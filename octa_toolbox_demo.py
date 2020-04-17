@@ -28,3 +28,5 @@ stimulus.colour    = GridRepeater(["red", "blue", 'yellow'], n_rows, n_cols).Rep
 
 stimulus.Render()
 stimulus.Show()
+#stimulus.CreateJSON()
+#stimulus.Save("test")
