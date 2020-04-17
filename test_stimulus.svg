@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<svg baseProfile="full" height="512" version="1.1" width="512" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs/>
+  <rect fill="white" height="512" width="512" x="0" y="0"/>
+  <polygon fill="#f00" points="-3.673940397442059e-15,-20.0 17.32050807568877,10.0 -17.320508075688778,9.999999999999996" transform="rotate(0, 0, 0)"/>
+  <rect fill="#f81c00" height="40" transform="rotate(12, 50, 0)" width="10" x="45.0" y="-20.0"/>
+  <polygon fill="#f13600" points="100.0,-20.0 117.32050807568876,10.0 82.67949192431122,9.999999999999996" transform="rotate(45, 100, 0)"/>
+  <rect fill="#ea4e00" height="40" transform="rotate(0, 150, 0)" width="10" x="145.0" y="-20.0"/>
+  <polygon fill="#e36500" points="200.0,-20.0 217.32050807568876,10.0 182.6794919243112,9.999999999999996" transform="rotate(12, 200, 0)"/>
+  <rect fill="#dc7a00" height="40" transform="rotate(12, 250, 0)" width="10" x="245.0" y="-20.0"/>
+  <polygon fill="#d58e00" points="300.0,-20.0 317.3205080756888,10.0 282.6794919243112,9.999999999999996" transform="rotate(0, 300, 0)"/>
+  <rect fill="#cea000" height="40" transform="rotate(45, 350, 0)" width="10" x="345.0" y="-20.0"/>
+  <polygon fill="#c7b000" points="400.0,-20.0 417.3205080756888,10.0 382.6794919243112,9.999999999999996" transform="rotate(12, 400, 0)"/>
+  <rect fill="#bfbf00" height="40" transform="rotate(0, 450, 0)" width="10" x="445.0" y="-20.0"/>
+  <polygon fill="#f81c00" points="-3.673940397442059e-15,30.0 17.32050807568877,60.0 -17.320508075688778,60.0" transform="rotate(0, 0, 50)"/>
+  <rect fill="#f13600" height="40" transform="rotate(12, 50, 50)" width="10" x="45.0" y="30.0"/>
+  <polygon fill="#ea4e00" points="100.0,30.0 117.32050807568876,60.0 82.67949192431122,60.0" transform="rotate(45, 100, 50)"/>
+  <rect fill="#e36500" height="40" transform="rotate(0, 150, 50)" width="10" x="145.0" y="30.0"/>
+  <polygon fill="#dc7a00" points="200.0,30.0 217.32050807568876,60.0 182.6794919243112,60.0" transform="rotate(12, 200, 50)"/>
+  <rect fill="#d58e00" height="40" transform="rotate(12, 250, 50)" width="10" x="245.0" y="30.0"/>
+  <polygon fill="#cea000" points="300.0,30.0 317.3205080756888,60.0 282.6794919243112,60.0" transform="rotate(0, 300, 50)"/>
+  <rect fill="#c7b000" height="40" transform="rotate(45, 350, 50)" width="10" x="345.0" y="30.0"/>
+  <polygon fill="#bfbf00" points="400.0,30.0 417.3205080756888,60.0 382.6794919243112,60.0" transform="rotate(12, 400, 50)"/>
+  <rect fill="#a4b800" height="40" transform="rotate(0, 450, 50)" width="10" x="445.0" y="30.0"/>
+  <polygon fill="#f13600" points="-3.673940397442059e-15,80.0 17.32050807568877,110.0 -17.320508075688778,110.0" transform="rotate(0, 0, 100)"/>
+  <rect fill="#ea4e00" height="40" transform="rotate(12, 50, 100)" width="10" x="45.0" y="80.0"/>
+  <polygon fill="#e36500" points="100.0,80.0 117.32050807568876,110.0 82.67949192431122,110.0" transform="rotate(45, 100, 100)"/>
+  <rect fill="#dc7a00" height="40" transform="rotate(0, 150, 100)" width="10" x="145.0" y="80.0"/>
+  <polygon fill="#d58e00" points="200.0,80.0 217.32050807568876,110.0 182.6794919243112,110.0" transform="rotate(12, 200, 100)"/>
+  <rect fill="#cea000" height="40" transform="rotate(12, 250, 100)" width="10" x="245.0" y="80.0"/>
+  <polygon fill="#c7b000" points="300.0,80.0 317.3205080756888,110.0 282.6794919243112,110.0" transform="rotate(0, 300, 100)"/>
+  <rect fill="#bfbf00" height="40" transform="rotate(45, 350, 100)" width="10" x="345.0" y="80.0"/>
+  <polygon fill="#a4b800" points="400.0,80.0 417.3205080756888,110.0 382.6794919243112,110.0" transform="rotate(12, 400, 100)"/>
+  <rect fill="#8ab100" height="40" transform="rotate(0, 450, 100)" width="10" x="445.0" y="80.0"/>
+  <polygon fill="#ea4e00" points="-3.673940397442059e-15,130.0 17.32050807568877,160.0 -17.320508075688778,160.0" transform="rotate(0, 0, 150)"/>
+  <rect fill="#e36500" height="40" transform="rotate(12, 50, 150)" width="10" x="45.0" y="130.0"/>
+  <polygon fill="#dc7a00" points="100.0,130.0 117.32050807568876,160.0 82.67949192431122,160.0" transform="rotate(45, 100, 150)"/>
+  <rect fill="#d58e00" height="40" transform="rotate(0, 150, 150)" width="10" x="145.0" y="130.0"/>
+  <polygon fill="#cea000" points="200.0,130.0 217.32050807568876,160.0 182.6794919243112,160.0" transform="rotate(12, 200, 150)"/>
+  <rect fill="#c7b000" height="40" transform="rotate(12, 250, 150)" width="10" x="245.0" y="130.0"/>
+  <polygon fill="#bfbf00" points="300.0,130.0 317.3205080756888,160.0 282.6794919243112,160.0" transform="rotate(0, 300, 150)"/>
+  <rect fill="#a4b800" height="40" transform="rotate(45, 350, 150)" width="10" x="345.0" y="130.0"/>
+  <polygon fill="#8ab100" points="400.0,130.0 417.3205080756888,160.0 382.6794919243112,160.0" transform="rotate(12, 400, 150)"/>
+  <rect fill="#72aa00" height="40" transform="rotate(0, 450, 150)" width="10" x="445.0" y="130.0"/>
+  <polygon fill="#e36500" points="-3.673940397442059e-15,180.0 17.32050807568877,210.0 -17.320508075688778,210.0" transform="rotate(0, 0, 200)"/>
+  <rect fill="#dc7a00" height="40" transform="rotate(12, 50, 200)" width="10" x="45.0" y="180.0"/>
+  <polygon fill="#d58e00" points="100.0,180.0 117.32050807568876,210.0 82.67949192431122,210.0" transform="rotate(45, 100, 200)"/>
+  <rect fill="#cea000" height="40" transform="rotate(0, 150, 200)" width="10" x="145.0" y="180.0"/>
+  <polygon fill="#c7b000" points="200.0,180.0 217.32050807568876,210.0 182.6794919243112,210.0" transform="rotate(12, 200, 200)"/>
+  <rect fill="#bfbf00" height="40" transform="rotate(12, 250, 200)" width="10" x="245.0" y="180.0"/>
+  <polygon fill="#a4b800" points="300.0,180.0 317.3205080756888,210.0 282.6794919243112,210.0" transform="rotate(0, 300, 200)"/>
+  <rect fill="#8ab100" height="40" transform="rotate(45, 350, 200)" width="10" x="345.0" y="180.0"/>
+  <polygon fill="#72aa00" points="400.0,180.0 417.3205080756888,210.0 382.6794919243112,210.0" transform="rotate(12, 400, 200)"/>
+  <rect fill="#5ba300" height="40" transform="rotate(0, 450, 200)" width="10" x="445.0" y="180.0"/>
+  <polygon fill="#dc7a00" points="-3.673940397442059e-15,230.0 17.32050807568877,260.0 -17.320508075688778,260.0" transform="rotate(0, 0, 250)"/>
+  <rect fill="#d58e00" height="40" transform="rotate(12, 50, 250)" width="10" x="45.0" y="230.0"/>
+  <polygon fill="#cea000" points="100.0,230.0 117.32050807568876,260.0 82.67949192431122,260.0" transform="rotate(45, 100, 250)"/>
+  <rect fill="#c7b000" height="40" transform="rotate(0, 150, 250)" width="10" x="145.0" y="230.0"/>
+  <polygon fill="#bfbf00" points="200.0,230.0 217.32050807568876,260.0 182.6794919243112,260.0" transform="rotate(12, 200, 250)"/>
+  <rect fill="#a4b800" height="40" transform="rotate(12, 250, 250)" width="10" x="245.0" y="230.0"/>
+  <polygon fill="#8ab100" points="300.0,230.0 317.3205080756888,260.0 282.6794919243112,260.0" transform="rotate(0, 300, 250)"/>
+  <rect fill="#72aa00" height="40" transform="rotate(45, 350, 250)" width="10" x="345.0" y="230.0"/>
+  <polygon fill="#5ba300" points="400.0,230.0 417.3205080756888,260.0 382.6794919243112,260.0" transform="rotate(12, 400, 250)"/>
+  <rect fill="#459c00" height="40" transform="rotate(0, 450, 250)" width="10" x="445.0" y="230.0"/>
+  <polygon fill="#d58e00" points="-3.673940397442059e-15,280.0 17.32050807568877,310.0 -17.320508075688778,310.0" transform="rotate(0, 0, 300)"/>
+  <rect fill="#cea000" height="40" transform="rotate(12, 50, 300)" width="10" x="45.0" y="280.0"/>
+  <polygon fill="#c7b000" points="100.0,280.0 117.32050807568876,310.0 82.67949192431122,310.0" transform="rotate(45, 100, 300)"/>
+  <rect fill="#bfbf00" height="40" transform="rotate(0, 150, 300)" width="10" x="145.0" y="280.0"/>
+  <polygon fill="#a4b800" points="200.0,280.0 217.32050807568876,310.0 182.6794919243112,310.0" transform="rotate(12, 200, 300)"/>
+  <rect fill="#8ab100" height="40" transform="rotate(12, 250, 300)" width="10" x="245.0" y="280.0"/>
+  <polygon fill="#72aa00" points="300.0,280.0 317.3205080756888,310.0 282.6794919243112,310.0" transform="rotate(0, 300, 300)"/>
+  <rect fill="#5ba300" height="40" transform="rotate(45, 350, 300)" width="10" x="345.0" y="280.0"/>
+  <polygon fill="#459c00" points="400.0,280.0 417.3205080756888,310.0 382.6794919243112,310.0" transform="rotate(12, 400, 300)"/>
+  <rect fill="#329500" height="40" transform="rotate(0, 450, 300)" width="10" x="445.0" y="280.0"/>
+  <polygon fill="#cea000" points="-3.673940397442059e-15,330.0 17.32050807568877,360.0 -17.320508075688778,360.0" transform="rotate(0, 0, 350)"/>
+  <rect fill="#c7b000" height="40" transform="rotate(12, 50, 350)" width="10" x="45.0" y="330.0"/>
+  <polygon fill="#bfbf00" points="100.0,330.0 117.32050807568876,360.0 82.67949192431122,360.0" transform="rotate(45, 100, 350)"/>
+  <rect fill="#a4b800" height="40" transform="rotate(0, 150, 350)" width="10" x="145.0" y="330.0"/>
+  <polygon fill="#8ab100" points="200.0,330.0 217.32050807568876,360.0 182.6794919243112,360.0" transform="rotate(12, 200, 350)"/>
+  <rect fill="#72aa00" height="40" transform="rotate(12, 250, 350)" width="10" x="245.0" y="330.0"/>
+  <polygon fill="#5ba300" points="300.0,330.0 317.3205080756888,360.0 282.6794919243112,360.0" transform="rotate(0, 300, 350)"/>
+  <rect fill="#459c00" height="40" transform="rotate(45, 350, 350)" width="10" x="345.0" y="330.0"/>
+  <polygon fill="#329500" points="400.0,330.0 417.3205080756888,360.0 382.6794919243112,360.0" transform="rotate(12, 400, 350)"/>
+  <rect fill="#208e00" height="40" transform="rotate(0, 450, 350)" width="10" x="445.0" y="330.0"/>
+  <polygon fill="#c7b000" points="-3.673940397442059e-15,380.0 17.32050807568877,410.0 -17.320508075688778,410.0" transform="rotate(0, 0, 400)"/>
+  <rect fill="#bfbf00" height="40" transform="rotate(12, 50, 400)" width="10" x="45.0" y="380.0"/>
+  <polygon fill="#a4b800" points="100.0,380.0 117.32050807568876,410.0 82.67949192431122,410.0" transform="rotate(45, 100, 400)"/>
+  <rect fill="#8ab100" height="40" transform="rotate(0, 150, 400)" width="10" x="145.0" y="380.0"/>
+  <polygon fill="#72aa00" points="200.0,380.0 217.32050807568876,410.0 182.6794919243112,410.0" transform="rotate(12, 200, 400)"/>
+  <rect fill="#5ba300" height="40" transform="rotate(12, 250, 400)" width="10" x="245.0" y="380.0"/>
+  <polygon fill="#459c00" points="300.0,380.0 317.3205080756888,410.0 282.6794919243112,410.0" transform="rotate(0, 300, 400)"/>
+  <rect fill="#329500" height="40" transform="rotate(45, 350, 400)" width="10" x="345.0" y="380.0"/>
+  <polygon fill="#208e00" points="400.0,380.0 417.3205080756888,410.0 382.6794919243112,410.0" transform="rotate(12, 400, 400)"/>
+  <rect fill="#0f8700" height="40" transform="rotate(0, 450, 400)" width="10" x="445.0" y="380.0"/>
+  <polygon fill="#bfbf00" points="-3.673940397442059e-15,430.0 17.32050807568877,460.0 -17.320508075688778,460.0" transform="rotate(0, 0, 450)"/>
+  <rect fill="#a4b800" height="40" transform="rotate(12, 50, 450)" width="10" x="45.0" y="430.0"/>
+  <polygon fill="#8ab100" points="100.0,430.0 117.32050807568876,460.0 82.67949192431122,460.0" transform="rotate(45, 100, 450)"/>
+  <rect fill="#72aa00" height="40" transform="rotate(0, 150, 450)" width="10" x="145.0" y="430.0"/>
+  <polygon fill="#5ba300" points="200.0,430.0 217.32050807568876,460.0 182.6794919243112,460.0" transform="rotate(12, 200, 450)"/>
+  <rect fill="#459c00" height="40" transform="rotate(12, 250, 450)" width="10" x="245.0" y="430.0"/>
+  <polygon fill="#329500" points="300.0,430.0 317.3205080756888,460.0 282.6794919243112,460.0" transform="rotate(0, 300, 450)"/>
+  <rect fill="#208e00" height="40" transform="rotate(45, 350, 450)" width="10" x="345.0" y="430.0"/>
+  <polygon fill="#0f8700" points="400.0,430.0 417.3205080756888,460.0 382.6794919243112,460.0" transform="rotate(12, 400, 450)"/>
+  <rect fill="#008000" height="40" transform="rotate(0, 450, 450)" width="10" x="445.0" y="430.0"/>
+</svg>

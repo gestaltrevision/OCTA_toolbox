@@ -31,6 +31,7 @@ stimulus.orientation = SymmetryPattern([0,12,45], n_rows, n_cols).MirrorAcrossCo
 stimulus.Render()
 stimulus.Show()
 stimulus.SaveJSON('test_stimulus')
+stimulus.SaveSVG('test_stimulus')
 
 #%%
 stim_2 = Stimulus.LoadFromJSON("test_stimulus.json")
