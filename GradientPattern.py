@@ -1,23 +1,23 @@
 """
-This module contains a class for creating gradient pattern in 2D grid structures
+This module contains a class for creating gradient pattern in 2D grid structures.
 """
 from BasicPattern import BasicPattern
 
 class GridGradient(BasicPattern):   
     def __init__(self, start_val, end_val, n_rows, n_cols):
         """
-        Initializes the parameters for a gradient pattern
+        Initializes the parameters for a gradient pattern.
 
         Parameters
         ----------
         start_val : int, float or string
-            Starting value for the gradient
+            Starting value for the gradient.
         end_val : int, float or string (must match start_val)
-            Stop value for the gradient
+            End value for the gradient.
         n_rows : int
-            Number of rows
+            Number of rows.
         n_cols : int
-            Number of columns
+            Number of columns.
 
         Returns
         -------
@@ -32,7 +32,7 @@ class GridGradient(BasicPattern):
     def __str__(self):
         """
         Generates a string representation of the grid. Used for printing
-        in the IPython console window
+        in the IPython console window.
 
         Returns
         -------
@@ -53,12 +53,12 @@ class GridGradient(BasicPattern):
     
     def GradientElements(self):
         """
-        Creates a gradient where the number of elements equals the total number of elements in the grid
+        Creates a gradient where the number of elements equals the total number of elements in the grid.
 
         Returns
         -------
         GridGradient
-            Current instance of the object
+            Current instance of the object.
 
         """
         n_elements = self.n_rows * self.n_cols
@@ -69,7 +69,7 @@ class GridGradient(BasicPattern):
         
     def GradientAcrossRows(self):
         """
-        Creates a gradient across the rows of the grid
+        Creates a gradient across the rows of the grid.
 
         Returns
         -------
@@ -85,7 +85,7 @@ class GridGradient(BasicPattern):
         
     def GradientAcrossColumns(self):      
         """
-        Creates a gradient across the columns of the grid
+        Creates a gradient across the columns of the grid.
 
         Returns
         -------
@@ -100,7 +100,7 @@ class GridGradient(BasicPattern):
     
     def GradientAcrossLeftDiagonal(self):
         """
-        Creates a diagonal gradient, starting in the top right corner and ending in the bottom left corner
+        Creates a diagonal gradient, starting in the top right corner and ending in the bottom left corner.
 
         Returns
         -------
@@ -122,7 +122,7 @@ class GridGradient(BasicPattern):
     
     def GradientAcrossRightDiagonal(self):
         """
-        Creates a diagonal gradient, starting in the top left corner and ending in the bottom right corner
+        Creates a diagonal gradient, starting in the top left corner and ending in the bottom right corner.
 
         Returns
         -------
@@ -145,7 +145,7 @@ class GridGradient(BasicPattern):
     def __CreateGradientValues(self, n_elements):
         """
         Private method for creating a list of gradient values, taking into account
-        the type of start and end value
+        the type of start and end value.
 
         Parameters
         ----------
@@ -155,14 +155,14 @@ class GridGradient(BasicPattern):
         Returns
         -------
         gradient_list : list
-            A list of size n_elements .
+            A list of size n_elements.
 
         """
         gradient_list = None
         if type(self.start_val) == str:
             gradient_list = BasicPattern.CreateColorRangeList(self.start_val, self.end_val, n_elements)
         elif type(self.start_val) == int or type(self.start_val) == float:
-            gradient_list = BasicPattern.CreateNumberRangeList(self.start_val, self.end_val,n_elements )
+            gradient_list = BasicPattern.CreateNumberRangeList(self.start_val, self.end_val, n_elements)
         
         return gradient_list
         
