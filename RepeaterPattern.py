@@ -1,12 +1,12 @@
 """
-A class for creating repeated patterns in a 2D grid structure
+A class for creating repeated patterns in a 2D grid structure.
 """
 from BasicPattern import BasicPattern
 
 class GridRepeater(BasicPattern):
     def __init__(self, pattern, n_rows, n_cols):
         """
-        Initializes a GridRepeater object
+        Initializes a GridRepeater object.
 
         Parameters
         ----------
@@ -25,7 +25,7 @@ class GridRepeater(BasicPattern):
         
     def __str__(self):
         """
-        Creates a string representation of the 2D grid structure
+        Creates a string representation of the 2D grid structure.
 
         Returns
         -------
@@ -42,7 +42,7 @@ class GridRepeater(BasicPattern):
             
     def RepeatElements(self):
         """
-        Repeats the current pattern, until the total number of elements fits into the 2D grid structure
+        Repeats the current pattern, until the total number of elements fits into the 2D grid structure.
 
         Returns
         -------
@@ -75,7 +75,7 @@ class GridRepeater(BasicPattern):
         """
         Repeats the provided pattern across the rows in the grid. The provided pattern is first
         either duplicated (when #elements < n_cols) or truncated (when #elements > n_cols) to fit
-        in a single row
+        in a single row.
 
         Returns
         -------
@@ -113,7 +113,7 @@ class GridRepeater(BasicPattern):
         """
         Repeats the provided pattern across the columns in the grid. The provided pattern is first
         either duplicated (when #elements < n_rows) or truncated (when #elements > n_rows) to fit
-        in a single column
+        in a single column.
 
         Returns
         -------
@@ -189,7 +189,7 @@ class GridRepeater(BasicPattern):
     def RepeatAcrossLeftDiagonal(self):
         """
         Repeats the provided pattern across the diagonal running from the top right corner
-        to the bottom left corner
+        to the bottom left corner.
 
         Returns
         -------
@@ -228,16 +228,16 @@ class GridRepeater(BasicPattern):
     
     def GenerateOnAxis(self, axis):
         """
-        Generates a pattern along the axis specified with the axis argument
+        Generates a pattern along the axis specified with the axis argument.
 
         Parameters
         ----------
         axis : str
-            'element'   : MirrorElements
-            'row'       : MirrorAcrossColumns
-            'col'       : MirrorAcrossRows
-            'rightdiag' : MirrorAcrossRightDiagonal
-            'leftdiag'  : MirrorAcrossLeftDiagonal
+            'element'   : RepeatElements
+            'row'       : RepeatAcrossColumns
+            'col'       : RepeatAcrossRows
+            'rightdiag' : RepeatAcrossRightDiagonal
+            'leftdiag'  : RepeatAcrossLeftDiagonal
                 
         Returns
         -------
