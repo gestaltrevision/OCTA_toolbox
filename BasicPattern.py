@@ -7,7 +7,7 @@ import colour
 class BasicPattern:
     def __init__(self, pattern):
         """
-        Initialises a BasicPattern object
+        Initialises a BasicPattern object.
 
         Parameters
         ----------
@@ -21,7 +21,7 @@ class BasicPattern:
         
     def __str__(self):
         """
-        Creates a string representation of the pattern
+        Creates a string representation of the pattern.
 
         Returns
         -------
@@ -34,7 +34,7 @@ class BasicPattern:
     
     def DuplicateElements(self, n_duplications, max_elements = None):
         """
-        Duplicates each element in the pattern
+        Duplicates each element in the pattern.
 
         Parameters
         ----------
@@ -100,7 +100,7 @@ class BasicPattern:
         """
         Duplicates the number of elements in the pattern until the total pattern length
         is equal or exceeds to the requested count. If the total pattern length exceeds the count,
-        the pattern is truncated
+        the pattern is truncated.
 
         Parameters
         ----------
@@ -110,7 +110,7 @@ class BasicPattern:
         Returns
         -------
         BasicPattern
-            Current instance of BasicPattern
+            Current instance of BasicPattern.
 
         """
         n_duplications = int(count/len(self.pattern)) + 1
@@ -122,17 +122,17 @@ class BasicPattern:
         """
         Duplicates the pattern until the total pattern length is equal to or exceeds
         the requested count. If the total pattern length exceeds the count, the pattern
-        is truncated
+        is truncated.
 
         Parameters
         ----------
         count : int
-            Required number of elements in thep pattern
+            Required number of elements in the pattern.
 
         Returns
         -------
         BasicPattern
-            Current instance of BasicPattern
+            Current instance of BasicPattern.
 
         """
         n_duplications = int(count/len(self.pattern)) + 1
@@ -142,21 +142,21 @@ class BasicPattern:
             
     def CreateColorRangeList(start_colour, end_colour, n_elements):
         """
-        Creates a range of colours
+        Creates a range of colors.
 
         Parameters
         ----------
         start_colour : string
-            Name of the first colour in the list.
+            Name of the first color in the list.
         end_colour : string
             Name of the final color in the list.
         n_elements : TYPE
-            Total amount of colours in the list. Value must be >= 2
+            Total number of colors in the list. Value must be >= 2.
 
         Returns
         -------
         colour_range : list
-            A list with hexadecimal colour values.
+            A list with hexadecimal color values.
 
         """
         start_colour = colour.Color(start_colour)
@@ -178,7 +178,7 @@ class BasicPattern:
         end_number : int or float
             Final number in the list.
         n_elements : int
-            Total amount of numbers in the list. Value must be >= 2
+            Total number of numbers in the list. Value must be >= 2.
 
         Returns
         -------
