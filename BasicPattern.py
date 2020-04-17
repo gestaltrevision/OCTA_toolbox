@@ -228,7 +228,7 @@ class BasicPattern:
     
     def RandomizeOrder(self):
         """
-        Randomises the order of the elements in the pattern.
+        Randomizes the order of the elements in the pattern.
 
         Returns
         -------
@@ -270,7 +270,7 @@ if __name__ == '__main__':
     
     # 4. Demonstrating number range
     p = BasicPattern(BasicPattern.CreateNumberRangeList(1, 10, 4))
-    print("Creating color range: ")
+    print("Creating number range: ")
     print(p)
     print("\n\n")
     
