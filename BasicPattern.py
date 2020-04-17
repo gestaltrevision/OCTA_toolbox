@@ -3,11 +3,12 @@ This module contains a base class with several essential functions for patterns.
 More complex patterns (e.g., grid based patterns) can be derived from this class.
 """
 import colour
+import random
 
 class BasicPattern:
     def __init__(self, pattern):
         """
-        Initialises a BasicPattern object.
+        Initialises a BasicPattern object
 
         Parameters
         ----------
@@ -21,7 +22,7 @@ class BasicPattern:
         
     def __str__(self):
         """
-        Creates a string representation of the pattern.
+        Creates a string representation of the pattern
 
         Returns
         -------
@@ -31,10 +32,17 @@ class BasicPattern:
         """
         return str(self.pattern)
     
+    def __add__(self, o):
+        assert len(self.pattern) == len(o.pattern), "Pattern length must be equal"
+        
+        result = [self.pattern[i] + o.pattern[i] for i in range(len(self.pattern))]
+            
+        return BasicPattern(result)
+    
     
     def DuplicateElements(self, n_duplications, max_elements = None):
         """
-        Duplicates each element in the pattern.
+        Duplicates each element in the pattern
 
         Parameters
         ----------
@@ -100,7 +108,7 @@ class BasicPattern:
         """
         Duplicates the number of elements in the pattern until the total pattern length
         is equal or exceeds to the requested count. If the total pattern length exceeds the count,
-        the pattern is truncated.
+        the pattern is truncated
 
         Parameters
         ----------
@@ -110,7 +118,7 @@ class BasicPattern:
         Returns
         -------
         BasicPattern
-            Current instance of BasicPattern.
+            Current instance of BasicPattern
 
         """
         n_duplications = int(count/len(self.pattern)) + 1
@@ -122,17 +130,17 @@ class BasicPattern:
         """
         Duplicates the pattern until the total pattern length is equal to or exceeds
         the requested count. If the total pattern length exceeds the count, the pattern
-        is truncated.
+        is truncated
 
         Parameters
         ----------
         count : int
-            Required number of elements in the pattern.
+            Required number of elements in thep pattern
 
         Returns
         -------
         BasicPattern
-            Current instance of BasicPattern.
+            Current instance of BasicPattern
 
         """
         n_duplications = int(count/len(self.pattern)) + 1
@@ -142,21 +150,21 @@ class BasicPattern:
             
     def CreateColorRangeList(start_colour, end_colour, n_elements):
         """
-        Creates a range of colors.
+        Creates a range of colours
 
         Parameters
         ----------
         start_colour : string
-            Name of the first color in the list.
+            Name of the first colour in the list.
         end_colour : string
             Name of the final color in the list.
         n_elements : TYPE
-            Total number of colors in the list. Value must be >= 2.
+            Total amount of colours in the list. Value must be >= 2
 
         Returns
         -------
         colour_range : list
-            A list with hexadecimal color values.
+            A list with hexadecimal colour values.
 
         """
         start_colour = colour.Color(start_colour)
@@ -178,7 +186,7 @@ class BasicPattern:
         end_number : int or float
             Final number in the list.
         n_elements : int
-            Total number of numbers in the list. Value must be >= 2.
+            Total amount of numbers in the list. Value must be >= 2
 
         Returns
         -------
@@ -193,6 +201,51 @@ class BasicPattern:
             number_range.append(number_range[-1] + step_size)
         
         return number_range
+    
+    def AddJitter(self, mu = 0, std = 1):
+        """
+        Adds a sample from a random normal distribution to each element in the pattern
+
+        Parameters
+        ----------
+        mu : float, optional
+            Mean of the normal distribution. The default is 0.
+        std : float, optional
+            Standard deviation of the normal distribution. The default is 1.
+
+        Returns
+        -------
+        BasicPattern:
+            A representation of the pattern object
+
+        """
+        result = []
+        for i in range(len(self.pattern)):
+            result.append(self.pattern[i] + random.normalvariate(mu, std))
+        
+        self.pattern = result
+        return self
+    
+    def RandomizeOrder(self):
+        """
+        Randomises the order of the elements in the pattern
+
+        Returns
+        -------
+        BasicPattern:
+            A representation of the pattern object
+
+        """
+        idx = list(range(len(self.pattern)))
+        random.shuffle(idx)
+        
+        result = []
+        for i in range(len(self.pattern)):
+            result.append(self.pattern[idx[i]])
+        
+        self.pattern = result
+        return self
+        
             
     
 
@@ -217,6 +270,12 @@ if __name__ == '__main__':
     
     # 4. Demonstrating number range
     p = BasicPattern(BasicPattern.CreateNumberRangeList(1, 10, 4))
-    print("Creating number range: ")
+    print("Creating colour range: ")
     print(p)
     print("\n\n")
+    
+    # 5. Demonstraing addition
+    p_1 = BasicPattern([1,2,3])
+    p_2 = BasicPattern([4,5,6])
+    p   = p_1 + p_2
+    print(p)
