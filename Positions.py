@@ -11,7 +11,7 @@ from BasicPattern import BasicPattern
 class Positions:
     def Create2DGrid(n_rows, n_cols, row_spacing, col_spacing):
         """
-        Creates a 2D regularly spaced grid
+        Creates a 2D regularly spaced grid.
 
         Parameters
         ----------
@@ -43,7 +43,7 @@ class Positions:
     
     def CreateSineGrid(n_rows, n_cols, row_spacing, col_spacing, A = 1, f = 1):
         """
-        Creates a 2D regularly spaced grid and adds a sine wave modulation to the y-axis
+        Creates a 2D regularly spaced grid and adds a sine wave modulation to the y-axis.
 
         Parameters
         ----------
@@ -63,9 +63,9 @@ class Positions:
         Returns
         -------
         x : BasicPattern
-            All the x-coordinates
+            All the x-coordinates.
         y : BasicPattern
-            All the y-coordinates
+            All the y-coordinates.
 
         """
         x = BasicPattern(list(range(0, n_cols * col_spacing, col_spacing)))
@@ -82,7 +82,7 @@ class Positions:
     def CreateCircle(radius, n_elements, x_offset = 0, y_offset = 0):
         """
         Generates element positions on the circumference of a regularly spaced
-        circle
+        circle.
 
         Parameters
         ----------
