@@ -30,7 +30,7 @@ class Rectangle:
         self.transform = "rotate(%d, %d, %d)"%(self.orientation, self.pos[0], self.pos[1])
             
     def __str__(self):
-        result = "Square object with params:\n"
+        result = "Rectangle object with params:\n"
         result+= "center: (%.2f, %.2f)\n"%self.pos
         result+= "size: (%.2f, %.2f)\n"%self.size
         result+= "fill  : %s\n"%self.fill
