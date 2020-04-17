@@ -47,5 +47,5 @@ class Rectangle:
     
     
 if __name__ == '__main__':
-    c = Rectangle(x = 3, y = 4, radius = 10)
+    c = Rectangle(x = 3, y = 4, size = 10)
     print(c)
