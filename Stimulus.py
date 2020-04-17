@@ -8,11 +8,11 @@ import svgwrite
 from IPython.display import SVG, display
 
 class Stimulus:
-    """ Container class for creating a stimulus
+    """ Container class for creating a stimulus.
     
-    Size and background colour is set when creating the object
+    Size and background color is set when creating the object.
     
-    position, radii and shape properties need to be assigned. When this is done,
+    Position, radii and shape properties need to be assigned. When this is done,
     the render method can be called. This will generate the JSON format, and 
     create an svg image.
     """
@@ -30,7 +30,7 @@ class Stimulus:
         self.json_parameters = None
         
     def CreateEmptyBackground(self):        
-        """ Creates an empty background in which elements can be drawn """
+        """ Creates an empty background in which elements can be drawn. """
         self.dwg = svgwrite.Drawing(size = (self.width, self.height))
         self.background = self.dwg.rect(insert = (0, 0), size = (self.width, self.height), fill = self.background_color)
         self.dwg.add(self.background)              
