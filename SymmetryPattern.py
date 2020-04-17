@@ -1,12 +1,12 @@
 """
-Class for generating symmetrical patterns in 2D grid structures
+Class for generating symmetrical patterns in 2D grid structures.
 """
 from BasicPattern import BasicPattern
 
 class SymmetryPattern(BasicPattern):
     def __init__(self, pattern, n_rows, n_cols):
         """
-        Initializes a SymmetryPattern object
+        Initializes a SymmetryPattern object.
 
         Parameters
         ----------
@@ -25,7 +25,7 @@ class SymmetryPattern(BasicPattern):
     
     def __str__(self):
         """
-        Creates a string representation of the 2D grid structure
+        Creates a string representation of the 2D grid structure.
 
         Returns
         -------
@@ -43,12 +43,12 @@ class SymmetryPattern(BasicPattern):
     def MirrorElements(self):
         """
         Extends the current pattern by mirroring all the existing elements. This new pattern is then
-        repeated until it fits in the 2D grid structure
+        repeated until it fits in the 2D grid structure.
 
         Returns
         -------
         SymmetryPattern.
-            Current instance of the SymmetryPattern
+            Current instance of the SymmetryPattern.
             
         Example
         -------
@@ -87,7 +87,7 @@ class SymmetryPattern(BasicPattern):
         Returns
         -------
         SymmetryPattern.
-            Current instance of the SymmetryPattern
+            Current instance of the SymmetryPattern.
             
         Example
         -------
@@ -130,7 +130,7 @@ class SymmetryPattern(BasicPattern):
         Returns
         -------
         SymmetryPattern.
-            Current instance of the SymmetryPattern
+            Current instance of the SymmetryPattern.
             
         Example
         -------
@@ -168,12 +168,12 @@ class SymmetryPattern(BasicPattern):
         """
         Mirrors the pattern across the diagonal running from the top left to 
         the bottom right. If the pattern is shorter than the number of elements required to
-        reach the diagonal, the pattern is repeated
+        reach the diagonal, the pattern is repeated.
 
         Returns
         -------
         SymmetryPattern.
-            Current instance of the SymmetryPattern
+            Current instance of the SymmetryPattern.
             
         Example
         -------
@@ -219,7 +219,7 @@ class SymmetryPattern(BasicPattern):
         Returns
         -------
         SymmetryPattern.
-            Current instance of the SymmetryPattern
+            Current instance of the SymmetryPattern.
             
         Example
         -------
@@ -258,7 +258,7 @@ class SymmetryPattern(BasicPattern):
     
     def GenerateOnAxis(self, axis):
         """
-        Generates a pattern along the axis specified with the axis argument
+        Generates a pattern along the axis specified with the axis argument.
 
         Parameters
         ----------

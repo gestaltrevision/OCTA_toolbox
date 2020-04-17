@@ -1,5 +1,5 @@
 """
-A class for creating repeated patterns in a 2D grid structure
+A class for creating repeated patterns in a 2D grid structure.
 """
 from BasicPattern import BasicPattern
 
