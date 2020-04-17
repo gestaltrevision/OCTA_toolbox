@@ -53,5 +53,5 @@ class Triangle:
     
     
 if __name__ == '__main__':
-    c = Triangle(x = 3, y = 4, radius = 10)
+    c = Triangle(x = 3, y = 4, size = 10)
     print(c)
