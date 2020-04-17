@@ -12,13 +12,13 @@ import pandas as pd
 from IPython.display import SVG, display
 
 class Stimulus:
-    """ Container class for creating a stimulus
+    """ Container class for creating a stimulus.
     
     """
     
     def __init__(self, width = 512, height = 512, background_color = "white"):
         """
-        Instantiates a stimulus object
+        Instantiates a stimulus object.
 
         Parameters
         ----------
@@ -51,7 +51,7 @@ class Stimulus:
     
     def SaveSVG(self, filename):
         """
-        Saves the current stimulus as an SVG file
+        Saves the current stimulus as an SVG file.
 
         Parameters
         ----------
@@ -68,7 +68,7 @@ class Stimulus:
         
     def SaveJSON(self, filename):
         """
-        Saves the current stimulus as a JSON file
+        Saves the current stimulus as a JSON file.
 
         Parameters
         ----------
@@ -117,7 +117,7 @@ class Stimulus:
             
     def Show(self):
         """
-        Displays the current SVG stimulus in the IPython console window
+        Displays the current SVG stimulus in the IPython console window.
 
         Returns
         -------
@@ -155,7 +155,7 @@ class Stimulus:
         """
         Instantiates a new drawing canvas to which elements can be added. Executing
         this function will result in a blank canvas with the provided size and
-        background color
+        background color.
 
         Returns
         -------
@@ -168,7 +168,7 @@ class Stimulus:
 
     def __AddDrawingElements(self):
         """
-        Adds the provided stimulus elements to the svg drawing
+        Adds the provided stimulus elements to the svg drawing.
 
         Returns
         -------
@@ -181,7 +181,7 @@ class Stimulus:
         
     def LoadFromJSON(filename):
         """
-        Creates a stimulus object from a JSON file
+        Creates a stimulus object from a JSON file.
 
         Parameters
         ----------
