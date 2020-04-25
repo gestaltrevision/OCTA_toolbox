@@ -9,7 +9,7 @@ import numpy as np
 from BasicPattern import BasicPattern
 
 class Positions:
-    def Create2DGrid(n_rows, n_cols, row_spacing, col_spacing):
+    def Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset = 0, y_offset = 0):
         """
         Creates a 2D regularly spaced grid.
 
@@ -23,6 +23,10 @@ class Positions:
             Distance between column centers.
         col_spacing : int
             Distance between row centers.
+        x_offset : int, optional
+            x position offset for all elements. The default is 0.
+        y_offset : int, optional
+            y position offset for all elements. The default is 0.
 
         Returns
         -------
@@ -32,9 +36,9 @@ class Positions:
             All the y-coordinates.
 
         """
-        x = BasicPattern(list(range(0, n_cols * col_spacing, col_spacing)))
+        x = BasicPattern(list(range(x_offset, n_cols * col_spacing + (x_offset), col_spacing)))
         x.DuplicatePattern(n_cols)
-        y = BasicPattern(list(range(0, n_cols * col_spacing, col_spacing)))
+        y = BasicPattern(list(range(y_offset, n_cols * col_spacing + (y_offset), col_spacing)))
         y.DuplicateElements(n_rows)
     
         
