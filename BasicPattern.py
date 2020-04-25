@@ -284,6 +284,7 @@ class BasicPattern:
                     if elements_to_pick[i] != []: count_full_lists += 1
                 if count_full_lists < 2:
                     print("Not possible to conduct so many switches! Pattern created with only " + str(conducted_switches) + " switches.")
+                    break
                 else:
                     groups_to_switch = random.sample(range(len(elements_to_pick)),2)
                     element_group1_to_switch = random.sample(range(len(elements_to_pick[groups_to_switch[0]])),1)
@@ -296,7 +297,7 @@ class BasicPattern:
                     for i in range(len(idx_elementgroups)): 
                         elements_to_pick.append([value for value in idx_elementgroups[i] if value not in switch])
     
-            for i in range(n_switches):
+            for i in range(conducted_switches):
                 pos1, pos2  = switch[(i*2)-2], switch[(i*2)-1]
                 self.pattern[pos1], self.pattern[pos2] = self.pattern[pos2], self.pattern[pos1] 
             
