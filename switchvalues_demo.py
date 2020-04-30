@@ -30,11 +30,11 @@ stimulus.Show()
 #%%
 ### SIZE SWITCHES ###
 stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset = 50, y_offset = 50)
-stimulus.shapes      = BasicPattern([Rectangle, Ellipse]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.shapes      = BasicPattern([Ellipse, Triangle, Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.colour      = GridRepeater(["red", "blue"], n_rows, n_cols).RepeatElements()
 stimulus.orientation = SymmetryPattern([0], n_rows, n_cols).MirrorAcrossColumns()
 
-stimulus.size        = BasicPattern([(30,30), (20, 20)]).DuplicatePatternToSize(n_rows * n_cols).SwitchValues(n_switches = 1)
+stimulus.size        = BasicPattern([30,30,10]).DuplicatePatternToSize(n_rows * n_cols).SwitchValues(n_switches = 1)
 stimulus.Render()
 stimulus.Show()
 

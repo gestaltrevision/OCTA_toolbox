@@ -10,14 +10,18 @@ class Triangle:
     
     def __init__(self, **kwargs):
         self.pos = (kwargs['x'], kwargs['y'])
-        self.radius = kwargs['size']
-
-      
-        self.points = []
-        for deg in [90, 210, 330]:
-            rad = math.radians(deg + 180)
-            self.points.append((self.pos[0] + self.radius * math.cos(rad), self.pos[1] + self.radius * math.sin(rad)))
         
+        if type(kwargs['size']) == list or type(kwargs['size']) == tuple:
+            self.diameter = kwargs['size']
+        elif type(kwargs['size']) == int or type(kwargs['size']) == float:
+            self.diameter = (kwargs['size'], kwargs['size'])
+      
+        self.points = [(self.pos[0], self.pos[1] - (self.diameter[1]/2)), 
+                       (self.pos[0] - (self.diameter[0]/2), self.pos[1] + (self.diameter[1]/2)), 
+                       (self.pos[0] + (self.diameter[0]/2), self.pos[1] + (self.diameter[1]/2))]
+#        for deg in [90, 210, 330]:
+#            rad = math.radians(deg + 180)
+#            self.points.append((self.pos[0] + self.diameter * math.cos(rad), self.pos[1] + self.diameter * math.sin(rad)))
         
         if 'colour' in kwargs.keys():
             self.fill   = kwargs['colour']
@@ -39,7 +43,7 @@ class Triangle:
     def __str__(self):
         result = "Triangle object with params:\n"
         result+= "points: %s\n"%str(self.points)
-        result+= "radius: %.2f\n"%self.radius
+        result+= "diameter: %.2f\n"%self.diameter
         result+= "fill  : %s\n"%self.fill
         return result
         

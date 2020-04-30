@@ -13,7 +13,7 @@ class Ellipse:
         
         if type(kwargs['size']) == list or type(kwargs['size']) == tuple:
             self.diameter = kwargs['size']
-        elif type(kwargs['diameter']) == int or type(kwargs['size']) == float:
+        elif type(kwargs['size']) == int or type(kwargs['size']) == float:
             self.diameter = (kwargs['size'], kwargs['size'])
         
         if 'colour' in kwargs.keys():
