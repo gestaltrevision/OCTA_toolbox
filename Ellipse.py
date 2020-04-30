@@ -46,5 +46,5 @@ class Ellipse:
     
     
 if __name__ == '__main__':
-    c = Ellipse(x = 3, y = 4, radius = 10)
+    c = Ellipse(x = 3, y = 4, size = (10,10))
     print(c)
