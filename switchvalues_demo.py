@@ -34,7 +34,7 @@ stimulus.shapes      = BasicPattern([Ellipse, Triangle, Rectangle]).DuplicatePat
 stimulus.colour      = GridRepeater(["red", "blue"], n_rows, n_cols).RepeatElements()
 stimulus.orientation = SymmetryPattern([0], n_rows, n_cols).MirrorAcrossColumns()
 
-stimulus.size        = BasicPattern([30,30,10]).DuplicatePatternToSize(n_rows * n_cols).SwitchValues(n_switches = 1)
+stimulus.size        = BasicPattern([(10,10), (20,20), (20,20)]).DuplicatePatternToSize(n_rows * n_cols).SwitchValues(n_switches = 1)
 stimulus.Render()
 stimulus.Show()
 
