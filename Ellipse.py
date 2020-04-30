@@ -12,9 +12,9 @@ class Ellipse:
         
         
         if type(kwargs['size']) == list or type(kwargs['size']) == tuple:
-            self.radius = kwargs['size']
-        elif type(kwargs['radius']) == int or type(kwargs['size']) == float:
-            self.radius = (kwargs['size'], kwargs['size'])
+            self.diameter = kwargs['size']
+        elif type(kwargs['diameter']) == int or type(kwargs['size']) == float:
+            self.diameter = (kwargs['size'], kwargs['size'])
         
         if 'colour' in kwargs.keys():
             self.fill   = kwargs['colour']
@@ -31,14 +31,14 @@ class Ellipse:
     def __str__(self):
         result = "Ellipse object with params:\n"
         result+= "center: (%.2f, %.2f)\n"%self.pos
-        result+= "radius: %s\n"%str(self.radius)
+        result+= "diameter: %s\n"%str(self.diameter)
         result+= "fill  : %s\n"%self.fill
         return result
         
     def generate(self, dwg):
         ellipse = dwg.ellipse(
                 center    = self.pos,
-                r         = (self.radius[0], self.radius[1]),
+                r         = (self.diameter[0]/2, self.diameter[1]/2),
                 fill      = self.fill,
                 transform = self.transform)
         
