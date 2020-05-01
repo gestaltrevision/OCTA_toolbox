@@ -37,15 +37,14 @@ class Positions:
 
         """
         x = BasicPattern(list(range(x_offset, n_cols * col_spacing + (x_offset), col_spacing)))
-        x.DuplicatePattern(n_cols)
-        y = BasicPattern(list(range(y_offset, n_cols * col_spacing + (y_offset), col_spacing)))
-        y.DuplicateElements(n_rows)
-    
+        x.DuplicatePattern(n_rows)
+        y = BasicPattern(list(range(y_offset, n_rows * row_spacing + (y_offset), row_spacing)))
+        y.DuplicateElements(n_cols)    
         
         return (x, y)
         
     
-    def CreateSineGrid(n_rows, n_cols, row_spacing, col_spacing, A = 1, f = 1):
+    def CreateSineGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset = 0, y_offset = 0, A = 1, f = 1):
         """
         Creates a 2D regularly spaced grid and adds a sine wave modulation to the y-axis.
 
@@ -59,6 +58,10 @@ class Positions:
             Distance between column centers.
         col_spacing : int
             Distance between row centers.
+        x_offset : int, optional
+            x position offset for all elements. The default is 0.
+        y_offset : int, optional
+            y position offset for all elements. The default is 0.
         A : TYPE, float
             Amplitude of the modulation.
         f : TYPE, float
@@ -72,12 +75,12 @@ class Positions:
             All the y-coordinates.
 
         """
-        x = BasicPattern(list(range(0, n_cols * col_spacing, col_spacing)))
-        x.DuplicatePattern(n_cols)
+        x = BasicPattern(list(range(x_offset, n_cols * col_spacing + (x_offset), col_spacing)))
+        x.DuplicatePattern(n_rows)
         
-        y = BasicPattern(list(range(0, n_cols * col_spacing, col_spacing)))
-        y.DuplicateElements(n_rows)
-        
+        y = BasicPattern(list(range(y_offset, n_rows * row_spacing + (y_offset), row_spacing)))
+        y.DuplicateElements(n_cols)    
+                
         y_mod = BasicPattern( list(A*np.sin(2*np.pi*f*np.array(range(n_cols)))))
         y_mod.DuplicatePattern(n_rows)
         
@@ -107,14 +110,14 @@ class Positions:
             All the y-coordinates.
 
         """
-        idx = np.deg2rad(np.linspace(0, 360, n_elements))
-        x   = BasicPattern(list( (radius * np.cos(idx)) + (x_offset)))
-        y   = BasicPattern(list( (radius * np.sin(idx)) + (y_offset)))
+        idx = np.deg2rad(np.linspace(0, 360, n_elements+1))
+        x   = BasicPattern(list( (radius * np.cos(idx)) + (x_offset))[0:n_elements])
+        y   = BasicPattern(list( (radius * np.sin(idx)) + (y_offset))[0:n_elements])
         
         return (x, y)
     
 if __name__ == '__main__':
-    (x,y) = Positions.CreateSineGrid(5, 5, 20, 20, f = 0.20)
+    (x,y) = Positions.CreateSineGrid(3, 5, 50, 50, A = 50, f = 1/250)
     print(x.pattern)
     print(y.pattern)
         
