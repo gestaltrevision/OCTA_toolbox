@@ -226,6 +226,178 @@ class GridRepeater(BasicPattern):
         
         return self
     
+    def RepeatAcrossOutIn(self):
+        """
+        Repeats the provided elements outwards to inwards.
+        FOR NOW ONLY WHEN 2 OR 3 VALUES PROVIDED, 
+        AND WHEN EQUAL NUMBER OF ROWS AND COLUMNS, 
+        AND N_ROWS or N_COLS >= 4 with 2 values and >= 5 with 3 values
+
+        Returns
+        -------
+        GridRepeater
+            Current instance of the GridRepeater object.
+            
+        Example
+        -------
+        pattern: 
+            [1, 2, 3]
+        n_rows:
+            6
+        n_cols:
+            6
+            
+        result:
+            [1, 1, 1, 1, 1, 1, 
+             1, 2, 2, 2, 2, 1, 
+             1, 2, 3, 3, 2, 1, 
+             1, 2, 3, 3, 2, 1, 
+             1, 2, 2, 2, 2, 1, 
+             1, 1, 1, 1, 1, 1]
+            
+
+        """
+        if self.n_cols != self.n_rows:
+            print("OutIn pattern is only possible when the number of rows is equal to the number of columns, therefore the pattern cannot be created.")
+        elif len(self.pattern) > 3 | len(self.pattern) < 2:
+            print("OutIn pattern is only possible with 2 or provided values, therefore the pattern cannot be created.")
+        elif len(self.pattern) == 2 & (self.n_cols < 4 | self.n_rows < 4):
+            print("If there are 2 elements provided, the OutIn pattern is only possible with a row and column number of 4 or more, therefore the pattern cannot be created")
+        elif len(self.pattern) == 3 & (self.n_cols < 5 | self.n_rows < 5):
+            print("If there are 3 elements provided, the OutIn pattern is only possible with a row and column number of 5 or more, therefore the pattern cannot be created")
+        else:             
+            if self.n_cols % 2 == 0: # if even n_rows & n_cols:
+                n_rings = int(self.n_cols / 2)
+            
+                self.DuplicatePatternToSize(count = n_rings)
+                ring_elements = self.pattern
+            
+                ring_pattern = list(range(n_rings)) + list(range(n_rings))[::-1]
+                
+            else: # if odd n_rows & n_cols
+                n_rings = int(self.n_cols / 2) + 1
+                
+                self.DuplicatePatternToSize(count = n_rings)
+                ring_elements = self.pattern
+                ring_pattern = list(range(n_rings)) + list(range(n_rings-1))[::-1]
+                
+            result = []         
+
+            for i in ring_pattern:
+                result.append(ring_elements[0:i] + [ring_elements[i]]* (self.n_cols-2*i) + ring_elements[0:i][::-1])
+        
+            result = [item for items in result for item in items] # flatten list
+            
+            self.pattern = result
+        
+            return self
+    
+    def RepeatElementsInSubgroups(self):
+        """
+        Repeats the provided elements in subgroups across rows and columns.
+        ONLY POSSIBLE FOR NUMBER OF ROWS AND COLUMNS THAT CAN BE DIVIDED BY THE NUMBER OF PROVIDED ELEMENTS
+
+        Returns
+        -------
+        GridRepeater
+            Current instance of the GridRepeater object.
+            
+        Example
+        -------
+        pattern: 
+            [1, 2, 3]
+        n_rows:
+            6
+        n_cols:
+            6
+            
+        result:
+            [1, 1, 2, 2, 3, 3,
+             1, 1, 2, 2, 3, 3,
+             2, 2, 3, 3, 1, 1,
+             2, 2, 3, 3, 1, 1,
+             3, 3, 1, 1, 2, 2, 
+             3, 3, 1, 1, 2, 2]
+            
+
+        """
+        if self.n_rows % len(self.pattern) != 0:
+            print("The number of rows can not be divided by the number of elements given in the pattern, therefore a subgroup pattern cannot be created.")
+        elif self.n_cols % len(self.pattern) != 0:
+            print("The number of columns can not be divided by the number of elements given in the pattern, therefore a subgroup pattern cannot be created.")
+        else:
+            n_elements = len(self.pattern)
+            n_elementrepeats_row = int(self.n_rows / len(self.pattern))
+            n_elementrepeats_col = int(self.n_cols / len(self.pattern))
+        
+            self.DuplicateElements(n_duplications = n_elementrepeats_col)
+            self.DuplicatePattern(n_duplications = n_elementrepeats_row)
+            group_pattern = self.pattern
+        
+            result = []
+            for i in range(n_elements):
+                result.extend(group_pattern[i*n_elementrepeats_col:] + group_pattern[:i*n_elementrepeats_col])
+            
+            self.pattern = result
+        
+            return self
+        
+    def RepeatPatternInCheckerboard(self):
+        """
+        Repeats the provided elements in a checkerboard across rows and columns.
+        ONLY POSSIBLE FOR 2 or 3 PROVIDED ELEMENTS; and NUMBER OF ROWS AND COLUMNS THAT IS EVEN (could be changed later on)
+
+        Returns
+        -------
+        GridRepeater
+            Current instance of the GridRepeater object.
+            
+        Example
+        -------
+        pattern: 
+            [1, 2, 3]
+        n_rows:
+            6
+        n_cols:
+            6
+            
+        result:
+            [1, 2, 1, 2, 1, 2,
+             3, 1, 3, 1, 3, 1, 
+             1, 2, 1, 2, 1, 2,
+             3, 1, 3, 1, 3, 1, 
+             1, 2, 1, 2, 1, 2,
+             3, 1, 3, 1, 3, 1]
+            
+
+        """
+        if len(self.pattern) > 3 | len(self.pattern) < 2:
+            print("Checkerboard patterns can only be made with 2 or 3 provided elements, therefore a checkerboard pattern cannot be created.")
+        elif self.n_rows % 2 != 0:
+            print("The number of rows is not even, therefore a checkerboard pattern cannot be created.")
+        elif self.n_cols % 2 != 0:
+            print("The number of columns is not even, therefore a checkerboard pattern cannot be created.")
+        elif len(self.pattern) == 2:
+            self.DuplicatePattern(n_duplications = int(self.n_cols / len(self.pattern)))
+            group_pattern = self.pattern
+            
+            result = group_pattern
+            result.extend(group_pattern[1:] + group_pattern[:1])
+            
+            self.pattern = result
+            self.DuplicatePattern(n_duplications = int(self.n_rows / 2))
+            
+            return self
+            
+        elif len(self.pattern) == 3:
+            pattern_1 = self.pattern[0:2] * int(self.n_cols / 2)
+            pattern_2 = [self.pattern[2], self.pattern[0]] * int(self.n_cols / 2)
+            
+            self.pattern = pattern_1 + pattern_2
+            self.DuplicatePattern(n_duplications = int(self.n_rows / 2))
+            
+            return self
+    
     def GenerateOnAxis(self, axis):
         """
         Generates a pattern along the axis specified with the axis argument.
@@ -258,12 +430,12 @@ class GridRepeater(BasicPattern):
     
 if __name__ == '__main__':
     # Grid pattern parameters
-    n_rows = 4
+    n_rows = 5
     n_cols = 5
     base_pattern= [1, 2, 3]
     
-    repeat_styles = ["RepeatElements", "RepeatAcrossRows", "RepeatAcrossColumns", "RepeatAcrossRightDiagonal", "RepeatAcrossLeftDiagonal"]
-
+    repeat_styles = ["RepeatElements", "RepeatAcrossRows", "RepeatAcrossColumns", "RepeatAcrossRightDiagonal", "RepeatAcrossLeftDiagonal",
+                     "RepeatElementsInSubgroups", "RepeatPatternInCheckerboard"]
     # Repeat elements
     for repeat_style in repeat_styles:
         pattern = GridRepeater(base_pattern, n_rows, n_cols)
