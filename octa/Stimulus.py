@@ -47,6 +47,7 @@ class Stimulus:
         self.shapes      = None
         self.colour      = None
         self.orientation = None
+        self.data        = None
         
         self.dwg_elements = None
         
@@ -91,7 +92,8 @@ class Stimulus:
                                    'size'         :    jsonpickle.encode(self.size),
                                    'shapes'       :    jsonpickle.encode(self.shapes),
                                    'colour'       :    jsonpickle.encode(self.colour),
-                                   'orientation' :     jsonpickle.encode(self.orientation)}}
+                                   'orientation'  :    jsonpickle.encode(self.orientation),
+                                   'data'         :    jsonpickle.encode(self.data)}}
                      #'dwg_elements'  : self.dwg_elements}
         
         with open(json_filename, 'w') as output_file:
@@ -147,8 +149,9 @@ class Stimulus:
             size        = self.size.pattern[i]
             colour      = self.colour.pattern[i]
             orientation = self.orientation.pattern[i]
+            data        = self.data.pattern[i]
             
-            element_parameters = {'shape' : str(self.shapes.pattern[i].__name__), 'x' : x, 'y' : y, 'size' : size, 'colour' : colour, 'orientation' : orientation}
+            element_parameters = {'shape' : str(self.shapes.pattern[i].__name__), 'x' : x, 'y' : y, 'size' : size, 'colour' : colour, 'orientation' : orientation, 'data': data}
             
             self.dwg_elements.append(element_parameters)
             
@@ -207,6 +210,7 @@ class Stimulus:
             stimulus.shapes      = jsonpickle.decode(data['stimulus']['shapes'])
             stimulus.colour      = jsonpickle.decode(data['stimulus']['colour'])
             stimulus.orientation = jsonpickle.decode(data['stimulus']['orientation'])
+            stimulus.data        = jsonpickle.decode(data['stimulus']['data'])
             
             # stimulus.dwg_elements = data['dwg_elements']
             
