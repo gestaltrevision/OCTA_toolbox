@@ -226,6 +226,56 @@ class GridRepeater(BasicPattern):
         
         return self
     
+    def RepeatElementsInSubgroups(self):
+        """
+        Repeats the provided elements in subgroups across rows and columns.
+        ONLY POSSIBLE FOR NUMBER OF ROWS AND COLUMNS THAT CAN BE DIVIDED BY THE NUMBER OF PROVIDED ELEMENTS
+
+        Returns
+        -------
+        GridRepeater
+            Current instance of the GridRepeater object.
+            
+        Example
+        -------
+        pattern: 
+            [1, 2, 3]
+        n_rows:
+            6
+        n_cols:
+            6
+            
+        result:
+            [1, 1, 2, 2, 3, 3,
+             1, 1, 2, 2, 3, 3,
+             2, 2, 3, 3, 1, 1,
+             2, 2, 3, 3, 1, 1,
+             3, 3, 1, 1, 2, 2, 
+             3, 3, 1, 1, 2, 2]
+            
+
+        """
+        if self.n_rows % len(self.pattern) != 0:
+            print("The number of rows can not be divided by the number of elements given in the pattern, therefore a subgroup pattern cannot be created.")
+        elif self.n_cols % len(self.pattern) != 0:
+            print("The number of columns can not be divided by the number of elements given in the pattern, therefore a subgroup pattern cannot be created.")
+        else:
+            n_elements = len(self.pattern)
+            n_elementrepeats_row = int(self.n_rows / len(self.pattern))
+            n_elementrepeats_col = int(self.n_cols / len(self.pattern))
+        
+            self.DuplicateElements(n_duplications = n_elementrepeats_col)
+            self.DuplicatePattern(n_duplications = n_elementrepeats_row)
+            group_pattern = self.pattern
+        
+            result = []
+            for i in range(n_elements):
+                result.extend(group_pattern[i*n_elementrepeats_col:] + group_pattern[:i*n_elementrepeats_col])
+            
+            self.pattern = result
+        
+            return self
+    
     def GenerateOnAxis(self, axis):
         """
         Generates a pattern along the axis specified with the axis argument.
@@ -259,11 +309,11 @@ class GridRepeater(BasicPattern):
 if __name__ == '__main__':
     # Grid pattern parameters
     n_rows = 4
-    n_cols = 5
-    base_pattern= [1, 2, 3]
+    n_cols = 6
+    base_pattern= [1, 2]
     
-    repeat_styles = ["RepeatElements", "RepeatAcrossRows", "RepeatAcrossColumns", "RepeatAcrossRightDiagonal", "RepeatAcrossLeftDiagonal"]
-
+    repeat_styles = ["RepeatElements", "RepeatAcrossRows", "RepeatAcrossColumns", "RepeatAcrossRightDiagonal", "RepeatAcrossLeftDiagonal",
+                     "RepeatElementsInSubgroups"]
     # Repeat elements
     for repeat_style in repeat_styles:
         pattern = GridRepeater(base_pattern, n_rows, n_cols)
