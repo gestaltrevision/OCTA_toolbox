@@ -17,6 +17,7 @@ stimulus.shapes      = patterns.BasicPattern([shapes.Rectangle, shapes.Rectangle
 stimulus.size        = patterns.BasicPattern([(30,30), (20, 20)]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.colour      = patterns.GridRepeater(["red", "blue"], n_rows, n_cols).RepeatElements()
 stimulus.orientation = patterns.SymmetryPattern([0], n_rows, n_cols).MirrorAcrossColumns()
+stimulus.data        = patterns.BasicPattern(["none"]).DuplicatePatternToSize(n_rows * n_cols)
 
 stimulus.Render()
 stimulus.Show()
@@ -28,6 +29,7 @@ stimulus.shapes      = patterns.BasicPattern([shapes.Ellipse, shapes.Rectangle])
 stimulus.colour      = patterns.GridRepeater(["red", "blue"], n_rows, n_cols).RepeatElements()
 stimulus.orientation = patterns.SymmetryPattern([0,90], n_rows, n_cols).MirrorAcrossColumns()
 stimulus.size        = patterns.BasicPattern([(10,10), (20,20)]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.data        = patterns.BasicPattern(["none"]).DuplicatePatternToSize(n_rows * n_cols)
 
 stimulus             = stimulus.SwitchElements(n_switches = 1)
 
@@ -40,6 +42,7 @@ stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_s
 stimulus.shapes      = patterns.BasicPattern([shapes.Ellipse, shapes.Triangle, shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.colour      = patterns.GridRepeater(["red", "blue"], n_rows, n_cols).RepeatElements()
 stimulus.orientation = patterns.SymmetryPattern([0], n_rows, n_cols).MirrorAcrossColumns()
+stimulus.data        = patterns.BasicPattern(["none"]).DuplicatePatternToSize(n_rows * n_cols)
 
 stimulus.size        = patterns.BasicPattern([(10,10), (20,20), (20,20)]).DuplicatePatternToSize(n_rows * n_cols).SwitchValues(n_switches = 1)
 stimulus.Render()
@@ -51,6 +54,7 @@ stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_s
 stimulus.shapes      = patterns.BasicPattern([shapes.Rectangle, shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.size        = patterns.BasicPattern([(30,30), (20, 20)]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.orientation = patterns.SymmetryPattern([0], n_rows, n_cols).MirrorAcrossColumns()
+stimulus.data        = patterns.BasicPattern(["none"]).DuplicatePatternToSize(n_rows * n_cols)
 
 stimulus.colour      = patterns.GridRepeater(["red", "blue"], n_rows, n_cols).RepeatAcrossRows().SwitchValues(n_switches = 1)
 stimulus.Render()
@@ -62,6 +66,7 @@ stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_s
 stimulus.shapes      = patterns.BasicPattern([shapes.Rectangle, shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.size        = patterns.BasicPattern([(30,30), (20, 20)]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.colour      = patterns.GridRepeater(["red", "blue"], n_rows, n_cols).RepeatAcrossRows()
+stimulus.data        = patterns.BasicPattern(["none"]).DuplicatePatternToSize(n_rows * n_cols)
 
 stimulus.orientation = patterns.SymmetryPattern([0, 45], n_rows, n_cols).MirrorAcrossColumns().SwitchValues(n_switches = 2)
 
@@ -74,6 +79,7 @@ stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_s
 stimulus.shapes      = patterns.BasicPattern([shapes.Rectangle, shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.size        = patterns.BasicPattern([(30,30), (20, 20)]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.orientation = patterns.SymmetryPattern([0], n_rows, n_cols).MirrorAcrossColumns()
+stimulus.data        = patterns.BasicPattern(["none"]).DuplicatePatternToSize(n_rows * n_cols)
 
 #stimulus.colour      = GridRepeater(["red", "blue"], n_rows, n_cols).RepeatElements().SwitchValues(n_switches = 13)
 stimulus.colour      = patterns.GridRepeater(["red", "blue"], n_rows, n_cols).RepeatAcrossRows().SwitchValues(n_switches = 15)
@@ -87,6 +93,7 @@ stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_s
 stimulus.shapes      = patterns.BasicPattern([shapes.Rectangle, shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.size        = patterns.BasicPattern([(30,30), (20, 20)]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.orientation = patterns.SymmetryPattern([0], n_rows, n_cols).MirrorAcrossColumns()
+stimulus.data        = patterns.BasicPattern(["none"]).DuplicatePatternToSize(n_rows * n_cols)
 
 stimulus.colour      = patterns.GridRepeater(["red"], n_rows, n_cols).RepeatAcrossRows().SwitchValues(n_switches = 1)
 

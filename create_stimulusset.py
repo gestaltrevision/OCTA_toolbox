@@ -23,13 +23,13 @@ color_options = [["#9C4B9C"], ["#5EA1D8"], ["#54C4D0"], ["#62BD80"], ["#B2D135"]
                  ["#9C4B9C","#5EA1D8","#54C4D0"], ["#5EA1D8","#54C4D0","#62BD80"], ["#54C4D0","#62BD80","#B2D135"], 
                  ["#62BD80","#B2D135","#FCE533"], ["#B2D135","#FCE533","#F39130"], ["#FCE533","#F39130","#ED4959"],
                  ["#F39130","#ED4959","#9C4B9C"], ["#ED4959","#9C4B9C","#5EA1D8"]]
-size_options = [[(20,20)], [(25,25)], [(30,30)],
-                [(20,20), (25,25)], #[(25,25), (20,20)]
-                [(25,25), (30,30)], #[(30,30), (25,25)]
-                [(20,20), (30,30)], #[(30,30), (20,20)]
-                [(20,20), (25,25), (30,30)]
-                # [(20,20), (30,30), (25,25)], [(25,25), (20,20), (30,30)], [(25,25), (30,30), (20,20)],
-                # [(30,30), (20,20), (25,25)], [(30,30), (25,25), (20,20)]
+size_options = [[(20,20)], [(28,28)], [(36,36)],
+                [(20,20), (28,28)], #[(28,28), (20,20)]
+                [(28,28), (36,36)], #[(36,36), (28,28)]
+                [(20,20), (36,36)], #[(36,36), (20,20)]
+                [(20,20), (28,28), (36,36)]
+                # [(20,20), (36,36), (28,28)], [(28,28), (20,20), (36,36)], [(28,28), (36,36), (20,20)],
+                # [(36,36), (20,20), (28,28)], [(36,36), (28,28), (20,20)]
                 ]
 
 #size_options = [[(30,30)]]
@@ -50,8 +50,8 @@ pattern_options = ["subgroup_repeat", "outin_repeat", "checkerboard_repeat"] #ra
 
 #pattern_options = [random.choice(pattern_options)]
 
-switch_features_options = [0,1] # 0,1,2 # if pattern not random
-switch_positions_options = [1]
+switch_features_options = [0] # 0,1,2 # if pattern not random
+switch_elements_options = [1]
 #switch_features_options = [random.choice(switch_features_options)]
 
 ### STANDARD PATTERN ###
@@ -66,18 +66,17 @@ x_offset = 40
 y_offset = 40
 
 stimulus = Stimulus(background_color = "white")
-#stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset, y_offset)
-
-for i in range(len(switch_positions_options)):
-    stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset, y_offset)
-    stimulus.positions[0].SwitchValues(0)
-    stimulus.positions[1].SwitchValues(1)
+stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset, y_offset)
 
 stimulus.orientation = patterns.BasicPattern([0]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.shapes  = patterns.BasicPattern(shape_options[0]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.colour  = patterns.BasicPattern(color_options[0]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.size  = patterns.BasicPattern(size_options[0]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.data        = patterns.BasicPattern(["none"]).DuplicatePatternToSize(n_rows * n_cols)
 
+#stimulus.Render()
+#stimulus.Show()
+                            
 for i in range(len(shape_options)):
     if len(shape_options[i]) > 1:        
         for shapepattern in pattern_options:
@@ -122,9 +121,9 @@ for i in range(len(shape_options)):
                 elif sizepattern == "subgroup_repeat":
                     stimulus.size  = patterns.GridRepeater(size_options[i], n_rows, n_cols).RepeatElementsInSubgroups()
                 elif sizepattern == "outin_repeat":
-                    stimulus.size  = patterns.GridRepeater(size_options[i], n_rows, n_cols).RepeatAcrossOutIn()
+                    stimulus.size  = patterns.GridRepeater(size_options[j], n_rows, n_cols).RepeatAcrossOutIn()
                 elif sizepattern == "checkerboard_repeat":
-                    stimulus.size  = patterns.GridRepeater(size_options[i], n_rows, n_cols).RepeatPatternInCheckerboard()
+                    stimulus.size  = patterns.GridRepeater(size_options[j], n_rows, n_cols).RepeatPatternInCheckerboard()
                 elif sizepattern == "random":
                     stimulus.size  = patterns.BasicPattern(size_options[j]).DuplicatePatternToSize(n_rows * n_cols)
                     stimulus.size.RandomizeOrder()
@@ -148,11 +147,11 @@ for i in range(len(shape_options)):
                     elif colorpattern == "column_repeat":
                         stimulus.colour  = patterns.GridRepeater(color_options[k], n_rows, n_cols).RepeatAcrossColumns()  
                     elif colorpattern == "subgroup_repeat":
-                        stimulus.colour  = patterns.GridRepeater(color_options[i], n_rows, n_cols).RepeatElementsInSubgroups()
+                        stimulus.colour  = patterns.GridRepeater(color_options[k], n_rows, n_cols).RepeatElementsInSubgroups()
                     elif colorpattern == "outin_repeat":
-                        stimulus.colour  = patterns.GridRepeater(color_options[i], n_rows, n_cols).RepeatAcrossOutIn()
+                        stimulus.colour  = patterns.GridRepeater(color_options[k], n_rows, n_cols).RepeatAcrossOutIn()
                     elif colorpattern == "checkerboard_repeat":
-                        stimulus.colour  = patterns.GridRepeater(color_options[i], n_rows, n_cols).RepeatPatternInCheckerboard()
+                        stimulus.colour  = patterns.GridRepeater(color_options[k], n_rows, n_cols).RepeatPatternInCheckerboard()
                     elif colorpattern == "random":
                         stimulus.colour  = patterns.BasicPattern(color_options[k]).DuplicatePatternToSize(n_rows * n_cols)
                         stimulus.colour.RandomizeOrder()
@@ -160,7 +159,9 @@ for i in range(len(shape_options)):
                     if colorpattern != "random":
                         for n_switches in switch_features_options:
                             stimulus.colour.SwitchValues(n_switches)
-                        
+                            
+                        for i in switch_elements_options:
+                            stimulus.SwitchElements(i)                        
                             stimulus.Render()
                             stimulus.Show()
                 

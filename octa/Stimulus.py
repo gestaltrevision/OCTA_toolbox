@@ -231,7 +231,7 @@ class Stimulus:
 
         """
         
-        elements = [ "|".join([str(i), str(j), str(k), str(l)]) for i, j, k, l in zip(self.shapes.pattern, self.size.pattern, self.colour.pattern, self.orientation.pattern)] 
+        elements = [ "|".join([str(i), str(j), str(k), str(l), str(m)]) for i, j, k, l, m in zip(self.shapes.pattern, self.size.pattern, self.colour.pattern, self.orientation.pattern, self.data.pattern)] 
         
         d = defaultdict(list)
         for i, x in enumerate(elements):
@@ -274,5 +274,6 @@ class Stimulus:
                 self.size.pattern[pos1], self.size.pattern[pos2] = self.size.pattern[pos2], self.size.pattern[pos1]
                 self.colour.pattern[pos1], self.colour.pattern[pos2] = self.colour.pattern[pos2], self.colour.pattern[pos1]
                 self.orientation.pattern[pos1], self.orientation.pattern[pos2] = self.orientation.pattern[pos2], self.orientation.pattern[pos1]
+                self.data.pattern[pos1], self.data.pattern[pos2] = self.data.pattern[pos2], self.data.pattern[pos1]
             
         return self
