@@ -42,14 +42,15 @@ size_options = [random.choice(size_options)]
 color_options = [random.choice(color_options)]
 
 ### ORDER ###
-pattern_options = ["row_symmetry", "column_symmetry", "row_repeat", "column_repeat"] #random
+#pattern_options = ["row_symmetry", "column_symmetry", "row_repeat", "column_repeat", 
+pattern_options = ["subgroup_repeat", "outin_repeat", "checkerboard_repeat"] #random
 #                   "row_gradient", "col_gradient",
 #                   "rightdiag_repeat", "leftdiag_repeat", "rightdiag_gradient", "leftdiag_gradient", 
 #                   "subgroup_repeat", "subgroup_gradient", "inward_outward", "outward_inward"]
 
-pattern_options = [random.choice(pattern_options)]
+#pattern_options = [random.choice(pattern_options)]
 
-switch_options = [0,1] # 0,1,2 # if pattern not random
+switch_options = [0] # 0,1,2 # if pattern not random
 #switch_options = [random.choice(switch_options)]
 
 ### STANDARD PATTERN ###
@@ -82,6 +83,12 @@ for i in range(len(shape_options)):
                 stimulus.shapes  = patterns.GridRepeater(shape_options[i], n_rows, n_cols).RepeatAcrossRows()
             elif shapepattern == "column_repeat":
                 stimulus.shapes  = patterns.GridRepeater(shape_options[i], n_rows, n_cols).RepeatAcrossColumns()  
+            elif shapepattern == "subgroup_repeat":
+                stimulus.shapes  = patterns.GridRepeater(shape_options[i], n_rows, n_cols).RepeatElementsInSubgroups()
+            elif shapepattern == "outin_repeat":
+                stimulus.shapes  = patterns.GridRepeater(shape_options[i], n_rows, n_cols).RepeatAcrossOutIn()
+            elif shapepattern == "checkerboard_repeat":
+                stimulus.shapes  = patterns.GridRepeater(shape_options[i], n_rows, n_cols).RepeatPatternInCheckerboard()
             elif shapepattern == "random":
                 stimulus.shapes  = patterns.BasicPattern(shape_options[i]).DuplicatePatternToSize(n_rows * n_cols)
                 stimulus.shapes.RandomizeOrder()
@@ -105,6 +112,12 @@ for i in range(len(shape_options)):
                     stimulus.size  = patterns.GridRepeater(size_options[j], n_rows, n_cols).RepeatAcrossRows()
                 elif sizepattern == "column_repeat":
                     stimulus.size  = patterns.GridRepeater(size_options[j], n_rows, n_cols).RepeatAcrossColumns()  
+                elif sizepattern == "subgroup_repeat":
+                    stimulus.size  = patterns.GridRepeater(size_options[i], n_rows, n_cols).RepeatElementsInSubgroups()
+                elif sizepattern == "outin_repeat":
+                    stimulus.size  = patterns.GridRepeater(size_options[i], n_rows, n_cols).RepeatAcrossOutIn()
+                elif sizepattern == "checkerboard_repeat":
+                    stimulus.size  = patterns.GridRepeater(size_options[i], n_rows, n_cols).RepeatPatternInCheckerboard()
                 elif sizepattern == "random":
                     stimulus.size  = patterns.BasicPattern(size_options[j]).DuplicatePatternToSize(n_rows * n_cols)
                     stimulus.size.RandomizeOrder()
@@ -127,6 +140,12 @@ for i in range(len(shape_options)):
                         stimulus.colour  = patterns.GridRepeater(color_options[k], n_rows, n_cols).RepeatAcrossRows()
                     elif colorpattern == "column_repeat":
                         stimulus.colour  = patterns.GridRepeater(color_options[k], n_rows, n_cols).RepeatAcrossColumns()  
+                    elif colorpattern == "subgroup_repeat":
+                        stimulus.colour  = patterns.GridRepeater(color_options[i], n_rows, n_cols).RepeatElementsInSubgroups()
+                    elif colorpattern == "outin_repeat":
+                        stimulus.colour  = patterns.GridRepeater(color_options[i], n_rows, n_cols).RepeatAcrossOutIn()
+                    elif colorpattern == "checkerboard_repeat":
+                        stimulus.colour  = patterns.GridRepeater(color_options[i], n_rows, n_cols).RepeatPatternInCheckerboard()
                     elif colorpattern == "random":
                         stimulus.colour  = patterns.BasicPattern(color_options[k]).DuplicatePatternToSize(n_rows * n_cols)
                         stimulus.colour.RandomizeOrder()
