@@ -279,10 +279,7 @@ class BasicPattern:
         
             for i in range(n_switches):
                 
-                count_full_lists = 0
-                for i in range(len(elements_to_pick)):
-                    if elements_to_pick[i] != []: count_full_lists += 1
-                if count_full_lists < 2:
+                if len(elements_to_pick) < 2:
                     print("Not possible to conduct so many switches! Pattern created with only " + str(conducted_switches) + " switches.")
                     break
                 else:
@@ -296,6 +293,7 @@ class BasicPattern:
                     elements_to_pick = list()
                     for i in range(len(idx_elementgroups)): 
                         elements_to_pick.append([value for value in idx_elementgroups[i] if value not in switch])
+                    elements_to_pick = [x for x in elements_to_pick if x != []]
     
             for i in range(conducted_switches):
                 pos1, pos2  = switch[(i*2)-2], switch[(i*2)-1]

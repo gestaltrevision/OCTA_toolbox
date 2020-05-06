@@ -50,8 +50,9 @@ pattern_options = ["subgroup_repeat", "outin_repeat", "checkerboard_repeat"] #ra
 
 #pattern_options = [random.choice(pattern_options)]
 
-switch_options = [0] # 0,1,2 # if pattern not random
-#switch_options = [random.choice(switch_options)]
+switch_features_options = [0,1] # 0,1,2 # if pattern not random
+switch_positions_options = [1]
+#switch_features_options = [random.choice(switch_features_options)]
 
 ### STANDARD PATTERN ###
 
@@ -65,7 +66,13 @@ x_offset = 40
 y_offset = 40
 
 stimulus = Stimulus(background_color = "white")
-stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset, y_offset)
+#stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset, y_offset)
+
+for i in range(len(switch_positions_options)):
+    stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset, y_offset)
+    stimulus.positions[0].SwitchValues(0)
+    stimulus.positions[1].SwitchValues(1)
+
 stimulus.orientation = patterns.BasicPattern([0]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.shapes  = patterns.BasicPattern(shape_options[0]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.colour  = patterns.BasicPattern(color_options[0]).DuplicatePatternToSize(n_rows * n_cols)
@@ -94,7 +101,7 @@ for i in range(len(shape_options)):
                 stimulus.shapes.RandomizeOrder()
             
             if shapepattern != "random":
-                for n_switches in switch_options:
+                for n_switches in switch_features_options:
                     stimulus.shapes.SwitchValues(n_switches)
                     
     else:
@@ -123,7 +130,7 @@ for i in range(len(shape_options)):
                     stimulus.size.RandomizeOrder()
                 
                 if sizepattern != "random":   
-                    for n_switches in switch_options:
+                    for n_switches in switch_features_options:
                         stimulus.size.SwitchValues(n_switches)
         else:
             stimulus.size  = patterns.BasicPattern(size_options[j]).DuplicatePatternToSize(n_rows * n_cols)
@@ -151,7 +158,7 @@ for i in range(len(shape_options)):
                         stimulus.colour.RandomizeOrder()
                     
                     if colorpattern != "random":
-                        for n_switches in switch_options:
+                        for n_switches in switch_features_options:
                             stimulus.colour.SwitchValues(n_switches)
                         
                             stimulus.Render()

@@ -22,6 +22,19 @@ stimulus.Render()
 stimulus.Show()
 
 #%%
+### ELEMENT SWITCHES ###
+stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset = 50, y_offset = 50)
+stimulus.shapes      = patterns.BasicPattern([shapes.Ellipse, shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.colour      = patterns.GridRepeater(["red", "blue"], n_rows, n_cols).RepeatElements()
+stimulus.orientation = patterns.SymmetryPattern([0,90], n_rows, n_cols).MirrorAcrossColumns()
+stimulus.size        = patterns.BasicPattern([(10,10), (20,20)]).DuplicatePatternToSize(n_rows * n_cols)
+
+stimulus             = stimulus.SwitchElements(n_switches = 1)
+
+stimulus.Render()
+stimulus.Show()
+
+#%%
 ### SIZE SWITCHES ###
 stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset = 50, y_offset = 50)
 stimulus.shapes      = patterns.BasicPattern([shapes.Ellipse, shapes.Triangle, shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
