@@ -14,3 +14,4 @@ from octa.shapes.Infinity import Infinity
 from octa.shapes.FlowerLeave import FlowerLeave
 from octa.shapes.Droplet import Droplet
 from octa.shapes.Text import Text
+from octa.shapes.Image import Image
