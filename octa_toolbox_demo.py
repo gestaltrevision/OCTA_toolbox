@@ -19,7 +19,7 @@ col_spacing = 50
 stimulus = Stimulus(background_color = "white")
 
 stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing)
-stimulus.shapes      = patterns.BasicPattern([shapes.FlowerLeave, shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.shapes      = patterns.BasicPattern([shapes.Droplet, shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.size        = patterns.BasicPattern([30]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.colour      = patterns.GridGradient("red", "green", n_rows, n_cols).GradientAcrossRightDiagonal()
 stimulus.orientation = patterns.SymmetryPattern([45,0], n_rows, n_cols).MirrorAcrossColumns()
