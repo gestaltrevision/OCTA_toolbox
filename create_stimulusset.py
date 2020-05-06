@@ -2,15 +2,10 @@
 Create sets of stimuli
 """
 
-from Stimulus import Stimulus
-from Positions import Positions
-from BasicPattern import BasicPattern
-from RepeaterPattern import GridRepeater
-from GradientPattern import GridGradient
-from SymmetryPattern import SymmetryPattern
-from Ellipse import Ellipse
-from Rectangle import Rectangle
-from Triangle import Triangle
+from octa.Stimulus import Stimulus
+from octa.Positions import Positions
+from octa import patterns
+from octa.shapes import Ellipse, Triangle, Rectangle
 import random
 
 ### COMPLEXITY ###
@@ -70,25 +65,25 @@ y_offset = 40
 
 stimulus = Stimulus(background_color = "white")
 stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset, y_offset)
-stimulus.orientation = BasicPattern([0]).DuplicatePatternToSize(n_rows * n_cols)
-stimulus.shapes  = BasicPattern(shape_options[0]).DuplicatePatternToSize(n_rows * n_cols)
-stimulus.colour  = BasicPattern(color_options[0]).DuplicatePatternToSize(n_rows * n_cols)
-stimulus.size  = BasicPattern(size_options[0]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.orientation = patterns.BasicPattern([0]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.shapes  = patterns.BasicPattern(shape_options[0]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.colour  = patterns.BasicPattern(color_options[0]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.size  = patterns.BasicPattern(size_options[0]).DuplicatePatternToSize(n_rows * n_cols)
 
 for i in range(len(shape_options)):
     if len(shape_options[i]) > 1:        
         for shapepattern in pattern_options:
             
             if shapepattern == "row_symmetry":
-                stimulus.shapes  = SymmetryPattern(shape_options[i], n_rows, n_cols).MirrorAcrossRows()
+                stimulus.shapes  = patterns.SymmetryPattern(shape_options[i], n_rows, n_cols).MirrorAcrossRows()
             elif shapepattern == "column_symmetry":
-                stimulus.shapes  = SymmetryPattern(shape_options[i], n_rows, n_cols).MirrorAcrossColumns()
+                stimulus.shapes  = patterns.SymmetryPattern(shape_options[i], n_rows, n_cols).MirrorAcrossColumns()
             elif shapepattern == "row_repeat":
-                stimulus.shapes  = GridRepeater(shape_options[i], n_rows, n_cols).RepeatAcrossRows()
+                stimulus.shapes  = patterns.GridRepeater(shape_options[i], n_rows, n_cols).RepeatAcrossRows()
             elif shapepattern == "column_repeat":
-                stimulus.shapes  = GridRepeater(shape_options[i], n_rows, n_cols).RepeatAcrossColumns()  
+                stimulus.shapes  = patterns.GridRepeater(shape_options[i], n_rows, n_cols).RepeatAcrossColumns()  
             elif shapepattern == "random":
-                stimulus.shapes  = BasicPattern(shape_options[i]).DuplicatePatternToSize(n_rows * n_cols)
+                stimulus.shapes  = patterns.BasicPattern(shape_options[i]).DuplicatePatternToSize(n_rows * n_cols)
                 stimulus.shapes.RandomizeOrder()
             
             if shapepattern != "random":
@@ -96,44 +91,44 @@ for i in range(len(shape_options)):
                     stimulus.shapes.SwitchValues(n_switches)
                     
     else:
-        stimulus.shapes  = BasicPattern(shape_options[i]).DuplicatePatternToSize(n_rows * n_cols)
+        stimulus.shapes  = patterns.BasicPattern(shape_options[i]).DuplicatePatternToSize(n_rows * n_cols)
     
     for j in range(len(size_options)): 
         if len(size_options[j]) > 1:
             for sizepattern in pattern_options:
         
                 if sizepattern == "row_symmetry":
-                    stimulus.size  = SymmetryPattern(size_options[j], n_rows, n_cols).MirrorAcrossRows()
+                    stimulus.size  = patterns.SymmetryPattern(size_options[j], n_rows, n_cols).MirrorAcrossRows()
                 elif sizepattern == "column_symmetry":
-                    stimulus.size  = SymmetryPattern(size_options[j], n_rows, n_cols).MirrorAcrossColumns()
+                    stimulus.size  = patterns.SymmetryPattern(size_options[j], n_rows, n_cols).MirrorAcrossColumns()
                 elif sizepattern == "row_repeat":
-                    stimulus.size  = GridRepeater(size_options[j], n_rows, n_cols).RepeatAcrossRows()
+                    stimulus.size  = patterns.GridRepeater(size_options[j], n_rows, n_cols).RepeatAcrossRows()
                 elif sizepattern == "column_repeat":
-                    stimulus.size  = GridRepeater(size_options[j], n_rows, n_cols).RepeatAcrossColumns()  
+                    stimulus.size  = patterns.GridRepeater(size_options[j], n_rows, n_cols).RepeatAcrossColumns()  
                 elif sizepattern == "random":
-                    stimulus.size  = BasicPattern(size_options[j]).DuplicatePatternToSize(n_rows * n_cols)
+                    stimulus.size  = patterns.BasicPattern(size_options[j]).DuplicatePatternToSize(n_rows * n_cols)
                     stimulus.size.RandomizeOrder()
                 
                 if sizepattern != "random":   
                     for n_switches in switch_options:
                         stimulus.size.SwitchValues(n_switches)
         else:
-            stimulus.size  = BasicPattern(size_options[j]).DuplicatePatternToSize(n_rows * n_cols)
+            stimulus.size  = patterns.BasicPattern(size_options[j]).DuplicatePatternToSize(n_rows * n_cols)
             
         for k in range(len(color_options)):
             if len(color_options[k]) > 1:
                 for colorpattern in pattern_options:
         
                     if colorpattern == "row_symmetry":
-                        stimulus.colour  = SymmetryPattern(color_options[k], n_rows, n_cols).MirrorAcrossRows()
+                        stimulus.colour  = patterns.SymmetryPattern(color_options[k], n_rows, n_cols).MirrorAcrossRows()
                     elif colorpattern == "column_symmetry":
-                        stimulus.colour  = SymmetryPattern(color_options[k], n_rows, n_cols).MirrorAcrossColumns()
+                        stimulus.colour  = patterns.SymmetryPattern(color_options[k], n_rows, n_cols).MirrorAcrossColumns()
                     elif colorpattern == "row_repeat":
-                        stimulus.colour  = GridRepeater(color_options[k], n_rows, n_cols).RepeatAcrossRows()
+                        stimulus.colour  = patterns.GridRepeater(color_options[k], n_rows, n_cols).RepeatAcrossRows()
                     elif colorpattern == "column_repeat":
-                        stimulus.colour  = GridRepeater(color_options[k], n_rows, n_cols).RepeatAcrossColumns()  
+                        stimulus.colour  = patterns.GridRepeater(color_options[k], n_rows, n_cols).RepeatAcrossColumns()  
                     elif colorpattern == "random":
-                        stimulus.colour  = BasicPattern(color_options[k]).DuplicatePatternToSize(n_rows * n_cols)
+                        stimulus.colour  = patterns.BasicPattern(color_options[k]).DuplicatePatternToSize(n_rows * n_cols)
                         stimulus.colour.RandomizeOrder()
                     
                     if colorpattern != "random":
@@ -144,7 +139,7 @@ for i in range(len(shape_options)):
                             stimulus.Show()
                 
             else:
-                stimulus.colour  = BasicPattern(color_options[k]).DuplicatePatternToSize(n_rows * n_cols)
+                stimulus.colour  = patterns.BasicPattern(color_options[k]).DuplicatePatternToSize(n_rows * n_cols)
                         
                 stimulus.Render()
                 stimulus.Show()

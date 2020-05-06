@@ -1,7 +1,7 @@
 """
 This module contains a class for creating gradient pattern in 2D grid structures.
 """
-from BasicPattern import BasicPattern
+from .BasicPattern import BasicPattern
 
 class GridGradient(BasicPattern):   
     def __init__(self, start_val, end_val, n_rows, n_cols):

@@ -6,7 +6,7 @@ Created on Tue Apr  7 12:33:03 2020
 """
 import numpy as np
 
-from BasicPattern import BasicPattern
+from .patterns.BasicPattern import BasicPattern
 
 class Positions:
     def Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset = 0, y_offset = 0):

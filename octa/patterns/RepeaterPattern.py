@@ -1,7 +1,7 @@
 """
 A class for creating repeated patterns in a 2D grid structure.
 """
-from BasicPattern import BasicPattern
+from .BasicPattern import BasicPattern
 
 class GridRepeater(BasicPattern):
     def __init__(self, pattern, n_rows, n_cols):

@@ -1,7 +1,7 @@
 """
 Class for generating symmetrical patterns in 2D grid structures.
 """
-from BasicPattern import BasicPattern
+from .BasicPattern import BasicPattern
 
 class SymmetryPattern(BasicPattern):
     def __init__(self, pattern, n_rows, n_cols):
