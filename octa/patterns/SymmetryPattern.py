@@ -53,7 +53,9 @@ class SymmetryPattern(BasicPattern):
     def MirrorElements(self):
         """
         Extends the current pattern by mirroring all the existing elements. This new pattern is then
-        repeated until it fits in the 2D grid structure.
+        repeated until the number of elements equals the number of elements in the corresponding grid,
+        optionally truncating if the number of elements after a repetition exceeds the number of 
+        elements in the grid.
 
         Returns
         -------
@@ -91,8 +93,12 @@ class SymmetryPattern(BasicPattern):
         
     def MirrorAcrossRows(self):
         """
-        Mirrors the pattern across the horizontal midline of the grid. If the pattern is shorter than
-        half the total number of rows, the pattern is first duplicated.
+        Mirrors the pattern across the horizontal midline of the grid. If the input
+        pattern is not equal to half the number of rows (+1 if the number of rows is uneven),
+        two manipulations can take place:
+            1. If the provided pattern is shorter in length, the pattern as a whole is duplicated
+               until it matches half the number of rows (+1 if uneven)
+            2. If the provided pattern is longer, it is truncated to half the number of rows (+1)
         
         Returns
         -------
@@ -134,8 +140,12 @@ class SymmetryPattern(BasicPattern):
     
     def MirrorAcrossColumns(self):
         """
-        Mirrors the pattern across the vertical midline of the grid. If the pattern is shorter than
-        half the total number of rows, the pattern is first duplicated.
+        Mirrors the pattern across the horizontal midline of the grid. If the input
+        pattern is not equal to half the number of columns (+1 if the number of columns is uneven),
+        two manipulations can take place:
+            1. If the provided pattern is shorter in length, the pattern as a whole is duplicated
+               until it matches half the number of columns (+1 if uneven)
+            2. If the provided pattern is longer, it is truncated to half the number of columns (+1)
         
         Returns
         -------
@@ -176,9 +186,10 @@ class SymmetryPattern(BasicPattern):
     
     def MirrorAcrossLeftDiagonal(self):
         """
-        Mirrors the pattern across the diagonal running from the top left to 
-        the bottom right. If the pattern is shorter than the number of elements required to
-        reach the diagonal, the pattern is repeated.
+        Mirrors the pattern across the diagonal running from the top left to the bottom right. 
+        If the pattern is shorter than the number of elements required to reach the diagonal,
+        which is (n_rows + n_cols - 1) / 2, the pattern is repeated. If it is longer, the pattern
+        is truncated.
 
         Returns
         -------
@@ -224,7 +235,8 @@ class SymmetryPattern(BasicPattern):
         """
         Mirrors the pattern across the diagonal running from the top right to the bottom left.
         If the pattern is shorter than the number of elements required to reach the diagonal,
-        the pattern is repeated.
+        which is (n_rows + n_cols - 1) / 2, the pattern is repeated. If it is longer, the pattern
+        is truncated.
 
         Returns
         -------
