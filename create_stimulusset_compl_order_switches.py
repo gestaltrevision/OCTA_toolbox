@@ -23,6 +23,7 @@ shapecompl3 = random.sample([[Ellipse, Triangle, Rectangle], [Ellipse, Rectangle
                [Triangle, Rectangle, Ellipse], [Triangle, Ellipse, Rectangle],
                [Rectangle, Ellipse, Triangle], [Rectangle, Triangle, Ellipse]], 1)
 shape_values = random.sample([shapecompl1, shapecompl2, shapecompl3],1)[0]
+#shape_values = random.sample([shapecompl1, shapecompl2],1)[0]
 
 
 colorcompl1 = random.sample([["#9C4B9C"], ["#5EA1D8"], ["#54C4D0"], ["#62BD80"], ["#B2D135"], ["#FCE533"], ["#F39130"], ["#ED4959"]], 1)
@@ -34,7 +35,7 @@ colorcompl3 = random.sample([["#9C4B9C","#5EA1D8","#54C4D0"], ["#5EA1D8","#54C4D
                  ["#62BD80","#B2D135","#FCE533"], ["#B2D135","#FCE533","#F39130"], ["#FCE533","#F39130","#ED4959"],
                  ["#F39130","#ED4959","#9C4B9C"], ["#ED4959","#9C4B9C","#5EA1D8"]], 1)
 color_values = random.sample([colorcompl1, colorcompl2, colorcompl3],1)[0]
-
+#color_values = random.sample([colorcompl1, colorcompl2],1)[0]
 
 size1, size2, size3 = 20, 28, 36
 sizecompl1 = random.sample([[(size1,size1)], [(size2,size2)], [(size3,size3)]], 1)
@@ -45,6 +46,7 @@ sizecompl3 = random.sample([[(size1,size1), (size2,size2), (size3,size3)], [(siz
                             [(size2,size2), (size1,size1), (size3,size3)], [(size2,size2), (size3,size3), (size1,size1)],
                             [(size3,size3), (size1,size1), (size2,size2)], [(size3,size3), (size2,size2), (size1,size1)]], 1)
 size_values = random.sample([sizecompl1, sizecompl2, sizecompl3],1)[0]
+#size_values = random.sample([sizecompl1, sizecompl2],1)[0]
 
 ### ADDITIONAL COMPLEXITY PARAMETERS: SHAPEXYRATIO, ORIENTATION ###
 ### ADDITIONAL COMPLEXITY MEASURES: LOCE: see below ###
@@ -103,16 +105,16 @@ else:
 ############################################
 ### SPECIFY COMPLEXITY AND ORDER OPTIONS ###
 ############################################
-shape_values = [[Ellipse]]
-shape_pattern = ["identity"]
-
-size_values = [[30]]
-size_pattern = ["identity"]
-#size_pattern = [symmetry, repetition, subgroups, outin, checkerboard, randompattern]
-
-#color_values = [["green"]]
+#shape_values = [[Ellipse]]
+#shape_pattern = ["identity"]
+#
+#size_values = [[30]]
+#size_pattern = ["identity"]
+##size_pattern = [symmetry, repetition, subgroups, outin, checkerboard, randompattern]
+#
+##color_values = [["green"]]
 #color_pattern = [symmetry, repetition, subgroups, outin, checkerboard, randompattern]
-#color_pattern = ["identity"]
+##color_pattern = ["identity"]
 
 #############################################################
 ### CALCULATE ORDER AND COMPLEXITY MEASURES (except LOCE) ###
@@ -296,4 +298,4 @@ for i in range(len(shape_values)):
 #                       print("shape_switches: " + str(shape_switches) + "\t")
 #                       print("color_switches: " + str(color_switches) + "\t")
 #                       print("size_switches: " + str(size_switches) + "\t")
-                        print("element_switches: " + str(element_switches[l]) + "\t")
+                        print("element_switches: " + str(element_switches[0]) + "\t")
