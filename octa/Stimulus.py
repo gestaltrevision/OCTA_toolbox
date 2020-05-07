@@ -144,8 +144,8 @@ class Stimulus:
         self.dwg_elements = []
         
         for i in range(len(self.shapes.pattern)):
-            x           = self.positions[0].pattern[i]
-            y           = self.positions[1].pattern[i]
+            x           = self.positions.x[i]
+            y           = self.positions.y[i]
             size        = self.size.pattern[i]
             colour      = self.colour.pattern[i]
             orientation = self.orientation.pattern[i]

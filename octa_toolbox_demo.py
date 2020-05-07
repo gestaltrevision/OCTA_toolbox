@@ -18,27 +18,30 @@ n_cols = 4
 row_spacing = 100
 col_spacing = 100
 
-x_offset = 200
-y_offset = 200
+x_offset = 50
+y_offset = 50
 
 stimulus = Stimulus(background_color = "white")
 
 
-stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing)
-stimulus.shapes      = patterns.BasicPattern([shapes.Image, shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset, y_offset)
+stimulus.positions.JitterLocations(axis = "x", mu = 0, std = 10)
+stimulus.positions.JitterLocations(axis = "y", distribution = "uniform", min_val = 0, max_val = 20)
+
+stimulus.shapes      = patterns.BasicPattern([shapes.Triangle, shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.size        = patterns.BasicPattern([50]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.colour      = patterns.GridGradient("red", "green", n_rows, n_cols).GradientAcrossRightDiagonal()
 stimulus.orientation = patterns.SymmetryPattern([0], n_rows, n_cols).MirrorAcrossColumns()
 stimulus.data        = patterns.BasicPattern([r"C:\Users\Christophe\Desktop\todo\OCTA_toolbox\output\beautiful_birds_6.jpg"]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.Render()
 stimulus.Show()
-#stimulus.SaveJSON(r'output/test_stimulus')
+stimulus.SaveJSON(r'output/test_stimulus')
 #stimulus.SaveSVG(r'output/test_stimulus')
 
 #%%
-# stim_2 = Stimulus.LoadFromJSON(r"output/test_stimulus.json")
-# stim_2.Render()
-# stim_2.Show()
+stim_2 = Stimulus.LoadFromJSON(r"output/test_stimulus.json")
+stim_2.Render()
+stim_2.Show()
 
 
 #stimulus.SaveJSON('test_stimulus')

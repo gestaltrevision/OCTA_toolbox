@@ -203,7 +203,7 @@ class BasicPattern:
         
         return number_range
     
-    def AddJitter(self, mu = 0, std = 1):
+    def AddNormalJitter(self, mu = 0, std = 1):
         """
         Adds a sample from a random normal distribution to each element in the pattern.
 
@@ -223,6 +223,30 @@ class BasicPattern:
         result = []
         for i in range(len(self.pattern)):
             result.append(self.pattern[i] + random.normalvariate(mu, std))
+        
+        self.pattern = result
+        return self
+    
+    def AddUniformJitter(self, min_val = -1, max_val = 1):
+        """
+        Adds a sample from a uniform distribution to each element in the pattern.
+
+        Parameters
+        ----------
+        min_val : float, optional
+            Lower bound of the uniform distribution
+        max_val : float, optional
+            Upper bound of the uniform distribution
+
+        Returns
+        -------
+        BasicPattern:
+            A representation of the pattern object.
+
+        """
+        result = []
+        for i in range(len(self.pattern)):
+            result.append(self.pattern[i] + random.uniform(min_val, max_val))
         
         self.pattern = result
         return self
