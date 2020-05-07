@@ -9,16 +9,20 @@ from collections import defaultdict
 class BasicPattern:
     def __init__(self, pattern):
         """
-        Initializes a BasicPattern object.
+        Initializes a BasicPattern object. If the provided input is not a list,
+        the pattern will be initialized with a list that contains the provided
+        input as the first and only element.
 
         Parameters
         ----------
-        pattern : list
+        pattern : any type
             List object with initial values for the pattern.
 
         """
-        assert type(pattern) == list, "BasicPattern needs to be initialized with a list"
-        self.pattern = pattern
+        if type(pattern) == list:
+            self.pattern = pattern
+        else:
+            self.pattern = [pattern]
         
         
     def __str__(self):
