@@ -38,7 +38,9 @@ stimulus.Render()
 stimulus.Show()
 #stimulus.SaveJSON(r'output/test_stimulus')
 #stimulus.SaveSVG(r'output/test_stimulus')
-
+#%%
+g = patterns.GridGradient(10, 20, 5, 5)
+print(g)
 #%%
 # stim_2 = Stimulus.LoadFromJSON(r"output/test_stimulus.json")
 # stim_2.Render()
