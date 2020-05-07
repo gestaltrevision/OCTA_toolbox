@@ -18,7 +18,12 @@ class SymmetryPattern(BasicPattern):
             Number of columns in the 2D grid.
 
         """
+        assert type(pattern) == list, "Provided pattern must be a list"
+        assert type(n_rows)  == int, "n_rows must be an integer type"
+        assert type(n_cols)  == int, "n_cols must be an integer type"
+        
         super().__init__(pattern)
+        
         self.n_rows = n_rows
         self.n_cols = n_cols
         

@@ -24,6 +24,12 @@ class GridGradient(BasicPattern):
         None.
 
         """
+        assert type(start_val) in [int, float, str], "start_val must be an integer, float, or string type"
+        assert type(end_val) in [int, float, str], "end_val must be an integer, float, or string type"
+        assert type(start_val) == type(end_val), "start_val and end_val must be of the same type"
+        assert type(n_rows) == int, "n_rows must be an integer type"
+        assert type(n_cols) == int, "n_cols must be an integer type"
+        
         self.start_val = start_val
         self.end_val   = end_val
         self.n_rows    = n_rows
