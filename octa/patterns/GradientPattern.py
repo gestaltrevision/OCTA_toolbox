@@ -4,7 +4,7 @@ This module contains a class for creating gradient pattern in 2D grid structures
 from .BasicPattern import BasicPattern
 
 class GridGradient(BasicPattern):   
-    def __init__(self, start_val, end_val, n_rows, n_cols):
+    def __init__(self, start_val, end_val, n_rows, n_cols, style = "elements"):
         """
         Initializes the parameters for a gradient pattern.
 
@@ -34,6 +34,9 @@ class GridGradient(BasicPattern):
         self.end_val   = end_val
         self.n_rows    = n_rows
         self.n_cols    = n_cols
+        
+        self.style = style
+        self._Generate()
             
     def __str__(self):
         """
@@ -171,6 +174,35 @@ class GridGradient(BasicPattern):
             gradient_list = BasicPattern.CreateNumberRangeList(self.start_val, self.end_val, n_elements)
         
         return gradient_list
+    
+    def _Generate(self):
+        """
+        Generates a pattern with the style specified in the style property
+
+        Parameters
+        ----------
+        axis : str
+            'element'    : GradientElements
+            'row'        : GradientAcrossRows
+            'col'        : GradientAcrossColumns
+            'right_diag' : GradientAcrossLeftDiagonal
+            'left_diag'  : GradientAcrossRightDiagonal
+                
+        Returns
+        -------
+        A list with values representing the pattern.
+
+        """
+        if self.style == 'elements':
+            self.GradientElements()
+        elif self.style == 'rows':
+            self.GradientAcrossRows()
+        elif self.style == 'columns':
+            self.GradientAcrossColumns()
+        elif self.style == 'right_diagonal':
+            self.GradientAcrossRightDiagonal()
+        elif self.style == 'left_diagonal':
+            self.GradientAcrossLeftDiagonal()
         
         
 if __name__ == '__main__':

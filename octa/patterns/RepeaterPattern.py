@@ -4,7 +4,7 @@ A class for creating repeated patterns in a 2D grid structure.
 from .BasicPattern import BasicPattern
 
 class GridRepeater(BasicPattern):
-    def __init__(self, pattern, n_rows, n_cols):
+    def __init__(self, pattern, n_rows, n_cols, style = "element"):
         """
         Initializes a GridRepeater object.
 
@@ -16,6 +16,8 @@ class GridRepeater(BasicPattern):
             Number of rows in the 2D grid.
         n_cols : int
             Number of columns in the 2D grid.
+        element: str
+            Style of the pattern. Can be found in octa.patterns.Style class
 
         """
         assert type(pattern) == list, "Provided pattern must be a list"
@@ -26,6 +28,9 @@ class GridRepeater(BasicPattern):
         
         self.n_rows = n_rows
         self.n_cols = n_cols
+        
+        self.style  = style
+        self._Generate()
         
         
     def __str__(self):
@@ -403,34 +408,34 @@ class GridRepeater(BasicPattern):
             
             return self
     
-    def GenerateOnAxis(self, axis):
+    def _Generate(self):
         """
-        Generates a pattern along the axis specified with the axis argument.
+        Generates a pattern with the style specified in the style property
 
         Parameters
         ----------
         axis : str
-            'element'   : RepeatElements
-            'row'       : RepeatAcrossColumns
-            'col'       : RepeatAcrossRows
-            'rightdiag' : RepeatAcrossRightDiagonal
-            'leftdiag'  : RepeatAcrossLeftDiagonal
+            'element'    : RepeatElements
+            'row'        : RepeatAcrossColumns
+            'col'        : RepeatAcrossRows
+            'right_diag' : RepeatAcrossRightDiagonal
+            'left_diag'  : RepeatAcrossLeftDiagonal
                 
         Returns
         -------
         A list with values representing the pattern.
 
         """
-        if axis == 'element':
-            return self.RepeatElements().pattern
-        elif axis == 'row':
-            return self.RepeatAcrossColumns().pattern
-        elif axis == 'col':
-            return self.RepeatAcrossRows().pattern
-        elif axis == 'rightdiag':
-            return self.RepeatAcrossRightDiagonal().pattern
-        elif axis == 'leftdiag':
-            return self.RepeatAcrossLeftDiagonal().pattern
+        if self.style == 'elements':
+            self.RepeatElements()
+        elif self.style == 'rows':
+            self.RepeatAcrossColumns()
+        elif self.style == 'columns':
+            self.RepeatAcrossRows()
+        elif self.style == 'right_diagonal':
+            self.RepeatAcrossRightDiagonal()
+        elif self.style == 'left_diagonal':
+            self.RepeatAcrossLeftDiagonal()
     
     
 if __name__ == '__main__':

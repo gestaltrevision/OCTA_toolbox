@@ -4,7 +4,7 @@ Class for generating symmetrical patterns in 2D grid structures.
 from .BasicPattern import BasicPattern
 
 class SymmetryPattern(BasicPattern):
-    def __init__(self, pattern, n_rows, n_cols):
+    def __init__(self, pattern, n_rows, n_cols, style = "element"):
         """
         Initializes a SymmetryPattern object.
 
@@ -16,6 +16,8 @@ class SymmetryPattern(BasicPattern):
             Number of rows in the 2D grid.
         n_cols : int
             Number of columns in the 2D grid.
+        element: str
+            Style of the pattern. Can be found in octa.patterns.Style class
 
         """
         assert type(pattern) == list, "Provided pattern must be a list"
@@ -26,6 +28,9 @@ class SymmetryPattern(BasicPattern):
         
         self.n_rows = n_rows
         self.n_cols = n_cols
+        
+        self.style  = style
+        self._Generate()
         
     
     def __str__(self):
@@ -261,34 +266,35 @@ class SymmetryPattern(BasicPattern):
         
         return self
     
-    def GenerateOnAxis(self, axis):
+        
+    def _Generate(self):
         """
-        Generates a pattern along the axis specified with the axis argument.
+        Generates a pattern with the style specified in the style property
 
         Parameters
         ----------
         axis : str
-            'element'   : MirrorElements
-            'row'       : MirrorAcrossColumns
-            'col'       : MirrorAcrossRows
-            'rightdiag' : MirrorAcrossRightDiagonal
-            'leftdiag'  : MirrorAcrossLeftDiagonal
+            'element'    : MirrorElements
+            'row'        : MirrorAcrossColumns
+            'col'        : MirrorAcrossRows
+            'right_diag' : MirrorAcrossRightDiagonal
+            'left_diag'  : MirrorAcrossLeftDiagonal
                 
         Returns
         -------
         A list with values representing the pattern.
 
         """
-        if axis == 'element':
-            return self.MirrorElements().pattern
-        elif axis == 'row':
-            return self.MirrorAcrossColumns().pattern
-        elif axis == 'col':
-            return self.MirrorAcrossRows().pattern
-        elif axis == 'rightdiag':
-            return self.MirrorAcrossRightDiagonal().pattern
-        elif axis == 'leftdiag':
-            return self.MirrorAcrossLeftDiagonal().pattern
+        if self.style == 'elements':
+            self.MirrorElements()
+        elif self.style == 'rows':
+            self.MirrorAcrossColumns()
+        elif self.style == 'columns':
+            self.MirrorAcrossRows()
+        elif self.style == 'right_diagonal':
+            self.MirrorAcrossRightDiagonal()
+        elif self.style == 'left_diagonal':
+            self.MirrorAcrossLeftDiagonal()
         
         
 
