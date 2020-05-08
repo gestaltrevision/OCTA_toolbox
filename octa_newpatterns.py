@@ -132,3 +132,27 @@ stimulus.Render()
 stimulus.Show()
 #stimulus.SaveJSON(r'output/test_stimulus')
 #stimulus.SaveSVG(r'output/test_stimulus')
+#%%
+
+### REPEATER PATTERN - MORE THAN ONE REPEAT ###
+n_rows = 6
+n_cols = 6
+
+row_spacing = 50
+col_spacing = 50
+
+x_offset = 50
+y_offset = 50
+
+stimulus = Stimulus(background_color = "white")
+
+stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset, y_offset)
+stimulus.shapes      = patterns.BasicPattern([shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.size        = patterns.BasicPattern([20]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.colour      = patterns.GridRepeater(["red", "green", "blue"], n_rows, n_cols).RepeatAcrossRightDiagonal(n_repeats = 2)
+stimulus.orientation = patterns.SymmetryPattern([0], n_rows, n_cols).MirrorAcrossColumns()
+stimulus.data        = patterns.BasicPattern(["none"]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.Render()
+stimulus.Show()
+#stimulus.SaveJSON(r'output/test_stimulus')
+#stimulus.SaveSVG(r'output/test_stimulus')
