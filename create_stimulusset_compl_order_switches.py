@@ -108,17 +108,17 @@ else:
 ############################################
 ### SPECIFY COMPLEXITY AND ORDER OPTIONS ###
 ############################################
-shape_values = [[Ellipse]]
-shape_pattern = ["identity"]
-
-size_values = [[28]]
-size_pattern = ["identity"]
-#size_pattern = [symmetry, repetition, subgroups, outin, checkerboard, randompattern]
-
-color_values = [["#9C4B9C","#5EA1D8","#54C4D0"]]
-#color_pattern = ["identity"]
-#color_pattern = ["row_symmetry", "column_symmetry", "row_alternate", "column_alternate",  "row_repeat", "column_repeat", subgroups, outin, checkerboard, randompattern]
-color_pattern = ["row_repeat", "column_repeat"]
+#shape_values = [[Ellipse]]
+#shape_pattern = ["identity"]
+#
+#size_values = [[28]]
+#size_pattern = ["identity"]
+##size_pattern = [symmetry, repetition, subgroups, outin, checkerboard, randompattern]
+#
+#color_values = [["#9C4B9C","#5EA1D8","#54C4D0"]]
+##color_pattern = ["identity"]
+##color_pattern = ["row_symmetry", "column_symmetry", "row_alternate", "column_alternate",  "row_repeat", "column_repeat", subgroups, outin, checkerboard, randompattern]
+#color_pattern = ["row_repeat", "column_repeat"]
 
 #############################################################
 ### CALCULATE ORDER AND COMPLEXITY MEASURES (except LOCE) ###
