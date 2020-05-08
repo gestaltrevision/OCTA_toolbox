@@ -81,7 +81,7 @@ class GridRepeater(BasicPattern):
         return self
         
     
-    def RepeatAcrossRows(self, n_repeats = 1):
+    def RepeatAcrossRows(self):
         """
         Repeats the provided pattern across the rows in the grid. The provided pattern is first
         either duplicated (when #elements < n_cols) or truncated (when #elements > n_cols) to fit
@@ -110,8 +110,6 @@ class GridRepeater(BasicPattern):
              1, 2, 3, 1]
 
         """
-        self.DuplicateElements(n_duplications = n_repeats)
-        
         if len(self.pattern) < self.n_cols:
             self.DuplicatePattern( int(self.n_cols/len(self.pattern)) + 1, self.n_cols)
         self.pattern = self.pattern[:self.n_cols]
@@ -121,7 +119,7 @@ class GridRepeater(BasicPattern):
         return self
         
     
-    def RepeatAcrossColumns(self, n_repeats = 1):
+    def RepeatAcrossColumns(self):
         """
         Repeats the provided pattern across the columns in the grid. The provided pattern is first
         either duplicated (when #elements < n_rows) or truncated (when #elements > n_rows) to fit
@@ -149,9 +147,7 @@ class GridRepeater(BasicPattern):
              2, 2, 2, 2,
              3, 3, 3, 3,
              1, 1, 1, 1]
-        """
-        self.DuplicateElements(n_duplications = n_repeats)
-         
+        """        
         if len(self.pattern) < self.n_rows:
             self.DuplicatePattern( int(self.n_rows/len(self.pattern)) + 1, self.n_rows)
         self.pattern = self.pattern[:self.n_rows]
@@ -161,7 +157,7 @@ class GridRepeater(BasicPattern):
         return self
         
     
-    def RepeatAcrossRightDiagonal(self, n_repeats = 1):
+    def RepeatAcrossRightDiagonal(self):
         """
         Repeats the provided pattern across the diagonal running from the top left corner
         to the bottom right corner.
@@ -186,9 +182,7 @@ class GridRepeater(BasicPattern):
              3, 1, 2, 3,
              1, 2, 3, 1]
 
-        """
-        self.DuplicateElements(n_duplications = n_repeats)
-         
+        """         
         self.DuplicatePattern( int( self.n_cols / len(self.pattern)) + 1 )
         shifted_pattern  = list(self.pattern)
         
@@ -202,7 +196,7 @@ class GridRepeater(BasicPattern):
         return self
             
     
-    def RepeatAcrossLeftDiagonal(self, n_repeats = 1):
+    def RepeatAcrossLeftDiagonal(self):
         """
         Repeats the provided pattern across the diagonal running from the top right corner
         to the bottom left corner.
@@ -228,9 +222,7 @@ class GridRepeater(BasicPattern):
              1, 3, 2, 1]
             
 
-        """
-        self.DuplicateElements(n_duplications = n_repeats)
-         
+        """         
         self.pattern  = list(self.pattern[::-1])
         self.DuplicatePattern( int( self.n_cols / len(self.pattern)) + 1 )
         shifted_pattern = list(self.pattern)
