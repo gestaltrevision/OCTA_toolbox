@@ -22,6 +22,7 @@ x_offset = 50
 y_offset = 50
 
 image_loc = r"C:\Users\Christophe\Desktop\todo\OCTA_toolbox\output\beautiful_birds_6.jpg"
+#image_loc = r"C:\Users\u0090621\Downloads\kisspng-bird-cartoon-clip-art-birds-5ab38ad5633e37.2425937115217159254065.png"
 stimulus = Stimulus(background_color = "white")
 
 

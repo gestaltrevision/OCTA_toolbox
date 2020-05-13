@@ -286,7 +286,7 @@ for i in range(len(shape_values)):
                             stimulus.SwitchElements(nr_switches)                        
                             stimulus.Render()
                             stimulus.Show()
-                            LOCE = stimulus.CalculateElementsLOC() # number of different element types present in display
+                            LOCE = stimulus.CalculateElementsLOCE() # number of different element types present in display
                             print("LOC: " + str(LOC) + "\t")
                             print("LOCI: " + str(LOCI) + "\t")
                             print("LOCE: " + str(LOCE) + "\t")
@@ -306,7 +306,7 @@ for i in range(len(shape_values)):
                                         
                         stimulus.Render()
                         stimulus.Show()
-                        LOCE = stimulus.CalculateElementsLOC() # number of different element types present in display
+                        LOCE = stimulus.CalculateElementsLOCE() # number of different element types present in display
                         print("LOC: " + str(LOC) + "\t")
                         print("LOCI: " + str(LOCI) + "\t")
                         print("LOCE: " + str(LOCE) + "\t")
