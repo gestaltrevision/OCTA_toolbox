@@ -275,7 +275,7 @@ class Positions:
                 
             outer_iteration_count += 1
             
-        assert all_elements_valid, "CreateRandomPattern failed to produce %d elements with a minimum distance %d\n. Try changin the max_iterations, or decrease the number of elements and/or minimum distance."
+        assert all_elements_valid, "CreateRandomPattern failed to produce %d elements with a minimum distance %d\n. Try changin the max_iterations, or decrease the number of elements and/or minimum distance."%(n_elements, min_distance)
         
         x = BasicPattern(list( p[0] for p in positions))
         y = BasicPattern(list( p[1] for p in positions))
