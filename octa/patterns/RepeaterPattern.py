@@ -147,7 +147,7 @@ class GridRepeater(BasicPattern):
              2, 2, 2, 2,
              3, 3, 3, 3,
              1, 1, 1, 1]
-        """
+        """        
         if len(self.pattern) < self.n_rows:
             self.DuplicatePattern( int(self.n_rows/len(self.pattern)) + 1, self.n_rows)
         self.pattern = self.pattern[:self.n_rows]
@@ -182,7 +182,7 @@ class GridRepeater(BasicPattern):
              3, 1, 2, 3,
              1, 2, 3, 1]
 
-        """
+        """         
         self.DuplicatePattern( int( self.n_cols / len(self.pattern)) + 1 )
         shifted_pattern  = list(self.pattern)
         
@@ -222,7 +222,7 @@ class GridRepeater(BasicPattern):
              1, 3, 2, 1]
             
 
-        """
+        """         
         self.pattern  = list(self.pattern[::-1])
         self.DuplicatePattern( int( self.n_cols / len(self.pattern)) + 1 )
         shifted_pattern = list(self.pattern)

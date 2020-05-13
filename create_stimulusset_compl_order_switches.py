@@ -58,6 +58,7 @@ size_values = random.sample([sizecompl1, sizecompl2, sizecompl3],1)[0]
     
     ### SHAPE ###
 symmetry = random.choice(["row_symmetry", "column_symmetry"])
+alternation = random.choice(["row_alternate", "column_alternate"])
 repetition = random.choice(["row_repeat", "column_repeat"])
 subgroups = "subgroup_repeat"
 outin = "outin_repeat"
@@ -68,12 +69,13 @@ randompattern = "randompattern"
 ### EXTRA/TOCREATE: subgroup_gradient, inout_repeat ###
 
 if len(shape_values[0]) > 1:
-    shape_pattern = [random.choice([symmetry, repetition, subgroups, outin, checkerboard, randompattern])]
+    shape_pattern = [random.choice([symmetry, alternation, repetition, subgroups, outin, checkerboard, randompattern])]
 else:
     shape_pattern = ["identity"]
 
     ### COLOR ###
 symmetry = random.choice(["row_symmetry", "column_symmetry"])
+alternation = random.choice(["row_alternate", "column_alternate"])
 repetition = random.choice(["row_repeat", "column_repeat"])
 subgroups = "subgroup_repeat"
 outin = "outin_repeat"
@@ -83,12 +85,13 @@ randompattern = "randompattern"
 ### DIAGONAL OPTIONS: rightdiag_repeat, leftdiag_repeat, rightdiag_gradient, leftdiag_gradient ###
 ### EXTRA/TOCREATE: subgroup_gradient, inout_repeat ###
 if len(color_values[0]) > 1:
-    color_pattern = [random.choice([symmetry, repetition, subgroups, outin, checkerboard, randompattern])]    
+    color_pattern = [random.choice([symmetry, alternation, repetition, subgroups, outin, checkerboard, randompattern])]    
 else:
     color_pattern = ["identity"]
     
     ### SIZE ###
 symmetry = random.choice(["row_symmetry", "column_symmetry"])
+alternation = random.choice(["row_alternate", "column_alternate"])
 repetition = random.choice(["row_repeat", "column_repeat"])
 subgroups = "subgroup_repeat"
 outin = "outin_repeat"
@@ -98,7 +101,7 @@ randompattern = "randompattern"
 ### DIAGONAL OPTIONS: rightdiag_repeat, leftdiag_repeat, rightdiag_gradient, leftdiag_gradient ###
 ### EXTRA/TOCREATE: subgroup_gradient, inout_repeat ###
 if len(size_values[0]) > 1:
-    size_pattern = [random.choice([symmetry, repetition, subgroups, outin, checkerboard, randompattern])]
+    size_pattern = [random.choice([symmetry, alternation, repetition, subgroups, outin, checkerboard, randompattern])]
 else:
     size_pattern = ["identity"]
     
@@ -108,13 +111,14 @@ else:
 #shape_values = [[Ellipse]]
 #shape_pattern = ["identity"]
 #
-#size_values = [[30]]
+#size_values = [[28]]
 #size_pattern = ["identity"]
 ##size_pattern = [symmetry, repetition, subgroups, outin, checkerboard, randompattern]
 #
-##color_values = [["green"]]
-#color_pattern = [symmetry, repetition, subgroups, outin, checkerboard, randompattern]
+#color_values = [["#9C4B9C","#5EA1D8","#54C4D0"]]
 ##color_pattern = ["identity"]
+##color_pattern = ["row_symmetry", "column_symmetry", "row_alternate", "column_alternate",  "row_repeat", "column_repeat", subgroups, outin, checkerboard, randompattern]
+#color_pattern = ["row_repeat", "column_repeat"]
 
 #############################################################
 ### CALCULATE ORDER AND COMPLEXITY MEASURES (except LOCE) ###
@@ -187,11 +191,17 @@ for i in range(len(shape_values)):
         elif shape_pattern[a] == "row_symmetry":
             stimulus.shapes  = patterns.SymmetryPattern(shape_values[i], n_rows, n_cols).MirrorAcrossRows()
         elif shape_pattern[a] == "column_symmetry":
-            stimulus.shapes  = patterns.SymmetryPattern(shape_values[i], n_rows, n_cols).MirrorAcrossColumns()
-        elif shape_pattern[a] == "row_repeat":
+            stimulus.shapes  = patterns.SymmetryPattern(shape_values[i], n_rows, n_cols).MirrorAcrossColumns()        
+        elif shape_pattern[a] == "row_alternate":
             stimulus.shapes  = patterns.GridRepeater(shape_values[i], n_rows, n_cols).RepeatAcrossRows()
-        elif shape_pattern[a] == "column_repeat":
+        elif shape_pattern[a] == "column_alternate":
             stimulus.shapes  = patterns.GridRepeater(shape_values[i], n_rows, n_cols).RepeatAcrossColumns()  
+        elif shape_pattern[a] == "row_repeat":
+            shapepattern = patterns.BasicPattern(shape_values[i]).DuplicateElements(n_duplications = int(n_cols/len(shape_values[i]))).pattern
+            stimulus.shapes  = patterns.GridRepeater(shapepattern, n_rows, n_cols).RepeatAcrossRows()
+        elif shape_pattern[a] == "column_repeat":
+            shapepattern = patterns.BasicPattern(shape_values[i]).DuplicateElements(n_duplications = int(n_cols/len(shape_values[i]))).pattern
+            stimulus.shapes  = patterns.GridRepeater(shapepattern, n_rows, n_cols).RepeatAcrossColumns()  
         elif shape_pattern[a] == "subgroup_repeat":
             stimulus.shapes  = patterns.GridRepeater(shape_values[i], n_rows, n_cols).RepeatElementsInSubgroups()
         elif shape_pattern[a] == "outin_repeat":
@@ -215,12 +225,18 @@ for i in range(len(shape_values)):
                 stimulus.size  = patterns.SymmetryPattern(size_values[j], n_rows, n_cols).MirrorAcrossRows()
             elif size_pattern[b] == "column_symmetry":
                 stimulus.size  = patterns.SymmetryPattern(size_values[j], n_rows, n_cols).MirrorAcrossColumns()
-            elif size_pattern[b] == "row_repeat":
+            elif size_pattern[b] == "row_alternate":
                 stimulus.size  = patterns.GridRepeater(size_values[j], n_rows, n_cols).RepeatAcrossRows()
-            elif size_pattern[b] == "column_repeat":
+            elif size_pattern[b] == "column_alternate":
                 stimulus.size  = patterns.GridRepeater(size_values[j], n_rows, n_cols).RepeatAcrossColumns()  
+            elif size_pattern[b] == "row_repeat":
+                sizepattern = patterns.BasicPattern(size_values[j]).DuplicateElements(n_duplications = int(n_cols/len(size_values[j]))).pattern
+                stimulus.size  = patterns.GridRepeater(sizepattern, n_rows, n_cols).RepeatAcrossRows()
+            elif size_pattern[b] == "column_repeat":
+                sizepattern = patterns.BasicPattern(size_values[j]).DuplicateElements(n_duplications = int(n_cols/len(size_values[j]))).pattern
+                stimulus.size  = patterns.GridRepeater(sizepattern, n_rows, n_cols).RepeatAcrossColumns()  
             elif size_pattern[b] == "subgroup_repeat":
-                stimulus.size  = patterns.GridRepeater(size_values[i], n_rows, n_cols).RepeatElementsInSubgroups()
+                stimulus.size  = patterns.GridRepeater(size_values[j], n_rows, n_cols).RepeatElementsInSubgroups()
             elif size_pattern[b] == "outin_repeat":
                 stimulus.size  = patterns.GridRepeater(size_values[j], n_rows, n_cols).RepeatAcrossOutIn()
             elif size_pattern[b] == "checkerboard_repeat":
@@ -242,10 +258,16 @@ for i in range(len(shape_values)):
                         stimulus.colour  = patterns.SymmetryPattern(color_values[k], n_rows, n_cols).MirrorAcrossRows()
                     elif color_pattern[c] == "column_symmetry":
                         stimulus.colour  = patterns.SymmetryPattern(color_values[k], n_rows, n_cols).MirrorAcrossColumns()
-                    elif color_pattern[c] == "row_repeat":
+                    elif color_pattern[c] == "row_alternate":
                         stimulus.colour  = patterns.GridRepeater(color_values[k], n_rows, n_cols).RepeatAcrossRows()
-                    elif color_pattern[c] == "column_repeat":
+                    elif color_pattern[c] == "column_alternate":
                         stimulus.colour  = patterns.GridRepeater(color_values[k], n_rows, n_cols).RepeatAcrossColumns()  
+                    elif color_pattern[c] == "row_repeat":
+                        colorpattern = patterns.BasicPattern(color_values[k]).DuplicateElements(n_duplications = int(n_cols/len(color_values[k]))).pattern
+                        stimulus.colour  = patterns.GridRepeater(colorpattern, n_rows, n_cols).RepeatAcrossRows()
+                    elif color_pattern[c] == "column_repeat":
+                        colorpattern = patterns.BasicPattern(color_values[k]).DuplicateElements(n_duplications = int(n_cols/len(color_values[k]))).pattern
+                        stimulus.colour  = patterns.GridRepeater(colorpattern, n_rows, n_cols).RepeatAcrossColumns()  
                     elif color_pattern[c] == "subgroup_repeat":
                         stimulus.colour  = patterns.GridRepeater(color_values[k], n_rows, n_cols).RepeatElementsInSubgroups()
                     elif color_pattern[c] == "outin_repeat":
@@ -260,11 +282,11 @@ for i in range(len(shape_values)):
                         for n_switches in color_switches:
                             stimulus.colour.SwitchValues(n_switches)
                             
-                        for l in element_switches:
-                            stimulus.SwitchElements(l)                        
+                        for nr_switches in element_switches:
+                            stimulus.SwitchElements(nr_switches)                        
                             stimulus.Render()
                             stimulus.Show()
-                            LOCE = stimulus.CalculateElementsLOC() # number of different element types present in display
+                            LOCE = stimulus.CalculateElementsLOCE() # number of different element types present in display
                             print("LOC: " + str(LOC) + "\t")
                             print("LOCI: " + str(LOCI) + "\t")
                             print("LOCE: " + str(LOCE) + "\t")
@@ -278,13 +300,13 @@ for i in range(len(shape_values)):
 #                            print("shape_switches: " + str(shape_switches) + "\t")
 #                            print("color_switches: " + str(color_switches) + "\t")
 #                            print("size_switches: " + str(size_switches) + "\t")
-                            print("element_switches: " + str(element_switches[l]) + "\t")
+                            print("element_switches: " + str(nr_switches) + "\t")
                             
                     else:
                                         
                         stimulus.Render()
                         stimulus.Show()
-                        LOCE = stimulus.CalculateElementsLOC() # number of different element types present in display
+                        LOCE = stimulus.CalculateElementsLOCE() # number of different element types present in display
                         print("LOC: " + str(LOC) + "\t")
                         print("LOCI: " + str(LOCI) + "\t")
                         print("LOCE: " + str(LOCE) + "\t")
@@ -298,4 +320,4 @@ for i in range(len(shape_values)):
 #                       print("shape_switches: " + str(shape_switches) + "\t")
 #                       print("color_switches: " + str(color_switches) + "\t")
 #                       print("size_switches: " + str(size_switches) + "\t")
-                        print("element_switches: " + str(element_switches[0]) + "\t")
+                        print("element_switches: " + str(0) + "\t")

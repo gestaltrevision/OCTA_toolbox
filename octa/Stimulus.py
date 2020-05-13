@@ -216,7 +216,7 @@ class Stimulus:
             
         return stimulus
     
-    def CalculateElementsLOC(self):
+    def CalculateElementsLOCE(self):
         """
         Calculate how many different elements are present in the display.
 

@@ -8,9 +8,9 @@ from octa.Stimulus import Stimulus
 from octa.Positions import Positions
 from octa import shapes, patterns
 
-### SUBGROUP PATTERN ###
+### CURVE ###
 
-n_rows = 12
+n_rows = 6
 n_cols = 6
 
 row_spacing = 40
@@ -22,9 +22,9 @@ y_offset = 50
 stimulus = Stimulus(background_color = "white")
 
 stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset, y_offset)
-stimulus.shapes      = patterns.BasicPattern([shapes.Triangle, shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
-stimulus.size        = patterns.BasicPattern([20, (10, 20)]).DuplicatePatternToSize(n_rows * n_cols)
-stimulus.colour      = patterns.GridRepeater(["red", "green", "blue"], n_rows, n_cols).RepeatElementsInSubgroups()
+stimulus.shapes      = patterns.BasicPattern([shapes.Curve, shapes.Ellipse]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.size        = patterns.BasicPattern([20, 20]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.colour      = patterns.GridRepeater(["red", "green", "blue"], n_rows, n_cols).RepeatAcrossColumns()
 stimulus.orientation = patterns.SymmetryPattern([0,12,45], n_rows, n_cols).MirrorAcrossColumns()
 stimulus.data        = patterns.BasicPattern(["none"]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.Render()
@@ -34,63 +34,12 @@ stimulus.Show()
 
 #%%
 
-### CHECKERBOARD PATTERN - 2 VALUES ###
-n_rows = 8
-n_cols = 6
-
-row_spacing = 50
-col_spacing = 50
-
-x_offset = 50
-y_offset = 50
-
-stimulus = Stimulus(background_color = "white")
-
-stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset, y_offset)
-stimulus.shapes      = patterns.BasicPattern([shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
-stimulus.size        = patterns.BasicPattern([20]).DuplicatePatternToSize(n_rows * n_cols)
-stimulus.colour      = patterns.GridRepeater(["red", "green"], n_rows, n_cols).RepeatPatternInCheckerboard()
-stimulus.orientation = patterns.SymmetryPattern([0], n_rows, n_cols).MirrorAcrossColumns()
-stimulus.data        = patterns.BasicPattern(["none"]).DuplicatePatternToSize(n_rows * n_cols)
-stimulus.Render()
-stimulus.Show()
-#stimulus.SaveJSON(r'output/test_stimulus')
-#stimulus.SaveSVG(r'output/test_stimulus')
-
-#%%
-
-### CHECKERBOARD PATTERN - 3 VALUES ###
-n_rows = 8
-n_cols = 6
-
-row_spacing = 50
-col_spacing = 50
-
-x_offset = 50
-y_offset = 50
-
-stimulus = Stimulus(background_color = "white")
-
-stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset, y_offset)
-stimulus.shapes      = patterns.BasicPattern([shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
-stimulus.size        = patterns.BasicPattern([20]).DuplicatePatternToSize(n_rows * n_cols)
-stimulus.colour      = patterns.GridRepeater(["red", "green", "blue"], n_rows, n_cols).RepeatPatternInCheckerboard()
-stimulus.orientation = patterns.SymmetryPattern([0], n_rows, n_cols).MirrorAcrossColumns()
-stimulus.data        = patterns.BasicPattern(["none"]).DuplicatePatternToSize(n_rows * n_cols)
-stimulus.Render()
-stimulus.Show()
-#stimulus.SaveJSON(r'output/test_stimulus')
-#stimulus.SaveSVG(r'output/test_stimulus')
-
-
-#%%
-
-### OUTWARD-INWARD PATTERN - EVEN NUMBER OF ROWS AND COLUMNS ###
+### DROPLET ###
 n_rows = 6
 n_cols = 6
 
-row_spacing = 50
-col_spacing = 50
+row_spacing = 40
+col_spacing = 40
 
 x_offset = 50
 y_offset = 50
@@ -98,9 +47,9 @@ y_offset = 50
 stimulus = Stimulus(background_color = "white")
 
 stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset, y_offset)
-stimulus.shapes      = patterns.BasicPattern([shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.shapes      = patterns.BasicPattern([shapes.Droplet]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.size        = patterns.BasicPattern([20]).DuplicatePatternToSize(n_rows * n_cols)
-stimulus.colour      = patterns.GridRepeater(["red", "green", "blue"], n_rows, n_cols).RepeatAcrossOutIn()
+stimulus.colour      = patterns.GridRepeater(["red", "green", "blue"], n_rows, n_cols).RepeatAcrossColumns()
 stimulus.orientation = patterns.SymmetryPattern([0], n_rows, n_cols).MirrorAcrossColumns()
 stimulus.data        = patterns.BasicPattern(["none"]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.Render()
@@ -110,36 +59,12 @@ stimulus.Show()
 
 #%%
 
-### OUTWARD-INWARD PATTERN - ODD NUMBER OF ROWS AND COLUMNS ###
-n_rows = 7
-n_cols = 7
-
-row_spacing = 50
-col_spacing = 50
-
-x_offset = 50
-y_offset = 50
-
-stimulus = Stimulus(background_color = "white")
-
-stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset, y_offset)
-stimulus.shapes      = patterns.BasicPattern([shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
-stimulus.size        = patterns.BasicPattern([20]).DuplicatePatternToSize(n_rows * n_cols)
-stimulus.colour      = patterns.GridRepeater(["red", "green", "blue"], n_rows, n_cols).RepeatAcrossOutIn()
-stimulus.orientation = patterns.SymmetryPattern([0], n_rows, n_cols).MirrorAcrossColumns()
-stimulus.data        = patterns.BasicPattern(["none"]).DuplicatePatternToSize(n_rows * n_cols)
-stimulus.Render()
-stimulus.Show()
-#stimulus.SaveJSON(r'output/test_stimulus')
-#stimulus.SaveSVG(r'output/test_stimulus')
-#%%
-
-### REPEATER PATTERN - MORE THAN ONE REPEAT ###
+### FLOWERLEAVE ###
 n_rows = 6
 n_cols = 6
 
-row_spacing = 50
-col_spacing = 50
+row_spacing = 40
+col_spacing = 40
 
 x_offset = 50
 y_offset = 50
@@ -147,12 +72,90 @@ y_offset = 50
 stimulus = Stimulus(background_color = "white")
 
 stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset, y_offset)
-stimulus.shapes      = patterns.BasicPattern([shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
-stimulus.size        = patterns.BasicPattern([20]).DuplicatePatternToSize(n_rows * n_cols)
-colorpattern         = patterns.BasicPattern(["red", "green", "blue"]).DuplicateElements(n_duplications = 2).pattern
-stimulus.colour      = patterns.GridRepeater(colorpattern, n_rows, n_cols).RepeatAcrossRightDiagonal()
-stimulus.orientation = patterns.SymmetryPattern([0], n_rows, n_cols).MirrorAcrossColumns()
+stimulus.shapes      = patterns.BasicPattern([shapes.FlowerLeave, shapes.Ellipse]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.size        = patterns.BasicPattern([20, 20]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.colour      = patterns.GridRepeater(["red", "green", "blue"], n_rows, n_cols).RepeatAcrossColumns()
+stimulus.orientation = patterns.SymmetryPattern([0,12,45], n_rows, n_cols).MirrorAcrossColumns()
 stimulus.data        = patterns.BasicPattern(["none"]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.Render()
+stimulus.Show()
+#stimulus.SaveJSON(r'output/test_stimulus')
+#stimulus.SaveSVG(r'output/test_stimulus')
+
+
+#%%
+
+### INFINITY ###
+n_rows = 6
+n_cols = 6
+
+row_spacing = 40
+col_spacing = 40
+
+x_offset = 50
+y_offset = 50
+
+stimulus = Stimulus(background_color = "white")
+
+stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset, y_offset)
+stimulus.shapes      = patterns.BasicPattern([shapes.Infinity, shapes.Ellipse]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.size        = patterns.BasicPattern([20, 20]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.colour      = patterns.GridRepeater(["red", "green", "blue"], n_rows, n_cols).RepeatAcrossColumns()
+stimulus.orientation = patterns.SymmetryPattern([0,12,45], n_rows, n_cols).MirrorAcrossColumns()
+stimulus.data        = patterns.BasicPattern(["none"]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.Render()
+stimulus.Show()
+#stimulus.SaveJSON(r'output/test_stimulus')
+#stimulus.SaveSVG(r'output/test_stimulus')
+
+#%%
+
+### TEXT ###
+n_rows = 6
+n_cols = 6
+
+row_spacing = 40
+col_spacing = 40
+
+x_offset = 50
+y_offset = 50
+
+stimulus = Stimulus(background_color = "white")
+
+stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset, y_offset)
+stimulus.shapes      = patterns.BasicPattern([shapes.Text, shapes.Ellipse]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.size        = patterns.BasicPattern([50, 20]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.colour      = patterns.GridRepeater(["red", "green", "blue"], n_rows, n_cols).RepeatAcrossColumns()
+stimulus.orientation = patterns.SymmetryPattern([0], n_rows, n_cols).MirrorAcrossColumns()
+stimulus.data        = patterns.BasicPattern(["octa"]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.Render()
+stimulus.Show()
+#stimulus.SaveJSON(r'output/test_stimulus')
+#stimulus.SaveSVG(r'output/test_stimulus')
+
+#%%
+
+### IMAGE ###
+n_rows = 6
+n_cols = 6
+
+row_spacing = 40
+col_spacing = 40
+
+x_offset = 50
+y_offset = 50
+
+stimulus = Stimulus(background_color = "white")
+#image_loc = r"C:\Users\u0090621\Downloads\kisspng-bird-cartoon-clip-art-birds-5ab38ad5633e37.2425937115217159254065.png"
+#image_loc = r"C:\Users\u0090621\Downloads\bird.svg"
+#image_loc = r"C:\Users\u0090621\Downloads\animated-bird.jpg"
+
+stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset, y_offset)
+stimulus.shapes      = patterns.BasicPattern([shapes.Image, shapes.Ellipse]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.size        = patterns.BasicPattern([50, 20]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.colour      = patterns.GridRepeater(["red", "green", "blue"], n_rows, n_cols).RepeatAcrossColumns()
+stimulus.orientation = patterns.SymmetryPattern([0,12,45], n_rows, n_cols).MirrorAcrossColumns()
+stimulus.data        = patterns.BasicPattern([image_loc]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.Render()
 stimulus.Show()
 #stimulus.SaveJSON(r'output/test_stimulus')
