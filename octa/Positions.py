@@ -216,6 +216,72 @@ class Positions:
         y   = BasicPattern(list( (radius * np.sin(idx)) + (y_offset))[0:n_elements])
         
         return Positions(x, y)
+    
+    def CreateRandomPattern(n_elements, width = 256, height = 256, min_distance = 30, max_iterations = 10):
+        """
+        Generates random (x,y) positions
+
+        Parameters
+        ----------
+        n_elements : int
+            The number of random positions.
+        width : int, optional
+            The width of the stimulus. The default is 256.
+        height : int, optional
+            The height of the stimulus. The default is 256.
+        min_distance : int, optional
+            Minimum distance between all generated positions. The default is 30.
+        max_iterations : int, optional
+            How many times the algorithm should try to generate positions if
+            the min_distance criterion can not be satisfied. The default is 10.
+
+        Returns
+        -------
+        Positions
+            Positions object with the generated (x,y) positions.
+
+        """
+        outer_iteration_count = 0
+        all_elements_valid = False
+        
+        while all_elements_valid == False and outer_iteration_count < max_iterations:
+            positions = []
+            
+            # Start generating new positions
+            for i in range(n_elements):
+                valid_point = False
+                inner_iteration_count = 0
+                
+                # Check if the new position is sufficiently separated from previous ones
+                while valid_point == False and inner_iteration_count < max_iterations:                  
+                    x = np.random.randint(0, width)
+                    y = np.random.randint(0, height)
+                    
+                    valid_point = True
+                    for p in positions:
+                        if ((p[0] - x)**2 + (p[1] - y)**2)**0.5 < min_distance:
+                            valid_point = False
+                            break
+                        
+                    inner_iteration_count += 1
+                        
+                if valid_point:
+                    positions.append((x, y))
+                else:
+                    break
+                    
+            if len(positions) == n_elements:
+                all_elements_valid = True
+                
+            outer_iteration_count += 1
+            
+        assert all_elements_valid, "CreateRandomPattern failed to produce %d elements with a minimum distance %d\n. Try changin the max_iterations, or decrease the number of elements and/or minimum distance."
+        
+        x = BasicPattern(list( p[0] for p in positions))
+        y = BasicPattern(list( p[1] for p in positions))
+        
+        return Positions(x, y)
+                       
 
     
 if __name__ == '__main__':
