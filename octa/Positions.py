@@ -144,7 +144,7 @@ class Positions:
         return Positions(x, y)
         
     
-    def CreateSineGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset = 0, y_offset = 0, A = 1, f = 1):
+    def CreateSineGrid(n_rows, n_cols, row_spacing, col_spacing, A = 1, f = 1, axis = "x", x_offset = 0, y_offset = 0):
         """
         Creates a 2D regularly spaced grid and adds a sine wave modulation to the y-axis.
 
@@ -181,10 +181,16 @@ class Positions:
         y = BasicPattern(list(range(y_offset, n_rows * row_spacing + (y_offset), row_spacing)))
         y.DuplicateElements(n_cols)    
                 
-        y_mod = BasicPattern( list(A*np.sin(2*np.pi*f*np.array(range(n_cols)))))
-        y_mod.DuplicatePattern(n_rows)
-        
-        return Positions(x, y + y_mod)
+        if axis == "x":
+            y_mod = BasicPattern( list(A*np.sin(2*np.pi*f*np.array(range(n_cols)))))
+            y_mod.DuplicatePattern(n_rows)
+            
+            return Positions(x, y + y_mod)
+        else:
+            x_mod = BasicPattern( list(A*np.sin(2*np.pi*f*np.array(range(n_rows)))))
+            x_mod.DuplicateElements(n_cols)
+            
+            return Positions(x + x_mod, y)
 
     
     def CreateCircle(radius, n_elements, x_offset = 0, y_offset = 0):
@@ -216,6 +222,7 @@ class Positions:
         y   = BasicPattern(list( (radius * np.sin(idx)) + (y_offset))[0:n_elements])
         
         return Positions(x, y)
+    
     
     def CreateRandomPattern(n_elements, width = 256, height = 256, min_distance = 30, max_iterations = 10):
         """
