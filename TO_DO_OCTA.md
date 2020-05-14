@@ -6,9 +6,10 @@
 
 * structural change: all grid patterns in same file:
   * add the possibility to switch between patterns
-  * give the possibility to change function arguments after initialization, e.g.:
+  * give the possibility to change function arguments after initialization / basic values used in pattern creation, e.g.:
     stimulus.n_rows = 6 (instead of eg 5)
     stimulus.colors.pattern = [red, blue] (instead of eg [red, green])
+  * give the possibility to change pattern itself, eg. symmetrypattern to repeaterpattern
 * make clear in documentation that top->bottom left-> right is standard in OCTA
 * add function for BasicPattern:
   add error message when users attempt adding strings
@@ -141,6 +142,7 @@ SHAPES TO POTENTIALLY REMOVE: droplet, flowerleave, infinity
 * image: 
   * externe svg code embedden/inladen
   * externe png/jpg inladen???
+* converter module bepaling grootte (different parameters possible at initialization --> bounding box params)
 * [rounded_rectangle, rounded_triangle, rounded_polygon]
 * [spiral]
 * [newshape]
@@ -184,7 +186,7 @@ important:
 
 * Shiny app:
   * also output OCTA code to generate same stimulus in python
-* documentation (gitbook via Rmd)
+* documentation (gitbook via Rmd); look at documentation GERT 
 
 ### very nice
 
@@ -225,7 +227,10 @@ important:
 * when generating range of stimuli: html image grid as output option = create_grid function to create combination of several stimuli varying in order & complexity dimensions
 
 * combine different displays / stimuli / elementgroups (e.g. 2 concentric circles with elements); group elements together?
+  extend_stimuli
+
   merge_svg function: does viewbox change as well?
+
 * generate shape with certain level of order / complexity?
 
 ### nice
