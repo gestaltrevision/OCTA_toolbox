@@ -99,6 +99,40 @@ class GridPattern(Pattern):
             result.extend(current_row)
             
         return GridPattern(result, self.n_rows * tile_multiplier[0], self.n_cols * tile_multiplier[1])
+    
+    
+    def tile_grid(self, tile_multiplier):
+        """
+        Adds copies of the grid along the rows and columns
+
+        Parameters
+        ----------
+        tile_multiplier : TYPE
+            DESCRIPTION.
+
+        Returns
+        -------
+        None.
+
+        """
+        assert type(tile_multiplier) == int or type(tile_multiplier) == list or type(tile_multiplier) == tuple, "tile_multiplier needs to be int, list or tuple"
+        if type(tile_multiplier) == int:
+            tile_multiplier = (tile_multiplier, tile_multiplier)
+        else:
+            assert len(tile_multiplier) == 2, "tile_multiplier must contain two values"
+            
+        result = []
+        
+        for r in range(self.n_rows):
+            start_idx = r * self.n_cols
+            current_row = self.pattern[ start_idx : ( start_idx + self.n_cols)] * tile_multiplier[1]
+            result.extend(current_row)
+            
+        result.extend(result * tile_multiplier[0])
+        
+        return GridPattern(result, self.n_rows * tile_multiplier[0], self.n_cols * tile_multiplier[1])
+        
+        
                 
     
     

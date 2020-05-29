@@ -21,3 +21,11 @@ g = GridPattern.RepeatAcrossRightDiagonal([1,2,3], 3, 3).generate()
 print(g)
 
 print(g.tile_elements(2))
+
+
+# RepeatPatternInCheckerboard
+g = GridPattern.RepeatElements([1,2,3], 2, 2).generate()
+print(g)
+
+print(g.tile_grid(3))
+
