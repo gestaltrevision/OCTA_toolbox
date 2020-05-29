@@ -63,6 +63,44 @@ class GridPattern(Pattern):
         """
         pass
     
+    def tile_elements(self, tile_multiplier):
+        """
+        Each element in the grid is expanded across rows and columns using the
+        values in tile_multiplier
+
+        Parameters
+        ----------
+        tile_multiplier : list, tuple or int
+            Two values indicating the tiling along the rows and columns
+            respectively. If a single integer is provided, the tiling will
+            be the same along the rows and columns
+
+        Returns
+        -------
+        None.
+
+        """
+        assert type(tile_multiplier) == int or type(tile_multiplier) == list or type(tile_multiplier) == tuple, "tile_multiplier needs to be int, list or tuple"
+        if type(tile_multiplier) == int:
+            tile_multiplier = (tile_multiplier, tile_multiplier)
+        else:
+            assert len(tile_multiplier) == 2, "tile_multiplier must contain two values"
+            
+            
+        result = []
+        
+        for r in range(self.n_rows):
+            current_row = []
+            for c in range(self.n_cols):
+                idx = r*(self.n_cols) + c
+                current_row.extend([self.pattern[idx]] * tile_multiplier[1])
+                
+            current_row = current_row * tile_multiplier[0]
+            result.extend(current_row)
+            
+        return GridPattern(result, self.n_rows * tile_multiplier[0], self.n_cols * tile_multiplier[1])
+                
+    
     
 class RepeatElements(GridPattern):
     """
