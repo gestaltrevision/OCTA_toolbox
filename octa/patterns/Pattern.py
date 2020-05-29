@@ -295,6 +295,30 @@ class Pattern:
         return Pattern(result)
     
     
+    def CreateGradientPattern(start_value, end_value, n_elements):
+        """
+        Private method for creating a list of gradient values, taking into account
+        the type of start and end value.
+
+        Parameters
+        ----------
+        n_elements : int
+            Total number of elements in the list of gradient values.
+
+        Returns
+        -------
+        Pattern : Pattern
+            A list of size n_elements.
+
+        """
+        gradient = None
+        if type(start_value) == str:
+            gradient = Pattern.CreateColorRangeList(start_value, end_value, n_elements)
+        elif type(start_value) == int or type(start_value) == float:
+            gradient = Pattern.CreateNumberRangeList(start_value, end_value, n_elements)
+        
+        return Pattern(gradient)
+    
     def CreateColorRangeList(start_colour, end_colour, n_elements):
         """
         Creates a range of colors.

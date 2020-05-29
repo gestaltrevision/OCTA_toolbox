@@ -77,7 +77,7 @@ class GridPattern(Pattern):
 
         Returns
         -------
-        None.
+        GridPattern.
 
         """
         assert type(tile_multiplier) == int or type(tile_multiplier) == list or type(tile_multiplier) == tuple, "tile_multiplier needs to be int, list or tuple"
@@ -103,16 +103,19 @@ class GridPattern(Pattern):
     
     def tile_grid(self, tile_multiplier):
         """
-        Adds copies of the grid along the rows and columns
+        The current grid is tiled across the rows and columns using the
+        values in tile_multiplier
 
         Parameters
         ----------
-        tile_multiplier : TYPE
-            DESCRIPTION.
+        tile_multiplier : list, tuple or int
+            Two values indicating the tiling along the rows and columns
+            respectively. If a single integer is provided, the tiling will
+            be the same along the rows and columns
 
         Returns
         -------
-        None.
+        GridPattern.
 
         """
         assert type(tile_multiplier) == int or type(tile_multiplier) == list or type(tile_multiplier) == tuple, "tile_multiplier needs to be int, list or tuple"
@@ -641,4 +644,126 @@ class LayeredGrid(GridPattern):
             
         return GridPattern(current_center, current_rows, current_cols)
         
+class GradientElements(GridPattern):
+    """
+    Creates a gradient where the number of elements equals the total number of elements in the grid.
+
+    Returns
+    -------
+    GridGradient
+        Current instance of the object.
+
+    """
+    def __init__(self, start_value, end_value, n_rows = 5, n_cols = 5):
+        self.start_value = start_value
+        self.end_value   = end_value
+        self.n_rows = n_rows
+        self.n_cols = n_cols
         
+    def generate(self):
+        n_elements = self.n_rows * self.n_cols
+        result = Pattern.CreateGradientPattern(self.start_value, self.end_value, n_elements)
+        
+        return GridPattern(result.pattern, self.n_rows, self.n_cols)
+    
+
+class GradientAcrossRows(GridPattern):
+    """
+    Creates a gradient across the rows of the grid.
+
+    Returns
+    -------
+    GridGradient
+        Current instance of the object.
+
+    """
+    def __init__(self, start_value, end_value, n_rows = 5, n_cols = 5):
+        self.start_value = start_value
+        self.end_value   = end_value
+        self.n_rows = n_rows
+        self.n_cols = n_cols
+        
+    def generate(self):
+        p = Pattern.CreateGradientPattern(self.start_value, self.end_value, self.n_rows)
+        p = p.RepeatElements(self.n_cols)
+        
+        return GridPattern(p.pattern, self.n_rows, self.n_cols)
+    
+    
+class GradientAcrossColumns(GridPattern):
+    """
+    Creates a gradient across the columns of the grid.
+
+    Returns
+    -------
+    GridGradient
+        Current instance of the object.
+
+    """
+    def __init__(self, start_value, end_value, n_rows = 5, n_cols = 5):
+        self.start_value = start_value
+        self.end_value   = end_value
+        self.n_rows = n_rows
+        self.n_cols = n_cols
+        
+    def generate(self):      
+        p = Pattern.CreateGradientPattern(self.start_value, self.end_value, self.n_cols)
+        p = p.RepeatPattern(self.n_rows)
+        
+        return GridPattern(p.pattern, self.n_rows, self.n_cols)
+    
+    
+class GradientAcrossLeftDiagonal(GridPattern):
+    """
+    Creates a diagonal gradient, starting in the top right corner and ending in the bottom left corner.
+
+    Returns
+    -------
+    GridGradient
+        Current instance of the object.
+
+    """
+    def __init__(self, start_value, end_value, n_rows = 5, n_cols = 5):
+        self.start_value = start_value
+        self.end_value   = end_value
+        self.n_rows = n_rows
+        self.n_cols = n_cols
+        
+    def generate(self):
+        n_elements = self.n_rows + self.n_cols - 1
+        shifter = Pattern.CreateGradientPattern(self.start_value, self.end_value, n_elements).pattern
+          
+        result = []
+        for i in range(self.n_rows):
+            result.extend(shifter[:self.n_cols][::-1])
+            shifter = shifter[1:] + [shifter[0]]
+                
+        return GridPattern(result, self.n_rows, self.n_cols)
+        
+    
+class GradientAcrossRightDiagonal(GridPattern):
+    """
+    Creates a diagonal gradient, starting in the top left corner and ending in the bottom right corner.
+
+    Returns
+    -------
+    GridGradient
+        Current instance of the object.
+
+    """
+    def __init__(self, start_value, end_value, n_rows = 5, n_cols = 5):
+        self.start_value = start_value
+        self.end_value   = end_value
+        self.n_rows = n_rows
+        self.n_cols = n_cols
+        
+    def generate(self):
+        n_elements = self.n_rows + self.n_cols - 1
+        shifter = Pattern.CreateGradientPattern(self.start_value, self.end_value, n_elements).pattern
+            
+        result = []
+        for i in range(self.n_rows):
+            result.extend(shifter[:self.n_cols])
+            shifter = shifter[1:] + [shifter[0]]
+                
+        return GridPattern(result, self.n_rows, self.n_cols)

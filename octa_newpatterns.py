@@ -29,3 +29,18 @@ print(g)
 
 print(g.tile_grid(3))
 
+# Gradient
+g = GridPattern.GradientElements(1, 10, 5, 5).generate()
+print(g)
+
+g = GridPattern.GradientAcrossRows("red", "blue", 3, 3).generate()
+print(g)
+
+g = GridPattern.GradientAcrossColumns("red", "blue", 3, 3).generate()
+print(g)
+
+g = GridPattern.GradientAcrossLeftDiagonal("red", "blue", 5, 5).generate()
+print(g)
+
+g = GridPattern.GradientAcrossLeftDiagonal("red", "blue", 5, 5).generate()
+print(g)
