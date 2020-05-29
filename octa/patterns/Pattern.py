@@ -4,7 +4,6 @@ More complex patterns (e.g., grid based patterns) can be derived from this class
 """
 import colour
 import random
-from collections import defaultdict
 
 class Pattern:
     def __init__(self, pattern):
@@ -21,6 +20,8 @@ class Pattern:
         """
         if type(pattern) == list:
             self.pattern = pattern
+        elif type(pattern) == Pattern:
+            self.pattern = pattern.pattern
         else:
             self.pattern = [pattern]
         
@@ -38,6 +39,20 @@ class Pattern:
         return str(self.pattern)
     
     def __add__(self, o):
+        """
+        
+
+        Parameters
+        ----------
+        o : Pattern object
+            The object with values that need to be added to the current pattern.
+
+        Returns
+        -------
+        Pattern
+            Pattern object.
+
+        """
         assert len(self.pattern) == len(o.pattern), "Pattern length must be equal"
         
         result = [self.pattern[i] + o.pattern[i] for i in range(len(self.pattern))]
@@ -80,9 +95,8 @@ class Pattern:
         if max_elements != None:
             result = result[:max_elements]
             
-        self.pattern = result
             
-        return self
+        return Pattern(result)
             
             
     def RepeatPattern(self, n_repeats, max_elements = None):
@@ -111,8 +125,7 @@ class Pattern:
         if max_elements != None:
             result = result[:max_elements]
         
-        self.pattern = result
-        return self
+        return Pattern(result)
     
     def RepeatElementsToSize(self, count):
         """
@@ -128,18 +141,19 @@ class Pattern:
         Returns
         -------
         Pattern
-            Current instance of Pattern
+            New Pattern object instance
 
         """
         n_repeats = int(count/len(self.pattern)) + 1
-        self.RepeatElements(n_repeats, count)
         
-        return self
+        new_pattern = self.RepeatElements(n_repeats, count)
+        
+        return new_pattern
         
     
     def RepeatPatternToSize(self, count):
         """
-        Duplicates the pattern until the total pattern length is equal to or 
+        Repeats the pattern until the total pattern length is equal to or 
         exceeds the requested count. If the total pattern length exceeds the 
         count, the pattern is truncated.
 
@@ -151,13 +165,14 @@ class Pattern:
         Returns
         -------
         Pattern
-            Current instance of Pattern.
+            New Pattern object instance
 
         """
         n_repeats = int(count/len(self.pattern)) + 1
-        self.RepeatPattern(n_repeats, count)
         
-        return self
+        new_pattern = self.RepeatPattern(n_repeats, count)
+        
+        return new_pattern
             
     
     def AddNormalJitter(self, mu = 0, std = 1):
@@ -174,15 +189,14 @@ class Pattern:
         Returns
         -------
         Pattern:
-            A representation of the pattern object.
+            New Pattern object instance
 
         """
         result = []
         for i in range(len(self.pattern)):
             result.append(self.pattern[i] + random.normalvariate(mu, std))
         
-        self.pattern = result
-        return self
+        return Pattern(result)
     
     
     def AddUniformJitter(self, min_val = -1, max_val = 1):
@@ -199,15 +213,14 @@ class Pattern:
         Returns
         -------
         Pattern:
-            A representation of the pattern object.
+            New Pattern object instance
 
         """
         result = []
         for i in range(len(self.pattern)):
             result.append(self.pattern[i] + random.uniform(min_val, max_val))
         
-        self.pattern = result
-        return self
+        return Pattern(result)
     
     def RandomizeOrder(self):
         """
@@ -216,7 +229,7 @@ class Pattern:
         Returns
         -------
         Pattern:
-            A representation of the pattern object.
+            New Pattern object instance
 
         """
         idx = list(range(len(self.pattern)))
@@ -226,8 +239,7 @@ class Pattern:
         for i in range(len(self.pattern)):
             result.append(self.pattern[idx[i]])
         
-        self.pattern = result
-        return self
+        return Pattern(result)
         
             
     def SwapElements(self, n_swap_pairs = 1):
@@ -250,7 +262,7 @@ class Pattern:
         Returns
         -------
         Pattern:
-            A representation of the pattern object.
+            New Pattern object instance
 
         """
         assert len(self.pattern) >= n_swap_pairs * 2, 'Maximal number of swaps possible is %d, but %d were requested'%(len(self.pattern)//2, n_swap_pairs)
@@ -276,11 +288,12 @@ class Pattern:
             candidate_swap_positions.difference_update(removable_positions)
             
         # 3. Perform the swap
+        result = list(self.pattern)
         for swap_pair in selected_swap_pairs:
-            self.pattern[swap_pair[0]], self.pattern[swap_pair[1]] = self.pattern[swap_pair[1]], self.pattern[swap_pair[0]]
+            result[swap_pair[0]], result[swap_pair[1]] = result[swap_pair[1]], result[swap_pair[0]]
         
-            
-        return self
+        return Pattern(result)
+    
     
     def CreateColorRangeList(start_colour, end_colour, n_elements):
         """
@@ -307,6 +320,7 @@ class Pattern:
         colour_range = [c.hex for c in start_colour.range_to(end_colour, n_elements)]
         
         return colour_range
+    
     
     def CreateNumberRangeList(start_number, end_number, n_elements):
         """

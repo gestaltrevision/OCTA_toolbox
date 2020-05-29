@@ -6,7 +6,7 @@ Created on Tue Apr  7 12:33:03 2020
 """
 import numpy as np
 
-from .patterns.BasicPattern import BasicPattern
+from .patterns.Pattern import Pattern
 
 class Positions:
     """
@@ -136,10 +136,10 @@ class Positions:
             All the y-coordinates.
 
         """
-        x = BasicPattern(list(range(x_offset, n_cols * col_spacing + (x_offset), col_spacing)))
-        x.DuplicatePattern(n_rows)
-        y = BasicPattern(list(range(y_offset, n_rows * row_spacing + (y_offset), row_spacing)))
-        y.DuplicateElements(n_cols)    
+        x = Pattern(list(range(x_offset, n_cols * col_spacing + (x_offset), col_spacing)))
+        x.RepeatPattern(n_rows)
+        y = Pattern(list(range(y_offset, n_rows * row_spacing + (y_offset), row_spacing)))
+        y.RepeatElements(n_cols)    
         
         return Positions(x, y)
         
@@ -175,20 +175,20 @@ class Positions:
             All the y-coordinates.
 
         """
-        x = BasicPattern(list(range(x_offset, n_cols * col_spacing + (x_offset), col_spacing)))
-        x.DuplicatePattern(n_rows)
+        x = Pattern(list(range(x_offset, n_cols * col_spacing + (x_offset), col_spacing)))
+        x.RepeatPattern(n_rows)
         
-        y = BasicPattern(list(range(y_offset, n_rows * row_spacing + (y_offset), row_spacing)))
-        y.DuplicateElements(n_cols)    
+        y = Pattern(list(range(y_offset, n_rows * row_spacing + (y_offset), row_spacing)))
+        y.RepeatElements(n_cols)    
                 
         if axis == "x":
-            y_mod = BasicPattern( list(A*np.sin(2*np.pi*f*np.array(range(n_cols)))))
-            y_mod.DuplicatePattern(n_rows)
+            y_mod = Pattern( list(A*np.sin(2*np.pi*f*np.array(range(n_cols)))))
+            y_mod.RepeatPattern(n_rows)
             
             return Positions(x, y + y_mod)
         else:
-            x_mod = BasicPattern( list(A*np.sin(2*np.pi*f*np.array(range(n_rows)))))
-            x_mod.DuplicateElements(n_cols)
+            x_mod = Pattern( list(A*np.sin(2*np.pi*f*np.array(range(n_rows)))))
+            x_mod.RepeatElements(n_cols)
             
             return Positions(x + x_mod, y)
 
@@ -218,8 +218,8 @@ class Positions:
 
         """
         idx = np.deg2rad(np.linspace(0, 360, n_elements+1))
-        x   = BasicPattern(list( (radius * np.cos(idx)) + (x_offset))[0:n_elements])
-        y   = BasicPattern(list( (radius * np.sin(idx)) + (y_offset))[0:n_elements])
+        x   = Pattern(list( (radius * np.cos(idx)) + (x_offset))[0:n_elements])
+        y   = Pattern(list( (radius * np.sin(idx)) + (y_offset))[0:n_elements])
         
         return Positions(x, y)
     
@@ -284,8 +284,8 @@ class Positions:
             
         assert all_elements_valid, "CreateRandomPattern failed to produce %d elements with a minimum distance %d\n. Try changin the max_iterations, or decrease the number of elements and/or minimum distance."%(n_elements, min_distance)
         
-        x = BasicPattern(list( p[0] for p in positions))
-        y = BasicPattern(list( p[1] for p in positions))
+        x = Pattern(list( p[0] for p in positions))
+        y = Pattern(list( p[1] for p in positions))
         
         return Positions(x, y)
                        
