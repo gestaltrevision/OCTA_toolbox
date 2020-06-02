@@ -40,7 +40,8 @@ class Pattern:
     
     def __add__(self, o):
         """
-        
+        The + operator can be used to add the values in two patterns
+        element-wise.
 
         Parameters
         ----------
@@ -54,6 +55,13 @@ class Pattern:
 
         """
         assert len(self.pattern) == len(o.pattern), "Pattern length must be equal"
+        
+        numerical_values = True
+        for i in range(len(self.pattern)):
+            if not (isinstance(self.pattern[i], (int, float)) and isinstance(self.pattern[i], (int, float))):
+                numerical_values = False        
+        assert numerical_values == True, "Pattern values must be numerical values"
+        
         
         result = [self.pattern[i] + o.pattern[i] for i in range(len(self.pattern))]
             
