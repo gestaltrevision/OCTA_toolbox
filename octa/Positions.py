@@ -10,19 +10,19 @@ from .patterns.Pattern import Pattern
 
 class Positions:
     """
-    The Positions object contains two BasicPattern objects for each of the
+    The Positions object contains two Pattern objects for each of the
     x and y coordinates.
     
-    Getters are defined to immediately access the values in the BasicPattern
+    Getters are defined to immediately access the values in the Pattern
     objects.
     
     Static methods are defined for generating template position structures
     
     Parameters
     ----------
-    x : BasicPattern
+    x : Pattern
         Object that contains the values for the x-coordinates
-    y : BasicPattern
+    y : Pattern
         Object that contains the values for the y-coordinates
     """
     def __init__(self, x, y):
@@ -32,7 +32,7 @@ class Positions:
     @property
     def x(self):
         """
-        Returns the values in the x BasicPattern
+        Returns the values in the x Pattern
 
         Returns
         -------
@@ -45,7 +45,7 @@ class Positions:
     @property
     def y(self):
         """
-        Returns the values in the y BasicPattern
+        Returns the values in the y Pattern
 
         Returns
         -------
@@ -109,7 +109,7 @@ class Positions:
                 
         return self
         
-    def Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset = 0, y_offset = 0):
+    def Create2DGrid(n_rows, n_cols, row_spacing = 50, col_spacing= 50, x_offset = 0, y_offset = 0):
         """
         Static method for creates a 2D grid structure.
 
@@ -120,9 +120,9 @@ class Positions:
         n_cols : int
             Numbr of columns.
         row_spacing : int
-            Distance between column centers.
+            Distance between column centers. The default is 50.
         col_spacing : int
-            Distance between row centers.
+            Distance between row centers. The default is 50.
         x_offset : int, optional
             x position offset for all elements. The default is 0.
         y_offset : int, optional
@@ -130,16 +130,16 @@ class Positions:
 
         Returns
         -------
-        x : BasicPattern
+        x : Pattern
             All the x-coordinates.
-        y : BasicPattern
+        y : Pattern
             All the y-coordinates.
 
         """
         x = Pattern(list(range(x_offset, n_cols * col_spacing + (x_offset), col_spacing)))
-        x.RepeatPattern(n_rows)
+        x = x.RepeatPattern(n_rows)
         y = Pattern(list(range(y_offset, n_rows * row_spacing + (y_offset), row_spacing)))
-        y.RepeatElements(n_cols)    
+        y = y.RepeatElements(n_cols)    
         
         return Positions(x, y)
         
@@ -169,17 +169,17 @@ class Positions:
 
         Returns
         -------
-        x : BasicPattern
+        x : Pattern
             All the x-coordinates.
-        y : BasicPattern
+        y : Pattern
             All the y-coordinates.
 
         """
         x = Pattern(list(range(x_offset, n_cols * col_spacing + (x_offset), col_spacing)))
-        x.RepeatPattern(n_rows)
+        x = x.RepeatPattern(n_rows)
         
         y = Pattern(list(range(y_offset, n_rows * row_spacing + (y_offset), row_spacing)))
-        y.RepeatElements(n_cols)    
+        y = y.RepeatElements(n_cols)    
                 
         if axis == "x":
             y_mod = Pattern( list(A*np.sin(2*np.pi*f*np.array(range(n_cols)))))
@@ -211,9 +211,9 @@ class Positions:
 
         Returns
         -------
-        x : BasicPattern
+        x : Pattern
             All the x-coordinates.
-        y : BasicPattern
+        y : Pattern
             All the y-coordinates.
 
         """

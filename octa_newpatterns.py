@@ -4,43 +4,18 @@ Created on Tue Apr  7 12:31:15 2020
 
 @author: Christophe
 """
-from octa.Stimulus import Stimulus
+from octa.Stimulus import Grid, Circles
 from octa.Positions import Positions
-from octa import shapes, patterns
 from octa.patterns import GridPattern, Pattern
+from octa.shapes import Ellipse, Rectangle
 
+colours = GridPattern.LayeredGrid(GridPattern.RepeatElements(["blue"], 2, 2), Pattern(["red", "green", "blue"]))
+shapes  = GridPattern.LayeredGrid(GridPattern.RepeatElements([Ellipse], 2, 2), Pattern([Rectangle, Ellipse, Rectangle]))
+n_rows, n_cols = colours.get_dimensions()
 
-# RepeatAcrossOutIn substitute
-center_grid = GridPattern.RepeatElements([1], 2, 4)
-outer_layers= Pattern([7, 8, 9])
-g = GridPattern.LayeredGrid(center_grid, outer_layers)
-print(g.generate())
+stimulus = Grid(n_rows, n_cols, x_offset = 20, y_offset = 20)
+stimulus.size = GridPattern.RepeatElements([30])
+stimulus.shapes = shapes
+stimulus.colours = colours
+stimulus.Show()
 
-# RepeatElementsInSubgroups
-g = GridPattern.RepeatAcrossRightDiagonal([1,2,3], 3, 3).generate()
-print(g)
-
-print(g.tile_elements(2))
-
-
-# RepeatPatternInCheckerboard
-g = GridPattern.RepeatElements([1,2,3], 2, 2).generate()
-print(g)
-
-print(g.tile_grid(3))
-
-# Gradient
-g = GridPattern.GradientElements(1, 10, 5, 5).generate()
-print(g)
-
-g = GridPattern.GradientAcrossRows("red", "blue", 3, 3).generate()
-print(g)
-
-g = GridPattern.GradientAcrossColumns("red", "blue", 3, 3).generate()
-print(g)
-
-g = GridPattern.GradientAcrossLeftDiagonal("red", "blue", 5, 5).generate()
-print(g)
-
-g = GridPattern.GradientAcrossLeftDiagonal("red", "blue", 5, 5).generate()
-print(g)

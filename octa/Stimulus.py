@@ -13,6 +13,10 @@ from collections import defaultdict
 
 from IPython.display import SVG, display
 
+from .Positions import Positions
+from .patterns.GridPattern import Pattern, RepeatElements
+from .shapes.Rectangle import Rectangle
+
 class Stimulus:
     """ Container class for creating a stimulus.
     
@@ -43,14 +47,14 @@ class Stimulus:
         
         # Set initial shape parameters to zero
         self.positions   = None
-        self.size        = None
-        self.shapes      = None
-        self.colour      = None
-        self.orientation = None
-        self.data        = None
+        # self.__size        = None
+        # self.__shapes      = None
+        # self.__colour      = None
+        # self.__orientation = None
+        # self.__data        = None
         
         self.dwg_elements = None
-        
+        self.dwg = None
     
     def SaveSVG(self, filename):
         """
@@ -128,6 +132,7 @@ class Stimulus:
         None.
 
         """
+        self.Render()
         display(SVG(self.dwg.tostring()))
             
         
@@ -143,15 +148,21 @@ class Stimulus:
         """
         self.dwg_elements = []
         
-        for i in range(len(self.shapes.pattern)):
+        sizes = self.size
+        colours = self.colours
+        orientations = self.orientation
+        datas = self.data
+        shapes = self.shapes
+        
+        for i in range(len(shapes)):
             x           = self.positions.x[i]
             y           = self.positions.y[i]
-            size        = self.size.pattern[i]
-            colour      = self.colour.pattern[i]
-            orientation = self.orientation.pattern[i]
-            data        = self.data.pattern[i]
+            size        = sizes[i]
+            colour      = colours[i]
+            orientation = orientations[i]
+            data        = datas[i]
             
-            element_parameters = {'shape' : str(self.shapes.pattern[i].__name__), 'x' : x, 'y' : y, 'size' : size, 'colour' : colour, 'orientation' : orientation, 'data': data}
+            element_parameters = {'shape' : str(shapes[i].__name__), 'x' : x, 'y' : y, 'size' : size, 'colour' : colour, 'orientation' : orientation, 'data': data}
             
             self.dwg_elements.append(element_parameters)
             
@@ -180,8 +191,10 @@ class Stimulus:
         None.
 
         """
-        for i in range(len(self.shapes.pattern)):
-            el = self.shapes.pattern[i](**self.dwg_elements[i])
+        shapes = self.shapes
+        
+        for i in range(len(shapes)):
+            el = shapes[i](**self.dwg_elements[i])
             self.dwg.add(el.generate(self.dwg))
         
     def LoadFromJSON(filename):
@@ -297,3 +310,225 @@ class Stimulus:
                 self.data.pattern[pos1], self.data.pattern[pos2] = self.data.pattern[pos2], self.data.pattern[pos1]
             
         return self
+    
+    
+    
+class Grid(Stimulus):
+    def __init__(self, n_rows, n_cols, row_spacing = 50, col_spacing= 50, x_offset = 0, y_offset = 0):
+        super().__init__()
+        
+        self._n_rows = n_rows
+        self._n_cols = n_cols
+        self.row_spacing = row_spacing
+        self.col_spacing = col_spacing
+        self.x_offset = x_offset
+        self.y_offset = y_offset
+        
+        self.positions = Positions.Create2DGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing,
+                                                x_offset = self.x_offset, y_offset = self.y_offset)
+        
+        self._size        = RepeatElements([5], self._n_rows, self._n_cols)
+        self._shapes      = RepeatElements([Rectangle], self._n_rows, self._n_cols)
+        self._colour      = RepeatElements(["black"], self._n_rows, self._n_cols)
+        self._orientation = RepeatElements([0], self._n_rows, self._n_cols)
+        self._data        = RepeatElements([""], self._n_rows, self._n_cols)
+        
+    @property
+    def n_rows(self):
+        return self._n_rows
+    
+    @n_rows.setter
+    def n_rows(self, n_rows):
+        self._n_rows = n_rows
+        
+        self.positions = Positions.Create2DGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing,
+                                                x_offset = self.x_offset, y_offset = self.y_offset)
+        
+        for attr in ['_size', '_shapes', '_colour', '_orientation', '_data']:
+            a = getattr(self, attr)
+            if hasattr(a, 'n_rows'):
+                setattr(a, 'n_rows', self._n_rows)
+        
+    @property
+    def n_cols(self):
+        return self._n_cols
+    
+    @n_cols.setter
+    def n_cols(self, n_cols):
+        self._n_cols = n_cols
+        
+        self.positions = Positions.Create2DGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing,
+                                                x_offset = self.x_offset, y_offset = self.y_offset)
+        
+        for attr in ['_size', '_shapes', '_colour', '_orientation', '_data']:
+            a = getattr(self, attr)
+            if hasattr(a, 'n_rows'):
+                setattr(a, 'n_rows', self._n_rows)
+        
+    @property
+    def size(self):
+        return self._size.generate().pattern
+    
+    @size.setter
+    def size(self, size):
+        self._size = size
+        if hasattr(self._size, 'n_rows'):
+            self._size.n_rows = self._n_rows
+            self._size.n_cols = self._n_cols
+            
+    @property
+    def shapes(self):
+        return self._shapes.generate().pattern
+        
+    @shapes.setter
+    def shapes(self, shapes):
+        self._shapes = shapes
+        if hasattr(self._shapes, 'n_rows'):
+            self._shapes.n_rows = self._n_rows
+            self._shapes.n_cols = self._n_cols
+                    
+    @property
+    def colours(self):
+        return self._colour.generate().pattern
+        
+    @colours.setter
+    def colours(self, colour):
+        self._colour = colour
+        if hasattr(self._colour, 'n_rows'):
+            self._colour.n_rows = self._n_rows
+            self._colour.n_cols = self._n_cols
+            
+    @property
+    def orientation(self):
+        return self._orientation.generate().pattern
+        
+    @orientation.setter
+    def orientation(self, orientation):
+        self._orientation = orientation
+        if hasattr(self._orientation, 'n_rows'):
+            self._orientation.n_rows = self._n_rows
+            self._orientation.n_cols = self._n_cols
+            
+    @property
+    def data(self):
+        return self._data.generate().pattern
+        
+    @data.setter
+    def data(self, data):
+        self._data = data
+        if hasattr(self._data, 'n_rows'):
+            self._data.n_rows = self._n_rows
+            self._data.n_cols = self._n_cols
+          
+        
+class Circles(Stimulus):
+    """
+    Generates element positions on the circumference of a regularly spaced
+    circle.
+
+    Parameters
+    ----------
+    radius : float
+        Radius of the circle.
+    n_elements : int
+        Number of elements on the circle.
+    x_offset : int, optional
+        x position offset for all elements. The default is 0.
+    y_offset : int, optional
+        y position offset for all elements. The default is 0.
+
+    Returns
+    -------
+    x : Pattern
+        All the x-coordinates.
+    y : Pattern
+        All the y-coordinates.
+
+    """
+    def __init__(self, radius, n_elements, x_offset = 0, y_offset = 0):
+        super().__init__()
+        
+        self.radius = radius
+        self.n_elements = n_elements
+        self.x_offset = x_offset
+        self.y_offset = y_offset
+        
+        self.positions = Positions.CreateCircle(self.radius, self.n_elements, self.x_offset, self.y_offset)
+        
+        self._size        = Pattern([5]).RepeatElementsToSize(self.n_elements)
+        self._shapes      = Pattern([Rectangle]).RepeatElementsToSize(self.n_elements)
+        self._colour      = Pattern(["black"]).RepeatElementsToSize(self.n_elements)
+        self._orientation = Pattern([0]).RepeatElementsToSize(self.n_elements)
+        self._data        = Pattern([""]).RepeatElementsToSize(self.n_elements)
+        
+        
+    @property
+    def size(self):
+        if type(self._size) == Pattern:
+            return self._size.pattern
+        else:
+            return self._size.generate().pattern
+    
+    @size.setter
+    def size(self, size):
+        self._size = size
+        if hasattr(self.__size, 'n_rows'):
+            self._size.n_rows = self.n_rows
+            self._size.n_cols = self.n_cols
+            
+    @property
+    def shapes(self):
+        if type(self._shapes) == Pattern:
+            return self._shapes.pattern
+        else:
+            return self._shape.generate().pattern
+        
+    @shapes.setter
+    def shapes(self, shapes):
+        self._shapes = shapes
+        if hasattr(self._shapes, 'n_rows'):
+            self._shapes.n_rows = self.n_rows
+            self._shapes.n_cols = self.n_cols
+                    
+    @property
+    def colours(self):
+        if type(self._colour) == Pattern:
+            return self._colour.pattern
+        else:
+            return self._colour.generate().pattern
+        
+    @colours.setter
+    def colours(self, colour):
+        self._colour = colour
+        if hasattr(self._colour, 'n_rows'):
+            self._colour.n_rows = self.n_rows
+            self._colour.n_cols = self.n_cols
+            
+    @property
+    def orientation(self):
+        if type(self._orientation) == Pattern:
+            return self._orientation.pattern
+        else:
+            return self._orientation.generate().pattern
+        
+    @orientation.setter
+    def orientation(self, orientation):
+        self._orientation = orientation
+        if hasattr(self._orientation, 'n_rows'):
+            self._orientation.n_rows = self.n_rows
+            self._orientation.n_cols = self.n_cols
+            
+    @property
+    def data(self):
+        if type(self._data) == Pattern:
+            return self._data.pattern
+        else:
+            return self._data.generate().pattern
+        
+    @data.setter
+    def data(self, data):
+        self._data = data
+        if hasattr(self.__data, 'n_rows'):
+            self._data.n_rows = self.n_rows
+            self._data.n_cols = self.n_cols
+    

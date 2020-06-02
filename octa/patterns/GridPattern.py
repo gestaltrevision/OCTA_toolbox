@@ -610,13 +610,19 @@ class LayeredGrid(GridPattern):
         self.center_grid = center_grid
         self.outer_layers = outer_layers        
         
+    def get_dimensions(self):
+        n_rows, n_cols = self.center_grid.n_rows, self.center_grid.n_cols
+        n_rows += 2 * len(self.outer_layers.pattern)
+        n_cols += 2 * len(self.outer_layers.pattern)
+        
+        return n_rows, n_cols
+    
     def generate(self):
         # 1. Generate the center grid pattern
         current_center = self.center_grid.generate().pattern
         current_rows   = self.center_grid.n_rows
         current_cols   = self.center_grid.n_cols
         
-        print(current_center)
         
         # 2. Recursively layer each layer ourind the center grid
         for value in self.outer_layers.pattern:
@@ -643,6 +649,7 @@ class LayeredGrid(GridPattern):
             current_cols = new_cols
             
         return GridPattern(current_center, current_rows, current_cols)
+    
         
 class GradientElements(GridPattern):
     """
