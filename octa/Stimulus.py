@@ -148,21 +148,37 @@ class Stimulus:
         """
         self.dwg_elements = []
         
-        sizes = self.size
-        colours = self.colours
-        orientations = self.orientation
-        datas = self.data
-        shapes = self.shapes
+        bounding_boxes = self.bounding_boxes
+        fillcolours    = self.fillcolours
+        bordercolours  = self.bordercolours
+        borderwidths   = self.borderwidths
+        orientations   = self.orientations
+        datas          = self.data
+        shapes         = self.shapes
         
         for i in range(len(shapes)):
-            x           = self.positions.x[i]
-            y           = self.positions.y[i]
-            size        = sizes[i]
-            colour      = colours[i]
-            orientation = orientations[i]
-            data        = datas[i]
+            x            = self.positions.x[i]
+            y            = self.positions.y[i]
+            bounding_box = bounding_boxes[i]
+            fillcolour   = fillcolours[i]
+            bordercolour = bordercolours[i]
+            borderwidth  = borderwidths[i]
+            orientation  = orientations[i]
+            data         = datas[i]
             
-            element_parameters = {'shape' : str(shapes[i].__name__), 'x' : x, 'y' : y, 'size' : size, 'colour' : colour, 'orientation' : orientation, 'data': data}
+            if hasattr(shapes[i], '__name__'):
+                shape = shapes[i]
+            else:
+                shape = None
+                
+            element_parameters = {'shape'        : shape, 
+                                  'position'     : (x, y), 
+                                  'bounding_box' : bounding_box, 
+                                  'fillcolour'   : fillcolour,
+                                  'bordercolour' : bordercolour,
+                                  'borderwidth'  : borderwidth,
+                                  'orientation'  : orientation, 
+                                  'data'         : data}
             
             self.dwg_elements.append(element_parameters)
             
@@ -178,7 +194,7 @@ class Stimulus:
         None.
 
         """
-        self.dwg = svgwrite.Drawing(size = (self.width, self.height))
+        self.dwg = svgwrite.Drawing(size = (self.width, self.height), profile="tiny")
         self.background = self.dwg.rect(insert = (0, 0), size = (self.width, self.height), fill = self.background_color)
         self.dwg.add(self.background)    
 
@@ -194,8 +210,9 @@ class Stimulus:
         shapes = self.shapes
         
         for i in range(len(shapes)):
-            el = shapes[i](**self.dwg_elements[i])
-            self.dwg.add(el.generate(self.dwg))
+            if not shapes[i] == None:
+                el = shapes[i](**self.dwg_elements[i])
+                self.dwg.add(el.generate(self.dwg))
         
     def LoadFromJSON(filename):
         """
@@ -327,11 +344,16 @@ class Grid(Stimulus):
         self.positions = Positions.Create2DGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing,
                                                 x_offset = self.x_offset, y_offset = self.y_offset)
         
-        self._size        = RepeatElements([5], self._n_rows, self._n_cols)
-        self._shapes      = RepeatElements([Rectangle], self._n_rows, self._n_cols)
-        self._colour      = RepeatElements(["black"], self._n_rows, self._n_cols)
-        self._orientation = RepeatElements([0], self._n_rows, self._n_cols)
-        self._data        = RepeatElements([""], self._n_rows, self._n_cols)
+        self._bounding_boxes = RepeatElements([(10, 10)], self._n_rows, self._n_cols)
+        self._orientations   = RepeatElements([0], self._n_rows, self._n_cols)
+        self._bordercolours  = RepeatElements([""], self._n_rows, self._n_cols)
+        self._borderwidths   = RepeatElements([0], self.n_rows, self.n_cols)
+        self._fillcolours    = RepeatElements(["black"], self.n_rows, self.n_cols)
+        self._shapes         = RepeatElements([Rectangle], self._n_rows, self._n_cols)
+        self._class_labels   = RepeatElements([""], self._n_rows, self._n_cols)
+        self._id_labels      = RepeatElements([""], self._n_rows, self._n_cols)
+        self._mirrors        = RepeatElements([""], self._n_rows, self._n_cols)
+        self._data           = RepeatElements([""], self._n_rows, self._n_cols)
         
     @property
     def n_rows(self):
@@ -366,15 +388,15 @@ class Grid(Stimulus):
                 setattr(a, 'n_rows', self._n_rows)
         
     @property
-    def size(self):
-        return self._size.generate().pattern
+    def bounding_boxes(self):
+        return self._bounding_boxes.generate().pattern
     
-    @size.setter
-    def size(self, size):
-        self._size = size
-        if hasattr(self._size, 'n_rows'):
-            self._size.n_rows = self._n_rows
-            self._size.n_cols = self._n_cols
+    @bounding_boxes.setter
+    def bounding_boxes(self, bounding_box):
+        self._bounding_boxes = bounding_box
+        if hasattr(self._bounding_boxes, 'n_rows'):
+            self._bounding_boxes.n_rows = self._n_rows
+            self._bounding_boxes.n_cols = self._n_cols
             
     @property
     def shapes(self):
@@ -388,26 +410,48 @@ class Grid(Stimulus):
             self._shapes.n_cols = self._n_cols
                     
     @property
-    def colours(self):
-        return self._colour.generate().pattern
+    def bordercolours(self):
+        return self._bordercolours.generate().pattern
         
-    @colours.setter
-    def colours(self, colour):
-        self._colour = colour
-        if hasattr(self._colour, 'n_rows'):
-            self._colour.n_rows = self._n_rows
-            self._colour.n_cols = self._n_cols
+    @bordercolours.setter
+    def bordercolours(self, bordercolours):
+        self._bordercolours = bordercolours
+        if hasattr(self._bordercolours, 'n_rows'):
+            self._bordercolours.n_rows = self._n_rows
+            self._bordercolours.n_cols = self._n_cols
             
     @property
-    def orientation(self):
-        return self._orientation.generate().pattern
+    def fillcolours(self):
+        return self._fillcolours.generate().pattern
         
-    @orientation.setter
-    def orientation(self, orientation):
-        self._orientation = orientation
-        if hasattr(self._orientation, 'n_rows'):
-            self._orientation.n_rows = self._n_rows
-            self._orientation.n_cols = self._n_cols
+    @fillcolours.setter
+    def fillcolours(self, fillcolours):
+        self._fillcolours = fillcolours
+        if hasattr(self._fillcolours, 'n_rows'):
+            self._fillcolours.n_rows = self._n_rows
+            self._fillcolours.n_cols = self._n_cols
+            
+    @property
+    def borderwidths(self):
+        return self._borderwidths.generate().pattern
+        
+    @borderwidths.setter
+    def borderwidths(self, borderwidths):
+        self._borderwidths = borderwidths
+        if hasattr(self._borderwidths, 'n_rows'):
+            self._borderwidths.n_rows = self._n_rows
+            self._borderwidths.n_cols = self._n_cols
+                       
+    @property
+    def orientations(self):
+        return self._orientations.generate().pattern
+        
+    @orientations.setter
+    def orientations(self, orientations):
+        self._orientations = orientations
+        if hasattr(self._orientations, 'n_rows'):
+            self._orientations.n_rows = self._n_rows
+            self._orientations.n_cols = self._n_cols
             
     @property
     def data(self):

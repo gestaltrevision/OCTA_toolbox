@@ -7,15 +7,18 @@ Created on Tue Apr  7 12:31:15 2020
 from octa.Stimulus import Grid, Circles
 from octa.Positions import Positions
 from octa.patterns import GridPattern, Pattern
-from octa.shapes import Ellipse, Rectangle
+from octa.shapes import Ellipse, Rectangle, Triangle, Image, Text
 
-colours = GridPattern.LayeredGrid(GridPattern.RepeatElements(["blue"], 2, 2), Pattern(["red", "green", "blue"]))
-shapes  = GridPattern.LayeredGrid(GridPattern.RepeatElements([Ellipse], 2, 2), Pattern([Rectangle, Ellipse, Rectangle]))
-n_rows, n_cols = colours.get_dimensions()
 
-stimulus = Grid(n_rows, n_cols, x_offset = 20, y_offset = 20)
-stimulus.size = GridPattern.RepeatElements([30])
-stimulus.shapes = shapes
-stimulus.colours = colours
+
+stimulus = Grid(5, 5, x_offset = 40, y_offset = 40, row_spacing = 100, col_spacing = 100)
+stimulus.bounding_boxes = GridPattern.RepeatElements([(40, 40)])
+stimulus.shapes         = GridPattern.RepeatElements([Text, None, Image])
+stimulus.orientation    = GridPattern.RepeatElements([45])
+stimulus.borderwidths   = GridPattern.RepeatElements([1])
+stimulus.bordercolours  = GridPattern.RepeatElements(["red", "green", "blue"])
+stimulus.fillcolours    = GridPattern.RepeatElements(["green", "blue", "red"])
+stimulus.data           = GridPattern.RepeatElements(["hello everybody in the houses tonight how","",r"C:\Users\Christophe\Documents\My Dropbox\personal_projects\100twh\web\assets\images\iconfinder_1_social_2609541.png"])
+
 stimulus.Show()
 

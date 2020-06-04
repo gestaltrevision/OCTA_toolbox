@@ -7,51 +7,98 @@ Created on Mon Apr  6 16:02:30 2020
 import math
 
 class Triangle:
+    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolour', 'borderwidth', 'fillcolour', 'class_label', 'id_label', 'mirror']
     
     def __init__(self, **kwargs):
-        self.pos = (kwargs['x'], kwargs['y'])
+        for p in Triangle.parameters:
+            set_method = getattr(self, 'set_%s'%p)
+            if p in kwargs:
+                set_method(kwargs[p])
+            else:
+                set_method(None)
+
+
+    def set_position(self, position):
+        if position == None:
+            position = (0, 0)
         
-        if type(kwargs['size']) == list or type(kwargs['size']) == tuple:
-            self.diameter = kwargs['size']
-        elif type(kwargs['size']) == int or type(kwargs['size']) == float:
-            self.diameter = (kwargs['size'], kwargs['size'])
-      
-        self.points = [(self.pos[0], self.pos[1] - (self.diameter[1]/2)), 
-                       (self.pos[0] - (self.diameter[0]/2), self.pos[1] + (self.diameter[1]/2)), 
-                       (self.pos[0] + (self.diameter[0]/2), self.pos[1] + (self.diameter[1]/2))]
-#        for deg in [90, 210, 330]:
-#            rad = math.radians(deg + 180)
-#            self.points.append((self.pos[0] + self.diameter * math.cos(rad), self.pos[1] + self.diameter * math.sin(rad)))
+        self.position = position
+    
+    
+    def set_bounding_box(self, bounding_box):
+        if bounding_box == None:
+            bounding_box = (10, 10)
         
-        if 'colour' in kwargs.keys():
-            self.fill   = kwargs['colour']
-        else:
-            self.fill   = 'black'
+        self.bounding_box = bounding_box
+    
+    
+    def set_orientation(self, orientation):
+        if orientation == None:
+            orientation = 0
             
-        if 'orientation' in kwargs.keys():
-            self.orientation = kwargs['orientation']
-        else:
-            self.orientation = 0
+        self.orientation = orientation
+    
+    
+    def set_bordercolour(self, bordercolour):
+        if bordercolour == None:
+            bordercolour = "green"
             
-        if 'mirror' in kwargs.keys():
-            self.mirror = kwargs['mirror']
-        else:
-            self.mirror = 'none'
+        self.bordercolour = bordercolour
+    
+    
+    def set_borderwidth(self, borderwidth):
+        if borderwidth == None:
+            borderwidth = 4
             
-        self.transform = "rotate(%d, %d, %d)"%(self.orientation, self.pos[0], self.pos[1])
+        self.borderwidth = borderwidth
+        
+        
+    def set_fillcolour(self, fillcolour):
+        if fillcolour == None:
+            fillcolour = "gray"
             
+        self.fillcolour = fillcolour
+    
+    
+    def set_class_label(self, class_label):
+        if class_label == None:
+            class_label = ""
+            
+        self.class_label = class_label
+    
+    def set_id_label(self, id_label):
+        if id_label == None:
+            id_label = ""
+            
+        self.id_label = id_label
+    
+    def set_mirror(self, mirror):
+        if mirror == None:
+            mirror = ""
+            
+        self.mirror = mirror
+    
+
     def __str__(self):
         result = "Triangle object with params:\n"
-        result+= "points: %s\n"%str(self.points)
-        result+= "diameter: %.2f\n"%self.diameter
-        result+= "fill  : %s\n"%self.fill
+        for p in Triangle.parameters:
+            result += "%s: %s\n"%(p, getattr(self,p))
+            
         return result
         
     def generate(self, dwg):
+        transform_string = "rotate(%d, %d, %d)"%(self.orientation, self.position[0], self.position[1])
+        
+        points = [(self.position[0] - self.bounding_box[0]/2 , self.position[1] + self.bounding_box[1]/2),
+                  (self.position[0], self.position[1] - self.bounding_box[1]/2),
+                  (self.position[0] + self.bounding_box[0]/2, self.position[1] + self.bounding_box[1]/2)]
+        
         svg = dwg.polygon(
-                points = self.points,
-                fill   = self.fill,
-                transform = self.transform)
+                points       = points,
+                fill         = self.fillcolour,
+                stroke       = self.bordercolour,
+                stroke_width = self.borderwidth,
+                transform    = transform_string)
         
         return svg
     
