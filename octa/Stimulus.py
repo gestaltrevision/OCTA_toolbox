@@ -9,7 +9,6 @@ import random
 import json
 import jsonpickle
 import pandas as pd
-from collections import defaultdict
 
 from IPython.display import SVG, display
 
@@ -245,26 +244,6 @@ class Stimulus:
             # stimulus.dwg_elements = data['dwg_elements']
             
         return stimulus
-    
-    def CalculateElementsLOCE(self):
-        """
-        Calculate how many different elements are present in the display.
-
-        Returns
-        -------
-        LOCE value.
-
-        """     
-        
-        elements = [ "|".join([str(i), str(j), str(k), str(l), str(m)]) for i, j, k, l, m in zip(self.shapes.pattern, self.size.pattern, self.colour.pattern, self.orientation.pattern, self.data.pattern)] 
-        
-        d = defaultdict(list)
-        for i, x in enumerate(elements):
-            d[x].append(i)
-            
-        LOCE = len(d)
-        
-        return LOCE
     
     def SwitchElements(self, n_switches = 1):
         """
