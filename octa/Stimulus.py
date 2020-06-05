@@ -528,18 +528,18 @@ class Circles(Stimulus):
             self._colour.n_cols = self.n_cols
             
     @property
-    def orientation(self):
-        if type(self._orientation) == Pattern:
-            return self._orientation.pattern
+    def orientations(self):
+        if type(self._orientations) == Pattern:
+            return self._orientations.pattern
         else:
-            return self._orientation.generate().pattern
+            return self._orientations.generate().pattern
         
-    @orientation.setter
-    def orientation(self, orientation):
-        self._orientation = orientation
-        if hasattr(self._orientation, 'n_rows'):
-            self._orientation.n_rows = self.n_rows
-            self._orientation.n_cols = self.n_cols
+    @orientations.setter
+    def orientations(self, orientations):
+        self._orientations = orientations
+        if hasattr(self._orientations, 'n_rows'):
+            self._orientations.n_rows = self.n_rows
+            self._orientations.n_cols = self.n_cols
             
     @property
     def data(self):
