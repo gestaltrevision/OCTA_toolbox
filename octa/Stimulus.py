@@ -310,9 +310,13 @@ class Stimulus:
     
     
 class Grid(Stimulus):
+    _element_attributes = ["_bounding_boxes", "_orientations", "_bordercolours", "_borderwidths", "_fillcolours", "_shapes",
+                          "_class_labels", "_id_labels", "_mirrors", "_data"]
+    
     def __init__(self, n_rows, n_cols, row_spacing = 50, col_spacing= 50, x_offset = 0, y_offset = 0):
         super().__init__()
         
+        # Initialize the positions of each element
         self._n_rows = n_rows
         self._n_cols = n_cols
         self.row_spacing = row_spacing
@@ -323,6 +327,7 @@ class Grid(Stimulus):
         self.positions = Positions.Create2DGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing,
                                                 x_offset = self.x_offset, y_offset = self.y_offset)
         
+        # Initialize the element attributes to their default values
         self._bounding_boxes = RepeatElements([(10, 10)], self._n_rows, self._n_cols)
         self._orientations   = RepeatElements([0], self._n_rows, self._n_cols)
         self._bordercolours  = RepeatElements([""], self._n_rows, self._n_cols)
@@ -336,109 +341,292 @@ class Grid(Stimulus):
         
     @property
     def n_rows(self):
+        """
+        The number of columns in the Grid
+        
+        """
         return self._n_rows
     
     @n_rows.setter
     def n_rows(self, n_rows):
-        self._n_rows = n_rows
+        """
+        Sets the number of rows in the grid.
         
+        This only works if none of the element attributes have a fixed grid
+        structure.
+        """
+        if not self._is_modifieable():
+            print("WARNING: At least one element attribute has a fixed structure. n_rows remains unchanged.")
+            return
+        
+        self._n_rows = n_rows
         self.positions = Positions.Create2DGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing,
                                                 x_offset = self.x_offset, y_offset = self.y_offset)
         
-        for attr in ['_size', '_shapes', '_colour', '_orientation', '_data']:
-            a = getattr(self, attr)
-            if hasattr(a, 'n_rows'):
-                setattr(a, 'n_rows', self._n_rows)
+        for attr in Grid._element_attributes:
+            setattr(getattr(self, attr), 'n_rows', self._n_rows)
+        
         
     @property
     def n_cols(self):
+        """
+        The number of rows in the Grid
+        
+        """
         return self._n_cols
+    
     
     @n_cols.setter
     def n_cols(self, n_cols):
+        """
+        Sets the number of columns in the grid.
+        
+        This only works if none of the element attributes have a fixed grid
+        structure.
+        """
+        if not self._is_modifieable():
+            print("WARNING: At least one element attribute has a fixed structure. n_rows remains unchanged.")
+            return
+        
         self._n_cols = n_cols
         
         self.positions = Positions.Create2DGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing,
                                                 x_offset = self.x_offset, y_offset = self.y_offset)
         
-        for attr in ['_size', '_shapes', '_colour', '_orientation', '_data']:
-            a = getattr(self, attr)
-            if hasattr(a, 'n_rows'):
-                setattr(a, 'n_rows', self._n_rows)
+        for attr in Grid._element_attributes:
+            setattr(getattr(self, attr), 'n_cols', self._n_cols)
+        
         
     @property
     def bounding_boxes(self):
+        """
+        The size for each element in the grid.
+        
+        The size is defined in terms of a rectangular bounding box that
+        contains the element.
+        
+        """
         return self._bounding_boxes.generate().pattern
+    
     
     @bounding_boxes.setter
     def bounding_boxes(self, bounding_box):
-        self._bounding_boxes = bounding_box
-        if hasattr(self._bounding_boxes, 'n_rows'):
-            self._bounding_boxes.n_rows = self._n_rows
-            self._bounding_boxes.n_cols = self._n_cols
+        """
+        Sets the bounding box size for each grid element.
+        
+        If the provided pattern has a fixed grid structure, that structure
+        must match the number of rows and columns of the Grid Stimulus
+        
+        """
+        if not self._check_attribute_dimensions(bounding_box):
+            return
             
+        self._bounding_boxes = bounding_box
+        self._bounding_boxes.n_rows = self._n_rows
+        self._bounding_boxes.n_cols = self._n_cols
+          
+        
     @property
     def shapes(self):
+        """
+        The shape for each element in the grid.
+        
+        """
         return self._shapes.generate().pattern
         
+    
     @shapes.setter
     def shapes(self, shapes):
+        """
+        Sets the shape for each grid element.
+        
+        If the provided pattern has a fixed grid structure, that structure
+        must match the number of rows and columns of the Grid Stimulus
+        
+        """
+        if not self._check_attribute_dimensions(shapes):
+            return
+            
         self._shapes = shapes
-        if hasattr(self._shapes, 'n_rows'):
-            self._shapes.n_rows = self._n_rows
-            self._shapes.n_cols = self._n_cols
-                    
+        self._shapes.n_rows = self._n_rows
+        self._shapes.n_cols = self._n_cols
+            
+        
     @property
     def bordercolours(self):
-        return self._bordercolours.generate().pattern
+        """
+        The bordercolour for each element in the grid.
         
+        """
+        return self._bordercolours.generate().pattern
+    
+    
     @bordercolours.setter
     def bordercolours(self, bordercolours):
+        """
+        Sets the bordercolour for each grid element.
+        
+        If the provided pattern has a fixed grid structure, that structure
+        must match the number of rows and columns of the Grid Stimulus
+        
+        """
+        if not self._check_attribute_dimensions(bordercolours):
+            return
+            
         self._bordercolours = bordercolours
-        if hasattr(self._bordercolours, 'n_rows'):
-            self._bordercolours.n_rows = self._n_rows
-            self._bordercolours.n_cols = self._n_cols
+        self._bordercolours.n_rows = self._n_rows
+        self._bordercolours.n_cols = self._n_cols
+            
             
     @property
     def fillcolours(self):
+        """
+        The fillcolour for each element in the grid.
+        
+        """
         return self._fillcolours.generate().pattern
         
+    
     @fillcolours.setter
     def fillcolours(self, fillcolours):
+        """
+        Sets the fillcolour for each grid element.
+        
+        If the provided pattern has a fixed grid structure, that structure
+        must match the number of rows and columns of the Grid Stimulus
+        
+        """
+        if not self._check_attribute_dimensions(fillcolours):
+            return
+        
         self._fillcolours = fillcolours
-        if hasattr(self._fillcolours, 'n_rows'):
-            self._fillcolours.n_rows = self._n_rows
-            self._fillcolours.n_cols = self._n_cols
+        self._fillcolours.n_rows = self._n_rows
+        self._fillcolours.n_cols = self._n_cols
+        
             
     @property
     def borderwidths(self):
+        """
+        The borderwidths for each element in the grid.
+        
+        """
         return self._borderwidths.generate().pattern
         
+    
     @borderwidths.setter
     def borderwidths(self, borderwidths):
+        """
+        Sets the borderwidths for each grid element.
+        
+        If the provided pattern has a fixed grid structure, that structure
+        must match the number of rows and columns of the Grid Stimulus
+        
+        """
+        if not self._check_attribute_dimensions(borderwidths):
+            return
+        
         self._borderwidths = borderwidths
-        if hasattr(self._borderwidths, 'n_rows'):
-            self._borderwidths.n_rows = self._n_rows
-            self._borderwidths.n_cols = self._n_cols
+        self._borderwidths.n_rows = self._n_rows
+        self._borderwidths.n_cols = self._n_cols
                        
+        
     @property
     def orientations(self):
+        """
+        The orientations for each element in the grid.
+        
+        """
         return self._orientations.generate().pattern
         
+    
     @orientations.setter
     def orientations(self, orientations):
+        """
+        Sets the orientations for each grid element.
+        
+        If the provided pattern has a fixed grid structure, that structure
+        must match the number of rows and columns of the Grid Stimulus
+        
+        """
+        if not self._check_attribute_dimensions(orientations):
+            return
+        
         self._orientations = orientations
         if hasattr(self._orientations, 'n_rows'):
             self._orientations.n_rows = self._n_rows
             self._orientations.n_cols = self._n_cols
             
+            
     @property
     def data(self):
+        """
+        The orientations for each element in the grid.
+        
+        """
         return self._data.generate().pattern
         
     @data.setter
     def data(self, data):
+        """
+        Sets the data for each grid element.
+        
+        If the provided pattern has a fixed grid structure, that structure
+        must match the number of rows and columns of the Grid Stimulus
+        
+        """
+        if not self._check_attribute_dimensions(data):
+            return
+        
         self._data = data
-        if hasattr(self._data, 'n_rows'):
-            self._data.n_rows = self._n_rows
-            self._data.n_cols = self._n_cols
+        self._data.n_rows = self._n_rows
+        self._data.n_cols = self._n_cols
+            
+            
+    def _is_modifieable(self):
+        """
+        Inspects the _fixed_grid attribute of each of the element properties.
+        
+        Parameters
+        ----------
+        None
+        
+        Return
+        ------
+        True if none of the element attributes has a fixed structure. 
+        False if at least one element has a fixed structure
+        """
+        fixed_attributes = []
+        
+        for attr_name in Grid._element_attributes:
+            attr = getattr(self, attr_name)
+            if attr._fixed_grid == True:
+                print("Property %s has a fixed grid structure of %d rows and %d columns"%(attr_name, attr.n_rows, attr.n_cols))
+                
+        modifieable = False if len(fixed_attributes) == 0 else True
+            
+        return modifieable
+    
+    def _check_attribute_dimensions(self, attr):
+        """
+        Checks if the dimensions of an attribute are changeable.
+        
+        If not, the dimensions should match those of the stimulus
+        
+        Parameters
+        ----------
+        attr:
+            The attribute value that needs to be checked
+            
+        Return
+        ------
+        Boolean
+            True if the attribute can be used in the current Grid
+            False if the attribute cannot be used in the current Grid
+        """
+        if attr._fixed_grid == True:
+            if not (attr.n_rows == self._n_rows and attr.n_cols == self._n_cols):
+                print("WARNING: property has a fixed grid structure and does not match the stimulus structure")
+                return False
+            
+        return True
+        

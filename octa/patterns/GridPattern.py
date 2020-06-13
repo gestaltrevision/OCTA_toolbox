@@ -63,81 +63,6 @@ class GridPattern(Pattern):
         """
         pass
     
-    def tile_elements(self, tile_multiplier):
-        """
-        Each element in the grid is expanded across rows and columns using the
-        values in tile_multiplier
-
-        Parameters
-        ----------
-        tile_multiplier : list, tuple or int
-            Two values indicating the tiling along the rows and columns
-            respectively. If a single integer is provided, the tiling will
-            be the same along the rows and columns
-
-        Returns
-        -------
-        GridPattern.
-
-        """
-        assert type(tile_multiplier) == int or type(tile_multiplier) == list or type(tile_multiplier) == tuple, "tile_multiplier needs to be int, list or tuple"
-        if type(tile_multiplier) == int:
-            tile_multiplier = (tile_multiplier, tile_multiplier)
-        else:
-            assert len(tile_multiplier) == 2, "tile_multiplier must contain two values"
-            
-            
-        result = []
-        
-        for r in range(self.n_rows):
-            current_row = []
-            for c in range(self.n_cols):
-                idx = r*(self.n_cols) + c
-                current_row.extend([self.pattern[idx]] * tile_multiplier[1])
-                
-            current_row = current_row * tile_multiplier[0]
-            result.extend(current_row)
-            
-        return GridPattern(result, self.n_rows * tile_multiplier[0], self.n_cols * tile_multiplier[1])
-    
-    
-    def tile_grid(self, tile_multiplier):
-        """
-        The current grid is tiled across the rows and columns using the
-        values in tile_multiplier
-
-        Parameters
-        ----------
-        tile_multiplier : list, tuple or int
-            Two values indicating the tiling along the rows and columns
-            respectively. If a single integer is provided, the tiling will
-            be the same along the rows and columns
-
-        Returns
-        -------
-        GridPattern.
-
-        """
-        assert type(tile_multiplier) == int or type(tile_multiplier) == list or type(tile_multiplier) == tuple, "tile_multiplier needs to be int, list or tuple"
-        if type(tile_multiplier) == int:
-            tile_multiplier = (tile_multiplier, tile_multiplier)
-        else:
-            assert len(tile_multiplier) == 2, "tile_multiplier must contain two values"
-            
-        result = []
-        
-        for r in range(self.n_rows):
-            start_idx = r * self.n_cols
-            current_row = self.pattern[ start_idx : ( start_idx + self.n_cols)] * tile_multiplier[1]
-            result.extend(current_row)
-            
-        result.extend(result * tile_multiplier[0])
-        
-        return GridPattern(result, self.n_rows * tile_multiplier[0], self.n_cols * tile_multiplier[1])
-        
-        
-                
-    
     
 class RepeatElements(GridPattern):
     """
@@ -590,86 +515,7 @@ class MirrorAcrossRightDiagonal(GridPattern):
         return MirrorAcrossRightDiagonal(result, self.n_rows, self.n_cols)
   
     
-class LayeredGrid(GridPattern):
-    """
-    Creates a grid that starts from a central structure, around which
-    additional layers are placed.
 
-    Parameters
-    ----------
-    center_grid : GridPattern
-        A grid pattern that forms the central structure
-        
-    outer_layer : Pattern
-        The values for each of the outer layers. Each value in the pattern
-        becomes the next layer around the central grid structure
-    Example
-    -------
-    pattern: 
-        [1, 2, 3]
-    n_rows:
-        6
-    n_cols:
-        6
-        
-    result:
-        [1, 1, 1, 1, 1, 1, 
-         1, 2, 2, 2, 2, 1, 
-         1, 2, 3, 3, 2, 1, 
-         1, 2, 3, 3, 2, 1, 
-         1, 2, 2, 2, 2, 1, 
-         1, 1, 1, 1, 1, 1]
-        
-
-    """
-    fixed_grid = True
-    
-    def __init__(self, center_grid, outer_layers):
-        assert issubclass(type(center_grid), GridPattern), "center_grid has to be a GridPattern type"
-        assert type(outer_layers) == Pattern, "outer_layers has to be a Pattern type"
-        
-        self.center_grid = center_grid
-        self.outer_layers = outer_layers        
-        
-    def get_dimensions(self):
-        n_rows, n_cols = self.center_grid.n_rows, self.center_grid.n_cols
-        n_rows += 2 * len(self.outer_layers.pattern)
-        n_cols += 2 * len(self.outer_layers.pattern)
-        
-        return n_rows, n_cols
-    
-    def generate(self):
-        # 1. Generate the center grid pattern
-        current_center = self.center_grid.generate().pattern
-        current_rows   = self.center_grid.n_rows
-        current_cols   = self.center_grid.n_cols
-        
-        
-        # 2. Recursively layer each layer ourind the center grid
-        for value in self.outer_layers.pattern:
-            # Calculate new dimensions
-            new_rows = current_rows + 2
-            new_cols = current_cols + 2
-            
-            # Fill the values in the new grid            
-            new_center = []
-            t = 0
-            for r in range(new_rows):
-                for c in range(new_cols):
-                    if r == 0 or r == new_rows - 1:
-                        new_center.append(value)
-                    elif c == 0 or c == new_cols - 1:
-                        new_center.append(value)
-                    else:
-                        new_center.append(current_center[t])
-                        t += 1
-                        
-            # Update the current values
-            current_center = new_center
-            current_rows = new_rows
-            current_cols = new_cols
-            
-        return GridPattern(current_center, current_rows, current_cols)
     
         
 class GradientElements(GridPattern):
@@ -804,4 +650,204 @@ class GradientAcrossRightDiagonal(GridPattern):
             result.extend(shifter[:self.n_cols])
             shifter = shifter[1:] + [shifter[0]]
                 
+        return GridPattern(result, self.n_rows, self.n_cols)
+    
+    
+class LayeredGrid(GridPattern):
+    """
+    Creates a grid that starts from a central structure, around which
+    additional layers are placed.
+
+    Parameters
+    ----------
+    center_grid : GridPattern
+        A grid pattern that forms the central structure
+        
+    outer_layer : Pattern
+        The values for each of the outer layers. Each value in the pattern
+        becomes the next layer around the central grid structure
+    Example
+    -------
+    pattern: 
+        [1, 2, 3]
+    n_rows:
+        6
+    n_cols:
+        6
+        
+    result:
+        [1, 1, 1, 1, 1, 1, 
+         1, 2, 2, 2, 2, 1, 
+         1, 2, 3, 3, 2, 1, 
+         1, 2, 3, 3, 2, 1, 
+         1, 2, 2, 2, 2, 1, 
+         1, 1, 1, 1, 1, 1]
+        
+
+    """
+    _fixed_grid = True
+    
+    def __init__(self, center_grid, outer_layers):
+        assert issubclass(type(center_grid), GridPattern), "center_grid has to be a GridPattern type"
+        assert type(outer_layers) == Pattern, "outer_layers has to be a Pattern type"
+        
+        self.center_grid = center_grid
+        self.outer_layers = outer_layers        
+        
+        dim = self.get_dimensions()
+        self.n_rows = dim[0]
+        self.n_cols = dim[1]
+        
+    def get_dimensions(self):
+        n_rows, n_cols = self.center_grid.n_rows, self.center_grid.n_cols
+        n_rows += 2 * len(self.outer_layers.pattern)
+        n_cols += 2 * len(self.outer_layers.pattern)
+        
+        return n_rows, n_cols
+    
+    def generate(self):
+        # 1. Generate the center grid pattern
+        current_center = self.center_grid.generate().pattern
+        current_rows   = self.center_grid.n_rows
+        current_cols   = self.center_grid.n_cols
+        
+        
+        # 2. Recursively layer each layer ourind the center grid
+        for value in self.outer_layers.pattern:
+            # Calculate new dimensions
+            new_rows = current_rows + 2
+            new_cols = current_cols + 2
+            
+            # Fill the values in the new grid            
+            new_center = []
+            t = 0
+            for r in range(new_rows):
+                for c in range(new_cols):
+                    if r == 0 or r == new_rows - 1:
+                        new_center.append(value)
+                    elif c == 0 or c == new_cols - 1:
+                        new_center.append(value)
+                    else:
+                        new_center.append(current_center[t])
+                        t += 1
+                        
+            # Update the current values
+            current_center = new_center
+            current_rows = new_rows
+            current_cols = new_cols
+            
+        return GridPattern(current_center, current_rows, current_cols)
+    
+    
+class TiledGrid(GridPattern):
+    """
+    The current grid is tiled across the rows and columns using the
+    values in tile_multiplier
+
+    Parameters
+    ----------
+    tile_multiplier : list, tuple or int
+        Two values indicating the tiling along the rows and columns
+        respectively. If a single integer is provided, the tiling will
+        be the same along the rows and columns
+
+    Returns
+    -------
+    GridPattern.
+
+    """
+    _fixed_grid = True
+    
+    def __init__(self, source_grid, tile_multiplier):
+        assert type(tile_multiplier) == int or type(tile_multiplier) == list or type(tile_multiplier) == tuple, "tile_multiplier needs to be int, list or tuple"
+        if type(tile_multiplier) == int:
+            tile_multiplier = (tile_multiplier, tile_multiplier)
+        else:
+            assert len(tile_multiplier) == 2, "tile_multiplier must contain two values"
+        
+        self.tile_multiplier = tile_multiplier
+        self.source_grid = source_grid
+        
+        dims = self.get_dimensions()
+        self.n_rows = dims[0]
+        self.n_cols = dims[1]
+        
+    
+    def get_dimensions(self):
+        n_rows = self.source_grid.n_rows * self.tile_multiplier[0]
+        n_cols = self.source_grid.n_cols * self.tile_multiplier[1]
+        
+        return (n_rows, n_cols)
+    
+    def generate(self):            
+        result = []
+        
+        source_pattern = self.source_grid.generate().pattern
+        n_rows, n_cols = self.source_grid.n_rows, self.source_grid.n_cols
+        
+        for r in range(n_rows):
+            start_idx = r * n_cols
+            current_row = source_pattern[ start_idx : ( start_idx + n_cols)] * self.tile_multiplier[1]
+            result.extend(current_row)
+            
+        result.extend(result * self.tile_multiplier[0])
+        
+        return GridPattern(result, n_rows * self.tile_multiplier[0], n_cols * self.tile_multiplier[1])
+    
+
+class TiledElementGrid(GridPattern):
+    """
+        Each element in the grid is expanded across rows and columns using the
+        values in tile_multiplier
+
+        Parameters
+        ----------
+        tile_multiplier : list, tuple or int
+            Two values indicating the tiling along the rows and columns
+            respectively. If a single integer is provided, the tiling will
+            be the same along the rows and columns
+
+        Returns
+        -------
+        GridPattern.
+
+    """
+    
+    _fixed_grid = True
+    def __init__(self, source_grid, tile_multiplier):
+        assert type(tile_multiplier) == int or type(tile_multiplier) == list or type(tile_multiplier) == tuple, "tile_multiplier needs to be int, list or tuple"
+        if type(tile_multiplier) == int:
+            tile_multiplier = (tile_multiplier, tile_multiplier)
+        else:
+            assert len(tile_multiplier) == 2, "tile_multiplier must contain two values"
+            
+        self.tile_multiplier = tile_multiplier
+        self.source_grid     = source_grid
+        
+        dims = self.get_dimensions()
+        
+        self.n_rows = dims[0]
+        self.n_cols = dims[1]
+        
+    def get_dimensions(self):
+        n_rows = self.source_grid.n_rows * self.tile_multiplier[0]
+        n_cols = self.source_grid.n_cols * self.tile_multiplier[1]
+        
+        return (n_rows, n_cols)
+    
+    def generate(self):
+        result = []
+    
+        source_pattern = self.source_grid.generate().pattern
+        n_rows, n_cols = self.source_grid.n_rows, self.source_grid.n_cols
+        
+        for r in range(n_rows):
+            current_row = []
+            for c in range(n_cols):
+                idx = r * n_cols + c
+                current_row.extend([source_pattern[idx]] * self.tile_multiplier[1])
+                
+            current_row = current_row * self.tile_multiplier[0]
+            result.extend(current_row)
+            
         return GridPattern(result, self.n_rows, self.n_cols)
