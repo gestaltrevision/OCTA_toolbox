@@ -161,8 +161,9 @@ class RepeatElements(GridPattern):
              2, 3, 1, 2, 
              3, 1, 2, 3]
 
-        """
-        
+    """
+    _fixed_grid = False
+    
     def generate(self):
         required_count = self.n_rows * self.n_cols
         current_count = len(self.pattern)
@@ -200,7 +201,9 @@ class RepeatAcrossRows(GridPattern):
              1, 2, 3, 1,
              1, 2, 3, 1]
 
-    """    
+    """ 
+    _fixed_grid = False
+    
     def generate(self):
         p = Pattern(self.pattern)
         
@@ -241,7 +244,9 @@ class RepeatAcrossColumns(GridPattern):
              2, 2, 2, 2,
              3, 3, 3, 3,
              1, 1, 1, 1]
-        """   
+    """   
+    _fixed_grid = False
+    
     def generate(self):
         p = Pattern(self.pattern)
         N = len(p.pattern)
@@ -280,7 +285,9 @@ class RepeatAcrossRightDiagonal(GridPattern):
              3, 1, 2, 3,
              1, 2, 3, 1]
 
-        """    
+    """   
+    _fixed_grid = False
+    
     def generate(self):       
         p = Pattern(self.pattern)
         p = p.RepeatPattern( int( self.n_cols / len(self.pattern)) + 1 )
@@ -320,7 +327,8 @@ class RepeatAcrossLeftDiagonal(GridPattern):
              1, 3, 2, 1]
             
 
-        """ 
+    """ 
+    _fixed_grid = False
     def generate(self):  
         p = Pattern(self.pattern[::-1])
         p = p.RepeatPattern( int( self.n_cols / len(self.pattern)) + 1 )
@@ -366,6 +374,8 @@ class MirrorElements(GridPattern):
              3, 2, 1, 1]
 
         """
+    _fixed_grid = False
+    
     def generate(self):
         
         required_count = self.n_rows * self.n_cols
@@ -408,6 +418,8 @@ class MirrorAcrossRows(GridPattern):
              1, 1, 1, 1]
 
     """
+    _fixed_grid = False
+    
     def generate(self):
         p = Pattern(self.pattern)
         
@@ -457,6 +469,8 @@ class MirrorAcrossColumns(GridPattern):
              1, 2, 2, 1,
              1, 2, 2, 1]
     """
+    _fixed_grid = False
+    
     def generate(self):
         p = Pattern(self.pattern)
         if len(p.pattern) < int(self.n_cols/2) + 1:
@@ -503,6 +517,8 @@ class MirrorAcrossLeftDiagonal(GridPattern):
              2, 3, 1, 1, 3,
              1, 2, 3, 1, 1]
         """
+    _fixed_grid = False    
+    
     def generate(self):
         p = Pattern(self.pattern)
         n = self.n_rows + self.n_cols
@@ -551,6 +567,8 @@ class MirrorAcrossRightDiagonal(GridPattern):
              3, 1, 1, 3, 2,
              1, 1, 3, 2, 1]
     """
+    _fixed_grid = True
+    
     def generate(self):
         p = Pattern(self.pattern)
         n = self.n_rows + self.n_cols
@@ -570,6 +588,7 @@ class MirrorAcrossRightDiagonal(GridPattern):
             shifter = shifter[1:] + [shifter[0]]
                
         return MirrorAcrossRightDiagonal(result, self.n_rows, self.n_cols)
+  
     
 class LayeredGrid(GridPattern):
     """
@@ -603,6 +622,8 @@ class LayeredGrid(GridPattern):
         
 
     """
+    fixed_grid = True
+    
     def __init__(self, center_grid, outer_layers):
         assert issubclass(type(center_grid), GridPattern), "center_grid has to be a GridPattern type"
         assert type(outer_layers) == Pattern, "outer_layers has to be a Pattern type"
@@ -661,6 +682,8 @@ class GradientElements(GridPattern):
         Current instance of the object.
 
     """
+    _fixed_grid = False
+    
     def __init__(self, start_value, end_value, n_rows = 5, n_cols = 5):
         self.start_value = start_value
         self.end_value   = end_value
@@ -684,6 +707,8 @@ class GradientAcrossRows(GridPattern):
         Current instance of the object.
 
     """
+    _fixed_grid = False
+    
     def __init__(self, start_value, end_value, n_rows = 5, n_cols = 5):
         self.start_value = start_value
         self.end_value   = end_value
@@ -707,6 +732,8 @@ class GradientAcrossColumns(GridPattern):
         Current instance of the object.
 
     """
+    _fixed_grid = False
+    
     def __init__(self, start_value, end_value, n_rows = 5, n_cols = 5):
         self.start_value = start_value
         self.end_value   = end_value
@@ -730,6 +757,8 @@ class GradientAcrossLeftDiagonal(GridPattern):
         Current instance of the object.
 
     """
+    _fixed_grid = False
+    
     def __init__(self, start_value, end_value, n_rows = 5, n_cols = 5):
         self.start_value = start_value
         self.end_value   = end_value
@@ -758,6 +787,8 @@ class GradientAcrossRightDiagonal(GridPattern):
         Current instance of the object.
 
     """
+    _fixed_grid = False
+    
     def __init__(self, start_value, end_value, n_rows = 5, n_cols = 5):
         self.start_value = start_value
         self.end_value   = end_value
