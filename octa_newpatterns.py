@@ -21,8 +21,8 @@ stimulus.orientations   = GridPattern.RepeatElements([0])
 stimulus.borderwidths   = GridPattern.RepeatElements([1])
 stimulus.bordercolours  = GridPattern.RepeatElements(["red", "green", "blue"])
 stimulus.fillcolours    = GridPattern.RepeatElements(["green", "blue", "red"])
-stimulus.data           = GridPattern.RepeatElements(["hello everybody in the houses tonight how","","5"])
-
+stimulus.set_element_bounding_box(1, (10,10))
+stimulus.set_element_shape(0, Ellipse)
 stimulus.Show()
 
 #%%
@@ -31,4 +31,17 @@ p = GridPattern.TiledElementGrid(src, 2)
 
 stimulus = Grid(8, 8, x_offset = 40, y_offset = 40, row_spacing = 20, col_spacing = 20)
 stimulus.fillcolours = p
+stimulus.Show()
+
+#%%
+center_grid  = GridPattern.RepeatElements(["red"], 1, 1)
+outer_layers = Pattern(["green", "blue"])
+layered_grid = GridPattern.LayeredGrid(center_grid, outer_layers)
+
+tiled_grid = GridPattern.TiledGrid(layered_grid, 3)
+
+stimulus = Grid(tiled_grid.n_rows, tiled_grid.n_cols, x_offset = 40, y_offset = 40, row_spacing = 20, col_spacing = 20)
+stimulus.fillcolours = tiled_grid
+stimulus.orientations = GridPattern.TiledElementGrid(GridPattern.MirrorAcrossLeftDiagonal([0, 30, 60], 3, 3), 5)
+
 stimulus.Show()

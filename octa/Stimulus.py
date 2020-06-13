@@ -158,17 +158,22 @@ class Stimulus:
         for i in range(len(shapes)):
             x            = self.positions.x[i]
             y            = self.positions.y[i]
-            bounding_box = bounding_boxes[i]
+            
+            if 'bounding_box' in self._attribute_overrides[i]:
+                bounding_box = self._attribute_overrides[i]['bounding_box']
+            else:
+                bounding_box = bounding_boxes[i]
+                
             fillcolour   = fillcolours[i]
             bordercolour = bordercolours[i]
             borderwidth  = borderwidths[i]
             orientation  = orientations[i]
             data         = datas[i]
             
-            if hasattr(shapes[i], '__name__'):
-                shape = shapes[i]
+            if 'shape' in self._attribute_overrides[i]:
+                shape = self._attribute_overrides[i]['shape']
             else:
-                shape = None
+                shape = shapes[i]
                 
             element_parameters = {'shape'        : shape, 
                                   'position'     : (x, y), 
@@ -205,12 +210,10 @@ class Stimulus:
         -------
         None.
 
-        """
-        shapes = self.shapes
-        
-        for i in range(len(shapes)):
-            if not shapes[i] == None:
-                el = shapes[i](**self.dwg_elements[i])
+        """                
+        for i in range(len(self.dwg_elements)):
+            if not self.dwg_elements[i]['shape'] == None:
+                el = self.dwg_elements[i]['shape'](**self.dwg_elements[i])
                 self.dwg.add(el.generate(self.dwg))
         
     def LoadFromJSON(filename):
@@ -339,6 +342,9 @@ class Grid(Stimulus):
         self._mirrors        = RepeatElements([""], self._n_rows, self._n_cols)
         self._data           = RepeatElements([""], self._n_rows, self._n_cols)
         
+        # Initialize a list with element attribute overrides
+        self._attribute_overrides = [dict() for _ in range(self._n_cols * self._n_rows)]
+        
     @property
     def n_rows(self):
         """
@@ -362,7 +368,7 @@ class Grid(Stimulus):
         self._n_rows = n_rows
         self.positions = Positions.Create2DGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing,
                                                 x_offset = self.x_offset, y_offset = self.y_offset)
-        
+        self._attribute_overrides = [dict() for _ in range(self._n_cols * self._n_rows)]
         for attr in Grid._element_attributes:
             setattr(getattr(self, attr), 'n_rows', self._n_rows)
         
@@ -392,7 +398,7 @@ class Grid(Stimulus):
         
         self.positions = Positions.Create2DGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing,
                                                 x_offset = self.x_offset, y_offset = self.y_offset)
-        
+        self._attribute_overrides = [dict() for _ in range(self._n_cols * self._n_rows)]
         for attr in Grid._element_attributes:
             setattr(getattr(self, attr), 'n_cols', self._n_cols)
         
@@ -424,6 +430,34 @@ class Grid(Stimulus):
         self._bounding_boxes = bounding_box
         self._bounding_boxes.n_rows = self._n_rows
         self._bounding_boxes.n_cols = self._n_cols
+        
+    
+    def set_element_bounding_box(self, element_id, bounding_box_value):
+        """
+        Sets the bounding box value for an individual element
+        """
+        element_id = self._parse_element_id(element_id)
+        bounding_box_value = Grid._check_bounding_box_value(bounding_box_value)                
+        self._attribute_overrides[element_id]['bounding_box'] = bounding_box_value
+        
+    def _check_bounding_box_value(bounding_box_value):
+        """
+        Inspects the bounding_box_value and raises an error when the format
+        of this value is not correct
+        
+        Returns
+        -------
+        bounding_box_value: tuple
+            A valid bounding_box_value
+        """
+        assert type(bounding_box_value) == list or type(bounding_box_value) == tuple or type(bounding_box_value) == int, "Bounding box value must be int, list or tuple"
+        
+        if type(bounding_box_value) == list or type(bounding_box_value) == tuple:
+            assert len(bounding_box_value) == 2, "Bounding box collection can only contain two values"
+        else:
+            bounding_box_value = (bounding_box_value, bounding_box_value)
+            
+        return bounding_box_value
           
         
     @property
@@ -450,6 +484,15 @@ class Grid(Stimulus):
         self._shapes = shapes
         self._shapes.n_rows = self._n_rows
         self._shapes.n_cols = self._n_cols
+        
+        
+    def set_element_shape(self, element_id, shape_value):
+        """
+        Sets the bounding box value for an individual element
+        """
+        element_id = self._parse_element_id(element_id)
+        
+        self._attribute_overrides[element_id]['shape'] = shape_value
             
         
     @property
@@ -629,4 +672,24 @@ class Grid(Stimulus):
                 return False
             
         return True
+    
+    def _parse_element_id(self, element_id):
+        """
+        Validates and parses the element_id that is passed to functions that
+        allow the manipulation of a single element in the grid.
+        
+        The following conditions are checked
+        - element id must be int, list or tuple
+        - if list or tuple, the length must be 2
+        - the resulting element id cannot exceed the number of elements in the grid
+        """
+        assert type(element_id) == list or type(element_id) == tuple or type(element_id) == int, "Element id must be an integer, list or tuple"
+        
+        if type(element_id) == list or type(element_id) == tuple:
+            assert len(element_id) == 2, "Element id must contain two values"
+            element_id = element_id[0] * self.n_cols + element_id[1]
+                
+        assert 0 <= element_id < self.n_rows * self.n_cols, "Element id not in range"
+        
+        return element_id
         
