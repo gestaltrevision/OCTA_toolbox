@@ -488,7 +488,19 @@ class Grid(Stimulus):
         
     def set_element_shape(self, element_id, shape_value):
         """
-        Sets the bounding box value for an individual element
+        Sets the shape of an individual element
+
+        Parameters
+        ----------
+        element_id : tuple, list or int
+            A tuple with the row and column index of the element. A single integer
+            can also be used to refer to an element in order.
+        bordercolour_value : Shape or None
+            An element shape, or None if no shape needs to be displayed.
+
+        Returns
+        -------
+        None.
         """
         element_id = self._parse_element_id(element_id)
         
@@ -520,6 +532,26 @@ class Grid(Stimulus):
         self._bordercolours.n_rows = self._n_rows
         self._bordercolours.n_cols = self._n_cols
             
+    def set_element_bordercolour(self, element_id, bordercolour_value):
+        """
+        Sets the bordercolour of an individual element
+
+        Parameters
+        ----------
+        element_id : tuple, list or int
+            A tuple with the row and column index of the element. A single integer
+            can also be used to refer to an element in order.
+        bordercolour_value : string
+            Colour string.
+
+        Returns
+        -------
+        None.
+
+        """
+        element_id = self._parse_element_id(element_id)
+        
+        self._attribute_overrides[element_id]['bordercolour'] = bordercolour_value
             
     @property
     def fillcolours(self):
@@ -546,6 +578,27 @@ class Grid(Stimulus):
         self._fillcolours.n_rows = self._n_rows
         self._fillcolours.n_cols = self._n_cols
         
+    def set_element_fillcolour(self, element_id, fillcolour_value):
+        """
+        Sets the fillcolour of an individual element
+
+        Parameters
+        ----------
+        element_id : tuple, list or int
+            A tuple with the row and column index of the element. A single integer
+            can also be used to refer to an element in order.
+        fillcolour_value : string
+            Colour string.
+
+        Returns
+        -------
+        None.
+
+        """
+        element_id = self._parse_element_id(element_id)
+        
+        self._attribute_overrides[element_id]['fillcolour'] = fillcolour_value
+        
             
     @property
     def borderwidths(self):
@@ -571,6 +624,27 @@ class Grid(Stimulus):
         self._borderwidths = borderwidths
         self._borderwidths.n_rows = self._n_rows
         self._borderwidths.n_cols = self._n_cols
+        
+    def set_element_borderwidth(self, element_id, borderwidth_value):
+        """
+        Sets the borderwidth of an individual element
+
+        Parameters
+        ----------
+        element_id : tuple, list or int
+            A tuple with the row and column index of the element. A single integer
+            can also be used to refer to an element in order.
+        borderwidth_value : int
+            Size of the border.
+
+        Returns
+        -------
+        None.
+
+        """
+        element_id = self._parse_element_id(element_id)
+        
+        self._attribute_overrides[element_id]['borderwidth'] = borderwidth_value
                        
         
     @property
@@ -599,6 +673,27 @@ class Grid(Stimulus):
             self._orientations.n_rows = self._n_rows
             self._orientations.n_cols = self._n_cols
             
+    def set_element_orientation(self, element_id, orientation_value):
+        """
+        Sets the orientation of an individual element
+
+        Parameters
+        ----------
+        element_id : tuple, list or int
+            A tuple with the row and column index of the element. A single integer
+            can also be used to refer to an element in order.
+        orientation : int
+            Orientation of the element.
+
+        Returns
+        -------
+        None.
+
+        """
+        element_id = self._parse_element_id(element_id)
+        
+        self._attribute_overrides[element_id]['orientation'] = orientation_value
+            
             
     @property
     def data(self):
@@ -623,6 +718,27 @@ class Grid(Stimulus):
         self._data = data
         self._data.n_rows = self._n_rows
         self._data.n_cols = self._n_cols
+        
+    def set_element_data(self, element_id, data_value):
+        """
+        Sets the data of an individual element
+
+        Parameters
+        ----------
+        element_id : tuple, list or int
+            A tuple with the row and column index of the element. A single integer
+            can also be used to refer to an element in order.
+        data : string
+            Data string for the element.
+
+        Returns
+        -------
+        None.
+
+        """
+        element_id = self._parse_element_id(element_id)
+        
+        self._attribute_overrides[element_id]['data'] = data_value
             
             
     def _is_modifieable(self):
