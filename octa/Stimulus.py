@@ -46,11 +46,7 @@ class Stimulus:
         
         # Set initial shape parameters to zero
         self.positions   = None
-        # self.__size        = None
-        # self.__shapes      = None
-        # self.__colour      = None
-        # self.__orientation = None
-        # self.__data        = None
+
         
         self.dwg_elements = None
         self.dwg = None
@@ -164,12 +160,31 @@ class Stimulus:
             else:
                 bounding_box = bounding_boxes[i]
                 
-            fillcolour   = fillcolours[i]
-            bordercolour = bordercolours[i]
-            borderwidth  = borderwidths[i]
-            orientation  = orientations[i]
-            data         = datas[i]
+            if 'fillcolour' in self._attribute_overrides[i]:
+                fillcolour = self._attribute_overrides[i]['fillcolour']
+            else:
+                fillcolour = fillcolours[i]
             
+            if 'bordercolour' in self._attribute_overrides[i]:
+                bordercolour = self._attribute_overrides[i]['bordercolour']
+            else:
+                bordercolour = bordercolours[i]
+            
+            if 'borderwidth' in self._attribute_overrides[i]:
+                borderwidth = self._attribute_overrides[i]['borderwidth']
+            else:
+                borderwidth = borderwidths[i]
+            
+            if 'orientation' in self._attribute_overrides[i]:
+                orientation = self._attribute_overrides[i]['orientation']
+            else:
+                orientation = orientations[i]
+            
+            if 'data' in self._attribute_overrides[i]:
+                data = self._attribute_overrides[i]['data']
+            else:
+                data = datas[i]
+                            
             if 'shape' in self._attribute_overrides[i]:
                 shape = self._attribute_overrides[i]['shape']
             else:
@@ -744,6 +759,8 @@ class Grid(Stimulus):
     def _is_modifieable(self):
         """
         Inspects the _fixed_grid attribute of each of the element properties.
+        Used to determine if the stimulus n_rows and n_cols attributes can
+        be modified directly.
         
         Parameters
         ----------
@@ -751,8 +768,9 @@ class Grid(Stimulus):
         
         Return
         ------
-        True if none of the element attributes has a fixed structure. 
-        False if at least one element has a fixed structure
+        modifieable: Boolean
+            True if none of the element attributes has a fixed structure. 
+            False if at least one element has a fixed structure
         """
         fixed_attributes = []
         
