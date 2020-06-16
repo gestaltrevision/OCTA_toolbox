@@ -9,7 +9,7 @@ import random
 import json
 import jsonpickle
 import pandas as pd
-
+import os
 from IPython.display import SVG, display
 
 from .Positions import Positions
@@ -68,7 +68,7 @@ class Stimulus:
         self.dwg.saveas('%s.svg'%filename , pretty = True)
         
         
-    def SaveJSON(self, filename):
+    def SaveJSON(self, filename, folder = None):
         """
         Saves the current stimulus as a JSON file.
 
@@ -83,25 +83,75 @@ class Stimulus:
 
         """
         json_filename = "%s.json"%filename
-        
+        csv_filename = "%s.csv"%filename
+        if folder is not None:
+            json_filename = os.path.join(folder, json_filename)
+            csv_filename  = os.path.join(folder, csv_filename)
+                    
         json_data = {'stimulus' : {'width':            self.width,
                                    'height':           self.height,
-                                   'background_color': self.background_color,
+                                   'background_color': self.background_color},
+                     'structure': {'class': str(type(self)),
+                                   'n_rows': self._n_rows,
+                                   'n_cols': self._n_cols,
+                                   'row_spacing': self.row_spacing,
+                                   'col_spacing': self.col_spacing,
+                                   'x_offset'   : self.x_offset,
+                                   'y_offset'   : self.y_offset
+                                   },
+                     'element_attributes': {
                                    'positions'    :    jsonpickle.encode(self.positions),
-                                   'size'         :    jsonpickle.encode(self.size),
-                                   'shapes'       :    jsonpickle.encode(self.shapes),
-                                   'colour'       :    jsonpickle.encode(self.colour),
-                                   'orientation'  :    jsonpickle.encode(self.orientation),
-                                   'data'         :    jsonpickle.encode(self.data)}}
-                     #'dwg_elements'  : self.dwg_elements}
+                                   'bounding_boxes' :  jsonpickle.encode(self._bounding_boxes),
+                                   'shapes'       :    jsonpickle.encode(self._shapes),
+                                   'fillcolour'     :  jsonpickle.encode(self._fillcolours),
+                                   'bordercolour'   :  jsonpickle.encode(self._bordercolours),
+                                   'orientation'  :    jsonpickle.encode(self._orientations),
+                                   'data'         :    jsonpickle.encode(self._data),
+                                   'overrides'    :    jsonpickle.encode(self._attribute_overrides),
+                                   'element_order':    jsonpickle.encode(self._element_presentation_order)}}
         
         with open(json_filename, 'w') as output_file:
             json.dump(json_data, output_file)
             
-        csv_filename = "%s.csv"%filename
-        df = pd.DataFrame(self.dwg_elements, columns = ['shape', 'x', 'y', 'size', 'colour', 'orientation'])
+        df = pd.DataFrame(self.dwg_elements, columns = ['shape', 'position', 'bounding_box', 'fillcolour', 'bordercolour', 'borderwidth', 'orientation', 'data'])
         df.to_csv(csv_filename)
             
+        
+    def LoadFromJSON(filename):
+        """
+        Creates a stimulus object from a JSON file.
+
+        Parameters
+        ----------
+        filename : STRING
+            JSON file that needs to be loaded.
+
+        Returns
+        -------
+        stimulus : STIMULUS
+            A stimulus object with parameters extracted from the JSON file.
+
+        """
+        stimulus = None
+        
+        with open(filename, 'r') as input_file:
+            data = json.load(input_file)
+            
+            stimulus = Grid(data['structure']['n_rows'], data['structure']['n_cols'], data['structure']['row_spacing'],
+                            data['structure']['col_spacing'], data['structure']['x_offset'], data['structure']['y_offset'])
+            stimulus._positions      = jsonpickle.decode(data['element_attributes']['positions'])
+            stimulus._bounding_boxes = jsonpickle.decode(data['element_attributes']['bounding_boxes'])
+            stimulus._shapes         = jsonpickle.decode(data['element_attributes']['shapes'])
+            stimulus._fillcolours    = jsonpickle.decode(data['element_attributes']['fillcolour'])
+            stimulus._bordercolours  = jsonpickle.decode(data['element_attributes']['bordercolour'])
+            stimulus._orientations   = jsonpickle.decode(data['element_attributes']['orientation'])
+            stimulus._data           = jsonpickle.decode(data['element_attributes']['data'])
+            stimulus._attribute_overrides = jsonpickle.decode(data['element_attributes']['overrides'])
+            stimulus._element_presentation_order = jsonpickle.decode(data['element_attributes']['element_order'])
+            
+            
+        return stimulus
+    
                            
     def Render(self):
         """
@@ -232,39 +282,6 @@ class Stimulus:
                 el = self.dwg_elements[i]['shape'](**self.dwg_elements[i])
                 self.dwg.add(el.generate(self.dwg))
         
-    def LoadFromJSON(filename):
-        """
-        Creates a stimulus object from a JSON file.
-
-        Parameters
-        ----------
-        filename : STRING
-            JSON file that needs to be loaded.
-
-        Returns
-        -------
-        stimulus : STIMULUS
-            A stimulus object with parameters extracted from the JSON file.
-
-        """
-        stimulus = None
-        
-        with open(filename, 'r') as input_file:
-            data = json.load(input_file)
-            
-            stimulus = Stimulus(width = data['stimulus']['width'], height = data['stimulus']['height'], background_color = data['stimulus']['background_color'])
-            stimulus.positions   = jsonpickle.decode(data['stimulus']['positions'])
-            stimulus.size        = jsonpickle.decode(data['stimulus']['size'])
-            stimulus.shapes      = jsonpickle.decode(data['stimulus']['shapes'])
-            stimulus.colour      = jsonpickle.decode(data['stimulus']['colour'])
-            stimulus.orientation = jsonpickle.decode(data['stimulus']['orientation'])
-            stimulus.data        = jsonpickle.decode(data['stimulus']['data'])
-            
-            # stimulus.dwg_elements = data['dwg_elements']
-            
-        return stimulus
-    
-    
     
     
 class Grid(Stimulus):
