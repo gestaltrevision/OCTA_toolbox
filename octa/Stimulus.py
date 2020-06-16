@@ -151,44 +151,45 @@ class Stimulus:
         datas          = self.data
         shapes         = self.shapes
         
-        for i in range(len(shapes)):
+        for i in range(len(self._element_presentation_order)):
+            idx = self._element_presentation_order[i]
             x            = self.positions.x[i]
             y            = self.positions.y[i]
             
-            if 'bounding_box' in self._attribute_overrides[i]:
-                bounding_box = self._attribute_overrides[i]['bounding_box']
+            if 'bounding_box' in self._attribute_overrides[idx]:
+                bounding_box = self._attribute_overrides[idx]['bounding_box']
             else:
-                bounding_box = bounding_boxes[i]
+                bounding_box = bounding_boxes[idx]
                 
-            if 'fillcolour' in self._attribute_overrides[i]:
-                fillcolour = self._attribute_overrides[i]['fillcolour']
+            if 'fillcolour' in self._attribute_overrides[idx]:
+                fillcolour = self._attribute_overrides[idx]['fillcolour']
             else:
-                fillcolour = fillcolours[i]
+                fillcolour = fillcolours[idx]
             
-            if 'bordercolour' in self._attribute_overrides[i]:
-                bordercolour = self._attribute_overrides[i]['bordercolour']
+            if 'bordercolour' in self._attribute_overrides[idx]:
+                bordercolour = self._attribute_overrides[idx]['bordercolour']
             else:
-                bordercolour = bordercolours[i]
+                bordercolour = bordercolours[idx]
             
-            if 'borderwidth' in self._attribute_overrides[i]:
-                borderwidth = self._attribute_overrides[i]['borderwidth']
+            if 'borderwidth' in self._attribute_overrides[idx]:
+                borderwidth = self._attribute_overrides[idx]['borderwidth']
             else:
-                borderwidth = borderwidths[i]
+                borderwidth = borderwidths[idx]
             
-            if 'orientation' in self._attribute_overrides[i]:
-                orientation = self._attribute_overrides[i]['orientation']
+            if 'orientation' in self._attribute_overrides[idx]:
+                orientation = self._attribute_overrides[idx]['orientation']
             else:
-                orientation = orientations[i]
+                orientation = orientations[idx]
             
-            if 'data' in self._attribute_overrides[i]:
-                data = self._attribute_overrides[i]['data']
+            if 'data' in self._attribute_overrides[idx]:
+                data = self._attribute_overrides[idx]['data']
             else:
                 data = datas[i]
                             
-            if 'shape' in self._attribute_overrides[i]:
-                shape = self._attribute_overrides[i]['shape']
+            if 'shape' in self._attribute_overrides[idx]:
+                shape = self._attribute_overrides[idx]['shape']
             else:
-                shape = shapes[i]
+                shape = shapes[idx]
                 
             element_parameters = {'shape'        : shape, 
                                   'position'     : (x, y), 
@@ -263,67 +264,6 @@ class Stimulus:
             
         return stimulus
     
-    def SwitchElements(self, n_switches = 1):
-        """
-        Switches an element in the pattern with another element in the pattern.
-        
-        Parameters
-        ----------
-        n_switches: int 
-            Number of switches that will take place.
-
-        Returns
-        -------
-        A Stimulus object.
-
-        """
-        
-        elements = [ "|".join([str(i), str(j), str(k), str(l), str(m)]) for i, j, k, l, m in zip(self.shapes.pattern, self.size.pattern, self.colour.pattern, self.orientation.pattern, self.data.pattern)] 
-        
-        d = defaultdict(list)
-        for i, x in enumerate(elements):
-            d[x].append(i)
-            
-        idx_elementgroups = list(d.values())
-        elements_to_pick = idx_elementgroups
-        switch = list()
-        conducted_switches = 0
-        
-        if len(elements_to_pick) < 2:
-            print("SwitchElements failed, because to switch elements at least 2 different elements need to be in the pattern.")
-        else:
-        
-            for i in range(n_switches):
-
-                if len(elements_to_pick) < 2:
-                    print("Not possible to conduct so many switches! Pattern created with only " + str(conducted_switches) + " switches.")
-                    break
-                else:
-                    groups_to_switch = random.sample(range(len(elements_to_pick)),2)
-                    element_group1_to_switch = random.sample(range(len(elements_to_pick[groups_to_switch[0]])),1)
-                    element_group2_to_switch = random.sample(range(len(elements_to_pick[groups_to_switch[1]])),1)
-                    switch.append(elements_to_pick[groups_to_switch[0]][element_group1_to_switch[0]])
-                    switch.append(elements_to_pick[groups_to_switch[1]][element_group2_to_switch[0]])
-                    conducted_switches += 1
-                
-                    elements_to_pick = list()
-                    for i in range(len(idx_elementgroups)): 
-                        elements_to_pick.append([value for value in idx_elementgroups[i] if value not in switch])
-                        
-                    elements_to_pick = [x for x in elements_to_pick if x != []]
-    
-            for i in range(conducted_switches):
-                pos1, pos2  = switch[(i*2)-2], switch[(i*2)-1]
-#                shape1, size1, color1, orientation1 =  elements[pos1].split("|")
-#                shape2, size2, color2, orientation2 =  elements[pos2].split("|")
-                
-                self.shapes.pattern[pos1], self.shapes.pattern[pos2] = self.shapes.pattern[pos2], self.shapes.pattern[pos1]
-                self.size.pattern[pos1], self.size.pattern[pos2] = self.size.pattern[pos2], self.size.pattern[pos1]
-                self.colour.pattern[pos1], self.colour.pattern[pos2] = self.colour.pattern[pos2], self.colour.pattern[pos1]
-                self.orientation.pattern[pos1], self.orientation.pattern[pos2] = self.orientation.pattern[pos2], self.orientation.pattern[pos1]
-                self.data.pattern[pos1], self.data.pattern[pos2] = self.data.pattern[pos2], self.data.pattern[pos1]
-            
-        return self
     
     
     
@@ -359,6 +299,7 @@ class Grid(Stimulus):
         
         # Initialize a list with element attribute overrides
         self._attribute_overrides = [dict() for _ in range(self._n_cols * self._n_rows)]
+        self._element_presentation_order = list(range(self._n_cols * self._n_rows))
         
     @property
     def n_rows(self):
@@ -756,6 +697,57 @@ class Grid(Stimulus):
         self._attribute_overrides[element_id]['data'] = data_value
             
             
+    def swap_elements(self, n_swap_pairs = 1):
+        """
+        Swaps the position of two elements in the pattern. Once a position has
+        been used in a swap, it will not be used again in additional swaps. 
+        As a consequence, the maximum number of possible swaps is N//2, where
+        N is the number of elements in the pattern.
+        
+        When doing multiple swaps, if two elements have been selected to be
+        swapped around a first time, they will not be selected again. This
+        means that subsequent swaps can never cancel out an initial swap
+        
+        Parameters
+        ----------
+        n_swap_pairs: int 
+            Number of element pairs that will be swapped. Maximum value
+            is half the total number of elements
+
+        Returns
+        -------
+        Pattern:
+            New Pattern object instance
+
+        """
+        n_elements = self._n_rows * self._n_cols
+        assert n_elements >= n_swap_pairs * 2, 'Maximal number of swaps possible is %d, but %d were requested'%(len(self.pattern)//2, n_swap_pairs)
+               
+        # 1. Generate all available swap positions
+        candidate_swap_positions = set()
+        for i in range(n_elements):
+            for j in range(i+1, n_elements):
+                candidate_swap_positions.add((i,j))
+            
+        # 2. Select the required number of swap positions
+        selected_swap_pairs = []
+        for i in range(n_swap_pairs):
+            selected_pair = random.sample(candidate_swap_positions, 1)[0]
+            print(selected_pair)
+            selected_swap_pairs.append(selected_pair)
+            
+            removable_positions = set()
+            for p in candidate_swap_positions:
+                if selected_pair[0] in p or selected_pair[1] in p:
+                    removable_positions.add(p)
+                    
+            candidate_swap_positions.difference_update(removable_positions)
+            
+        # 3. Perform the swap
+        for swap_pair in selected_swap_pairs:
+            self._element_presentation_order[swap_pair[0]], self._element_presentation_order[swap_pair[1]] = self._element_presentation_order[swap_pair[1]], self._element_presentation_order[swap_pair[0]]
+
+        
     def _is_modifieable(self):
         """
         Inspects the _fixed_grid attribute of each of the element properties.
