@@ -341,7 +341,10 @@ class Grid(Stimulus):
         self._n_rows = n_rows
         self.positions = Positions.Create2DGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing,
                                                 x_offset = self.x_offset, y_offset = self.y_offset)
+        
         self._attribute_overrides = [dict() for _ in range(self._n_cols * self._n_rows)]
+        self._element_presentation_order = list(range(self._n_cols * self._n_rows))
+        
         for attr in Grid._element_attributes:
             setattr(getattr(self, attr), 'n_rows', self._n_rows)
         
@@ -371,7 +374,10 @@ class Grid(Stimulus):
         
         self.positions = Positions.Create2DGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing,
                                                 x_offset = self.x_offset, y_offset = self.y_offset)
+        
         self._attribute_overrides = [dict() for _ in range(self._n_cols * self._n_rows)]
+        self._element_presentation_order = list(range(self._n_cols * self._n_rows))
+        
         for attr in Grid._element_attributes:
             setattr(getattr(self, attr), 'n_cols', self._n_cols)
         
@@ -787,8 +793,9 @@ class Grid(Stimulus):
             attr = getattr(self, attr_name)
             if attr._fixed_grid == True:
                 print("Property %s has a fixed grid structure of %d rows and %d columns"%(attr_name, attr.n_rows, attr.n_cols))
+                fixed_attributes.append(attr_name)
                 
-        modifieable = False if len(fixed_attributes) == 0 else True
+        modifieable = True if len(fixed_attributes) == 0 else False
             
         return modifieable
     
