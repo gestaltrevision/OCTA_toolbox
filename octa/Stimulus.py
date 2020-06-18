@@ -321,7 +321,7 @@ class Grid(Stimulus):
     @property
     def n_rows(self):
         """
-        The number of columns in the Grid
+        The number of rows in the Grid
         
         """
         return self._n_rows
@@ -352,7 +352,7 @@ class Grid(Stimulus):
     @property
     def n_cols(self):
         """
-        The number of rows in the Grid
+        The number of columns in the Grid
         
         """
         return self._n_cols
@@ -474,7 +474,7 @@ class Grid(Stimulus):
         element_id : tuple, list or int
             A tuple with the row and column index of the element. A single integer
             can also be used to refer to an element in order.
-        bordercolour_value : Shape or None
+        shape_value : Shape or None
             An element shape, or None if no shape needs to be displayed.
 
         Returns
@@ -661,7 +661,7 @@ class Grid(Stimulus):
         element_id : tuple, list or int
             A tuple with the row and column index of the element. A single integer
             can also be used to refer to an element in order.
-        orientation : int
+        orientation_value : int
             Orientation of the element.
 
         Returns
@@ -677,7 +677,7 @@ class Grid(Stimulus):
     @property
     def data(self):
         """
-        The orientations for each element in the grid.
+        The data for each element in the grid.
         
         """
         return self._data.generate().pattern
@@ -707,7 +707,7 @@ class Grid(Stimulus):
         element_id : tuple, list or int
             A tuple with the row and column index of the element. A single integer
             can also be used to refer to an element in order.
-        data : string
+        data_value : string
             Data string for the element.
 
         Returns
@@ -729,7 +729,7 @@ class Grid(Stimulus):
         
         When doing multiple swaps, if two elements have been selected to be
         swapped around a first time, they will not be selected again. This
-        means that subsequent swaps can never cancel out an initial swap
+        means that subsequent swaps can never cancel out an initial swap.
         
         Parameters
         ----------
