@@ -712,7 +712,7 @@ class LayeredGrid(GridPattern):
         current_cols   = self.center_grid.n_cols
         
         
-        # 2. Recursively layer each layer ourind the center grid
+        # 2. Recursively layer each layer around the center grid
         for value in self.outer_layers.pattern:
             # Calculate new dimensions
             new_rows = current_rows + 2
