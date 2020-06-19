@@ -14,7 +14,8 @@ stimulus.Show()
 
 #%% Adjusting grid structure dynamically
 stimulus = Grid(9, 9, x_offset = 40, y_offset = 40, row_spacing = 50, col_spacing = 50)
-stimulus.shapes = GridPattern.MirrorAcrossRows([Ellipse, Rectangle, Triangle])
+stimulus.shapes = GridPattern.MirrorAcrossRows([Ellipse, Rectangle, Polygon])
+stimulus.data   = GridPattern.MirrorAcrossRows(["", "", "5"])
 stimulus.fillcolours = GridPattern.MirrorAcrossColumns(["red", "green","blue","orange"])
 stimulus.Show()
 

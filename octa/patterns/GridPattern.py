@@ -64,7 +64,7 @@ class GridPattern(Pattern):
         pass
     
     
-class RepeatElements(GridPattern):
+class RepeatAcrossElements(GridPattern):
     """
         Repeats the current pattern, until the total number of elements fits into the 2D grid structure.
 
@@ -95,7 +95,7 @@ class RepeatElements(GridPattern):
         
         result = self.RepeatPattern(1 + int(required_count/current_count), required_count)
         
-        return RepeatElements(result.pattern, self.n_rows, self.n_cols)
+        return RepeatAcrossElements(result.pattern, self.n_rows, self.n_cols)
     
     
 class RepeatAcrossRows(GridPattern):
@@ -268,7 +268,7 @@ class RepeatAcrossLeftDiagonal(GridPattern):
         return RepeatAcrossLeftDiagonal(result, self.n_rows, self.n_cols)    
     
     
-class MirrorElements(GridPattern):
+class MirrorAcrossElements(GridPattern):
     """
         Extends the current pattern by mirroring all the existing elements. This new pattern is then
         repeated until the number of elements equals the number of elements in the corresponding grid,
@@ -310,7 +310,7 @@ class MirrorElements(GridPattern):
         
         p = p.RepeatPattern(1 + int(required_count/current_count), required_count)
         
-        return MirrorElements(p, self.n_rows, self.n_cols)
+        return MirrorAcrossElements(p, self.n_rows, self.n_cols)
     
     
 class MirrorAcrossRows(GridPattern):
