@@ -21,7 +21,7 @@ class Stimulus:
     
     """
     
-    def __init__(self, width = 512, height = 512, background_color = "white"):
+    def __init__(self, size = None, background_color = "white"):
         """
         Instantiates a stimulus object.
 
@@ -39,10 +39,16 @@ class Stimulus:
         None.
 
         """
-        # Assign provided parameters
-        self.width = width
-        self.height = height
-        self.background_color = background_color
+        
+        if size == None:
+            self._autosize = True
+        else:
+            self._autosize = False
+            self.width = size[0]
+            self.height = size[1]
+            self.x_offset = 0
+            self.y_offset = 0
+            self.background_color = background_color
         
         # Set initial shape parameters to zero
         self.positions   = None
@@ -163,6 +169,7 @@ class Stimulus:
         None.
 
         """
+        self.__AutoCalculateSize()
         self.__ParseDrawingParameters()
         self.__StartNewDrawing()
         self.__AddDrawingElements()
@@ -203,8 +210,8 @@ class Stimulus:
         
         for i in range(len(self._element_presentation_order)):
             idx = self._element_presentation_order[i]
-            x            = self.positions.x[i]
-            y            = self.positions.y[i]
+            x            = self.positions.x[i] + self.x_offset
+            y            = self.positions.y[i] + self.y_offset
             
             if 'bounding_box' in self._attribute_overrides[idx]:
                 bounding_box = self._attribute_overrides[idx]['bounding_box']
@@ -263,10 +270,40 @@ class Stimulus:
         -------
         None.
 
-        """
+        """           
         self.dwg = svgwrite.Drawing(size = (self.width, self.height), profile="tiny")
         self.background = self.dwg.rect(insert = (0, 0), size = (self.width, self.height), fill = self.background_color)
-        self.dwg.add(self.background)    
+        self.dwg.add(self.background)  
+        
+        
+    def __AutoCalculateSize(self):
+        if not self._autosize:
+            return
+        if len(self.positions.x) == 0:
+            return
+        
+        min_width = self.positions.x[0]
+        max_width = self.positions.x[0]
+        min_height = self.positions.y[0]
+        max_height = self.positions.y[0]
+        
+        bounding_boxes = self.bounding_boxes
+        for i in range(len(self.positions.x)):
+            if self.positions.x[i] - max(bounding_boxes[i]) < min_width:
+                min_width = self.positions.x[i] -  max(bounding_boxes[i])
+            if self.positions.x[i] +  max(bounding_boxes[i]) > max_width:
+                max_width = self.positions.x[i] +  max(bounding_boxes[i]) 
+            if self.positions.y[i] -  max(bounding_boxes[i]) < min_height: 
+                min_height = self.positions.y[i] -  max(bounding_boxes[i])
+            if self.positions.y[i] +  max(bounding_boxes[i]) > max_height: 
+                max_height = self.positions.y[i] +  max(bounding_boxes[i])
+                
+        self.width = abs(max_width - min_width)
+        self.height = abs(max_height - min_height)
+        print("min width: %d \nmax width: %d"%(min_width, max_width))
+        self.x_offset = -min_width
+        self.y_offset = -min_height
+        
 
     def __AddDrawingElements(self):
         """
@@ -288,8 +325,8 @@ class Grid(Stimulus):
     _element_attributes = ["_bounding_boxes", "_orientations", "_bordercolors", "_borderwidths", "_fillcolors", "_shapes",
                           "_class_labels", "_id_labels", "_mirrors", "_data"]
     
-    def __init__(self, n_rows, n_cols, row_spacing = 50, col_spacing= 50, x_offset = 0, y_offset = 0):
-        super().__init__()
+    def __init__(self, n_rows, n_cols, row_spacing = 50, col_spacing= 50, x_offset = 0, y_offset = 0, background_color = "white", size = None):
+        super().__init__(size, background_color)
         
         # Initialize the positions of each element
         self._n_rows = n_rows
@@ -303,7 +340,7 @@ class Grid(Stimulus):
                                                 x_offset = self.x_offset, y_offset = self.y_offset)
         
         # Initialize the element attributes to their default values
-        self._bounding_boxes = RepeatAcrossElements([(10, 10)], self._n_rows, self._n_cols)
+        self._bounding_boxes = RepeatAcrossElements([(20, 20)], self._n_rows, self._n_cols)
         self._orientations   = RepeatAcrossElements([0], self._n_rows, self._n_cols)
         self._bordercolors  = RepeatAcrossElements([""], self._n_rows, self._n_cols)
         self._borderwidths   = RepeatAcrossElements([0], self.n_rows, self.n_cols)
