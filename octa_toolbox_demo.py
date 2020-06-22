@@ -13,14 +13,14 @@ stimulus = Grid(5,5, x_offset = 40, y_offset = 40)
 stimulus.Show()
 
 #%% Adjusting grid structure dynamically
-stimulus = Grid(9, 9, x_offset = 40, y_offset = 40, row_spacing = 50, col_spacing = 50)
+stimulus = Grid(7, 7,  row_spacing = 50, col_spacing = 50)
+stimulus.background_color = "lightgray"
 stimulus.shapes = GridPattern.MirrorAcrossRows([Ellipse, Rectangle, Polygon])
 stimulus.data   = GridPattern.MirrorAcrossRows(["", "", "5"])
 stimulus.fillcolors = GridPattern.MirrorAcrossColumns(["red", "green","blue","orange"])
 stimulus.Show()
 
-stimulus.n_rows = 5
-stimulus.Show()
+
 
 #%% New grid structure: layered grid
 center_grid = GridPattern.RepeatAcrossElements(["red"], 2, 2)
