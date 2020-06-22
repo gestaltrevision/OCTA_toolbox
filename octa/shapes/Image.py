@@ -6,7 +6,7 @@ Created on Mon Apr  6 16:02:30 2020
 """
 
 class Image:
-    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolour', 'borderwidth', 'fillcolour', 'class_label', 'id_label', 'mirror', 'data']
+    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror', 'data']
     
     def __init__(self, **kwargs):
         for p in Image.parameters:
@@ -38,11 +38,11 @@ class Image:
         self.orientation = orientation
     
     
-    def set_bordercolour(self, bordercolour):
-        if bordercolour == None:
-            bordercolour = "green"
+    def set_bordercolor(self, bordercolor):
+        if bordercolor == None:
+            bordercolor = "green"
             
-        self.bordercolour = bordercolour
+        self.bordercolor = bordercolor
     
     
     def set_borderwidth(self, borderwidth):
@@ -52,11 +52,11 @@ class Image:
         self.borderwidth = borderwidth
         
         
-    def set_fillcolour(self, fillcolour):
-        if fillcolour == None:
-            fillcolour = "gray"
+    def set_fillcolor(self, fillcolor):
+        if fillcolor == None:
+            fillcolor = "gray"
             
-        self.fillcolour = fillcolour
+        self.fillcolor = fillcolor
     
     
     def set_class_label(self, class_label):
@@ -106,5 +106,5 @@ class Image:
     
     
 if __name__ == '__main__':
-    c = Image(x = 3, y = 4, size = 10,  colour = "blue", orientation = 30, data = 'hello')
+    c = Image(x = 3, y = 4, size = 10,  color = "blue", orientation = 30, data = 'hello')
     print(c)
