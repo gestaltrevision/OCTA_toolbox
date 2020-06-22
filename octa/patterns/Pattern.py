@@ -2,7 +2,7 @@
 This module contains a base class with several essential functions for patterns.
 More complex patterns (e.g., grid based patterns) can be derived from this class.
 """
-import colour
+import color
 import random
 
 class Pattern:
@@ -327,31 +327,31 @@ class Pattern:
         
         return Pattern(gradient)
     
-    def CreateColorRangeList(start_colour, end_colour, n_elements):
+    def CreateColorRangeList(start_color, end_color, n_elements):
         """
         Creates a range of colors.
 
         Parameters
         ----------
-        start_colour : string
+        start_color : string
             Name of the first color in the list.
-        end_colour : string
+        end_color : string
             Name of the final color in the list.
         n_elements : TYPE
             Total number of colors in the list. Value must be >= 2.
 
         Returns
         -------
-        colour_range : list
+        color_range : list
             A list with hexadecimal color values.
 
         """
-        start_colour = colour.Color(start_colour)
-        end_colour   = colour.Color(end_colour)
+        start_color = color.Color(start_color)
+        end_color   = color.Color(end_color)
         
-        colour_range = [c.hex for c in start_colour.range_to(end_colour, n_elements)]
+        color_range = [c.hex for c in start_color.range_to(end_color, n_elements)]
         
-        return colour_range
+        return color_range
     
     
     def CreateNumberRangeList(start_number, end_number, n_elements):

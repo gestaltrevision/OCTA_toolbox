@@ -16,7 +16,7 @@ stimulus.Show()
 stimulus = Grid(9, 9, x_offset = 40, y_offset = 40, row_spacing = 50, col_spacing = 50)
 stimulus.shapes = GridPattern.MirrorAcrossRows([Ellipse, Rectangle, Polygon])
 stimulus.data   = GridPattern.MirrorAcrossRows(["", "", "5"])
-stimulus.fillcolours = GridPattern.MirrorAcrossColumns(["red", "green","blue","orange"])
+stimulus.fillcolors = GridPattern.MirrorAcrossColumns(["red", "green","blue","orange"])
 stimulus.Show()
 
 stimulus.n_rows = 5
@@ -25,37 +25,37 @@ stimulus.Show()
 #%% New grid structure: layered grid
 center_grid = GridPattern.RepeatAcrossElements(["red"], 2, 2)
 outer_layers= Pattern(["green", "blue", "yellow"])
-fillcolours = GridPattern.LayeredGrid(center_grid, outer_layers)
+fillcolors = GridPattern.LayeredGrid(center_grid, outer_layers)
 
-stimulus = Grid(fillcolours.n_rows, fillcolours.n_cols, x_offset = 40, y_offset = 40)
-stimulus.fillcolours = fillcolours
+stimulus = Grid(fillcolors.n_rows, fillcolors.n_cols, x_offset = 40, y_offset = 40)
+stimulus.fillcolors = fillcolors
 stimulus.Show()
 
 #%% If one attribute has a layered grid structure, attribute dimensions
 # can not be changed freely
 center_grid = GridPattern.RepeatAcrossElements(["red"], 2, 2)
 outer_layers= Pattern(["green", "blue", "yellow"])
-fillcolours = GridPattern.LayeredGrid(center_grid, outer_layers)
+fillcolors = GridPattern.LayeredGrid(center_grid, outer_layers)
 
-stimulus = Grid(fillcolours.n_rows, fillcolours.n_cols, x_offset = 40, y_offset = 40)
-stimulus.fillcolours = fillcolours
+stimulus = Grid(fillcolors.n_rows, fillcolors.n_cols, x_offset = 40, y_offset = 40)
+stimulus.fillcolors = fillcolors
 stimulus.n_rows = 10
 stimulus.Show()
 
 #%% Tiled element grid
 source_grid = GridPattern.RepeatAcrossColumns(["red", "green", "blue"], 3, 3)
-fillcolours = GridPattern.TiledElementGrid(source_grid, 2)
+fillcolors = GridPattern.TiledElementGrid(source_grid, 2)
 
-stimulus = Grid(fillcolours.n_rows, fillcolours.n_cols, x_offset = 40, y_offset = 40)
-stimulus.fillcolours = fillcolours
+stimulus = Grid(fillcolors.n_rows, fillcolors.n_cols, x_offset = 40, y_offset = 40)
+stimulus.fillcolors = fillcolors
 stimulus.Show()
 
 #%% Tiled grid
 source_grid = GridPattern.RepeatAcrossColumns(["red", "green", "blue"], 3, 3)
-fillcolours = GridPattern.TiledGrid(source_grid, (3, 2))
+fillcolors = GridPattern.TiledGrid(source_grid, (3, 2))
 
-stimulus = Grid(fillcolours.n_rows, fillcolours.n_cols, x_offset = 40, y_offset = 40)
-stimulus.fillcolours = fillcolours
+stimulus = Grid(fillcolors.n_rows, fillcolors.n_cols, x_offset = 40, y_offset = 40)
+stimulus.fillcolors = fillcolors
 stimulus.Show()
 
 #%% Swapping elements
@@ -65,7 +65,7 @@ shapes = GridPattern.LayeredGrid(center_grid, outer_layers)
 
 stimulus = Grid(shapes.n_rows, shapes.n_cols, x_offset = 20, y_offset = 20)
 stimulus.shapes = shapes
-stimulus.fillcolours = GridPattern.RepeatAcrossLeftDiagonal(["red", "green", "blue"])
+stimulus.fillcolors = GridPattern.RepeatAcrossLeftDiagonal(["red", "green", "blue"])
 stimulus.Show()
 
 stimulus.swap_elements(10)

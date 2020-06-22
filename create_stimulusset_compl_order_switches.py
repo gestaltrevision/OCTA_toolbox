@@ -176,7 +176,7 @@ stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_s
 
 stimulus.orientation = patterns.BasicPattern([0]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.shapes  = patterns.BasicPattern(shape_values[0]).DuplicatePatternToSize(n_rows * n_cols)
-stimulus.colour  = patterns.BasicPattern(color_values[0]).DuplicatePatternToSize(n_rows * n_cols)
+stimulus.color  = patterns.BasicPattern(color_values[0]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.size  = patterns.BasicPattern(size_values[0]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.data        = patterns.BasicPattern(["none"]).DuplicatePatternToSize(n_rows * n_cols)
 
@@ -253,34 +253,34 @@ for i in range(len(shape_values)):
                 for c in range(len(color_pattern)):
         
                     if color_pattern[c] == "identity":
-                        stimulus.colour  = patterns.BasicPattern(color_values[k]).DuplicatePatternToSize(n_rows * n_cols)
+                        stimulus.color  = patterns.BasicPattern(color_values[k]).DuplicatePatternToSize(n_rows * n_cols)
                     elif color_pattern[c] == "row_symmetry":
-                        stimulus.colour  = patterns.SymmetryPattern(color_values[k], n_rows, n_cols).MirrorAcrossRows()
+                        stimulus.color  = patterns.SymmetryPattern(color_values[k], n_rows, n_cols).MirrorAcrossRows()
                     elif color_pattern[c] == "column_symmetry":
-                        stimulus.colour  = patterns.SymmetryPattern(color_values[k], n_rows, n_cols).MirrorAcrossColumns()
+                        stimulus.color  = patterns.SymmetryPattern(color_values[k], n_rows, n_cols).MirrorAcrossColumns()
                     elif color_pattern[c] == "row_alternate":
-                        stimulus.colour  = patterns.GridRepeater(color_values[k], n_rows, n_cols).RepeatAcrossRows()
+                        stimulus.color  = patterns.GridRepeater(color_values[k], n_rows, n_cols).RepeatAcrossRows()
                     elif color_pattern[c] == "column_alternate":
-                        stimulus.colour  = patterns.GridRepeater(color_values[k], n_rows, n_cols).RepeatAcrossColumns()  
+                        stimulus.color  = patterns.GridRepeater(color_values[k], n_rows, n_cols).RepeatAcrossColumns()  
                     elif color_pattern[c] == "row_repeat":
                         colorpattern = patterns.BasicPattern(color_values[k]).DuplicateElements(n_duplications = int(n_cols/len(color_values[k]))).pattern
-                        stimulus.colour  = patterns.GridRepeater(colorpattern, n_rows, n_cols).RepeatAcrossRows()
+                        stimulus.color  = patterns.GridRepeater(colorpattern, n_rows, n_cols).RepeatAcrossRows()
                     elif color_pattern[c] == "column_repeat":
                         colorpattern = patterns.BasicPattern(color_values[k]).DuplicateElements(n_duplications = int(n_cols/len(color_values[k]))).pattern
-                        stimulus.colour  = patterns.GridRepeater(colorpattern, n_rows, n_cols).RepeatAcrossColumns()  
+                        stimulus.color  = patterns.GridRepeater(colorpattern, n_rows, n_cols).RepeatAcrossColumns()  
                     elif color_pattern[c] == "subgroup_repeat":
-                        stimulus.colour  = patterns.GridRepeater(color_values[k], n_rows, n_cols).RepeatElementsInSubgroups()
+                        stimulus.color  = patterns.GridRepeater(color_values[k], n_rows, n_cols).RepeatElementsInSubgroups()
                     elif color_pattern[c] == "outin_repeat":
-                        stimulus.colour  = patterns.GridRepeater(color_values[k], n_rows, n_cols).RepeatAcrossOutIn()
+                        stimulus.color  = patterns.GridRepeater(color_values[k], n_rows, n_cols).RepeatAcrossOutIn()
                     elif color_pattern[c] == "checkerboard_repeat":
-                        stimulus.colour  = patterns.GridRepeater(color_values[k], n_rows, n_cols).RepeatPatternInCheckerboard()
+                        stimulus.color  = patterns.GridRepeater(color_values[k], n_rows, n_cols).RepeatPatternInCheckerboard()
                     elif color_pattern[c] == "randompattern":
-                        stimulus.colour  = patterns.BasicPattern(color_values[k]).DuplicatePatternToSize(n_rows * n_cols)
-                        stimulus.colour.RandomizeOrder()
+                        stimulus.color  = patterns.BasicPattern(color_values[k]).DuplicatePatternToSize(n_rows * n_cols)
+                        stimulus.color.RandomizeOrder()
                     
                     if (color_pattern[c] != "randompattern") & (color_pattern[c] != "identity"):
                         for n_switches in color_switches:
-                            stimulus.colour.SwitchValues(n_switches)
+                            stimulus.color.SwitchValues(n_switches)
                             
                         for nr_switches in element_switches:
                             stimulus.SwitchElements(nr_switches)                        

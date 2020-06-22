@@ -103,8 +103,8 @@ class Stimulus:
                                    'positions'    :    jsonpickle.encode(self.positions),
                                    'bounding_boxes' :  jsonpickle.encode(self._bounding_boxes),
                                    'shapes'       :    jsonpickle.encode(self._shapes),
-                                   'fillcolour'     :  jsonpickle.encode(self._fillcolours),
-                                   'bordercolour'   :  jsonpickle.encode(self._bordercolours),
+                                   'fillcolor'     :  jsonpickle.encode(self._fillcolors),
+                                   'bordercolor'   :  jsonpickle.encode(self._bordercolors),
                                    'orientation'  :    jsonpickle.encode(self._orientations),
                                    'data'         :    jsonpickle.encode(self._data),
                                    'overrides'    :    jsonpickle.encode(self._attribute_overrides),
@@ -113,7 +113,7 @@ class Stimulus:
         with open(json_filename, 'w') as output_file:
             json.dump(json_data, output_file)
             
-        df = pd.DataFrame(self.dwg_elements, columns = ['shape', 'position', 'bounding_box', 'fillcolour', 'bordercolour', 'borderwidth', 'orientation', 'data'])
+        df = pd.DataFrame(self.dwg_elements, columns = ['shape', 'position', 'bounding_box', 'fillcolor', 'bordercolor', 'borderwidth', 'orientation', 'data'])
         df.to_csv(csv_filename)
             
         
@@ -142,8 +142,8 @@ class Stimulus:
             stimulus._positions      = jsonpickle.decode(data['element_attributes']['positions'])
             stimulus._bounding_boxes = jsonpickle.decode(data['element_attributes']['bounding_boxes'])
             stimulus._shapes         = jsonpickle.decode(data['element_attributes']['shapes'])
-            stimulus._fillcolours    = jsonpickle.decode(data['element_attributes']['fillcolour'])
-            stimulus._bordercolours  = jsonpickle.decode(data['element_attributes']['bordercolour'])
+            stimulus._fillcolors    = jsonpickle.decode(data['element_attributes']['fillcolor'])
+            stimulus._bordercolors  = jsonpickle.decode(data['element_attributes']['bordercolor'])
             stimulus._orientations   = jsonpickle.decode(data['element_attributes']['orientation'])
             stimulus._data           = jsonpickle.decode(data['element_attributes']['data'])
             stimulus._attribute_overrides = jsonpickle.decode(data['element_attributes']['overrides'])
@@ -194,8 +194,8 @@ class Stimulus:
         self.dwg_elements = []
         
         bounding_boxes = self.bounding_boxes
-        fillcolours    = self.fillcolours
-        bordercolours  = self.bordercolours
+        fillcolors    = self.fillcolors
+        bordercolors  = self.bordercolors
         borderwidths   = self.borderwidths
         orientations   = self.orientations
         datas          = self.data
@@ -211,15 +211,15 @@ class Stimulus:
             else:
                 bounding_box = bounding_boxes[idx]
                 
-            if 'fillcolour' in self._attribute_overrides[idx]:
-                fillcolour = self._attribute_overrides[idx]['fillcolour']
+            if 'fillcolor' in self._attribute_overrides[idx]:
+                fillcolor = self._attribute_overrides[idx]['fillcolor']
             else:
-                fillcolour = fillcolours[idx]
+                fillcolor = fillcolors[idx]
             
-            if 'bordercolour' in self._attribute_overrides[idx]:
-                bordercolour = self._attribute_overrides[idx]['bordercolour']
+            if 'bordercolor' in self._attribute_overrides[idx]:
+                bordercolor = self._attribute_overrides[idx]['bordercolor']
             else:
-                bordercolour = bordercolours[idx]
+                bordercolor = bordercolors[idx]
             
             if 'borderwidth' in self._attribute_overrides[idx]:
                 borderwidth = self._attribute_overrides[idx]['borderwidth']
@@ -244,8 +244,8 @@ class Stimulus:
             element_parameters = {'shape'        : shape, 
                                   'position'     : (x, y), 
                                   'bounding_box' : bounding_box, 
-                                  'fillcolour'   : fillcolour,
-                                  'bordercolour' : bordercolour,
+                                  'fillcolor'   : fillcolor,
+                                  'bordercolor' : bordercolor,
                                   'borderwidth'  : borderwidth,
                                   'orientation'  : orientation, 
                                   'data'         : data}
@@ -285,7 +285,7 @@ class Stimulus:
     
     
 class Grid(Stimulus):
-    _element_attributes = ["_bounding_boxes", "_orientations", "_bordercolours", "_borderwidths", "_fillcolours", "_shapes",
+    _element_attributes = ["_bounding_boxes", "_orientations", "_bordercolors", "_borderwidths", "_fillcolors", "_shapes",
                           "_class_labels", "_id_labels", "_mirrors", "_data"]
     
     def __init__(self, n_rows, n_cols, row_spacing = 50, col_spacing= 50, x_offset = 0, y_offset = 0):
@@ -305,9 +305,9 @@ class Grid(Stimulus):
         # Initialize the element attributes to their default values
         self._bounding_boxes = RepeatAcrossElements([(10, 10)], self._n_rows, self._n_cols)
         self._orientations   = RepeatAcrossElements([0], self._n_rows, self._n_cols)
-        self._bordercolours  = RepeatAcrossElements([""], self._n_rows, self._n_cols)
+        self._bordercolors  = RepeatAcrossElements([""], self._n_rows, self._n_cols)
         self._borderwidths   = RepeatAcrossElements([0], self.n_rows, self.n_cols)
-        self._fillcolours    = RepeatAcrossElements(["black"], self.n_rows, self.n_cols)
+        self._fillcolors    = RepeatAcrossElements(["black"], self.n_rows, self.n_cols)
         self._shapes         = RepeatAcrossElements([Rectangle], self._n_rows, self._n_cols)
         self._class_labels   = RepeatAcrossElements([""], self._n_rows, self._n_cols)
         self._id_labels      = RepeatAcrossElements([""], self._n_rows, self._n_cols)
@@ -334,7 +334,7 @@ class Grid(Stimulus):
         This only works if none of the element attributes have a fixed grid
         structure.
         """
-        if not self._is_modifieable():
+        if not self._is_modifiable():
             print("WARNING: At least one element attribute has a fixed structure. n_rows remains unchanged.")
             return
         
@@ -366,7 +366,7 @@ class Grid(Stimulus):
         This only works if none of the element attributes have a fixed grid
         structure.
         """
-        if not self._is_modifieable():
+        if not self._is_modifiable():
             print("WARNING: At least one element attribute has a fixed structure. n_rows remains unchanged.")
             return
         
@@ -487,41 +487,41 @@ class Grid(Stimulus):
             
         
     @property
-    def bordercolours(self):
+    def bordercolors(self):
         """
-        The bordercolour for each element in the grid.
+        The bordercolor for each element in the grid.
         
         """
-        return self._bordercolours.generate().pattern
+        return self._bordercolors.generate().pattern
     
     
-    @bordercolours.setter
-    def bordercolours(self, bordercolours):
+    @bordercolors.setter
+    def bordercolors(self, bordercolors):
         """
-        Sets the bordercolour for each grid element.
+        Sets the bordercolor for each grid element.
         
         If the provided pattern has a fixed grid structure, that structure
         must match the number of rows and columns of the Grid Stimulus
         
         """
-        if not self._check_attribute_dimensions(bordercolours):
+        if not self._check_attribute_dimensions(bordercolors):
             return
             
-        self._bordercolours = bordercolours
-        self._bordercolours.n_rows = self._n_rows
-        self._bordercolours.n_cols = self._n_cols
+        self._bordercolors = bordercolors
+        self._bordercolors.n_rows = self._n_rows
+        self._bordercolors.n_cols = self._n_cols
             
-    def set_element_bordercolour(self, element_id, bordercolour_value):
+    def set_element_bordercolor(self, element_id, bordercolor_value):
         """
-        Sets the bordercolour of an individual element
+        Sets the bordercolor of an individual element
 
         Parameters
         ----------
         element_id : tuple, list or int
             A tuple with the row and column index of the element. A single integer
             can also be used to refer to an element in order.
-        bordercolour_value : string
-            Colour string.
+        bordercolor_value : string
+            color string.
 
         Returns
         -------
@@ -530,44 +530,44 @@ class Grid(Stimulus):
         """
         element_id = self._parse_element_id(element_id)
         
-        self._attribute_overrides[element_id]['bordercolour'] = bordercolour_value
+        self._attribute_overrides[element_id]['bordercolor'] = bordercolor_value
             
     @property
-    def fillcolours(self):
+    def fillcolors(self):
         """
-        The fillcolour for each element in the grid.
+        The fillcolor for each element in the grid.
         
         """
-        return self._fillcolours.generate().pattern
+        return self._fillcolors.generate().pattern
         
     
-    @fillcolours.setter
-    def fillcolours(self, fillcolours):
+    @fillcolors.setter
+    def fillcolors(self, fillcolors):
         """
-        Sets the fillcolour for each grid element.
+        Sets the fillcolor for each grid element.
         
         If the provided pattern has a fixed grid structure, that structure
         must match the number of rows and columns of the Grid Stimulus
         
         """
-        if not self._check_attribute_dimensions(fillcolours):
+        if not self._check_attribute_dimensions(fillcolors):
             return
         
-        self._fillcolours = fillcolours
-        self._fillcolours.n_rows = self._n_rows
-        self._fillcolours.n_cols = self._n_cols
+        self._fillcolors = fillcolors
+        self._fillcolors.n_rows = self._n_rows
+        self._fillcolors.n_cols = self._n_cols
         
-    def set_element_fillcolour(self, element_id, fillcolour_value):
+    def set_element_fillcolor(self, element_id, fillcolor_value):
         """
-        Sets the fillcolour of an individual element
+        Sets the fillcolor of an individual element
 
         Parameters
         ----------
         element_id : tuple, list or int
             A tuple with the row and column index of the element. A single integer
             can also be used to refer to an element in order.
-        fillcolour_value : string
-            Colour string.
+        fillcolor_value : string
+            color string.
 
         Returns
         -------
@@ -576,7 +576,7 @@ class Grid(Stimulus):
         """
         element_id = self._parse_element_id(element_id)
         
-        self._attribute_overrides[element_id]['fillcolour'] = fillcolour_value
+        self._attribute_overrides[element_id]['fillcolor'] = fillcolor_value
         
             
     @property
@@ -771,7 +771,7 @@ class Grid(Stimulus):
             self._element_presentation_order[swap_pair[0]], self._element_presentation_order[swap_pair[1]] = self._element_presentation_order[swap_pair[1]], self._element_presentation_order[swap_pair[0]]
 
         
-    def _is_modifieable(self):
+    def _is_modifiable(self):
         """
         Inspects the _fixed_grid attribute of each of the element properties.
         Used to determine if the stimulus n_rows and n_cols attributes can
@@ -783,7 +783,7 @@ class Grid(Stimulus):
         
         Return
         ------
-        modifieable: Boolean
+        modifiable: Boolean
             True if none of the element attributes has a fixed structure. 
             False if at least one element has a fixed structure
         """
@@ -795,9 +795,9 @@ class Grid(Stimulus):
                 print("Property %s has a fixed grid structure of %d rows and %d columns"%(attr_name, attr.n_rows, attr.n_cols))
                 fixed_attributes.append(attr_name)
                 
-        modifieable = True if len(fixed_attributes) == 0 else False
+        modifiable = True if len(fixed_attributes) == 0 else False
             
-        return modifieable
+        return modifiable
     
     def _check_attribute_dimensions(self, attr):
         """
