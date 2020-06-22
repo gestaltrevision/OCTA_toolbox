@@ -112,8 +112,8 @@ class Polygon:
         
         r = self.bounding_box[0] / 2
         for i in range(n_sides):
-            x = self.position[0] + r * sin(i*2*pi/n_sides)
-            y = self.position[1] + r * cos(i*2*pi/n_sides)
+            x = self.position[0] + r * sin((i*2*pi/n_sides)+pi)
+            y = self.position[1] + r * cos((i*2*pi/n_sides)+pi)
             points.append((x, y))
         
         
