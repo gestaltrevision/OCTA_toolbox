@@ -2,7 +2,7 @@
 This module contains a base class with several essential functions for patterns.
 More complex patterns (e.g., grid based patterns) can be derived from this class.
 """
-import color
+import colour
 import random
 
 class Pattern:

@@ -7,7 +7,7 @@ Created on Mon Apr  6 16:02:30 2020
 import math
 
 class Triangle:
-    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolour', 'borderwidth', 'fillcolour', 'class_label', 'id_label', 'mirror']
+    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror']
     
     def __init__(self, **kwargs):
         for p in Triangle.parameters:
@@ -39,11 +39,11 @@ class Triangle:
         self.orientation = orientation
     
     
-    def set_bordercolour(self, bordercolour):
-        if bordercolour == None:
-            bordercolour = "green"
+    def set_bordercolor(self, bordercolor):
+        if bordercolor == None:
+            bordercolor = "green"
             
-        self.bordercolour = bordercolour
+        self.bordercolor = bordercolor
     
     
     def set_borderwidth(self, borderwidth):
@@ -53,11 +53,11 @@ class Triangle:
         self.borderwidth = borderwidth
         
         
-    def set_fillcolour(self, fillcolour):
-        if fillcolour == None:
-            fillcolour = "gray"
+    def set_fillcolor(self, fillcolor):
+        if fillcolor == None:
+            fillcolor = "gray"
             
-        self.fillcolour = fillcolour
+        self.fillcolor = fillcolor
     
     
     def set_class_label(self, class_label):
@@ -95,8 +95,8 @@ class Triangle:
         
         svg = dwg.polygon(
                 points       = points,
-                fill         = self.fillcolour,
-                stroke       = self.bordercolour,
+                fill         = self.fillcolor,
+                stroke       = self.bordercolor,
                 stroke_width = self.borderwidth,
                 transform    = transform_string)
         

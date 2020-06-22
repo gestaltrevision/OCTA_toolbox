@@ -6,7 +6,7 @@ Created on Mon Apr  6 16:02:30 2020
 """
 
 class Ellipse:
-    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolour', 'borderwidth', 'fillcolour', 'class_label', 'id_label', 'mirror']
+    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror']
     
     def __init__(self, **kwargs):
         for p in Ellipse.parameters:
@@ -38,11 +38,11 @@ class Ellipse:
         self.orientation = orientation
     
     
-    def set_bordercolour(self, bordercolour):
-        if bordercolour == None:
-            bordercolour = "green"
+    def set_bordercolor(self, bordercolor):
+        if bordercolor == None:
+            bordercolor = "green"
             
-        self.bordercolour = bordercolour
+        self.bordercolor = bordercolor
     
     
     def set_borderwidth(self, borderwidth):
@@ -52,11 +52,11 @@ class Ellipse:
         self.borderwidth = borderwidth
         
         
-    def set_fillcolour(self, fillcolour):
-        if fillcolour == None:
-            fillcolour = "gray"
+    def set_fillcolor(self, fillcolor):
+        if fillcolor == None:
+            fillcolor = "gray"
             
-        self.fillcolour = fillcolour
+        self.fillcolor = fillcolor
     
     
     def set_class_label(self, class_label):
@@ -92,8 +92,8 @@ class Ellipse:
         ellipse = dwg.ellipse(
                 center       = self.position,
                 r            = (self.bounding_box[0]/2, self.bounding_box[1]/2),
-                fill         = self.fillcolour,
-                stroke       = self.bordercolour,
+                fill         = self.fillcolor,
+                stroke       = self.bordercolor,
                 stroke_width = self.borderwidth,
                 transform    = transform_string)
         
