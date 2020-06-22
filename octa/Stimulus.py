@@ -14,7 +14,7 @@ from IPython.display import SVG, display
 
 from .Positions import Positions
 from .patterns.GridPattern import Pattern, RepeatAcrossElements
-from .shapes.Rectangle import Rectangle
+from .shapes.Polygon import Polygon
 
 class Stimulus:
     """ Container class for creating a stimulus.
@@ -39,7 +39,7 @@ class Stimulus:
         None.
 
         """
-        
+        print("ping")
         if size == None:
             self._autosize = True
         else:
@@ -48,7 +48,8 @@ class Stimulus:
             self.height = size[1]
             self.x_offset = 0
             self.y_offset = 0
-            self.background_color = background_color
+            
+        self.background_color = background_color
         
         # Set initial shape parameters to zero
         self.positions   = None
@@ -300,7 +301,7 @@ class Stimulus:
                 
         self.width = abs(max_width - min_width)
         self.height = abs(max_height - min_height)
-        print("min width: %d \nmax width: %d"%(min_width, max_width))
+        
         self.x_offset = -min_width
         self.y_offset = -min_height
         
@@ -326,7 +327,8 @@ class Grid(Stimulus):
                           "_class_labels", "_id_labels", "_mirrors", "_data"]
     
     def __init__(self, n_rows, n_cols, row_spacing = 50, col_spacing= 50, x_offset = 0, y_offset = 0, background_color = "white", size = None):
-        super().__init__(size, background_color)
+        print("Grid constructor")
+        super().__init__(size = size, background_color = background_color)
         
         # Initialize the positions of each element
         self._n_rows = n_rows
@@ -340,16 +342,16 @@ class Grid(Stimulus):
                                                 x_offset = self.x_offset, y_offset = self.y_offset)
         
         # Initialize the element attributes to their default values
-        self._bounding_boxes = RepeatAcrossElements([(20, 20)], self._n_rows, self._n_cols)
+        self._bounding_boxes = RepeatAcrossElements([(45, 45)], self._n_rows, self._n_cols)
         self._orientations   = RepeatAcrossElements([0], self._n_rows, self._n_cols)
-        self._bordercolors  = RepeatAcrossElements([""], self._n_rows, self._n_cols)
+        self._bordercolors   = RepeatAcrossElements([""], self._n_rows, self._n_cols)
         self._borderwidths   = RepeatAcrossElements([0], self.n_rows, self.n_cols)
-        self._fillcolors    = RepeatAcrossElements(["black"], self.n_rows, self.n_cols)
-        self._shapes         = RepeatAcrossElements([Rectangle], self._n_rows, self._n_cols)
+        self._fillcolors     = RepeatAcrossElements(["blue"], self.n_rows, self.n_cols)
+        self._shapes         = RepeatAcrossElements([Polygon], self._n_rows, self._n_cols)
         self._class_labels   = RepeatAcrossElements([""], self._n_rows, self._n_cols)
         self._id_labels      = RepeatAcrossElements([""], self._n_rows, self._n_cols)
         self._mirrors        = RepeatAcrossElements([""], self._n_rows, self._n_cols)
-        self._data           = RepeatAcrossElements([""], self._n_rows, self._n_cols)
+        self._data           = RepeatAcrossElements(["8"], self._n_rows, self._n_cols)
         
         # Initialize a list with element attribute overrides
         self._attribute_overrides = [dict() for _ in range(self._n_cols * self._n_rows)]

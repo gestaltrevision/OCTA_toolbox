@@ -103,7 +103,7 @@ class Polygon:
                 stroke_width = 1)
         dwg.add(bb)
         
-        return self.generate_v2(dwg)
+        #return self.generate_v2(dwg)
     
         transform_string = "rotate(%d, %d, %d)"%(self.orientation, self.position[0], self.position[1])
         
