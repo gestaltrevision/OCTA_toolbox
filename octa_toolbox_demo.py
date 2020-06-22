@@ -23,7 +23,7 @@ stimulus.n_rows = 5
 stimulus.Show()
 
 #%% New grid structure: layered grid
-center_grid = GridPattern.RepeatElements(["red"], 2, 2)
+center_grid = GridPattern.RepeatAcrossElements(["red"], 2, 2)
 outer_layers= Pattern(["green", "blue", "yellow"])
 fillcolours = GridPattern.LayeredGrid(center_grid, outer_layers)
 
@@ -33,7 +33,7 @@ stimulus.Show()
 
 #%% If one attribute has a layered grid structure, attribute dimensions
 # can not be changed freely
-center_grid = GridPattern.RepeatElements(["red"], 2, 2)
+center_grid = GridPattern.RepeatAcrossElements(["red"], 2, 2)
 outer_layers= Pattern(["green", "blue", "yellow"])
 fillcolours = GridPattern.LayeredGrid(center_grid, outer_layers)
 
@@ -59,7 +59,7 @@ stimulus.fillcolours = fillcolours
 stimulus.Show()
 
 #%% Swapping elements
-center_grid = GridPattern.RepeatElements([Rectangle], 2, 2)
+center_grid = GridPattern.RepeatAcrossElements([Rectangle], 2, 2)
 outer_layers= Pattern([Triangle, Ellipse]).RepeatElements(2)
 shapes = GridPattern.LayeredGrid(center_grid, outer_layers)
 
@@ -72,8 +72,8 @@ stimulus.swap_elements(10)
 stimulus.Show()
 
 #%% Sizes are always defined using the bounding box parameter
-source_grid_1 = GridPattern.RepeatElements([Rectangle, Triangle, Ellipse],3,3)
-source_grid_2 = GridPattern.RepeatElements([(20, 20), (30, 30), (40, 40)],3,3)
+source_grid_1 = GridPattern.RepeatAcrossElements([Rectangle, Triangle, Ellipse],3,3)
+source_grid_2 = GridPattern.RepeatAcrossElements([(20, 20), (30, 30), (40, 40)],3,3)
 
 stimulus = Grid(9,9, x_offset = 40, y_offset = 40)
 stimulus.bounding_boxes = GridPattern.TiledElementGrid(source_grid_2, 3)

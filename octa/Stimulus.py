@@ -13,7 +13,7 @@ import os
 from IPython.display import SVG, display
 
 from .Positions import Positions
-from .patterns.GridPattern import Pattern, RepeatElements
+from .patterns.GridPattern import Pattern, RepeatAcrossElements
 from .shapes.Rectangle import Rectangle
 
 class Stimulus:
@@ -303,16 +303,16 @@ class Grid(Stimulus):
                                                 x_offset = self.x_offset, y_offset = self.y_offset)
         
         # Initialize the element attributes to their default values
-        self._bounding_boxes = RepeatElements([(10, 10)], self._n_rows, self._n_cols)
-        self._orientations   = RepeatElements([0], self._n_rows, self._n_cols)
-        self._bordercolours  = RepeatElements([""], self._n_rows, self._n_cols)
-        self._borderwidths   = RepeatElements([0], self.n_rows, self.n_cols)
-        self._fillcolours    = RepeatElements(["black"], self.n_rows, self.n_cols)
-        self._shapes         = RepeatElements([Rectangle], self._n_rows, self._n_cols)
-        self._class_labels   = RepeatElements([""], self._n_rows, self._n_cols)
-        self._id_labels      = RepeatElements([""], self._n_rows, self._n_cols)
-        self._mirrors        = RepeatElements([""], self._n_rows, self._n_cols)
-        self._data           = RepeatElements([""], self._n_rows, self._n_cols)
+        self._bounding_boxes = RepeatAcrossElements([(10, 10)], self._n_rows, self._n_cols)
+        self._orientations   = RepeatAcrossElements([0], self._n_rows, self._n_cols)
+        self._bordercolours  = RepeatAcrossElements([""], self._n_rows, self._n_cols)
+        self._borderwidths   = RepeatAcrossElements([0], self.n_rows, self.n_cols)
+        self._fillcolours    = RepeatAcrossElements(["black"], self.n_rows, self.n_cols)
+        self._shapes         = RepeatAcrossElements([Rectangle], self._n_rows, self._n_cols)
+        self._class_labels   = RepeatAcrossElements([""], self._n_rows, self._n_cols)
+        self._id_labels      = RepeatAcrossElements([""], self._n_rows, self._n_cols)
+        self._mirrors        = RepeatAcrossElements([""], self._n_rows, self._n_cols)
+        self._data           = RepeatAcrossElements([""], self._n_rows, self._n_cols)
         
         # Initialize a list with element attribute overrides
         self._attribute_overrides = [dict() for _ in range(self._n_cols * self._n_rows)]
