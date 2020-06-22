@@ -95,13 +95,13 @@ class Polygon:
         return result
         
     def generate(self, dwg):
-        bb = dwg.rect(
-                insert       = (self.position[0] - self.bounding_box[0]/2, self.position[1] - self.bounding_box[1]/2),
-                size         = self.bounding_box,
-                fill         = "none",
-                stroke       = "red",
-                stroke_width = 1)
-        dwg.add(bb)
+#        bb = dwg.rect(
+#                insert       = (self.position[0] - self.bounding_box[0]/2, self.position[1] - self.bounding_box[1]/2),
+#                size         = self.bounding_box,
+#                fill         = "none",
+#                stroke       = "red",
+#                stroke_width = 1)
+#        dwg.add(bb)
         
         #return self.generate_v2(dwg)
     

@@ -54,7 +54,7 @@ stimulus = Grid(6, 6)
 stimulus.fillcolors = GridPattern.RepeatAcrossColumns(Pattern(["purple", "blue", "green"]).RepeatElements(2))
 stimulus.Show()
 
-#%% Repeat across rows
+#%% Repeat across columns
 stimulus = Grid(6, 6)
 stimulus.fillcolors = GridPattern.RepeatAcrossRows(Pattern(["purple", "blue"]).RepeatElements(3))
 stimulus.Show()
