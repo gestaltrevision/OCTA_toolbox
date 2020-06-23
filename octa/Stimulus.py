@@ -74,6 +74,20 @@ class Stimulus:
         """
         self.dwg.saveas('%s.svg'%filename , pretty = True)
         
+    def GetSVG(self):
+        """
+        Gives the current stimulus as an SVG string.
+
+        Parameters
+        ----------
+        None.
+
+        Returns
+        -------
+        String.
+
+        """
+        return self.dwg.tostring()
         
     def SaveJSON(self, filename, folder = None):
         """
@@ -125,7 +139,7 @@ class Stimulus:
    
     def GetJSON(self):
         """
-        Saves the current stimulus as a JSON file.
+        Gives the JSON info concerning the current stimulus.
 
         Parameters
         ----------
