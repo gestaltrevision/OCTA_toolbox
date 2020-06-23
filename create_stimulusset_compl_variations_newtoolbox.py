@@ -202,7 +202,7 @@ elif(pattern == "Frame"):
 ####################################
 
 ### SWITCH ELEMENTS ###
-element_switches = random.choice([1])
+element_switches = random.choice([0])
 
 stimulus_1.swap_elements(element_switches)
 stimulus_2.swap_elements(element_switches)
