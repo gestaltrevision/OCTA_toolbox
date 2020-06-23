@@ -122,7 +122,44 @@ class Stimulus:
             
         df = pd.DataFrame(self.dwg_elements, columns = ['shape', 'position', 'bounding_box', 'fillcolor', 'bordercolor', 'borderwidth', 'orientation', 'data'])
         df.to_csv(csv_filename)
-            
+   
+    def GetJSON(self):
+        """
+        Saves the current stimulus as a JSON file.
+
+        Parameters
+        ----------
+        None.
+
+        Returns
+        -------
+        JSON object.
+
+        """
+                   
+        json_data = {'stimulus' : {'width':            self.width,
+                                   'height':           self.height,
+                                   'background_color': self.background_color},
+                     'structure': {'class': str(type(self)),
+                                   'n_rows': self._n_rows,
+                                   'n_cols': self._n_cols,
+                                   'row_spacing': self.row_spacing,
+                                   'col_spacing': self.col_spacing,
+                                   'x_offset'   : self.x_offset,
+                                   'y_offset'   : self.y_offset
+                                   },
+                     'element_attributes': {
+                                   'positions'    :    jsonpickle.encode(self.positions),
+                                   'bounding_boxes' :  jsonpickle.encode(self._bounding_boxes),
+                                   'shapes'       :    jsonpickle.encode(self._shapes),
+                                   'fillcolor'     :  jsonpickle.encode(self._fillcolors),
+                                   'bordercolor'   :  jsonpickle.encode(self._bordercolors),
+                                   'orientation'  :    jsonpickle.encode(self._orientations),
+                                   'data'         :    jsonpickle.encode(self._data),
+                                   'overrides'    :    jsonpickle.encode(self._attribute_overrides),
+                                   'element_order':    jsonpickle.encode(self._element_presentation_order)}}
+        
+        return json_data            
         
     def LoadFromJSON(filename):
         """
