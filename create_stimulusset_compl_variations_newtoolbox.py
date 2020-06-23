@@ -125,9 +125,6 @@ elif(pattern == "Frame"):
     outer_layers_colors = Pattern(colors_1.pattern)
     stimulus_1.fillcolors = GridPattern.LayeredGrid(center_grid_colors, outer_layers_colors)
     
-stimulus_1.Show()
-
-
 if(pattern == "RepeatAcrossRows"):
     stimulus_2.shapes = GridPattern.RepeatAcrossColumns(Pattern(shapes_2).RepeatElements(int(stimulus_2.n_rows/len(shapes_2))))
     stimulus_2.bounding_boxes = GridPattern.RepeatAcrossColumns(Pattern(sizes_2).RepeatElements(int(stimulus_2.n_rows/len(sizes_2))))
@@ -199,7 +196,20 @@ elif(pattern == "Frame"):
     outer_layers_colors = Pattern(colors_2.pattern)
     stimulus_2.fillcolors = GridPattern.LayeredGrid(center_grid_colors, outer_layers_colors)
     
+
+####################################
+### INSERT DEVIANTS FROM PATTERN ###
+####################################
+
+### SWITCH ELEMENTS ###
+element_switches = random.choice([1])
+
+stimulus_1.swap_elements(element_switches)
+stimulus_2.swap_elements(element_switches)
+
+stimulus_1.Show()
 stimulus_2.Show()
+
 
 LOCI_1 = 0
 for i in complexity_1: 
