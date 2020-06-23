@@ -7,10 +7,17 @@ Created on Tue Apr  7 12:31:15 2020
 from octa.Stimulus import Grid, Stimulus
 from octa.patterns import GridPattern, Pattern
 from octa.shapes import Ellipse, Rectangle, Triangle, Image, Text, Polygon
+from octa.measurements import LOCE
 
 #%% Default grid
 stimulus = Grid(5,5, x_offset = 40, y_offset = 40)
 stimulus.Show()
+
+stimulus = Grid(2,2, x_offset = 40, y_offset = 40)
+stimulus.fillcolors = GridPattern.MirrorAcrossElements(["red", "green"])
+stimulus.Show()
+
+print("LOCE: ", LOCE.CalculateElementsLOCE(stimulus))
 
 #%% Adjusting grid structure dynamically
 stimulus = Grid(7, 7,  row_spacing = 50, col_spacing = 50)
