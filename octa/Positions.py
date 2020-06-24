@@ -89,9 +89,9 @@ class Positions:
                 std = kwargs['std']
             
             if 'x' in axis:
-                self._x.AddNormalJitter(mu, std)
+                self._x = self._x.AddNormalJitter(mu, std)
             if 'y' in axis:
-                self._y.AddNormalJitter(mu, std)
+                self._y = self._y.AddNormalJitter(mu, std)
                 
         if distribution == 'uniform':
             min_val = -1
@@ -103,9 +103,9 @@ class Positions:
                 max_val = kwargs['max_val']
                 
             if 'x' in axis:
-                self._x.AddUniformJitter(min_val, max_val)
+                self._x = self._x.AddUniformJitter(min_val, max_val)
             if 'y' in axis:
-                self._y.AddUniformJitter(min_val, max_val)
+                self._y = self._y.AddUniformJitter(min_val, max_val)
                 
         return self
         

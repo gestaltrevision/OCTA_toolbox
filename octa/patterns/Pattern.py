@@ -201,6 +201,7 @@ class Pattern:
 
         """
         result = []
+        print("%f %f"%(mu, std))
         for i in range(len(self.pattern)):
             result.append(self.pattern[i] + random.normalvariate(mu, std))
         
