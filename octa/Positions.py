@@ -109,7 +109,7 @@ class Positions:
                 
         return self
         
-    def Create2DGrid(n_rows, n_cols, row_spacing = 50, col_spacing= 50, x_offset = 0, y_offset = 0):
+    def Create2DGrid(n_rows, n_cols, row_spacing = 50, col_spacing= 50):
         """
         Static method for creates a 2D grid structure.
 
@@ -123,10 +123,6 @@ class Positions:
             Distance between column centers. The default is 50.
         col_spacing : int
             Distance between row centers. The default is 50.
-        x_offset : int, optional
-            x position offset for all elements. The default is 0.
-        y_offset : int, optional
-            y position offset for all elements. The default is 0.
 
         Returns
         -------
@@ -136,15 +132,15 @@ class Positions:
             All the y-coordinates.
 
         """
-        x = Pattern(list(range(x_offset, n_cols * col_spacing + (x_offset), col_spacing)))
+        x = Pattern(list(range(0, n_cols * col_spacing, col_spacing)))
         x = x.RepeatPattern(n_rows)
-        y = Pattern(list(range(y_offset, n_rows * row_spacing + (y_offset), row_spacing)))
+        y = Pattern(list(range(0, n_rows * row_spacing, row_spacing)))
         y = y.RepeatElements(n_cols)    
         
         return Positions(x, y)
         
     
-    def CreateSineGrid(n_rows, n_cols, row_spacing, col_spacing, A = 1, f = 1, axis = "x", x_offset = 0, y_offset = 0):
+    def CreateSineGrid(n_rows, n_cols, row_spacing, col_spacing, A = 1, f = 1, axis = "x"):
         """
         Creates a 2D regularly spaced grid and adds a sine wave modulation to the y-axis.
 
@@ -158,10 +154,6 @@ class Positions:
             Distance between column centers.
         col_spacing : int
             Distance between row centers.
-        x_offset : int, optional
-            x position offset for all elements. The default is 0.
-        y_offset : int, optional
-            y position offset for all elements. The default is 0.
         A : TYPE, float
             Amplitude of the modulation.
         f : TYPE, float
@@ -175,10 +167,10 @@ class Positions:
             All the y-coordinates.
 
         """
-        x = Pattern(list(range(x_offset, n_cols * col_spacing + (x_offset), col_spacing)))
+        x = Pattern(list(range(0, n_cols * col_spacing , col_spacing)))
         x = x.RepeatPattern(n_rows)
         
-        y = Pattern(list(range(y_offset, n_rows * row_spacing + (y_offset), row_spacing)))
+        y = Pattern(list(range(0, n_rows * row_spacing , row_spacing)))
         y = y.RepeatElements(n_cols)    
                 
         if axis == "x":
@@ -193,7 +185,7 @@ class Positions:
             return Positions(x + x_mod, y)
 
     
-    def CreateCircle(radius, n_elements, x_offset = 0, y_offset = 0):
+    def CreateCircle(radius, n_elements):
         """
         Generates element positions on the circumference of a regularly spaced
         circle.
@@ -204,10 +196,6 @@ class Positions:
             Radius of the circle.
         n_elements : int
             Number of elements on the circle.
-        x_offset : int, optional
-            x position offset for all elements. The default is 0.
-        y_offset : int, optional
-            y position offset for all elements. The default is 0.
 
         Returns
         -------
@@ -218,8 +206,8 @@ class Positions:
 
         """
         idx = np.deg2rad(np.linspace(0, 360, n_elements+1))
-        x   = Pattern(list( (radius * np.cos(idx)) + (x_offset))[0:n_elements])
-        y   = Pattern(list( (radius * np.sin(idx)) + (y_offset))[0:n_elements])
+        x   = Pattern(list( (radius * np.cos(idx)))[0:n_elements])
+        y   = Pattern(list( (radius * np.sin(idx)))[0:n_elements])
         
         return Positions(x, y)
     

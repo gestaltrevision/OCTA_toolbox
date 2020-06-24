@@ -46,13 +46,13 @@ class Stimulus:
             self._autosize = False
             self.width = size[0]
             self.height = size[1]
-            self.x_offset = 0
-            self.y_offset = 0
             
         self.background_color = background_color
         
         # Set initial shape parameters to zero
         self.positions   = None
+        self.x_margin = 20
+        self.y_margin = 20
 
         
         self.dwg_elements = None
@@ -117,8 +117,8 @@ class Stimulus:
                                    'n_cols': self._n_cols,
                                    'row_spacing': self.row_spacing,
                                    'col_spacing': self.col_spacing,
-                                   'x_offset'   : self.x_offset,
-                                   'y_offset'   : self.y_offset
+                                   'x_margin'   : self.x_margin,
+                                   'y_margin'   : self.y_margin
                                    },
                      'element_attributes': {
                                    'positions'    :    jsonpickle.encode(self.positions),
@@ -159,8 +159,8 @@ class Stimulus:
                                    'n_cols': self._n_cols,
                                    'row_spacing': self.row_spacing,
                                    'col_spacing': self.col_spacing,
-                                   'x_offset'   : self.x_offset,
-                                   'y_offset'   : self.y_offset
+                                   'x_margin'   : self.x_margin,
+                                   'y_margin'   : self.y_margin
                                    },
                      'element_attributes': {
                                    'positions'    :    jsonpickle.encode(self.positions),
@@ -196,7 +196,7 @@ class Stimulus:
             data = json.load(input_file)
             
             stimulus = Grid(data['structure']['n_rows'], data['structure']['n_cols'], data['structure']['row_spacing'],
-                            data['structure']['col_spacing'], data['structure']['x_offset'], data['structure']['y_offset'])
+                            data['structure']['col_spacing'], data['structure']['x_margin'], data['structure']['y_margin'])
             stimulus._positions      = jsonpickle.decode(data['element_attributes']['positions'])
             stimulus._bounding_boxes = jsonpickle.decode(data['element_attributes']['bounding_boxes'])
             stimulus._shapes         = jsonpickle.decode(data['element_attributes']['shapes'])
@@ -262,8 +262,8 @@ class Stimulus:
         
         for i in range(len(self._element_presentation_order)):
             idx = self._element_presentation_order[i]
-            x            = self.positions.x[i] + self.x_offset
-            y            = self.positions.y[i] + self.y_offset
+            x            = self.positions.x[i] + self._x_offset
+            y            = self.positions.y[i] + self._y_offset
             
             if 'bounding_box' in self._attribute_overrides[idx]:
                 bounding_box = self._attribute_overrides[idx]['bounding_box']
@@ -334,27 +334,27 @@ class Stimulus:
         if len(self.positions.x) == 0:
             return
         
-        min_width = self.positions.x[0]
-        max_width = self.positions.x[0]
-        min_height = self.positions.y[0]
-        max_height = self.positions.y[0]
+        min_x = self.positions.x[0]
+        max_x = self.positions.x[0]
+        min_y = self.positions.y[0]
+        max_y = self.positions.y[0]
         
         bounding_boxes = self.bounding_boxes
         for i in range(len(self.positions.x)):
-            if self.positions.x[i] - max(bounding_boxes[i]) < min_width:
-                min_width = self.positions.x[i] -  max(bounding_boxes[i])
-            if self.positions.x[i] +  max(bounding_boxes[i]) > max_width:
-                max_width = self.positions.x[i] +  max(bounding_boxes[i]) 
-            if self.positions.y[i] -  max(bounding_boxes[i]) < min_height: 
-                min_height = self.positions.y[i] -  max(bounding_boxes[i])
-            if self.positions.y[i] +  max(bounding_boxes[i]) > max_height: 
-                max_height = self.positions.y[i] +  max(bounding_boxes[i])
+            if self.positions.x[i] - bounding_boxes[i][0]//2 < min_x:
+                min_width = self.positions.x[i] -  bounding_boxes[i][0]//2
+            if self.positions.x[i] +  bounding_boxes[i][0]//2 > max_x:
+                max_width = self.positions.x[i] +  bounding_boxes[i][0]//2 
+            if self.positions.y[i] -  bounding_boxes[i][1]//2 < min_y: 
+                min_height = self.positions.y[i] -  bounding_boxes[i][1]//2
+            if self.positions.y[i] +  bounding_boxes[i][1]//2 > max_y: 
+                max_height = self.positions.y[i] +  bounding_boxes[i][1]//2
                 
-        self.width = abs(max_width - min_width)
-        self.height = abs(max_height - min_height)
+        self.width = abs(max_width - min_width) + self.x_margin
+        self.height = abs(max_height - min_height) + self.y_margin
         
-        self.x_offset = -min_width
-        self.y_offset = -min_height
+        self._x_offset = -min_width + (self.x_margin//2)
+        self._y_offset = -min_height + (self.y_margin//2)
         
 
     def __AddDrawingElements(self):
@@ -377,7 +377,7 @@ class Grid(Stimulus):
     _element_attributes = ["_bounding_boxes", "_orientations", "_bordercolors", "_borderwidths", "_fillcolors", "_shapes",
                           "_class_labels", "_id_labels", "_mirrors", "_data"]
     
-    def __init__(self, n_rows, n_cols, row_spacing = 50, col_spacing= 50, x_offset = 0, y_offset = 0, background_color = "white", size = None):
+    def __init__(self, n_rows, n_cols, row_spacing = 50, col_spacing= 50, background_color = "white", size = None):
         print("Grid constructor")
         super().__init__(size = size, background_color = background_color)
         
@@ -386,11 +386,8 @@ class Grid(Stimulus):
         self._n_cols = n_cols
         self.row_spacing = row_spacing
         self.col_spacing = col_spacing
-        self.x_offset = x_offset
-        self.y_offset = y_offset
         
-        self.positions = Positions.Create2DGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing,
-                                                x_offset = self.x_offset, y_offset = self.y_offset)
+        self.positions = Positions.Create2DGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing)
         
         # Initialize the element attributes to their default values
         self._bounding_boxes = RepeatAcrossElements([(45, 45)], self._n_rows, self._n_cols)
@@ -429,8 +426,7 @@ class Grid(Stimulus):
             return
         
         self._n_rows = n_rows
-        self.positions = Positions.Create2DGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing,
-                                                x_offset = self.x_offset, y_offset = self.y_offset)
+        self.positions = Positions.Create2DGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing)
         
         self._attribute_overrides = [dict() for _ in range(self._n_cols * self._n_rows)]
         self._element_presentation_order = list(range(self._n_cols * self._n_rows))
@@ -462,8 +458,7 @@ class Grid(Stimulus):
         
         self._n_cols = n_cols
         
-        self.positions = Positions.Create2DGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing,
-                                                x_offset = self.x_offset, y_offset = self.y_offset)
+        self.positions = Positions.Create2DGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing)
         
         self._attribute_overrides = [dict() for _ in range(self._n_cols * self._n_rows)]
         self._element_presentation_order = list(range(self._n_cols * self._n_rows))

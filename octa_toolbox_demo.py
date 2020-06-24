@@ -20,7 +20,9 @@ stimulus.Show()
 print("LOCE: ", LOCE.CalculateElementsLOCE(stimulus))
 
 #%% Adjusting grid structure dynamically
-stimulus = Grid(7, 7,  row_spacing = 50, col_spacing = 50)
+
+stimulus = Grid(5, 5,  row_spacing = 50, col_spacing = 50)
+
 stimulus.background_color = "lightgray"
 stimulus.shapes = GridPattern.MirrorAcrossRows([Ellipse, Rectangle, Polygon])
 stimulus.data   = GridPattern.MirrorAcrossRows(["", "", "5"])
