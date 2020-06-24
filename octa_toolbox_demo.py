@@ -26,7 +26,7 @@ stimulus = Grid(5, 5,  row_spacing = 50, col_spacing = 50)
 stimulus.background_color = "lightgray"
 stimulus.shapes = GridPattern.MirrorAcrossRows([Ellipse, Rectangle, Polygon])
 stimulus.data   = GridPattern.MirrorAcrossRows(["", "", "5"])
-stimulus.fillcolors = GridPattern.MirrorAcrossColumns(["red", "green","blue","orange"])
+stimulus.fillcolors = GridPattern.RandomPattern(["red", "green","blue","orange"], proportions = [0,0.5,.25,.25])
 stimulus.Show()
 
 

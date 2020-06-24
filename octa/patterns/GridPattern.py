@@ -851,3 +851,52 @@ class TiledElementGrid(GridPattern):
             result.extend(current_row)
             
         return GridPattern(result, self.n_rows, self.n_cols)
+    
+class RandomPattern(GridPattern):
+    """
+        The provided pattern is repeated until the length is equal to the
+        number of elements in the grid structure. The order of the elements 
+        is then randomized. A list of proportions can be provided to decide
+        how many times each element has to be repeated.
+
+        Parameters
+        ----------
+        proportions : list (optional)
+            Proportions for the random pattern.
+
+        Returns
+        -------
+        GridPattern.
+    """
+    _fixed_grid = False
+    
+    def __init__(self, pattern, n_rows = 5, n_cols = 5, proportions = None):
+        super().__init__(pattern, n_rows, n_cols)
+        self.proportions = proportions
+        
+        if proportions is not None:
+            assert len(proportions) == len(pattern), "Proportions and pattern must have same length"
+            assert sum(proportions) == 1, "Proportions must sum to one"
+        
+    def generate(self):
+        n_elements = self.n_rows * self.n_cols
+        
+        if type(self.pattern) is not Pattern:
+            p = Pattern(self.pattern)
+        else:
+            p = self.pattern
+                        
+        if self.proportions is None:
+            p = p.RepeatElementsToSize(n_elements)
+        else:
+            elements = []
+            for i in range(len(self.proportions)):
+                c = int(self.proportions[i] * n_elements)
+                elements.extend([p.pattern[i]] * c)
+                
+            p.pattern = elements
+            
+            
+        p = p.RandomizeOrder()
+        
+        return RandomPattern(p, self.n_rows, self.n_cols)
