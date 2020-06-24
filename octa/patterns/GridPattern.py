@@ -305,7 +305,7 @@ class MirrorAcrossElements(GridPattern):
         
         required_count = self.n_rows * self.n_cols
         
-        p = Pattern(self.pattern + self.pattern[:-1][::-1])
+        p = Pattern(self.pattern + self.pattern[::-1])
         current_count = len(p.pattern)
         
         p = p.RepeatPattern(1 + int(required_count/current_count), required_count)

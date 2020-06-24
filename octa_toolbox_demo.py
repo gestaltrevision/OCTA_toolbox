@@ -29,7 +29,10 @@ stimulus.data   = GridPattern.MirrorAcrossRows(["", "", "5"])
 stimulus.fillcolors = GridPattern.RandomPattern(["red", "green","blue","orange"], proportions = [0,0.5,.25,.25])
 stimulus.Show()
 
-
+#%% 
+stimulus = Grid(2,2)
+stimulus.fillcolors = GridPattern.MirrorAcrossElements(["red", "green"])
+stimulus.Show()
 
 #%% New grid structure: layered grid
 center_grid = GridPattern.RepeatAcrossElements(["red"], 2, 2)
