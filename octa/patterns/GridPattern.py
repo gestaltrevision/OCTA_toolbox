@@ -492,7 +492,7 @@ class MirrorAcrossRightDiagonal(GridPattern):
              3, 1, 1, 3, 2,
              1, 1, 3, 2, 1]
     """
-    _fixed_grid = True
+    _fixed_grid = False
     
     def generate(self):
         p = Pattern(self.pattern)
