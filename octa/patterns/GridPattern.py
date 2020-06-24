@@ -98,7 +98,7 @@ class RepeatAcrossElements(GridPattern):
         return RepeatAcrossElements(result.pattern, self.n_rows, self.n_cols)
     
     
-class RepeatAcrossRows(GridPattern):
+class RepeatAcrossColumns(GridPattern):
     """
         Repeats the provided pattern across the rows in the grid. The provided pattern is first
         either duplicated (when #elements < n_cols) or truncated (when #elements > n_cols) to fit
@@ -141,7 +141,7 @@ class RepeatAcrossRows(GridPattern):
         return RepeatAcrossRows(p, self.n_rows, self.n_cols)
         
     
-class RepeatAcrossColumns(GridPattern):
+class RepeatAcrossRows(GridPattern):
     """
         Repeats the provided pattern across the columns in the grid. The provided pattern is first
         either duplicated (when #elements < n_rows) or truncated (when #elements > n_rows) to fit
