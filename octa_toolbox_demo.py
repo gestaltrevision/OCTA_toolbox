@@ -10,9 +10,10 @@ from octa.shapes import Ellipse, Rectangle, Triangle, Image, Text, Polygon
 from octa.measurements import LOCE
 
 #%% Default grid
-stimulus = Grid(5,5, col_spacing = 50)
-stimulus.x_margin = 100
-stimulus.y_margin = 100
+stimulus = Grid(6,6)
+stimulus.x_margin = 0
+stimulus.y_margin = 0
+stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(50,50), (10, 10)])
 stimulus.Show()
 
 #%%
