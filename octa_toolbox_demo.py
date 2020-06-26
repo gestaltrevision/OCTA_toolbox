@@ -24,7 +24,7 @@ stimulus.Show()
 print("LOCE: ", LOCE.CalculateElementsLOCE(stimulus))
 
 #%% Size parameter
-stimulus = Grid(7,6, background_color = "gray", size = (200, 200))
+stimulus = Grid(7,6, background_color = "gray", size = (350, 350), x_margin = 23, y_margin = 10)
 stimulus.shapes = GridPattern.MirrorAcrossColumns([Rectangle, Triangle])
 stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([ (24, 24), (46, 30)])
 stimulus.Show()

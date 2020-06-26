@@ -930,12 +930,11 @@ class Grid(Stimulus):
             for j in range(i+1, n_elements):
                 if element_fingerprints[i] != element_fingerprints[j]:
                     candidate_swap_positions.add((i,j))
-        print("Found %d valid swap positions"%len(candidate_swap_positions))
-        assert len(candidate_swap_positions) >= n_swap_pairs, "Stimulus configurations allows maximum %d distinct swaps"%len(candidate_swap_positions)
         
         # 2. Select the required number of swap positions
         selected_swap_pairs = []
         for i in range(n_swap_pairs):
+            assert len(candidate_swap_positions) > 0, "Distinct swaps exhausted, try again with a lower number of pairs"
             selected_pair = random.sample(candidate_swap_positions, 1)[0]
             selected_swap_pairs.append(selected_pair)
             
