@@ -23,14 +23,11 @@ stimulus.Show()
 
 print("LOCE: ", LOCE.CalculateElementsLOCE(stimulus))
 
-#%% Error for random pattern
-stimulus = Grid(5, 5,  row_spacing = 50, col_spacing = 50)
-stimulus.background_color = "lightgray"
-stimulus.shapes = GridPattern.MirrorAcrossRows([Ellipse, Rectangle, Polygon])
-stimulus.data   = GridPattern.MirrorAcrossRows(["", "", "5"])
-stimulus.fillcolors = GridPattern.RandomPattern(["red", "green","blue","orange"], counts = [0, 10, 5, 10])
+#%% Size parameter
+stimulus = Grid(7,6, background_color = "gray", size = (200, 200))
+stimulus.shapes = GridPattern.MirrorAcrossColumns([Rectangle, Triangle])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([ (24, 24), (46, 30)])
 stimulus.Show()
-
 
 #%% MirrorAcrossElements
 stimulus = Grid(5,2)

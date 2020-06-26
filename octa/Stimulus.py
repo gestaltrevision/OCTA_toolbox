@@ -21,7 +21,7 @@ class Stimulus:
     
     """
     
-    def __init__(self, size = None, background_color = "white"):
+    def __init__(self, size = None, background_color = "white", x_margin = 20, y_margin = 20):
         """
         Instantiates a stimulus object.
 
@@ -51,8 +51,8 @@ class Stimulus:
         
         # Set initial shape parameters to zero
         self.positions   = None
-        self.x_margin = 20
-        self.y_margin = 20
+        self.x_margin = x_margin
+        self.y_margin = y_margin
 
         
         self.dwg_elements = None
@@ -328,9 +328,36 @@ class Stimulus:
         self.dwg.add(self.background)  
         
         
+    @property
+    def x_margin(self):
+        return self._x_margin
+    
+    @x_margin.setter
+    def x_margin(self, x_margin):
+        if type(x_margin) == int or type(x_margin) == float:
+            self._x_margin = (x_margin, x_margin)
+        elif type(x_margin) == list or type(x_margin) == tuple:
+            if len(x_margin) == 2:
+                self._x_margin = x_margin
+                
+    @property
+    def y_margin(self):
+        return self._y_margin
+    
+    @y_margin.setter
+    def y_margin(self, y_margin):
+        if type(y_margin) == int or type(y_margin) == float:
+            self._y_margin = (y_margin, y_margin)
+        elif type(y_margin) == list or type(y_margin) == tuple:
+            if len(y_margin) == 2:
+                self._y_margin = y_margin
+        
     def __AutoCalculateSize(self):
         if not self._autosize:
+            self._x_offset = 0 + self.x_margin[0]
+            self._y_offset = 0 + self.y_margin[0]
             return
+        
         if len(self.positions.x) == 0:
             return
         
@@ -355,20 +382,23 @@ class Stimulus:
         # max_height = max_position_y + max_bounding_box_y//2
         
         for i in range(len(self.positions.x)):
-            if self.positions.x[i] - bounding_boxes[i][0]//2 < min_x:
-                min_width = self.positions.x[i] -  bounding_boxes[i][0]//2
-            if self.positions.x[i] +  bounding_boxes[i][0]//2 > max_x:
-                max_width = self.positions.x[i] +  bounding_boxes[i][0]//2 
-            if self.positions.y[i] -  bounding_boxes[i][1]//2 < min_y: 
-                min_height = self.positions.y[i] -  bounding_boxes[i][1]//2
-            if self.positions.y[i] +  bounding_boxes[i][1]//2 > max_y: 
-                max_height = self.positions.y[i] +  bounding_boxes[i][1]//2
+            if (self.positions.x[i] - bounding_boxes[i][0]//2) < min_x:
+                print(self.positions.x[i] -  bounding_boxes[i][0]//2)
+                min_x = self.positions.x[i] -  bounding_boxes[i][0]//2
+            if (self.positions.x[i] +  bounding_boxes[i][0]//2) > max_x:
+                max_x = self.positions.x[i] +  bounding_boxes[i][0]//2 
                 
-        self.width = abs(max_width - min_width) + self.x_margin
-        self.height = abs(max_height - min_height) + self.y_margin
+            if (self.positions.y[i] -  bounding_boxes[i][1]//2) < min_y: 
+                min_y = self.positions.y[i] -  bounding_boxes[i][1]//2
+            if (self.positions.y[i] +  bounding_boxes[i][1]//2) > max_y: 
+                max_y = self.positions.y[i] +  bounding_boxes[i][1]//2
+                
+        self.width = abs(max_x - min_x) + sum(self.x_margin)
+        self.height = abs(max_y - min_y) + sum(self.y_margin)
         
-        self._x_offset = -min_width + (self.x_margin//2)
-        self._y_offset = -min_height + (self.y_margin//2)
+        print("min width: %f, max_width: %f"%(min_x, min_y))
+        self._x_offset = -min_x + self.x_margin[0]
+        self._y_offset = -min_y + self.y_margin[0]
         
 
     def __AddDrawingElements(self):
@@ -391,9 +421,9 @@ class Grid(Stimulus):
     _element_attributes = ["_bounding_boxes", "_orientations", "_bordercolors", "_borderwidths", "_fillcolors", "_shapes",
                           "_class_labels", "_id_labels", "_mirrors", "_data"]
     
-    def __init__(self, n_rows, n_cols, row_spacing = 50, col_spacing= 50, background_color = "white", size = None):
+    def __init__(self, n_rows, n_cols, row_spacing = 50, col_spacing= 50, background_color = "white", size = None, x_margin = 20, y_margin = 20):
         # print("Grid constructor")
-        super().__init__(size = size, background_color = background_color)
+        super().__init__(size = size, background_color = background_color, x_margin = x_margin, y_margin = y_margin)
         
         # Initialize the positions of each element
         self._n_rows = n_rows
