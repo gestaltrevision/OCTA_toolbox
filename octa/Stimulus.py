@@ -836,11 +836,6 @@ class Grid(Stimulus):
             Number of element pairs that will be swapped. Maximum value
             is half the total number of elements
 
-        Returns
-        -------
-        Pattern:
-            New Pattern object instance
-
         """
         n_elements = self._n_rows * self._n_cols
         assert n_elements >= n_swap_pairs * 2, 'Maximal number of swaps possible is %d, but %d were requested'%(len(self.pattern)//2, n_swap_pairs)
@@ -855,7 +850,63 @@ class Grid(Stimulus):
         selected_swap_pairs = []
         for i in range(n_swap_pairs):
             selected_pair = random.sample(candidate_swap_positions, 1)[0]
-            print(selected_pair)
+            selected_swap_pairs.append(selected_pair)
+            
+            removable_positions = set()
+            for p in candidate_swap_positions:
+                if selected_pair[0] in p or selected_pair[1] in p:
+                    removable_positions.add(p)
+                    
+            candidate_swap_positions.difference_update(removable_positions)
+            
+        # 3. Perform the swap
+        for swap_pair in selected_swap_pairs:
+            self._element_presentation_order[swap_pair[0]], self._element_presentation_order[swap_pair[1]] = self._element_presentation_order[swap_pair[1]], self._element_presentation_order[swap_pair[0]]
+            
+            
+    def swap_distinct_elements(self, n_swap_pairs = 1, distinction_features = ['shapes', 'bounding_boxes', 'fillcolors', 'orientations', 'data']):
+        """
+        Swaps the position of two elements in the pattern. The elements that
+        wil be swapped need to be distinct on at least one element feature
+        dimension specified in the distinction_features argument. Once 
+        an element is used in a swap, it will not be used in subsequent swaps.
+        
+        
+        Parameters
+        ----------
+        n_swap_pairs: int 
+            Number of element pairs that will be swapped. 
+        distinction_features: list
+            Feature dimensions that will be inspected to decide if two elements
+            are the same.
+
+        """
+        
+        # 0. Create a list of unique fingerprints for each element
+        features = dict()
+        for f in distinction_features:
+            features[f] = getattr(self, f)
+        
+        element_fingerprints = []
+        for idx in range(self.n_cols * self.n_rows):
+            fingerprint = "|".join([str(features[f][idx]) for f in distinction_features])
+            element_fingerprints.append(fingerprint)
+            
+        # 1. Generate all available swap positions
+        n_elements = self.n_rows * self.n_cols
+        
+        candidate_swap_positions = set()
+        for i in range(n_elements):
+            for j in range(i+1, n_elements):
+                if element_fingerprints[i] != element_fingerprints[j]:
+                    candidate_swap_positions.add((i,j))
+        print("Found %d valid swap positions"%len(candidate_swap_positions))
+        assert len(candidate_swap_positions) >= n_swap_pairs, "Stimulus configurations allows maximum %d distinct swaps"%len(candidate_swap_positions)
+        
+        # 2. Select the required number of swap positions
+        selected_swap_pairs = []
+        for i in range(n_swap_pairs):
+            selected_pair = random.sample(candidate_swap_positions, 1)[0]
             selected_swap_pairs.append(selected_pair)
             
             removable_positions = set()

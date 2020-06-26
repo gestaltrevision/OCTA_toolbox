@@ -11,10 +11,8 @@ from octa.patterns import GridPattern, Pattern
 
 #%% Default pattern
 stimulus = Grid(6, 6)
-stimulus.positions.JitterLocations(axis="x", distribution = "normal", mu = 0, std = 2)
-stimulus.positions.JitterLocations(axis="y", distribution = "uniform", min_val = 0, max_val = 5)
-stimulus.x_margin = 40
-stimulus.y_margin = 40
+stimulus.fillcolors = GridPattern.RepeatAcrossRows(["red", "green","blue"])
+stimulus.swap_distinct_elements(10)
 stimulus.Show()
 
 #%% Mirror across columns
