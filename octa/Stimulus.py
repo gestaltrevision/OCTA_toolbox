@@ -340,6 +340,20 @@ class Stimulus:
         max_y = self.positions.y[0]
         
         bounding_boxes = self.bounding_boxes
+        # min_position_x = min(self.positions.x)
+        # max_position_x = max(self.positions.x)
+        # min_position_y = min(self.positions.y)
+        # max_position_y = max(self.positions.y)
+        
+        # max_bounding_box_x = max(list(list(zip(*bounding_boxes))[0]))
+        # max_bounding_box_y = max(list(list(zip(*bounding_boxes))[1]))
+        
+        # min_width = min_position_x - max_bounding_box_x//2
+        # max_width = max_position_x + max_bounding_box_x//2
+        
+        # min_height = min_position_y - max_bounding_box_y//2
+        # max_height = max_position_y + max_bounding_box_y//2
+        
         for i in range(len(self.positions.x)):
             if self.positions.x[i] - bounding_boxes[i][0]//2 < min_x:
                 min_width = self.positions.x[i] -  bounding_boxes[i][0]//2
