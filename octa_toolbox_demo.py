@@ -10,7 +10,8 @@ from octa.shapes import Ellipse, Rectangle, Triangle, Image, Text, Polygon
 from octa.measurements import LOCE
 
 #%% Default grid
-stimulus = Grid(6,6)
+stimulus = Grid(6,6, background_color = "gray")
+stimulus._autosize_method = "maximum_bounding_box"
 stimulus.x_margin = 0
 stimulus.y_margin = 0
 stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(50,50), (10, 10)])
