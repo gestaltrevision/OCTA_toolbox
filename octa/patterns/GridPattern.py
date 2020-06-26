@@ -870,13 +870,13 @@ class RandomPattern(GridPattern):
     """
     _fixed_grid = False
     
-    def __init__(self, pattern, n_rows = 5, n_cols = 5, proportions = None):
+    def __init__(self, pattern, n_rows = 5, n_cols = 5, counts = None):
         super().__init__(pattern, n_rows, n_cols)
-        self.proportions = proportions
+        self.counts = counts
         
-        if proportions is not None:
-            assert len(proportions) == len(pattern), "Proportions and pattern must have same length"
-            assert sum(proportions) == 1, "Proportions must sum to one"
+        if counts is not None:
+            assert len(counts) == len(pattern), "Count and pattern must have same length"
+            assert sum(counts) == self.n_rows * self.n_cols, "Counts must sum to pattern length"
         
     def generate(self):
         n_elements = self.n_rows * self.n_cols
@@ -886,13 +886,12 @@ class RandomPattern(GridPattern):
         else:
             p = self.pattern
                         
-        if self.proportions is None:
+        if self.counts is None:
             p = p.RepeatElementsToSize(n_elements)
         else:
             elements = []
-            for i in range(len(self.proportions)):
-                c = int(self.proportions[i] * n_elements)
-                elements.extend([p.pattern[i]] * c)
+            for i in range(len(self.counts)):
+                elements.extend([p.pattern[i]] * self.counts[i])
                 
             p.pattern = elements
             
