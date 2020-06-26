@@ -11,7 +11,8 @@ from octa.patterns import GridPattern, Pattern
 
 #%% Default pattern
 stimulus = Grid(6, 6)
-stimulus.positions.JitterLocations(axis="xy", distribution = "normal", mu = 10, std = 10)
+stimulus.positions.JitterLocations(axis="x", distribution = "normal", mu = 0, std = 2)
+stimulus.positions.JitterLocations(axis="y", distribution = "uniform", min_val = 0, max_val = 5)
 stimulus.x_margin = 40
 stimulus.y_margin = 40
 stimulus.Show()
@@ -32,6 +33,21 @@ stimulus.Show()
 stimulus.fillcolors = GridPattern.MirrorAcrossRows(["purple", "blue", "green"])
 stimulus.Show()
 
+#%% Mirror across leftdiagonal
+stimulus = Grid(3, 6)
+stimulus.fillcolors = GridPattern.MirrorAcrossLeftDiagonal(["purple", "blue"])
+stimulus.Show()
+
+stimulus.fillcolors = GridPattern.MirrorAcrossLeftDiagonal(["purple", "blue", "green"])
+stimulus.Show()
+#%% Mirror across rightdiagonal
+stimulus = Grid(3, 6)
+stimulus.fillcolors = GridPattern.MirrorAcrossRightDiagonal(["purple", "blue"])
+stimulus.Show()
+
+stimulus.fillcolors = GridPattern.MirrorAcrossRightDiagonal(["purple", "blue", "green"])
+stimulus.Show()
+
 #%% Alternate rows
 stimulus = Grid(6, 6)
 stimulus.fillcolors = GridPattern.RepeatAcrossRows(["purple", "blue"])
@@ -48,7 +64,32 @@ stimulus.Show()
 stimulus.fillcolors = GridPattern.RepeatAcrossColumns(["purple", "blue", "green"])
 stimulus.Show()
 
+#%% Alternate across leftdiagonal
+stimulus = Grid(3, 6)
+stimulus.fillcolors = GridPattern.RepeatAcrossLeftDiagonal(["purple", "blue"])
+stimulus.Show()
+
+stimulus.fillcolors = GridPattern.RepeatAcrossLeftDiagonal(["purple", "blue", "green"])
+stimulus.Show()
+
+#%% Alternate across rightdiagonal
+stimulus = Grid(3, 6)
+stimulus.fillcolors = GridPattern.RepeatAcrossRightDiagonal(["purple", "blue"])
+stimulus.Show()
+
+stimulus.fillcolors = GridPattern.RepeatAcrossRightDiagonal(["purple", "blue", "green"])
+stimulus.Show()
+
 #%% Repeat across rows
+stimulus = Grid(6, 6)
+stimulus.fillcolors = GridPattern.RepeatAcrossRows(Pattern(["purple", "blue"]).RepeatElements(3))
+stimulus.Show()
+
+stimulus = Grid(6, 6)
+stimulus.fillcolors = GridPattern.RepeatAcrossRows(Pattern(["purple", "blue", "green"]).RepeatElements(2))
+stimulus.Show()
+
+#%% Repeat across columns
 stimulus = Grid(6, 6)
 stimulus.fillcolors = GridPattern.RepeatAcrossColumns(Pattern(["purple", "blue"]).RepeatElements(3))
 stimulus.Show()
@@ -57,13 +98,22 @@ stimulus = Grid(6, 6)
 stimulus.fillcolors = GridPattern.RepeatAcrossColumns(Pattern(["purple", "blue", "green"]).RepeatElements(2))
 stimulus.Show()
 
-#%% Repeat across columns
+#%% Repeat across leftdiagonal
 stimulus = Grid(6, 6)
-stimulus.fillcolors = GridPattern.RepeatAcrossRows(Pattern(["purple", "blue"]).RepeatElements(3))
+stimulus.fillcolors = GridPattern.RepeatAcrossLeftDiagonal(Pattern(["purple", "blue"]).RepeatElements(3))
 stimulus.Show()
 
 stimulus = Grid(6, 6)
-stimulus.fillcolors = GridPattern.RepeatAcrossRows(Pattern(["purple", "blue", "green"]).RepeatElements(2))
+stimulus.fillcolors = GridPattern.RepeatAcrossLeftDiagonal(Pattern(["purple", "blue", "green"]).RepeatElements(2))
+stimulus.Show()
+
+#%% Repeat across rightdiagonal
+stimulus = Grid(6, 6)
+stimulus.fillcolors = GridPattern.RepeatAcrossRightDiagonal(Pattern(["purple", "blue"]).RepeatElements(3))
+stimulus.Show()
+
+stimulus = Grid(6, 6)
+stimulus.fillcolors = GridPattern.RepeatAcrossRightDiagonal(Pattern(["purple", "blue", "green"]).RepeatElements(2))
 stimulus.Show()
 
 #%% Subgroups

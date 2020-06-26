@@ -39,7 +39,7 @@ class Stimulus:
         None.
 
         """
-        print("ping")
+        # print("ping")
         if size == None:
             self._autosize = True
         else:
@@ -378,7 +378,7 @@ class Grid(Stimulus):
                           "_class_labels", "_id_labels", "_mirrors", "_data"]
     
     def __init__(self, n_rows, n_cols, row_spacing = 50, col_spacing= 50, background_color = "white", size = None):
-        print("Grid constructor")
+        # print("Grid constructor")
         super().__init__(size = size, background_color = background_color)
         
         # Initialize the positions of each element
