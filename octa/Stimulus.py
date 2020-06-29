@@ -54,7 +54,7 @@ class Stimulus:
         self.x_margin = x_margin
         self.y_margin = y_margin
 
-        self._autosize_method = "tight_fit" # can be 'tight_fit' or 'maximum_bounding_box'
+        self._autosize_method = "maximum_bounding_box" # can be 'tight_fit' or 'maximum_bounding_box'
         
         self.dwg_elements = None
         self.dwg = None
@@ -400,7 +400,7 @@ class Stimulus:
         self.width = abs(max_x - min_x) + sum(self.x_margin)
         self.height = abs(max_y - min_y) + sum(self.y_margin)
         
-        print("min width: %f, max_width: %f"%(min_x, min_y))
+        # print("min width: %f, max_width: %f"%(min_x, min_y))
         self._x_offset = -min_x + self.x_margin[0]
         self._y_offset = -min_y + self.y_margin[0]
         

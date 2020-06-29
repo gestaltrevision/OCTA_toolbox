@@ -301,14 +301,32 @@ class MirrorAcrossElements(GridPattern):
         """
     _fixed_grid = False
     
+#    def generate(self):
+#        
+#        required_count = self.n_rows * self.n_cols
+#        
+#        p = Pattern(self.pattern + self.pattern[::-1])
+#        current_count = len(p.pattern)
+#        
+#        p = p.RepeatPattern(1 + int(required_count/current_count), required_count)
+#        
+#        return MirrorAcrossElements(p, self.n_rows, self.n_cols)
+    
     def generate(self):
-        
+        p = Pattern(self.pattern)
         required_count = self.n_rows * self.n_cols
         
-        p = Pattern(self.pattern + self.pattern[::-1])
-        current_count = len(p.pattern)
+        if len(p.pattern) < int(required_count/2) + 1:
+            p = p.RepeatPattern(int(required_count/2) + 1)
         
-        p = p.RepeatPattern(1 + int(required_count/current_count), required_count)
+        if required_count%2 == 0:
+            m1 = p.pattern[:int(required_count/2)]
+            m2 = m1[::-1]
+            p.pattern = m1 + m2
+        else:
+            m1 = p.pattern[:int((required_count+1)/2)]
+            m2 = m1[::-1]
+            p.pattern = m1 + m2[1:]
         
         return MirrorAcrossElements(p, self.n_rows, self.n_cols)
     

@@ -10,16 +10,17 @@ from octa.shapes import Ellipse, Rectangle, Triangle, Image, Text, Polygon
 from octa.measurements import LOCE
 
 #%% Default grid
-stimulus = Grid(6,6, background_color = "gray")
+stimulus = Grid(6,6, background_color = "lightgrey", x_margin = 0, y_margin = 0)
 stimulus._autosize_method = "maximum_bounding_box"
-stimulus.x_margin = 0
-stimulus.y_margin = 0
-stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(50,50), (10, 10)])
+#stimulus._autosize_method = "tight_fit"
+stimulus.bounding_boxes = GridPattern.MirrorAcrossRows([(50,50), (10,10)])
+stimulus.swap_distinct_elements(n_swap_pairs = 5)
+
 stimulus.Show()
 
 #%%
-stimulus = Grid(2,2)
-stimulus.fillcolors = GridPattern.MirrorAcrossElements(["red", "green"])
+stimulus = Grid(5,2)
+stimulus.fillcolors = GridPattern.MirrorAcrossElements(["red", "green", "blue"])
 stimulus.Show()
 
 print("LOCE: ", LOCE.CalculateElementsLOCE(stimulus))
@@ -36,7 +37,7 @@ stimulus.fillcolors = GridPattern.MirrorAcrossElements(["red", "green"])
 stimulus.Show()
 
 #%% Request list of pattern values
-stimulus.shapes.generate().pattern
+#stimulus.shapes.generate().pattern
 
 
 #%% Adjusting grid structure dynamically
@@ -46,7 +47,7 @@ stimulus = Grid(5, 5,  row_spacing = 50, col_spacing = 50)
 stimulus.background_color = "lightgrey"
 stimulus.shapes = GridPattern.MirrorAcrossRows([Ellipse, Rectangle, Polygon])
 stimulus.data   = GridPattern.MirrorAcrossRows(["", "", "5"])
-# stimulus.fillcolors = GridPattern.RandomPattern(["red", "green","blue","orange"], proportions = [0,0.5,.25,.25])
+stimulus.fillcolors = GridPattern.RandomPattern(["red", "green","blue","orange"], counts = [5,5,10,5])
 stimulus.Show()
 
 #%% 
