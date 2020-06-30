@@ -202,10 +202,14 @@ elif(pattern == "Frame"):
 ####################################
 
 ### SWITCH ELEMENTS ###
-element_switches = random.choice([0])
+if((complexity_1 != [1,1,1]) & (complexity_2 != [1,1,1])):
+    element_switches = random.choice([0,1,2])
+else:
+    element_switches = 0
 
-stimulus_1.swap_elements(element_switches)
-stimulus_2.swap_elements(element_switches)
+stimulus_1.swap_distinct_elements(element_switches, distinction_features = ['shapes', 'bounding_boxes', 'fillcolors'])
+newpresentationorder_1 = stimulus_1._element_presentation_order
+stimulus_2._element_presentation_order = newpresentationorder_1
 
 stimulus_1.Show()
 stimulus_2.Show()
