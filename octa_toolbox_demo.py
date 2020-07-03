@@ -12,11 +12,10 @@ from octa.measurements import LOCE
 #%% Default grid
 stimulus = Grid(6,6, background_color = "lightgrey", x_margin = 0, y_margin = 0)
 stimulus._autosize_method = "maximum_bounding_box"
-#stimulus._autosize_method = "tight_fit"
-stimulus.bounding_boxes = GridPattern.MirrorAcrossRows([(50,50), (10,10)])
-stimulus.swap_distinct_elements(n_swap_pairs = 5)
-
+stimulus.bounding_boxes = GridPattern.RandomPattern([(50,50), (10,10)], counts = [18,18])
 stimulus.Show()
+
+
 
 #%%
 stimulus = Grid(5,2)

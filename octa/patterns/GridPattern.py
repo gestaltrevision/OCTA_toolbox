@@ -891,13 +891,15 @@ class RandomPattern(GridPattern):
     def __init__(self, pattern, n_rows = 5, n_cols = 5, counts = None):
         super().__init__(pattern, n_rows, n_cols)
         self.counts = counts
-        
-        if counts is not None:
-            assert len(counts) == len(pattern), "Count and pattern must have same length"
-            assert sum(counts) == self.n_rows * self.n_cols, "Counts must sum to pattern length"
-        
+                
+    def check_counts(self):
+        if self.counts is not None:
+            assert len(self.counts) == len(self.pattern), "Count and pattern must have same length"
+            assert sum(self.counts) == self.n_rows * self.n_cols, "Counts must sum to pattern length"
+            
     def generate(self):
         n_elements = self.n_rows * self.n_cols
+        self.check_counts()
         
         if type(self.pattern) is not Pattern:
             p = Pattern(self.pattern)
