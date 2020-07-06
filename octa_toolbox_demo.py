@@ -9,13 +9,26 @@ from octa.patterns import GridPattern, Pattern
 from octa.shapes import Ellipse, Rectangle, Triangle, Image, Text, Polygon
 from octa.measurements import LOCE
 
+#%%
+def rgb2hex(r,g,b):
+    return "#{:02x}{:02x}{:02x}".format(round(r*255),round(g*255),round(b*255))
+
 #%% Default grid
 stimulus = Grid(6,6, background_color = "lightgrey", x_margin = 0, y_margin = 0)
 stimulus._autosize_method = "maximum_bounding_box"
 stimulus.bounding_boxes = GridPattern.RandomPattern([(50,50), (10,10)], counts = [18,18])
 stimulus.Show()
 
+#%% RGB colors
+stimulus = Grid(6,6, background_color = "white", x_margin = 0, y_margin = 0)
+stimulus._autosize_method = "maximum_bounding_box"
+#stimulus._autosize_method = "tight_fit"
+stimulus.bounding_boxes = GridPattern.MirrorAcrossRows([(50,50)])
 
+stimulus.fillcolors = GridPattern.MirrorAcrossRows([rgb2hex(0.30294,0.78057,0.90983)])
+stimulus.fillcolors = GridPattern.MirrorAcrossRows(['#1C3D61','#5E78A1','#A0BAE6'])
+
+stimulus.Show()
 
 #%%
 stimulus = Grid(5,2)
