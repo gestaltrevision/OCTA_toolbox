@@ -270,7 +270,8 @@ class RepeatAcrossLeftDiagonal(GridPattern):
     
 class MirrorAcrossElements(GridPattern):
     """
-        Repeats the input pattern until there are as many elements as h
+        Repeats the input pattern until there are as many elements as half the 
+        number of elements in the grid. This pattern
 
         Returns
         -------
@@ -287,28 +288,17 @@ class MirrorAcrossElements(GridPattern):
             4
             
         result:
-            (after mirroring)
-            [1, 2, 3, 2, 1]
+            (after repetition)
+            [1, 2, 3, 1, 2, 3, 1, 2]
             (after repeating to fit in the grid)
-            [1, 2, 3, 2,
-             1, 1, 2, 3,
-             2, 1, 1, 2,
-             3, 2, 1, 1]
+            [1, 2, 3, 1,
+             2, 3, 1, 2,
+             2, 1, 3, 2,
+             1, 3, 2, 1]
 
         """
     _fixed_grid = False
-    
-#    def generate(self):
-#        
-#        required_count = self.n_rows * self.n_cols
-#        
-#        p = Pattern(self.pattern + self.pattern[::-1])
-#        current_count = len(p.pattern)
-#        
-#        p = p.RepeatPattern(1 + int(required_count/current_count), required_count)
-#        
-#        return MirrorAcrossElements(p, self.n_rows, self.n_cols)
-    
+        
     def generate(self):
         p = Pattern(self.pattern)
         required_count = self.n_rows * self.n_cols
