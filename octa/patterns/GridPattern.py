@@ -270,10 +270,7 @@ class RepeatAcrossLeftDiagonal(GridPattern):
     
 class MirrorAcrossElements(GridPattern):
     """
-        Extends the current pattern by mirroring all the existing elements. This new pattern is then
-        repeated until the number of elements equals the number of elements in the corresponding grid,
-        optionally truncating if the number of elements after a repetition exceeds the number of 
-        elements in the grid.
+        Repeats the input pattern until there are as many elements as h
 
         Returns
         -------
