@@ -7,11 +7,11 @@ Created on Mon Apr  6 16:02:30 2020
 
 from math import sin, cos, pi, radians
 
-class Polygon:
+class RegularPolygon:
     parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror', 'data']
     
     def __init__(self, **kwargs):
-        for p in Polygon.parameters:
+        for p in RegularPolygon.parameters:
             set_method = getattr(self, 'set_%s'%p)
             if p in kwargs:
                 set_method(kwargs[p])
@@ -89,24 +89,33 @@ class Polygon:
 
     def __str__(self):
         result = "Rectangle object with params:\n"
-        for p in Polygon.parameters:
+        for p in RegularPolygon.parameters:
             result += "%s: %s\n"%(p, getattr(self,p))
             
         return result
         
-    def generate(self, dwg):    
+    def generate(self, dwg):
         transform_string = "rotate(%d, %d, %d)"%(self.orientation, self.position[0], self.position[1])
         
+#        bb = dwg.rect(
+#                insert       = (self.position[0] - self.bounding_box[0]/2, self.position[1] - self.bounding_box[1]/2),
+#                size         = self.bounding_box,
+#                fill         = "none",
+#                stroke       = "red",
+#                stroke_width = 1)
+#        dwg.add(bb)
+            
         
+        
+        points = []
         n_sides = int(self.data)
         
-        r = 1
+        r = min(self.bounding_box)/2
         
         # Initial pass for calculating offset parameters
-        points = []
         for i in range(n_sides):
-            x = self.position[0] + r * sin((i*2*pi/n_sides) + pi + radians(self.orientation))
-            y = self.position[1] + r * cos((i*2*pi/n_sides) + pi + radians(self.orientation))
+            x = self.position[0] + r * sin((i*2*pi/n_sides) + pi - radians(self.orientation))
+            y = self.position[1] + r * cos((i*2*pi/n_sides) + pi - radians(self.orientation))
             points.append((x, y))
         
         min_x = min([p[0] for p in points])
@@ -117,20 +126,14 @@ class Polygon:
         x_center = (min_x + max_x) / 2
         y_center = (min_y + max_y) / 2
         
-        x_height = max_x - min_x
-        y_height = max_y - min_y
-        
         x_offset = self.position[0] - x_center
         y_offset = self.position[1] - y_center
         
-        x_scaling = (1/(x_height/2))*(self.bounding_box[0]/2)
-        y_scaling = (1/(y_height/2))*(self.bounding_box[1]/2)
-        
-        # Second pass centering
+        # Second pass for generating offset parameters
         points = []
         for i in range(n_sides):
-            x = self.position[0] + x_scaling * (sin((i*2*pi/n_sides) + radians(self.orientation) + pi) + x_offset)
-            y = self.position[1] + y_scaling * (cos((i*2*pi/n_sides) + radians(self.orientation) + pi) + y_offset)
+            x = self.position[0] + r * sin((i*2*pi/n_sides) + pi - radians(self.orientation)) + x_offset
+            y = self.position[1] + r * cos((i*2*pi/n_sides) + pi - radians(self.orientation)) + y_offset
             points.append((x, y))
         
         svg = dwg.polygon(
@@ -141,6 +144,8 @@ class Polygon:
         
         return svg
     
+
+    
 if __name__ == '__main__':
-    c = Polygon(x = 3, y = 4, size = 10,  color = "blue", orientation = 30)
+    c = RegularPolygon(x = 3, y = 4, size = 10,  color = "blue", orientation = 30)
     print(c)

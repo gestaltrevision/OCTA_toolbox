@@ -11,4 +11,5 @@ from octa.shapes.Ellipse import Ellipse
 from octa.shapes.Triangle import Triangle
 from octa.shapes.Text import Text
 from octa.shapes.Image import Image
+from octa.shapes.RegularPolygon import RegularPolygon
 from octa.shapes.Polygon import Polygon
