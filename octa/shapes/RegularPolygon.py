@@ -106,16 +106,15 @@ class RegularPolygon:
 #        dwg.add(bb)
             
         
-        
-        points = []
         n_sides = int(self.data)
         
-        r = min(self.bounding_box)/2
+        r = 1
         
         # Initial pass for calculating offset parameters
+        points = []
         for i in range(n_sides):
-            x = self.position[0] + r * sin((i*2*pi/n_sides) + pi - radians(self.orientation))
-            y = self.position[1] + r * cos((i*2*pi/n_sides) + pi - radians(self.orientation))
+            x = self.position[0] + r * sin((i*2*pi/n_sides) + pi) 
+            y = self.position[1] + r * cos((i*2*pi/n_sides) + pi) 
             points.append((x, y))
         
         min_x = min([p[0] for p in points])
@@ -126,21 +125,30 @@ class RegularPolygon:
         x_center = (min_x + max_x) / 2
         y_center = (min_y + max_y) / 2
         
+        x_height = max_x - min_x
+        y_height = max_y - min_y
+        
         x_offset = self.position[0] - x_center
         y_offset = self.position[1] - y_center
         
-        # Second pass for generating offset parameters
+        x_scaling = (1/(x_height/2))*(self.bounding_box[0]/2)
+        y_scaling = (1/(y_height/2))*(self.bounding_box[1]/2)
+        
+        scaling = min([x_scaling, y_scaling])
+        
+        # Second pass centering
         points = []
         for i in range(n_sides):
-            x = self.position[0] + r * sin((i*2*pi/n_sides) + pi - radians(self.orientation)) + x_offset
-            y = self.position[1] + r * cos((i*2*pi/n_sides) + pi - radians(self.orientation)) + y_offset
+            x = self.position[0] + scaling * (sin((i*2*pi/n_sides) + pi) + x_offset)
+            y = self.position[1] + scaling * (cos((i*2*pi/n_sides) + pi) + y_offset)
             points.append((x, y))
         
         svg = dwg.polygon(
                 points       = points,
                 fill         = self.fillcolor,
                 stroke       = self.bordercolor,
-                stroke_width = self.borderwidth)
+                stroke_width = self.borderwidth,
+                transform    = transform_string)
         
         return svg
     

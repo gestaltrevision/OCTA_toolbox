@@ -105,8 +105,8 @@ class Polygon:
         # Initial pass for calculating offset parameters
         points = []
         for i in range(n_sides):
-            x = self.position[0] + r * sin((i*2*pi/n_sides) + pi + radians(self.orientation))
-            y = self.position[1] + r * cos((i*2*pi/n_sides) + pi + radians(self.orientation))
+            x = self.position[0] + r * sin((i*2*pi/n_sides) + pi)
+            y = self.position[1] + r * cos((i*2*pi/n_sides) + pi) 
             points.append((x, y))
         
         min_x = min([p[0] for p in points])
@@ -129,15 +129,16 @@ class Polygon:
         # Second pass centering
         points = []
         for i in range(n_sides):
-            x = self.position[0] + x_scaling * (sin((i*2*pi/n_sides) + radians(self.orientation) + pi) + x_offset)
-            y = self.position[1] + y_scaling * (cos((i*2*pi/n_sides) + radians(self.orientation) + pi) + y_offset)
+            x = self.position[0] + x_scaling * (sin((i*2*pi/n_sides) + pi) + x_offset)
+            y = self.position[1] + y_scaling * (cos((i*2*pi/n_sides) + pi) + y_offset)
             points.append((x, y))
         
         svg = dwg.polygon(
                 points       = points,
                 fill         = self.fillcolor,
                 stroke       = self.bordercolor,
-                stroke_width = self.borderwidth)
+                stroke_width = self.borderwidth,
+                transform    = transform_string)
         
         return svg
     
