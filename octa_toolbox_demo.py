@@ -36,6 +36,7 @@ stimulus.bordercolors = GridPattern.RepeatAcrossElements(["black"])
 stimulus.fillcolors = GridPattern.MirrorAcrossRows([rgb2hex(0.30294,0.78057,0.90983)])
 stimulus.fillcolors = GridPattern.RepeatAcrossRows(['#7FE5FF', '#38AEE8', '#0079B0'])
 
+#stimulus.swap_distinct_elements(1, distinction_features = ['shapes', 'bounding_boxes', 'fillcolors', 'orientations', 'data'])
 stimulus.Show()
 
 #%%
