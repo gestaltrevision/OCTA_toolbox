@@ -30,7 +30,7 @@ class Polygon:
         if bounding_box == None:
             bounding_box = (10, 10)
         
-        assert bounding_box[0] == bounding_box[1], 'Polygon bounding box needs to be square'
+#        assert bounding_box[0] == bounding_box[1], 'Polygon bounding box needs to be square'
         self.bounding_box = bounding_box
     
     
