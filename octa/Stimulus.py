@@ -294,7 +294,7 @@ class Stimulus:
             if 'data' in self._attribute_overrides[idx]:
                 data = self._attribute_overrides[idx]['data']
             else:
-                data = datas[i]
+                data = datas[idx]
                             
             if 'shape' in self._attribute_overrides[idx]:
                 shape = self._attribute_overrides[idx]['shape']
