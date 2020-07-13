@@ -79,7 +79,6 @@ stimulus.Show()
 stimulus = Grid(6,5)
 stimulus.fillcolors = GridPattern.MirrorAcrossRightDiagonal(["red", "green"])
 stimulus.Show()
->>>>>>> 16b7122a81f4f427084ada997dc85e83e2c6650c
 
 stimulus.shapes = GridPattern.RepeatAcrossRows([Triangle, Polygon])
 stimulus.data   = GridPattern.RepeatAcrossRows(["", "3"])
