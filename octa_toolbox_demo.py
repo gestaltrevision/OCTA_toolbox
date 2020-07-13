@@ -30,15 +30,38 @@ stimulus.shapes = GridPattern.RepeatAcrossElements([Polygon, RegularPolygon])
 stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(50,80)])
 stimulus.data = GridPattern.RepeatAcrossRows([3,3,5,5,6,6])
 stimulus.orientations = GridPattern.RepeatAcrossRows([0,180])
+stimulus.borderwidths = GridPattern.RepeatAcrossElements([1])
+stimulus.bordercolors = GridPattern.RepeatAcrossElements(["black"])
+
+#stimulus.fillcolors = GridPattern.MirrorAcrossRows([rgb2hex(0.30294,0.78057,0.90983)])
+#stimulus.fillcolors = GridPattern.RepeatAcrossRows(['#7FE5FF', '#38AEE8', '#0079B0'])
+stimulus.fillcolors = GridPattern.RepeatAcrossColumns(['#6dd6ff', '#1b9fd8', '#006ca1'])
+## OR LESS RISKY:
+#stimulus.fillcolors = GridPattern.RepeatAcrossColumns(['#5cc8ff', '#1b9fd8', '#0078af'])
+# OR EVEN CLOSER:
+#stimulus.fillcolors = GridPattern.RepeatAcrossRows(['#4bbaf5', '#1b9fd8', '#0085bc'])
+                                                    
+#stimulus.swap_distinct_elements(1, distinction_features = ['shapes', 'bounding_boxes', 'fillcolors', 'orientations', 'data'])
+stimulus.Show()
+
+#%% RGB colors
+stimulus = Grid(6,6, background_color = "white", x_margin = 0, y_margin = 0, row_spacing = 50, col_spacing = 50)
+stimulus._autosize_method = "maximum_bounding_box"
+#stimulus._autosize_method = "tight_fit"
+stimulus.shapes = GridPattern.RepeatAcrossElements([RegularPolygon])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(45,45)])
+stimulus.data = GridPattern.RepeatAcrossRows([6,8,10])
+stimulus.orientations = GridPattern.RepeatAcrossRows([0])
 #stimulus.borderwidths = GridPattern.RepeatAcrossElements([1])
 #stimulus.bordercolors = GridPattern.RepeatAcrossElements(["black"])
 
 #stimulus.fillcolors = GridPattern.MirrorAcrossRows([rgb2hex(0.30294,0.78057,0.90983)])
 #stimulus.fillcolors = GridPattern.RepeatAcrossRows(['#7FE5FF', '#38AEE8', '#0079B0'])
+stimulus.fillcolors = GridPattern.RepeatAcrossColumns(['#6dd6ff', '#1b9fd8', '#006ca1'])
 ## OR LESS RISKY:
-stimulus.fillcolors = GridPattern.RepeatAcrossRows(['#5cc8ff', '#1b9fd8', '#0078af'])
+#stimulus.fillcolors = GridPattern.RepeatAcrossColumns(['#5cc8ff', '#1b9fd8', '#0078af'])
 # OR EVEN CLOSER:
-stimulus.fillcolors = GridPattern.RepeatAcrossRows(['#4bbaf5', '#1b9fd8', '#0085bc'])
+#stimulus.fillcolors = GridPattern.RepeatAcrossRows(['#4bbaf5', '#1b9fd8', '#0085bc'])
                                                     
 #stimulus.swap_distinct_elements(1, distinction_features = ['shapes', 'bounding_boxes', 'fillcolors', 'orientations', 'data'])
 stimulus.Show()

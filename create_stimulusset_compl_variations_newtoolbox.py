@@ -17,7 +17,8 @@ random.shuffle(shapes)
 sizes = [(20,20),(28,28),(36,36)]
 random.shuffle(sizes)
 
-colors = ['#1C3D61','#5E78A1','#A0BAE6']
+#colors = ['#1C3D61','#5E78A1','#A0BAE6']
+colors = ['#6dd6ff', '#1b9fd8', '#006ca1'] 
 random.shuffle(colors)
 
 # DEFINE COMPLEXITY FOR STIMULUS 1 and 2
