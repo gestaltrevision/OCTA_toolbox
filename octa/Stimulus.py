@@ -355,8 +355,9 @@ class Stimulus:
         
     def __AutoCalculateSize(self):
         if not self._autosize:
-            self._x_offset = 0 + self.x_margin[0]
-            self._y_offset = 0 + self.y_margin[0]
+            x_center, y_center = self.CalculateCenter()
+            self._x_offset = self.width/2 - x_center
+            self._y_offset = self.height/2 - y_center
             return
         
         if len(self.positions.x) == 0:
@@ -384,7 +385,7 @@ class Stimulus:
             min_y = min_position_y - max_bounding_box_y//2
             max_y = max_position_y + max_bounding_box_y//2
             
-        elif self._autosize_method == "tight_fit":
+        elif self._autosize_150method == "tight_fit":
             for i in range(len(self.positions.x)):
                 if (self.positions.x[i] - bounding_boxes[i][0]//2) < min_x:
                     print(self.positions.x[i] -  bounding_boxes[i][0]//2)
@@ -411,13 +412,31 @@ class Stimulus:
 
         Returns
         -------
-        None.
+        None.150
 
         """                
         for i in range(len(self.dwg_elements)):
             if not self.dwg_elements[i]['shape'] == None:
                 el = self.dwg_elements[i]['shape'](**self.dwg_elements[i])
                 self.dwg.add(el.generate(self.dwg))
+                
+    def CalculateCenter(self):
+        """
+        Calculates the center position based on the location of the elements
+        """
+        self._x_center = 0
+        self._y_center = 0
+        
+        for x in self.positions.x:
+            self._x_center += x
+        self._x_center /= len(self.positions.x)
+        
+        for y in self.positions.y:
+            self._y_center += y
+        self._y_center /= len(self.positions.y)
+        
+        return (self._x_center, self._y_center)
+        
         
     
     
