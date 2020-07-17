@@ -204,7 +204,7 @@ elif(pattern == "Frame"):
 
 ### SWITCH ELEMENTS ###
 if((complexity_1 != [1,1,1]) & (complexity_2 != [1,1,1])):
-    element_switches = random.choice([0,1,2])
+    element_switches = random.choice([0,6,12])
 else:
     element_switches = 0
 
