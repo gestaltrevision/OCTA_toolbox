@@ -385,7 +385,7 @@ class Stimulus:
             min_y = min_position_y - max_bounding_box_y//2
             max_y = max_position_y + max_bounding_box_y//2
             
-        elif self._autosize_method == "tight_fit":
+        elif self._autosize_150method == "tight_fit":
             for i in range(len(self.positions.x)):
                 if (self.positions.x[i] - bounding_boxes[i][0]//2) < min_x:
 #                    print(self.positions.x[i] -  bounding_boxes[i][0]//2)
@@ -412,7 +412,7 @@ class Stimulus:
 
         Returns
         -------
-        None.
+        None.150
 
         """                
         for i in range(len(self.dwg_elements)):
