@@ -65,3 +65,13 @@ stimulus.Show()
 print("LOCE = ", Complexity.CalculateElementsLOCE(stimulus, distinction_features = ["bounding_boxes", "fillcolors", "shapes"]))
 print("LOC = ", Complexity.CalculateElementsLOC(stimulus, distinction_features = ["bounding_boxes", "fillcolors", "shapes"]))
 print("LOCI = ", Complexity.CalculateElementsLOCI(stimulus, distinction_features = ["bounding_boxes", "fillcolors", "shapes"]))
+
+#%% Output files
+stimulus = Grid(6,6, background_color = "lightgrey", size =(300,300))
+stimulus._autosize_method = "maximum_bounding_box"
+#stimulus._autosize_method = "tight_fit"
+stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(50,50), (40,40),(30,30), (20,20)])
+stimulus.fillcolors = GridPattern.RepeatAcrossColumns(['#6dd6ff', '#1b9fd8', '#006ca1'])
+stimulus.Show()
+stimulus.SaveSVG(filename = "output/testoutput")
+stimulus.SaveJSON(folder = "output", filename = "testoutput")

@@ -42,17 +42,21 @@ class Stimulus:
         # print("ping")
         if size == None:
             self._autosize = True
+            self.x_margin = x_margin
+            self.y_margin = y_margin
+            self.size = "auto"
         else:
             self._autosize = False
             self.width = size[0]
             self.height = size[1]
+            self.x_margin = "auto"
+            self.y_margin = "auto"
+            self.size = (size[0], size[1])
             
         self.background_color = background_color
         
         # Set initial shape parameters to zero
         self.positions   = None
-        self.x_margin = x_margin
-        self.y_margin = y_margin
 
         self._autosize_method = "maximum_bounding_box" # can be 'tight_fit' or 'maximum_bounding_box'
         
@@ -119,24 +123,26 @@ class Stimulus:
                                    'row_spacing': self.row_spacing,
                                    'col_spacing': self.col_spacing,
                                    'x_margin'   : self.x_margin,
-                                   'y_margin'   : self.y_margin
+                                   'y_margin'   : self.y_margin,
+                                   'size'       : self.size
                                    },
                      'element_attributes': {
+                                   'element_id'   :    jsonpickle.encode(list(range(len(self.dwg_elements)))),
                                    'positions'    :    jsonpickle.encode(self.positions),
                                    'bounding_boxes' :  jsonpickle.encode(self._bounding_boxes),
                                    'shapes'       :    jsonpickle.encode(self._shapes),
-                                   'fillcolor'     :  jsonpickle.encode(self._fillcolors),
-                                   'bordercolor'   :  jsonpickle.encode(self._bordercolors),
-                                   'orientation'  :    jsonpickle.encode(self._orientations),
+                                   'fillcolors'     :  jsonpickle.encode(self._fillcolors),
+                                   'bordercolors'   :  jsonpickle.encode(self._bordercolors),
+                                   'orientations'  :    jsonpickle.encode(self._orientations),
                                    'data'         :    jsonpickle.encode(self._data),
                                    'overrides'    :    jsonpickle.encode(self._attribute_overrides),
                                    'element_order':    jsonpickle.encode(self._element_presentation_order)}}
         
         with open(json_filename, 'w') as output_file:
-            json.dump(json_data, output_file)
+            json.dump(json_data, output_file, indent = 4)
             
-        df = pd.DataFrame(self.dwg_elements, columns = ['shape', 'position', 'bounding_box', 'fillcolor', 'bordercolor', 'borderwidth', 'orientation', 'data'])
-        df.to_csv(csv_filename)
+        df = pd.DataFrame(self.dwg_elements, columns = ['element_id', 'position', 'shape', 'bounding_box', 'fillcolor', 'bordercolor', 'borderwidth', 'orientation', 'data'])
+        df.to_csv(csv_filename, index = False)
    
     def GetJSON(self):
         """
@@ -161,15 +167,17 @@ class Stimulus:
                                    'row_spacing': self.row_spacing,
                                    'col_spacing': self.col_spacing,
                                    'x_margin'   : self.x_margin,
-                                   'y_margin'   : self.y_margin
+                                   'y_margin'   : self.y_margin,
+                                   'size'       : self.size
                                    },
                      'element_attributes': {
+                                   'element_id'   :    jsonpickle.encode(list(range(len(self.dwg_elements)))),
                                    'positions'    :    jsonpickle.encode(self.positions),
                                    'bounding_boxes' :  jsonpickle.encode(self._bounding_boxes),
                                    'shapes'       :    jsonpickle.encode(self._shapes),
-                                   'fillcolor'     :  jsonpickle.encode(self._fillcolors),
-                                   'bordercolor'   :  jsonpickle.encode(self._bordercolors),
-                                   'orientation'  :    jsonpickle.encode(self._orientations),
+                                   'fillcolors'     :  jsonpickle.encode(self._fillcolors),
+                                   'bordercolors'   :  jsonpickle.encode(self._bordercolors),
+                                   'orientations'  :    jsonpickle.encode(self._orientations),
                                    'data'         :    jsonpickle.encode(self._data),
                                    'overrides'    :    jsonpickle.encode(self._attribute_overrides),
                                    'element_order':    jsonpickle.encode(self._element_presentation_order)}}
@@ -197,13 +205,14 @@ class Stimulus:
             data = json.load(input_file)
             
             stimulus = Grid(data['structure']['n_rows'], data['structure']['n_cols'], data['structure']['row_spacing'],
-                            data['structure']['col_spacing'], data['structure']['x_margin'], data['structure']['y_margin'])
+                            data['structure']['col_spacing'], data['structure']['x_margin'], data['structure']['y_margin'],
+                            data['structure']['size'])
             stimulus._positions      = jsonpickle.decode(data['element_attributes']['positions'])
             stimulus._bounding_boxes = jsonpickle.decode(data['element_attributes']['bounding_boxes'])
             stimulus._shapes         = jsonpickle.decode(data['element_attributes']['shapes'])
-            stimulus._fillcolors    = jsonpickle.decode(data['element_attributes']['fillcolor'])
-            stimulus._bordercolors  = jsonpickle.decode(data['element_attributes']['bordercolor'])
-            stimulus._orientations   = jsonpickle.decode(data['element_attributes']['orientation'])
+            stimulus._fillcolors    = jsonpickle.decode(data['element_attributes']['fillcolors'])
+            stimulus._bordercolors  = jsonpickle.decode(data['element_attributes']['bordercolors'])
+            stimulus._orientations   = jsonpickle.decode(data['element_attributes']['orientations'])
             stimulus._data           = jsonpickle.decode(data['element_attributes']['data'])
             stimulus._attribute_overrides = jsonpickle.decode(data['element_attributes']['overrides'])
             stimulus._element_presentation_order = jsonpickle.decode(data['element_attributes']['element_order'])
@@ -301,7 +310,8 @@ class Stimulus:
             else:
                 shape = shapes[idx]
                 
-            element_parameters = {'shape'        : shape, 
+            element_parameters = {'element_id'   : i,
+                                  'shape'        : shape, 
                                   'position'     : (x, y), 
                                   'bounding_box' : bounding_box, 
                                   'fillcolor'   : fillcolor,
@@ -311,7 +321,7 @@ class Stimulus:
                                   'data'         : data}
             
             self.dwg_elements.append(element_parameters)
-            
+                        
             
     def __StartNewDrawing(self):        
         """
@@ -340,6 +350,8 @@ class Stimulus:
         elif type(x_margin) == list or type(x_margin) == tuple:
             if len(x_margin) == 2:
                 self._x_margin = x_margin
+        elif type(x_margin) == str:
+            self._x_margin = x_margin
                 
     @property
     def y_margin(self):
@@ -352,12 +364,15 @@ class Stimulus:
         elif type(y_margin) == list or type(y_margin) == tuple:
             if len(y_margin) == 2:
                 self._y_margin = y_margin
+        elif type(y_margin) == str:
+            self._y_margin = y_margin
         
     def __AutoCalculateSize(self):
         if not self._autosize:
             x_center, y_center = self.CalculateCenter()
             self._x_offset = self.width/2 - x_center
             self._y_offset = self.height/2 - y_center
+            
             return
         
         if len(self.positions.x) == 0:
