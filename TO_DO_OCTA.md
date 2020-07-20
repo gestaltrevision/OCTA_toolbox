@@ -1,4 +1,4 @@
-# **OCTA to do list** (14/05/2020)
+# **OCTA to do list** (20/07/2020)
 
 ## ADDITIONAL PATTERNS / PATTERN FEATURES
 
@@ -6,13 +6,11 @@
 
 * structural change: all grid patterns in same file:
   * add the possibility to switch between patterns
+    e.g.:
+    stimulus.colors.pattern = RepeatAcrossColumns (instead of eg MirrorAcrossRows)
   * give the possibility to change function arguments after initialization / basic values used in pattern creation, e.g.:
-    stimulus.n_rows = 6 (instead of eg 5)
-    stimulus.colors.pattern = [red, blue] (instead of eg [red, green])
-  * give the possibility to change pattern itself, eg. symmetrypattern to repeaterpattern
+    stimulus.colors.patternvalues = [red, blue] (instead of eg [red, green])
 * make clear in documentation that top->bottom left-> right is standard in OCTA
-* add function for BasicPattern:
-  add error message when users attempt adding strings
 * naming RepeaterPattern / Duplicate functions: Duplicate/Repeat/Replicate/Iterate/Alternate/...?
 
 ### very nice
@@ -41,12 +39,11 @@
 
   * replace_value (of one feature of an element): arguments = element_id and new_value (feature_dimension could be an additional argument OR could be part of the name of the function, like replace_color)
   * replace_element (& all features of element): arguments = element_id and all new values (for different feature dimensions)
-  * switch_value (like implemented, but not random switch)
+  * IMPLEMENTED: switch_value (like implemented, but not random switch)
   * switch_element (like implemented, but not random switch)
   * add_element
   * [add_value (only if not all features need to be given and defaults are implemented)]
 
-* do all features need to be given or are there defaults implemented (eg if no color given, elements are black?)
 
 ### nice 
 
@@ -57,23 +54,14 @@
 * better color gradients?
 * extra deviant options: transform one, some, or all elements (e.g. change on condition, e.g. = rectangle)
 * [let user give structure and apply it to given values? eg alternate (abcb)]
-* [features with different percentage present?]
-
-
 
 ## ADDITIONAL STIMULUS FEATURE DIMENSIONS
 
 ### important
 
 * mirror parameter
-* fillcolor (ipv color)
 * class
 * id
-
-### very nice
-
-* bordercolor / strokecolor
-* borderwidth / strokewidth? 
 
 ### nice
 
@@ -109,7 +97,6 @@
 
 ### very nice
 
-* autocenter position
 * transparent background color? (also png?)
 
  ### nice
@@ -120,16 +107,11 @@
 
 CRUCIAL SHAPES: ellipse, rectangle, triangle, polygon, none, image, text, (newshape), (rounded_rectangle, rounded_triangle), (curve)
 
-SHAPES TO POTENTIALLY REMOVE: droplet, flowerleave, infinity
-
 ### important
 
-* same size ~ bounding box with x and y parameter
 * triangle: 
   * check function used (now Eline's but can probably be improved)
   * also not equilateral triangles
-* image:
-  * allow non-squared images, check how to handle size ~ bounding box
 * text:
   * center text in bounding box
 * [curve:]
@@ -138,7 +120,6 @@ SHAPES TO POTENTIALLY REMOVE: droplet, flowerleave, infinity
 
 ### very nice
 
-* polygon
 * image: 
   * externe svg code embedden/inladen
   * externe png/jpg inladen???
@@ -223,6 +204,7 @@ important:
 ### very nice
 
 * generate range of stimuli
+  
   * e.g. give values for each feature dimension + dataframe with different order combinations + names stimuli --> create several svgs
 * when generating range of stimuli: html image grid as output option = create_grid function to create combination of several stimuli varying in order & complexity dimensions
 
