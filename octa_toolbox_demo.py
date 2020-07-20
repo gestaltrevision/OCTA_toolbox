@@ -31,7 +31,7 @@ stimulus.fillcolors = GridPattern.RepeatAcrossColumns(['#6dd6ff', '#1b9fd8', '#0
 stimulus.Show()
 #print(stimulus.CalculateCenter())
 
-#%% Default grid with size (this should autocenter on the middle of the figure)
+#%% Example swap_distinct_features
 stimulus = Grid(6,6, background_color = "lightgrey", size = (350,350), x_margin = 0, y_margin = 0)
 stimulus._autosize_method = "maximum_bounding_box"
 #stimulus._autosize_method = "tight_fit"
