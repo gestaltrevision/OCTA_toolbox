@@ -12,7 +12,7 @@ col_spacing = 50
 
 stimulus = Stimulus(background_color = "white")
 
-stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset = 50, y_offset = 50)
+stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_margin = 50, y_margin = 50)
 stimulus.shapes      = patterns.BasicPattern([shapes.Rectangle, shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.size        = patterns.BasicPattern([(30,30), (20, 20)]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.color      = patterns.GridRepeater(["red", "blue"], n_rows, n_cols).RepeatElements()
@@ -24,7 +24,7 @@ stimulus.Show()
 
 #%%
 ### ELEMENT SWITCHES ###
-stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset = 50, y_offset = 50)
+stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_margin = 50, y_margin = 50)
 stimulus.shapes      = patterns.BasicPattern([shapes.Ellipse, shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.color      = patterns.GridRepeater(["red", "blue"], n_rows, n_cols).RepeatElements()
 stimulus.orientation = patterns.SymmetryPattern([0,90], n_rows, n_cols).MirrorAcrossColumns()
@@ -38,7 +38,7 @@ stimulus.Show()
 
 #%%
 ### SIZE SWITCHES ###
-stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset = 50, y_offset = 50)
+stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_margin = 50, y_margin = 50)
 stimulus.shapes      = patterns.BasicPattern([shapes.Ellipse, shapes.Triangle, shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.color      = patterns.GridRepeater(["red", "blue"], n_rows, n_cols).RepeatElements()
 stimulus.orientation = patterns.SymmetryPattern([0], n_rows, n_cols).MirrorAcrossColumns()
@@ -50,7 +50,7 @@ stimulus.Show()
 
 #%%
 ### COLOR SWITCHES ###
-stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset = 50, y_offset = 50)
+stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_margin = 50, y_margin = 50)
 stimulus.shapes      = patterns.BasicPattern([shapes.Rectangle, shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.size        = patterns.BasicPattern([(30,30), (20, 20)]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.orientation = patterns.SymmetryPattern([0], n_rows, n_cols).MirrorAcrossColumns()
@@ -62,7 +62,7 @@ stimulus.Show()
 
 #%%
 ### ORIENTATION SWITCHES ###
-stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset = 50, y_offset = 50)
+stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_margin = 50, y_margin = 50)
 stimulus.shapes      = patterns.BasicPattern([shapes.Rectangle, shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.size        = patterns.BasicPattern([(30,30), (20, 20)]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.color      = patterns.GridRepeater(["red", "blue"], n_rows, n_cols).RepeatAcrossRows()
@@ -75,7 +75,7 @@ stimulus.Show()
 
 #%%
 ### SWITCHES: ERROR WHEN TOO MANY SWITCHES ASKED FOR ###
-stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset = 50, y_offset = 50)
+stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_margin = 50, y_margin = 50)
 stimulus.shapes      = patterns.BasicPattern([shapes.Rectangle, shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.size        = patterns.BasicPattern([(30,30), (20, 20)]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.orientation = patterns.SymmetryPattern([0], n_rows, n_cols).MirrorAcrossColumns()
@@ -89,7 +89,7 @@ stimulus.Show()
 
 #%%
 ### SWITCHES: ERROR WHEN TOO FEW GROUPS OF VALUES IN FEATURE ###
-stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_offset = 50, y_offset = 50)
+stimulus.positions   = Positions.Create2DGrid(n_rows, n_cols, row_spacing, col_spacing, x_margin = 50, y_margin = 50)
 stimulus.shapes      = patterns.BasicPattern([shapes.Rectangle, shapes.Rectangle]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.size        = patterns.BasicPattern([(30,30), (20, 20)]).DuplicatePatternToSize(n_rows * n_cols)
 stimulus.orientation = patterns.SymmetryPattern([0], n_rows, n_cols).MirrorAcrossColumns()

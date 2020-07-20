@@ -47,8 +47,8 @@ colors_2 = colors[0:n_colors_2]
 n_rows = 6
 n_cols = 6
 
-stimulus_1 = Grid(6,6, row_spacing = 40, col_spacing = 40)
-stimulus_2 = Grid(6,6, row_spacing = 40, col_spacing = 40)
+stimulus_1 = Grid(6,6, row_spacing = 40, col_spacing = 40, size = (330,330))
+stimulus_2 = Grid(6,6, row_spacing = 40, col_spacing = 40, size = (330,330))
 
 # DEFINE ORDER
 
