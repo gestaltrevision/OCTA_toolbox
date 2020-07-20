@@ -972,7 +972,78 @@ class Grid(Stimulus):
         for swap_pair in selected_swap_pairs:
             self._element_presentation_order[swap_pair[0]], self._element_presentation_order[swap_pair[1]] = self._element_presentation_order[swap_pair[1]], self._element_presentation_order[swap_pair[0]]
 
+    def swap_distinct_features(self, n_swap_pairs = 1, feature_dimensions = ['fillcolors']):
+        """
+        Swaps the position of two element features in the pattern. The element features that
+        wil be swapped need to be distinct on the element feature
+        dimension specified in the feature_dimensions argument. Once 
+        an element is used in a swap, it will not be used in subsequent swaps.
         
+        
+        Parameters
+        ----------
+        n_swap_pairs: int 
+            Number of element pairs that will be swapped. 
+        feature_dimensions: list
+            Feature dimensions that will be swapped between the elements.
+
+        """
+        
+        # 0. Create a list of unique fingerprints for each element
+        features = dict()
+        for f in feature_dimensions:
+            features[f] = getattr(self, f)
+        
+        element_fingerprints = []
+        for idx in range(self.n_cols * self.n_rows):
+            fingerprint = "|".join([str(features[f][idx]) for f in feature_dimensions])
+            element_fingerprints.append(fingerprint)
+            
+        # 1. Generate all available swap positions
+        n_elements = self.n_rows * self.n_cols
+        
+        candidate_swap_positions = set()
+        for i in range(n_elements):
+            for j in range(i+1, n_elements):
+                if element_fingerprints[i] != element_fingerprints[j]:
+                    candidate_swap_positions.add((i,j))
+        
+        # 2. Select the required number of swap positions
+        selected_swap_pairs = []
+        for i in range(n_swap_pairs):
+            assert len(candidate_swap_positions) > 0, "Distinct swaps exhausted, try again with a lower number of pairs"
+            selected_pair = random.sample(candidate_swap_positions, 1)[0]
+            selected_swap_pairs.append(selected_pair)
+            
+            removable_positions = set()
+            for p in candidate_swap_positions:
+                if selected_pair[0] in p or selected_pair[1] in p:
+                    removable_positions.add(p)
+                    
+            candidate_swap_positions.difference_update(removable_positions)
+            
+        # 3. Perform the swap
+        for swap_pair in selected_swap_pairs:
+            
+            swap_element_0 = self._parse_element_id(swap_pair[0])
+            swap_element_1 = self._parse_element_id(swap_pair[1])
+            
+            if 'shapes' in feature_dimensions:
+                self._attribute_overrides[swap_element_0]['shape'] , self._attribute_overrides[swap_element_1]['shape'] = self.shapes[swap_pair[1]], self.shapes[swap_pair[0]]
+            if 'bounding_boxes' in feature_dimensions:
+                self._attribute_overrides[swap_element_0]['bounding_box'] , self._attribute_overrides[swap_element_1]['bounding_box'] = self.bounding_boxes[swap_pair[1]], self.bounding_boxes[swap_pair[0]]
+            if 'bordercolors' in feature_dimensions:
+                self._attribute_overrides[swap_element_0]['bordercolor'] , self._attribute_overrides[swap_element_1]['bordercolor'] = self.bordercolors[swap_pair[1]], self.bordercolors[swap_pair[0]]
+            if 'borderwidths' in feature_dimensions:
+                self._attribute_overrides[swap_element_0]['borderwidth'] , self._attribute_overrides[swap_element_1]['borderwidth'] = self.borderwidths[swap_pair[1]], self.borderwidths[swap_pair[0]]
+            if 'fillcolors' in feature_dimensions:
+                self._attribute_overrides[swap_element_0]['fillcolor'] , self._attribute_overrides[swap_element_1]['fillcolor'] = self.fillcolors[swap_pair[1]], self.fillcolors[swap_pair[0]]
+            if 'orientations' in feature_dimensions:
+                self._attribute_overrides[swap_element_0]['orientation'] , self._attribute_overrides[swap_element_1]['orientation']  = self.orientations[swap_pair[1]], self.orientations[swap_pair[0]]
+            if 'data' in feature_dimensions:
+                self._attribute_overrides[swap_element_0]['data'] , self._attribute_overrides[swap_element_1]['data']  = self.data[swap_pair[1]], self.data[swap_pair[0]]
+
+            
     def _is_modifiable(self):
         """
         Inspects the _fixed_grid attribute of each of the element properties.

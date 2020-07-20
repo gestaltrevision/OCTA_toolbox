@@ -30,3 +30,13 @@ stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(50,50), (40,40),(30,30)
 stimulus.fillcolors = GridPattern.RepeatAcrossColumns(['#6dd6ff', '#1b9fd8', '#006ca1'])
 stimulus.Show()
 #print(stimulus.CalculateCenter())
+
+#%% Default grid with size (this should autocenter on the middle of the figure)
+stimulus = Grid(6,6, background_color = "lightgrey", size = (350,350), x_margin = 0, y_margin = 0)
+stimulus._autosize_method = "maximum_bounding_box"
+#stimulus._autosize_method = "tight_fit"
+stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(50,50), (40,40),(30,30), (20,20)])
+stimulus.fillcolors = GridPattern.RepeatAcrossColumns(['#6dd6ff', '#1b9fd8', '#006ca1'])
+stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ["fillcolors"])
+stimulus.Show()
+#print(stimulus.CalculateCenter())
