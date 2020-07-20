@@ -40,3 +40,17 @@ stimulus.fillcolors = GridPattern.RepeatAcrossColumns(['#6dd6ff', '#1b9fd8', '#0
 stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ["fillcolors"])
 stimulus.Show()
 #print(stimulus.CalculateCenter())
+
+#%% Image
+stimulus = Grid(6,6, background_color = "white", x_margin = 50, y_margin = 50)
+stimulus._autosize_method = "maximum_bounding_box"
+#stimulus._autosize_method = "tight_fit"
+stimulus.shapes = GridPattern.RepeatAcrossElements([Image, Text])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(40,30), (10,40),(30,30), (20,20)])
+stimulus.fillcolors = GridPattern.RepeatAcrossColumns(['#6dd6ff', '#1b9fd8', '#006ca1'])
+stimulus.data = GridPattern.RepeatAcrossElements(["img/test.jpg", "TEXT"])
+stimulus.Show()
+#stimulus.CalculateCenter()
+stimulus._fillcolors.pattern
+stimulus._fillcolors.patterntype
+stimulus._fillcolors.patternorientation
