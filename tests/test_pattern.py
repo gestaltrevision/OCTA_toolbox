@@ -13,6 +13,3 @@ os.chdir('..')
 import matplotlib.pyplot as plt
 from octa.patterns import Pattern
 
-p = Pattern([12,13,14, 15, 16])
-p.SwapElements(1)
-print(p)

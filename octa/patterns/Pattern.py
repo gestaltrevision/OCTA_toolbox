@@ -249,59 +249,6 @@ class Pattern:
             result.append(self.pattern[idx[i]])
         
         return Pattern(result)
-        
-            
-    def SwapElements(self, n_swap_pairs = 1):
-        """
-        Swaps the values of two positions in the pattern. Once a position has
-        been used in a swap, it will not be used again in additional swaps. 
-        As a consequence, the maximum number of possible swaps is N//2, where
-        N is the number of elements in the pattern.
-        
-        When doing multiple swaps, if two elements have been selected to be
-        swapped around a first time, they will not be selected again. This
-        means that subsequent swaps can never cancel out an initial swap
-        
-        Parameters
-        ----------
-        n_swap_pairs: int 
-            Number of element pairs that will be swapped. Maximum value
-            is half the number of elements in the Pattern.
-
-        Returns
-        -------
-        Pattern:
-            New Pattern object instance
-
-        """
-        assert len(self.pattern) >= n_swap_pairs * 2, 'Maximal number of swaps possible is %d, but %d were requested'%(len(self.pattern)//2, n_swap_pairs)
-               
-        # 1. Generate all available swap positions
-        candidate_swap_positions = set()
-        for i in range(len(self.pattern)):
-            for j in range(i+1, len(self.pattern)):
-                candidate_swap_positions.add((i,j))
-            
-        # 2. Select the required number of swap positions
-        selected_swap_pairs = []
-        for i in range(n_swap_pairs):
-            selected_pair = random.sample(candidate_swap_positions, 1)[0]
-            print(selected_pair)
-            selected_swap_pairs.append(selected_pair)
-            
-            removable_positions = set()
-            for p in candidate_swap_positions:
-                if selected_pair[0] in p or selected_pair[1] in p:
-                    removable_positions.add(p)
-                    
-            candidate_swap_positions.difference_update(removable_positions)
-            
-        # 3. Perform the swap
-        result = list(self.pattern)
-        for swap_pair in selected_swap_pairs:
-            result[swap_pair[0]], result[swap_pair[1]] = result[swap_pair[1]], result[swap_pair[0]]
-        
-        return Pattern(result)
     
     
     def CreateGradientPattern(start_value, end_value, n_elements):
