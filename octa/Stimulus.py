@@ -21,18 +21,24 @@ class Stimulus:
     
     """
     
-    def __init__(self, size = None, background_color = "white", x_margin = 20, y_margin = 20):
+    def __init__(self, background_color = "white", x_margin = 20, y_margin = 20, size = None):
         """
         Instantiates a stimulus object.
 
         Parameters
         ----------
-        width : INT, optional
-            Width of the stimulus. The default is 512.
-        height : INT, optional
-            Height of the stimulus. The default is 512.
         background_color : STRING, optional
             Background color of the stimulus. The default is "white".
+        x_margin: INT, optional
+            Amount of extra space added to the stimulus in the x-direction
+        y_margin: INT, optional
+            Amount of extra space added to the stimulus in the y-direction
+        size: TUPLE, optional
+            If specified, fixes the size of the stimulus to the dimension
+            given in the tuple. The center of the stimulus will be calculated
+            to correspond to the average position of all the elements in the
+            stimulus.
+            
 
         Returns
         -------
@@ -461,7 +467,7 @@ class Grid(Stimulus):
     
     def __init__(self, n_rows, n_cols, row_spacing = 50, col_spacing= 50, background_color = "white", size = None, x_margin = 20, y_margin = 20):
         # print("Grid constructor")
-        super().__init__(size = size, background_color = background_color, x_margin = x_margin, y_margin = y_margin)
+        super().__init__(background_color = background_color, x_margin = x_margin, y_margin = y_margin, size = size)
         
         # Initialize the positions of each element
         self._n_rows = n_rows
