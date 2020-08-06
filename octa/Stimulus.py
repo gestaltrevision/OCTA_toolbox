@@ -10,6 +10,8 @@ import json
 import jsonpickle
 import pandas as pd
 import os
+from svglib.svglib import svg2rlg
+from reportlab.graphics import renderPM, renderPDF
 from IPython.display import SVG, display
 
 from .Positions import Positions
@@ -99,6 +101,64 @@ class Stimulus:
 
         """
         return self.dwg.tostring()
+    
+    def SavePNG(self, filename, folder = None): 
+        """
+        Saves the current stimulus as a PNG file.
+
+        Parameters
+        ----------
+        filename : STRING
+            Name of the png file.
+
+        Returns
+        -------
+        None.
+
+        """ 
+        # limitations using svglib:
+        # clipping is limited to single paths, no mask support
+        # color gradients not supported
+            
+        svg_filename = "%s.svg"%filename
+        png_filename = "%s.png"%filename
+        if folder is not None:
+            svg_filename = os.path.join(folder, svg_filename)  
+            png_filename = os.path.join(folder, png_filename)       
+
+        self.dwg.saveas(svg_filename, pretty = True)
+        img = svg2rlg(svg_filename)
+        os.remove(svg_filename)
+        renderPM.drawToFile(img, png_filename, fmt="PNG")
+        
+    def SavePDF(self, filename, folder = None): 
+        """
+        Saves the current stimulus as a PNG file.
+
+        Parameters
+        ----------
+        filename : STRING
+            Name of the png file.
+
+        Returns
+        -------
+        None.
+
+        """ 
+        # limitations using svglib:
+        # clipping is limited to single paths, no mask support
+        # color gradients not supported
+            
+        svg_filename = "%s.svg"%filename
+        pdf_filename = "%s.pdf"%filename
+        if folder is not None:
+            svg_filename = os.path.join(folder, svg_filename)  
+            pdf_filename = os.path.join(folder, pdf_filename)       
+
+        self.dwg.saveas(svg_filename, pretty = True)
+        img = svg2rlg(svg_filename)
+        os.remove(svg_filename)
+        renderPDF.drawToFile(img, pdf_filename)
         
     def SaveJSON(self, filename, folder = None):
         """
