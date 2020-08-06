@@ -65,7 +65,6 @@ class GridPattern(Pattern):
         """
         pass
     
-    
 class RepeatAcrossElements(GridPattern):
     """
         Repeats the current pattern, until the total number of elements fits into the 2D grid structure.
@@ -920,7 +919,7 @@ class RandomPattern(GridPattern):
     """
     _fixed_grid = False
     
-    def __init__(self, pattern, n_rows = 5, n_cols = 5, counts = None):
+    def __init__(self, pattern, n_rows = 5, n_cols = 5, counts = None, patterntype = None, patternorientation = None):
         super().__init__(pattern, n_rows, n_cols)
         self.counts = counts
                 

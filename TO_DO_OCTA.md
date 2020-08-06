@@ -8,8 +8,6 @@
   * add the possibility to switch between patterns
     e.g.:
     stimulus.colors.pattern = RepeatAcrossColumns (instead of eg MirrorAcrossRows)
-  * give the possibility to change function arguments after initialization / basic values used in pattern creation, e.g.:
-    stimulus.colors.patternvalues = [red, blue] (instead of eg [red, green])
 * make clear in documentation that top->bottom left-> right is standard in OCTA
 * naming RepeaterPattern / Duplicate functions: Duplicate/Repeat/Replicate/Iterate/Alternate/...?
 

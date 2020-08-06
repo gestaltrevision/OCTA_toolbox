@@ -13,12 +13,24 @@ from octa.measurements import Complexity
 def rgb2hex(r,g,b):
     return "#{:02x}{:02x}{:02x}".format(round(r*255),round(g*255),round(b*255))
 
-#%% Default grid
-stimulus = Grid(6,6, background_color = "lightgrey", x_margin = 50, y_margin = 50)
+#%% Default grid + change in values after initialization
+stimulus = Grid(6,6, background_color = "lightgrey", x_margin = 0, y_margin = 0)
 stimulus._autosize_method = "maximum_bounding_box"
 #stimulus._autosize_method = "tight_fit"
-stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(50,50), (40,40),(30,30), (20,20)])
-stimulus.fillcolors = GridPattern.RepeatAcrossColumns(['#6dd6ff', '#1b9fd8', '#006ca1'])
+stimulus.bounding_boxes = GridPattern.RandomPattern([(50,50), (40,40),(30,30), (20,20)])
+stimulus.fillcolors = GridPattern.RandomPattern(['#6dd6ff', '#1b9fd8', '#006ca1'])  
+#stimulus.bordercolors = GridPattern.RandomPattern(['#6dd6ff', '#1b9fd8', '#006ca1'])  
+#stimulus.borderwidths = GridPattern.RandomPattern([5])
+
+stimulus.Show()
+
+stimulus.positions.JitterLocations(distribution = "uniform", min_val = 5, max_val = 40)
+
+stimulus.Show()
+
+
+stimulus._fillcolors.pattern = ["red", "green", "blue"]
+
 stimulus.Show()
 #stimulus.CalculateCenter()
 
