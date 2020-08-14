@@ -49,6 +49,8 @@ class Stimulus:
         """
         if size == None:
             self._autosize = True
+            self.width = -1
+            self.height = -1
             self.x_margin = x_margin
             self.y_margin = y_margin
             self.size = "auto"
@@ -288,7 +290,8 @@ class Stimulus:
                             stimulus_size,
                             data['structure']['x_margin'], 
                             data['structure']['y_margin'])
-            stimulus._positions                  = jsonpickle.decode(data['element_attributes']['positions'])
+            
+            stimulus.positions                   = jsonpickle.decode(data['element_attributes']['positions'])
             stimulus._bounding_boxes             = jsonpickle.decode(data['element_attributes']['bounding_boxes'])
             stimulus._shapes                     = jsonpickle.decode(data['element_attributes']['shapes'])
             stimulus._fillcolors                 = jsonpickle.decode(data['element_attributes']['fillcolors'])
@@ -299,7 +302,7 @@ class Stimulus:
             stimulus._element_presentation_order = jsonpickle.decode(data['element_attributes']['element_order'])
             stimulus._id_labels                  = jsonpickle.decode(data['element_attributes']['id'])
             stimulus._class_labels               = jsonpickle.decode(data['element_attributes']['class'])
-            stimulus._mirror_values                    = jsonpickle.decode(data['element_attributes']['mirror'])
+            stimulus._mirror_values              = jsonpickle.decode(data['element_attributes']['mirror'])
             
             
         return stimulus
@@ -315,6 +318,7 @@ class Stimulus:
         None.
 
         """
+        self.__CalculateStimulusValues()
         self.__AutoCalculateSize()
         self.__ParseDrawingParameters()
         self.__StartNewDrawing()
@@ -330,9 +334,13 @@ class Stimulus:
         None.
 
         """
+        
         self.Render()
         display(SVG(self.dwg.tostring()))
             
+        
+    def __CalculateStimulusValues(self):
+        self._calculated_positions = self.positions.GetPositions()
         
     def __ParseDrawingParameters(self):
         """
@@ -356,11 +364,13 @@ class Stimulus:
         id_labels      = self.id_labels
         class_labels   = self.class_labels
         mirror_values  = self.mirror_values
+        x, y           = self._calculated_positions
         
         for i in range(len(self._element_presentation_order)):
             idx = self._element_presentation_order[i]
-            x            = self.positions.x[i] + self._x_offset
-            y            = self.positions.y[i] + self._y_offset
+            
+            x_i           = x[i] + self._x_offset
+            y_i           = y[i] + self._y_offset
             
             if 'bounding_box' in self._attribute_overrides[idx]:
                 bounding_box = self._attribute_overrides[idx]['bounding_box']
@@ -414,7 +424,7 @@ class Stimulus:
                 
             element_parameters = {'element_id'   : i,
                                   'shape'        : shape, 
-                                  'position'     : (x, y), 
+                                  'position'     : (x_i, y_i), 
                                   'bounding_box' : bounding_box, 
                                   'fillcolor'    : fillcolor,
                                   'bordercolor'  : bordercolor,
@@ -480,21 +490,23 @@ class Stimulus:
             
             return
         
-        if len(self.positions.x) == 0:
+        x, y = self._calculated_positions
+        
+        if len(x) == 0:
             return
         
-        min_x = self.positions.x[0]
-        max_x = self.positions.x[0]
-        min_y = self.positions.y[0]
-        max_y = self.positions.y[0]
+        min_x = x[0]
+        max_x = x[0]
+        min_y = y[0]
+        max_y = y[0]
         
         bounding_boxes = self.bounding_boxes
         
         if self._autosize_method == "maximum_bounding_box":
-            min_position_x = min(self.positions.x)
-            max_position_x = max(self.positions.x)
-            min_position_y = min(self.positions.y)
-            max_position_y = max(self.positions.y)
+            min_position_x = min(x)
+            max_position_x = max(x)
+            min_position_y = min(y)
+            max_position_y = max(y)
             
             max_bounding_box_x = max(list(list(zip(*bounding_boxes))[0]))
             max_bounding_box_y = max(list(list(zip(*bounding_boxes))[1]))
@@ -506,17 +518,16 @@ class Stimulus:
             max_y = max_position_y + max_bounding_box_y//2
             
         elif self._autosize_method == "tight_fit":
-            for i in range(len(self.positions.x)):
-                if (self.positions.x[i] - bounding_boxes[i][0]//2) < min_x:
-#                    print(self.positions.x[i] -  bounding_boxes[i][0]//2)
-                    min_x = self.positions.x[i] -  bounding_boxes[i][0]//2
-                if (self.positions.x[i] +  bounding_boxes[i][0]//2) > max_x:
-                    max_x = self.positions.x[i] +  bounding_boxes[i][0]//2 
+            for i in range(len(x)):
+                if (x[i] - bounding_boxes[i][0]//2) < min_x:
+                    min_x = x[i] -  bounding_boxes[i][0]//2
+                if (x[i] +  bounding_boxes[i][0]//2) > max_x:
+                    max_x = x[i] +  bounding_boxes[i][0]//2 
                     
-                if (self.positions.y[i] -  bounding_boxes[i][1]//2) < min_y: 
-                    min_y = self.positions.y[i] -  bounding_boxes[i][1]//2
-                if (self.positions.y[i] +  bounding_boxes[i][1]//2) > max_y: 
-                    max_y = self.positions.y[i] +  bounding_boxes[i][1]//2
+                if (y[i] -  bounding_boxes[i][1]//2) < min_y: 
+                    min_y = y[i] -  bounding_boxes[i][1]//2
+                if (y[i] +  bounding_boxes[i][1]//2) > max_y: 
+                    max_y = y[i] +  bounding_boxes[i][1]//2
                 
         self.width = abs(max_x - min_x) + sum(self.x_margin)
         self.height = abs(max_y - min_y) + sum(self.y_margin)
@@ -543,17 +554,11 @@ class Stimulus:
     def CalculateCenter(self):
         """
         Calculates the center position based on the location of the elements
-        """
-        self._x_center = 0
-        self._y_center = 0
+        """       
+        x, y = self._calculated_positions
         
-        for x in self.positions.x:
-            self._x_center += x
-        self._x_center /= len(self.positions.x)
-        
-        for y in self.positions.y:
-            self._y_center += y
-        self._y_center /= len(self.positions.y)
+        self._x_center = sum(x)/len(x)
+        self._y_cente  = sum(y)/len(y)
         
         return (self._x_center, self._y_center)
         
@@ -585,7 +590,7 @@ class Grid(Stimulus):
         self._shapes         = RepeatAcrossElements([Polygon], self._n_rows, self._n_cols)
         self._class_labels   = RepeatAcrossElements([""], self._n_rows, self._n_cols)
         self._id_labels      = RepeatAcrossElements([""], self._n_rows, self._n_cols)
-        self._mirror_values        = RepeatAcrossElements([""], self._n_rows, self._n_cols)
+        self._mirror_values  = RepeatAcrossElements([""], self._n_rows, self._n_cols)
         self._data           = RepeatAcrossElements(["8"], self._n_rows, self._n_cols)
         
         # Initialize a list with element attribute overrides

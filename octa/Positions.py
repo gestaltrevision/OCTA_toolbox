@@ -5,6 +5,7 @@ Created on Tue Apr  7 12:33:03 2020
 @author: Christophe
 """
 import numpy as np
+import random
 
 from .patterns.Pattern import Pattern
 
@@ -28,6 +29,8 @@ class Positions:
     def __init__(self, x, y):
         self._x = x
         self._y = y
+        self._randomization = None
+        self._randomization_parameters = {}
         
     @property
     def x(self):
@@ -55,7 +58,21 @@ class Positions:
         """
         return self._y.pattern
     
-    def JitterLocations(self, axis = "xy", distribution = "normal", **kwargs):
+    def GetPositions(self):
+        position_jitter = self._CalculateLocationJitter()
+        
+        x = list(self._x.pattern)
+        y = list(self._y.pattern)
+        
+        for i in range(len(position_jitter['x'])):
+            x[i] += position_jitter['x'][i]
+        
+        for i in range(len(position_jitter['y'])):
+            y[i] += position_jitter['y'][i]
+        
+        return (x, y)
+    
+    def SetLocationJitter(self, axis = "xy", distribution = "normal", **kwargs):
         """
         Add jitter to the positions.
 
@@ -87,11 +104,9 @@ class Positions:
             std = 1
             if 'std' in kwargs.keys():
                 std = kwargs['std']
-            
-            if 'x' in axis:
-                self._x = self._x.AddNormalJitter(mu, std)
-            if 'y' in axis:
-                self._y = self._y.AddNormalJitter(mu, std)
+                
+            self._randomization = 'normal'
+            self._randomization_parameters = {'mu' : mu, 'std' : std, 'axis' : axis}
                 
         if distribution == 'uniform':
             min_val = -1
@@ -101,13 +116,31 @@ class Positions:
                 min_val = kwargs['min_val']
             if 'max_val' in kwargs.keys():
                 max_val = kwargs['max_val']
-                
-            if 'x' in axis:
-                self._x = self._x.AddUniformJitter(min_val, max_val)
-            if 'y' in axis:
-                self._y = self._y.AddUniformJitter(min_val, max_val)
-                
+            
+            self._randomization = 'uniform'
+            self._randomization_parameters = {'min_val' : min_val, 'max_val' : max_val, 'axis' : axis}
+                           
         return self
+    
+    
+    def _CalculateLocationJitter(self):
+        x_jitter = [0 for _ in range(len(self._x.pattern))]
+        y_jitter = [0 for _ in range(len(self._y.pattern))]
+            
+        if self._randomization == "normal":
+            if 'x' in self._randomization_parameters['axis']:
+                x_jitter = [random.normalvariate(self._randomization_parameters['mu'], self._randomization_parameters['std']) for _ in range(len(self._x.pattern))]
+            if 'y' in self._randomization_parameters['axis']:
+                y_jitter = [random.normalvariate(self._randomization_parameters['mu'], self._randomization_parameters['std']) for _ in range(len(self._y.pattern))]
+                
+        elif self._randomization == "uniform":
+            if 'x' in self._randomization_parameters['axis']:
+                x_jitter = [random.uniform(self._randomization_parameters['min_val'], self._randomization_parameters['max_val']) for _ in range(len(self._x.pattern))]
+            if 'y' in self._randomization_parameters['axis']:
+                y_jitter = [random.uniform(self._randomization_parameters['min_val'], self._randomization_parameters['max_val']) for _ in range(len(self._y.pattern))]
+        
+        return {'x' : x_jitter, 'y' : y_jitter}
+            
         
     def Create2DGrid(n_rows, n_cols, row_spacing = 50, col_spacing= 50):
         """
