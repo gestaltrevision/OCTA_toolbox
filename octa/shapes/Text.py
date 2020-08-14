@@ -6,7 +6,7 @@ Created on Mon Apr  6 16:02:30 2020
 """
 
 class Text:
-    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror', 'data']
+    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror_value', 'data']
     
     def __init__(self, **kwargs):
         for p in Text.parameters:
@@ -71,7 +71,7 @@ class Text:
             
         self.id_label = id_label
     
-    def set_mirror(self, mirror):
+    def set_mirror_value(self, mirror):
         if mirror == None:
             mirror = ""
             
@@ -90,14 +90,30 @@ class Text:
             result += "%s: %s\n"%(p, getattr(self,p))
             
         return result
+    
+    def create_mirror_transform(self):
+        mirror_transform = ""
+        if self.mirror == "horizontal":
+            mirror_transform = "scale(-1, 1) translate(%f, 0)"%(-2*self.position[0])
+        elif self.mirror == "vertical":
+            mirror_transform = "scale(1, -1), translate(0, %f)"%(-2*self.position[1])
+        elif self.mirror == "horizontalvertical":
+            mirror_transform = "scale(-1, -1) translate(%f, %f)"%(-2*self.position[0], -2*self.position[1])
+                
+        return mirror_transform
         
     def generate(self, dwg):
+        mirror_transform = self.create_mirror_transform()
+
+        rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, self.position[0], self.position[1])
+        
         topleft = (self.position[0] - self.bounding_box[0]/2 , self.position[1] - self.bounding_box[1]/2)
         svg = dwg.textArea(
                 text        = self.data,
                 insert      = topleft,
                 font_size   = 10,
-                size        = self.bounding_box)
+                size        = self.bounding_box,
+                transform   = " ".join([mirror_transform, rotation_transform]))
         
         return svg
     

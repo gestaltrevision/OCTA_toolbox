@@ -47,7 +47,6 @@ class Stimulus:
         None.
 
         """
-        # print("ping")
         if size == None:
             self._autosize = True
             self.x_margin = x_margin
@@ -199,10 +198,13 @@ class Stimulus:
                                    'shapes'       :    jsonpickle.encode(self._shapes),
                                    'fillcolors'     :  jsonpickle.encode(self._fillcolors),
                                    'bordercolors'   :  jsonpickle.encode(self._bordercolors),
-                                   'orientations'  :    jsonpickle.encode(self._orientations),
+                                   'orientations'  :   jsonpickle.encode(self._orientations),
                                    'data'         :    jsonpickle.encode(self._data),
                                    'overrides'    :    jsonpickle.encode(self._attribute_overrides),
-                                   'element_order':    jsonpickle.encode(self._element_presentation_order)}}
+                                   'element_order':    jsonpickle.encode(self._element_presentation_order),
+                                   'id'           :    jsonpickle.encode(self._id_labels),
+                                   'class'        :    jsonpickle.encode(self._class_labels),
+                                   'mirror'       :    jsonpickle.encode(self._mirror_values)}}
         
         with open(json_filename, 'w') as output_file:
             json.dump(json_data, output_file, indent = 4)
@@ -237,16 +239,19 @@ class Stimulus:
                                    'size'       : self.size
                                    },
                      'element_attributes': {
-                                   'element_id'   :    jsonpickle.encode(list(range(len(self.dwg_elements)))),
-                                   'positions'    :    jsonpickle.encode(self.positions),
-                                   'bounding_boxes' :  jsonpickle.encode(self._bounding_boxes),
-                                   'shapes'       :    jsonpickle.encode(self._shapes),
-                                   'fillcolors'     :  jsonpickle.encode(self._fillcolors),
-                                   'bordercolors'   :  jsonpickle.encode(self._bordercolors),
-                                   'orientations'  :    jsonpickle.encode(self._orientations),
-                                   'data'         :    jsonpickle.encode(self._data),
-                                   'overrides'    :    jsonpickle.encode(self._attribute_overrides),
-                                   'element_order':    jsonpickle.encode(self._element_presentation_order)}}
+                                   'element_id'     : jsonpickle.encode(list(range(len(self.dwg_elements)))),
+                                   'positions'      : jsonpickle.encode(self.positions),
+                                   'bounding_boxes' : jsonpickle.encode(self._bounding_boxes),
+                                   'shapes'         : jsonpickle.encode(self._shapes),
+                                   'fillcolors'     : jsonpickle.encode(self._fillcolors),
+                                   'bordercolors'   : jsonpickle.encode(self._bordercolors),
+                                   'orientations'   : jsonpickle.encode(self._orientations),
+                                   'data'           : jsonpickle.encode(self._data),
+                                   'overrides'      : jsonpickle.encode(self._attribute_overrides),
+                                   'element_order':    jsonpickle.encode(self._element_presentation_order),
+                                   'id'           :    jsonpickle.encode(self._id_labels),
+                                   'class'        :    jsonpickle.encode(self._class_labels),
+                                   'mirror'       :    jsonpickle.encode(self._mirror_values)}}
         
         return json_data            
         
@@ -270,18 +275,31 @@ class Stimulus:
         with open(filename, 'r') as input_file:
             data = json.load(input_file)
             
-            stimulus = Grid(data['structure']['n_rows'], data['structure']['n_cols'], data['structure']['row_spacing'],
-                            data['structure']['col_spacing'], data['structure']['x_margin'], data['structure']['y_margin'],
-                            data['structure']['size'])
-            stimulus._positions      = jsonpickle.decode(data['element_attributes']['positions'])
-            stimulus._bounding_boxes = jsonpickle.decode(data['element_attributes']['bounding_boxes'])
-            stimulus._shapes         = jsonpickle.decode(data['element_attributes']['shapes'])
-            stimulus._fillcolors    = jsonpickle.decode(data['element_attributes']['fillcolors'])
-            stimulus._bordercolors  = jsonpickle.decode(data['element_attributes']['bordercolors'])
-            stimulus._orientations   = jsonpickle.decode(data['element_attributes']['orientations'])
-            stimulus._data           = jsonpickle.decode(data['element_attributes']['data'])
-            stimulus._attribute_overrides = jsonpickle.decode(data['element_attributes']['overrides'])
+            if data['structure']['size'] == 'auto':
+                stimulus_size = None
+            else:
+                stimulus_size = (data['stimulus']['width'], data['stimulus']['height'])
+                
+            stimulus = Grid(data['structure']['n_rows'], 
+                            data['structure']['n_cols'], 
+                            data['structure']['row_spacing'],
+                            data['structure']['col_spacing'], 
+                            data['stimulus']['background_color'],
+                            stimulus_size,
+                            data['structure']['x_margin'], 
+                            data['structure']['y_margin'])
+            stimulus._positions                  = jsonpickle.decode(data['element_attributes']['positions'])
+            stimulus._bounding_boxes             = jsonpickle.decode(data['element_attributes']['bounding_boxes'])
+            stimulus._shapes                     = jsonpickle.decode(data['element_attributes']['shapes'])
+            stimulus._fillcolors                 = jsonpickle.decode(data['element_attributes']['fillcolors'])
+            stimulus._bordercolors               = jsonpickle.decode(data['element_attributes']['bordercolors'])
+            stimulus._orientations               = jsonpickle.decode(data['element_attributes']['orientations'])
+            stimulus._data                       = jsonpickle.decode(data['element_attributes']['data'])
+            stimulus._attribute_overrides        = jsonpickle.decode(data['element_attributes']['overrides'])
             stimulus._element_presentation_order = jsonpickle.decode(data['element_attributes']['element_order'])
+            stimulus._id_labels                  = jsonpickle.decode(data['element_attributes']['id'])
+            stimulus._class_labels               = jsonpickle.decode(data['element_attributes']['class'])
+            stimulus._mirror_values                    = jsonpickle.decode(data['element_attributes']['mirror'])
             
             
         return stimulus
@@ -329,12 +347,15 @@ class Stimulus:
         self.dwg_elements = []
         
         bounding_boxes = self.bounding_boxes
-        fillcolors    = self.fillcolors
-        bordercolors  = self.bordercolors
+        fillcolors     = self.fillcolors
+        bordercolors   = self.bordercolors
         borderwidths   = self.borderwidths
         orientations   = self.orientations
         datas          = self.data
         shapes         = self.shapes
+        id_labels      = self.id_labels
+        class_labels   = self.class_labels
+        mirror_values  = self.mirror_values
         
         for i in range(len(self._element_presentation_order)):
             idx = self._element_presentation_order[i]
@@ -376,14 +397,32 @@ class Stimulus:
             else:
                 shape = shapes[idx]
                 
+            if 'mirror_values' in self._attribute_overrides[idx]:
+                mirror_value = self._attribute_overrides[idx]['mirror_values']
+            else:
+                mirror_value = mirror_values[idx]
+                
+            if 'class_labels' in self._attribute_overrides[idx]:
+                class_label = self._attribute_overrides[idx]['class_labels']
+            else:
+                class_label = class_labels[idx]
+                
+            if 'id_labels' in self._attribute_overrides[idx]:
+                id_label = self._attribute_overrides[idx]['id_labels']
+            else:
+                id_label = id_labels[idx]
+                
             element_parameters = {'element_id'   : i,
                                   'shape'        : shape, 
                                   'position'     : (x, y), 
                                   'bounding_box' : bounding_box, 
-                                  'fillcolor'   : fillcolor,
-                                  'bordercolor' : bordercolor,
+                                  'fillcolor'    : fillcolor,
+                                  'bordercolor'  : bordercolor,
                                   'borderwidth'  : borderwidth,
                                   'orientation'  : orientation, 
+                                  'class_label'  : class_label,
+                                  'id_label'     : id_label,
+                                  'mirror_value' : mirror_value,
                                   'data'         : data}
             
             self.dwg_elements.append(element_parameters)
@@ -523,7 +562,7 @@ class Stimulus:
     
 class Grid(Stimulus):
     _element_attributes = ["_bounding_boxes", "_orientations", "_bordercolors", "_borderwidths", "_fillcolors", "_shapes",
-                          "_class_labels", "_id_labels", "_mirrors", "_data"]
+                          "_class_labels", "_id_labels", "_mirror_values", "_data"]
     
     def __init__(self, n_rows, n_cols, row_spacing = 50, col_spacing= 50, background_color = "white", size = None, x_margin = 20, y_margin = 20):
         # print("Grid constructor")
@@ -546,7 +585,7 @@ class Grid(Stimulus):
         self._shapes         = RepeatAcrossElements([Polygon], self._n_rows, self._n_cols)
         self._class_labels   = RepeatAcrossElements([""], self._n_rows, self._n_cols)
         self._id_labels      = RepeatAcrossElements([""], self._n_rows, self._n_cols)
-        self._mirrors        = RepeatAcrossElements([""], self._n_rows, self._n_cols)
+        self._mirror_values        = RepeatAcrossElements([""], self._n_rows, self._n_cols)
         self._data           = RepeatAcrossElements(["8"], self._n_rows, self._n_cols)
         
         # Initialize a list with element attribute overrides
@@ -952,7 +991,76 @@ class Grid(Stimulus):
         
         self._attribute_overrides[element_id]['data'] = data_value
             
-            
+    @property
+    def class_labels(self):
+        """
+        The class labels for each grid element
+
+        """
+        return self._class_labels.generate().pattern
+    
+    @class_labels.setter
+    def class_labels(self, class_labels):
+        if not self._check_attribute_dimensions(class_labels):
+            return
+        
+        self._class_labels = class_labels
+        self._class_labels.n_rows = self._n_rows
+        self._class_labels.n_cols = self._n_cols
+        
+    def set_element_class_label(self, element_id, class_label_value):
+        element_id = self._parse_element_id(element_id)
+        
+        self._attribute_overrides[element_id]['class_labels'] = class_label_value
+        
+        
+    @property
+    def id_labels(self):
+        """
+        The ids for each grid element
+
+        """
+        return self._id_labels.generate().pattern
+    
+    @id_labels.setter
+    def id_labels(self, id_labels):
+        if not self._check_attribute_dimensions(id_labels):
+            return
+        
+        self._id_labels = id_labels
+        self._id_labels.n_rows = self._n_rows
+        self._id_labels.n_cols = self._n_cols
+        
+    def set_element_id_label(self, element_id, id_label_value):
+        element_id = self._parse_element_id(element_id)
+        
+        self._attribute_overrides[element_id]['id_labels'] = id_label_value
+        
+    
+    @property
+    def mirror_values(self):
+        """
+        The mirror value for each grid element
+
+        """
+        return self._mirror_values.generate().pattern
+    
+    @mirror_values.setter
+    def mirror_values(self, mirror_values):
+        if not self._check_attribute_dimensions(mirror_values):
+            return
+        
+        self._mirror_values = mirror_values
+        self._mirror_values.n_rows = self._n_rows
+        self._mirror_values.n_cols = self._n_cols
+        
+    def set_element_mirror_value(self, element_id, mirror_value):
+        element_id = self._parse_element_id(element_id)
+        
+        self._attribute_overrides[element_id]['mirror_values'] = mirror_value
+        
+        
+
     def swap_elements(self, n_swap_pairs = 1):
         """
         Swaps the position of two elements in the pattern. Once a position has

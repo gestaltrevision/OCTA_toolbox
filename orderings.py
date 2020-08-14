@@ -5,16 +5,27 @@ Created on Mon Jun 22 15:56:47 2020
 
 @author: rudy
 """
+import random
 
 from octa.Stimulus import Grid, Stimulus
 from octa.patterns import GridPattern, Pattern
+from octa.shapes import Rectangle
 
 #%% Default pattern
-stimulus = Grid(6, 6)
-stimulus.fillcolors = GridPattern.RepeatAcrossRows(["red", "green","blue"])
-stimulus.swap_distinct_elements(10)
-stimulus.Show()
 
+stimulus = Grid(6, 6)
+stimulus.fillcolors = GridPattern.RepeatAcrossElements(["red", "green", "blue"])
+stimulus.shapes = GridPattern.MirrorAcrossColumns([Rectangle, None])
+stimulus.orientations = GridPattern.MirrorAcrossColumns([20])
+stimulus.mirror_values = GridPattern.MirrorAcrossColumns(["horizontal", "vertical", "horizontalvertical"])
+
+stimulus.Show()
+stimulus.SaveJSON("test", r"C:\Users\Christophe\Desktop\todo\octa\OCTA_toolbox\output")
+
+#%% Load default pattern
+
+stimulus = Stimulus.LoadFromJSON(r"C:\Users\Christophe\Desktop\todo\octa\OCTA_toolbox\output\test.json")
+stimulus.Show()
 #%% Mirror across columns
 stimulus = Grid(6, 6)
 stimulus.fillcolors = GridPattern.MirrorAcrossColumns(["purple", "blue"])
