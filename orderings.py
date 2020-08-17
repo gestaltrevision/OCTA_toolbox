@@ -18,10 +18,10 @@ stimulus = Grid(6, 6)
 stimulus.positions.SetLocationJitter("xy", "normal", mu = 0, std = 10)
 random.seed(2)
 stimulus.Show()
-stimulus.SaveJSON("test", r"C:\Users\Christophe\Desktop\todo\octa\OCTA_toolbox\output")
+stimulus.SaveJSON("test", "output")
 
 #%% Load default pattern
-stimulus = Stimulus.LoadFromJSON(r"C:\Users\Christophe\Desktop\todo\octa\OCTA_toolbox\output\test.json")
+stimulus = Stimulus.LoadFromJSON(r"output\test.json")
 random.seed(2)
 stimulus.Show()
 

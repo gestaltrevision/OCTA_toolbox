@@ -558,7 +558,7 @@ class Stimulus:
         x, y = self._calculated_positions
         
         self._x_center = sum(x)/len(x)
-        self._y_cente  = sum(y)/len(y)
+        self._y_center  = sum(y)/len(y)
         
         return (self._x_center, self._y_center)
         

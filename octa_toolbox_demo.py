@@ -8,6 +8,7 @@ from octa.Stimulus import Grid, Stimulus
 from octa.patterns import GridPattern, Pattern
 from octa.shapes import Ellipse, Rectangle, Triangle, Image, Text, Polygon, RegularPolygon
 from octa.measurements import Complexity
+import random
 
 #%%
 def rgb2hex(r,g,b):
@@ -27,11 +28,12 @@ stimulus.SavePNG(filename = "output/test")
 stimulus.SavePDF(filename = "output/test")
 stimulus.SaveSVG(filename = "output/test")
 
-stimulus.positions.JitterLocations(distribution = "uniform", min_val = 5, max_val = 40)
+random.seed(2)
+stimulus.positions.SetLocationJitter(distribution = "uniform", min_val = 5, max_val = 40)
 
 stimulus.Show()
 
-
+random.seed(2)
 stimulus._fillcolors.pattern = ["red", "green", "blue"]
 
 stimulus.Show()
