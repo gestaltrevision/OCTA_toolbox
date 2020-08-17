@@ -92,3 +92,21 @@ stimulus.fillcolors = GridPattern.RepeatAcrossColumns(['#6dd6ff', '#1b9fd8', '#0
 stimulus.Show()
 stimulus.SaveSVG(filename = "output/testoutput")
 stimulus.SaveJSON(folder = "output", filename = "testoutput")
+
+#%% Apply jitter to feature (e.g. orientation)
+
+#%%
+random.seed(3)
+
+stimulus = Grid(6,6, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0)
+stimulus._autosize_method = "maximum_bounding_box"
+stimulus.shapes = GridPattern.RepeatAcrossRows([Ellipse])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(20,40)])
+stimulus.fillcolors = GridPattern.MirrorAcrossColumns(Pattern.CreateColorRangeList( '#006ca1','#6dd6ff', n_elements = 5))
+                                                                                   
+stimulus.orientations = GridPattern.RepeatAcrossElements([30])
+#orientationjitter = Pattern(stimulus.orientations).AddUniformJitter(min_val = -20, max_val = 20)
+orientationjitter = Pattern(stimulus.orientations).AddNormalJitter(mu = 0 , std = 30)
+stimulus.orientations = GridPattern.RepeatAcrossElements(orientationjitter)
+                                                             
+stimulus.Show()
