@@ -72,7 +72,7 @@ class Stimulus:
         self.dwg_elements = None
         self.dwg = None
     
-    def SaveSVG(self, filename):
+    def SaveSVG(self, filename, folder = None):
         """
         Saves the current stimulus as an SVG file.
 
@@ -86,7 +86,12 @@ class Stimulus:
         None.
 
         """
-        self.dwg.saveas('%s.svg'%filename , pretty = True)
+        
+        svg_filename = "%s.svg"%filename
+        if folder is not None:
+            svg_filename = os.path.join(folder, svg_filename)  
+            
+        self.dwg.saveas(svg_filename , pretty = True)
         
     def GetSVG(self):
         """

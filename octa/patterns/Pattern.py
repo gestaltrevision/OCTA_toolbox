@@ -294,8 +294,8 @@ class Pattern:
             A list with hexadecimal color values.
 
         """
-        start_color = color.Color(start_color)
-        end_color   = color.Color(end_color)
+        start_color = colour.Color(start_color)
+        end_color   = colour.Color(end_color)
         
         color_range = [c.hex for c in start_color.range_to(end_color, n_elements)]
         

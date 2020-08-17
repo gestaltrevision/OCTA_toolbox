@@ -119,7 +119,7 @@ class Positions:
             
             self._randomization = 'uniform'
             self._randomization_parameters = {'min_val' : min_val, 'max_val' : max_val, 'axis' : axis}
-                           
+                                       
         return self
     
     
@@ -208,15 +208,21 @@ class Positions:
                 
         if axis == "x":
             y_mod = Pattern( list(A*np.sin(2*np.pi*f*np.array(range(n_cols)))))
-            y_mod.RepeatPattern(n_rows)
+            y_mod = y_mod.RepeatPattern(n_rows)
             
             return Positions(x, y + y_mod)
-        else:
+        elif axis == "y":
             x_mod = Pattern( list(A*np.sin(2*np.pi*f*np.array(range(n_rows)))))
-            x_mod.RepeatElements(n_cols)
+            x_mod = x_mod.RepeatElements(n_cols)
             
             return Positions(x + x_mod, y)
-
+        else:
+            y_mod = Pattern( list(A*np.sin(2*np.pi*f*np.array(range(n_cols)))))
+            y_mod = y_mod.RepeatPattern(n_rows)
+            x_mod = Pattern( list(A*np.sin(2*np.pi*f*np.array(range(n_rows)))))
+            x_mod = x_mod.RepeatElements(n_cols)
+            
+            return Positions(x + x_mod, y + y_mod)
     
     def CreateCircle(radius, n_elements):
         """
