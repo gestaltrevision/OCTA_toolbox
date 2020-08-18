@@ -768,6 +768,14 @@ class Grid(Stimulus):
         self._attribute_overrides[element_id]['shape'] = shape_value
             
         
+    def remove_element(self, element_id):
+        """
+        Removes the shape at position element_id from the display
+        
+        """
+        self.set_element_shape(element_id, None)
+        
+        
     @property
     def bordercolors(self):
         """

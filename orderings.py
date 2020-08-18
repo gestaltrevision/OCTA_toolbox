@@ -14,11 +14,12 @@ from octa.shapes import Rectangle, Triangle
 #%% Default pattern
 
 stimulus = Grid(6, 6)
-# stimulus.shapes = GridPattern.RandomPattern([Rectangle, Triangle])
-stimulus.positions.SetLocationJitter("xy", "normal", mu = 0, std = 10)
+stimulus.shapes = GridPattern.RepeatAcrossColumns([Rectangle, None])
+stimulus.remove_element(0)
+#stimulus.positions.SetLocationJitter("xy", "normal", mu = 0, std = 10)
 random.seed(2)
 stimulus.Show()
-stimulus.SaveJSON("test", "output")
+#stimulus.SaveJSON("test", "output")
 
 #%% Load default pattern
 stimulus = Stimulus.LoadFromJSON(r"output\test.json")
