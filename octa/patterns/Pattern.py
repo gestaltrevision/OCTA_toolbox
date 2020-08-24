@@ -4,6 +4,7 @@ More complex patterns (e.g., grid based patterns) can be derived from this class
 """
 import colour
 import random
+import types
 
 class Pattern:
     def __init__(self, pattern):
@@ -329,4 +330,31 @@ class Pattern:
             number_range.append(number_range[-1] + step_size)
         
         return number_range
+    
+    def Create2DGradient(x, y, n_elements):
+        """
+        """
+        result = []
+        for i in range(n_elements):
+            if isinstance(x, types.GeneratorType):
+                x_i = next(x)
+            else:
+                x_i = x
+            
+            if isinstance(y, types.GeneratorType):
+                y_i = next(y)
+            else:
+                y_i = y
+                
+            result.append((x_i, y_i))
+            
+        return result
+        
+        
+def Sequence(start, step):
+    i = start
+    
+    while True:
+        yield i 
+        i += step
     

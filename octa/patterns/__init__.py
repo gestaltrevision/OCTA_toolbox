@@ -5,6 +5,6 @@ Created on Tue May  5 15:58:04 2020
 @author: Christophe
 """
 
-from octa.patterns.Pattern import Pattern
+from octa.patterns.Pattern import Pattern, Sequence
 
 import octa.patterns.GridPattern
