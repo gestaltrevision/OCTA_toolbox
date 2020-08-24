@@ -357,4 +357,12 @@ def Sequence(start, step):
     while True:
         yield i 
         i += step
+        
+def LinearGradient(start, end, n_elements):
+    step_size = (end - start) / (n_elements - 1)
+    
+    current_number = start
+    while current_number <= end:
+        yield current_number
+        current_number += step_size
     

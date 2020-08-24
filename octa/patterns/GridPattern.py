@@ -24,6 +24,7 @@ class GridPattern(Pattern):
     """
     def __init__(self, pattern, n_rows = 5, n_cols = 5, patterntype = None, patternorientation = None):
 
+        #print(type(pattern))
         assert type(pattern) == list or type(pattern) == Pattern, "Provided pattern must be a list"
         assert type(n_rows)  == int, "n_rows must be an integer type"
         assert type(n_cols)  == int, "n_cols must be an integer type"
