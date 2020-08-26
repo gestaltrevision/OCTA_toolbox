@@ -5,6 +5,7 @@ Created on Tue Apr  7 12:31:15 2020
 @author: Christophe
 """
 from octa.Stimulus import Grid, Stimulus
+from octa.Positions import Positions
 from octa.patterns import GridPattern, Pattern
 from octa.shapes import Ellipse, Rectangle, Triangle, Image, Text, Polygon, RegularPolygon
 from octa.measurements import Complexity

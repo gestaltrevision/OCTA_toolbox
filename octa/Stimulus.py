@@ -106,6 +106,7 @@ class Stimulus:
         String.
 
         """
+        self.Render()
         return self.dwg.tostring()
     
     def SavePNG(self, filename, folder = None): 
@@ -591,7 +592,7 @@ class Grid(Stimulus):
         self._orientations   = RepeatAcrossElements([0], self._n_rows, self._n_cols)
         self._bordercolors   = RepeatAcrossElements([""], self._n_rows, self._n_cols)
         self._borderwidths   = RepeatAcrossElements([0], self.n_rows, self.n_cols)
-        self._fillcolors     = RepeatAcrossElements(["blue"], self.n_rows, self.n_cols)
+        self._fillcolors     = RepeatAcrossElements(["dodgerblue"], self.n_rows, self.n_cols)
         self._shapes         = RepeatAcrossElements([Polygon], self._n_rows, self._n_cols)
         self._class_labels   = RepeatAcrossElements([""], self._n_rows, self._n_cols)
         self._id_labels      = RepeatAcrossElements([""], self._n_rows, self._n_cols)
