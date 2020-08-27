@@ -112,8 +112,8 @@ class Path:
         
         sizeposition_transform = "scale(%f, %f) translate(%f, %f)"%(scale_x_parameter, scale_y_parameter, (topleft[0]/scale_x_parameter), (topleft[1]/scale_y_parameter))
 
-        mirror_transform = ""
-        #self.create_mirror_transform()  
+        mirror_transform = self.create_mirror_transform()  
+        
         rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, xsize/2, ysize/2)
                
         svg = dwg.path(
@@ -121,7 +121,7 @@ class Path:
                 fill         = self.fillcolor,
                 stroke       = self.bordercolor,
                 stroke_width = self.borderwidth,
-                transform    = " ".join([sizeposition_transform, mirror_transform, rotation_transform]))#,
+                transform    = " ".join([mirror_transform, sizeposition_transform,  rotation_transform]))#,
 #                insert      = topleft,
 #                size        = self.bounding_box)
                 

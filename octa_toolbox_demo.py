@@ -141,7 +141,7 @@ stimulus.Show()
 
 random.seed(3)
 
-stimulus = Grid(6,6, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0)
+stimulus = Grid(6,6, background_color = "white", x_margin = 0, y_margin = 0)
 stimulus._autosize_method = "maximum_bounding_box"
 stimulus.shapes = GridPattern.RepeatAcrossRows([Image])
 stimulus.data = GridPattern.RepeatAcrossElements(["img/checkmark.svg"])
@@ -164,12 +164,16 @@ stimulus.Show()
 
 # PathSvg: does not work well if other elements (eg rectangle) in the svg (should be paths only); 
 # incorrect width and height is assumed, some parts are filled and some not, non-path elements are not shown
+# (see problems with test.svg and arrow-circle-up-svgrepo-com.svg)
 
 # use Path in case svg has more than one path; then you can define width and height yourself
 
+# Image: not visible in PNG/PDF/JPG
+# data URI possible solution? (datauri package)
+
 random.seed(3)
 
-stimulus = Grid(9,6, background_color = "white", x_margin = 0, y_margin = 0)
+stimulus = Grid(9,6, background_color = "gainsboro", x_margin = 0, y_margin = 0)
 stimulus._autosize_method = "maximum_bounding_box"
 stimulus.shapes = GridPattern.RepeatAcrossRows([Path, PathSvg, Image, Path, PathSvg, Image, Path, PathSvg, Image])
 stimulus.data = GridPattern.RepeatAcrossRows([('M 100 350 l 150 -300 M 250 50 l 150 300 M 175 200 l 150 0 M 100 350 q 150 -300 300 0', 450, 400), 
@@ -180,13 +184,40 @@ stimulus.data = GridPattern.RepeatAcrossRows([('M 100 350 l 150 -300 M 250 50 l 
                                               ("M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z", 512, 512),
                                               "img/checkmark.svg",
                                               "img/checkmark.svg"])
-stimulus.borderwidths = GridPattern.RepeatAcrossRows([2,2,2,0,0,0])
+stimulus.borderwidths = GridPattern.RepeatAcrossRows([2,2,2,0,0,0,2,2,2])
 stimulus.bordercolors = GridPattern.RepeatAcrossElements(['black'])
 stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(40,40)])
 stimulus.fillcolors = GridPattern.MirrorAcrossColumns(Pattern.CreateColorRangeList( '#006ca1','#6dd6ff', n_elements = 5))
+stimulus.mirror_values = GridPattern.RepeatAcrossColumns(["none", "horizontal", "vertical", "horizontalvertical"])
                                                                
 #                                                        
 #stimulus.orientations = GridPattern.RepeatAcrossElements([0,30,45])
+#orientationjitter = Pattern(stimulus.orientations).AddUniformJitter(min_val = -20, max_val = 20)
+#orientationjitter = Pattern(stimulus.orientations).AddNormalJitter(mu = 0 , std = 30)
+#stimulus.orientations = GridPattern.RepeatAcrossElements(orientationjitter)
+                                                             
+stimulus.Show()
+#stimulus.SavePNG("output/pathsvg_in_png")
+#stimulus.SaveSVG("output/pathsvg_in_png")
+
+#%%
+
+# Text as shape
+
+random.seed(3)
+
+stimulus = Grid(6,6, background_color = "gainsboro", x_margin = 0, y_margin = 0, row_spacing = 40, col_spacing = 40)
+stimulus._autosize_method = "maximum_bounding_box"
+stimulus.shapes = GridPattern.RepeatAcrossRows([Text, Rectangle])
+stimulus.data = GridPattern.RepeatAcrossRows(["ABC\nB A G", "B", "C"])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(40,40)])
+stimulus.fillcolors = GridPattern.MirrorAcrossColumns(Pattern.CreateColorRangeList( '#006ca1','#6dd6ff', n_elements = 5))
+#stimulus.borderwidths = GridPattern.RepeatAcrossRows([2])
+#stimulus.bordercolors = GridPattern.RepeatAcrossElements(['green'])
+#stimulus.mirror_values = GridPattern.RepeatAcrossColumns(["none", "horizontal", "vertical", "horizontalvertical"])
+                                                               
+#                                                        
+stimulus.orientations = GridPattern.RepeatAcrossElements([0,30,45])
 #orientationjitter = Pattern(stimulus.orientations).AddUniformJitter(min_val = -20, max_val = 20)
 #orientationjitter = Pattern(stimulus.orientations).AddNormalJitter(mu = 0 , std = 30)
 #stimulus.orientations = GridPattern.RepeatAcrossElements(orientationjitter)

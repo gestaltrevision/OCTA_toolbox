@@ -107,13 +107,34 @@ class Text:
 
         rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, self.position[0], self.position[1])
         
-        topleft = (self.position[0] - self.bounding_box[0]/2 , self.position[1] - self.bounding_box[1]/2)
+#        topleft = (self.position[0] - self.bounding_box[0]/2 , self.position[1] - self.bounding_box[1]/2)
+
+        textlength = max([(len(i) - i.count(" ")) for i in self.data.split("\n")])
+
         svg = dwg.textArea(
                 text        = self.data,
-                insert      = topleft,
-                font_size   = 10,
+                fill        = self.fillcolor,
+                stroke= self.bordercolor,
+                stroke_width = self.borderwidth,
+                text_align = 'center',
+#                display_align = 'center',
+                insert      = (self.position[0]- (4* textlength ), self.position[1]- (4* textlength)),
+                font_size   = "10pt",#min(self.bounding_box),
+                font_family = 'Roboto Mono',
                 size        = self.bounding_box,
                 transform   = " ".join([mirror_transform, rotation_transform]))
         
+#        svg = dwg.text(
+#                text        = self.data, 
+#                insert      = self.position,
+#                fill        = self.fillcolor,
+#                stroke      = self.bordercolor,
+#                stroke_width = self.borderwidth,
+##                style       = 'text-align = "middle";',
+#                textlength  = self.bounding_box[0],
+#                font_size   = min(self.bounding_box), 
+##                font_weight = str(700), 
+#                transform   = " ".join([mirror_transform, rotation_transform]))
+#        
         return svg
     
