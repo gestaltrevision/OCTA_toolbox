@@ -134,3 +134,26 @@ stimulus.Show()
 stimulus.remove_element(2)
 
 stimulus.Show()
+
+#%%
+
+# image as shape
+
+random.seed(3)
+
+stimulus = Grid(6,6, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0)
+stimulus._autosize_method = "maximum_bounding_box"
+stimulus.shapes = GridPattern.RepeatAcrossRows([Image])
+stimulus.data = GridPattern.RepeatAcrossElements(["img/checkmark.svg"])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(40,40)])
+                                                        
+stimulus.orientations = GridPattern.RepeatAcrossElements([30])
+#orientationjitter = Pattern(stimulus.orientations).AddUniformJitter(min_val = -20, max_val = 20)
+orientationjitter = Pattern(stimulus.orientations).AddNormalJitter(mu = 0 , std = 30)
+stimulus.orientations = GridPattern.RepeatAcrossElements(orientationjitter)
+                                                             
+stimulus.Show()
+
+stimulus.remove_element(2)
+
+stimulus.Show()
