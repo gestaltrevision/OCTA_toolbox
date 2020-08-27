@@ -162,7 +162,10 @@ stimulus.Show()
 
 # svg as Path, PathSvg, or Image
 
-# PathSvg: does not work well if other elements (eg rectangle) in the svg (should be paths only)
+# PathSvg: does not work well if other elements (eg rectangle) in the svg (should be paths only); 
+# incorrect width and height is assumed, some parts are filled and some not, non-path elements are not shown
+
+# use Path in case svg has more than one path; then you can define width and height yourself
 
 random.seed(3)
 
