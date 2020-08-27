@@ -13,3 +13,5 @@ from octa.shapes.Text import Text
 from octa.shapes.Image import Image
 from octa.shapes.RegularPolygon import RegularPolygon
 from octa.shapes.Polygon import Polygon
+from octa.shapes.Path import Path
+from octa.shapes.PathSvg import PathSvg

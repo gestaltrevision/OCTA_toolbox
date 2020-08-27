@@ -7,7 +7,7 @@ Created on Tue Apr  7 12:31:15 2020
 from octa.Stimulus import Grid, Stimulus
 from octa.Positions import Positions
 from octa.patterns import GridPattern, Pattern
-from octa.shapes import Ellipse, Rectangle, Triangle, Image, Text, Polygon, RegularPolygon
+from octa.shapes import Ellipse, Rectangle, Triangle, Image, Text, Polygon, RegularPolygon, Path, PathSvg
 from octa.measurements import Complexity
 import random
 
@@ -156,4 +156,36 @@ stimulus.Show()
 
 stimulus.remove_element(2)
 
+stimulus.Show()
+
+#%%
+
+# svg as Path, PathSvg, or Image
+
+# PathSvg: does not work well if other elements (eg rectangle) in the svg (should be paths only)
+
+random.seed(3)
+
+stimulus = Grid(9,6, background_color = "white", x_margin = 0, y_margin = 0)
+stimulus._autosize_method = "maximum_bounding_box"
+stimulus.shapes = GridPattern.RepeatAcrossRows([Path, PathSvg, Image, Path, PathSvg, Image, Path, PathSvg, Image])
+stimulus.data = GridPattern.RepeatAcrossRows([('M 100 350 l 150 -300 M 250 50 l 150 300 M 175 200 l 150 0 M 100 350 q 150 -300 300 0', 450, 400), 
+                                              "img/test.svg", "img/test.svg",
+                                              ("M12 22A10 10 0 1 0 2 12a10 10 0 0 0 10 10zM8.31 10.14l3-2.86a.49.49 0 0 1 .15-.1.54.54 0 0 1 .16-.1.94.94 0 0 1 .76 0 1 1 0 0 1 .33.21l3 3a1 1 0 0 1-1.42 1.42L13 10.41V16a1 1 0 0 1-2 0v-5.66l-1.31 1.25a1 1 0 0 1-1.38-1.45z", 24,24),
+                                              "img/arrow-circle-up-svgrepo-com.svg", 
+                                              "img/arrow-circle-up-svgrepo-com.svg",
+                                              ("M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z", 512, 512),
+                                              "img/checkmark.svg",
+                                              "img/checkmark.svg"])
+stimulus.borderwidths = GridPattern.RepeatAcrossRows([2,2,2,0,0,0])
+stimulus.bordercolors = GridPattern.RepeatAcrossElements(['black'])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(40,40)])
+stimulus.fillcolors = GridPattern.MirrorAcrossColumns(Pattern.CreateColorRangeList( '#006ca1','#6dd6ff', n_elements = 5))
+                                                               
+#                                                        
+#stimulus.orientations = GridPattern.RepeatAcrossElements([0,30,45])
+#orientationjitter = Pattern(stimulus.orientations).AddUniformJitter(min_val = -20, max_val = 20)
+#orientationjitter = Pattern(stimulus.orientations).AddNormalJitter(mu = 0 , std = 30)
+#stimulus.orientations = GridPattern.RepeatAcrossElements(orientationjitter)
+                                                             
 stimulus.Show()
