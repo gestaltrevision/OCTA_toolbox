@@ -108,7 +108,7 @@ class Path:
         xsize = self.data[1]
         ysize = self.data[2]
         scale_x_parameter = self.bounding_box[0] / xsize
-        scale_y_parameter = self.bounding_box[0] / ysize
+        scale_y_parameter = self.bounding_box[1] / ysize
         
         sizeposition_transform = "scale(%f, %f) translate(%f, %f)"%(scale_x_parameter, scale_y_parameter, (topleft[0]/scale_x_parameter), (topleft[1]/scale_y_parameter))
 

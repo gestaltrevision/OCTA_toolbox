@@ -120,7 +120,7 @@ class PathSvg:
         max_xsize = max([item[0] for item in allpaths])
         max_ysize = max([item[1] for item in allpaths])
         scale_x_parameter = self.bounding_box[0] / max_xsize
-        scale_y_parameter = self.bounding_box[0] / max_ysize
+        scale_y_parameter = self.bounding_box[1] / max_ysize
         
         d = " ".join([item["d"] for item in attributes])
         

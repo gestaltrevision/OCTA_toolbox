@@ -114,7 +114,7 @@ class Text:
         svg = dwg.textArea(
                 text        = self.data,
                 fill        = self.fillcolor,
-                stroke= self.bordercolor,
+                stroke      = self.bordercolor,
                 stroke_width = self.borderwidth,
                 text_align = 'center',
 #                display_align = 'center',
