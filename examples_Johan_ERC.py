@@ -28,9 +28,9 @@ stimulus.fillcolors = GridPattern.RepeatAcrossRightDiagonal(['#6dd6ff', '#1b9fd8
 
 stimulus.Show()
 filename = "1"
-stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
-stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
-stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
+#stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
 #stimulus.SavePDF(filename = "output/test")
 #stimulus.SaveSVG(filename = "output/test")
 
@@ -41,9 +41,9 @@ stimulus.positions.SetLocationJitter(distribution = "uniform", min_val = 0, max_
 
 stimulus.Show()
 filename = "2"
-stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
-stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
-stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
+#stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
 
 #%%
 
@@ -52,9 +52,9 @@ stimulus._fillcolors.pattern = ["yellowgreen", "purple", "deepskyblue"]
 
 stimulus.Show()
 filename = "3"
-stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
-stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
-stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
+#stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
 
 
 #%%
@@ -70,9 +70,9 @@ stimulus.positions = Positions.CreateSineGrid(n_rows = 6, n_cols = 6, row_spacin
 
 stimulus.Show()
 filename = "4"
-stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
-stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
-stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
+#stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
 
 #%%
 
@@ -87,9 +87,9 @@ stimulus.positions = Positions.CreateSineGrid(n_rows = 6, n_cols = 6, row_spacin
 
 stimulus.Show()
 filename = "5"
-stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
-stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
-stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
+#stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
 
 
 #%% Default grid + change in values after initialization
@@ -103,9 +103,9 @@ stimulus.fillcolors = GridPattern.RepeatAcrossRightDiagonal(['#6dd6ff', '#1b9fd8
 
 stimulus.Show()
 filename = "6"
-stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
-stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
-stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
+#stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
 #stimulus.SavePDF(filename = "output/test")
 #stimulus.SaveSVG(filename = "output/test")
 
@@ -116,9 +116,9 @@ stimulus.positions.SetLocationJitter(distribution = "uniform", min_val = 0, max_
 
 stimulus.Show()
 filename = "7"
-stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
-stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
-stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
+#stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
 
 #%%
 
@@ -127,9 +127,9 @@ stimulus._fillcolors.pattern = ["yellowgreen", "purple", "deepskyblue"]
 
 stimulus.Show()
 filename = "8"
-stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
-stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
-stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
+#stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
 
 #%% Default grid + change in values after initialization
 stimulus = Grid(6,6, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0)
@@ -142,9 +142,9 @@ stimulus.fillcolors = GridPattern.RepeatAcrossRightDiagonal(['#6dd6ff', '#1b9fd8
 
 stimulus.Show()
 filename = "9"
-stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
-stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
-stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
+#stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
 #stimulus.SavePDF(filename = "output/test")
 #stimulus.SaveSVG(filename = "output/test")
 
@@ -155,9 +155,9 @@ stimulus.positions.SetLocationJitter(distribution = "uniform", min_val = 0, max_
 
 stimulus.Show()
 filename = "10"
-stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
-stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
-stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
+#stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
 
 #%%
 
@@ -166,9 +166,9 @@ stimulus._fillcolors.pattern = ["yellowgreen", "purple", "deepskyblue"]
 
 stimulus.Show()
 filename = "11"
-stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
-stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
-stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
+#stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
 
 #%%
 stimulus = Grid(6,6, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0)
@@ -183,9 +183,9 @@ stimulus.swap_elements(1)
 
 stimulus.Show()
 filename = "12"
-stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
-stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
-stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
+#stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
 
                                                              
 #%%
@@ -219,9 +219,9 @@ stimulus.positions = Positions.CreateCircle(radius = 150, n_elements = 18 )
 
 stimulus.Show()
 filename = "13"
-stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
-stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
-stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
+#stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
 
 
 #%%
@@ -241,9 +241,9 @@ stimulus.set_element_orientation(element_id = 9, orientation_value = 0)
 
 stimulus.Show()
 filename = "14"
-stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
-stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
-stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
+#stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
 
 #%%
 
@@ -260,9 +260,9 @@ stimulus.positions = Positions.CreateCircle(radius = 150, n_elements = 36)
 
 stimulus.Show()
 filename = "15"
-stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
-stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
-stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
+#stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
 
 #%%
 
@@ -278,9 +278,9 @@ random.seed(2)
 
 stimulus.Show()
 filename = "16"
-stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
-stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
-stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
+#stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
 
 #%%
 
@@ -296,9 +296,9 @@ stimulus.positions = Positions.CreateSineGrid(n_rows = 6, n_cols = 10, row_spaci
 
 stimulus.Show()
 filename = "17"
-stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
-stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
-stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
+#stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
 
 #%%
 
@@ -315,9 +315,9 @@ stimulus.positions.SetLocationJitter(distribution = "normal", mu = 0, std = 8)
 
 stimulus.Show()
 filename = "18"
-stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
-stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
-stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
+#stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
 
 #%%
 
@@ -334,9 +334,9 @@ stimulus.positions = Positions.CreateSineGrid(n_rows = 6, n_cols = 6, row_spacin
 
 stimulus.Show()
 filename = "19"
-stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
-stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
-stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
+#stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
 
 #%%
 
@@ -353,9 +353,9 @@ stimulus.positions = Positions.CreateSineGrid(n_rows = 10, n_cols = 10, row_spac
 
 stimulus.Show()
 filename = "20"
-stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
-stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
-stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
+#stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
 
 #%%
 random.seed(3)
@@ -369,9 +369,9 @@ stimulus.fillcolors = GridPattern.MirrorAcrossColumns(Pattern.CreateColorRangeLi
 
 stimulus.Show()
 filename = "21"
-stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
-stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
-stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
+#stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
 
 #%%
 
@@ -389,6 +389,6 @@ stimulus.positions.SetLocationJitter(distribution = "normal", mu = 0, std = 5)
 
 stimulus.Show()
 filename = "22"
-stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
-stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
-stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SaveSVG(filename, folder = "octa_examples_johan_ERC")
+#stimulus.SavePNG(filename, folder = "octa_examples_johan_ERC/PNG")
+#stimulus.SaveJSON(filename, folder = "octa_examples_johan_ERC")
