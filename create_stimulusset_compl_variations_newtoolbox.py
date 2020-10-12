@@ -7,7 +7,7 @@ Created on Thu Jun 18 10:57:21 2020
 from octa.Stimulus import Grid
 from octa.patterns import GridPattern, Pattern
 from octa.shapes import Ellipse, Rectangle, Triangle
-from octa.measurements import LOCE
+from octa.measurements import Complexity
 
 import random 
 
@@ -215,7 +215,6 @@ stimulus_2._element_presentation_order = newpresentationorder_1
 stimulus_1.Show()
 stimulus_2.Show()
 
-
 LOCI_1 = 0
 for i in complexity_1: 
     if(i > 1): 
@@ -228,4 +227,4 @@ for i in complexity_2:
 
 print("\n\nLOCI:\t", LOCI_1, " vs. ", LOCI_2)
 print("LOC:\t", sum(complexity_1), " vs. ", sum(complexity_2))
-print("LOCE:\t", LOCE.CalculateElementsLOCE(stimulus_1), " vs. ", LOCE.CalculateElementsLOCE(stimulus_2))
+print("LOCE:\t", Complexity.CalculateElementsLOCE(stimulus_1, distinction_features = ['shapes', 'bounding_boxes', 'fillcolors']), " vs. ", Complexity.CalculateElementsLOCE(stimulus_2, distinction_features = ['shapes', 'bounding_boxes', 'fillcolors']))
