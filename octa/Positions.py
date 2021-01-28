@@ -171,6 +171,30 @@ class Positions:
         y = y.RepeatElements(n_cols)    
         
         return Positions(x, y)
+    
+    def CreateCustomPositions(x, y):
+        """
+        Static method for creates a 2D grid structure.
+
+        Parameters
+        ----------
+        x : Pattern
+            All the x-coordinates.
+        y : Pattern
+            All the y-coordinates.
+
+        Returns
+        -------
+        x : Pattern
+            All the x-coordinates.
+        y : Pattern
+            All the y-coordinates.
+
+        """
+        x = Pattern(list(x))
+        y = Pattern(list(y))   
+        
+        return Positions(x, y)
         
     
     def CreateSineGrid(n_rows, n_cols, row_spacing, col_spacing, A = 1, f = 1, axis = "x"):

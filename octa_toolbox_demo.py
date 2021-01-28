@@ -245,5 +245,24 @@ stimulus.orientations = GridPattern.RepeatAcrossElements([135])
 #orientationjitter = Pattern(stimulus.orientations).AddUniformJitter(min_val = -20, max_val = 20)
 #orientationjitter = Pattern(stimulus.orientations).AddNormalJitter(mu = 0 , std = 30)
 #stimulus.orientations = GridPattern.RepeatAcrossElements(orientationjitter)
-                                                             
+                           
+stimulus.positions.x                                  
+stimulus.Show()
+
+#%%
+
+# Custom positions elements
+
+random.seed(3)
+
+stimulus = Grid(3,1, background_color = "gainsboro", x_margin = 50, y_margin = 50, row_spacing = 50, col_spacing = 50)
+stimulus._autosize_method = "maximum_bounding_box"
+stimulus.Show()
+
+x_jitter = [random.uniform(-50, 50) for _ in range(len(stimulus.positions.x))]
+y_jitter = [random.uniform(-10, 10) for _ in range(len(stimulus.positions.y))]
+new_x = [stimulus.positions.x[i] + x_jitter[i] for i in range(len(stimulus.positions.x))]
+new_y = [stimulus.positions.y[i] + y_jitter[i] for i in range(len(stimulus.positions.y))]
+stimulus.positions = Positions.CreateCustomPositions(x = new_x, y = new_y)
+                                
 stimulus.Show()
