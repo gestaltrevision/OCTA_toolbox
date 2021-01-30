@@ -71,7 +71,8 @@ class Stimulus:
         
         self.dwg_elements = None
         self.dwg = None
-    
+        
+
     def SaveSVG(self, filename, folder = None):
         """
         Saves the current stimulus as an SVG file.
@@ -456,8 +457,9 @@ class Stimulus:
 
         """           
         self.dwg = svgwrite.Drawing(size = (self.width, self.height), profile="tiny")
-        self.background = self.dwg.rect(insert = (0, 0), size = (self.width, self.height), fill = self.background_color)
-        self.dwg.add(self.background)  
+        if(self.background_color != "None"):
+            self.background = self.dwg.rect(insert = (0, 0), size = (self.width, self.height), fill = self.background_color)
+            self.dwg.add(self.background)  
         
         
     @property

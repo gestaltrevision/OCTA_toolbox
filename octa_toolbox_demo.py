@@ -298,3 +298,14 @@ new_y = [stimulus.positions.y[i] + y_jitter[i] for i in range(len(stimulus.posit
 stimulus.positions = Positions.CreateCustomPositions(x = new_x, y = new_y)
                                 
 stimulus.Show()
+
+#%%
+
+# Stimulus without background color
+
+stimulus = Grid(6,6, background_color = "None", size = (350,350), row_spacing = 50, col_spacing = 50)
+stimulus._autosize_method = "maximum_bounding_box"
+stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(40,40),(20,20)])
+
+stimulus.Show()
+# stimulus.SaveSVG("test")
