@@ -72,11 +72,11 @@ class Triangle:
             
         self.id_label = id_label
     
-    def set_mirror_value(self, mirror):
-        if mirror == None:
-            mirror = ""
+    def set_mirror_value(self, mirror_value):
+        if mirror_value == None:
+            mirror_value = ""
             
-        self.mirror = mirror
+        self.mirror_value = mirror_value
     
 
     def __str__(self):
@@ -88,11 +88,11 @@ class Triangle:
     
     def create_mirror_transform(self):
         mirror_transform = ""
-        if self.mirror == "vertical":
+        if self.mirror_value == "vertical":
             mirror_transform = "scale(-1, 1) translate(%f, 0)"%(-2*self.position[0])
-        elif self.mirror == "horizontal":
+        elif self.mirror_value == "horizontal":
             mirror_transform = "scale(1, -1), translate(0, %f)"%(-2*self.position[1])
-        elif self.mirror == "horizontalvertical":
+        elif self.mirror_value == "horizontalvertical":
             mirror_transform = "scale(-1, -1) translate(%f, %f)"%(-2*self.position[0], -2*self.position[1])
                 
         return mirror_transform
@@ -112,6 +112,11 @@ class Triangle:
                 stroke       = self.bordercolor,
                 stroke_width = self.borderwidth,
                 transform    = " ".join([mirror_transform, rotation_transform]))
+        
+        if self.class_label != "":
+            svg['class']         = self.class_label
+        if self.id_label != "":
+            svg['id']        = self.id_label
         
         return svg
     

@@ -354,3 +354,20 @@ stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(40, 20)])
 stimulus.mirror_values = GridPattern.RepeatAcrossColumns(["none", "horizontal", "vertical", "horizontalvertical"])
 
 stimulus.Show()
+
+#%%
+
+# class & id example
+
+stimulus = Grid(1,4, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus._autosize_method = "maximum_bounding_box"
+
+stimulus.shapes = GridPattern.RepeatAcrossColumns([Triangle, Ellipse, Rectangle])
+stimulus.orientations = GridPattern.RepeatAcrossRows([45])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(40, 20)])
+stimulus.mirror_values = GridPattern.RepeatAcrossColumns(["none", "horizontal", "vertical", "horizontalvertical"])
+stimulus.class_labels = GridPattern.RepeatAcrossColumns(["Triangle", "Ellipse", "Rectangle"])
+stimulus.id_labels = GridPattern.RepeatAcrossElements(['firstelement', '', '', 'lastelement'])
+
+stimulus.Show()
+stimulus.SaveSVG("testclassesids")

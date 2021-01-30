@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<svg baseProfile="tiny" height="60" version="1.2" width="260" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs/>
+  <rect fill="lightgrey" height="60" width="260" x="0" y="0"/>
+  <polygon class="Triangle" fill="dodgerblue" id="firstelement" points="20.0,40.0 40,20.0 60.0,40.0" stroke-width="0" transform=" rotate(45, 40, 30)"/>
+  <ellipse class="Ellipse" cx="100" cy="30" fill="dodgerblue" rx="20.0" ry="10.0" stroke-width="0" transform="scale(1, -1), translate(0, -60.000000) rotate(45, 100, 30)"/>
+  <rect class="Rectangle" fill="dodgerblue" height="20" stroke-width="0" transform="scale(-1, 1) translate(-320.000000, 0) rotate(45, 160, 30)" width="40" x="140.0" y="20.0"/>
+  <polygon class="Triangle" fill="dodgerblue" id="lastelement" points="200.0,40.0 220,20.0 240.0,40.0" stroke-width="0" transform="scale(-1, -1) translate(-440.000000, -60.000000) rotate(45, 220, 30)"/>
+</svg>
