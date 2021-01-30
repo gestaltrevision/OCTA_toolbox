@@ -345,11 +345,12 @@ stimulus.Show()
 
 # mirror example
 
-stimulus = Grid(6,6, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus = Grid(6,4, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
 stimulus._autosize_method = "maximum_bounding_box"
 
-stimulus.shapes = GridPattern.RepeatAcrossElements([Triangle])
-stimulus.orientations = GridPattern.RepeatAcrossRows([-20])
-stimulus.mirror_values = GridPattern.RepeatAcrossColumns(["none", "horizontal"])
+stimulus.shapes = GridPattern.RepeatAcrossRows([Triangle, Ellipse, Rectangle])
+stimulus.orientations = GridPattern.RepeatAcrossRows([45])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(40, 20)])
+stimulus.mirror_values = GridPattern.RepeatAcrossColumns(["none", "horizontal", "vertical", "horizontalvertical"])
 
 stimulus.Show()

@@ -86,9 +86,9 @@ class PathSvg:
 
     def create_mirror_transform(self):
         mirror_transform = ""
-        if self.mirror == "horizontal":
+        if self.mirror == "vertical":
             mirror_transform = "scale(-1, 1) translate(%f, 0)"%(-2*self.position[0])
-        elif self.mirror == "vertical":
+        elif self.mirror == "horizontal":
             mirror_transform = "scale(1, -1), translate(0, %f)"%(-2*self.position[1])
         elif self.mirror == "horizontalvertical":
             mirror_transform = "scale(-1, -1) translate(%f, %f)"%(-2*self.position[0], -2*self.position[1])
