@@ -309,3 +309,47 @@ stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(40,40),(20,20)])
 
 stimulus.Show()
 # stimulus.SaveSVG("test")
+
+#%%
+
+# remove_element example
+
+stimulus = Grid(6,6, background_color = "lightgrey", size = (350,350), row_spacing = 50, col_spacing = 50)
+stimulus._autosize_method = "maximum_bounding_box"
+stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(40,40),(20,20)])
+
+# using row and column index starting from 0
+stimulus.remove_element((1,1))
+stimulus.Show()
+
+# using element_id starting from 0
+stimulus.remove_element(15)
+stimulus.Show()
+
+# how this works: putting shape to None
+print(stimulus._attribute_overrides)
+
+#%%
+
+# None shape example
+
+stimulus = Grid(6,6, background_color = "lightgrey", size = (350,350), row_spacing = 50, col_spacing = 50)
+stimulus._autosize_method = "maximum_bounding_box"
+
+stimulus.shapes = GridPattern.RepeatAcrossElements([Rectangle, None, Ellipse])
+
+stimulus.Show()
+
+
+#%%
+
+# mirror example
+
+stimulus = Grid(6,6, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus._autosize_method = "maximum_bounding_box"
+
+stimulus.shapes = GridPattern.RepeatAcrossElements([Triangle])
+stimulus.orientations = GridPattern.RepeatAcrossRows([-20])
+stimulus.mirror_values = GridPattern.RepeatAcrossColumns(["none", "horizontal"])
+
+stimulus.Show()
