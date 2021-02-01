@@ -420,6 +420,7 @@ stimulus.SaveSVG("testembeddedpng")
 #%%
 
 # encode svg image in svg (including animation!!!)
+# WARNING: if animated, not visible in Spyder preview of image!
 
 stimulus = Grid(4,4, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
 stimulus._autosize_method = "maximum_bounding_box"
@@ -460,6 +461,7 @@ stimulus.SaveSVG("testembeddedbmp")
 #%%
 
 # encode gif image in svg (including animation!!!)
+# WARNING: if animated, not visible in Spyder preview of image!
 
 stimulus = Grid(4,4, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
 stimulus._autosize_method = "maximum_bounding_box"
@@ -512,13 +514,14 @@ stimulus.SaveSVG("testembeddedwebp")
 #%%
 
 # encode image from online source in svg (including animation!!!)
-# WARNING: if from online source / animated, not visible in Spyder preview of image!
+# WARNING: image preview in Spyder not always accurate!
+# WARNING: if animated, not visible in Spyder preview of image!
 
 stimulus = Grid(4,4, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
 stimulus._autosize_method = "maximum_bounding_box"
 
 stimulus.shapes = GridPattern.RepeatAcrossColumns([Image])
-stimulus.data = GridPattern.RepeatAcrossColumns(["https://media.inkscape.org/media/resources/file/Gears_8IWk3lq.svg", "https://upload.wikimedia.org/wikipedia/commons/b/bd/Test.svg", "https://upload.wikimedia.org/wikipedia/commons/6/6a/PNG_Test.png"])
+stimulus.data = GridPattern.RepeatAcrossColumns(["https://media.inkscape.org/media/resources/file/Gears_8IWk3lq.svg", "https://upload.wikimedia.org/wikipedia/commons/b/bd/Test.svg", "https://upload.wikimedia.org/wikipedia/commons/6/6a/PNG_Test.png", "https://upload.wikimedia.org/wikipedia/commons/d/d0/RStudio_logo_flat.svg"])
 
 stimulus.Show()
 stimulus.SaveSVG("testembeddedonlineimage")

@@ -89,37 +89,38 @@ class Image:
         
         try:
             image_data = urlopen(data).read()
+            encoded = base64.b64encode(image_data).decode()
         except ValueError:  # invalid URL
             if data.endswith(tuple(ext)):
                 image_data = open(data, "rb").read() # read file in binary format
                 encoded = base64.b64encode(image_data).decode() # read image in base64 encoding
      
-                if data.endswith(".svg"):
-                    data = 'data:image/svg+xml;base64,{}'.format(encoded)
-                    
-                elif data.endswith(".png"):
-                    data = 'data:image/png;base64,{}'.format(encoded)
-                    
-                elif data.endswith(".jpg") | data.endswith(".jpeg"):
-                    data = 'data:image/jpeg;base64,{}'.format(encoded)
-                    
-                elif data.endswith(".bmp"):
-                    data = 'data:image/bmp;base64,{}'.format(encoded)
-                    
-                elif data.endswith(".gif"):
-                    data = 'data:image/gif;base64,{}'.format(encoded)
-                    
-                elif data.endswith(".ico"):
-                    data = 'data:image/vnd.microsoft.icon;base64,{}'.format(encoded)
-                                    
-                elif data.endswith(".tif") | data.endswith(".tiff"):
-                    data = 'data:image/tiff;base64,{}'.format(encoded)
-                    
-                elif data.endswith(".webp"):
-                    data = 'data:image/webp;base64,{}'.format(encoded)
-                
-                else:
-                    data = data
+        if data.endswith(".svg"):
+            data = 'data:image/svg+xml;base64,{}'.format(encoded)
+            
+        elif data.endswith(".png"):
+            data = 'data:image/png;base64,{}'.format(encoded)
+            
+        elif data.endswith(".jpg") | data.endswith(".jpeg"):
+            data = 'data:image/jpeg;base64,{}'.format(encoded)
+            
+        elif data.endswith(".bmp"):
+            data = 'data:image/bmp;base64,{}'.format(encoded)
+            
+        elif data.endswith(".gif"):
+            data = 'data:image/gif;base64,{}'.format(encoded)
+            
+        elif data.endswith(".ico"):
+            data = 'data:image/vnd.microsoft.icon;base64,{}'.format(encoded)
+                            
+        elif data.endswith(".tif") | data.endswith(".tiff"):
+            data = 'data:image/tiff;base64,{}'.format(encoded)
+            
+        elif data.endswith(".webp"):
+            data = 'data:image/webp;base64,{}'.format(encoded)
+        
+        else:
+            data = data
 
         self.data = data
     
