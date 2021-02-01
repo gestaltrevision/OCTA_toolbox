@@ -507,3 +507,18 @@ stimulus.data = GridPattern.RepeatAcrossColumns(["img/file_example_WEBP_50kB.web
 
 stimulus.Show()
 stimulus.SaveSVG("testembeddedwebp")
+
+
+#%%
+
+# encode image from online source in svg (including animation!!!)
+# WARNING: if from online source / animated, not visible in Spyder preview of image!
+
+stimulus = Grid(4,4, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus._autosize_method = "maximum_bounding_box"
+
+stimulus.shapes = GridPattern.RepeatAcrossColumns([Image])
+stimulus.data = GridPattern.RepeatAcrossColumns(["https://media.inkscape.org/media/resources/file/Gears_8IWk3lq.svg", "https://upload.wikimedia.org/wikipedia/commons/b/bd/Test.svg", "https://upload.wikimedia.org/wikipedia/commons/6/6a/PNG_Test.png"])
+
+stimulus.Show()
+stimulus.SaveSVG("testembeddedonlineimage")
