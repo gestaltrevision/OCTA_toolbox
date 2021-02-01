@@ -5,6 +5,8 @@ Created on Mon Apr  6 16:02:30 2020
 @author: Christophe
 """
 
+import base64
+
 class Image:
     parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror_value', 'data']
     
@@ -81,6 +83,40 @@ class Image:
         if data == None:
             data = ""
             
+        ext = [".svg", ".png", ".jpg", ".jpeg", ".bmp", ".gif", \
+               ".ico", ".tif", ".tiff", ".webp"]
+        
+        if data.endswith(tuple(ext)):
+            image_data = open(data, "rb").read() # read file in binary format
+            encoded = base64.b64encode(image_data).decode() # read image in base64 encoding
+ 
+            if data.endswith(".svg"):
+                data = 'data:image/svg+xml;base64,{}'.format(encoded)
+                
+            elif data.endswith(".png"):
+                data = 'data:image/png;base64,{}'.format(encoded)
+                
+            elif data.endswith(".jpg") | data.endswith(".jpeg"):
+                data = 'data:image/jpeg;base64,{}'.format(encoded)
+                
+            elif data.endswith(".bmp"):
+                data = 'data:image/bmp;base64,{}'.format(encoded)
+                
+            elif data.endswith(".gif"):
+                data = 'data:image/gif;base64,{}'.format(encoded)
+                
+            elif data.endswith(".ico"):
+                data = 'data:image/vnd.microsoft.icon;base64,{}'.format(encoded)
+                                
+            elif data.endswith(".tif") | data.endswith(".tiff"):
+                data = 'data:image/tiff;base64,{}'.format(encoded)
+                
+            elif data.endswith(".webp"):
+                data = 'data:image/webp;base64,{}'.format(encoded)
+            
+            else:
+                data = data
+
         self.data = data
     
 

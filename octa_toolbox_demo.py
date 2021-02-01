@@ -371,3 +371,139 @@ stimulus.id_labels = GridPattern.RepeatAcrossElements(['firstelement', '', '', '
 
 stimulus.Show()
 stimulus.SaveSVG("testclassesids")
+
+#%%
+
+# repeatacrossrows vs repeatacrosscolumns
+
+stimulus = Grid(4,4, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus._autosize_method = "maximum_bounding_box"
+
+stimulus.shapes = GridPattern.RepeatAcrossColumns([Triangle, Ellipse, Rectangle])
+stimulus.fillcolors = GridPattern.RepeatAcrossRows(["red", "green", "blue"])
+stimulus.Show()
+
+#%%
+
+# complexity measurements
+
+stimulus = Grid(4,4, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus._autosize_method = "maximum_bounding_box"
+
+stimulus.shapes = GridPattern.RepeatAcrossColumns([Triangle, Ellipse, Rectangle])
+stimulus.orientations = GridPattern.RepeatAcrossRows([45])
+stimulus.Show()
+
+# LOCE: level of element complexity
+# Calculate how many different types of elements are present in the display based on the feature dimensions specified in distinction_features.
+print("LOCE: " + str(Complexity.CalculateElementsLOCE(stimulus, distinction_features = ['shapes', 'bounding_boxes', 'fillcolors'])))
+# LOC: level of complexity
+# Calculate how many different features are present across all dimensions.
+print("LOC: " + str(Complexity.CalculateElementsLOC(stimulus, distinction_features = ['shapes', 'bounding_boxes', 'fillcolors'])))
+# LOCI: level of non-identical complexity
+# Calculate how many different feature dimensions have more than one feature value (i.e., have non-identical values).
+print("LOCI: " + str(Complexity.CalculateElementsLOCI(stimulus, distinction_features = ['shapes', 'bounding_boxes', 'fillcolors'])))
+
+#%%
+
+# encode png in svg
+
+stimulus = Grid(4,4, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus._autosize_method = "maximum_bounding_box"
+
+stimulus.shapes = GridPattern.RepeatAcrossColumns([Image])
+stimulus.data = GridPattern.RepeatAcrossColumns(["img/file_example_PNG_500kB.png", "img/w3c_home.png"])
+
+stimulus.Show()
+stimulus.SaveSVG("testembeddedpng")
+
+#%%
+
+# encode svg image in svg (including animation!!!)
+
+stimulus = Grid(4,4, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus._autosize_method = "maximum_bounding_box"
+
+stimulus.shapes = GridPattern.RepeatAcrossColumns([Image])
+stimulus.data = GridPattern.RepeatAcrossColumns(["img/gears.svg", "img/file_example_SVG_20kB.svg"])
+
+stimulus.Show()
+stimulus.SaveSVG("testembeddedsvg")
+
+
+#%%
+
+# encode jpg image in svg
+
+stimulus = Grid(4,4, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus._autosize_method = "maximum_bounding_box"
+
+stimulus.shapes = GridPattern.RepeatAcrossColumns([Image])
+stimulus.data = GridPattern.RepeatAcrossColumns(["img/w3c_home.jpg", "img/file_example_JPG_100kB.jpg"])
+
+stimulus.Show()
+stimulus.SaveSVG("testembeddedjpg")
+
+#%%
+
+# encode bmp image in svg
+
+stimulus = Grid(4,4, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus._autosize_method = "maximum_bounding_box"
+
+stimulus.shapes = GridPattern.RepeatAcrossColumns([Image])
+stimulus.data = GridPattern.RepeatAcrossColumns(["img/w3c_home.bmp"])
+
+stimulus.Show()
+stimulus.SaveSVG("testembeddedbmp")
+
+#%%
+
+# encode gif image in svg (including animation!!!)
+
+stimulus = Grid(4,4, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus._autosize_method = "maximum_bounding_box"
+
+stimulus.shapes = GridPattern.RepeatAcrossColumns([Image])
+stimulus.data = GridPattern.RepeatAcrossColumns(["img/w3c_home.gif", "img/w3c_home_animation.gif"])
+
+stimulus.Show()
+stimulus.SaveSVG("testembeddedgif")
+
+#%%
+
+# encode ico image in svg
+
+stimulus = Grid(4,4, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus._autosize_method = "maximum_bounding_box"
+
+stimulus.shapes = GridPattern.RepeatAcrossColumns([Image])
+stimulus.data = GridPattern.RepeatAcrossColumns(["img/file_example_favicon.ico"])
+
+stimulus.Show()
+stimulus.SaveSVG("testembeddedico")
+
+#%%
+
+# encode tiff image in svg
+
+stimulus = Grid(4,4, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus._autosize_method = "maximum_bounding_box"
+
+stimulus.shapes = GridPattern.RepeatAcrossColumns([Image])
+stimulus.data = GridPattern.RepeatAcrossColumns(["img/file_example_TIFF_1MB.tiff"])
+
+stimulus.Show()
+stimulus.SaveSVG("testembeddedtiff")
+#%%
+
+# encode webp image in svg
+
+stimulus = Grid(4,4, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus._autosize_method = "maximum_bounding_box"
+
+stimulus.shapes = GridPattern.RepeatAcrossColumns([Image])
+stimulus.data = GridPattern.RepeatAcrossColumns(["img/file_example_WEBP_50kB.webp"])
+
+stimulus.Show()
+stimulus.SaveSVG("testembeddedwebp")
