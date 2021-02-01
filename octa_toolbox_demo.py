@@ -525,3 +525,18 @@ stimulus.data = GridPattern.RepeatAcrossColumns(["https://media.inkscape.org/med
 
 stimulus.Show()
 stimulus.SaveSVG("testembeddedonlineimage")
+
+#%%
+
+# test out how to animate properties (in ChangingEllipse.py)
+from octa.shapes import ChangingEllipse
+
+stimulus = Grid(4,4, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus._autosize_method = "maximum_bounding_box"
+
+
+stimulus.shapes = GridPattern.RepeatAcrossColumns([ChangingEllipse.Ellipse])
+#stimulus.fillcolors = GridPattern.RepeatAcrossColumns(["green", "blue", "orange"])
+
+stimulus.Show()
+stimulus.SaveSVG("testanimatesvg")
