@@ -7,7 +7,7 @@ Created on Tue Apr  7 12:31:15 2020
 from octa.Stimulus import Grid, Stimulus
 from octa.Positions import Positions
 from octa.patterns import GridPattern, Pattern
-from octa.shapes import Ellipse, Rectangle, Triangle, Image, Text, Polygon, RegularPolygon, Path, PathSvg
+from octa.shapes import Ellipse, Rectangle, Triangle, Image, FitImage, Text, Polygon, RegularPolygon, Path, PathSvg
 from octa.measurements import Complexity
 import random
 
@@ -535,8 +535,22 @@ stimulus = Grid(4,4, background_color = "lightgrey", row_spacing = 60, col_spaci
 stimulus._autosize_method = "maximum_bounding_box"
 
 
-stimulus.shapes = GridPattern.RepeatAcrossColumns([ChangingEllipse.Ellipse])
+stimulus.shapes = GridPattern.RepeatAcrossColumns([ChangingEllipse])
 #stimulus.fillcolors = GridPattern.RepeatAcrossColumns(["green", "blue", "orange"])
 
 stimulus.Show()
 stimulus.SaveSVG("testanimatesvg")
+
+
+#%%
+
+# shaping of image
+
+stimulus = Grid(4,4, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus._autosize_method = "maximum_bounding_box"
+
+stimulus.shapes = GridPattern.RepeatAcrossRows([Image, FitImage])
+stimulus.data = GridPattern.RepeatAcrossColumns(["https://media.inkscape.org/media/resources/file/Gears_8IWk3lq.svg", "https://upload.wikimedia.org/wikipedia/commons/b/bd/Test.svg", "https://upload.wikimedia.org/wikipedia/commons/6/6a/PNG_Test.png", "https://upload.wikimedia.org/wikipedia/commons/d/d0/RStudio_logo_flat.svg"])
+
+stimulus.Show()
+stimulus.SaveSVG("testscalingimage")

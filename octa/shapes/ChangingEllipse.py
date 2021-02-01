@@ -6,11 +6,11 @@ Created on Mon Apr  6 16:02:30 2020
 """
 import svgwrite
 
-class Ellipse:
+class ChangingEllipse:
     parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror_value']
     
     def __init__(self, **kwargs):
-        for p in Ellipse.parameters:
+        for p in ChangingEllipse.parameters:
             set_method = getattr(self, 'set_%s'%p)
             if p in kwargs:
                 set_method(kwargs[p])
@@ -81,7 +81,7 @@ class Ellipse:
 
     def __str__(self):
         result = "Ellipse object with params:\n"
-        for p in Ellipse.parameters:
+        for p in ChangingEllipse.parameters:
             result += "%s: %s\n"%(p, getattr(self,p))
             
         return result
@@ -124,5 +124,5 @@ class Ellipse:
     
     
 if __name__ == '__main__':
-    c = Ellipse(x = 3, y = 4, radius = 10)
+    c = ChangingEllipse(x = 3, y = 4, radius = 10)
     print(c)

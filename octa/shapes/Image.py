@@ -161,6 +161,10 @@ class Image:
         if self.id_label != "":
             svg['id']        = self.id_label
         
+#        svg.fit(scale="slice")
+        svg.fit(scale="meet")
+#        svg.stretch()
+        
         return svg
     
     
