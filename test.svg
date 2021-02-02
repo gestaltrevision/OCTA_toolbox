@@ -1,136 +1,70 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <svg baseProfile="tiny" height="324" version="1.2" width="324" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <defs>
-    <radialGradient id="id2036">
-      <stop offset="0.0" stop-color="white"/>
-      <stop offset="1.0" stop-color="red"/>
-    </radialGradient>
-    <radialGradient id="id2037">
-      <stop offset="0.0" stop-color="white"/>
-      <stop offset="1.0" stop-color="red"/>
-    </radialGradient>
-    <radialGradient id="id2038">
-      <stop offset="0.0" stop-color="white"/>
-      <stop offset="1.0" stop-color="red"/>
-    </radialGradient>
-    <radialGradient id="id2039">
-      <stop offset="0.0" stop-color="white"/>
-      <stop offset="1.0" stop-color="red"/>
-    </radialGradient>
-    <radialGradient id="id2040">
-      <stop offset="0.0" stop-color="white"/>
-      <stop offset="1.0" stop-color="red"/>
-    </radialGradient>
-    <linearGradient id="id2041" x1="0" x2="1" y1="0" y2="0">
-      <stop offset="0.0" stop-color="red"/>
-      <stop offset="0.2" stop-color="orange"/>
-      <stop offset="0.4" stop-color="green"/>
-      <stop offset="0.6" stop-color="blue"/>
-      <stop offset="0.8" stop-color="indigo"/>
-      <stop offset="1.0" stop-color="violet"/>
-    </linearGradient>
-    <linearGradient id="id2042" x1="0" x2="1" y1="0" y2="0">
-      <stop offset="0.0" stop-color="red"/>
-      <stop offset="0.2" stop-color="orange"/>
-      <stop offset="0.4" stop-color="green"/>
-      <stop offset="0.6" stop-color="blue"/>
-      <stop offset="0.8" stop-color="indigo"/>
-      <stop offset="1.0" stop-color="violet"/>
-    </linearGradient>
-    <linearGradient id="id2043" x1="0" x2="1" y1="0" y2="0">
-      <stop offset="0.0" stop-color="red"/>
-      <stop offset="0.2" stop-color="orange"/>
-      <stop offset="0.4" stop-color="green"/>
-      <stop offset="0.6" stop-color="blue"/>
-      <stop offset="0.8" stop-color="indigo"/>
-      <stop offset="1.0" stop-color="violet"/>
-    </linearGradient>
-    <linearGradient id="id2044" x1="0" x2="1" y1="0" y2="0">
-      <stop offset="0.0" stop-color="red"/>
-      <stop offset="0.2" stop-color="orange"/>
-      <stop offset="0.4" stop-color="green"/>
-      <stop offset="0.6" stop-color="blue"/>
-      <stop offset="0.8" stop-color="indigo"/>
-      <stop offset="1.0" stop-color="violet"/>
-    </linearGradient>
-    <linearGradient id="id2045" x1="0" x2="1" y1="0" y2="0">
-      <stop offset="0.0" stop-color="red"/>
-      <stop offset="0.2" stop-color="orange"/>
-      <stop offset="0.4" stop-color="green"/>
-      <stop offset="0.6" stop-color="blue"/>
-      <stop offset="0.8" stop-color="indigo"/>
-      <stop offset="1.0" stop-color="violet"/>
-    </linearGradient>
-    <linearGradient id="id2046" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0.0" stop-color="green"/>
-      <stop offset="0.5" stop-color="white"/>
-      <stop offset="1.0" stop-color="green"/>
-    </linearGradient>
-    <linearGradient id="id2047" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0.0" stop-color="green"/>
-      <stop offset="0.5" stop-color="white"/>
-      <stop offset="1.0" stop-color="green"/>
-    </linearGradient>
-    <linearGradient id="id2048" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0.0" stop-color="green"/>
-      <stop offset="0.5" stop-color="white"/>
-      <stop offset="1.0" stop-color="green"/>
-    </linearGradient>
-    <linearGradient id="id2049" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0.0" stop-color="green"/>
-      <stop offset="0.5" stop-color="white"/>
-      <stop offset="1.0" stop-color="green"/>
-    </linearGradient>
-    <linearGradient id="id2050" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0.0" stop-color="green"/>
-      <stop offset="0.5" stop-color="white"/>
-      <stop offset="1.0" stop-color="green"/>
-    </linearGradient>
-    <linearGradient id="id2051" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0.0" stop-color="red"/>
-      <stop offset="1.0" stop-color="white"/>
-    </linearGradient>
-    <linearGradient id="id2052" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0.0" stop-color="red"/>
-      <stop offset="1.0" stop-color="white"/>
-    </linearGradient>
-    <linearGradient id="id2053" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0.0" stop-color="red"/>
-      <stop offset="1.0" stop-color="white"/>
-    </linearGradient>
-    <linearGradient id="id2054" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0.0" stop-color="red"/>
-      <stop offset="1.0" stop-color="white"/>
-    </linearGradient>
-    <linearGradient id="id2055" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0.0" stop-color="red"/>
-      <stop offset="1.0" stop-color="white"/>
-    </linearGradient>
-  </defs>
+  <defs/>
   <rect fill="lightgrey" height="324" width="324" x="0" y="0"/>
-  <polygon fill="url(#id2036) none" points="42.0,19.5 19.5,42.0 42.0,64.5 64.5,42.0" stroke-width="0" transform=" rotate(0, 42, 42)"/>
-  <polygon fill="url(#id2037) none" points="102.0,19.5 79.5,42.0 102.0,64.5 124.5,42.0" stroke-width="0" transform=" rotate(45, 102, 42)"/>
-  <polygon fill="url(#id2038) none" points="162.0,19.5 139.5,42.0 162.0,64.5 184.5,42.0" stroke-width="0" transform=" rotate(90, 162, 42)"/>
-  <polygon fill="url(#id2039) none" points="222.0,19.5 199.5,42.0 222.0,64.5 244.5,42.0" stroke-width="0" transform=" rotate(115, 222, 42)"/>
-  <polygon fill="url(#id2040) none" points="282.0,19.5 259.5,42.0 282.0,64.5 304.5,42.0" stroke-width="0" transform=" rotate(180, 282, 42)"/>
-  <polygon fill="green" points="42.0,80.6012 19.5,96.9484 28.0942,123.3988 55.9058,123.3988 64.5,96.9484" stroke-width="0" transform=" rotate(0, 42, 102)"/>
-  <polygon fill="green" points="102.0,80.6012 79.5,96.9484 88.0942,123.3988 115.9058,123.3988 124.5,96.9484" stroke-width="0" transform=" rotate(45, 102, 102)"/>
-  <polygon fill="green" points="162.0,80.6012 139.5,96.9484 148.0942,123.3988 175.9058,123.3988 184.5,96.9484" stroke-width="0" transform=" rotate(90, 162, 102)"/>
-  <polygon fill="green" points="222.0,80.6012 199.5,96.9484 208.0942,123.3988 235.9058,123.3988 244.5,96.9484" stroke-width="0" transform=" rotate(115, 222, 102)"/>
-  <polygon fill="green" points="282.0,80.6012 259.5,96.9484 268.0942,123.3988 295.9058,123.3988 304.5,96.9484" stroke-width="0" transform=" rotate(180, 282, 102)"/>
-  <polygon fill="url(#id2041) none" points="42.0,140.6012 19.5,156.9484 28.0942,183.3988 55.9058,183.3988 64.5,156.9484" stroke-width="0" transform=" rotate(0, 42, 162)"/>
-  <polygon fill="url(#id2042) none" points="102.0,139.5 82.5144,150.75 82.5144,173.25 102.0,184.5 121.4856,173.25 121.4856,150.75" stroke-width="0" transform=" rotate(45, 102, 162)"/>
-  <polygon fill="url(#id2043) none" points="162.0,139.5 142.5144,150.75 142.5144,173.25 162.0,184.5 181.4856,173.25 181.4856,150.75" stroke-width="0" transform=" rotate(90, 162, 162)"/>
-  <polygon fill="url(#id2044) none" points="222.0,139.5 202.5144,150.75 202.5144,173.25 222.0,184.5 241.4856,173.25 241.4856,150.75" stroke-width="0" transform=" rotate(115, 222, 162)"/>
-  <polygon fill="url(#id2045) none" points="282.0,139.5 262.5144,150.75 262.5144,173.25 282.0,184.5 301.4856,173.25 301.4856,150.75" stroke-width="0" transform=" rotate(180, 282, 162)"/>
-  <polygon fill="url(#id2046) none" points="42.0,199.5 19.5,222.0 42.0,244.5 64.5,222.0" stroke-width="0" transform=" rotate(0, 42, 222)"/>
-  <polygon fill="url(#id2047) none" points="102.0,199.5 79.5,222.0 102.0,244.5 124.5,222.0" stroke-width="0" transform=" rotate(45, 102, 222)"/>
-  <polygon fill="url(#id2048) none" points="162.0,199.5 139.5,222.0 162.0,244.5 184.5,222.0" stroke-width="0" transform=" rotate(90, 162, 222)"/>
-  <polygon fill="url(#id2049) none" points="222.0,199.5 199.5,222.0 222.0,244.5 244.5,222.0" stroke-width="0" transform=" rotate(115, 222, 222)"/>
-  <polygon fill="url(#id2050) none" points="282.0,199.5 259.5,222.0 282.0,244.5 304.5,222.0" stroke-width="0" transform=" rotate(180, 282, 222)"/>
-  <polygon fill="url(#id2051) none" points="42.0,260.6012 19.5,276.9484 28.0942,303.3988 55.9058,303.3988 64.5,276.9484" stroke-width="0" transform=" rotate(0, 42, 282)"/>
-  <polygon fill="url(#id2052) none" points="102.0,260.6012 79.5,276.9484 88.0942,303.3988 115.9058,303.3988 124.5,276.9484" stroke-width="0" transform=" rotate(45, 102, 282)"/>
-  <polygon fill="url(#id2053) none" points="162.0,260.6012 139.5,276.9484 148.0942,303.3988 175.9058,303.3988 184.5,276.9484" stroke-width="0" transform=" rotate(90, 162, 282)"/>
-  <polygon fill="url(#id2054) none" points="222.0,260.6012 199.5,276.9484 208.0942,303.3988 235.9058,303.3988 244.5,276.9484" stroke-width="0" transform=" rotate(115, 222, 282)"/>
-  <polygon fill="url(#id2055) none" points="282.0,259.5 262.5144,270.75 262.5144,293.25 282.0,304.5 301.4856,293.25 301.4856,270.75" stroke-width="0" transform=" rotate(180, 282, 282)"/>
+  <textArea display-align="center" fill="dodgerblue" font-family="Roboto Mono" font-size="16pt" height="45" stroke-width="0" text-align="center" transform=" rotate(0, 42, 42)" width="45" x="26.0" y="32.0">
+    <tspan>OCTA</tspan>
+  </textArea>
+  <textArea display-align="center" fill="dodgerblue" font-family="Roboto Mono" font-size="16pt" height="45" stroke-width="0" text-align="center" transform=" rotate(45, 102, 42)" width="45" x="86.0" y="32.0">
+    <tspan>OCTA</tspan>
+  </textArea>
+  <textArea display-align="center" fill="dodgerblue" font-family="Roboto Mono" font-size="16pt" height="45" stroke-width="0" text-align="center" transform=" rotate(90, 162, 42)" width="45" x="146.0" y="32.0">
+    <tspan>OCTA</tspan>
+  </textArea>
+  <textArea display-align="center" fill="dodgerblue" font-family="Roboto Mono" font-size="16pt" height="45" stroke-width="0" text-align="center" transform=" rotate(115, 222, 42)" width="45" x="206.0" y="32.0">
+    <tspan>OCTA</tspan>
+  </textArea>
+  <textArea display-align="center" fill="dodgerblue" font-family="Roboto Mono" font-size="16pt" height="45" stroke-width="0" text-align="center" transform=" rotate(180, 282, 42)" width="45" x="266.0" y="32.0">
+    <tspan>OCTA</tspan>
+  </textArea>
+  <rect fill="dodgerblue" height="45" stroke-width="0" transform=" rotate(0, 42, 102)" width="45" x="19.5" y="79.5"/>
+  <rect fill="dodgerblue" height="45" stroke-width="0" transform=" rotate(45, 102, 102)" width="45" x="79.5" y="79.5"/>
+  <rect fill="dodgerblue" height="45" stroke-width="0" transform=" rotate(90, 162, 102)" width="45" x="139.5" y="79.5"/>
+  <rect fill="dodgerblue" height="45" stroke-width="0" transform=" rotate(115, 222, 102)" width="45" x="199.5" y="79.5"/>
+  <rect fill="dodgerblue" height="45" stroke-width="0" transform=" rotate(180, 282, 102)" width="45" x="259.5" y="79.5"/>
+  <textArea display-align="center" fill="dodgerblue" font-family="Roboto Mono" font-size="16pt" height="45" stroke-width="0" text-align="center" transform=" rotate(0, 42, 162)" width="45" x="34.0" y="152.0">
+    <tspan>O3</tspan>
+  </textArea>
+  <textArea display-align="center" fill="dodgerblue" font-family="Roboto Mono" font-size="16pt" height="45" stroke-width="0" text-align="center" transform=" rotate(45, 102, 162)" width="45" x="94.0" y="152.0">
+    <tspan>O3</tspan>
+  </textArea>
+  <textArea display-align="center" fill="dodgerblue" font-family="Roboto Mono" font-size="16pt" height="45" stroke-width="0" text-align="center" transform=" rotate(90, 162, 162)" width="45" x="154.0" y="152.0">
+    <tspan>O3</tspan>
+  </textArea>
+  <textArea display-align="center" fill="dodgerblue" font-family="Roboto Mono" font-size="16pt" height="45" stroke-width="0" text-align="center" transform=" rotate(115, 222, 162)" width="45" x="214.0" y="152.0">
+    <tspan>O3</tspan>
+  </textArea>
+  <textArea display-align="center" fill="dodgerblue" font-family="Roboto Mono" font-size="16pt" height="45" stroke-width="0" text-align="center" transform=" rotate(180, 282, 162)" width="45" x="274.0" y="152.0">
+    <tspan>O3</tspan>
+  </textArea>
+  <textArea display-align="center" fill="dodgerblue" font-family="Roboto Mono" font-size="16pt" height="45" stroke-width="0" text-align="center" transform=" rotate(0, 42, 222)" width="45" x="26.0" y="202.0">
+    <tspan>Hola</tspan>
+    <tbreak/>
+    <tspan>Pola</tspan>
+  </textArea>
+  <textArea display-align="center" fill="dodgerblue" font-family="Roboto Mono" font-size="16pt" height="45" stroke-width="0" text-align="center" transform=" rotate(45, 102, 222)" width="45" x="86.0" y="202.0">
+    <tspan>Hola</tspan>
+    <tbreak/>
+    <tspan>Pola</tspan>
+  </textArea>
+  <textArea display-align="center" fill="dodgerblue" font-family="Roboto Mono" font-size="16pt" height="45" stroke-width="0" text-align="center" transform=" rotate(90, 162, 222)" width="45" x="146.0" y="202.0">
+    <tspan>Hola</tspan>
+    <tbreak/>
+    <tspan>Pola</tspan>
+  </textArea>
+  <textArea display-align="center" fill="dodgerblue" font-family="Roboto Mono" font-size="16pt" height="45" stroke-width="0" text-align="center" transform=" rotate(115, 222, 222)" width="45" x="206.0" y="202.0">
+    <tspan>Hola</tspan>
+    <tbreak/>
+    <tspan>Pola</tspan>
+  </textArea>
+  <textArea display-align="center" fill="dodgerblue" font-family="Roboto Mono" font-size="16pt" height="45" stroke-width="0" text-align="center" transform=" rotate(180, 282, 222)" width="45" x="266.0" y="202.0">
+    <tspan>Hola</tspan>
+    <tbreak/>
+    <tspan>Pola</tspan>
+  </textArea>
+  <polygon fill="dodgerblue" points="42.0,259.5 26.0901,266.0901 19.5,282.0 26.0901,297.9099 42.0,304.5 57.9099,297.9099 64.5,282.0 57.9099,266.0901" stroke-width="0" transform=" rotate(0, 42, 282)"/>
+  <polygon fill="dodgerblue" points="102.0,259.5 86.0901,266.0901 79.5,282.0 86.0901,297.9099 102.0,304.5 117.9099,297.9099 124.5,282.0 117.9099,266.0901" stroke-width="0" transform=" rotate(45, 102, 282)"/>
+  <polygon fill="dodgerblue" points="162.0,259.5 146.0901,266.0901 139.5,282.0 146.0901,297.9099 162.0,304.5 177.9099,297.9099 184.5,282.0 177.9099,266.0901" stroke-width="0" transform=" rotate(90, 162, 282)"/>
+  <polygon fill="dodgerblue" points="222.0,259.5 206.0901,266.0901 199.5,282.0 206.0901,297.9099 222.0,304.5 237.9099,297.9099 244.5,282.0 237.9099,266.0901" stroke-width="0" transform=" rotate(115, 222, 282)"/>
+  <polygon fill="dodgerblue" points="282.0,259.5 266.0901,266.0901 259.5,282.0 266.0901,297.9099 282.0,304.5 297.9099,297.9099 304.5,282.0 297.9099,266.0901" stroke-width="0" transform=" rotate(180, 282, 282)"/>
 </svg>

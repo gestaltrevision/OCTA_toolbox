@@ -5,11 +5,14 @@ Created on Mon Apr  6 16:02:30 2020
 @author: Christophe
 """
 
-class Text:
+def Text(text):
+    return type("Text_" + str(text), (Text_,), {'text': str(text)})
+
+class Text_:
     parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror_value', 'data']
     
     def __init__(self, **kwargs):
-        for p in Text.parameters:
+        for p in Text_.parameters:
             set_method = getattr(self, 'set_%s'%p)
             if p in kwargs:
                 set_method(kwargs[p])
@@ -86,7 +89,7 @@ class Text:
 
     def __str__(self):
         result = "Text object with params:\n"
-        for p in Text.parameters:
+        for p in Text_.parameters:
             result += "%s: %s\n"%(p, getattr(self,p))
             
         return result
@@ -155,19 +158,25 @@ class Text:
 
         rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, self.position[0], self.position[1])
         
-#        topleft = (self.position[0] - self.bounding_box[0]/2 , self.position[1] - self.bounding_box[1]/2)
+        topleft = (self.position[0] - self.bounding_box[0]/2 , self.position[1] - self.bounding_box[1]/2)
 
-        textlength = max([(len(i) - i.count(" ")) for i in self.data.split("\n")])
+        textlength = max([(len(i) - i.count(" ")) for i in self.text.split("\n")])
+        
+        n_lines = len(self.text.split("\n"))
 
         svg = dwg.textArea(
-                text        = self.data,
+                text        = self.text, #self.data,
                 fill        = self.create_fillcolor(dwg),
                 stroke      = self.create_bordercolor(dwg),
                 stroke_width = self.borderwidth,
+                x           = topleft[0]+((self.bounding_box[0] - (8*textlength)) / 2.0),
+                y           = topleft[1]+((self.bounding_box[1] - (20*n_lines)) / 2.0),
+                width       = self.bounding_box[0],
+                height      = self.bounding_box[1],
                 text_align = 'center',
-#                display_align = 'center',
-                insert      = (self.position[0]- (4* textlength ), self.position[1]- (4* textlength)),
-                font_size   = "10pt",#min(self.bounding_box),
+                display_align = 'center',
+#                insert      = (self.position[0]- (4* textlength ), self.position[1]- (4* textlength)),
+                font_size   = "16pt",#min(self.bounding_box),
                 font_family = 'Roboto Mono',
                 size        = self.bounding_box,
                 transform   = " ".join([mirror_transform, rotation_transform]))
