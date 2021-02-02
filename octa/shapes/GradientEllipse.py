@@ -99,7 +99,9 @@ class GradientEllipse:
         
     def create_fillcolor(self, dwg):
         gradient = ""
-        if self.fillcolor[0] == "radial":
+        if len(self.fillcolor) < 2:
+            return self.fillcolor
+        elif self.fillcolor[0] == "radial":
             gradient = dwg.radialGradient()
         elif self.fillcolor[0] == "horizontal":
             gradient = dwg.linearGradient((0, 0), (1, 0))
@@ -121,7 +123,9 @@ class GradientEllipse:
 
     def create_bordercolor(self, dwg):
         gradient = ""
-        if self.bordercolor[0] == "radial":
+        if len(self.bordercolor) < 2:
+            return self.bordercolor
+        elif self.bordercolor[0] == "radial":
             gradient = dwg.radialGradient()
         elif self.bordercolor[0] == "horizontal":
             gradient = dwg.linearGradient((0, 0), (1, 0))
@@ -130,7 +134,7 @@ class GradientEllipse:
         elif self.bordercolor[0] == "diagonal":
             gradient = dwg.linearGradient((0, 0), (1, 1))
         else:
-            return self.fillcolor
+            return self.bordercolor
             
         dwg.defs.add(gradient)
         # define the gradient colors
