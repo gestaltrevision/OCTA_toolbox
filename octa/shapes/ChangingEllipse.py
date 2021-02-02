@@ -101,7 +101,7 @@ class ChangingEllipse:
         mirror_transform = self.create_mirror_transform()
 
         rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, self.position[0], self.position[1])
-    
+        
         svg = dwg.ellipse(
                 center       = self.position,
                 r            = (self.bounding_box[0]/2, self.bounding_box[1]/2),
