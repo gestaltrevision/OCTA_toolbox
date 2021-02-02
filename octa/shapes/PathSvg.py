@@ -5,11 +5,14 @@
 import svgwrite
 import svgpathtools
 
-class PathSvg:
+def PathSvg(src):
+  return type("PathSvg_" + str(src), (PathSvg_,), {'source': src})
+
+class PathSvg_:
     parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror_value', 'data']
     
     def __init__(self, **kwargs):
-        for p in PathSvg.parameters:
+        for p in PathSvg_.parameters:
             set_method = getattr(self, 'set_%s'%p)
             if p in kwargs:
                 set_method(kwargs[p])
@@ -97,7 +100,7 @@ class PathSvg:
     
     def __str__(self):
         result = "PathSvg object with params:\n"
-        for p in PathSvg.parameters:
+        for p in PathSvg_.parameters:
             result += "%s: %s\n"%(p, getattr(self,p))
             
         return result
@@ -153,7 +156,7 @@ class PathSvg:
     def generate(self, dwg):
         topleft = (self.position[0] - self.bounding_box[0]/2 , self.position[1] - self.bounding_box[1]/2)
               
-        paths, attributes = svgpathtools.svg2paths(self.data)      
+        paths, attributes = svgpathtools.svg2paths(self.source) #self.data      
 #         paths, attributes = svgpathtools.svg2paths("img/arrow-circle-up-svgrepo-com.svg")
         n_paths = len(paths)
         allpaths = []
@@ -200,5 +203,5 @@ class PathSvg:
     
     
 if __name__ == '__main__':
-    c = PathSvg(x = 3, y = 4, size = 10,  color = "blue", orientation = 30, data = 'hello')
+    c = PathSvg_(x = 3, y = 4, size = 10,  color = "blue", orientation = 30, data = 'hello')
     print(c)

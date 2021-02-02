@@ -5,11 +5,14 @@
 import svgwrite
 import svgpathtools
 
-class Path:
+def Path(path, xsize, ysize):
+  return type("Path_" + str(path) + "_" + str(xsize) + "_" + str(ysize), (Path_,), {'path': path, 'xsizepath': xsize, 'ysizepath': ysize})
+
+class Path_:
     parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror_value', 'data']
     
     def __init__(self, **kwargs):
-        for p in Path.parameters:
+        for p in Path_.parameters:
             set_method = getattr(self, 'set_%s'%p)
             if p in kwargs:
                 set_method(kwargs[p])
@@ -97,7 +100,7 @@ class Path:
     
     def __str__(self):
         result = "Path object with params:\n"
-        for p in Path.parameters:
+        for p in Path_.parameters:
             result += "%s: %s\n"%(p, getattr(self,p))
             
         return result
@@ -153,8 +156,8 @@ class Path:
     def generate(self, dwg):
         topleft = (self.position[0] - self.bounding_box[0]/2 , self.position[1] - self.bounding_box[1]/2)
                           
-        xsize = self.data[1]
-        ysize = self.data[2]
+        xsize = self.xsizepath #self.data[1]
+        ysize = self.ysizepath #self.data[2]
         scale_x_parameter = self.bounding_box[0] / xsize
         scale_y_parameter = self.bounding_box[1] / ysize
         
@@ -165,7 +168,7 @@ class Path:
         rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, xsize/2, ysize/2)
                
         svg = dwg.path(
-                d            = self.data[0],              
+                d            = self.path, #self.data[0],              
                 fill         = self.create_fillcolor(dwg),
                 stroke       = self.create_bordercolor(dwg),
                 stroke_width = self.borderwidth,
@@ -186,5 +189,5 @@ class Path:
     
     
 if __name__ == '__main__':
-    c = Path(x = 3, y = 4, size = 10,  color = "blue", orientation = 30, data = 'hello')
+    c = Path_(x = 3, y = 4, size = 10,  color = "blue", orientation = 30, data = 'hello')
     print(c)
