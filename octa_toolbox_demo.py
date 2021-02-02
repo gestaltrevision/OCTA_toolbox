@@ -594,7 +594,7 @@ from octa.shapes import GradientEllipse
 stimulus = Grid(5,5, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
 stimulus._autosize_method = "maximum_bounding_box"
 
-stimulus.shapes = GridPattern.RepeatAcrossRows([GradientEllipse])
+stimulus.shapes = GridPattern.RepeatAcrossRows([GradientEllipse, ChangingEllipse, Triangle, Ellipse])
 stimulus.fillcolors = GridPattern.RepeatAcrossRows([["radial", "white", "red"], "green", ["horizontal", "red", "orange", "green", "blue", "indigo", "violet"], ["vertical", "green", "white", "green"], ["diagonal", "red", "white"]])
 stimulus.orientations = GridPattern.RepeatAcrossColumns([0,45,90,115,180])
 
@@ -602,3 +602,4 @@ stimulus.orientations = GridPattern.RepeatAcrossColumns([0,45,90,115,180])
 stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['fillcolors'])
 
 stimulus.Show()
+stimulus.SaveSVG("test")

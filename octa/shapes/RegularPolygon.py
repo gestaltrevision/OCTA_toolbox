@@ -105,6 +105,54 @@ class RegularPolygon:
                 
         return mirror_transform
         
+    def create_fillcolor(self, dwg):
+        gradient = ""
+        if len(self.fillcolor) < 2:
+            return self.fillcolor
+        elif self.fillcolor[0] == "radial":
+            gradient = dwg.radialGradient()
+        elif self.fillcolor[0] == "horizontal":
+            gradient = dwg.linearGradient((0, 0), (1, 0))
+        elif self.fillcolor[0] == "vertical":
+            gradient = dwg.linearGradient((0, 0), (0, 1))
+        elif self.fillcolor[0] == "diagonal":
+            gradient = dwg.linearGradient((0, 0), (1, 1))
+        else:
+            return self.fillcolor
+            
+        dwg.defs.add(gradient)
+        # define the gradient colors
+        n_colors = len(self.fillcolor)-1
+        stepsize = 1 / (n_colors - 1)
+        for i in range(n_colors):
+            gradient.add_stop_color(i*stepsize, self.fillcolor[i+1])
+            
+        return gradient.get_paint_server()  
+
+    def create_bordercolor(self, dwg):
+        gradient = ""
+        if len(self.bordercolor) < 2:
+            return self.bordercolor
+        elif self.bordercolor[0] == "radial":
+            gradient = dwg.radialGradient()
+        elif self.bordercolor[0] == "horizontal":
+            gradient = dwg.linearGradient((0, 0), (1, 0))
+        elif self.bordercolor[0] == "vertical":
+            gradient = dwg.linearGradient((0, 0), (0, 1))
+        elif self.bordercolor[0] == "diagonal":
+            gradient = dwg.linearGradient((0, 0), (1, 1))
+        else:
+            return self.bordercolor
+            
+        dwg.defs.add(gradient)
+        # define the gradient colors
+        n_colors = len(self.bordercolor)-1
+        stepsize = 1 / (n_colors - 1)
+        for i in range(n_colors):
+            gradient.add_stop_color(i*stepsize, self.bordercolor[i+1])
+            
+        return gradient.get_paint_server() 
+
     def generate(self, dwg):
         mirror_transform = self.create_mirror_transform()
 
@@ -158,8 +206,8 @@ class RegularPolygon:
         
         svg = dwg.polygon(
                 points       = points,
-                fill         = self.fillcolor,
-                stroke       = self.bordercolor,
+                fill         = self.create_fillcolor(dwg),
+                stroke       = self.create_bordercolor(dwg),
                 stroke_width = self.borderwidth,
                 transform    = " ".join([mirror_transform, rotation_transform]))
         

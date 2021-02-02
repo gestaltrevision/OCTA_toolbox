@@ -142,7 +142,7 @@ class Image:
             result += "%s: %s\n"%(p, getattr(self,p))
             
         return result
-        
+
     def generate(self, dwg):
         topleft = (self.position[0] - self.bounding_box[0]/2 , self.position[1] - self.bounding_box[1]/2)
         mirror_transform = self.create_mirror_transform()
