@@ -557,7 +557,7 @@ stimulus.SaveSVG("testscalingimage")
 
 #%%
 
-# gradient color
+# gradient fillcolor
 from octa.shapes import GradientEllipse
 
 stimulus = Grid(5,5, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
@@ -568,3 +568,19 @@ stimulus.shapes = GridPattern.RepeatAcrossRows([GradientEllipse])
 stimulus.fillcolors = GridPattern.RepeatAcrossRows([["radial", "white", "red"], "green", ["horizontal", "red", "orange", "green", "blue", "indigo", "violet"], ["vertical", "green", "white", "green"], ["diagonal", "red", "white"]])
 stimulus.Show()
 stimulus.SaveSVG("testgradientellipse")
+
+#%%
+
+# gradient bordercolor
+from octa.shapes import GradientEllipse
+
+stimulus = Grid(5,5, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus._autosize_method = "maximum_bounding_box"
+
+      
+stimulus.shapes = GridPattern.RepeatAcrossRows([GradientEllipse])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(40,40)])
+stimulus.borderwidths = GridPattern.RepeatAcrossRows([10,10,0,10,10])
+stimulus.bordercolors = GridPattern.RepeatAcrossRows([["radial", "white", "red"], ["horizontal", "red", "orange", "green", "blue", "indigo", "violet"], "green", ["vertical", "green", "white", "green"], ["diagonal", "red", "white"]])
+stimulus.Show()
+stimulus.SaveSVG("testgradientellipseborder")
