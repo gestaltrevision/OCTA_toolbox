@@ -7,11 +7,15 @@ Created on Mon Apr  6 16:02:30 2020
 
 from math import sin, cos, pi, radians
 
-class RegularPolygon:
+def RegularPolygon(n_sides):
+  return type("RegularPolygon_" + str(n_sides), (RegularPolygon_,), {'n_sides': n_sides})
+
+
+class RegularPolygon_:
     parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror_value', 'data']
     
     def __init__(self, **kwargs):
-        for p in RegularPolygon.parameters:
+        for p in RegularPolygon_.parameters:
             set_method = getattr(self, 'set_%s'%p)
             if p in kwargs:
                 set_method(kwargs[p])
@@ -88,8 +92,8 @@ class RegularPolygon:
     
 
     def __str__(self):
-        result = "Rectangle object with params:\n"
-        for p in RegularPolygon.parameters:
+        result = "RegularPolygon object with params:\n"
+        for p in RegularPolygon_.parameters:
             result += "%s: %s\n"%(p, getattr(self,p))
             
         return result
@@ -167,7 +171,7 @@ class RegularPolygon:
 #        dwg.add(bb)
             
         
-        n_sides = int(self.data)
+        n_sides = int(self.n_sides) #int(self.data)
         
         r = 1
         
@@ -221,5 +225,5 @@ class RegularPolygon:
 
     
 if __name__ == '__main__':
-    c = RegularPolygon(x = 3, y = 4, size = 10,  color = "blue", orientation = 30)
+    c = RegularPolygon_(x = 3, y = 4, size = 10,  color = "blue", orientation = 30)
     print(c)

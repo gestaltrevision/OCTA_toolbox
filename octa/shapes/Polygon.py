@@ -7,11 +7,15 @@ Created on Mon Apr  6 16:02:30 2020
 
 from math import sin, cos, pi, radians
 
-class Polygon:
+
+def Polygon(n_sides):
+  return type("Polygon_" + str(n_sides), (Polygon_,), {'n_sides': n_sides})
+
+class Polygon_:
     parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror_value', 'data']
     
     def __init__(self, **kwargs):
-        for p in Polygon.parameters:
+        for p in Polygon_.parameters:
             set_method = getattr(self, 'set_%s'%p)
             if p in kwargs:
                 set_method(kwargs[p])
@@ -89,7 +93,7 @@ class Polygon:
 
     def __str__(self):
         result = "Rectangle object with params:\n"
-        for p in Polygon.parameters:
+        for p in Polygon_.parameters:
             result += "%s: %s\n"%(p, getattr(self,p))
             
         return result
@@ -158,7 +162,7 @@ class Polygon:
 
         rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, self.position[0], self.position[1])
         
-        n_sides = int(self.data)
+        n_sides = int(self.n_sides) #int(self.data)
         
         r = 1
         
@@ -208,5 +212,5 @@ class Polygon:
         return svg
     
 if __name__ == '__main__':
-    c = Polygon(x = 3, y = 4, size = 10,  color = "blue", orientation = 30)
+    c = Polygon_(x = 3, y = 4, size = 10,  color = "blue", orientation = 30)
     print(c)

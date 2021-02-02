@@ -589,12 +589,11 @@ stimulus.SaveSVG("testgradientellipseborder")
 #%%
 
 # use swaps and orientation changes on elements with gradient fill
-from octa.shapes import GradientEllipse
 
 stimulus = Grid(5,5, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
 stimulus._autosize_method = "maximum_bounding_box"
 
-stimulus.shapes = GridPattern.RepeatAcrossRows([GradientEllipse, ChangingEllipse, Triangle, Ellipse])
+stimulus.shapes = GridPattern.RepeatAcrossRows([Ellipse, ChangingEllipse, Triangle, Ellipse])
 stimulus.fillcolors = GridPattern.RepeatAcrossRows([["radial", "white", "red"], "green", ["horizontal", "red", "orange", "green", "blue", "indigo", "violet"], ["vertical", "green", "white", "green"], ["diagonal", "red", "white"]])
 stimulus.orientations = GridPattern.RepeatAcrossColumns([0,45,90,115,180])
 

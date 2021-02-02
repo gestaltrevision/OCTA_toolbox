@@ -595,11 +595,11 @@ class Grid(Stimulus):
         self._bordercolors   = RepeatAcrossElements([""], self._n_rows, self._n_cols)
         self._borderwidths   = RepeatAcrossElements([0], self.n_rows, self.n_cols)
         self._fillcolors     = RepeatAcrossElements(["dodgerblue"], self.n_rows, self.n_cols)
-        self._shapes         = RepeatAcrossElements([Polygon], self._n_rows, self._n_cols)
+        self._shapes         = RepeatAcrossElements([Polygon(8)], self._n_rows, self._n_cols)
         self._class_labels   = RepeatAcrossElements([""], self._n_rows, self._n_cols)
         self._id_labels      = RepeatAcrossElements([""], self._n_rows, self._n_cols)
         self._mirror_values  = RepeatAcrossElements([""], self._n_rows, self._n_cols)
-        self._data           = RepeatAcrossElements(["8"], self._n_rows, self._n_cols)
+        self._data           = RepeatAcrossElements([""], self._n_rows, self._n_cols)
         
         # Initialize a list with element attribute overrides
         self._attribute_overrides = [dict() for _ in range(self._n_cols * self._n_rows)]
