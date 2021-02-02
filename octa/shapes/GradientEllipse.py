@@ -6,11 +6,11 @@ Created on Mon Apr  6 16:02:30 2020
 """
 import svgwrite
 
-class ChangingEllipse:
+class GradientEllipse:
     parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror_value']
     
     def __init__(self, **kwargs):
-        for p in ChangingEllipse.parameters:
+        for p in GradientEllipse.parameters:
             set_method = getattr(self, 'set_%s'%p)
             if p in kwargs:
                 set_method(kwargs[p])
@@ -81,7 +81,7 @@ class ChangingEllipse:
 
     def __str__(self):
         result = "Ellipse object with params:\n"
-        for p in ChangingEllipse.parameters:
+        for p in GradientEllipse.parameters:
             result += "%s: %s\n"%(p, getattr(self,p))
             
         return result
@@ -97,6 +97,28 @@ class ChangingEllipse:
                 
         return mirror_transform
         
+    def create_fillcolor(self, dwg):
+        gradient = ""
+        if self.fillcolor[0] == "radial":
+            gradient = dwg.radialGradient()
+        elif self.fillcolor[0] == "horizontal":
+            gradient = dwg.linearGradient((0, 0), (1, 0))
+        elif self.fillcolor[0] == "vertical":
+            gradient = dwg.linearGradient((0, 0), (0, 1))
+        elif self.fillcolor[0] == "diagonal":
+            gradient = dwg.linearGradient((0, 0), (1, 1))
+        else:
+            return self.fillcolor
+            
+        dwg.defs.add(gradient)
+        # define the gradient colors
+        n_colors = len(self.fillcolor)-1
+        stepsize = 1 / (n_colors - 1)
+        for i in range(n_colors):
+            gradient.add_stop_color(i*stepsize, self.fillcolor[i+1])
+            
+        return gradient.get_paint_server()  
+
     def generate(self, dwg):
         mirror_transform = self.create_mirror_transform()
 
@@ -105,7 +127,7 @@ class ChangingEllipse:
         svg = dwg.ellipse(
                 center       = self.position,
                 r            = (self.bounding_box[0]/2, self.bounding_box[1]/2),
-                fill         = self.fillcolor,
+                fill         = self.create_fillcolor(dwg),
                 stroke       = self.bordercolor,
                 stroke_width = self.borderwidth,
                 transform    = " ".join([mirror_transform, rotation_transform]))
@@ -115,14 +137,14 @@ class ChangingEllipse:
         if self.id_label != "":
             svg['id']        = self.id_label
             
-        svg.add(svgwrite.animate.Set(attributeName = "fill", to = "purple", begin = "click", dur = "2s" )) 
-        svg.add(svgwrite.animate.Animate(attributeName = "fill", values = "red;orange;green;blue;indigo;violet;red", dur="10s", repeatCount="indefinite")) #to = "red"
-        svg.add(svgwrite.animate.Animate(attributeName = "cx", values = "-20;-20;20;20;-20", additive = "sum", dur="5s", repeatCount="indefinite")) #from_ = "0", to = "20"
-        svg.add(svgwrite.animate.Animate(attributeName = "cy", values = "20;-20;-20;20;20", additive = "sum", dur="5s", repeatCount="indefinite"))
-        
+#        svg.add(svgwrite.animate.Set(attributeName = "fill", to = "purple", begin = "click", dur = "2s" )) 
+#        svg.add(svgwrite.animate.Animate(attributeName = "fill", values = "red;orange;green;blue;indigo;violet;red", dur="10s", repeatCount="indefinite")) #to = "red"
+#        svg.add(svgwrite.animate.Animate(attributeName = "cx", values = "-20;-20;20;20;-20", additive = "sum", dur="5s", repeatCount="indefinite")) #from_ = "0", to = "20"
+#        svg.add(svgwrite.animate.Animate(attributeName = "cy", values = "20;-20;-20;20;20", additive = "sum", dur="5s", repeatCount="indefinite"))
+       
         return svg
     
     
 if __name__ == '__main__':
-    c = ChangingEllipse(x = 3, y = 4, radius = 10)
+    c = GradientEllipse(x = 3, y = 4, radius = 10)
     print(c)
