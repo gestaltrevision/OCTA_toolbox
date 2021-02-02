@@ -8,11 +8,14 @@ Created on Mon Apr  6 16:02:30 2020
 import base64
 from urllib.request import urlopen
 
-class FitImage:
+def FitImage(src):
+  return type("FitImage_" + str(src), (FitImage_,), {'source': src})
+
+class FitImage_:
     parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror_value', 'data']
     
     def __init__(self, **kwargs):
-        for p in FitImage.parameters:
+        for p in FitImage_.parameters:
             set_method = getattr(self, 'set_%s'%p)
             if p in kwargs:
                 set_method(kwargs[p])
@@ -84,47 +87,8 @@ class FitImage:
         if data == None:
             data = ""
             
-        ext = [".svg", ".png", ".jpg", ".jpeg", ".bmp", ".gif", \
-               ".ico", ".tif", ".tiff", ".webp"]
-        
-        try:
-            image_data = urlopen(data).read()
-            encoded = base64.b64encode(image_data).decode()
-        except ValueError:  # invalid URL
-            if data.endswith(tuple(ext)):
-                image_data = open(data, "rb").read() # read file in binary format
-                encoded = base64.b64encode(image_data).decode() # read image in base64 encoding
-     
-        if data.endswith(".svg"):
-            data = 'data:image/svg+xml;base64,{}'.format(encoded)
-            
-        elif data.endswith(".png"):
-            data = 'data:image/png;base64,{}'.format(encoded)
-            
-        elif data.endswith(".jpg") | data.endswith(".jpeg"):
-            data = 'data:image/jpeg;base64,{}'.format(encoded)
-            
-        elif data.endswith(".bmp"):
-            data = 'data:image/bmp;base64,{}'.format(encoded)
-            
-        elif data.endswith(".gif"):
-            data = 'data:image/gif;base64,{}'.format(encoded)
-            
-        elif data.endswith(".ico"):
-            data = 'data:image/vnd.microsoft.icon;base64,{}'.format(encoded)
-                            
-        elif data.endswith(".tif") | data.endswith(".tiff"):
-            data = 'data:image/tiff;base64,{}'.format(encoded)
-            
-        elif data.endswith(".webp"):
-            data = 'data:image/webp;base64,{}'.format(encoded)
-        
-        else:
-            data = data
-
         self.data = data
-    
-
+            
     def create_mirror_transform(self):
         mirror_transform = ""
         if self.mirror_value == "vertical":
@@ -136,9 +100,55 @@ class FitImage:
                 
         return mirror_transform
     
+    def get_imgdata(self):
+        imgdata = ""
+        source = self.source
+            
+        ext = [".svg", ".png", ".jpg", ".jpeg", ".bmp", ".gif", \
+               ".ico", ".tif", ".tiff", ".webp"]
+        
+        try:
+            image_data = urlopen(source).read()
+            encoded = base64.b64encode(image_data).decode()
+        except ValueError:  # invalid URL
+            if source.endswith(tuple(ext)):
+                image_data = open(source, "rb").read() # read file in binary format
+                encoded = base64.b64encode(image_data).decode() # read image in base64 encoding
+     
+        if source.endswith(".svg"):
+            imgdata = 'data:image/svg+xml;base64,{}'.format(encoded)
+            
+        elif source.endswith(".png"):
+            imgdata = 'data:image/png;base64,{}'.format(encoded)
+            
+        elif source.endswith(".jpg") | source.endswith(".jpeg"):
+            imgdata = 'data:image/jpeg;base64,{}'.format(encoded)
+            
+        elif source.endswith(".bmp"):
+            imgdata = 'data:image/bmp;base64,{}'.format(encoded)
+            
+        elif source.endswith(".gif"):
+            imgdata = 'data:image/gif;base64,{}'.format(encoded)
+            
+        elif source.endswith(".ico"):
+            imgdata = 'data:image/vnd.microsoft.icon;base64,{}'.format(encoded)
+                            
+        elif source.endswith(".tif") | source.endswith(".tiff"):
+            imgdata = 'data:image/tiff;base64,{}'.format(encoded)
+            
+        elif source.endswith(".webp"):
+            imgdata = 'data:image/webp;base64,{}'.format(encoded)
+        
+        else:
+            imgdata = source
+            
+        self.imgdata = imgdata
+
+        return self.imgdata
+    
     def __str__(self):
         result = "Image object with params:\n"
-        for p in FitImage.parameters:
+        for p in FitImage_.parameters:
             result += "%s: %s\n"%(p, getattr(self,p))
             
         return result
@@ -150,7 +160,7 @@ class FitImage:
         rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, self.position[0], self.position[1])
         
         svg = dwg.image(
-                href        = self.data,
+                href        = self.get_imgdata(),
                 insert      = topleft,
                 size        = self.bounding_box,
                 
@@ -169,5 +179,5 @@ class FitImage:
     
     
 if __name__ == '__main__':
-    c = FitImage(x = 3, y = 4, size = 10,  color = "blue", orientation = 30, data = 'hello')
+    c = FitImage_(x = 3, y = 4, size = 10,  color = "blue", orientation = 30, data = 'hello')
     print(c)
