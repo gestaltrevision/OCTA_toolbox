@@ -18,5 +18,4 @@ from octa.shapes.PathSvg import PathSvg
 
 
 from octa.shapes.FitImage import FitImage
-from octa.shapes.GradientEllipse import GradientEllipse
 from octa.shapes.ChangingEllipse import ChangingEllipse
