@@ -33,7 +33,7 @@ stimulus.orientations = GridPattern.RepeatAcrossColumns([0,45,90,115,180])
 stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])
 
 stimulus.Show()
-stimulus.SaveSVG("test")
+#stimulus.SaveSVG("test")
 
 
 #%%
@@ -50,7 +50,7 @@ stimulus.orientations = GridPattern.RepeatAcrossColumns([0,45,90,115,180])
 #stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])
 
 stimulus.Show()
-stimulus.SaveSVG("test")
+#stimulus.SaveSVG("test")
 
 #%%
 
@@ -58,7 +58,7 @@ stimulus.SaveSVG("test")
 stimulus = Grid(5,5, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
 stimulus._autosize_method = "maximum_bounding_box"
 
-stimulus.shapes = GridPattern.RepeatAcrossRows([Image("img/checkmark.svg", name = "Checkmark"), Image("https://upload.wikimedia.org/wikipedia/commons/b/bd/Test.svg"), Image("img/w3c_home.png")])
+stimulus.shapes = GridPattern.RepeatAcrossRows([Image("img/checkmark.svg", name = "Checkmark"), Image("https://upload.wikimedia.org/wikipedia/commons/b/bd/Test.svg"), FitImage("img/w3c_home.png", name = "W3C_png")])
 #stimulus.fillcolors = GridPattern.RepeatAcrossRows([["radial", "white", "red"], "green", ["horizontal", "red", "orange", "green", "blue", "indigo", "violet"], ["vertical", "green", "white", "green"], ["diagonal", "red", "white"]])
 stimulus.orientations = GridPattern.RepeatAcrossColumns([0,45,90,115,180])
 
@@ -66,7 +66,7 @@ stimulus.orientations = GridPattern.RepeatAcrossColumns([0,45,90,115,180])
 #stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])
 
 stimulus.Show()
-stimulus.SaveSVG("test")
+#stimulus.SaveSVG("test")
 
 #%%
 
@@ -84,7 +84,7 @@ stimulus.swap_distinct_elements(n_swap_pairs = 1, distinction_features = ['shape
 #stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])
 
 stimulus.Show()
-stimulus.SaveSVG("test")
+#stimulus.SaveSVG("test")
 
 
 #%%
@@ -103,4 +103,4 @@ stimulus.swap_distinct_elements(n_swap_pairs = 1, distinction_features = ['shape
 #stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])
 
 stimulus.Show()
-stimulus.SaveSVG("test")
+#stimulus.SaveSVG("test")
