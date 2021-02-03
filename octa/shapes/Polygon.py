@@ -8,8 +8,10 @@ Created on Mon Apr  6 16:02:30 2020
 from math import sin, cos, pi, radians
 
 
-def Polygon(n_sides):
-  return type("Polygon_" + str(n_sides), (Polygon_,), {'n_sides': n_sides})
+def Polygon(n_sides, name = None):
+    if name == None:
+        name = "Polygon_" + str(n_sides)
+    return type(str(name), (Polygon_,), {'n_sides': n_sides})
 
 class Polygon_:
     parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror_value', 'data']

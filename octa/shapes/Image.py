@@ -8,8 +8,10 @@ Created on Mon Apr  6 16:02:30 2020
 import base64
 from urllib.request import urlopen
 
-def Image(src):
-  return type("Image_" + str(src), (Image_,), {'source': src})
+def Image(src, name = None):
+    if name == None:
+        name = "Image_" + str(src)
+    return type(str(name), (Image_,), {'source': src})
 
 class Image_:
     parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror_value', 'data']

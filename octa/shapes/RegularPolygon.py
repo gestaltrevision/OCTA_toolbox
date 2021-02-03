@@ -7,8 +7,10 @@ Created on Mon Apr  6 16:02:30 2020
 
 from math import sin, cos, pi, radians
 
-def RegularPolygon(n_sides):
-  return type("RegularPolygon_" + str(n_sides), (RegularPolygon_,), {'n_sides': n_sides})
+def RegularPolygon(n_sides, name = None):
+    if name == None:
+        name = "RegularPolygon_" + str(n_sides)
+    return type(str(name), (RegularPolygon_,), {'n_sides': n_sides})
 
 
 class RegularPolygon_:

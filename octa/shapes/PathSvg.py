@@ -5,8 +5,10 @@
 import svgwrite
 import svgpathtools
 
-def PathSvg(src):
-  return type("PathSvg_" + str(src), (PathSvg_,), {'source': src})
+def PathSvg(src, name = None):
+    if name == None:
+        name = "PathSvg_" + str(src)
+    return type(str(name), (PathSvg_,), {'source': src})
 
 class PathSvg_:
     parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror_value', 'data']
