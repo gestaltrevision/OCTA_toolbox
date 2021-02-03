@@ -25,9 +25,9 @@ stimulus.fillcolors = GridPattern.RandomPattern(['#6dd6ff', '#1b9fd8', '#006ca1'
 #stimulus.borderwidths = GridPattern.RandomPattern([5])
 
 stimulus.Show()
-stimulus.SavePNG(filename = "output/test")
-stimulus.SavePDF(filename = "output/test")
-stimulus.SaveSVG(filename = "output/test")
+stimulus.SavePNG(filename = "test", folder = "output")
+stimulus.SavePDF(filename = "test", folder = "output")
+stimulus.SaveSVG(filename = "test", folder = "output")
 
 stimulus.positions.SetLocationJitter(distribution = "uniform", min_val = 5, max_val = 40)
 
@@ -90,7 +90,7 @@ stimulus._autosize_method = "maximum_bounding_box"
 stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(50,50), (40,40),(30,30), (20,20)])
 stimulus.fillcolors = GridPattern.RepeatAcrossColumns(['#6dd6ff', '#1b9fd8', '#006ca1'])
 stimulus.Show()
-stimulus.SaveSVG(filename = "output/testoutput")
+stimulus.SaveSVG(filename = "testoutput", folder = "output")
 stimulus.SaveJSON(folder = "output", filename = "testoutput")
 
 #%% Apply jitter to feature (e.g. orientation)
@@ -245,7 +245,7 @@ stimulus.orientations = GridPattern.RepeatAcrossElements([135])
                            
 stimulus.positions.x                                  
 stimulus.Show()
-stimulus.SaveSVG("testpathstimulus")
+stimulus.SaveSVG("testpathstimulus", folder = "output")
 
 #%%
 
@@ -306,8 +306,8 @@ stimulus._autosize_method = "maximum_bounding_box"
 stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(40,40),(20,20)])
 
 stimulus.Show()
-stimulus.SaveSVG("testwithoutbackgroundcolor")
-
+stimulus.SaveSVG("testwithoutbackgroundcolor", folder = "output")
+stimulus.SavePNG("testwithoutbackgroundcolor", folder = "output")
 #%%
 
 # remove_element example
@@ -368,7 +368,7 @@ stimulus.class_labels = GridPattern.RepeatAcrossColumns(["Triangle", "Ellipse", 
 stimulus.id_labels = GridPattern.RepeatAcrossElements(['firstelement', '', '', 'lastelement'])
 
 stimulus.Show()
-stimulus.SaveSVG("testclassesids")
+stimulus.SaveSVG("testclassesids", folder = "output")
 
 #%%
 
@@ -413,7 +413,7 @@ stimulus.shapes = GridPattern.RepeatAcrossColumns([Image])
 stimulus.data = GridPattern.RepeatAcrossColumns(["img/file_example_PNG_500kB.png", "img/w3c_home.png"])
 
 stimulus.Show()
-stimulus.SaveSVG("testembeddedpng")
+stimulus.SaveSVG("testembeddedpng", folder = "output")
 
 #%%
 
@@ -426,7 +426,7 @@ stimulus._autosize_method = "maximum_bounding_box"
 stimulus.shapes = GridPattern.RepeatAcrossColumns([Image("img/gears.svg"), Image("img/file_example_SVG_20kB.svg")])
 
 stimulus.Show()
-stimulus.SaveSVG("testembeddedsvg")
+stimulus.SaveSVG("testembeddedsvg", folder = "output")
 
 
 #%%
@@ -439,7 +439,7 @@ stimulus._autosize_method = "maximum_bounding_box"
 stimulus.shapes = GridPattern.RepeatAcrossColumns([Image("img/w3c_home.jpg"), Image("img/file_example_JPG_100kB.jpg")])
 
 stimulus.Show()
-stimulus.SaveSVG("testembeddedjpg")
+stimulus.SaveSVG("testembeddedjpg", folder = "output")
 
 #%%
 
@@ -451,7 +451,7 @@ stimulus._autosize_method = "maximum_bounding_box"
 stimulus.shapes = GridPattern.RepeatAcrossColumns([Image("img/w3c_home.bmp")])
 
 stimulus.Show()
-stimulus.SaveSVG("testembeddedbmp")
+stimulus.SaveSVG("testembeddedbmp", folder = "output")
 
 #%%
 
@@ -464,7 +464,7 @@ stimulus._autosize_method = "maximum_bounding_box"
 stimulus.shapes = GridPattern.RepeatAcrossColumns([Image("img/w3c_home.gif"), Image("img/w3c_home_animation.gif")])
 
 stimulus.Show()
-stimulus.SaveSVG("testembeddedgif")
+stimulus.SaveSVG("testembeddedgif", folder = "output")
 
 #%%
 
@@ -476,7 +476,7 @@ stimulus._autosize_method = "maximum_bounding_box"
 stimulus.shapes = GridPattern.RepeatAcrossColumns([Image("img/file_example_favicon.ico")])
 
 stimulus.Show()
-stimulus.SaveSVG("testembeddedico")
+stimulus.SaveSVG("testembeddedico", folder = "output")
 
 #%%
 
@@ -488,7 +488,8 @@ stimulus._autosize_method = "maximum_bounding_box"
 stimulus.shapes = GridPattern.RepeatAcrossColumns([Image("img/file_example_TIFF_1MB.tiff")])
 
 stimulus.Show()
-stimulus.SaveSVG("testembeddedtiff")
+stimulus.SaveSVG("testembeddedtiff", folder = "output")
+
 #%%
 
 # encode webp image in svg
@@ -499,8 +500,7 @@ stimulus._autosize_method = "maximum_bounding_box"
 stimulus.shapes = GridPattern.RepeatAcrossColumns([Image("img/file_example_WEBP_50kB.webp")])
 
 stimulus.Show()
-stimulus.SaveSVG("testembeddedwebp")
-
+stimulus.SaveSVG("testembeddedwebp", folder = "output")
 
 #%%
 
@@ -518,7 +518,7 @@ stimulus.shapes = GridPattern.RepeatAcrossColumns([
         Image("https://upload.wikimedia.org/wikipedia/commons/d/d0/RStudio_logo_flat.svg")])
 
 stimulus.Show()
-stimulus.SaveSVG("testembeddedonlineimage")
+stimulus.SaveSVG("testembeddedonlineimage", folder = "output")
 
 #%%
 
@@ -533,8 +533,7 @@ stimulus.shapes = GridPattern.RepeatAcrossColumns([ChangingEllipse])
 #stimulus.fillcolors = GridPattern.RepeatAcrossColumns(["green", "blue", "orange"])
 
 stimulus.Show()
-stimulus.SaveSVG("testanimatesvg")
-
+stimulus.SaveSVG("testanimatesvg", folder = "output")
 
 #%%
 
@@ -554,7 +553,7 @@ stimulus.shapes = GridPattern.RepeatAcrossColumns([
         Image("https://upload.wikimedia.org/wikipedia/commons/d/d0/RStudio_logo_flat.svg")])
 
 stimulus.Show()
-stimulus.SaveSVG("testscalingimage")
+stimulus.SaveSVG("testscalingimage", folder = "output")
 
 #%%
 
@@ -568,7 +567,8 @@ stimulus.shapes = GridPattern.RepeatAcrossElements([Ellipse, Rectangle, Triangle
                                                 Path("M37.5,186c-12.1-10.5-11.8-32.3-7.2-46.7c4.8-15,13.1-17.8,30.1-36.7C91,68.8,83.5,56.7,103.4,45 c22.2-13.1,51.1-9.5,69.6-1.6c18.1,7.8,15.7,15.3,43.3,33.2c28.8,18.8,37.2,14.3,46.7,27.9c15.6,22.3,6.4,53.3,4.4,60.2 c-3.3,11.2-7.1,23.9-18.5,32c-16.3,11.5-29.5,0.7-48.6,11c-16.2,8.7-12.6,19.7-28.2,33.2c-22.7,19.7-63.8,25.7-79.9,9.7 c-15.2-15.1,0.3-41.7-16.6-54.9C63,186,49.7,196.7,37.5,186z", 288,288)])
 stimulus.fillcolors = GridPattern.RepeatAcrossRows([["radial", "white", "red"], "green", ["horizontal", "red", "orange", "green", "blue", "indigo", "violet"], ["vertical", "green", "white", "green"], ["diagonal", "red", "white"]])
 stimulus.Show()
-stimulus.SaveSVG("testgradientellipse")
+stimulus.SaveSVG("testgradientellipse", folder = "output")
+stimulus.SavePNG("testgradientellipse", folder = "output")
 
 #%%
 
@@ -584,8 +584,7 @@ stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(40,40)])
 stimulus.borderwidths = GridPattern.RepeatAcrossRows([10,10,0,10,10])
 stimulus.bordercolors = GridPattern.RepeatAcrossRows([["radial", "white", "red"], ["horizontal", "red", "orange", "green", "blue", "indigo", "violet"], "green", ["vertical", "green", "white", "green"], ["diagonal", "red", "white"]])
 stimulus.Show()
-stimulus.SaveSVG("testgradientellipseborder")
-
+stimulus.SaveSVG("testgradientellipseborder", folder = "output")
 
 #%%
 
@@ -602,4 +601,90 @@ stimulus.orientations = GridPattern.RepeatAcrossColumns([0,45,90,115,180])
 stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['fillcolors'])
 
 stimulus.Show()
-stimulus.SaveSVG("test")
+stimulus.SaveSVG("test", folder = "output")
+
+#%%
+
+# Test Polygon shapes with n_sides as input 
+
+stimulus = Grid(5,5, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus._autosize_method = "maximum_bounding_box"
+
+stimulus.shapes = GridPattern.RepeatAcrossRows([RegularPolygon(4), RegularPolygon(5), RegularPolygon(6, "Hexagon"), Polygon(6, "Hexagon")])
+stimulus.fillcolors = GridPattern.RepeatAcrossRows([["radial", "white", "red"], "green", ["horizontal", "red", "orange", "green", "blue", "indigo", "violet"], ["vertical", "green", "white", "green"], ["diagonal", "red", "white"]])
+stimulus.orientations = GridPattern.RepeatAcrossColumns([0,45,90,115,180])
+
+#stimulus.swap_distinct_elements(n_swap_pairs = 1, distinction_features = ['shapes'])
+stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])
+
+stimulus.Show()
+#stimulus.SaveSVG("test")
+
+
+#%%
+
+# Test Text shape with text to use as input 
+stimulus = Grid(5,5, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus._autosize_method = "maximum_bounding_box"
+
+stimulus.shapes = GridPattern.RepeatAcrossRows([Text("OCTA"), Rectangle, Text("O3"), Text("Hola\nPola", name = "stopexpression"), Polygon(8)])
+#stimulus.fillcolors = GridPattern.RepeatAcrossRows([["radial", "white", "red"], "green", ["horizontal", "red", "orange", "green", "blue", "indigo", "violet"], ["vertical", "green", "white", "green"], ["diagonal", "red", "white"]])
+stimulus.orientations = GridPattern.RepeatAcrossColumns([0,45,90,115,180])
+
+#stimulus.swap_distinct_elements(n_swap_pairs = 1, distinction_features = ['shapes'])
+#stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])
+
+stimulus.Show()
+#stimulus.SaveSVG("test")
+
+#%%
+
+# Test Image shape with source to use as input 
+stimulus = Grid(5,5, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus._autosize_method = "maximum_bounding_box"
+
+stimulus.shapes = GridPattern.RepeatAcrossRows([Image("img/checkmark.svg", name = "Checkmark"), Image("https://upload.wikimedia.org/wikipedia/commons/b/bd/Test.svg"), FitImage("img/w3c_home.png", name = "W3C_png")])
+#stimulus.fillcolors = GridPattern.RepeatAcrossRows([["radial", "white", "red"], "green", ["horizontal", "red", "orange", "green", "blue", "indigo", "violet"], ["vertical", "green", "white", "green"], ["diagonal", "red", "white"]])
+stimulus.orientations = GridPattern.RepeatAcrossColumns([0,45,90,115,180])
+
+#stimulus.swap_distinct_elements(n_swap_pairs = 1, distinction_features = ['shapes'])
+#stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])
+
+stimulus.Show()
+#stimulus.SaveSVG("test")
+
+#%%
+
+# Test Path shape with path and size of path to use as input 
+stimulus = Grid(5,5, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus._autosize_method = "maximum_bounding_box"
+
+stimulus.shapes = GridPattern.RepeatAcrossRows(
+        [Path(name = "Arrow", path = "M12 22A10 10 0 1 0 2 12a10 10 0 0 0 10 10zM8.31 10.14l3-2.86a.49.49 0 0 1 .15-.1.54.54 0 0 1 .16-.1.94.94 0 0 1 .76 0 1 1 0 0 1 .33.21l3 3a1 1 0 0 1-1.42 1.42L13 10.41V16a1 1 0 0 1-2 0v-5.66l-1.31 1.25a1 1 0 0 1-1.38-1.45z", xsize = 24, ysize = 24),
+         Path(name = "Checkmark", path = "M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z", xsize = 512, ysize = 512)])
+#stimulus.fillcolors = GridPattern.RepeatAcrossRows([["radial", "white", "red"], "green", ["horizontal", "red", "orange", "green", "blue", "indigo", "violet"], ["vertical", "green", "white", "green"], ["diagonal", "red", "white"]])
+stimulus.orientations = GridPattern.RepeatAcrossColumns([0,45,90,115,180])
+
+stimulus.swap_distinct_elements(n_swap_pairs = 1, distinction_features = ['shapes'])
+#stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])
+
+stimulus.Show()
+#stimulus.SaveSVG("test")
+
+#%%
+
+# Test PathSvg shape with path and size of path to use as input 
+stimulus = Grid(5,5, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus._autosize_method = "maximum_bounding_box"
+
+stimulus.shapes = GridPattern.RepeatAcrossRows(
+        [PathSvg("img/checkmark.svg", name = "Checkmark"),
+         PathSvg("img/arrow-circle-up-svgrepo-com.svg", name = "Arrow")])
+#stimulus.fillcolors = GridPattern.RepeatAcrossRows([["radial", "white", "red"], "green", ["horizontal", "red", "orange", "green", "blue", "indigo", "violet"], ["vertical", "green", "white", "green"], ["diagonal", "red", "white"]])
+stimulus.orientations = GridPattern.RepeatAcrossColumns([0,45,90,115,180])
+
+stimulus.swap_distinct_elements(n_swap_pairs = 1, distinction_features = ['shapes'])
+#stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])
+
+stimulus.Show()
+#stimulus.SaveSVG("test")

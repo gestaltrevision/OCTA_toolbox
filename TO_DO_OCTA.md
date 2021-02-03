@@ -2,16 +2,28 @@
 
 ## ADDITIONAL PATTERNS / PATTERN FEATURES
 
-### important
+## do
+
+* make clear in documentation that top->bottom left-> right is standard in OCTA
+* add in documentation: 
+  * replace value (of one feature of an element): arguments = element_id and new_value (feature_dimension could be an additional argument OR could be part of the name of the function, like replace_color)
+  * transparent background color? (also png?)
+  * image: externe png/jpg inladen
+
+### think about
+
+* naming RepeaterPattern / Duplicate functions: Duplicate/Repeat/Replicate/Iterate/Alternate/...?
+
+* clarify use of the word "pattern": 
+
+  * set of values to create ordering with (pattern argument)
+  * resulting ordering (RepeaterPattern, SymmetryPattern, etc.)
 
 * structural change: all grid patterns in same file:
+
   * add the possibility to switch between patterns
     e.g.:
     stimulus.colors.pattern = RepeatAcrossColumns (instead of eg MirrorAcrossRows)
-* make clear in documentation that top->bottom left-> right is standard in OCTA
-* naming RepeaterPattern / Duplicate functions: Duplicate/Repeat/Replicate/Iterate/Alternate/...?
-
-### very nice
 
 * extend function for BasicPattern: 
   BasicPattern([1,2,3]) and BasicPattern([4,5,6]) --> BasicPattern([1,2,3,4,5,6])
@@ -22,6 +34,8 @@
 
   of bijv.: pattern1.extend([4,5,6])
 
+### very nice
+
 * additional jitter options:
 
   * regularly increasing jitter
@@ -31,13 +45,10 @@
   (like row/column/leftdiagonal/rightdiagonal)
   thus: repeater/gradient/symmetry patterns along this dimension
 
-* gradient in size working with tuples? (gradient in aspectratio)
-
 * extra deviant options:
 
-  * replace_value (of one feature of an element): arguments = element_id and new_value (feature_dimension could be an additional argument OR could be part of the name of the function, like replace_color)
   * replace_element (& all features of element): arguments = element_id and all new values (for different feature dimensions)
-  * IMPLEMENTED: switch_value (like implemented, but not random switch)
+  * switch_value (like implemented, but not random switch)
   * switch_element (like implemented, but not random switch)
   * add_element
   * [add_value (only if not all features need to be given and defaults are implemented)]
@@ -55,15 +66,8 @@
 
 ## ADDITIONAL STIMULUS FEATURE DIMENSIONS
 
-### important
-
-* mirror parameter
-* class
-* id
-
 ### nice
 
-* [filltexture?]
 * [animate ? (changing attributes across time: moving elements, changing orientation / color / ...)]
 
 ## ADDITIONAL POSITIONS / POSITION FUNCTIONS
@@ -93,17 +97,13 @@
 
 ## ADDITIONAL STIMULUS FUNCTIONS
 
-### very nice
-
-* transparent background color? (also png?)
-
  ### nice
 
 * change orientation of overall pattern?
 
 ## SHAPES
 
-CRUCIAL SHAPES: ellipse, rectangle, triangle, polygon, none, image, text, (newshape), (rounded_rectangle, rounded_triangle), (curve)
+CRUCIAL SHAPES: ellipse, rectangle, triangle, polygon, none, image, text, path, (rounded_rectangle, rounded_triangle), (curve)
 
 ### important
 
@@ -114,13 +114,11 @@ CRUCIAL SHAPES: ellipse, rectangle, triangle, polygon, none, image, text, (newsh
   * center text in bounding box
 * [curve:]
   * border color same as fill color
-* none shape
 
 ### very nice
 
 * image: 
   * externe svg code embedden/inladen
-  * externe png/jpg inladen???
 * converter module bepaling grootte (different parameters possible at initialization --> bounding box params)
 * [rounded_rectangle, rounded_triangle, rounded_polygon]
 * [spiral]
@@ -136,6 +134,7 @@ OCTA code (= now)
 important:
 
 * OCTA json file (implemented now but will need to changed/adapted together with outputfiles and additional functionality toolbox)
+  [NEEDS DEBUGGING FOR SHAPES Polygon, RegularPolygon, Text, Image, FitImage, Path, PathSvg]
 
 ### [nice ?]
 
@@ -166,6 +165,7 @@ important:
 * Shiny app:
   * also output OCTA code to generate same stimulus in python
 * documentation (gitbook via Rmd); look at documentation GERT 
+  + AND automatic Python documentation
 
 ### very nice
 
@@ -181,11 +181,11 @@ important:
 
 * problem with image and text stimuli:
   * can not be switched
+  
   * complexity calculation
+  
+    --> can be switched and complexity calculation solved now? 
 * output files verder aanvullen
-* clarify use of the word "pattern": 
-  * set of values to create ordering with (pattern argument)
-  * resulting ordering (RepeaterPattern, SymmetryPattern, etc.)
 
 ## EXTRA'S
 

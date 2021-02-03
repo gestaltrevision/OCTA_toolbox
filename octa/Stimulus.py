@@ -10,8 +10,9 @@ import json
 import jsonpickle
 import pandas as pd
 import os
+from html2image import Html2Image
 from svglib.svglib import svg2rlg
-from reportlab.graphics import renderPM, renderPDF
+from reportlab.graphics import renderPDF
 from IPython.display import SVG, display
 
 from .Positions import Positions
@@ -127,26 +128,33 @@ class Stimulus:
         # limitations using svglib:
         # clipping is limited to single paths, no mask support
         # color gradients not supported
-            
+
         svg_filename = "%s.svg"%filename
         png_filename = "%s.png"%filename
         if folder is not None:
             svg_filename = os.path.join(folder, svg_filename)  
-            png_filename = os.path.join(folder, png_filename)       
+#            png_fullfilename = os.path.join(folder, png_filename)
+            hti = Html2Image(output_path = folder)
+        else:
+            hti = Html2Image()
 
         self.dwg.saveas(svg_filename, pretty = True)
-        img = svg2rlg(svg_filename)
-        os.remove(svg_filename)
-        renderPM.drawToFile(img, png_filename, fmt="PNG")
+        
+        hti.screenshot(other_file = svg_filename, 
+                       size= (self.width, self.height), 
+                       save_as = png_filename)
+#        img = svg2rlg(svg_filename)
+#        os.remove(svg_filename)
+#        renderPM.drawToFile(img, png_filename, fmt="PNG")
         
     def SavePDF(self, filename, folder = None): 
         """
-        Saves the current stimulus as a PNG file.
+        Saves the current stimulus as a PDF file.
 
         Parameters
         ----------
         filename : STRING
-            Name of the png file.
+            Name of the pdf file.
 
         Returns
         -------
