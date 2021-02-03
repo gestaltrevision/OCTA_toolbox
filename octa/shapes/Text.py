@@ -8,7 +8,7 @@ Created on Mon Apr  6 16:02:30 2020
 def Text(text, name = None):
     if name == None:
         name = "Text_" + str(text)
-    return type(str(name), (Text_,), {'text': str(text)})
+    return type(str(name), (Text_,), {'text': str(text), 'name': name})
 
 class Text_:
     parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror_value', 'data']

@@ -11,7 +11,7 @@ from urllib.request import urlopen
 def Image(src, name = None):
     if name == None:
         name = "Image_" + str(src)
-    return type(str(name), (Image_,), {'source': src})
+    return type(str(name), (Image_,), {'source': src, 'name': name})
 
 class Image_:
     parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror_value', 'data']

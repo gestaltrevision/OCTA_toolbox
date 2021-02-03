@@ -1,26 +1,11 @@
 element_id,position,shape,bounding_box,fillcolor,bordercolor,borderwidth,orientation,data
-0,"(42, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,0,
-1,"(102, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,45,
-2,"(162, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,90,
-3,"(222, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,115,
-4,"(282, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,180,
-5,"(42, 102)",<class 'octa.shapes.Image.Image_img/test.svg'>,"(45, 45)",green,,0,0,
-6,"(102, 102)",<class 'octa.shapes.Image.Image_img/test.svg'>,"(45, 45)",green,,0,45,
-7,"(162, 102)",<class 'octa.shapes.Image.Image_img/test.svg'>,"(45, 45)",green,,0,90,
-8,"(222, 102)",<class 'octa.shapes.Image.Image_img/test.svg'>,"(45, 45)",green,,0,115,
-9,"(282, 102)",<class 'octa.shapes.Image.Image_img/test.svg'>,"(45, 45)",green,,0,180,
-10,"(42, 162)",<class 'octa.shapes.Text.Text_OCTA'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,0,
-11,"(102, 162)",<class 'octa.shapes.Image.Image_img/test.svg'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,45,
-12,"(162, 162)",<class 'octa.shapes.Text.Text_OCTA'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,90,
-13,"(222, 162)",<class 'octa.shapes.Text.Text_OCTA'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,115,
-14,"(282, 162)",<class 'octa.shapes.Text.Text_OCTA'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,180,
-15,"(42, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,0,
-16,"(102, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,45,
-17,"(162, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,90,
-18,"(222, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,115,
-19,"(282, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,180,
-20,"(42, 282)",<class 'octa.shapes.Image.Image_img/test.svg'>,"(45, 45)","['diagonal', 'red', 'white']",,0,0,
-21,"(102, 282)",<class 'octa.shapes.Image.Image_img/test.svg'>,"(45, 45)","['diagonal', 'red', 'white']",,0,45,
-22,"(162, 282)",<class 'octa.shapes.Image.Image_img/test.svg'>,"(45, 45)","['diagonal', 'red', 'white']",,0,90,
-23,"(222, 282)",<class 'octa.shapes.Text.Text_OCTA'>,"(45, 45)","['diagonal', 'red', 'white']",,0,115,
-24,"(282, 282)",<class 'octa.shapes.Image.Image_img/test.svg'>,"(45, 45)","['diagonal', 'red', 'white']",,0,180,
+0,"(42, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,0,"(8, 'Polygon_8')"
+1,"(42, 102)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",green,,0,0,
+2,"(42, 162)",<class 'octa.shapes.Image.Image_img/checkmark.svg'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,0,"('img/checkmark.svg', 'Image_img/checkmark.svg')"
+3,"(42, 222)",<class 'octa.shapes.Text.Text_OCTA'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,0,"('OCTA', 'Text_OCTA')"
+4,"(42, 282)",<class 'octa.shapes.PathSvg.PathSvg_img/checkmark.svg'>,"(45, 45)","['diagonal', 'red', 'white']",,0,0,"('img/checkmark.svg', 'PathSvg_img/checkmark.svg')"
+5,"(42, 342)","<class 'octa.shapes.Path.Path_M37.5,186c-12.1-10.5-11.8-32.3-7.2-46.7c4.8-15,13.1-17.8,30.1-36.7C91,68.8,83.5,56.7,103.4,45 c22.2-13.1,51.1-9.5,69.6-1.6c18.1,7.8,15.7,15.3,43.3,33.2c28.8,18.8,37.2,14.3,46.7,27.9c15.6,22.3,6.4,53.3,4.4,60.2 c-3.3,11.2-7.1,23.9-18.5,32c-16.3,11.5-29.5,0.7-48.6,11c-16.2,8.7-12.6,19.7-28.2,33.2c-22.7,19.7-63.8,25.7-79.9,9.7 c-15.2-15.1,0.3-41.7-16.6-54.9C63,186,49.7,196.7,37.5,186z_288_288'>","(45, 45)","['radial', 'white', 'red']",,0,0,"('M37.5,186c-12.1-10.5-11.8-32.3-7.2-46.7c4.8-15,13.1-17.8,30.1-36.7C91,68.8,83.5,56.7,103.4,45 c22.2-13.1,51.1-9.5,69.6-1.6c18.1,7.8,15.7,15.3,43.3,33.2c28.8,18.8,37.2,14.3,46.7,27.9c15.6,22.3,6.4,53.3,4.4,60.2 c-3.3,11.2-7.1,23.9-18.5,32c-16.3,11.5-29.5,0.7-48.6,11c-16.2,8.7-12.6,19.7-28.2,33.2c-22.7,19.7-63.8,25.7-79.9,9.7 c-15.2-15.1,0.3-41.7-16.6-54.9C63,186,49.7,196.7,37.5,186z', 288, 288, 'Path_M37.5,186c-12.1-10.5-11.8-32.3-7.2-46.7c4.8-15,13.1-17.8,30.1-36.7C91,68.8,83.5,56.7,103.4,45 c22.2-13.1,51.1-9.5,69.6-1.6c18.1,7.8,15.7,15.3,43.3,33.2c28.8,18.8,37.2,14.3,46.7,27.9c15.6,22.3,6.4,53.3,4.4,60.2 c-3.3,11.2-7.1,23.9-18.5,32c-16.3,11.5-29.5,0.7-48.6,11c-16.2,8.7-12.6,19.7-28.2,33.2c-22.7,19.7-63.8,25.7-79.9,9.7 c-15.2-15.1,0.3-41.7-16.6-54.9C63,186,49.7,196.7,37.5,186z_288_288')"
+6,"(42, 402)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,0,"(8, 'Polygon_8')"
+7,"(42, 462)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,0,
+8,"(42, 522)",<class 'octa.shapes.Image.Image_img/checkmark.svg'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,0,"('img/checkmark.svg', 'Image_img/checkmark.svg')"
+9,"(42, 582)",<class 'octa.shapes.Text.Text_OCTA'>,"(45, 45)","['diagonal', 'red', 'white']",,0,0,"('OCTA', 'Text_OCTA')"

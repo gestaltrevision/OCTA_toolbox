@@ -319,6 +319,10 @@ class Stimulus:
             stimulus._class_labels               = jsonpickle.decode(data['element_attributes']['class'])
             stimulus._mirror_values              = jsonpickle.decode(data['element_attributes']['mirror'])
             
+            for i in range(len(stimulus.data)):
+                if stimulus.data[i] != "":
+                    if "Polygon" in str(stimulus.shapes[i]):
+                          print(stimulus._shapes.pattern)
             
         return stimulus
     
@@ -757,6 +761,27 @@ class Grid(Stimulus):
         self._shapes.n_rows = self._n_rows
         self._shapes.n_cols = self._n_cols
         
+        datalist = []
+        for i in range(len(self._shapes.generate().pattern)):
+            # add info about subclass generation to "data" argument
+            if str(self._shapes.generate().pattern[i].__bases__[0]) == "<class 'octa.shapes.Polygon.Polygon_'>":
+                datalist.append((self._shapes.generate().pattern[i].n_sides, self._shapes.generate().pattern[i].name))
+            elif str(self._shapes.generate().pattern[i].__bases__[0]) == "<class 'octa.shapes.RegularPolygon.RegularPolygon_'>":
+                datalist.append((self._shapes.generate().pattern[i].n_sides, self._shapes.generate().pattern[i].name))
+            elif str(self._shapes.generate().pattern[i].__bases__[0]) == "<class 'octa.shapes.Image.Image_'>":
+                datalist.append((self._shapes.generate().pattern[i].source, self._shapes.generate().pattern[i].name))
+            elif str(self._shapes.generate().pattern[i].__bases__[0]) == "<class 'octa.shapes.FitImage.FitImage_'>":
+                datalist.append((self._shapes.generate().pattern[i].source, self._shapes.generate().pattern[i].name))
+            elif str(self._shapes.generate().pattern[i].__bases__[0]) == "<class 'octa.shapes.Text.Text_'>":
+                datalist.append((self._shapes.generate().pattern[i].text, self._shapes.generate().pattern[i].name))
+            elif str(self._shapes.generate().pattern[i].__bases__[0]) == "<class 'octa.shapes.Path.Path_'>":
+                datalist.append((self._shapes.generate().pattern[i].path, self._shapes.generate().pattern[i].xsizepath, self._shapes.generate().pattern[i].ysizepath, self._shapes.generate().pattern[i].name))
+            elif str(self._shapes.generate().pattern[i].__bases__[0]) == "<class 'octa.shapes.PathSvg.PathSvg_'>":
+                datalist.append((self._shapes.generate().pattern[i].source, self._shapes.generate().pattern[i].name))
+            else:
+                datalist.append("")
+                
+        self.data = RepeatAcrossElements(datalist)
         
     def set_element_shape(self, element_id, shape_value):
         """
