@@ -409,8 +409,7 @@ print("LOCI: " + str(Complexity.CalculateElementsLOCI(stimulus, distinction_feat
 stimulus = Grid(4,4, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
 stimulus._autosize_method = "maximum_bounding_box"
 
-stimulus.shapes = GridPattern.RepeatAcrossColumns([Image])
-stimulus.data = GridPattern.RepeatAcrossColumns(["img/file_example_PNG_500kB.png", "img/w3c_home.png"])
+stimulus.shapes = GridPattern.RepeatAcrossColumns([Image("img/file_example_PNG_500kB.png"), Image("img/w3c_home.png")])
 
 stimulus.Show()
 stimulus.SaveSVG("testembeddedpng", folder = "output")
