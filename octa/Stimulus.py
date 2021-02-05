@@ -814,7 +814,7 @@ class Grid(Stimulus):
                 else:
                     datalist.append("")
                     
-        self.data = eval(str(self._shapes.generate().patterntype) + str(self._shapes.generate().patternorientation) + "(" + str(datalist) + ")")
+        #self.data = eval(str(self._shapes.generate().patterntype) + str(self._shapes.generate().patternorientation) + "(" + str(datalist) + ")")
  
        
     def set_element_shape(self, element_id, shape_value):
