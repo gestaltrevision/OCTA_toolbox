@@ -146,7 +146,7 @@ class RepeatAcrossColumns(GridPattern):
         self.patterntype = "Repeat"
         self.patternorientation = "AcrossColumns"
 
-        return RepeatAcrossRows(p, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+        return RepeatAcrossColumns(p, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
         
     
 class RepeatAcrossRows(GridPattern):
@@ -193,7 +193,7 @@ class RepeatAcrossRows(GridPattern):
         self.patterntype = "Repeat"
         self.patternorientation = "AcrossRows"
 
-        return RepeatAcrossColumns(p, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+        return RepeatAcrossRows(p, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
     
     
 class RepeatAcrossRightDiagonal(GridPattern):

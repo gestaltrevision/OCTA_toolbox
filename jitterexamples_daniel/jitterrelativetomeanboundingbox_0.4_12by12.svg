@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<svg baseProfile="tiny" height="330" version="1.2" width="330" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs/>
+  <rect fill="white" height="330" width="330" x="0" y="0"/>
+  <rect fill="#6dd6ff" height="10" stroke-width="0" transform=" rotate(0, 50, 51)" width="10" x="45.6123" y="46.7246"/>
+  <polygon fill="#6dd6ff" points="69.4585,55.2073 74.4585,45.2073 79.4585,55.2073" stroke-width="0" transform=" rotate(0, 74, 50)"/>
+  <ellipse cx="97.4651" cy="49.2983" fill="#6dd6ff" rx="5.0" ry="5.0" stroke-width="0" transform=" rotate(0, 97, 49)"/>
+  <rect fill="#6dd6ff" height="10" stroke-width="0" transform=" rotate(0, 110, 56)" width="10" x="105.218" y="51.476"/>
+  <polygon fill="#6dd6ff" points="134.4476,54.7842 139.4476,44.7842 144.4476,54.7842" stroke-width="0" transform=" rotate(0, 139, 49)"/>
+  <ellipse cx="157.4614" cy="51.3923" fill="#6dd6ff" rx="5.0" ry="5.0" stroke-width="0" transform=" rotate(0, 157, 51)"/>
+  <rect fill="#6dd6ff" height="10" stroke-width="0" transform=" rotate(0, 175, 57)" width="10" x="170.2292" y="52.37"/>
+  <polygon fill="#6dd6ff" points="185.3062,61.7071 190.3062,51.7071 195.3062,61.7071" stroke-width="0" transform=" rotate(0, 190, 56)"/>
+  <ellipse cx="218.8675" cy="56.6131" fill="#6dd6ff" rx="5.0" ry="5.0" stroke-width="0" transform=" rotate(0, 218, 56)"/>
+  <rect fill="#6dd6ff" height="10" stroke-width="0" transform=" rotate(0, 233, 59)" width="10" x="228.7657" y="54.8749"/>
+  <polygon fill="#6dd6ff" points="246.5916,61.3826 251.5916,51.3826 256.5916,61.3826" stroke-width="0" transform=" rotate(0, 251, 56)"/>
+  <ellipse cx="276.1518" cy="57.1395" fill="#6dd6ff" rx="5.0" ry="5.0" stroke-width="0" transform=" rotate(0, 276, 57)"/>
+  <rect fill="#1b9fd8" height="14" stroke-width="0" transform=" rotate(0, 60, 73)" width="14" x="53.2038" y="66.8388"/>
+  <polygon fill="#1b9fd8" points="64.2401,84.9314 71.2401,70.9314 78.2401,84.9314" stroke-width="0" transform=" rotate(0, 71, 77)"/>
+  <ellipse cx="95.8089" cy="72.6246" fill="#1b9fd8" rx="7.0" ry="7.0" stroke-width="0" transform=" rotate(0, 95, 72)"/>
+  <rect fill="#1b9fd8" height="14" stroke-width="0" transform=" rotate(0, 117, 79)" width="14" x="110.1964" y="72.8041"/>
+  <polygon fill="#1b9fd8" points="124.104,81.9533 131.104,67.9533 138.104,81.9533" stroke-width="0" transform=" rotate(0, 131, 74)"/>
+  <ellipse cx="155.2565" cy="72.6662" fill="#1b9fd8" rx="7.0" ry="7.0" stroke-width="0" transform=" rotate(0, 155, 72)"/>
+  <rect fill="#1b9fd8" height="14" stroke-width="0" transform=" rotate(0, 177, 79)" width="14" x="170.0379" y="72.4382"/>
+  <polygon fill="#1b9fd8" points="187.7001,86.6701 194.7001,72.6701 201.7001,86.6701" stroke-width="0" transform=" rotate(0, 194, 79)"/>
+  <ellipse cx="211.2495" cy="79.3404" fill="#1b9fd8" rx="7.0" ry="7.0" stroke-width="0" transform=" rotate(0, 211, 79)"/>
+  <rect fill="#1b9fd8" height="14" stroke-width="0" transform=" rotate(0, 236, 70)" width="14" x="229.8388" y="63.9528"/>
+  <polygon fill="#1b9fd8" points="247.3597,80.8307 254.3597,66.8307 261.3597,80.8307" stroke-width="0" transform=" rotate(0, 254, 73)"/>
+  <ellipse cx="279.4475" cy="77.601" fill="#1b9fd8" rx="7.0" ry="7.0" stroke-width="0" transform=" rotate(0, 279, 77)"/>
+  <rect fill="#006ca1" height="18" stroke-width="0" transform=" rotate(0, 54, 96)" width="18" x="45.6039" y="87.382"/>
+  <polygon fill="#006ca1" points="66.9366,103.6948 75.9366,85.6948 84.9366,103.6948" stroke-width="0" transform=" rotate(0, 75, 94)"/>
+  <ellipse cx="97.2709" cy="99.2415" fill="#006ca1" rx="9.0" ry="9.0" stroke-width="0" transform=" rotate(0, 97, 99)"/>
+  <rect fill="#006ca1" height="18" stroke-width="0" transform=" rotate(0, 112, 91)" width="18" x="103.4626" y="82.4317"/>
+  <polygon fill="#006ca1" points="127.9709,102.3902 136.9709,84.3902 145.9709,102.3902" stroke-width="0" transform=" rotate(0, 136, 93)"/>
+  <ellipse cx="160.2551" cy="98.6786" fill="#006ca1" rx="9.0" ry="9.0" stroke-width="0" transform=" rotate(0, 160, 98)"/>
+  <rect fill="#006ca1" height="18" stroke-width="0" transform=" rotate(0, 169, 96)" width="18" x="160.9983" y="87.9324"/>
+  <polygon fill="#006ca1" points="184.7705,109.0577 193.7705,91.0577 202.7705,109.0577" stroke-width="0" transform=" rotate(0, 193, 100)"/>
+  <ellipse cx="217.0923" cy="95.959" fill="#006ca1" rx="9.0" ry="9.0" stroke-width="0" transform=" rotate(0, 217, 95)"/>
+  <rect fill="#006ca1" height="18" stroke-width="0" transform=" rotate(0, 234, 95)" width="18" x="225.6161" y="86.7088"/>
+  <polygon fill="#006ca1" points="251.2194,103.4207 260.2194,85.4207 269.2194,103.4207" stroke-width="0" transform=" rotate(0, 260, 94)"/>
+  <ellipse cx="277.2863" cy="97.7757" fill="#006ca1" rx="9.0" ry="9.0" stroke-width="0" transform=" rotate(0, 277, 97)"/>
+  <rect fill="#6dd6ff" height="10" stroke-width="0" transform=" rotate(0, 55, 109)" width="10" x="50.0274" y="104.3644"/>
+  <polygon fill="#6dd6ff" points="74.9161,116.3204 79.9161,106.3204 84.9161,116.3204" stroke-width="0" transform=" rotate(0, 79, 111)"/>
+  <ellipse cx="96.848" cy="111.7776" fill="#6dd6ff" rx="5.0" ry="5.0" stroke-width="0" transform=" rotate(0, 96, 111)"/>
+  <rect fill="#6dd6ff" height="10" stroke-width="0" transform=" rotate(0, 116, 115)" width="10" x="111.4537" y="110.029"/>
+  <polygon fill="#6dd6ff" points="131.0014,125.1564 136.0014,115.1564 141.0014,125.1564" stroke-width="0" transform=" rotate(0, 136, 120)"/>
+  <ellipse cx="156.3736" cy="113.3566" fill="#6dd6ff" rx="5.0" ry="5.0" stroke-width="0" transform=" rotate(0, 156, 113)"/>
+  <rect fill="#6dd6ff" height="10" stroke-width="0" transform=" rotate(0, 176, 117)" width="10" x="171.7443" y="112.5678"/>
+  <polygon fill="#6dd6ff" points="195.4036,120.6175 200.4036,110.6175 205.4036,120.6175" stroke-width="0" transform=" rotate(0, 200, 115)"/>
+  <ellipse cx="213.2345" cy="119.8317" fill="#6dd6ff" rx="5.0" ry="5.0" stroke-width="0" transform=" rotate(0, 213, 119)"/>
+  <rect fill="#6dd6ff" height="10" stroke-width="0" transform=" rotate(0, 239, 117)" width="10" x="234.946" y="112.2941"/>
+  <polygon fill="#6dd6ff" points="248.6276,124.8925 253.6276,114.8925 258.6276,124.8925" stroke-width="0" transform=" rotate(0, 253, 119)"/>
+  <ellipse cx="272.3991" cy="120.0155" fill="#6dd6ff" rx="5.0" ry="5.0" stroke-width="0" transform=" rotate(0, 272, 120)"/>
+  <rect fill="#1b9fd8" height="14" stroke-width="0" transform=" rotate(0, 50, 133)" width="14" x="43.235" y="126.5079"/>
+  <polygon fill="#1b9fd8" points="72.9856,144.2484 79.9856,130.2484 86.9856,144.2484" stroke-width="0" transform=" rotate(0, 79, 137)"/>
+  <ellipse cx="90.9521" cy="135.033" fill="#1b9fd8" rx="7.0" ry="7.0" stroke-width="0" transform=" rotate(0, 90, 135)"/>
+  <rect fill="#1b9fd8" height="14" stroke-width="0" transform=" rotate(0, 113, 135)" width="14" x="106.7513" y="128.2479"/>
+  <polygon fill="#1b9fd8" points="132.5749,147.2438 139.5749,133.2438 146.5749,147.2438" stroke-width="0" transform=" rotate(0, 139, 140)"/>
+  <ellipse cx="157.7628" cy="135.5405" fill="#1b9fd8" rx="7.0" ry="7.0" stroke-width="0" transform=" rotate(0, 157, 135)"/>
+  <rect fill="#1b9fd8" height="14" stroke-width="0" transform=" rotate(0, 172, 137)" width="14" x="165.3435" y="130.8711"/>
+  <polygon fill="#1b9fd8" points="186.4581,141.5522 193.4581,127.5522 200.4581,141.5522" stroke-width="0" transform=" rotate(0, 193, 134)"/>
+  <ellipse cx="214.3474" cy="135.7413" fill="#1b9fd8" rx="7.0" ry="7.0" stroke-width="0" transform=" rotate(0, 214, 135)"/>
+  <rect fill="#1b9fd8" height="14" stroke-width="0" transform=" rotate(0, 232, 133)" width="14" x="225.8887" y="126.1571"/>
+  <polygon fill="#1b9fd8" points="246.916,141.7019 253.916,127.7019 260.916,141.7019" stroke-width="0" transform=" rotate(0, 253, 134)"/>
+  <ellipse cx="272.3737" cy="131.551" fill="#1b9fd8" rx="7.0" ry="7.0" stroke-width="0" transform=" rotate(0, 272, 131)"/>
+  <rect fill="#006ca1" height="18" stroke-width="0" transform=" rotate(0, 50, 153)" width="18" x="41.3431" y="144.7885"/>
+  <polygon fill="#006ca1" points="70.2426,166.4842 79.2426,148.4842 88.2426,166.4842" stroke-width="0" transform=" rotate(0, 79, 157)"/>
+  <ellipse cx="89.7452" cy="157.8953" fill="#006ca1" rx="9.0" ry="9.0" stroke-width="0" transform=" rotate(0, 89, 157)"/>
+  <rect fill="#006ca1" height="18" stroke-width="0" transform=" rotate(0, 116, 151)" width="18" x="107.8158" y="142.0341"/>
+  <polygon fill="#006ca1" points="121.5084,161.7246 130.5084,143.7246 139.5084,161.7246" stroke-width="0" transform=" rotate(0, 130, 152)"/>
+  <ellipse cx="154.3058" cy="156.4843" fill="#006ca1" rx="9.0" ry="9.0" stroke-width="0" transform=" rotate(0, 154, 156)"/>
+  <rect fill="#006ca1" height="18" stroke-width="0" transform=" rotate(0, 170, 159)" width="18" x="161.3557" y="150.7969"/>
+  <polygon fill="#006ca1" points="189.3716,160.5743 198.3716,142.5743 207.3716,160.5743" stroke-width="0" transform=" rotate(0, 198, 151)"/>
+  <ellipse cx="215.7123" cy="159.103" fill="#006ca1" rx="9.0" ry="9.0" stroke-width="0" transform=" rotate(0, 215, 159)"/>
+  <rect fill="#006ca1" height="18" stroke-width="0" transform=" rotate(0, 233, 152)" width="18" x="224.3334" y="143.7187"/>
+  <polygon fill="#006ca1" points="250.2547,164.9651 259.2547,146.9651 268.2547,164.9651" stroke-width="0" transform=" rotate(0, 259, 155)"/>
+  <ellipse cx="273.6887" cy="150.8387" fill="#006ca1" rx="9.0" ry="9.0" stroke-width="0" transform=" rotate(0, 273, 150)"/>
+  <rect fill="#006ca1" height="18" stroke-width="0" transform=" rotate(0, 51, 170)" width="18" x="42.5147" y="161.6716"/>
+  <polygon fill="#006ca1" points="65.8241,184.4259 74.8241,166.4259 83.8241,184.4259" stroke-width="0" transform=" rotate(0, 74, 175)"/>
+  <ellipse cx="96.6747" cy="178.3204" fill="#006ca1" rx="9.0" ry="9.0" stroke-width="0" transform=" rotate(0, 96, 178)"/>
+  <rect fill="#006ca1" height="18" stroke-width="0" transform=" rotate(0, 111, 175)" width="18" x="102.3711" y="166.4676"/>
+  <polygon fill="#006ca1" points="124.7788,180.8268 133.7788,162.8268 142.7788,180.8268" stroke-width="0" transform=" rotate(0, 133, 171)"/>
+  <ellipse cx="151.4682" cy="172.8274" fill="#006ca1" rx="9.0" ry="9.0" stroke-width="0" transform=" rotate(0, 151, 172)"/>
+  <rect fill="#006ca1" height="18" stroke-width="0" transform=" rotate(0, 171, 171)" width="18" x="162.2704" y="162.9458"/>
+  <polygon fill="#006ca1" points="187.3257,182.7546 196.3257,164.7546 205.3257,182.7546" stroke-width="0" transform=" rotate(0, 196, 173)"/>
+  <ellipse cx="217.2849" cy="179.5217" fill="#006ca1" rx="9.0" ry="9.0" stroke-width="0" transform=" rotate(0, 217, 179)"/>
+  <rect fill="#006ca1" height="18" stroke-width="0" transform=" rotate(0, 229, 173)" width="18" x="220.5434" y="164.6555"/>
+  <polygon fill="#006ca1" points="243.2377,185.0734 252.2377,167.0734 261.2377,185.0734" stroke-width="0" transform=" rotate(0, 252, 176)"/>
+  <ellipse cx="270.6214" cy="174.0941" fill="#006ca1" rx="9.0" ry="9.0" stroke-width="0" transform=" rotate(0, 270, 174)"/>
+  <rect fill="#1b9fd8" height="14" stroke-width="0" transform=" rotate(0, 58, 192)" width="14" x="51.2159" y="185.6741"/>
+  <polygon fill="#1b9fd8" points="73.5576,196.2012 80.5576,182.2012 87.5576,196.2012" stroke-width="0" transform=" rotate(0, 80, 189)"/>
+  <ellipse cx="90.9842" cy="193.7428" fill="#1b9fd8" rx="7.0" ry="7.0" stroke-width="0" transform=" rotate(0, 90, 193)"/>
+  <rect fill="#1b9fd8" height="14" stroke-width="0" transform=" rotate(0, 116, 198)" width="14" x="109.6637" y="191.1285"/>
+  <polygon fill="#1b9fd8" points="131.382,196.7693 138.382,182.7693 145.382,196.7693" stroke-width="0" transform=" rotate(0, 138, 189)"/>
+  <ellipse cx="150.4889" cy="199.552" fill="#1b9fd8" rx="7.0" ry="7.0" stroke-width="0" transform=" rotate(0, 150, 199)"/>
+  <rect fill="#1b9fd8" height="14" stroke-width="0" transform=" rotate(0, 173, 194)" width="14" x="166.3977" y="187.2773"/>
+  <polygon fill="#1b9fd8" points="186.528,203.4028 193.528,189.4028 200.528,203.4028" stroke-width="0" transform=" rotate(0, 193, 196)"/>
+  <ellipse cx="210.9048" cy="195.4957" fill="#1b9fd8" rx="7.0" ry="7.0" stroke-width="0" transform=" rotate(0, 210, 195)"/>
+  <rect fill="#1b9fd8" height="14" stroke-width="0" transform=" rotate(0, 230, 194)" width="14" x="223.0587" y="187.0968"/>
+  <polygon fill="#1b9fd8" points="244.5962,205.9164 251.5962,191.9164 258.5962,205.9164" stroke-width="0" transform=" rotate(0, 251, 198)"/>
+  <ellipse cx="273.5359" cy="189.7268" fill="#1b9fd8" rx="7.0" ry="7.0" stroke-width="0" transform=" rotate(0, 273, 189)"/>
+  <rect fill="#6dd6ff" height="10" stroke-width="0" transform=" rotate(0, 53, 220)" width="10" x="48.7094" y="215.1703"/>
+  <polygon fill="#6dd6ff" points="66.866,219.3692 71.866,209.3692 76.866,219.3692" stroke-width="0" transform=" rotate(0, 71, 214)"/>
+  <ellipse cx="97.2177" cy="213.4788" fill="#6dd6ff" rx="5.0" ry="5.0" stroke-width="0" transform=" rotate(0, 97, 213)"/>
+  <rect fill="#6dd6ff" height="10" stroke-width="0" transform=" rotate(0, 113, 211)" width="10" x="108.4186" y="206.9649"/>
+  <polygon fill="#6dd6ff" points="135.2609,223.9104 140.2609,213.9104 145.2609,223.9104" stroke-width="0" transform=" rotate(0, 140, 218)"/>
+  <ellipse cx="155.9362" cy="211.6005" fill="#6dd6ff" rx="5.0" ry="5.0" stroke-width="0" transform=" rotate(0, 155, 211)"/>
+  <rect fill="#6dd6ff" height="10" stroke-width="0" transform=" rotate(0, 179, 215)" width="10" x="174.2649" y="210.4894"/>
+  <polygon fill="#6dd6ff" points="185.8558,222.8709 190.8558,212.8709 195.8558,222.8709" stroke-width="0" transform=" rotate(0, 190, 217)"/>
+  <ellipse cx="213.4958" cy="218.3732" fill="#6dd6ff" rx="5.0" ry="5.0" stroke-width="0" transform=" rotate(0, 213, 218)"/>
+  <rect fill="#6dd6ff" height="10" stroke-width="0" transform=" rotate(0, 239, 213)" width="10" x="234.5343" y="208.9673"/>
+  <polygon fill="#6dd6ff" points="248.543,222.1446 253.543,212.1446 258.543,222.1446" stroke-width="0" transform=" rotate(0, 253, 217)"/>
+  <ellipse cx="270.6127" cy="212.904" fill="#6dd6ff" rx="5.0" ry="5.0" stroke-width="0" transform=" rotate(0, 270, 212)"/>
+  <rect fill="#006ca1" height="18" stroke-width="0" transform=" rotate(0, 53, 231)" width="18" x="44.5135" y="222.8028"/>
+  <polygon fill="#006ca1" points="67.6991,241.9828 76.6991,223.9828 85.6991,241.9828" stroke-width="0" transform=" rotate(0, 76, 232)"/>
+  <ellipse cx="93.7889" cy="231.0373" fill="#006ca1" rx="9.0" ry="9.0" stroke-width="0" transform=" rotate(0, 93, 231)"/>
+  <rect fill="#006ca1" height="18" stroke-width="0" transform=" rotate(0, 119, 230)" width="18" x="110.9045" y="221.7101"/>
+  <polygon fill="#006ca1" points="122.6134,242.5868 131.6134,224.5868 140.6134,242.5868" stroke-width="0" transform=" rotate(0, 131, 233)"/>
+  <ellipse cx="152.1338" cy="239.4259" fill="#006ca1" rx="9.0" ry="9.0" stroke-width="0" transform=" rotate(0, 152, 239)"/>
+  <rect fill="#006ca1" height="18" stroke-width="0" transform=" rotate(0, 180, 231)" width="18" x="171.2926" y="222.214"/>
+  <polygon fill="#006ca1" points="183.4069,247.4023 192.4069,229.4023 201.4069,247.4023" stroke-width="0" transform=" rotate(0, 192, 238)"/>
+  <ellipse cx="218.5264" cy="234.3857" fill="#006ca1" rx="9.0" ry="9.0" stroke-width="0" transform=" rotate(0, 218, 234)"/>
+  <rect fill="#006ca1" height="18" stroke-width="0" transform=" rotate(0, 230, 231)" width="18" x="221.444" y="222.8346"/>
+  <polygon fill="#006ca1" points="241.6143,245.7844 250.6143,227.7844 259.6143,245.7844" stroke-width="0" transform=" rotate(0, 250, 236)"/>
+  <ellipse cx="272.7602" cy="239.0866" fill="#006ca1" rx="9.0" ry="9.0" stroke-width="0" transform=" rotate(0, 272, 239)"/>
+  <rect fill="#1b9fd8" height="14" stroke-width="0" transform=" rotate(0, 59, 256)" width="14" x="52.2217" y="249.2696"/>
+  <polygon fill="#1b9fd8" points="72.4839,260.188 79.4839,246.188 86.4839,260.188" stroke-width="0" transform=" rotate(0, 79, 253)"/>
+  <ellipse cx="99.1713" cy="249.8069" fill="#1b9fd8" rx="7.0" ry="7.0" stroke-width="0" transform=" rotate(0, 99, 249)"/>
+  <rect fill="#1b9fd8" height="14" stroke-width="0" transform=" rotate(0, 119, 255)" width="14" x="112.4293" y="248.2756"/>
+  <polygon fill="#1b9fd8" points="123.3387,257.2841 130.3387,243.2841 137.3387,257.2841" stroke-width="0" transform=" rotate(0, 130, 250)"/>
+  <ellipse cx="153.5849" cy="255.8292" fill="#1b9fd8" rx="7.0" ry="7.0" stroke-width="0" transform=" rotate(0, 153, 255)"/>
+  <rect fill="#1b9fd8" height="14" stroke-width="0" transform=" rotate(0, 177, 257)" width="14" x="170.0164" y="250.3757"/>
+  <polygon fill="#1b9fd8" points="191.0615,260.7325 198.0615,246.7325 205.0615,260.7325" stroke-width="0" transform=" rotate(0, 198, 253)"/>
+  <ellipse cx="217.8754" cy="258.1259" fill="#1b9fd8" rx="7.0" ry="7.0" stroke-width="0" transform=" rotate(0, 217, 258)"/>
+  <rect fill="#1b9fd8" height="14" stroke-width="0" transform=" rotate(0, 234, 252)" width="14" x="227.4559" y="245.9587"/>
+  <polygon fill="#1b9fd8" points="250.6855,256.6226 257.6855,242.6226 264.6855,256.6226" stroke-width="0" transform=" rotate(0, 257, 249)"/>
+  <ellipse cx="277.6987" cy="249.5263" fill="#1b9fd8" rx="7.0" ry="7.0" stroke-width="0" transform=" rotate(0, 277, 249)"/>
+  <rect fill="#6dd6ff" height="10" stroke-width="0" transform=" rotate(0, 59, 278)" width="10" x="54.78" y="273.8359"/>
+  <polygon fill="#6dd6ff" points="64.71,281.9886 69.71,271.9886 74.71,281.9886" stroke-width="0" transform=" rotate(0, 69, 276)"/>
+  <ellipse cx="98.0406" cy="269.465" fill="#6dd6ff" rx="5.0" ry="5.0" stroke-width="0" transform=" rotate(0, 98, 269)"/>
+  <rect fill="#6dd6ff" height="10" stroke-width="0" transform=" rotate(0, 117, 276)" width="10" x="112.4819" y="271.1824"/>
+  <polygon fill="#6dd6ff" points="131.5997,283.804 136.5997,273.804 141.5997,283.804" stroke-width="0" transform=" rotate(0, 136, 278)"/>
+  <ellipse cx="156.0626" cy="271.7021" fill="#6dd6ff" rx="5.0" ry="5.0" stroke-width="0" transform=" rotate(0, 156, 271)"/>
+  <rect fill="#6dd6ff" height="10" stroke-width="0" transform=" rotate(0, 171, 272)" width="10" x="166.8521" y="267.9159"/>
+  <polygon fill="#6dd6ff" points="193.5675,278.3655 198.5675,268.3655 203.5675,278.3655" stroke-width="0" transform=" rotate(0, 198, 273)"/>
+  <ellipse cx="217.7798" cy="270.2449" fill="#6dd6ff" rx="5.0" ry="5.0" stroke-width="0" transform=" rotate(0, 217, 270)"/>
+  <rect fill="#6dd6ff" height="10" stroke-width="0" transform=" rotate(0, 231, 280)" width="10" x="226.4673" y="275.1538"/>
+  <polygon fill="#6dd6ff" points="245.5837,285.2283 250.5837,275.2283 255.5837,285.2283" stroke-width="0" transform=" rotate(0, 250, 280)"/>
+  <ellipse cx="279.667" cy="270.7321" fill="#6dd6ff" rx="5.0" ry="5.0" stroke-width="0" transform=" rotate(0, 279, 270)"/>
+</svg>

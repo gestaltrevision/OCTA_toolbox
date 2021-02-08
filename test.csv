@@ -1,101 +1,101 @@
 element_id,position,shape,bounding_box,fillcolor,bordercolor,borderwidth,orientation,data
-0,"(42, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,0,"(8, 'Polygon_8')"
-1,"(102, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,45,"(8, 'Polygon_8')"
-2,"(162, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,90,"(8, 'Polygon_8')"
-3,"(222, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,115,"(8, 'Polygon_8')"
-4,"(282, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,180,"(8, 'Polygon_8')"
-5,"(342, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,0,"(8, 'Polygon_8')"
-6,"(402, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,45,"(8, 'Polygon_8')"
-7,"(462, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,90,"(8, 'Polygon_8')"
-8,"(522, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,115,"(8, 'Polygon_8')"
-9,"(582, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,180,"(8, 'Polygon_8')"
-10,"(42, 102)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,0,"(8, 'Polygon_8')"
-11,"(102, 102)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,45,"(8, 'Polygon_8')"
-12,"(162, 102)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,90,"(8, 'Polygon_8')"
-13,"(222, 102)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,115,"(8, 'Polygon_8')"
-14,"(282, 102)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,180,"(8, 'Polygon_8')"
-15,"(342, 102)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,0,"(8, 'Polygon_8')"
-16,"(402, 102)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,45,"(8, 'Polygon_8')"
-17,"(462, 102)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,90,"(8, 'Polygon_8')"
-18,"(522, 102)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,115,"(8, 'Polygon_8')"
-19,"(582, 102)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,180,"(8, 'Polygon_8')"
-20,"(42, 162)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,0,"(8, 'Polygon_8')"
-21,"(102, 162)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,45,"(8, 'Polygon_8')"
-22,"(162, 162)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,90,"(8, 'Polygon_8')"
-23,"(222, 162)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,115,"(8, 'Polygon_8')"
-24,"(282, 162)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,180,"(8, 'Polygon_8')"
-25,"(342, 162)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,0,"(8, 'Polygon_8')"
-26,"(402, 162)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,45,"(8, 'Polygon_8')"
-27,"(462, 162)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,90,"(8, 'Polygon_8')"
-28,"(522, 162)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,115,"(8, 'Polygon_8')"
-29,"(582, 162)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,180,"(8, 'Polygon_8')"
-30,"(42, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,0,"(8, 'Polygon_8')"
-31,"(102, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,45,"(8, 'Polygon_8')"
-32,"(162, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,90,"(8, 'Polygon_8')"
-33,"(222, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,115,"(8, 'Polygon_8')"
-34,"(282, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,180,"(8, 'Polygon_8')"
-35,"(342, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,0,"(8, 'Polygon_8')"
-36,"(402, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,45,"(8, 'Polygon_8')"
-37,"(462, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,90,"(8, 'Polygon_8')"
-38,"(522, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,115,"(8, 'Polygon_8')"
-39,"(582, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,180,"(8, 'Polygon_8')"
-40,"(42, 282)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,0,"(8, 'Polygon_8')"
-41,"(102, 282)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,45,"(8, 'Polygon_8')"
-42,"(162, 282)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,90,"(8, 'Polygon_8')"
-43,"(222, 282)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,115,"(8, 'Polygon_8')"
-44,"(282, 282)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,180,"(8, 'Polygon_8')"
-45,"(342, 282)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,0,"(8, 'Polygon_8')"
-46,"(402, 282)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,45,"(8, 'Polygon_8')"
-47,"(462, 282)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,90,"(8, 'Polygon_8')"
-48,"(522, 282)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,115,"(8, 'Polygon_8')"
-49,"(582, 282)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,180,"(8, 'Polygon_8')"
-50,"(42, 342)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,0,"(8, 'Polygon_8')"
-51,"(102, 342)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,45,"(8, 'Polygon_8')"
-52,"(162, 342)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,90,"(8, 'Polygon_8')"
-53,"(222, 342)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,115,"(8, 'Polygon_8')"
-54,"(282, 342)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,180,"(8, 'Polygon_8')"
-55,"(342, 342)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,0,"(8, 'Polygon_8')"
-56,"(402, 342)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,45,"(8, 'Polygon_8')"
-57,"(462, 342)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,90,"(8, 'Polygon_8')"
-58,"(522, 342)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,115,"(8, 'Polygon_8')"
-59,"(582, 342)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,180,"(8, 'Polygon_8')"
-60,"(42, 402)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,0,"(8, 'Polygon_8')"
-61,"(102, 402)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,45,"(8, 'Polygon_8')"
-62,"(162, 402)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,90,"(8, 'Polygon_8')"
-63,"(222, 402)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,115,"(8, 'Polygon_8')"
-64,"(282, 402)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,180,"(8, 'Polygon_8')"
-65,"(342, 402)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,0,"(8, 'Polygon_8')"
-66,"(402, 402)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,45,"(8, 'Polygon_8')"
-67,"(462, 402)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,90,"(8, 'Polygon_8')"
-68,"(522, 402)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,115,"(8, 'Polygon_8')"
-69,"(582, 402)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,180,"(8, 'Polygon_8')"
-70,"(42, 462)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,0,"(8, 'Polygon_8')"
-71,"(102, 462)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,45,"(8, 'Polygon_8')"
-72,"(162, 462)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,90,"(8, 'Polygon_8')"
-73,"(222, 462)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,115,"(8, 'Polygon_8')"
-74,"(282, 462)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,180,"(8, 'Polygon_8')"
-75,"(342, 462)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,0,"(8, 'Polygon_8')"
-76,"(402, 462)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,45,"(8, 'Polygon_8')"
-77,"(462, 462)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,90,"(8, 'Polygon_8')"
-78,"(522, 462)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,115,"(8, 'Polygon_8')"
-79,"(582, 462)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,180,"(8, 'Polygon_8')"
-80,"(42, 522)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,0,"(8, 'Polygon_8')"
-81,"(102, 522)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,45,"(8, 'Polygon_8')"
-82,"(162, 522)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,90,"(8, 'Polygon_8')"
-83,"(222, 522)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,115,"(8, 'Polygon_8')"
-84,"(282, 522)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,180,"(8, 'Polygon_8')"
-85,"(342, 522)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,0,"(8, 'Polygon_8')"
-86,"(402, 522)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,45,"(8, 'Polygon_8')"
-87,"(462, 522)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,90,"(8, 'Polygon_8')"
-88,"(522, 522)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,115,"(8, 'Polygon_8')"
-89,"(582, 522)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,180,"(8, 'Polygon_8')"
-90,"(42, 582)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,0,"(8, 'Polygon_8')"
-91,"(102, 582)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,45,"(8, 'Polygon_8')"
-92,"(162, 582)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,90,"(8, 'Polygon_8')"
-93,"(222, 582)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,115,"(8, 'Polygon_8')"
-94,"(282, 582)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,180,"(8, 'Polygon_8')"
-95,"(342, 582)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,0,"(8, 'Polygon_8')"
-96,"(402, 582)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,45,"(8, 'Polygon_8')"
-97,"(462, 582)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,90,"(8, 'Polygon_8')"
-98,"(522, 582)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,115,"(8, 'Polygon_8')"
-99,"(582, 582)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,180,"(8, 'Polygon_8')"
+0,"(42, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,0,
+1,"(102, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,45,
+2,"(162, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,90,
+3,"(222, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,115,
+4,"(282, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,180,
+5,"(342, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,0,
+6,"(402, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,45,
+7,"(462, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,90,
+8,"(522, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,115,
+9,"(582, 42)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,180,
+10,"(42, 102)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,0,
+11,"(102, 102)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,45,
+12,"(162, 102)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,90,
+13,"(222, 102)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,115,
+14,"(282, 102)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,180,
+15,"(342, 102)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,0,
+16,"(402, 102)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,45,
+17,"(462, 102)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,90,
+18,"(522, 102)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,115,
+19,"(582, 102)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,180,
+20,"(42, 162)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,0,
+21,"(102, 162)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,45,
+22,"(162, 162)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,90,
+23,"(222, 162)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,115,
+24,"(282, 162)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,180,
+25,"(342, 162)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,0,
+26,"(402, 162)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,45,
+27,"(462, 162)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,90,
+28,"(522, 162)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,115,
+29,"(582, 162)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,180,
+30,"(42, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,0,
+31,"(102, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,45,
+32,"(162, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,90,
+33,"(222, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,115,
+34,"(282, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,180,
+35,"(342, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,0,
+36,"(402, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,45,
+37,"(462, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,90,
+38,"(522, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,115,
+39,"(582, 222)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,180,
+40,"(42, 282)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,0,
+41,"(102, 282)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,45,
+42,"(162, 282)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,90,
+43,"(222, 282)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,115,
+44,"(282, 282)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,180,
+45,"(342, 282)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,0,
+46,"(402, 282)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,45,
+47,"(462, 282)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,90,
+48,"(522, 282)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,115,
+49,"(582, 282)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,180,
+50,"(42, 342)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,0,
+51,"(102, 342)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,45,
+52,"(162, 342)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,90,
+53,"(222, 342)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,115,
+54,"(282, 342)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,180,
+55,"(342, 342)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,0,
+56,"(402, 342)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,45,
+57,"(462, 342)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,90,
+58,"(522, 342)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,115,
+59,"(582, 342)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['radial', 'white', 'red']",,0,180,
+60,"(42, 402)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,0,
+61,"(102, 402)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,45,
+62,"(162, 402)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,90,
+63,"(222, 402)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,115,
+64,"(282, 402)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,180,
+65,"(342, 402)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,0,
+66,"(402, 402)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,45,
+67,"(462, 402)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,90,
+68,"(522, 402)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,115,
+69,"(582, 402)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)",green,,0,180,
+70,"(42, 462)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,0,
+71,"(102, 462)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,45,
+72,"(162, 462)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,90,
+73,"(222, 462)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,115,
+74,"(282, 462)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,180,
+75,"(342, 462)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,0,
+76,"(402, 462)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,45,
+77,"(462, 462)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,90,
+78,"(522, 462)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,115,
+79,"(582, 462)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",,0,180,
+80,"(42, 522)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,0,
+81,"(102, 522)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,45,
+82,"(162, 522)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,90,
+83,"(222, 522)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,115,
+84,"(282, 522)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,180,
+85,"(342, 522)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,0,
+86,"(402, 522)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,45,
+87,"(462, 522)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,90,
+88,"(522, 522)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,115,
+89,"(582, 522)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['vertical', 'green', 'white', 'green']",,0,180,
+90,"(42, 582)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,0,
+91,"(102, 582)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,45,
+92,"(162, 582)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,90,
+93,"(222, 582)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,115,
+94,"(282, 582)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,180,
+95,"(342, 582)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,0,
+96,"(402, 582)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,45,
+97,"(462, 582)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,90,
+98,"(522, 582)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,115,
+99,"(582, 582)",<class 'octa.shapes.Polygon.Polygon_8'>,"(45, 45)","['diagonal', 'red', 'white']",,0,180,
