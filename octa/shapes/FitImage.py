@@ -10,7 +10,7 @@ from urllib.request import urlopen
 
 def FitImage(src, name = None):
     if name == None:
-        name = "Image_" + str(src)
+        name = "FitImage_" #+ str(src)
     return type(str(name), (FitImage_,), {'source': src, 'name': name})
 
 class FitImage_:
@@ -93,6 +93,9 @@ class FitImage_:
     def set_data(self, data):
         if data == None:
             data = ""
+
+        if(hasattr(self, "source")):
+            data = self.source
             
         self.data = data
             
@@ -109,7 +112,7 @@ class FitImage_:
     
     def get_imgdata(self):
         imgdata = ""
-        source = self.source
+        source = self.data
             
         ext = [".svg", ".png", ".jpg", ".jpeg", ".bmp", ".gif", \
                ".ico", ".tif", ".tiff", ".webp"]

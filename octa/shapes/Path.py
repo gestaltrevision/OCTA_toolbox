@@ -7,7 +7,7 @@ import svgpathtools
 
 def Path(path, xsize, ysize, name = None):
     if name == None:
-        name = "Path_" + str(path) + "_" + str(xsize) + "_" + str(ysize)
+        name = "Path_" #+ str(path) + "_" + str(xsize) + "_" + str(ysize)
     return type(str(name), (Path_,), {'path': path, 'xsizepath': xsize, 'ysizepath': ysize, 'name': name})
 
 class Path_:
@@ -91,6 +91,9 @@ class Path_:
         if data == None:
             data = ""
             
+        if(hasattr(self, "path")):
+            data = [self.path, self.xsizepath, self.ysizepath]
+            
         self.data = data
     
 
@@ -163,8 +166,8 @@ class Path_:
     def generate(self, dwg):
         topleft = (self.position[0] - self.bounding_box[0]/2 , self.position[1] - self.bounding_box[1]/2)
                           
-        xsize = self.xsizepath #self.data[1]
-        ysize = self.ysizepath #self.data[2]
+        xsize = self.data[1]
+        ysize = self.data[2]
         scale_x_parameter = self.bounding_box[0] / xsize
         scale_y_parameter = self.bounding_box[1] / ysize
         
@@ -175,7 +178,7 @@ class Path_:
         rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, xsize/2, ysize/2)
                
         svg = dwg.path(
-                d            = self.path, #self.data[0],              
+                d            = self.data[0],              
                 fill         = self.create_fillcolor(dwg),
                 opacity      = self.opacity,
                 stroke       = self.create_bordercolor(dwg),

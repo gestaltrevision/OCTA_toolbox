@@ -10,7 +10,7 @@ from urllib.request import urlopen
 
 def Image(src, name = None):
     if name == None:
-        name = "Image_" + str(src)
+        name = "Image_" #+ str(src)
     return type(str(name), (Image_,), {'source': src, 'name': name})
 
 class Image_:
@@ -94,6 +94,9 @@ class Image_:
         if data == None:
             data = ""
 
+        if(hasattr(self, "source")):
+            data = self.source
+            
         self.data = data
         
     def create_mirror_transform(self):
@@ -109,7 +112,7 @@ class Image_:
     
     def get_imgdata(self):
         imgdata = ""
-        source = self.source
+        source = self.data
             
         ext = [".svg", ".png", ".jpg", ".jpeg", ".bmp", ".gif", \
                ".ico", ".tif", ".tiff", ".webp"]

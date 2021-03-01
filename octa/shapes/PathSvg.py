@@ -7,7 +7,7 @@ import svgpathtools
 
 def PathSvg(src, name = None):
     if name == None:
-        name = "PathSvg_" + str(src)
+        name = "PathSvg_" #+ str(src)
     return type(str(name), (PathSvg_,), {'source': src, 'name': name})
 
 class PathSvg_:
@@ -90,6 +90,9 @@ class PathSvg_:
     def set_data(self, data):
         if data == None:
             data = ""
+
+        if(hasattr(self, "source")):
+            data = self.source
             
         self.data = data
     
@@ -163,7 +166,7 @@ class PathSvg_:
     def generate(self, dwg):
         topleft = (self.position[0] - self.bounding_box[0]/2 , self.position[1] - self.bounding_box[1]/2)
               
-        paths, attributes = svgpathtools.svg2paths(self.source) #self.data      
+        paths, attributes = svgpathtools.svg2paths(self.data)       
 #         paths, attributes = svgpathtools.svg2paths("img/arrow-circle-up-svgrepo-com.svg")
         n_paths = len(paths)
         allpaths = []

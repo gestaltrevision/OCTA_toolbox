@@ -7,7 +7,7 @@ Created on Mon Apr  6 16:02:30 2020
 
 def Text(text, name = None):
     if name == None:
-        name = "Text_" + str(text)
+        name = "Text_" #+ str(text)
     return type(str(name), (Text_,), {'text': str(text), 'name': name})
 
 class Text_:
@@ -90,6 +90,9 @@ class Text_:
     def set_data(self, data):
         if data == None:
             data = ""
+
+        if(hasattr(self, "text")):
+            data = self.text
             
         self.data = data
     
@@ -167,12 +170,12 @@ class Text_:
         
         topleft = (self.position[0] - self.bounding_box[0]/2 , self.position[1] - self.bounding_box[1]/2)
 
-        textlength = max([(len(i) - i.count(" ")) for i in self.text.split("\n")])
+        textlength = max([(len(i) - i.count(" ")) for i in self.data.split("\n")])
         
-        n_lines = len(self.text.split("\n"))
+        n_lines = len(self.data.split("\n"))
 
         svg = dwg.textArea(
-                text        = self.text, #self.data,
+                text        = self.data,
                 fill        = self.create_fillcolor(dwg),
                 opacity     = self.opacity,
                 stroke      = self.create_bordercolor(dwg),

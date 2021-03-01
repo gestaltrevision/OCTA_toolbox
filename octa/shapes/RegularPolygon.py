@@ -9,7 +9,7 @@ from math import sin, cos, pi, radians
 
 def RegularPolygon(n_sides, name = None):
     if name == None:
-        name = "RegularPolygon_" + str(n_sides)
+        name = "RegularPolygon_" #+ str(n_sides)
     return type(str(name), (RegularPolygon_,), {'n_sides': n_sides, 'name': name})
 
 
@@ -95,6 +95,9 @@ class RegularPolygon_:
         if data == None:
             data = "3"
             
+        if(hasattr(self, "n_sides")):
+            data = int(self.n_sides)
+            
         self.data = data
     
 
@@ -178,7 +181,7 @@ class RegularPolygon_:
 #        dwg.add(bb)
             
         
-        n_sides = int(self.n_sides) #int(self.data)
+        n_sides = int(self.data)
         
         r = 1
         

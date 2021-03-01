@@ -64,8 +64,16 @@ class Stimulus:
             self.size = (size[0], size[1])
             
         self.background_color = background_color
-        self.background_shape = background_shape
-        self.mask = mask
+        
+        if background_shape == None:
+            self.background_shape = "auto"
+        else:
+            self.background_shape = background_shape
+        
+        if mask == None:
+            self.mask = "none"
+        else:
+            self.mask = mask
         
         # Set initial shape parameters to zero
         self.positions   = None
@@ -200,7 +208,9 @@ class Stimulus:
                     
         json_data = {'stimulus' : {'width':            self.width,
                                    'height':           self.height,
-                                   'background_color': self.background_color},
+                                   'background_color': self.background_color,
+                                   'background_shape': self.background_shape,
+                                   'mask':             self.mask},
                      'structure': {'class': str(type(self)),
                                    'n_rows': self._n_rows,
                                    'n_cols': self._n_cols,
@@ -248,7 +258,9 @@ class Stimulus:
                    
         json_data = {'stimulus' : {'width':            self.width,
                                    'height':           self.height,
-                                   'background_color': self.background_color},
+                                   'background_color': self.background_color,
+                                   'background_shape': self.background_shape,
+                                   'mask':             self.mask},
                      'structure': {'class': str(type(self)),
                                    'n_rows': self._n_rows,
                                    'n_cols': self._n_cols,
@@ -307,6 +319,8 @@ class Stimulus:
                             data['structure']['col_spacing'], 
                             data['stimulus']['background_color'],
                             stimulus_size,
+                            data['stimulus']['background_shape'],
+                            data['stimulus']['mask'],
                             data['structure']['x_margin'], 
                             data['structure']['y_margin'])
             
@@ -515,7 +529,7 @@ class Stimulus:
         self.dwg = svgwrite.Drawing(size = (self.width, self.height)) #, profile="tiny"
         
         # ADD CLIP PATH
-        if(self.background_shape != None):
+        if(self.background_shape != "auto"):
             self.clip_path = self.dwg.defs.add(self.dwg.clipPath(id='custom_clip_path'))
             self.clip_path.add(self.background_shape.generate(self.dwg)) #things inside this shape will be drawn
             clippath = "url(#custom_clip_path)"
@@ -523,7 +537,7 @@ class Stimulus:
             clippath = None
             
         # ADD MASK
-        if(self.mask != None):
+        if(self.mask != "none"):
             self.mask_object = self.dwg.defs.add(self.dwg.mask(id='custom_mask'))
             self.mask_object.add(self.mask.generate(self.dwg))
             maskpath = "url(#custom_mask)"
@@ -834,28 +848,28 @@ class Grid(Stimulus):
         self._shapes.n_rows = self._n_rows
         self._shapes.n_cols = self._n_cols
                        
-#        datalist = []
-#        for i in range(len(self._shapes.pattern)):
-#            if self._shapes.pattern[i] is not None:
-#                # add info about subclass generation to "data" argument
-#                if str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.Polygon.Polygon_'>":
-#                    datalist.append((self._shapes.pattern[i].n_sides, self._shapes.pattern[i].name))
-#                elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.RegularPolygon.RegularPolygon_'>":
-#                    datalist.append((self._shapes.pattern[i].n_sides, self._shapes.pattern[i].name))
-#                elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.Image.Image_'>":
-#                    datalist.append((self._shapes.pattern[i].source, self._shapes.pattern[i].name))
-#                elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.FitImage.FitImage_'>":
-#                    datalist.append((self._shapes.pattern[i].source, self._shapes.pattern[i].name))
-#                elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.Text.Text_'>":
-#                    datalist.append((self._shapes.pattern[i].text, self._shapes.pattern[i].name))
-#                elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.Path.Path_'>":
-#                    datalist.append((self._shapes.pattern[i].path, self._shapes.pattern[i].xsizepath, self._shapes.pattern[i].ysizepath, self._shapes.pattern[i].name))
-#                elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.PathSvg.PathSvg_'>":
-#                    datalist.append((self._shapes.pattern[i].source, self._shapes.pattern[i].name))
-#                else:
-#                    datalist.append("")
+        datalist = []
+        for i in range(len(self._shapes.pattern)):
+            if self._shapes.pattern[i] is not None:
+                # add info about subclass generation to "data" argument
+                if str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.Polygon.Polygon_'>":
+                    datalist.append(self._shapes.pattern[i].n_sides)
+                elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.RegularPolygon.RegularPolygon_'>":
+                    datalist.append(self._shapes.pattern[i].n_sides)
+                elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.Image.Image_'>":
+                    datalist.append(self._shapes.pattern[i].source)
+                elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.FitImage.FitImage_'>":
+                    datalist.append(self._shapes.pattern[i].source)
+                elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.Text.Text_'>":
+                    datalist.append(self._shapes.pattern[i].text)
+                elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.Path.Path_'>":
+                    datalist.append([self._shapes.pattern[i].path, self._shapes.pattern[i].xsizepath, self._shapes.pattern[i].ysizepath])
+                elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.PathSvg.PathSvg_'>":
+                    datalist.append(self._shapes.pattern[i].source)
+                else:
+                    datalist.append("")
                     
-        #self.data = eval(str(self._shapes.generate().patterntype) + str(self._shapes.generate().patternorientation) + "(" + str(datalist) + ")")
+        self.data = eval(str(self._shapes.generate().patterntype) + str(self._shapes.generate().patternorientation) + "(" + str(datalist) + ")")
  
        
     def set_element_shape(self, element_id, shape_value):

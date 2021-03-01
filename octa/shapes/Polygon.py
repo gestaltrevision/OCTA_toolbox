@@ -10,7 +10,7 @@ from math import sin, cos, pi, radians
 
 def Polygon(n_sides, name = None):
     if name == None:
-        name = "Polygon_" + str(n_sides)
+        name = "Polygon_" # + str(n_sides)
     return type(str(name), (Polygon_,), {'n_sides': n_sides, 'name': name})
 
 class Polygon_:
@@ -95,6 +95,9 @@ class Polygon_:
         if data == None:
             data = "3"
             
+        if(hasattr(self, "n_sides")):
+            data = int(self.n_sides)
+            
         self.data = data
     
 
@@ -169,10 +172,7 @@ class Polygon_:
 
         rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, self.position[0], self.position[1])
         
-#        if self.n_sides is not None:
-        n_sides = int(self.n_sides) #int(self.data)
-#        else:
-#            n_sides = int(self.data) 
+        n_sides = int(self.data) 
         
         r = 1
         
