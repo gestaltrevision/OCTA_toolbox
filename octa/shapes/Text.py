@@ -173,25 +173,28 @@ class Text_:
         textlength = max([(len(i) - i.count(" ")) for i in self.data.split("\n")])
         
         n_lines = len(self.data.split("\n"))
-
-        svg = dwg.textArea(
+       
+        svg = dwg.text(
                 text        = self.data,
                 fill        = self.create_fillcolor(dwg),
                 opacity     = self.opacity,
                 stroke      = self.create_bordercolor(dwg),
                 stroke_width = self.borderwidth,
-                x           = topleft[0]+((self.bounding_box[0] - (8*textlength)) / 2.0),
-                y           = topleft[1]+((self.bounding_box[1] - (20*n_lines)) / 2.0),
-                width       = self.bounding_box[0],
-                height      = self.bounding_box[1],
-                text_align = 'center',
-                display_align = 'center',
-#                insert      = (self.position[0]- (4* textlength ), self.position[1]- (4* textlength)),
-                font_size   = "16pt",#min(self.bounding_box),
+                dominant_baseline = "middle",
+                text_anchor = "middle",
+#                x           = topleft[0]+((self.bounding_box[0] - (8*textlength)) / 2.0),
+#                y           = topleft[1]+((self.bounding_box[1] - (20*n_lines)) / 2.0),
+#                width       = self.bounding_box[0],
+#                height      = self.bounding_box[1],
+#                text_align = 'center',
+#                display_align = 'center',
+                insert      = (self.position[0], self.position[1]+(min(self.bounding_box)/(2*min(self.bounding_box)/textlength))),
+                font_size   = min(self.bounding_box)/textlength,
                 font_family = 'Roboto Mono',
-                size        = self.bounding_box,
+#                textLength  = self.bounding_box[0],
+#                size        = self.bounding_box,
                 transform   = " ".join([mirror_transform, rotation_transform]))
-        
+
 #        svg = dwg.text(
 #                text        = self.data, 
 #                insert      = self.position,
