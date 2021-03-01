@@ -24,7 +24,7 @@ class Stimulus:
     
     """
     
-    def __init__(self, background_color = "white", x_margin = 20, y_margin = 20, size = None):
+    def __init__(self, background_color = "white", x_margin = 20, y_margin = 20, size = None, background_shape = None, mask = None):
         """
         Instantiates a stimulus object.
 
@@ -64,6 +64,8 @@ class Stimulus:
             self.size = (size[0], size[1])
             
         self.background_color = background_color
+        self.background_shape = background_shape
+        self.mask = mask
         
         # Set initial shape parameters to zero
         self.positions   = None
@@ -214,6 +216,7 @@ class Stimulus:
                                    'bounding_boxes' :  jsonpickle.encode(self._bounding_boxes),
                                    'shapes'       :    jsonpickle.encode(self._shapes),
                                    'fillcolors'     :  jsonpickle.encode(self._fillcolors),
+                                   'opacities'      :  jsonpickle.encode(self._opacities),
                                    'bordercolors'   :  jsonpickle.encode(self._bordercolors),
                                    'orientations'  :   jsonpickle.encode(self._orientations),
                                    'data'         :    jsonpickle.encode(self._data),
@@ -226,7 +229,7 @@ class Stimulus:
         with open(json_filename, 'w') as output_file:
             json.dump(json_data, output_file, indent = 4)
             
-        df = pd.DataFrame(self.dwg_elements, columns = ['element_id', 'position', 'shape', 'bounding_box', 'fillcolor', 'bordercolor', 'borderwidth', 'orientation', 'data'])
+        df = pd.DataFrame(self.dwg_elements, columns = ['element_id', 'position', 'shape', 'bounding_box', 'fillcolor', 'opacity', 'bordercolor', 'borderwidth', 'orientation', 'data'])
         df.to_csv(csv_filename, index = False)
    
     def GetJSON(self):
@@ -261,6 +264,7 @@ class Stimulus:
                                    'bounding_boxes' : jsonpickle.encode(self._bounding_boxes),
                                    'shapes'         : jsonpickle.encode(self._shapes),
                                    'fillcolors'     : jsonpickle.encode(self._fillcolors),
+                                   'opacities'      :  jsonpickle.encode(self._opacities),
                                    'bordercolors'   : jsonpickle.encode(self._bordercolors),
                                    'orientations'   : jsonpickle.encode(self._orientations),
                                    'data'           : jsonpickle.encode(self._data),
@@ -310,6 +314,7 @@ class Stimulus:
             stimulus._bounding_boxes             = jsonpickle.decode(data['element_attributes']['bounding_boxes'])
             stimulus._shapes                     = jsonpickle.decode(data['element_attributes']['shapes'])
             stimulus._fillcolors                 = jsonpickle.decode(data['element_attributes']['fillcolors'])
+            stimulus._opacities                  = jsonpickle.decode(data['element_attributes']['opacities'])
             stimulus._bordercolors               = jsonpickle.decode(data['element_attributes']['bordercolors'])
             stimulus._orientations               = jsonpickle.decode(data['element_attributes']['orientations'])
             stimulus._data                       = jsonpickle.decode(data['element_attributes']['data'])
@@ -407,6 +412,7 @@ class Stimulus:
         
         bounding_boxes = self.bounding_boxes
         fillcolors     = self.fillcolors
+        opacities      = self.opacities
         bordercolors   = self.bordercolors
         borderwidths   = self.borderwidths
         orientations   = self.orientations
@@ -432,7 +438,12 @@ class Stimulus:
                 fillcolor = self._attribute_overrides[idx]['fillcolor']
             else:
                 fillcolor = fillcolors[idx]
-            
+                
+            if 'opacity' in self._attribute_overrides[idx]:
+                opacity = self._attribute_overrides[idx]['opacity']
+            else:
+                opacity = opacities[idx]
+                
             if 'bordercolor' in self._attribute_overrides[idx]:
                 bordercolor = self._attribute_overrides[idx]['bordercolor']
             else:
@@ -478,6 +489,7 @@ class Stimulus:
                                   'position'     : (x_i, y_i), 
                                   'bounding_box' : bounding_box, 
                                   'fillcolor'    : fillcolor,
+                                  'opacity'      : opacity,
                                   'bordercolor'  : bordercolor,
                                   'borderwidth'  : borderwidth,
                                   'orientation'  : orientation, 
@@ -500,10 +512,38 @@ class Stimulus:
         None.
 
         """           
-        self.dwg = svgwrite.Drawing(size = (self.width, self.height), profile="tiny")
+        self.dwg = svgwrite.Drawing(size = (self.width, self.height)) #, profile="tiny"
+        
+        # ADD CLIP PATH
+        if(self.background_shape != None):
+            self.clip_path = self.dwg.defs.add(self.dwg.clipPath(id='custom_clip_path'))
+            self.clip_path.add(self.background_shape.generate(self.dwg)) #things inside this shape will be drawn
+            clippath = "url(#custom_clip_path)"
+        else:
+            clippath = None
+            
+        # ADD MASK
+        if(self.mask != None):
+            self.mask_object = self.dwg.defs.add(self.dwg.mask(id='custom_mask'))
+            self.mask_object.add(self.mask.generate(self.dwg))
+            maskpath = "url(#custom_mask)"
+        else:
+            maskpath = None
+                        
+        if(clippath != None):
+            if(maskpath != None):
+                self.stim = self.dwg.add(self.dwg.g(clip_path = clippath, mask = maskpath))
+            else:
+                self.stim = self.dwg.add(self.dwg.g(clip_path = clippath))
+        else:
+            if(maskpath != None):
+                self.stim = self.dwg.add(self.dwg.g(mask = maskpath))
+            else:
+                self.stim = self.dwg.add(self.dwg.g())
+                
         if(self.background_color != "None"):
             self.background = self.dwg.rect(insert = (0, 0), size = (self.width, self.height), fill = self.background_color)
-            self.dwg.add(self.background)  
+            self.stim.add(self.background)  
         
         
     @property
@@ -601,7 +641,7 @@ class Stimulus:
         for i in range(len(self.dwg_elements)):
             if not self.dwg_elements[i]['shape'] == None:
                 el = self.dwg_elements[i]['shape'](**self.dwg_elements[i])
-                self.dwg.add(el.generate(self.dwg))
+                self.stim.add(el.generate(self.dwg))
                 
     def CalculateCenter(self):
         """
@@ -618,12 +658,12 @@ class Stimulus:
     
     
 class Grid(Stimulus):
-    _element_attributes = ["_bounding_boxes", "_orientations", "_bordercolors", "_borderwidths", "_fillcolors", "_shapes",
+    _element_attributes = ["_bounding_boxes", "_orientations", "_bordercolors", "_borderwidths", "_fillcolors", "_opacities", "_shapes",
                           "_class_labels", "_id_labels", "_mirror_values", "_data"]
     
-    def __init__(self, n_rows, n_cols, row_spacing = 50, col_spacing= 50, background_color = "white", size = None, x_margin = 20, y_margin = 20):
+    def __init__(self, n_rows, n_cols, row_spacing = 50, col_spacing= 50, background_color = "white", size = None, background_shape = None, mask = None, x_margin = 20, y_margin = 20):
         # print("Grid constructor")
-        super().__init__(background_color = background_color, x_margin = x_margin, y_margin = y_margin, size = size)
+        super().__init__(background_color = background_color, x_margin = x_margin, y_margin = y_margin, size = size, background_shape = background_shape, mask = mask)
         
         # Initialize the positions of each element
         self._n_rows = n_rows
@@ -639,6 +679,7 @@ class Grid(Stimulus):
         self._bordercolors   = RepeatAcrossElements([""], self._n_rows, self._n_cols)
         self._borderwidths   = RepeatAcrossElements([0], self.n_rows, self.n_cols)
         self._fillcolors     = RepeatAcrossElements(["dodgerblue"], self.n_rows, self.n_cols)
+        self._opacities      = RepeatAcrossElements([1], self.n_rows, self.n_cols)
         self._shapes         = RepeatAcrossElements([Polygon(8)], self._n_rows, self._n_cols)
         self._class_labels   = RepeatAcrossElements([""], self._n_rows, self._n_cols)
         self._id_labels      = RepeatAcrossElements([""], self._n_rows, self._n_cols)
@@ -938,7 +979,52 @@ class Grid(Stimulus):
         
         self._attribute_overrides[element_id]['fillcolor'] = fillcolor_value
         
-            
+    @property
+    def opacities(self):
+        """
+        The opacity for each element in the grid.
+        
+        """
+        return self._opacities.generate().pattern
+        
+    
+    @opacities.setter
+    def opacities(self, opacities):
+        """
+        Sets the opacity for each grid element.
+        
+        If the provided pattern has a fixed grid structure, that structure
+        must match the number of rows and columns of the Grid Stimulus
+        
+        """
+        if not self._check_attribute_dimensions(opacities):
+            return
+        
+        self._opacities = opacities
+        self._opacities.n_rows = self._n_rows
+        self._opacities.n_cols = self._n_cols
+        
+    def set_element_opacity(self, element_id, opacity_value):
+        """
+        Sets the opacity of an individual element
+
+        Parameters
+        ----------
+        element_id : tuple, list or int
+            A tuple with the row and column index of the element. A single integer
+            can also be used to refer to an element in order.
+        opacity_value : 
+            numeric value between 0 and 1.
+
+        Returns
+        -------
+        None.
+
+        """
+        element_id = self._parse_element_id(element_id)
+        
+        self._attribute_overrides[element_id]['opacity'] = opacity_value
+                    
     @property
     def borderwidths(self):
         """
@@ -1194,7 +1280,7 @@ class Grid(Stimulus):
             self._element_presentation_order[swap_pair[0]], self._element_presentation_order[swap_pair[1]] = self._element_presentation_order[swap_pair[1]], self._element_presentation_order[swap_pair[0]]
             
             
-    def swap_distinct_elements(self, n_swap_pairs = 1, distinction_features = ['shapes', 'bounding_boxes', 'fillcolors', 'orientations', 'data']):
+    def swap_distinct_elements(self, n_swap_pairs = 1, distinction_features = ['shapes', 'bounding_boxes', 'fillcolors', 'orientations', 'opacities', 'mirror_values', 'class_labels', 'id_labels']):
         """
         Swaps the position of two elements in the pattern. The elements that
         wil be swapped need to be distinct on at least one element feature
@@ -1315,12 +1401,20 @@ class Grid(Stimulus):
                 self._attribute_overrides[swap_element_0]['borderwidth'] , self._attribute_overrides[swap_element_1]['borderwidth'] = self.borderwidths[swap_pair[1]], self.borderwidths[swap_pair[0]]
             if 'fillcolors' in feature_dimensions:
                 self._attribute_overrides[swap_element_0]['fillcolor'] , self._attribute_overrides[swap_element_1]['fillcolor'] = self.fillcolors[swap_pair[1]], self.fillcolors[swap_pair[0]]
+            if 'opacities' in feature_dimensions:
+                self._attribute_overrides[swap_element_0]['opacity'] , self._attribute_overrides[swap_element_1]['opacity'] = self.opacities[swap_pair[1]], self.opacities[swap_pair[0]]
             if 'orientations' in feature_dimensions:
                 self._attribute_overrides[swap_element_0]['orientation'] , self._attribute_overrides[swap_element_1]['orientation']  = self.orientations[swap_pair[1]], self.orientations[swap_pair[0]]
             if 'data' in feature_dimensions:
                 self._attribute_overrides[swap_element_0]['data'] , self._attribute_overrides[swap_element_1]['data']  = self.data[swap_pair[1]], self.data[swap_pair[0]]
-
-            
+            if 'class_labels' in feature_dimensions:
+                self._attribute_overrides[swap_element_0]['class_labels'] , self._attribute_overrides[swap_element_1]['class_labels']  = self.class_labels[swap_pair[1]], self.class_labels[swap_pair[0]]
+            if 'id_labels' in feature_dimensions:
+                self._attribute_overrides[swap_element_0]['id_labels'] , self._attribute_overrides[swap_element_1]['id_labels']  = self.id_labels[swap_pair[1]], self.id_labels[swap_pair[0]]
+            if 'mirror_values' in feature_dimensions:
+                self._attribute_overrides[swap_element_0]['mirror_values'] , self._attribute_overrides[swap_element_1]['mirror_values']  = self.mirror_values[swap_pair[1]], self.mirror_values[swap_pair[0]]
+ 
+           
     def _is_modifiable(self):
         """
         Inspects the _fixed_grid attribute of each of the element properties.

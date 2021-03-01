@@ -14,7 +14,7 @@ def RegularPolygon(n_sides, name = None):
 
 
 class RegularPolygon_:
-    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror_value', 'data']
+    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'class_label', 'id_label', 'mirror_value', 'data']
     
     def __init__(self, **kwargs):
         for p in RegularPolygon_.parameters:
@@ -66,7 +66,12 @@ class RegularPolygon_:
             fillcolor = "gray"
             
         self.fillcolor = fillcolor
-    
+
+    def set_opacity(self, opacity):
+        if opacity == None:
+            opacity = 1
+            
+        self.opacity = opacity       
     
     def set_class_label(self, class_label):
         if class_label == None:
@@ -213,6 +218,7 @@ class RegularPolygon_:
         svg = dwg.polygon(
                 points       = points,
                 fill         = self.create_fillcolor(dwg),
+                opacity      = self.opacity,
                 stroke       = self.create_bordercolor(dwg),
                 stroke_width = self.borderwidth,
                 transform    = " ".join([mirror_transform, rotation_transform]))

@@ -1,15 +1,58 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Apr  7 12:31:15 2020
-
-@author: Christophe
+OCTA toolbox: demo
 """
-from octa.Stimulus import Grid, Stimulus
+from octa.Stimulus import Grid
 from octa.Positions import Positions
 from octa.patterns import GridPattern, Pattern
 from octa.shapes import Ellipse, Rectangle, Triangle, Image, FitImage, Text, Polygon, RegularPolygon, Path, PathSvg
 from octa.measurements import Complexity
 import random
+
+#%%
+
+## Choose number of rows and number of columns
+n_rows = 6
+n_cols = 6
+
+stimulus = Grid(n_rows, n_cols, background_color = "None", row_spacing = 40, col_spacing = 40)
+
+## Determine shapes used in the stimulus
+## Example shapes: Ellipse, Rectangle, Triangle, Polygon(n_sides = 8), ...
+stimulus.shapes = GridPattern.RepeatAcrossColumns([Rectangle, Triangle, Ellipse])
+
+## Determine colors used in the stimulus
+colors_to_use = ['#1b9fd8', '#6dd6ff', '#006ca1'] 
+stimulus.fillcolors = GridPattern.RepeatAcrossColumns(colors_to_use)
+
+## Determine size of elements in the stimulus
+stimulus.bounding_boxes = GridPattern.RepeatAcrossColumns([(30,30)])
+
+
+stimulus.positions.SetLocationJitter("xy")
+
+stimulus.Show()
+#%%
+
+## Choose number of rows and number of columns
+n_rows = 1
+n_cols = 1
+
+stimulus = Grid(n_rows, n_cols, background_color = "None")
+
+## Determine shapes used in the stimulus
+## Example shapes: Ellipse, Rectangle, Triangle, Polygon(n_sides = 8), ...
+stimulus.shapes = GridPattern.RepeatAcrossColumns([Image("https://upload.wikimedia.org/wikipedia/commons/4/49/KU_Leuven_logo.svg")])
+
+## Determine colors used in the stimulus
+colors_to_use = ['#1b9fd8'] 
+stimulus.fillcolors = GridPattern.RepeatAcrossColumns(colors_to_use)
+
+## Determine size of elements in the stimulus
+stimulus.bounding_boxes = GridPattern.RepeatAcrossColumns([(100,100)])
+
+stimulus.Show()
+stimulus.SaveSVG(folder = "output", filename = "image")
 
 #%%
 def rgb2hex(r,g,b):
@@ -73,10 +116,10 @@ stimulus._fillcolors.patterntype
 stimulus._fillcolors.patternorientation
 
 #%% Order and complexity measures
-stimulus = Grid(6,6, background_color = "lightgrey", x_margin = 50, y_margin = 50)
+stimulus = Grid(6,6, background_color = "none", x_margin = 50, y_margin = 50)
 stimulus._autosize_method = "maximum_bounding_box"
 #stimulus._autosize_method = "tight_fit"
-stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(50,50), (40,40),(30,30), (20,20)])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(50,50), (40,40),(30,30)])
 stimulus.fillcolors = GridPattern.RepeatAcrossColumns(['#6dd6ff', '#1b9fd8', '#006ca1'])
 stimulus.Show()
 print("LOCE = ", Complexity.CalculateElementsLOCE(stimulus, distinction_features = ["bounding_boxes", "fillcolors", "shapes"]))
@@ -116,10 +159,10 @@ stimulus.Show()
 
 random.seed(3)
 
-stimulus = Grid(6,6, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0)
+stimulus = Grid(18,18, background_color = "white", col_spacing = 12, row_spacing = 12)
 stimulus._autosize_method = "maximum_bounding_box"
 stimulus.shapes = GridPattern.RepeatAcrossRows([Ellipse])
-stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(20,40)])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(5,10)])
 stimulus.fillcolors = GridPattern.MirrorAcrossColumns(Pattern.CreateColorRangeList( '#006ca1','#6dd6ff', n_elements = 5))
                                                                                    
 stimulus.orientations = GridPattern.RepeatAcrossElements([30])
@@ -127,9 +170,11 @@ stimulus.orientations = GridPattern.RepeatAcrossElements([30])
 orientationjitter = Pattern(stimulus.orientations).AddNormalJitter(mu = 0 , std = 30)
 stimulus.orientations = GridPattern.RepeatAcrossElements(orientationjitter)
                                                              
-stimulus.Show()
+#stimulus.Show()
 
-stimulus.remove_element(2)
+stimulus.remove_element([2,5])
+stimulus.remove_element([10,15])
+stimulus.remove_element([16,3])
 
 stimulus.Show()
 
@@ -151,7 +196,7 @@ stimulus.orientations = GridPattern.RepeatAcrossElements(orientationjitter)
                                                              
 stimulus.Show()
 
-stimulus.remove_element(2)
+stimulus.remove_element([2,6])
 
 stimulus.Show()
 
@@ -227,7 +272,7 @@ stimulus.Show()
 
 random.seed(3)
 
-stimulus = Grid(6,6, background_color = "gainsboro", x_margin = 50, y_margin = 50, row_spacing = 40, col_spacing = 40)
+stimulus = Grid(6,6, background_color = "none", x_margin = 20, y_margin = 20, row_spacing = 40, col_spacing = 40)
 stimulus._autosize_method = "maximum_bounding_box"
 stimulus.shapes = GridPattern.RepeatAcrossRows([
         Path("M37.5,186c-12.1-10.5-11.8-32.3-7.2-46.7c4.8-15,13.1-17.8,30.1-36.7C91,68.8,83.5,56.7,103.4,45 c22.2-13.1,51.1-9.5,69.6-1.6c18.1,7.8,15.7,15.3,43.3,33.2c28.8,18.8,37.2,14.3,46.7,27.9c15.6,22.3,6.4,53.3,4.4,60.2 c-3.3,11.2-7.1,23.9-18.5,32c-16.3,11.5-29.5,0.7-48.6,11c-16.2,8.7-12.6,19.7-28.2,33.2c-22.7,19.7-63.8,25.7-79.9,9.7 c-15.2-15.1,0.3-41.7-16.6-54.9C63,186,49.7,196.7,37.5,186z", 288,288)])
@@ -457,7 +502,7 @@ stimulus.SaveSVG("testembeddedbmp", folder = "output")
 # encode gif image in svg (including animation!!!)
 # WARNING: if animated, not visible in Spyder preview of image!
 
-stimulus = Grid(4,4, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus = Grid(4,4, background_color = "none", row_spacing = 60, col_spacing = 60)
 stimulus._autosize_method = "maximum_bounding_box"
 
 stimulus.shapes = GridPattern.RepeatAcrossColumns([Image("img/w3c_home.gif"), Image("img/w3c_home_animation.gif")])
@@ -524,7 +569,7 @@ stimulus.SaveSVG("testembeddedonlineimage", folder = "output")
 # test out how to animate properties (in ChangingEllipse.py)
 from octa.shapes import ChangingEllipse
 
-stimulus = Grid(4,4, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus = Grid(4,4, background_color = "white", row_spacing = 60, col_spacing = 60)
 stimulus._autosize_method = "maximum_bounding_box"
 
 
@@ -558,7 +603,7 @@ stimulus.SaveSVG("testscalingimage", folder = "output")
 
 # gradient fillcolor
 
-stimulus = Grid(5,5, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+stimulus = Grid(5,5, background_color = "none", row_spacing = 60, col_spacing = 60)
 stimulus._autosize_method = "maximum_bounding_box"
 
       
@@ -687,3 +732,42 @@ stimulus.swap_distinct_elements(n_swap_pairs = 1, distinction_features = ['shape
 
 stimulus.Show()
 #stimulus.SaveSVG("test")
+
+
+#%%
+
+# Test PathSvg shape with path and size of path to use as input 
+stimulus = Grid(5,5, background_color = "none", row_spacing = 60, col_spacing = 60)
+stimulus._autosize_method = "maximum_bounding_box"
+
+stimulus.shapes = GridPattern.RepeatAcrossRows(
+        [PathSvg("img/checkmark.svg", name = "Checkmark")])
+stimulus.fillcolors = GridPattern.GradientAcrossElements(start_value = "red", end_value = "blue")
+stimulus.orientations = GridPattern.RepeatAcrossColumns([0,45,90,115,180])
+
+stimulus.positions.SetLocationJitter("xy", "uniform", min_val = -10, max_val = 10)
+
+#stimulus.swap_distinct_elements(n_swap_pairs = 1, distinction_features = ['shapes'])
+#stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])
+
+stimulus.Show()
+#stimulus.SaveSVG("test")
+
+
+#%%
+
+stimulus = Grid(3,3, background_color = "none", row_spacing = 120, col_spacing = 120)
+stimulus._autosize_method = "maximum_bounding_box"
+
+stimulus.shapes = GridPattern.RepeatAcrossRows(
+        [Image("https://live.staticflickr.com/1888/44590255382_677039f088_b.jpg", name = "streetart")])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(100,100)])
+stimulus.orientations = GridPattern.RepeatAcrossColumns([0,45,90])
+
+
+#stimulus.swap_distinct_elements(n_swap_pairs = 1, distinction_features = ['shapes'])
+#stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])
+
+stimulus.Show()
+stimulus.SaveSVG("test")
+

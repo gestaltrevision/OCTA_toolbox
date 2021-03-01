@@ -7,7 +7,7 @@ Created on Mon Apr  6 16:02:30 2020
 import svgwrite
 
 class ChangingEllipse:
-    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror_value']
+    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'class_label', 'id_label', 'mirror_value']
     
     def __init__(self, **kwargs):
         for p in ChangingEllipse.parameters:
@@ -58,7 +58,12 @@ class ChangingEllipse:
             fillcolor = "gray"
             
         self.fillcolor = fillcolor
-    
+        
+    def set_opacity(self, opacity):
+        if opacity == None:
+            opacity = 1
+            
+        self.opacity = opacity       
     
     def set_class_label(self, class_label):
         if class_label == None:
@@ -155,6 +160,7 @@ class ChangingEllipse:
                 center       = self.position,
                 r            = (self.bounding_box[0]/2, self.bounding_box[1]/2),
                 fill         = self.create_fillcolor(dwg),
+                opacity      = self.opacity,
                 stroke       = self.create_bordercolor(dwg),
                 stroke_width = self.borderwidth,
                 transform    = " ".join([mirror_transform, rotation_transform]))
@@ -165,7 +171,8 @@ class ChangingEllipse:
             svg['id']        = self.id_label
             
         svg.add(svgwrite.animate.Set(attributeName = "fill", to = "purple", begin = "click", dur = "2s" )) 
-        svg.add(svgwrite.animate.Animate(attributeName = "fill", values = "red;orange;green;blue;indigo;violet;red", dur="10s", repeatCount="indefinite")) #to = "red"
+#        svg.add(svgwrite.animate.Animate(attributeName = "fill", values = "red;orange;green;blue;indigo;violet;red", dur="10s", repeatCount="indefinite")) #to = "red"
+        svg.add(svgwrite.animate.Animate(attributeName = "fill", values = "#6dd6ff;#1b9fd8;#006ca1;#1b9fd8;#6dd6ff", dur="10s", repeatCount="indefinite")) #to = "red"
         svg.add(svgwrite.animate.Animate(attributeName = "cx", values = "-20;-20;20;20;-20", additive = "sum", dur="5s", repeatCount="indefinite")) #from_ = "0", to = "20"
         svg.add(svgwrite.animate.Animate(attributeName = "cy", values = "20;-20;-20;20;20", additive = "sum", dur="5s", repeatCount="indefinite"))
         

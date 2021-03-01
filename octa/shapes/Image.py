@@ -14,7 +14,7 @@ def Image(src, name = None):
     return type(str(name), (Image_,), {'source': src, 'name': name})
 
 class Image_:
-    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror_value', 'data']
+    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'class_label', 'id_label', 'mirror_value', 'data']
     
     def __init__(self, **kwargs):
         for p in Image_.parameters:
@@ -66,7 +66,12 @@ class Image_:
             
         self.fillcolor = fillcolor
     
-    
+    def set_opacity(self, opacity):
+        if opacity == None:
+            opacity = 1
+            
+        self.opacity = opacity   
+        
     def set_class_label(self, class_label):
         if class_label == None:
             class_label = ""
@@ -166,7 +171,7 @@ class Image_:
                 href        = self.get_imgdata(),
                 insert      = topleft,
                 size        = self.bounding_box,
-                
+                opacity     = self.opacity,
                 transform   = " ".join([mirror_transform, rotation_transform]))
         
         if self.class_label != "":

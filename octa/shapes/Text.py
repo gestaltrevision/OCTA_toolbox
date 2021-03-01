@@ -11,7 +11,7 @@ def Text(text, name = None):
     return type(str(name), (Text_,), {'text': str(text), 'name': name})
 
 class Text_:
-    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror_value', 'data']
+    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'class_label', 'id_label', 'mirror_value', 'data']
     
     def __init__(self, **kwargs):
         for p in Text_.parameters:
@@ -63,7 +63,12 @@ class Text_:
             
         self.fillcolor = fillcolor
     
-    
+    def set_opacity(self, opacity):
+        if opacity == None:
+            opacity = 1
+            
+        self.opacity = opacity   
+        
     def set_class_label(self, class_label):
         if class_label == None:
             class_label = ""
@@ -169,6 +174,7 @@ class Text_:
         svg = dwg.textArea(
                 text        = self.text, #self.data,
                 fill        = self.create_fillcolor(dwg),
+                opacity     = self.opacity,
                 stroke      = self.create_bordercolor(dwg),
                 stroke_width = self.borderwidth,
                 x           = topleft[0]+((self.bounding_box[0] - (8*textlength)) / 2.0),

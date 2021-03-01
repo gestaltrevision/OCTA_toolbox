@@ -11,7 +11,7 @@ def PathSvg(src, name = None):
     return type(str(name), (PathSvg_,), {'source': src, 'name': name})
 
 class PathSvg_:
-    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror_value', 'data']
+    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'class_label', 'id_label', 'mirror_value', 'data']
     
     def __init__(self, **kwargs):
         for p in PathSvg_.parameters:
@@ -63,7 +63,12 @@ class PathSvg_:
             
         self.fillcolor = fillcolor
     
-    
+    def set_opacity(self, opacity):
+        if opacity == None:
+            opacity = 1
+            
+        self.opacity = opacity   
+        
     def set_class_label(self, class_label):
         if class_label == None:
             class_label = ""
@@ -186,6 +191,7 @@ class PathSvg_:
         svg = dwg.path(
                 d            = d,              
                 fill         = self.create_fillcolor(dwg),
+                opacity      = self.opacity,
                 stroke       = self.create_bordercolor(dwg),
                 stroke_width = self.borderwidth,
                 transform    = " ".join([mirror_transform,sizeposition_transform, rotation_transform]))#,

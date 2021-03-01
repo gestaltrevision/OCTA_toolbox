@@ -44,8 +44,8 @@ stimulus.fillcolors = GridPattern.RepeatAcrossColumns(colors_to_use)
 #stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])
 
 stimulus.Show()
-stimulus.SaveSVG("colcolor_pattern", folder = "stim_elisabeth")
-stimulus.SavePNG("colcolor_pattern", folder = "stim_elisabeth")
+#stimulus.SaveSVG("colcolor_pattern", folder = "stim_elisabeth")
+#stimulus.SavePNG("colcolor_pattern", folder = "stim_elisabeth")
 
 
 #%%
@@ -81,8 +81,8 @@ stimulus.fillcolors = GridPattern.RepeatAcrossColumns(colors_to_use)
 #stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])
 
 stimulus.Show()
-stimulus.SaveSVG("colcolor_rowshape_pattern", folder = "stim_elisabeth")
-stimulus.SavePNG("colcolor_rowshape_pattern", folder = "stim_elisabeth")
+#stimulus.SaveSVG("colcolor_rowshape_pattern", folder = "stim_elisabeth")
+#stimulus.SavePNG("colcolor_rowshape_pattern", folder = "stim_elisabeth")
 
 #%%
 
@@ -118,8 +118,8 @@ stimulus.fillcolors = tiled_grid
 #stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])
 
 stimulus.Show()
-stimulus.SaveSVG("quadrantcolor_pattern", folder = "stim_elisabeth")
-stimulus.SavePNG("quadrantcolor_pattern", folder = "stim_elisabeth")
+#stimulus.SaveSVG("quadrantcolor_pattern", folder = "stim_elisabeth")
+#stimulus.SavePNG("quadrantcolor_pattern", folder = "stim_elisabeth")
 
 
 #%%
@@ -156,15 +156,15 @@ stimulus.fillcolors = GridPattern.RandomPattern(colors_to_use)
 #stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])
 
 stimulus.Show()
-stimulus.SaveSVG("random_pattern", folder = "stim_elisabeth")
-stimulus.SavePNG("random_pattern", folder = "stim_elisabeth")
+#stimulus.SaveSVG("random_pattern", folder = "stim_elisabeth")
+#stimulus.SavePNG("random_pattern", folder = "stim_elisabeth")
 
 # ORDERED VERSION
 
 stimulus.fillcolors = GridPattern.RepeatAcrossRows(colors_to_use)
 stimulus.Show()
-stimulus.SaveSVG("ordered_random_pattern", folder = "stim_elisabeth")
-stimulus.SavePNG("ordered_random_pattern", folder = "stim_elisabeth")
+#stimulus.SaveSVG("ordered_random_pattern", folder = "stim_elisabeth")
+#stimulus.SavePNG("ordered_random_pattern", folder = "stim_elisabeth")
 
 
 #%%
@@ -201,12 +201,88 @@ stimulus.fillcolors = GridPattern.RepeatAcrossColumns(colors_to_use)
 #stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])
 
 stimulus.Show()
-stimulus.SaveSVG("complex_pattern", folder = "stim_elisabeth")
-stimulus.SavePNG("complex_pattern", folder = "stim_elisabeth")
+#stimulus.SaveSVG("complex_pattern", folder = "stim_elisabeth")
+#stimulus.SavePNG("complex_pattern", folder = "stim_elisabeth")
 
 # ORDERED VERSION
 colors_to_use = ['#1b9fd8']
 stimulus.fillcolors = GridPattern.RepeatAcrossRows(colors_to_use)
 stimulus.Show()
-stimulus.SaveSVG("simplified_complex_pattern", folder = "stim_elisabeth")
-stimulus.SavePNG("simplified_complex_pattern", folder = "stim_elisabeth")
+#stimulus.SaveSVG("simplified_complex_pattern", folder = "stim_elisabeth")
+#stimulus.SavePNG("simplified_complex_pattern", folder = "stim_elisabeth")
+
+
+#%%
+
+####################################################################################
+### Een grid obv proximity en similarity (kleur) in competitie (rows en columns) ###
+####################################################################################
+
+## Choose number of rows and number of columns
+n_rows = 12
+n_cols = 24
+
+## background color: "None" or "lightgrey" or "white" for example
+## row spacing is distance between midpoints of elements in horizontal direction
+## column spacing is distance between midpoints of elements in vertical direction
+## size argument makes the stimuli a fixed size, 
+## but you could also choose for automatic determination of size by removing the size argument
+stimulus = Grid(n_rows, n_cols, background_color = "None", row_spacing = 60, col_spacing = 30, size = (600,600))
+
+## Determine size of elements in the stimulus
+sizes_to_use = [(28,28)]
+stimulus.bounding_boxes = GridPattern.RepeatAcrossElements(sizes_to_use)
+
+## Determine shapes used in the stimulus
+## Example shapes: Ellipse, Rectangle, Triangle, Polygon(n_sides = 8), ...
+shapes_to_use = [Ellipse]
+stimulus.shapes = GridPattern.RepeatAcrossElements(shapes_to_use)
+
+## Determine colors used in the stimulus
+colors_to_use = ['#1b9fd8', '#006ca1', '#6dd6ff'] 
+stimulus.fillcolors = GridPattern.RepeatAcrossColumns(colors_to_use)
+
+stimulus.Show()
+stimulus.SaveSVG("competition_proximity_color", folder = "stim_elisabeth")
+stimulus.SavePNG("competition_proximity_color", folder = "stim_elisabeth")
+
+
+#%%
+
+#################################################################################################################################
+### Een grid waarin verticaal 2 subgroups ontstaan door shape te veranderen en horizontaal 2 subgroups door kleur te variëren ###
+#################################################################################################################################♦
+
+## Choose number of rows and number of columns
+n_rows = 24
+n_cols = 24
+
+## background color: "None" or "lightgrey" or "white" for example
+## row spacing is distance between midpoints of elements in horizontal direction
+## column spacing is distance between midpoints of elements in vertical direction
+## size argument makes the stimuli a fixed size, 
+## but you could also choose for automatic determination of size by removing the size argument
+stimulus = Grid(n_rows, n_cols, background_color = "None", row_spacing = 30, col_spacing = 30, size = (600,600))
+
+## Determine size of elements in the stimulus
+sizes_to_use = [(28,28)]
+stimulus.bounding_boxes = GridPattern.RepeatAcrossElements(sizes_to_use)
+
+## Determine shapes used in the stimulus
+## Example shapes: Ellipse, Rectangle, Triangle, Polygon(n_sides = 8), ...
+shapes_to_use = Pattern([Ellipse, Triangle])
+shapepattern = Pattern.RepeatElements(shapes_to_use, n_repeats = int(stimulus.n_rows / len(shapes_to_use.pattern)))
+stimulus.shapes = GridPattern.RepeatAcrossColumns(shapepattern)
+
+## Determine colors used in the stimulus
+colors_to_use = Pattern(['#1b9fd8', '#6dd6ff'])                         
+colorpattern = Pattern.RepeatElements(colors_to_use, n_repeats = int(stimulus.n_cols / len(colors_to_use.pattern)))
+stimulus.fillcolors = GridPattern.RepeatAcrossRows(colorpattern)
+
+stimulus.Show()
+stimulus.SaveSVG("competition_shape_color", folder = "stim_elisabeth")
+stimulus.SavePNG("competition_shape_color", folder = "stim_elisabeth")
+
+
+
+

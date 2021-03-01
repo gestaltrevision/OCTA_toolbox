@@ -6,7 +6,7 @@ Created on Mon Apr  6 16:02:30 2020
 """
 
 class Ellipse:
-    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'class_label', 'id_label', 'mirror_value']
+    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'class_label', 'id_label', 'mirror_value']
     
     def __init__(self, **kwargs):
         for p in Ellipse.parameters:
@@ -57,7 +57,12 @@ class Ellipse:
             fillcolor = "gray"
             
         self.fillcolor = fillcolor
-    
+        
+    def set_opacity(self, opacity):
+        if opacity == None:
+            opacity = 1
+            
+        self.opacity = opacity   
     
     def set_class_label(self, class_label):
         if class_label == None:
@@ -153,6 +158,7 @@ class Ellipse:
                 center       = self.position,
                 r            = (self.bounding_box[0]/2, self.bounding_box[1]/2),
                 fill         = self.create_fillcolor(dwg),
+                opacity      = self.opacity,
                 stroke       = self.create_bordercolor(dwg),
                 stroke_width = self.borderwidth,
                 transform    = " ".join([mirror_transform, rotation_transform]))
