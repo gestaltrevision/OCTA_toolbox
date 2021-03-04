@@ -228,6 +228,7 @@ class Stimulus:
                                    'fillcolors'     :  jsonpickle.encode(self._fillcolors),
                                    'opacities'      :  jsonpickle.encode(self._opacities),
                                    'bordercolors'   :  jsonpickle.encode(self._bordercolors),
+                                   'borderwidths'   :  jsonpickle.encode(self._borderwidths),
                                    'orientations'  :   jsonpickle.encode(self._orientations),
                                    'data'         :    jsonpickle.encode(self._data),
                                    'overrides'    :    jsonpickle.encode(self._attribute_overrides),
@@ -278,6 +279,7 @@ class Stimulus:
                                    'fillcolors'     : jsonpickle.encode(self._fillcolors),
                                    'opacities'      :  jsonpickle.encode(self._opacities),
                                    'bordercolors'   : jsonpickle.encode(self._bordercolors),
+                                   'borderwidths'   : jsonpickle.encode(self._borderwidths),
                                    'orientations'   : jsonpickle.encode(self._orientations),
                                    'data'           : jsonpickle.encode(self._data),
                                    'overrides'      : jsonpickle.encode(self._attribute_overrides),
@@ -330,6 +332,7 @@ class Stimulus:
             stimulus._fillcolors                 = jsonpickle.decode(data['element_attributes']['fillcolors'])
             stimulus._opacities                  = jsonpickle.decode(data['element_attributes']['opacities'])
             stimulus._bordercolors               = jsonpickle.decode(data['element_attributes']['bordercolors'])
+            stimulus._borderwidths               = jsonpickle.decode(data['element_attributes']['borderwidths'])
             stimulus._orientations               = jsonpickle.decode(data['element_attributes']['orientations'])
             stimulus._data                       = jsonpickle.decode(data['element_attributes']['data'])
             stimulus._attribute_overrides        = jsonpickle.decode(data['element_attributes']['overrides'])

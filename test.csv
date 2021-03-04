@@ -1,101 +1,101 @@
 element_id,position,shape,bounding_box,fillcolor,opacity,bordercolor,borderwidth,orientation,data
-0,"(42, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['radial', 'white', 'red']",0.5,,0,0,
-1,"(102, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['radial', 'white', 'red']",1.0,,0,45,
-2,"(162, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['radial', 'white', 'red']",0.5,,0,90,
-3,"(222, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['radial', 'white', 'red']",1.0,,0,115,
-4,"(282, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['radial', 'white', 'red']",0.5,,0,180,
-5,"(342, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['radial', 'white', 'red']",1.0,,0,0,
-6,"(402, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['radial', 'white', 'red']",0.5,,0,45,
-7,"(462, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['radial', 'white', 'red']",1.0,,0,90,
-8,"(522, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['radial', 'white', 'red']",0.5,,0,115,
-9,"(582, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['radial', 'white', 'red']",1.0,,0,180,
-10,"(42, 102)",<class 'octa.shapes.Text.Text_'>,"(45, 45)",green,0.5,,0,0,OCTA
-11,"(102, 102)",<class 'octa.shapes.Text.Text_'>,"(45, 45)",green,1.0,,0,45,OCTA
-12,"(162, 102)",<class 'octa.shapes.Text.Text_'>,"(45, 45)",green,0.5,,0,90,OCTA
-13,"(222, 102)",<class 'octa.shapes.Text.Text_'>,"(45, 45)",green,1.0,,0,115,OCTA
-14,"(282, 102)",<class 'octa.shapes.Text.Text_'>,"(45, 45)",green,0.5,,0,180,OCTA
-15,"(342, 102)",<class 'octa.shapes.Text.Text_'>,"(45, 45)",green,1.0,,0,0,OCTA
-16,"(402, 102)",<class 'octa.shapes.Text.Text_'>,"(45, 45)",green,0.5,,0,45,OCTA
-17,"(462, 102)",<class 'octa.shapes.Text.Text_'>,"(45, 45)",green,1.0,,0,90,OCTA
-18,"(522, 102)",<class 'octa.shapes.Text.Text_'>,"(45, 45)",green,0.5,,0,115,OCTA
-19,"(582, 102)",<class 'octa.shapes.Text.Text_'>,"(45, 45)",green,1.0,,0,180,OCTA
-20,"(42, 162)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",0.5,,0,0,
-21,"(102, 162)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",1.0,,0,45,
-22,"(162, 162)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",0.5,,0,90,
-23,"(222, 162)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",1.0,,0,115,
-24,"(282, 162)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",0.5,,0,180,
-25,"(342, 162)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",1.0,,0,0,
-26,"(402, 162)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",0.5,,0,45,
-27,"(462, 162)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",1.0,,0,90,
-28,"(522, 162)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",0.5,,0,115,
-29,"(582, 162)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",1.0,,0,180,
-30,"(42, 222)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['vertical', 'green', 'white', 'green']",0.5,,0,0,OCTA
-31,"(102, 222)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['vertical', 'green', 'white', 'green']",1.0,,0,45,OCTA
-32,"(162, 222)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['vertical', 'green', 'white', 'green']",0.5,,0,90,OCTA
-33,"(222, 222)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['vertical', 'green', 'white', 'green']",1.0,,0,115,OCTA
-34,"(282, 222)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['vertical', 'green', 'white', 'green']",0.5,,0,180,OCTA
-35,"(342, 222)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['vertical', 'green', 'white', 'green']",1.0,,0,0,OCTA
-36,"(402, 222)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['vertical', 'green', 'white', 'green']",0.5,,0,45,OCTA
-37,"(462, 222)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['vertical', 'green', 'white', 'green']",1.0,,0,90,OCTA
-38,"(522, 222)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['vertical', 'green', 'white', 'green']",0.5,,0,115,OCTA
-39,"(582, 222)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['vertical', 'green', 'white', 'green']",1.0,,0,180,OCTA
-40,"(42, 282)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['diagonal', 'red', 'white']",0.5,,0,0,
-41,"(102, 282)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['diagonal', 'red', 'white']",1.0,,0,45,
-42,"(162, 282)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['diagonal', 'red', 'white']",0.5,,0,90,
-43,"(222, 282)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['diagonal', 'red', 'white']",1.0,,0,115,
-44,"(282, 282)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['diagonal', 'red', 'white']",0.5,,0,180,
-45,"(342, 282)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['diagonal', 'red', 'white']",1.0,,0,0,
-46,"(402, 282)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['diagonal', 'red', 'white']",0.5,,0,45,
-47,"(462, 282)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['diagonal', 'red', 'white']",1.0,,0,90,
-48,"(522, 282)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['diagonal', 'red', 'white']",0.5,,0,115,
-49,"(582, 282)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['diagonal', 'red', 'white']",1.0,,0,180,
-50,"(42, 342)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['radial', 'white', 'red']",0.5,,0,0,OCTA
-51,"(102, 342)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['radial', 'white', 'red']",1.0,,0,45,OCTA
-52,"(162, 342)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['radial', 'white', 'red']",0.5,,0,90,OCTA
-53,"(222, 342)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['radial', 'white', 'red']",1.0,,0,115,OCTA
-54,"(282, 342)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['radial', 'white', 'red']",0.5,,0,180,OCTA
-55,"(342, 342)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['radial', 'white', 'red']",1.0,,0,0,OCTA
-56,"(402, 342)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['radial', 'white', 'red']",0.5,,0,45,OCTA
-57,"(462, 342)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['radial', 'white', 'red']",1.0,,0,90,OCTA
-58,"(522, 342)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['radial', 'white', 'red']",0.5,,0,115,OCTA
-59,"(582, 342)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['radial', 'white', 'red']",1.0,,0,180,OCTA
-60,"(42, 402)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",green,0.5,,0,0,
-61,"(102, 402)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",green,1.0,,0,45,
-62,"(162, 402)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",green,0.5,,0,90,
-63,"(222, 402)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",green,1.0,,0,115,
-64,"(282, 402)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",green,0.5,,0,180,
-65,"(342, 402)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",green,1.0,,0,0,
-66,"(402, 402)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",green,0.5,,0,45,
-67,"(462, 402)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",green,1.0,,0,90,
-68,"(522, 402)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",green,0.5,,0,115,
-69,"(582, 402)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",green,1.0,,0,180,
-70,"(42, 462)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",0.5,,0,0,OCTA
-71,"(102, 462)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",1.0,,0,45,OCTA
-72,"(162, 462)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",0.5,,0,90,OCTA
-73,"(222, 462)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",1.0,,0,115,OCTA
-74,"(282, 462)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",0.5,,0,180,OCTA
-75,"(342, 462)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",1.0,,0,0,OCTA
-76,"(402, 462)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",0.5,,0,45,OCTA
-77,"(462, 462)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",1.0,,0,90,OCTA
-78,"(522, 462)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",0.5,,0,115,OCTA
-79,"(582, 462)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['horizontal', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']",1.0,,0,180,OCTA
-80,"(42, 522)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['vertical', 'green', 'white', 'green']",0.5,,0,0,
-81,"(102, 522)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['vertical', 'green', 'white', 'green']",1.0,,0,45,
-82,"(162, 522)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['vertical', 'green', 'white', 'green']",0.5,,0,90,
-83,"(222, 522)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['vertical', 'green', 'white', 'green']",1.0,,0,115,
-84,"(282, 522)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['vertical', 'green', 'white', 'green']",0.5,,0,180,
-85,"(342, 522)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['vertical', 'green', 'white', 'green']",1.0,,0,0,
-86,"(402, 522)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['vertical', 'green', 'white', 'green']",0.5,,0,45,
-87,"(462, 522)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['vertical', 'green', 'white', 'green']",1.0,,0,90,
-88,"(522, 522)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['vertical', 'green', 'white', 'green']",0.5,,0,115,
-89,"(582, 522)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)","['vertical', 'green', 'white', 'green']",1.0,,0,180,
-90,"(42, 582)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['diagonal', 'red', 'white']",0.5,,0,0,OCTA
-91,"(102, 582)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['diagonal', 'red', 'white']",1.0,,0,45,OCTA
-92,"(162, 582)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['diagonal', 'red', 'white']",0.5,,0,90,OCTA
-93,"(222, 582)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['diagonal', 'red', 'white']",1.0,,0,115,OCTA
-94,"(282, 582)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['diagonal', 'red', 'white']",0.5,,0,180,OCTA
-95,"(342, 582)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['diagonal', 'red', 'white']",1.0,,0,0,OCTA
-96,"(402, 582)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['diagonal', 'red', 'white']",0.5,,0,45,OCTA
-97,"(462, 582)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['diagonal', 'red', 'white']",1.0,,0,90,OCTA
-98,"(522, 582)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['diagonal', 'red', 'white']",0.5,,0,115,OCTA
-99,"(582, 582)",<class 'octa.shapes.Text.Text_'>,"(45, 45)","['diagonal', 'red', 'white']",1.0,,0,180,OCTA
+0,"(42, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,0.5,black,5,0,
+1,"(102, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,1.0,black,5,45,
+2,"(162, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,0.5,black,5,90,
+3,"(222, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,1.0,black,5,115,
+4,"(282, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,0.5,black,5,180,
+5,"(342, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,1.0,black,5,0,
+6,"(402, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,0.5,black,5,45,
+7,"(462, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,1.0,black,5,90,
+8,"(522, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,0.5,black,5,115,
+9,"(582, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,1.0,black,5,180,
+10,"(42, 102)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,0.5,black,5,0,img/optotypes/butterfly.svg
+11,"(102, 102)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,1.0,black,5,45,img/optotypes/butterfly.svg
+12,"(162, 102)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,0.5,black,5,90,img/optotypes/butterfly.svg
+13,"(222, 102)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,1.0,black,5,115,img/optotypes/butterfly.svg
+14,"(282, 102)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,0.5,black,5,180,img/optotypes/butterfly.svg
+15,"(342, 102)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,1.0,black,5,0,img/optotypes/butterfly.svg
+16,"(402, 102)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,0.5,black,5,45,img/optotypes/butterfly.svg
+17,"(462, 102)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,1.0,black,5,90,img/optotypes/butterfly.svg
+18,"(522, 102)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,0.5,black,5,115,img/optotypes/butterfly.svg
+19,"(582, 102)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,1.0,black,5,180,img/optotypes/butterfly.svg
+20,"(42, 162)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,0.5,black,5,0,img/optotypes/butterfly.svg
+21,"(102, 162)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,1.0,black,5,45,img/optotypes/butterfly.svg
+22,"(162, 162)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,0.5,black,5,90,img/optotypes/butterfly.svg
+23,"(222, 162)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,1.0,black,5,115,img/optotypes/butterfly.svg
+24,"(282, 162)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,0.5,black,5,180,img/optotypes/butterfly.svg
+25,"(342, 162)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,1.0,black,5,0,img/optotypes/butterfly.svg
+26,"(402, 162)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,0.5,black,5,45,img/optotypes/butterfly.svg
+27,"(462, 162)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,1.0,black,5,90,img/optotypes/butterfly.svg
+28,"(522, 162)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,0.5,black,5,115,img/optotypes/butterfly.svg
+29,"(582, 162)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,1.0,black,5,180,img/optotypes/butterfly.svg
+30,"(42, 222)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,0.5,black,5,0,img/optotypes/butterfly.svg
+31,"(102, 222)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,1.0,black,5,45,img/optotypes/butterfly.svg
+32,"(162, 222)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,0.5,black,5,90,img/optotypes/butterfly.svg
+33,"(222, 222)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,1.0,black,5,115,img/optotypes/butterfly.svg
+34,"(282, 222)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,0.5,black,5,180,img/optotypes/butterfly.svg
+35,"(342, 222)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,1.0,black,5,0,img/optotypes/butterfly.svg
+36,"(402, 222)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,0.5,black,5,45,img/optotypes/butterfly.svg
+37,"(462, 222)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,1.0,black,5,90,img/optotypes/butterfly.svg
+38,"(522, 222)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,0.5,black,5,115,img/optotypes/butterfly.svg
+39,"(582, 222)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,1.0,black,5,180,img/optotypes/butterfly.svg
+40,"(42, 282)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,0.5,black,5,0,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
+41,"(102, 282)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,1.0,black,5,45,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
+42,"(162, 282)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,0.5,black,5,90,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
+43,"(222, 282)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,1.0,black,5,115,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
+44,"(282, 282)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,0.5,black,5,180,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
+45,"(342, 282)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,1.0,black,5,0,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
+46,"(402, 282)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,0.5,black,5,45,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
+47,"(462, 282)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,1.0,black,5,90,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
+48,"(522, 282)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,0.5,black,5,115,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
+49,"(582, 282)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,1.0,black,5,180,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
+50,"(42, 342)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,0.5,black,5,0,
+51,"(102, 342)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,1.0,black,5,45,
+52,"(162, 342)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,0.5,black,5,90,
+53,"(222, 342)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,1.0,black,5,115,
+54,"(282, 342)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,0.5,black,5,180,
+55,"(342, 342)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,1.0,black,5,0,
+56,"(402, 342)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,0.5,black,5,45,
+57,"(462, 342)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,1.0,black,5,90,
+58,"(522, 342)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,0.5,black,5,115,
+59,"(582, 342)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,1.0,black,5,180,
+60,"(42, 402)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,0.5,black,5,0,img/optotypes/butterfly.svg
+61,"(102, 402)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,1.0,black,5,45,img/optotypes/butterfly.svg
+62,"(162, 402)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,0.5,black,5,90,img/optotypes/butterfly.svg
+63,"(222, 402)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,1.0,black,5,115,img/optotypes/butterfly.svg
+64,"(282, 402)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,0.5,black,5,180,img/optotypes/butterfly.svg
+65,"(342, 402)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,1.0,black,5,0,img/optotypes/butterfly.svg
+66,"(402, 402)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,0.5,black,5,45,img/optotypes/butterfly.svg
+67,"(462, 402)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,1.0,black,5,90,img/optotypes/butterfly.svg
+68,"(522, 402)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,0.5,black,5,115,img/optotypes/butterfly.svg
+69,"(582, 402)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,1.0,black,5,180,img/optotypes/butterfly.svg
+70,"(42, 462)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,0.5,black,5,0,img/optotypes/butterfly.svg
+71,"(102, 462)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,1.0,black,5,45,img/optotypes/butterfly.svg
+72,"(162, 462)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,0.5,black,5,90,img/optotypes/butterfly.svg
+73,"(222, 462)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,1.0,black,5,115,img/optotypes/butterfly.svg
+74,"(282, 462)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,0.5,black,5,180,img/optotypes/butterfly.svg
+75,"(342, 462)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,1.0,black,5,0,img/optotypes/butterfly.svg
+76,"(402, 462)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,0.5,black,5,45,img/optotypes/butterfly.svg
+77,"(462, 462)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,1.0,black,5,90,img/optotypes/butterfly.svg
+78,"(522, 462)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,0.5,black,5,115,img/optotypes/butterfly.svg
+79,"(582, 462)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,1.0,black,5,180,img/optotypes/butterfly.svg
+80,"(42, 522)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,0.5,black,5,0,img/optotypes/butterfly.svg
+81,"(102, 522)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,1.0,black,5,45,img/optotypes/butterfly.svg
+82,"(162, 522)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,0.5,black,5,90,img/optotypes/butterfly.svg
+83,"(222, 522)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,1.0,black,5,115,img/optotypes/butterfly.svg
+84,"(282, 522)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,0.5,black,5,180,img/optotypes/butterfly.svg
+85,"(342, 522)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,1.0,black,5,0,img/optotypes/butterfly.svg
+86,"(402, 522)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,0.5,black,5,45,img/optotypes/butterfly.svg
+87,"(462, 522)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,1.0,black,5,90,img/optotypes/butterfly.svg
+88,"(522, 522)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,0.5,black,5,115,img/optotypes/butterfly.svg
+89,"(582, 522)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,1.0,black,5,180,img/optotypes/butterfly.svg
+90,"(42, 582)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,0.5,black,5,0,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
+91,"(102, 582)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,1.0,black,5,45,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
+92,"(162, 582)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,0.5,black,5,90,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
+93,"(222, 582)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,1.0,black,5,115,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
+94,"(282, 582)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,0.5,black,5,180,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
+95,"(342, 582)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,1.0,black,5,0,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
+96,"(402, 582)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,0.5,black,5,45,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
+97,"(462, 582)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,1.0,black,5,90,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
+98,"(522, 582)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,0.5,black,5,115,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
+99,"(582, 582)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,1.0,black,5,180,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
