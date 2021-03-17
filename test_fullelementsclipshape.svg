@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<svg baseProfile="full" height="529" version="1.1" width="529" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs/>
+  <g>
+    <rect fill="none" height="529" width="529" x="0" y="0"/>
+    <ellipse cx="127" cy="52" fill="#fff700" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 127, 52)"/>
+    <ellipse cx="152" cy="52" fill="#fcff00" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 152, 52)"/>
+    <polygon fill="#43ff00" opacity="1" points="94.5,84.5 102,69.5 109.5,84.5" stroke-width="0" transform=" rotate(0, 102, 77)"/>
+    <polygon fill="#39ff00" opacity="1" points="119.5,84.5 127,69.5 134.5,84.5" stroke-width="0" transform=" rotate(0, 127, 77)"/>
+    <polygon fill="#2eff00" opacity="1" points="144.5,84.5 152,69.5 159.5,84.5" stroke-width="0" transform=" rotate(0, 152, 77)"/>
+    <polygon fill="#24ff00" opacity="1" points="169.5,84.5 177,69.5 184.5,84.5" stroke-width="0" transform=" rotate(0, 177, 77)"/>
+    <polygon fill="#1aff00" opacity="1" points="194.5,84.5 202,69.5 209.5,84.5" stroke-width="0" transform=" rotate(0, 202, 77)"/>
+    <path d="M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z" fill="#00ff8b" opacity="1" stroke-width="0" transform=" scale(0.029297, 0.029297) translate(3225.600000, 3225.600000) rotate(0, 256, 256)"/>
+    <path d="M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z" fill="#00ff95" opacity="1" stroke-width="0" transform=" scale(0.029297, 0.029297) translate(4078.933333, 3225.600000) rotate(0, 256, 256)"/>
+    <path d="M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z" fill="#00ffa0" opacity="1" stroke-width="0" transform=" scale(0.029297, 0.029297) translate(4932.266667, 3225.600000) rotate(0, 256, 256)"/>
+    <path d="M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z" fill="#0fa" opacity="1" stroke-width="0" transform=" scale(0.029297, 0.029297) translate(5785.600000, 3225.600000) rotate(0, 256, 256)"/>
+    <path d="M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z" fill="#00ffb4" opacity="1" stroke-width="0" transform=" scale(0.029297, 0.029297) translate(6638.933333, 3225.600000) rotate(0, 256, 256)"/>
+    <path d="M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z" fill="#00ffbf" opacity="1" stroke-width="0" transform=" scale(0.029297, 0.029297) translate(7492.266667, 3225.600000) rotate(0, 256, 256)"/>
+    <rect fill="#00afff" height="15" opacity="1" stroke-width="0" transform=" rotate(0, 77, 127)" width="15" x="69.5" y="119.5"/>
+    <rect fill="#00a5ff" height="15" opacity="1" stroke-width="0" transform=" rotate(0, 102, 127)" width="15" x="94.5" y="119.5"/>
+    <rect fill="#009bff" height="15" opacity="1" stroke-width="0" transform=" rotate(0, 127, 127)" width="15" x="119.5" y="119.5"/>
+    <rect fill="#0090ff" height="15" opacity="1" stroke-width="0" transform=" rotate(0, 152, 127)" width="15" x="144.5" y="119.5"/>
+    <rect fill="#0086ff" height="15" opacity="1" stroke-width="0" transform=" rotate(0, 177, 127)" width="15" x="169.5" y="119.5"/>
+    <rect fill="#007cff" height="15" opacity="1" stroke-width="0" transform=" rotate(0, 202, 127)" width="15" x="194.5" y="119.5"/>
+    <rect fill="#0071ff" height="15" opacity="1" stroke-width="0" transform=" rotate(0, 227, 127)" width="15" x="219.5" y="119.5"/>
+    <rect fill="#0067ff" height="15" opacity="1" stroke-width="0" transform=" rotate(0, 252, 127)" width="15" x="244.5" y="119.5"/>
+    <ellipse cx="27" cy="152" fill="#f00" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 27, 152)"/>
+    <ellipse cx="52" cy="152" fill="#ff0a00" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 52, 152)"/>
+    <ellipse cx="77" cy="152" fill="#ff1500" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 77, 152)"/>
+    <ellipse cx="102" cy="152" fill="#ff1f00" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 102, 152)"/>
+    <ellipse cx="127" cy="152" fill="#ff2900" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 127, 152)"/>
+    <path d="M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z" fill="red" opacity="1" stroke-width="0" transform=" scale(0.029297, 0.029297) translate(4932.266667, 4932.266667) rotate(0, 256, 256)"/>
+    <ellipse cx="177" cy="152" fill="#ff3e00" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 177, 152)"/>
+    <ellipse cx="202" cy="152" fill="#ff4800" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 202, 152)"/>
+    <ellipse cx="227" cy="152" fill="#ff5200" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 227, 152)"/>
+    <ellipse cx="252" cy="152" fill="#ff5d00" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 252, 152)"/>
+    <ellipse cx="277" cy="152" fill="#ff6700" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 277, 152)"/>
+    <ellipse cx="302" cy="152" fill="#ff7100" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 302, 152)"/>
+    <ellipse cx="327" cy="152" fill="#ff7c00" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 327, 152)"/>
+    <ellipse cx="352" cy="152" fill="#ff8600" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 352, 152)"/>
+    <ellipse cx="377" cy="152" fill="#ff9000" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 377, 152)"/>
+    <ellipse cx="402" cy="152" fill="#ff9b00" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 402, 152)"/>
+    <ellipse cx="427" cy="152" fill="#ffa500" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 427, 152)"/>
+    <ellipse cx="452" cy="152" fill="#ffaf00" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 452, 152)"/>
+    <ellipse cx="477" cy="152" fill="#ffb900" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 477, 152)"/>
+    <ellipse cx="502" cy="152" fill="#ffc400" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 502, 152)"/>
+    <polygon fill="#ffce00" opacity="1" points="19.5,184.5 27,169.5 34.5,184.5" stroke-width="0" transform=" rotate(0, 27, 177)"/>
+    <polygon fill="#ffd800" opacity="1" points="44.5,184.5 52,169.5 59.5,184.5" stroke-width="0" transform=" rotate(0, 52, 177)"/>
+    <polygon fill="#ffe300" opacity="1" points="69.5,184.5 77,169.5 84.5,184.5" stroke-width="0" transform=" rotate(0, 77, 177)"/>
+    <polygon fill="#ffed00" opacity="1" points="94.5,184.5 102,169.5 109.5,184.5" stroke-width="0" transform=" rotate(0, 102, 177)"/>
+    <polygon fill="#fff700" opacity="1" points="119.5,184.5 127,169.5 134.5,184.5" stroke-width="0" transform=" rotate(0, 127, 177)"/>
+    <polygon fill="#fcff00" opacity="1" points="144.5,184.5 152,169.5 159.5,184.5" stroke-width="0" transform=" rotate(0, 152, 177)"/>
+    <polygon fill="#f2ff00" opacity="1" points="169.5,184.5 177,169.5 184.5,184.5" stroke-width="0" transform=" rotate(0, 177, 177)"/>
+    <polygon fill="#e8ff00" opacity="1" points="194.5,184.5 202,169.5 209.5,184.5" stroke-width="0" transform=" rotate(0, 202, 177)"/>
+    <polygon fill="#deff00" opacity="1" points="219.5,184.5 227,169.5 234.5,184.5" stroke-width="0" transform=" rotate(0, 227, 177)"/>
+    <polygon fill="#d3ff00" opacity="1" points="244.5,184.5 252,169.5 259.5,184.5" stroke-width="0" transform=" rotate(0, 252, 177)"/>
+    <polygon fill="#c9ff00" opacity="1" points="269.5,184.5 277,169.5 284.5,184.5" stroke-width="0" transform=" rotate(0, 277, 177)"/>
+    <polygon fill="#bfff00" opacity="1" points="294.5,184.5 302,169.5 309.5,184.5" stroke-width="0" transform=" rotate(0, 302, 177)"/>
+    <polygon fill="#b4ff00" opacity="1" points="319.5,184.5 327,169.5 334.5,184.5" stroke-width="0" transform=" rotate(0, 327, 177)"/>
+    <polygon fill="#af0" opacity="1" points="344.5,184.5 352,169.5 359.5,184.5" stroke-width="0" transform=" rotate(0, 352, 177)"/>
+    <polygon fill="#a0ff00" opacity="1" points="369.5,184.5 377,169.5 384.5,184.5" stroke-width="0" transform=" rotate(0, 377, 177)"/>
+    <polygon fill="#95ff00" opacity="1" points="394.5,184.5 402,169.5 409.5,184.5" stroke-width="0" transform=" rotate(0, 402, 177)"/>
+    <polygon fill="#8bff00" opacity="1" points="419.5,184.5 427,169.5 434.5,184.5" stroke-width="0" transform=" rotate(0, 427, 177)"/>
+    <polygon fill="#81ff00" opacity="1" points="444.5,184.5 452,169.5 459.5,184.5" stroke-width="0" transform=" rotate(0, 452, 177)"/>
+    <polygon fill="#76ff00" opacity="1" points="469.5,184.5 477,169.5 484.5,184.5" stroke-width="0" transform=" rotate(0, 477, 177)"/>
+    <polygon fill="#6cff00" opacity="1" points="494.5,184.5 502,169.5 509.5,184.5" stroke-width="0" transform=" rotate(0, 502, 177)"/>
+    <path d="M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z" fill="#58ff00" opacity="1" stroke-width="0" transform=" scale(0.029297, 0.029297) translate(1518.933333, 6638.933333) rotate(0, 256, 256)"/>
+    <path d="M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z" fill="#4dff00" opacity="1" stroke-width="0" transform=" scale(0.029297, 0.029297) translate(2372.266667, 6638.933333) rotate(0, 256, 256)"/>
+    <path d="M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z" fill="#43ff00" opacity="1" stroke-width="0" transform=" scale(0.029297, 0.029297) translate(3225.600000, 6638.933333) rotate(0, 256, 256)"/>
+    <path d="M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z" fill="#39ff00" opacity="1" stroke-width="0" transform=" scale(0.029297, 0.029297) translate(4078.933333, 6638.933333) rotate(0, 256, 256)"/>
+    <path d="M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z" fill="#2eff00" opacity="1" stroke-width="0" transform=" scale(0.029297, 0.029297) translate(4932.266667, 6638.933333) rotate(0, 256, 256)"/>
+    <path d="M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z" fill="#24ff00" opacity="1" stroke-width="0" transform=" scale(0.029297, 0.029297) translate(5785.600000, 6638.933333) rotate(0, 256, 256)"/>
+    <path d="M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z" fill="#1aff00" opacity="1" stroke-width="0" transform=" scale(0.029297, 0.029297) translate(6638.933333, 6638.933333) rotate(0, 256, 256)"/>
+    <path d="M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z" fill="#0fff00" opacity="1" stroke-width="0" transform=" scale(0.029297, 0.029297) translate(7492.266667, 6638.933333) rotate(0, 256, 256)"/>
+    <path d="M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z" fill="#05ff00" opacity="1" stroke-width="0" transform=" scale(0.029297, 0.029297) translate(8345.600000, 6638.933333) rotate(0, 256, 256)"/>
+    <rect fill="#00ff8b" height="15" opacity="1" stroke-width="0" transform=" rotate(0, 102, 227)" width="15" x="94.5" y="219.5"/>
+    <rect fill="#00ff95" height="15" opacity="1" stroke-width="0" transform=" rotate(0, 127, 227)" width="15" x="119.5" y="219.5"/>
+    <rect fill="#00ffa0" height="15" opacity="1" stroke-width="0" transform=" rotate(0, 152, 227)" width="15" x="144.5" y="219.5"/>
+    <rect fill="#0fa" height="15" opacity="1" stroke-width="0" transform=" rotate(0, 177, 227)" width="15" x="169.5" y="219.5"/>
+    <rect fill="#00ffb4" height="15" opacity="1" stroke-width="0" transform=" rotate(0, 202, 227)" width="15" x="194.5" y="219.5"/>
+    <rect fill="#00ffbf" height="15" opacity="1" stroke-width="0" transform=" rotate(0, 227, 227)" width="15" x="219.5" y="219.5"/>
+    <ellipse cx="102" cy="252" fill="#00a5ff" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 102, 252)"/>
+    <ellipse cx="127" cy="252" fill="#009bff" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 127, 252)"/>
+    <ellipse cx="152" cy="252" fill="#0090ff" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 152, 252)"/>
+    <ellipse cx="177" cy="252" fill="#0086ff" opacity="1" rx="7.5" ry="7.5" stroke-width="0" transform=" rotate(0, 177, 252)"/>
+    <polygon fill="#ff2900" opacity="1" points="119.5,284.5 127,269.5 134.5,284.5" stroke-width="0" transform=" rotate(0, 127, 277)"/>
+    <polygon fill="#ff3400" opacity="1" points="144.5,284.5 152,269.5 159.5,284.5" stroke-width="0" transform=" rotate(0, 152, 277)"/>
+  </g>
+</svg>

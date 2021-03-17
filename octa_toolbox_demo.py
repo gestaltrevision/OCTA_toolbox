@@ -2,10 +2,10 @@
 """
 OCTA toolbox: demo
 """
-from octa.Stimulus import Grid
+from octa.Stimulus import Grid, Stimulus
 from octa.Positions import Positions
 from octa.patterns import GridPattern, Pattern
-from octa.shapes import Ellipse, Rectangle, Triangle, Image, FitImage, Text, Polygon, RegularPolygon, Path, PathSvg
+from octa.shapes import Ellipse, Rectangle, Triangle, Image, FitImage, Text, Polygon, RegularPolygon, Path, PathSvg, ChangingEllipse
 from octa.measurements import Complexity
 import random
 
@@ -326,8 +326,19 @@ stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(40,30),(20,10)])
 tiled_grid_1 = GridPattern.TiledElementGrid(GridPattern.MirrorAcrossRightDiagonal([(20,20), (36,36)], 2 , 2),3)
 stimulus.bounding_boxes = tiled_grid_1
 
-tiled_grid_1 = GridPattern.TiledElementGrid(GridPattern.MirrorAcrossRightDiagonal([Rectangle, Ellipse], 2 , 2),3)
-stimulus.shapes = tiled_grid_1
+#tiled_grid_1 = GridPattern.TiledElementGrid(GridPattern.RepeatAcrossRows([RegularPolygon(6), Image("img/checkmark.svg")], 2 , 2), (3,3))
+#stimulus.shapes = tiled_grid_1
+#
+#tiled_grid_1 = GridPattern.TiledGrid(GridPattern.RepeatAcrossRows([RegularPolygon(6), Image("img/checkmark.svg")], 2 , 2), (3,3))
+#stimulus.shapes = tiled_grid_1
+
+center_grid = GridPattern.RepeatAcrossElements([Image("img/checkmark.svg")], 2, 2)
+outer_layers= Pattern([PathSvg("img/checkmark.svg"),
+                       Path("M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z", 41.15, 41.14)])
+
+stimulus.shapes  = GridPattern.LayeredGrid(center_grid, outer_layers)
+
+#stimulus.shapes = GridPattern.MirrorAcrossRightDiagonal([Rectangle, Ellipse])
 
 stimulus.Show()
 x_boundingboxes =  [i[0] for i in stimulus.bounding_boxes]
@@ -341,6 +352,11 @@ new_y = [stimulus.positions.y[i] + y_jitter[i] for i in range(len(stimulus.posit
 stimulus.positions = Positions.CreateCustomPositions(x = new_x, y = new_y)
                                 
 stimulus.Show()
+stimulus.SaveJSON("test2")
+#
+stim = Stimulus.LoadFromJSON("test2.json")
+##                  
+stim.Show()
 
 #%%
 

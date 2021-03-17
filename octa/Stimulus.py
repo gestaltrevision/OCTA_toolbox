@@ -16,7 +16,7 @@ from reportlab.graphics import renderPDF
 from IPython.display import SVG, display
 
 from .Positions import Positions
-from .patterns.GridPattern import Pattern, RepeatAcrossElements, RepeatAcrossRows
+from .patterns import GridPattern, Pattern
 from .shapes.Polygon import Polygon
 
 class Stimulus:
@@ -691,17 +691,17 @@ class Grid(Stimulus):
         self.positions = Positions.Create2DGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing)
         
         # Initialize the element attributes to their default values
-        self._bounding_boxes = RepeatAcrossElements([(45, 45)], self._n_rows, self._n_cols)
-        self._orientations   = RepeatAcrossElements([0], self._n_rows, self._n_cols)
-        self._bordercolors   = RepeatAcrossElements([""], self._n_rows, self._n_cols)
-        self._borderwidths   = RepeatAcrossElements([0], self.n_rows, self.n_cols)
-        self._fillcolors     = RepeatAcrossElements(["dodgerblue"], self.n_rows, self.n_cols)
-        self._opacities      = RepeatAcrossElements([1], self.n_rows, self.n_cols)
-        self._shapes         = RepeatAcrossElements([Polygon(8)], self._n_rows, self._n_cols)
-        self._class_labels   = RepeatAcrossElements([""], self._n_rows, self._n_cols)
-        self._id_labels      = RepeatAcrossElements([""], self._n_rows, self._n_cols)
-        self._mirror_values  = RepeatAcrossElements([""], self._n_rows, self._n_cols)
-        self._data           = RepeatAcrossElements([""], self._n_rows, self._n_cols)
+        self._bounding_boxes = GridPattern.RepeatAcrossElements([(45, 45)], self._n_rows, self._n_cols)
+        self._orientations   = GridPattern.RepeatAcrossElements([0], self._n_rows, self._n_cols)
+        self._bordercolors   = GridPattern.RepeatAcrossElements([""], self._n_rows, self._n_cols)
+        self._borderwidths   = GridPattern.RepeatAcrossElements([0], self.n_rows, self.n_cols)
+        self._fillcolors     = GridPattern.RepeatAcrossElements(["dodgerblue"], self.n_rows, self.n_cols)
+        self._opacities      = GridPattern.RepeatAcrossElements([1], self.n_rows, self.n_cols)
+        self._shapes         = GridPattern.RepeatAcrossElements([Polygon(8)], self._n_rows, self._n_cols)
+        self._class_labels   = GridPattern.RepeatAcrossElements([""], self._n_rows, self._n_cols)
+        self._id_labels      = GridPattern.RepeatAcrossElements([""], self._n_rows, self._n_cols)
+        self._mirror_values  = GridPattern.RepeatAcrossElements([""], self._n_rows, self._n_cols)
+        self._data           = GridPattern.RepeatAcrossElements(["8"], self._n_rows, self._n_cols)
         
         # Initialize a list with element attribute overrides
         self._attribute_overrides = [dict() for _ in range(self._n_cols * self._n_rows)]
@@ -850,29 +850,109 @@ class Grid(Stimulus):
         self._shapes = shapes
         self._shapes.n_rows = self._n_rows
         self._shapes.n_cols = self._n_cols
-                       
-        datalist = []
-        for i in range(len(self._shapes.pattern)):
-            if self._shapes.pattern[i] is not None:
-                # add info about subclass generation to "data" argument
-                if str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.Polygon.Polygon_'>":
-                    datalist.append(self._shapes.pattern[i].n_sides)
-                elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.RegularPolygon.RegularPolygon_'>":
-                    datalist.append(self._shapes.pattern[i].n_sides)
-                elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.Image.Image_'>":
-                    datalist.append(self._shapes.pattern[i].source)
-                elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.FitImage.FitImage_'>":
-                    datalist.append(self._shapes.pattern[i].source)
-                elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.Text.Text_'>":
-                    datalist.append(self._shapes.pattern[i].text)
-                elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.Path.Path_'>":
-                    datalist.append([self._shapes.pattern[i].path, self._shapes.pattern[i].xsizepath, self._shapes.pattern[i].ysizepath])
-                elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.PathSvg.PathSvg_'>":
-                    datalist.append(self._shapes.pattern[i].source)
-                else:
-                    datalist.append("")
-                    
-        self.data = eval(str(self._shapes.generate().patterntype) + str(self._shapes.generate().patternorientation) + "(" + str(datalist) + ")")
+
+
+        if (self._shapes.generate().patternorientation == "Grid") & (self._shapes.generate().patterntype in ["Tiled", "TiledElement"]):
+            
+            datalist = []
+            patternlist = self._shapes.source_grid.pattern
+            
+            for i in range(len(patternlist)):
+                if patternlist[i] is not None:
+                    # add info about subclass generation to "data" argument
+                    if str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Polygon.Polygon_'>":
+                        datalist.append(patternlist[i].n_sides)
+                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.RegularPolygon.RegularPolygon_'>":
+                        datalist.append(patternlist[i].n_sides)
+                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Image.Image_'>":
+                        datalist.append(patternlist[i].source)
+                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.FitImage.FitImage_'>":
+                        datalist.append(patternlist[i].source)
+                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Text.Text_'>":
+                        datalist.append(patternlist[i].text)
+                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Path.Path_'>":
+                        datalist.append([patternlist[i].path, patternlist[i].xsizepath, patternlist[i].ysizepath])
+                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.PathSvg.PathSvg_'>":
+                        datalist.append(patternlist[i].source)
+                    else:
+                        datalist.append("")
+
+            self.data = eval(str(self._shapes.generate().patternclass + self._shapes.generate().patterntype) + str(self._shapes.generate().patternorientation) + "(" + str("GridPattern." + self._shapes.source_grid.patterntype) + str(self._shapes.source_grid.patternorientation) + "(" + str(datalist) + ", " + str(self._shapes.source_grid.n_rows) + ", " + str(self._shapes.source_grid.n_cols) + "), (" + str(int(self._shapes.generate().n_rows/self._shapes.source_grid.n_rows)) + ", " + str(int(self._shapes.generate().n_cols/self._shapes.source_grid.n_cols)) + "))")
+        
+        elif (self._shapes.generate().patternorientation == "Grid") & (self._shapes.generate().patterntype in ["Layered"]):
+            
+            datalist = []
+            patternlist = self._shapes.center_grid.pattern
+            
+            for i in range(len(patternlist)):
+                if patternlist[i] is not None:
+                    # add info about subclass generation to "data" argument
+                    if str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Polygon.Polygon_'>":
+                        datalist.append(patternlist[i].n_sides)
+                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.RegularPolygon.RegularPolygon_'>":
+                        datalist.append(patternlist[i].n_sides)
+                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Image.Image_'>":
+                        datalist.append(patternlist[i].source)
+                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.FitImage.FitImage_'>":
+                        datalist.append(patternlist[i].source)
+                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Text.Text_'>":
+                        datalist.append(patternlist[i].text)
+                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Path.Path_'>":
+                        datalist.append([patternlist[i].path, patternlist[i].xsizepath, patternlist[i].ysizepath])
+                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.PathSvg.PathSvg_'>":
+                        datalist.append(patternlist[i].source)
+                    else:
+                        datalist.append("")
+
+            outerlist = []
+            patternlist = self._shapes.outer_layers.pattern
+            
+            for i in range(len(patternlist)):
+                if patternlist[i] is not None:
+                    # add info about subclass generation to "data" argument
+                    if str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Polygon.Polygon_'>":
+                        outerlist.append(patternlist[i].n_sides)
+                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.RegularPolygon.RegularPolygon_'>":
+                        outerlist.append(patternlist[i].n_sides)
+                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Image.Image_'>":
+                        outerlist.append(patternlist[i].source)
+                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.FitImage.FitImage_'>":
+                        outerlist.append(patternlist[i].source)
+                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Text.Text_'>":
+                        outerlist.append(patternlist[i].text)
+                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Path.Path_'>":
+                        outerlist.append([patternlist[i].path, patternlist[i].xsizepath, patternlist[i].ysizepath])
+                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.PathSvg.PathSvg_'>":
+                        outerlist.append(patternlist[i].source)
+                    else:
+                        outerlist.append("")
+
+            self.data = eval(str(self._shapes.generate().patternclass + self._shapes.generate().patterntype) + str(self._shapes.generate().patternorientation) + "(" + str(self._shapes.center_grid.patternclass + self._shapes.center_grid.patterntype) + str(self._shapes.center_grid.patternorientation) + "(" + str(datalist) + ", " + str(self._shapes.center_grid.n_rows) + ", " + str(self._shapes.center_grid.n_cols) + "), " + str(self._shapes.outer_layers.patternclass + self._shapes.outer_layers.patterntype + self._shapes.outer_layers.patternorientation) + "(" + str(outerlist) + "))")
+
+        else:
+            
+            datalist = []
+            for i in range(len(self._shapes.pattern)):
+                if self._shapes.pattern[i] is not None:
+                    # add info about subclass generation to "data" argument
+                    if str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.Polygon.Polygon_'>":
+                        datalist.append(self._shapes.pattern[i].n_sides)
+                    elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.RegularPolygon.RegularPolygon_'>":
+                        datalist.append(self._shapes.pattern[i].n_sides)
+                    elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.Image.Image_'>":
+                        datalist.append(self._shapes.pattern[i].source)
+                    elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.FitImage.FitImage_'>":
+                        datalist.append(self._shapes.pattern[i].source)
+                    elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.Text.Text_'>":
+                        datalist.append(self._shapes.pattern[i].text)
+                    elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.Path.Path_'>":
+                        datalist.append([self._shapes.pattern[i].path, self._shapes.pattern[i].xsizepath, self._shapes.pattern[i].ysizepath])
+                    elif str(self._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.PathSvg.PathSvg_'>":
+                        datalist.append(self._shapes.pattern[i].source)
+                    else:
+                        datalist.append("")
+
+            self.data = eval(str(self._shapes.generate().patternclass + self._shapes.generate().patterntype) + str(self._shapes.generate().patternorientation) + "(" + str(datalist) + ")")
  
        
     def set_element_shape(self, element_id, shape_value):
@@ -894,6 +974,25 @@ class Grid(Stimulus):
         element_id = self._parse_element_id(element_id)
         
         self._attribute_overrides[element_id]['shape'] = shape_value
+        
+        if str(shape_value.__bases__[0]) == "<class 'octa.shapes.Polygon.Polygon_'>":
+            data_value = shape_value.n_sides
+        elif str(shape_value.__bases__[0]) == "<class 'octa.shapes.RegularPolygon.RegularPolygon_'>":
+            data_value = shape_value.n_sides
+        elif str(shape_value.__bases__[0]) == "<class 'octa.shapes.Image.Image_'>":
+            data_value = shape_value.source
+        elif str(shape_value.__bases__[0]) == "<class 'octa.shapes.FitImage.FitImage_'>":
+            data_value = shape_value.source
+        elif str(shape_value.__bases__[0]) == "<class 'octa.shapes.Text.Text_'>":
+            data_value = shape_value.text
+        elif str(shape_value.__bases__[0]) == "<class 'octa.shapes.Path.Path_'>":
+            data_value = [shape_value.path, shape_value.xsizepath, shape_value.ysizepath]
+        elif str(shape_value.__bases__[0]) == "<class 'octa.shapes.PathSvg.PathSvg_'>":
+            data_value = shape_value.source
+        else:
+            data_value = ""
+        
+        self._attribute_overrides[element_id]['data'] = data_value
             
         
     def remove_element(self, element_id):

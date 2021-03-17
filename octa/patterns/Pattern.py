@@ -7,7 +7,7 @@ import random
 import types
 
 class Pattern:
-    def __init__(self, pattern):
+    def __init__(self, pattern, patterntype = "", patternorientation = "", patternclass = "Pattern"):
         """
         Initializes a Pattern object. If the provided input is not a list,
         the pattern will be initialized with a list that contains the provided
@@ -25,6 +25,10 @@ class Pattern:
             self.pattern = pattern.pattern
         else:
             self.pattern = [pattern]
+            
+        self.patternclass = patternclass        
+        self.patterntype = patterntype
+        self.patternorientation = patternorientation
         
         
     def __str__(self):

@@ -1,101 +1,101 @@
 element_id,position,shape,bounding_box,fillcolor,opacity,bordercolor,borderwidth,orientation,data
-0,"(42, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,0.5,black,5,0,
-1,"(102, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,1.0,black,5,45,
-2,"(162, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,0.5,black,5,90,
-3,"(222, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,1.0,black,5,115,
-4,"(282, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,0.5,black,5,180,
-5,"(342, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,1.0,black,5,0,
-6,"(402, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,0.5,black,5,45,
-7,"(462, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,1.0,black,5,90,
-8,"(522, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,0.5,black,5,115,
-9,"(582, 42)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,1.0,black,5,180,
-10,"(42, 102)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,0.5,black,5,0,img/optotypes/butterfly.svg
-11,"(102, 102)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,1.0,black,5,45,img/optotypes/butterfly.svg
-12,"(162, 102)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,0.5,black,5,90,img/optotypes/butterfly.svg
-13,"(222, 102)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,1.0,black,5,115,img/optotypes/butterfly.svg
-14,"(282, 102)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,0.5,black,5,180,img/optotypes/butterfly.svg
-15,"(342, 102)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,1.0,black,5,0,img/optotypes/butterfly.svg
-16,"(402, 102)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,0.5,black,5,45,img/optotypes/butterfly.svg
-17,"(462, 102)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,1.0,black,5,90,img/optotypes/butterfly.svg
-18,"(522, 102)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,0.5,black,5,115,img/optotypes/butterfly.svg
-19,"(582, 102)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,1.0,black,5,180,img/optotypes/butterfly.svg
-20,"(42, 162)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,0.5,black,5,0,img/optotypes/butterfly.svg
-21,"(102, 162)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,1.0,black,5,45,img/optotypes/butterfly.svg
-22,"(162, 162)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,0.5,black,5,90,img/optotypes/butterfly.svg
-23,"(222, 162)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,1.0,black,5,115,img/optotypes/butterfly.svg
-24,"(282, 162)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,0.5,black,5,180,img/optotypes/butterfly.svg
-25,"(342, 162)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,1.0,black,5,0,img/optotypes/butterfly.svg
-26,"(402, 162)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,0.5,black,5,45,img/optotypes/butterfly.svg
-27,"(462, 162)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,1.0,black,5,90,img/optotypes/butterfly.svg
-28,"(522, 162)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,0.5,black,5,115,img/optotypes/butterfly.svg
-29,"(582, 162)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,1.0,black,5,180,img/optotypes/butterfly.svg
-30,"(42, 222)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,0.5,black,5,0,img/optotypes/butterfly.svg
-31,"(102, 222)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,1.0,black,5,45,img/optotypes/butterfly.svg
-32,"(162, 222)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,0.5,black,5,90,img/optotypes/butterfly.svg
-33,"(222, 222)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,1.0,black,5,115,img/optotypes/butterfly.svg
-34,"(282, 222)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,0.5,black,5,180,img/optotypes/butterfly.svg
-35,"(342, 222)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,1.0,black,5,0,img/optotypes/butterfly.svg
-36,"(402, 222)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,0.5,black,5,45,img/optotypes/butterfly.svg
-37,"(462, 222)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,1.0,black,5,90,img/optotypes/butterfly.svg
-38,"(522, 222)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,0.5,black,5,115,img/optotypes/butterfly.svg
-39,"(582, 222)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,1.0,black,5,180,img/optotypes/butterfly.svg
-40,"(42, 282)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,0.5,black,5,0,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
-41,"(102, 282)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,1.0,black,5,45,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
-42,"(162, 282)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,0.5,black,5,90,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
-43,"(222, 282)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,1.0,black,5,115,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
-44,"(282, 282)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,0.5,black,5,180,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
-45,"(342, 282)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,1.0,black,5,0,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
-46,"(402, 282)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,0.5,black,5,45,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
-47,"(462, 282)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,1.0,black,5,90,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
-48,"(522, 282)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,0.5,black,5,115,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
-49,"(582, 282)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,1.0,black,5,180,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
-50,"(42, 342)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,0.5,black,5,0,
-51,"(102, 342)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,1.0,black,5,45,
-52,"(162, 342)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,0.5,black,5,90,
-53,"(222, 342)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,1.0,black,5,115,
-54,"(282, 342)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,0.5,black,5,180,
-55,"(342, 342)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,1.0,black,5,0,
-56,"(402, 342)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,0.5,black,5,45,
-57,"(462, 342)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,1.0,black,5,90,
-58,"(522, 342)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,0.5,black,5,115,
-59,"(582, 342)",<class 'octa.shapes.Rectangle.Rectangle'>,"(45, 45)",dodgerblue,1.0,black,5,180,
-60,"(42, 402)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,0.5,black,5,0,img/optotypes/butterfly.svg
-61,"(102, 402)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,1.0,black,5,45,img/optotypes/butterfly.svg
-62,"(162, 402)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,0.5,black,5,90,img/optotypes/butterfly.svg
-63,"(222, 402)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,1.0,black,5,115,img/optotypes/butterfly.svg
-64,"(282, 402)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,0.5,black,5,180,img/optotypes/butterfly.svg
-65,"(342, 402)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,1.0,black,5,0,img/optotypes/butterfly.svg
-66,"(402, 402)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,0.5,black,5,45,img/optotypes/butterfly.svg
-67,"(462, 402)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,1.0,black,5,90,img/optotypes/butterfly.svg
-68,"(522, 402)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,0.5,black,5,115,img/optotypes/butterfly.svg
-69,"(582, 402)",<class 'octa.shapes.Image.Image_'>,"(45, 45)",dodgerblue,1.0,black,5,180,img/optotypes/butterfly.svg
-70,"(42, 462)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,0.5,black,5,0,img/optotypes/butterfly.svg
-71,"(102, 462)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,1.0,black,5,45,img/optotypes/butterfly.svg
-72,"(162, 462)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,0.5,black,5,90,img/optotypes/butterfly.svg
-73,"(222, 462)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,1.0,black,5,115,img/optotypes/butterfly.svg
-74,"(282, 462)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,0.5,black,5,180,img/optotypes/butterfly.svg
-75,"(342, 462)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,1.0,black,5,0,img/optotypes/butterfly.svg
-76,"(402, 462)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,0.5,black,5,45,img/optotypes/butterfly.svg
-77,"(462, 462)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,1.0,black,5,90,img/optotypes/butterfly.svg
-78,"(522, 462)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,0.5,black,5,115,img/optotypes/butterfly.svg
-79,"(582, 462)",<class 'octa.shapes.FitImage.FitImage_'>,"(45, 45)",dodgerblue,1.0,black,5,180,img/optotypes/butterfly.svg
-80,"(42, 522)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,0.5,black,5,0,img/optotypes/butterfly.svg
-81,"(102, 522)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,1.0,black,5,45,img/optotypes/butterfly.svg
-82,"(162, 522)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,0.5,black,5,90,img/optotypes/butterfly.svg
-83,"(222, 522)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,1.0,black,5,115,img/optotypes/butterfly.svg
-84,"(282, 522)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,0.5,black,5,180,img/optotypes/butterfly.svg
-85,"(342, 522)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,1.0,black,5,0,img/optotypes/butterfly.svg
-86,"(402, 522)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,0.5,black,5,45,img/optotypes/butterfly.svg
-87,"(462, 522)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,1.0,black,5,90,img/optotypes/butterfly.svg
-88,"(522, 522)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,0.5,black,5,115,img/optotypes/butterfly.svg
-89,"(582, 522)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(45, 45)",dodgerblue,1.0,black,5,180,img/optotypes/butterfly.svg
-90,"(42, 582)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,0.5,black,5,0,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
-91,"(102, 582)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,1.0,black,5,45,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
-92,"(162, 582)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,0.5,black,5,90,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
-93,"(222, 582)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,1.0,black,5,115,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
-94,"(282, 582)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,0.5,black,5,180,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
-95,"(342, 582)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,1.0,black,5,0,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
-96,"(402, 582)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,0.5,black,5,45,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
-97,"(462, 582)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,1.0,black,5,90,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
-98,"(522, 582)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,0.5,black,5,115,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
-99,"(582, 582)",<class 'octa.shapes.Path.Path_'>,"(45, 45)",dodgerblue,1.0,black,5,180,"['M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z', 41.15, 41.14]"
+0,"(32, 32)",<class 'octa.shapes.Polygon.Polygon_'>,"(25, 25)",dodgerblue,1,,0,0,5
+1,"(57, 32)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+2,"(82, 32)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+3,"(107, 32)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+4,"(132, 32)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+5,"(157, 32)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+6,"(182, 32)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+7,"(207, 32)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+8,"(232, 32)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+9,"(257, 32)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+10,"(32, 57)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+11,"(57, 57)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+12,"(82, 57)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+13,"(107, 57)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+14,"(132, 57)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+15,"(157, 57)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+16,"(182, 57)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+17,"(207, 57)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+18,"(232, 57)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+19,"(257, 57)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+20,"(32, 82)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+21,"(57, 82)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+22,"(82, 82)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+23,"(107, 82)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+24,"(132, 82)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+25,"(157, 82)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+26,"(182, 82)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+27,"(207, 82)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+28,"(232, 82)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+29,"(257, 82)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+30,"(32, 107)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+31,"(57, 107)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+32,"(82, 107)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+33,"(107, 107)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+34,"(132, 107)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+35,"(157, 107)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+36,"(182, 107)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+37,"(207, 107)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+38,"(232, 107)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+39,"(257, 107)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+40,"(32, 132)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+41,"(57, 132)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+42,"(82, 132)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+43,"(107, 132)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+44,"(132, 132)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+45,"(157, 132)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+46,"(182, 132)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+47,"(207, 132)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+48,"(232, 132)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+49,"(257, 132)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+50,"(32, 157)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+51,"(57, 157)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+52,"(82, 157)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+53,"(107, 157)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+54,"(132, 157)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+55,"(157, 157)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+56,"(182, 157)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+57,"(207, 157)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+58,"(232, 157)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+59,"(257, 157)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+60,"(32, 182)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+61,"(57, 182)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+62,"(82, 182)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+63,"(107, 182)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+64,"(132, 182)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+65,"(157, 182)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+66,"(182, 182)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+67,"(207, 182)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+68,"(232, 182)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+69,"(257, 182)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+70,"(32, 207)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+71,"(57, 207)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+72,"(82, 207)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+73,"(107, 207)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+74,"(132, 207)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+75,"(157, 207)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+76,"(182, 207)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+77,"(207, 207)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+78,"(232, 207)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+79,"(257, 207)",<class 'octa.shapes.Ellipse.Ellipse'>,"(25, 25)",dodgerblue,1,,0,0,
+80,"(32, 232)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+81,"(57, 232)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+82,"(82, 232)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+83,"(107, 232)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+84,"(132, 232)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+85,"(157, 232)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+86,"(182, 232)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+87,"(207, 232)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+88,"(232, 232)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+89,"(257, 232)",<class 'octa.shapes.PathSvg.PathSvg_'>,"(25, 25)",dodgerblue,1,,0,0,img/arrow-circle-up-svgrepo-com.svg
+90,"(32, 257)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+91,"(57, 257)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+92,"(82, 257)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+93,"(107, 257)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+94,"(132, 257)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+95,"(157, 257)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+96,"(182, 257)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+97,"(207, 257)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+98,"(232, 257)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,
+99,"(257, 257)",<class 'octa.shapes.Rectangle.Rectangle'>,"(25, 25)",dodgerblue,1,,0,0,

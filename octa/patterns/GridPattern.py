@@ -22,7 +22,7 @@ class GridPattern(Pattern):
             Number of columns in the 2D grid.
 
     """
-    def __init__(self, pattern, n_rows = 5, n_cols = 5, patterntype = None, patternorientation = None):
+    def __init__(self, pattern, n_rows = 5, n_cols = 5, patterntype = None, patternorientation = None, patternclass = "GridPattern."):
 
         #print(type(pattern))
         assert type(pattern) == list or type(pattern) == Pattern, "Provided pattern must be a list"
@@ -33,6 +33,7 @@ class GridPattern(Pattern):
         
         self.n_rows = n_rows
         self.n_cols = n_cols
+        self.patternclass = patternclass
         self.patterntype = patterntype
         self.patternorientation = patternorientation
                 
@@ -786,7 +787,10 @@ class LayeredGrid(GridPattern):
             current_rows = new_rows
             current_cols = new_cols
             
-        return GridPattern(current_center, current_rows, current_cols)
+        self.patterntype = "Layered"
+        self.patternorientation = "Grid"
+            
+        return GridPattern(current_center, current_rows, current_cols, self.patterntype, self.patternorientation)
     
     
 class TiledGrid(GridPattern):
@@ -842,7 +846,10 @@ class TiledGrid(GridPattern):
             
         result.extend(result * self.tile_multiplier[0])
         
-        return GridPattern(result, n_rows * self.tile_multiplier[0], n_cols * self.tile_multiplier[1])
+        self.patterntype = "Tiled"
+        self.patternorientation = "Grid"
+        
+        return GridPattern(result, n_rows * self.tile_multiplier[0], n_cols * self.tile_multiplier[1], self.patterntype, self.patternorientation)
     
 
 class TiledElementGrid(GridPattern):
@@ -876,6 +883,7 @@ class TiledElementGrid(GridPattern):
         
         dims = self.get_dimensions()
         
+#        self.pattern = self.source_grid
         self.n_rows = dims[0]
         self.n_cols = dims[1]
         
@@ -900,7 +908,11 @@ class TiledElementGrid(GridPattern):
             current_row = current_row * self.tile_multiplier[0]
             result.extend(current_row)
             
-        return GridPattern(result, self.n_rows, self.n_cols)
+#        self.pattern = result
+        self.patterntype = "TiledElement"
+        self.patternorientation = "Grid"
+            
+        return RepeatAcrossElements(result, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
     
 class RandomPattern(GridPattern):
     """

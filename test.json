@@ -1,8 +1,8 @@
 {
     "stimulus": {
-        "width": 624,
-        "height": 624,
-        "background_color": "white",
+        "width": 289,
+        "height": 289,
+        "background_color": "none",
         "background_shape": "auto",
         "mask": "none"
     },
@@ -10,8 +10,8 @@
         "class": "<class 'octa.Stimulus.Grid'>",
         "n_rows": 10,
         "n_cols": 10,
-        "row_spacing": 60,
-        "col_spacing": 60,
+        "row_spacing": 25,
+        "col_spacing": 25,
         "x_margin": [
             20,
             20
@@ -24,19 +24,19 @@
     },
     "element_attributes": {
         "element_id": "[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]",
-        "positions": "{\"py/object\": \"octa.Positions.Positions\", \"_x\": {\"py/object\": \"octa.patterns.Pattern.Pattern\", \"pattern\": [0, 60, 120, 180, 240, 300, 360, 420, 480, 540, 0, 60, 120, 180, 240, 300, 360, 420, 480, 540, 0, 60, 120, 180, 240, 300, 360, 420, 480, 540, 0, 60, 120, 180, 240, 300, 360, 420, 480, 540, 0, 60, 120, 180, 240, 300, 360, 420, 480, 540, 0, 60, 120, 180, 240, 300, 360, 420, 480, 540, 0, 60, 120, 180, 240, 300, 360, 420, 480, 540, 0, 60, 120, 180, 240, 300, 360, 420, 480, 540, 0, 60, 120, 180, 240, 300, 360, 420, 480, 540, 0, 60, 120, 180, 240, 300, 360, 420, 480, 540]}, \"_y\": {\"py/object\": \"octa.patterns.Pattern.Pattern\", \"pattern\": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 420, 420, 420, 420, 420, 420, 420, 420, 420, 420, 480, 480, 480, 480, 480, 480, 480, 480, 480, 480, 540, 540, 540, 540, 540, 540, 540, 540, 540, 540]}, \"_randomization\": null, \"_randomization_parameters\": {}}",
-        "bounding_boxes": "{\"py/object\": \"octa.patterns.GridPattern.RepeatAcrossElements\", \"pattern\": [{\"py/tuple\": [45, 45]}], \"n_rows\": 10, \"n_cols\": 10, \"patterntype\": \"Repeat\", \"patternorientation\": \"AcrossElements\"}",
-        "shapes": "{\"py/object\": \"octa.patterns.GridPattern.RepeatAcrossRows\", \"pattern\": [{\"py/type\": \"octa.shapes.Rectangle.Rectangle\"}, {\"py/type\": \"octa.shapes.Image.Image_\"}, {\"py/type\": \"octa.shapes.FitImage.FitImage_\"}, {\"py/type\": \"octa.shapes.PathSvg.PathSvg_\"}, {\"py/type\": \"octa.shapes.Path.Path_\"}], \"n_rows\": 10, \"n_cols\": 10, \"patterntype\": \"Repeat\", \"patternorientation\": \"AcrossRows\"}",
-        "fillcolors": "{\"py/object\": \"octa.patterns.GridPattern.RepeatAcrossElements\", \"pattern\": [\"dodgerblue\"], \"n_rows\": 10, \"n_cols\": 10, \"patterntype\": \"Repeat\", \"patternorientation\": \"AcrossElements\"}",
-        "opacities": "{\"py/object\": \"octa.patterns.GridPattern.RepeatAcrossColumns\", \"pattern\": [0.5, 1], \"n_rows\": 10, \"n_cols\": 10, \"patterntype\": \"Repeat\", \"patternorientation\": \"AcrossColumns\"}",
-        "bordercolors": "{\"py/object\": \"octa.patterns.GridPattern.RepeatAcrossElements\", \"pattern\": [\"black\"], \"n_rows\": 10, \"n_cols\": 10, \"patterntype\": \"Repeat\", \"patternorientation\": \"AcrossElements\"}",
-        "borderwidths": "{\"py/object\": \"octa.patterns.GridPattern.RepeatAcrossElements\", \"pattern\": [5], \"n_rows\": 10, \"n_cols\": 10, \"patterntype\": \"Repeat\", \"patternorientation\": \"AcrossElements\"}",
-        "orientations": "{\"py/object\": \"octa.patterns.GridPattern.RepeatAcrossColumns\", \"pattern\": [0, 45, 90, 115, 180], \"n_rows\": 10, \"n_cols\": 10, \"patterntype\": \"Repeat\", \"patternorientation\": \"AcrossColumns\"}",
-        "data": "{\"py/object\": \"octa.patterns.GridPattern.RepeatAcrossRows\", \"pattern\": [\"\", \"img/optotypes/butterfly.svg\", \"img/optotypes/butterfly.svg\", \"img/optotypes/butterfly.svg\", [\"M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z\", 41.15, 41.14]], \"n_rows\": 10, \"n_cols\": 10, \"patterntype\": \"Repeat\", \"patternorientation\": \"AcrossRows\"}",
-        "overrides": "[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]",
+        "positions": "{\"py/object\": \"octa.Positions.Positions\", \"_x\": {\"py/object\": \"octa.patterns.Pattern.Pattern\", \"pattern\": [0, 25, 50, 75, 100, 125, 150, 175, 200, 225, 0, 25, 50, 75, 100, 125, 150, 175, 200, 225, 0, 25, 50, 75, 100, 125, 150, 175, 200, 225, 0, 25, 50, 75, 100, 125, 150, 175, 200, 225, 0, 25, 50, 75, 100, 125, 150, 175, 200, 225, 0, 25, 50, 75, 100, 125, 150, 175, 200, 225, 0, 25, 50, 75, 100, 125, 150, 175, 200, 225, 0, 25, 50, 75, 100, 125, 150, 175, 200, 225, 0, 25, 50, 75, 100, 125, 150, 175, 200, 225, 0, 25, 50, 75, 100, 125, 150, 175, 200, 225], \"patternclass\": \"Pattern\", \"patterntype\": \"\", \"patternorientation\": \"\"}, \"_y\": {\"py/object\": \"octa.patterns.Pattern.Pattern\", \"pattern\": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 75, 75, 75, 75, 75, 75, 75, 75, 75, 75, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 175, 175, 175, 175, 175, 175, 175, 175, 175, 175, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 225, 225, 225, 225, 225, 225, 225, 225, 225, 225], \"patternclass\": \"Pattern\", \"patterntype\": \"\", \"patternorientation\": \"\"}, \"_randomization\": null, \"_randomization_parameters\": {}}",
+        "bounding_boxes": "{\"py/object\": \"octa.patterns.GridPattern.RepeatAcrossElements\", \"pattern\": [{\"py/tuple\": [25, 25]}], \"patternclass\": \"GridPattern.\", \"patterntype\": \"Repeat\", \"patternorientation\": \"AcrossElements\", \"n_rows\": 10, \"n_cols\": 10}",
+        "shapes": "{\"py/object\": \"octa.patterns.GridPattern.RepeatAcrossRows\", \"pattern\": [{\"py/type\": \"octa.shapes.Rectangle.Rectangle\"}, {\"py/type\": \"octa.shapes.Ellipse.Ellipse\"}, {\"py/type\": \"octa.shapes.PathSvg.PathSvg_\"}], \"patternclass\": \"GridPattern.\", \"patterntype\": \"Repeat\", \"patternorientation\": \"AcrossRows\", \"n_rows\": 10, \"n_cols\": 10}",
+        "fillcolors": "{\"py/object\": \"octa.patterns.GridPattern.RepeatAcrossElements\", \"pattern\": [\"dodgerblue\"], \"patternclass\": \"GridPattern.\", \"patterntype\": \"Repeat\", \"patternorientation\": \"AcrossElements\", \"n_rows\": 10, \"n_cols\": 10}",
+        "opacities": "{\"py/object\": \"octa.patterns.GridPattern.RepeatAcrossElements\", \"pattern\": [1], \"patternclass\": \"GridPattern.\", \"patterntype\": \"Repeat\", \"patternorientation\": \"AcrossElements\", \"n_rows\": 10, \"n_cols\": 10}",
+        "bordercolors": "{\"py/object\": \"octa.patterns.GridPattern.RepeatAcrossElements\", \"pattern\": [\"\"], \"patternclass\": \"GridPattern.\", \"patterntype\": \"Repeat\", \"patternorientation\": \"AcrossElements\", \"n_rows\": 10, \"n_cols\": 10}",
+        "borderwidths": "{\"py/object\": \"octa.patterns.GridPattern.RepeatAcrossElements\", \"pattern\": [0], \"patternclass\": \"GridPattern.\", \"patterntype\": \"Repeat\", \"patternorientation\": \"AcrossElements\", \"n_rows\": 10, \"n_cols\": 10}",
+        "orientations": "{\"py/object\": \"octa.patterns.GridPattern.RepeatAcrossElements\", \"pattern\": [0], \"patternclass\": \"GridPattern.\", \"patterntype\": \"Repeat\", \"patternorientation\": \"AcrossElements\", \"n_rows\": 10, \"n_cols\": 10}",
+        "data": "{\"py/object\": \"octa.patterns.GridPattern.RepeatAcrossRows\", \"pattern\": [\"\", \"\", \"img/arrow-circle-up-svgrepo-com.svg\"], \"patternclass\": \"GridPattern.\", \"patterntype\": \"Repeat\", \"patternorientation\": \"AcrossRows\", \"n_rows\": 10, \"n_cols\": 10}",
+        "overrides": "[{\"shape\": {\"py/type\": \"octa.shapes.Polygon.Polygon_\"}, \"data\": 5}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]",
         "element_order": "[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]",
-        "id": "{\"py/object\": \"octa.patterns.GridPattern.RepeatAcrossElements\", \"pattern\": [\"\"], \"n_rows\": 10, \"n_cols\": 10, \"patterntype\": \"Repeat\", \"patternorientation\": \"AcrossElements\"}",
-        "class": "{\"py/object\": \"octa.patterns.GridPattern.RepeatAcrossElements\", \"pattern\": [\"\"], \"n_rows\": 10, \"n_cols\": 10, \"patterntype\": \"Repeat\", \"patternorientation\": \"AcrossElements\"}",
-        "mirror": "{\"py/object\": \"octa.patterns.GridPattern.RepeatAcrossElements\", \"pattern\": [\"\"], \"n_rows\": 10, \"n_cols\": 10, \"patterntype\": \"Repeat\", \"patternorientation\": \"AcrossElements\"}"
+        "id": "{\"py/object\": \"octa.patterns.GridPattern.RepeatAcrossElements\", \"pattern\": [\"\"], \"patternclass\": \"GridPattern.\", \"patterntype\": \"Repeat\", \"patternorientation\": \"AcrossElements\", \"n_rows\": 10, \"n_cols\": 10}",
+        "class": "{\"py/object\": \"octa.patterns.GridPattern.RepeatAcrossElements\", \"pattern\": [\"\"], \"patternclass\": \"GridPattern.\", \"patterntype\": \"Repeat\", \"patternorientation\": \"AcrossElements\", \"n_rows\": 10, \"n_cols\": 10}",
+        "mirror": "{\"py/object\": \"octa.patterns.GridPattern.RepeatAcrossElements\", \"pattern\": [\"\"], \"patternclass\": \"GridPattern.\", \"patterntype\": \"Repeat\", \"patternorientation\": \"AcrossElements\", \"n_rows\": 10, \"n_cols\": 10}"
     }
 }
