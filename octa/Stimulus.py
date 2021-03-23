@@ -975,7 +975,9 @@ class Grid(Stimulus):
         
         self._attribute_overrides[element_id]['shape'] = shape_value
         
-        if str(shape_value.__bases__[0]) == "<class 'octa.shapes.Polygon.Polygon_'>":
+        if shape_value == None:
+            data_value = ""        
+        elif str(shape_value.__bases__[0]) == "<class 'octa.shapes.Polygon.Polygon_'>":
             data_value = shape_value.n_sides
         elif str(shape_value.__bases__[0]) == "<class 'octa.shapes.RegularPolygon.RegularPolygon_'>":
             data_value = shape_value.n_sides

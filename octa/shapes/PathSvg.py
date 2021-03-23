@@ -11,7 +11,7 @@ def PathSvg(src, name = None):
     return type(str(name), (PathSvg_,), {'source': src, 'name': name})
 
 class PathSvg_:
-    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'class_label', 'id_label', 'mirror_value', 'data']
+    parameters = ['position', 'bounding_box', 'data', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'class_label', 'id_label', 'mirror_value']
     
     def __init__(self, **kwargs):
         for p in PathSvg_.parameters:
@@ -41,8 +41,29 @@ class PathSvg_:
             orientation = 0
             
         self.orientation = orientation
-    
-    
+               
+        paths, self.attributes = svgpathtools.svg2paths(self.data)       
+#         paths, attributes = svgpathtools.svg2paths("img/arrow-circle-up-svgrepo-com.svg")
+        n_paths = len(paths)
+        allpaths = []
+
+        for i in range(0,n_paths):
+            mypath = paths[i]
+            xmin, xmax, ymin, ymax = mypath.bbox()
+            xsize = xmax - xmin
+            ysize = ymax - ymin
+            allpaths.append([xsize, ysize])
+            
+        self.max_xsize = max([item[0] for item in allpaths])
+        self.max_ysize = max([item[1] for item in allpaths])
+
+        if type(self.orientation) == int:
+            self.rotation_animation = ""
+            self.rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, self.max_xsize/2, self.max_ysize/2)
+        elif type(self.orientation) == list:
+            self.rotation_animation = "svgwrite.animate.AnimateTransform('rotate','transform', from_= '" + self.orientation[1] + " " + str(self.max_xsize/2) + " " + str(self.max_ysize/2) + "', to = '" + self.orientation[2] + " " + str(self.max_xsize/2) + " " + str(self.max_ysize/2) + "', " + self.orientation[3] + ")"
+            self.rotation_transform = "rotate(%d, %d, %d)"%(int(self.orientation[1]), self.max_xsize/2, self.max_ysize/2)    
+            
     def set_bordercolor(self, bordercolor):
         if bordercolor == None:
             bordercolor = "green"
@@ -62,6 +83,18 @@ class PathSvg_:
             fillcolor = "gray"
             
         self.fillcolor = fillcolor
+        
+        if type(self.fillcolor) == str:
+            self.fillcolor_animation = ""
+        elif type(self.fillcolor) == list:
+            if self.fillcolor[0] == "set":                
+                self.fillcolor_animation = "svgwrite.animate.Set(attributeName = 'fill'," + self.fillcolor[2] + ")"
+                self.fillcolor = self.fillcolor[1]
+            elif self.fillcolor[0] == "animate":
+                self.fillcolor_animation = "svgwrite.animate.Animate(attributeName = 'fill'," + self.fillcolor[2] + ")"
+                self.fillcolor = self.fillcolor[1]
+            else:
+                self.fillcolor_animation = ""
     
     def set_opacity(self, opacity):
         if opacity == None:
@@ -166,30 +199,14 @@ class PathSvg_:
     def generate(self, dwg):
         topleft = (self.position[0] - self.bounding_box[0]/2 , self.position[1] - self.bounding_box[1]/2)
               
-        paths, attributes = svgpathtools.svg2paths(self.data)       
-#         paths, attributes = svgpathtools.svg2paths("img/arrow-circle-up-svgrepo-com.svg")
-        n_paths = len(paths)
-        allpaths = []
-
-        for i in range(0,n_paths):
-            mypath = paths[i]
-            xmin, xmax, ymin, ymax = mypath.bbox()
-            xsize = xmax - xmin
-            ysize = ymax - ymin
-            allpaths.append([xsize, ysize])
-            
-        max_xsize = max([item[0] for item in allpaths])
-        max_ysize = max([item[1] for item in allpaths])
-        scale_x_parameter = self.bounding_box[0] / max_xsize
-        scale_y_parameter = self.bounding_box[1] / max_ysize
+        scale_x_parameter = self.bounding_box[0] / self.max_xsize
+        scale_y_parameter = self.bounding_box[1] / self.max_ysize
         
-        d = " ".join([item["d"] for item in attributes])
+        d = " ".join([item["d"] for item in self.attributes])
         
         sizeposition_transform = "scale(%f, %f) translate(%f, %f)"%(scale_x_parameter, scale_y_parameter, (topleft[0]/scale_x_parameter), (topleft[1]/scale_y_parameter))
 
         mirror_transform = self.create_mirror_transform() 
-        
-        rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, max_xsize/2, max_ysize/2)
                
         svg = dwg.path(
                 d            = d,              
@@ -197,7 +214,7 @@ class PathSvg_:
                 opacity      = self.opacity,
                 stroke       = self.create_bordercolor(dwg),
                 stroke_width = self.borderwidth,
-                transform    = " ".join([mirror_transform,sizeposition_transform, rotation_transform]))#,
+                transform    = " ".join([mirror_transform,sizeposition_transform, self.rotation_transform]))#,
 #                insert      = topleft,
 #                size        = self.bounding_box)
                 
@@ -209,6 +226,12 @@ class PathSvg_:
             svg['class']         = self.class_label
         if self.id_label != "":
             svg['id']        = self.id_label
+            
+        if self.fillcolor_animation != "":
+            svg.add(eval(self.fillcolor_animation))
+            
+        if self.rotation_animation != "":
+            svg.add(eval(self.rotation_animation))   
             
         return svg
     

@@ -5,6 +5,8 @@ Created on Mon Apr  6 16:02:30 2020
 @author: Christophe
 """
 
+import svgwrite
+
 class Ellipse:
     parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'class_label', 'id_label', 'mirror_value']
     
@@ -36,7 +38,13 @@ class Ellipse:
             orientation = 0
             
         self.orientation = orientation
-    
+        
+        if type(self.orientation) == int:
+            self.rotation_animation = ""
+            self.rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, self.position[0], self.position[1])
+        elif type(self.orientation) == list:
+            self.rotation_animation = "svgwrite.animate.AnimateTransform('rotate','transform', from_= '" + self.orientation[1] + " " + str(self.position[0]) + " " + str(self.position[1]) + "', to = '" + self.orientation[2] + " " + str(self.position[0]) + " " + str(self.position[1]) + "', " + self.orientation[3] + ")"
+            self.rotation_transform = "rotate(%d, %d, %d)"%(int(self.orientation[1]), self.position[0], self.position[1])
     
     def set_bordercolor(self, bordercolor):
         if bordercolor == None:
@@ -58,6 +66,18 @@ class Ellipse:
             
         self.fillcolor = fillcolor
         
+        if type(self.fillcolor) == str:
+            self.fillcolor_animation = ""
+        elif type(self.fillcolor) == list:
+            if self.fillcolor[0] == "set":                
+                self.fillcolor_animation = "svgwrite.animate.Set(attributeName = 'fill'," + self.fillcolor[2] + ")"
+                self.fillcolor = self.fillcolor[1]
+            elif self.fillcolor[0] == "animate":
+                self.fillcolor_animation = "svgwrite.animate.Animate(attributeName = 'fill'," + self.fillcolor[2] + ")"
+                self.fillcolor = self.fillcolor[1]
+            else:
+                self.fillcolor_animation = ""
+                
     def set_opacity(self, opacity):
         if opacity == None:
             opacity = 1
@@ -151,8 +171,6 @@ class Ellipse:
 
     def generate(self, dwg):
         mirror_transform = self.create_mirror_transform()
-
-        rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, self.position[0], self.position[1])
         
         svg = dwg.ellipse(
                 center       = self.position,
@@ -161,12 +179,18 @@ class Ellipse:
                 opacity      = self.opacity,
                 stroke       = self.create_bordercolor(dwg),
                 stroke_width = self.borderwidth,
-                transform    = " ".join([mirror_transform, rotation_transform]))
+                transform    = " ".join([mirror_transform, self.rotation_transform]))
         
         if self.class_label != "":
             svg['class']         = self.class_label
         if self.id_label != "":
             svg['id']        = self.id_label
+            
+        if self.fillcolor_animation != "":
+            svg.add(eval(self.fillcolor_animation))
+            
+        if self.rotation_animation != "":
+            svg.add(eval(self.rotation_animation))  
         
         return svg
     

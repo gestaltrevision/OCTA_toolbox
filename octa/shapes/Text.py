@@ -4,6 +4,7 @@ Created on Mon Apr  6 16:02:30 2020
 
 @author: Christophe
 """
+import svgwrite
 
 def Text(text, name = None):
     if name == None:
@@ -42,6 +43,12 @@ class Text_:
             
         self.orientation = orientation
     
+        if type(self.orientation) == int:
+            self.rotation_animation = ""
+            self.rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, self.position[0], self.position[1])
+        elif type(self.orientation) == list:
+            self.rotation_animation = "svgwrite.animate.AnimateTransform('rotate','transform', from_= '" + self.orientation[1] + " " + str(self.position[0]) + " " + str(self.position[1]) + "', to = '" + self.orientation[2] + " " + str(self.position[0]) + " " + str(self.position[1]) + "', " + self.orientation[3] + ")"
+            self.rotation_transform = "rotate(%d, %d, %d)"%(int(self.orientation[1]), self.position[0], self.position[1])
     
     def set_bordercolor(self, bordercolor):
         if bordercolor == None:
@@ -62,6 +69,18 @@ class Text_:
             fillcolor = "gray"
             
         self.fillcolor = fillcolor
+        
+        if type(self.fillcolor) == str:
+            self.fillcolor_animation = ""
+        elif type(self.fillcolor) == list:
+            if self.fillcolor[0] == "set":                
+                self.fillcolor_animation = "svgwrite.animate.Set(attributeName = 'fill'," + self.fillcolor[2] + ")"
+                self.fillcolor = self.fillcolor[1]
+            elif self.fillcolor[0] == "animate":
+                self.fillcolor_animation = "svgwrite.animate.Animate(attributeName = 'fill'," + self.fillcolor[2] + ")"
+                self.fillcolor = self.fillcolor[1]
+            else:
+                self.fillcolor_animation = ""
     
     def set_opacity(self, opacity):
         if opacity == None:
@@ -165,8 +184,6 @@ class Text_:
 
     def generate(self, dwg):
         mirror_transform = self.create_mirror_transform()
-
-        rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, self.position[0], self.position[1])
         
         topleft = (self.position[0] - self.bounding_box[0]/2 , self.position[1] - self.bounding_box[1]/2)
 
@@ -193,7 +210,7 @@ class Text_:
                 font_family = 'Roboto Mono',
 #                textLength  = self.bounding_box[0],
 #                size        = self.bounding_box,
-                transform   = " ".join([mirror_transform, rotation_transform]))
+                transform   = " ".join([mirror_transform, self.rotation_transform]))
 
 #        svg = dwg.text(
 #                text        = self.data, 
@@ -211,6 +228,12 @@ class Text_:
             svg['class']         = self.class_label
         if self.id_label != "":
             svg['id']        = self.id_label
+
+        if self.fillcolor_animation != "":
+            svg.add(eval(self.fillcolor_animation))
+            
+        if self.rotation_animation != "":
+            svg.add(eval(self.rotation_animation))  
             
         return svg
     

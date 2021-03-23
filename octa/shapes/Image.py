@@ -5,6 +5,7 @@ Created on Mon Apr  6 16:02:30 2020
 @author: Christophe
 """
 
+import svgwrite
 import base64
 from urllib.request import urlopen
 
@@ -44,7 +45,13 @@ class Image_:
             orientation = 0
             
         self.orientation = orientation
-    
+        
+        if type(self.orientation) == int:
+            self.rotation_animation = ""
+            self.rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, self.position[0], self.position[1])
+        elif type(self.orientation) == list:
+            self.rotation_animation = "svgwrite.animate.AnimateTransform('rotate','transform', from_= '" + self.orientation[1] + " " + str(self.position[0]) + " " + str(self.position[1]) + "', to = '" + self.orientation[2] + " " + str(self.position[0]) + " " + str(self.position[1]) + "', " + self.orientation[3] + ")"
+            self.rotation_transform = "rotate(%d, %d, %d)"%(int(self.orientation[1]), self.position[0], self.position[1])    
     
     def set_bordercolor(self, bordercolor):
         if bordercolor == None:
@@ -167,21 +174,21 @@ class Image_:
     def generate(self, dwg):
         topleft = (self.position[0] - self.bounding_box[0]/2 , self.position[1] - self.bounding_box[1]/2)
         mirror_transform = self.create_mirror_transform()
-
-        rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, self.position[0], self.position[1])
         
         svg = dwg.image(
                 href        = self.get_imgdata(),
                 insert      = topleft,
                 size        = self.bounding_box,
                 opacity     = self.opacity,
-                transform   = " ".join([mirror_transform, rotation_transform]))
+                transform   = " ".join([mirror_transform, self.rotation_transform]))
         
         if self.class_label != "":
             svg['class']         = self.class_label
         if self.id_label != "":
             svg['id']        = self.id_label
         
+        if self.rotation_animation != "":
+            svg.add(eval(self.rotation_animation))  
 #        svg.fit(scale="slice")
         svg.fit(scale="meet")
 #        svg.stretch()
