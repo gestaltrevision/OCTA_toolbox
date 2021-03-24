@@ -194,22 +194,26 @@ class ChangingEllipse:
         if self.rotation_animation != "":
             svg.add(eval(self.rotation_animation))           
 
-
+        
 #        svg.add(svgwrite.animate.Animate(attributeName = "fill", values = "purple", begin = "click", dur = "2s" )) 
 #        svg.add(svgwrite.animate.Animate(attributeName = "fill", values = "red;orange;green;blue;indigo;violet;red", dur="10s", repeatCount="indefinite")) #to = "red"
 #        svg.add(svgwrite.animate.Animate(attributeName = "fill", values = "#6dd6ff;#1b9fd8;#006ca1;#1b9fd8;#6dd6ff", dur="10s", repeatCount="indefinite")) #to = "red"
 #        svg.add(svgwrite.animate.Animate(attributeName = "cx", values = "-20;-20;20;20;-20", additive = "sum", dur="5s", repeatCount="indefinite")) #from_ = "0", to = "20"
 #        svg.add(svgwrite.animate.Animate(attributeName = "cy", values = "20;-20;-20;20;20", additive = "sum", dur="5s", repeatCount="indefinite"))
 #        svg.add(svgwrite.animate.Animate(attributeName = "fill", to = "purple", begin = "click", dur = "2s" )) 
-#        svg.add(svgwrite.animate.Set(attributeName = "fill", to = "purple", begin = "click", dur = "2s" ))  
+        svg.add(svgwrite.animate.Set(attributeName = "fill", to = "purple;red;green", begin = "click", dur = "2s" ))  
 #        svg.add(svgwrite.animate.AnimateMotion(path = "M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z", dur = "10s"))
 #        svg.add(svgwrite.animate.AnimateTransform("translate","transform", to="-200 0", dur="4s",begin="0s", additive = "sum"))
 #        svg.add(svgwrite.animate.AnimateTransform("scale","transform", from_ = "1", to = "2", dur="4s",begin="0s",additive = "sum", repeatCount="indefinite"))
 #        svg.add(svgwrite.animate.AnimateTransform("skewX","transform", from_="0", to="15",dur="4s",begin="0s",repeatCount="indefinite"))
         
 #        svg.add(svgwrite.animate.Animate(attributeName="rx", values="0;5;0", dur="10s", repeatCount="indefinite"))
-       
-        return svg
+
+        link = dwg.add(dwg.a(href = "#", onmouseover="audio = new Audio('welldoneCCBY3.ogg'); audio.play(); audio.loop=true;", onmouseout="audio.pause(); try { audio.currentTime=0; } catch(e) {} audio.loop=false;"))
+#        link = dwg.add(dwg.a(href = "#", target="_self", onclick="audio = new Audio('lyricchords.mp3');  try { audio.currentTime=0; } catch(e) {} audio.play()"))
+        link.add(svg)
+        
+        return link
     
     
 if __name__ == '__main__':

@@ -842,7 +842,47 @@ stimulus.Show()
 from octa.shapes import Ellipse, Rectangle, Triangle, Image, FitImage, Text, Polygon, RegularPolygon, Path, PathSvg, ChangingEllipse
 stimulus = Grid(4,4, background_color = "none", row_spacing = 50, col_spacing = 50)
 
-stimulus.shapes = GridPattern.RepeatAcrossElements([Ellipse, PathSvg("img/checkmark.svg"),
+stimulus.shapes = GridPattern.RepeatAcrossElements([Ellipse])
+
+stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(50,50)])
+#stimulus.orientations = GridPattern.RepeatAcrossElements([['animate', '0', '360', "id='anim1', dur = '4s', begin='0s;anim1.end+6s', additive = 'sum'"],
+#                                                          ['animate', '0', '360', "id='anim2', dur = '4s', begin='2s;anim2.end+6s', additive = 'sum'"],
+#                                                          ['animate', '0', '360', "id='anim3', dur = '4s', begin='4s;anim3.end+6s', additive = 'sum'"],
+#                                                        ['animate', '0', '360', "id='anim4', dur = '4s', begin='6s; anim4.end+6s', additive = 'sum'"]])
+##stimulus.fillcolors = GridPattern.RepeatAcrossElements([['set', "orange", 'to = "purple", begin = "click", dur = "2s"']])
+#stimulus.fillcolors = GridPattern.RepeatAcrossElements([["radial", "white", "red"], ["horizontal", "red", "orange", "green", "blue", "indigo", "violet"], ["vertical", "green", "white", "green"], ["diagonal", "red", "white"],
+#                                                        ['animate', "red", 'values = "red;white;red", begin = "2s", dur = "10s",repeatCount="indefinite"'],
+#                                                        ['animate', "red", 'values = "red;orange;green;blue;indigo;violet;red", begin = "2s", dur = "10s",repeatCount="indefinite"'],
+#                                                        ['animate', "green", 'values = "green;purple;green", begin = "2s", dur = "10s",repeatCount="indefinite"'],
+#                                                        ['animate', "red", 'values = "red;white;red", begin = "2s", dur = "10s",repeatCount="indefinite"'],
+#                                                        ['set', "red", 'to = "purple", begin = "2s", dur = "10s"'],
+#                                                        ['animate', "red", 'values = "red;orange;green;blue;indigo;violet;red", begin = "2s", calcMode = "discrete", dur = "10s"'],
+#                                                        ['set', "green", 'to = "purple", begin = "click", dur = "10s"'],
+#                                                        ['set', "red", 'to = "white;red", begin = "2s", dur = "10s"']
+#                                                        ])
+    
+    
+stimulus.set_element_shape(10, ChangingEllipse)
+#stimulus.set_element_fillcolor(0, "red")
+#stimulus.set_element_orientation(0, 30)
+#stimulus.set_element_shape(9, Path("M37.5,186c-12.1-10.5-11.8-32.3-7.2-46.7c4.8-15,13.1-17.8,30.1-36.7C91,68.8,83.5,56.7,103.4,45 c22.2-13.1,51.1-9.5,69.6-1.6c18.1,7.8,15.7,15.3,43.3,33.2c28.8,18.8,37.2,14.3,46.7,27.9c15.6,22.3,6.4,53.3,4.4,60.2 c-3.3,11.2-7.1,23.9-18.5,32c-16.3,11.5-29.5,0.7-48.6,11c-16.2,8.7-12.6,19.7-28.2,33.2c-22.7,19.7-63.8,25.7-79.9,9.7 c-15.2-15.1,0.3-41.7-16.6-54.9C63,186,49.7,196.7,37.5,186z", 288,288))
+stimulus.set_element_bounding_box(10, (49,50))
+
+stimulus.Show()
+stimulus.SaveSVG("testsearchwithaudio")
+stimulus.SaveJSON("testsearchwithaudio")
+
+stim = Stimulus.LoadFromJSON("testsearchwithaudio.json")
+                  
+stim.Show()
+stim.SaveSVG("testsearchwithaudio")
+
+#%%
+
+from octa.shapes import Ellipse, Rectangle, Triangle, Image, FitImage, Text, Polygon, RegularPolygon, Path, PathSvg, ChangingEllipse
+stimulus = Grid(4,4, background_color = "none", row_spacing = 50, col_spacing = 50)
+
+stimulus.shapes = GridPattern.RepeatAcrossElements([ChangingEllipse, PathSvg("img/checkmark.svg"),
                                                     Path("M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z", 41.15, 41.14),
                                                     Polygon(5), RegularPolygon(6), 
                                                     Rectangle, Triangle, 
@@ -860,11 +900,17 @@ stimulus.fillcolors = GridPattern.RepeatAcrossElements([["radial", "white", "red
                                                         ['animate', "red", 'values = "red;white;red", begin = "2s", dur = "10s",repeatCount="indefinite"'],
                                                         ['animate', "red", 'values = "red;orange;green;blue;indigo;violet;red", begin = "2s", dur = "10s",repeatCount="indefinite"'],
                                                         ['animate', "green", 'values = "green;purple;green", begin = "2s", dur = "10s",repeatCount="indefinite"'],
-                                                        ['animate', "red", 'values = "red;white;red", begin = "2s", dur = "10s",repeatCount="indefinite"']
+                                                        ['animate', "red", 'values = "red;white;red", begin = "2s", dur = "10s",repeatCount="indefinite"'],
+                                                        ['set', "red", 'to = "purple", begin = "2s", dur = "10s"'],
+                                                        ['animate', "red", 'values = "red;orange;green;blue;indigo;violet;red", begin = "2s", calcMode = "discrete", dur = "10s"'],
+                                                        ['set', "green", 'to = "purple", begin = "click", dur = "10s"'],
+                                                        ['set', "red", 'to = "white;red", begin = "2s", dur = "10s"']
                                                         ])
     
     
-#stimulus.set_element_shape(2, PathSvg("img/checkmark.svg"))
+#stimulus.set_element_shape(0, ChangingEllipse)
+#stimulus.set_element_fillcolor(0, "red")
+#stimulus.set_element_orientation(0, 30)
 stimulus.set_element_shape(9, Path("M37.5,186c-12.1-10.5-11.8-32.3-7.2-46.7c4.8-15,13.1-17.8,30.1-36.7C91,68.8,83.5,56.7,103.4,45 c22.2-13.1,51.1-9.5,69.6-1.6c18.1,7.8,15.7,15.3,43.3,33.2c28.8,18.8,37.2,14.3,46.7,27.9c15.6,22.3,6.4,53.3,4.4,60.2 c-3.3,11.2-7.1,23.9-18.5,32c-16.3,11.5-29.5,0.7-48.6,11c-16.2,8.7-12.6,19.7-28.2,33.2c-22.7,19.7-63.8,25.7-79.9,9.7 c-15.2-15.1,0.3-41.7-16.6-54.9C63,186,49.7,196.7,37.5,186z", 288,288))
 #stimulus.set_element_orientation(2, ['animate', '0', '360', "id='anim2', dur = '4s', begin='0s; anim2.end+4s', additive = 'sum'"])
 #stimulus.set_element_shape(1, Image("img/checkmark.svg"))

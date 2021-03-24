@@ -219,6 +219,10 @@ class Path_:
         if self.rotation_animation != "":
             svg.add(eval(self.rotation_animation))  
             
+#        link = dwg.add(dwg.a(href = "#", onmouseover="audio = new Audio('alarm.ogg'); audio.play(); audio.loop=true;", onmouseout="audio.pause(); try { audio.currentTime=0; } catch(e) {} audio.loop=false;"))
+#        link = dwg.add(dwg.a(href = "#", target="_self", onclick="audio = new Audio('lyricchords.mp3');  try { audio.currentTime=0; } catch(e) {} audio.play()"))
+#        link.add(svg)
+
         return svg
     
     

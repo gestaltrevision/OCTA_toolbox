@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<svg baseProfile="full" height="240" version="1.1" width="240" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs/>
+  <g>
+    <rect fill="none" height="240" width="240" x="0" y="0"/>
+    <ellipse cx="45" cy="45" fill="dodgerblue" opacity="1" rx="25.0" ry="25.0" stroke-width="0" transform=" rotate(0, 45, 45)"/>
+    <ellipse cx="95" cy="45" fill="dodgerblue" opacity="1" rx="25.0" ry="25.0" stroke-width="0" transform=" rotate(0, 95, 45)"/>
+    <ellipse cx="145" cy="45" fill="dodgerblue" opacity="1" rx="25.0" ry="25.0" stroke-width="0" transform=" rotate(0, 145, 45)"/>
+    <ellipse cx="195" cy="45" fill="dodgerblue" opacity="1" rx="25.0" ry="25.0" stroke-width="0" transform=" rotate(0, 195, 45)"/>
+    <ellipse cx="45" cy="95" fill="dodgerblue" opacity="1" rx="25.0" ry="25.0" stroke-width="0" transform=" rotate(0, 45, 95)"/>
+    <ellipse cx="95" cy="95" fill="dodgerblue" opacity="1" rx="25.0" ry="25.0" stroke-width="0" transform=" rotate(0, 95, 95)"/>
+    <ellipse cx="145" cy="95" fill="dodgerblue" opacity="1" rx="25.0" ry="25.0" stroke-width="0" transform=" rotate(0, 145, 95)"/>
+    <ellipse cx="195" cy="95" fill="dodgerblue" opacity="1" rx="25.0" ry="25.0" stroke-width="0" transform=" rotate(0, 195, 95)"/>
+    <ellipse cx="45" cy="145" fill="dodgerblue" opacity="1" rx="25.0" ry="25.0" stroke-width="0" transform=" rotate(0, 45, 145)"/>
+    <ellipse cx="95" cy="145" fill="dodgerblue" opacity="1" rx="25.0" ry="25.0" stroke-width="0" transform=" rotate(0, 95, 145)"/>
+    <a onmouseout="audio.pause(); try { audio.currentTime=0; } catch(e) {} audio.loop=false;" onmouseover="audio = new Audio('welldoneCCBY3.ogg'); audio.play(); audio.loop=true;" target="_blank" xlink:href="#">
+      <ellipse cx="145" cy="145" fill="dodgerblue" opacity="1" rx="24.0" ry="25.0" stroke-width="0" transform=" rotate(0, 145, 145)">
+        <set attributeName="fill" begin="click" dur="2s" to="purple;red;green"/>
+      </ellipse>
+    </a>
+    <ellipse cx="195" cy="145" fill="dodgerblue" opacity="1" rx="25.0" ry="25.0" stroke-width="0" transform=" rotate(0, 195, 145)"/>
+    <ellipse cx="45" cy="195" fill="dodgerblue" opacity="1" rx="25.0" ry="25.0" stroke-width="0" transform=" rotate(0, 45, 195)"/>
+    <ellipse cx="95" cy="195" fill="dodgerblue" opacity="1" rx="25.0" ry="25.0" stroke-width="0" transform=" rotate(0, 95, 195)"/>
+    <ellipse cx="145" cy="195" fill="dodgerblue" opacity="1" rx="25.0" ry="25.0" stroke-width="0" transform=" rotate(0, 145, 195)"/>
+    <ellipse cx="195" cy="195" fill="dodgerblue" opacity="1" rx="25.0" ry="25.0" stroke-width="0" transform=" rotate(0, 195, 195)"/>
+  </g>
+  <a onmouseout="audio.pause(); try { audio.currentTime=0; } catch(e) {} audio.loop=false;" onmouseover="audio = new Audio('welldoneCCBY3.ogg'); audio.play(); audio.loop=true;" target="_blank" xlink:href="#">
+    <ellipse cx="145" cy="145" fill="dodgerblue" opacity="1" rx="24.0" ry="25.0" stroke-width="0" transform=" rotate(0, 145, 145)">
+      <set attributeName="fill" begin="click" dur="2s" to="purple;red;green"/>
+    </ellipse>
+  </a>
+</svg>
