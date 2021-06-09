@@ -35,18 +35,23 @@ stimulus.SaveSVG("testaudio")
 n_rows = 6
 n_cols = 6
 
+stimsize = (350,350)
+
+clipshape = Ellipse(position = (stimsize[0]/2,stimsize[1]/2), bounding_box = stimsize)
+
 # stimulus = Grid(n_rows, n_cols, background_color = ["diagonal", "black", "white"], stim_orientation = 30, 
                 # stim_mirror_value="vertical", stim_class_label= "right", row_spacing = 40, col_spacing = 40, x_margin = 20, y_margin = (40,50))
 
-stimulus = Grid(n_rows, n_cols, background_color = ['set', "orange", 'to = "purple", begin = "click", dur = "2s"'], stim_orientation = 30, 
-                stim_mirror_value="vertical", stim_class_label= "right", row_spacing = 40, col_spacing = 40, x_margin = 20, y_margin = (40,50))
+# stimulus = Grid(n_rows, n_cols, background_color = ['set', "orange", 'to = "purple", begin = "click", dur = "2s"'], stim_orientation = 30, 
+#                 stim_mirror_value="vertical", stim_class_label= "right", row_spacing = 40, col_spacing = 40, x_margin = 20, y_margin = (40,50))
 
-stimulus = Grid(n_rows, n_cols, background_color = ['animate', "red", 'values = "red;orange;green;blue;indigo;violet;red", begin = "2s", dur = "10s",repeatCount="indefinite"'], stim_orientation = 30, 
-                stim_mirror_value="vertical", stim_class_label= "right", row_spacing = 40, col_spacing = 40, x_margin = 20, y_margin = (40,50))
+# stimulus = Grid(n_rows, n_cols, background_color = ['animate', "red", 'values = "red;orange;green;blue;indigo;violet;red", begin = "2s", dur = "10s",repeatCount="indefinite"'], stim_orientation = 30, 
+#                 stim_mirror_value="vertical", stim_class_label= "right", row_spacing = 40, col_spacing = 40, x_margin = 20, y_margin = (40,50))
 
 stimulus = Grid(n_rows, n_cols, background_color = ['animate', "red", 'values = "red;orange;green;blue;indigo;violet;red", begin = "0s", dur = "10s",repeatCount="indefinite"'], 
                 stim_orientation = ['animate', '0', '360', "begin = 'click', dur='4s', additive='sum'"], 
-                stim_class_label= "right", row_spacing = 40, col_spacing = 40, x_margin = 20, y_margin = (40,50))
+                stim_class_label= "right", row_spacing = 40, col_spacing = 40, size = stimsize, 
+                background_shape = clipshape)
 
 
 

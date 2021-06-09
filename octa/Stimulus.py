@@ -534,7 +534,7 @@ class Stimulus:
         None.
 
         """           
-        self.dwg = svgwrite.Drawing(size = (self.width, self.height)) #, profile="tiny"
+        self.dwg = svgwrite.Drawing(size = (self.width, self.height)) 
 
         # ADD CLIP PATH
         if(self.background_shape != "auto"):
@@ -549,8 +549,20 @@ class Stimulus:
             self.mask_object = self.dwg.defs.add(self.dwg.mask(id='custom_mask'))
             self.mask_object.add(self.mask.generate(self.dwg))
             maskpath = "url(#custom_mask)"
+            
+            if clippath != None:
+                self.stim = self.dwg.g(clip_path = clippath, mask = maskpath)
+            else:
+                self.stim = self.dwg.g(mask = maskpath)
+                
         else:
             maskpath = None
+            
+            if clippath != None:            
+                self.stim = self.dwg.g(clip_path = clippath)
+            else:            
+                self.stim = self.dwg.g()
+                
             
         # ADD MIRROR VALUE  
         mirror_transform = ""
@@ -562,26 +574,18 @@ class Stimulus:
             mirror_transform = "scale(-1, -1) translate(%f, %f)"%(-2*(self.width/2), -2*(self.height/2))
 
         # ADD ROTATION
+        rotation_transform = ""
         if (type(self.stim_orientation) == int) or (type(self.stim_orientation) == float):
             self.rotation_animation = ""
             rotation_transform = "rotate(%d, %d, %d)"%(self.stim_orientation, self.width/2, self.height/2)
         elif type(self.stim_orientation) == list:
             self.rotation_animation = "svgwrite.animate.AnimateTransform('rotate','transform', from_= '" + self.stim_orientation[1] + " " + str(self.width/2) + " " + str(self.height/2) + "', to = '" + self.stim_orientation[2] + " " + str(self.width/2) + " " + str(self.height/2) + "', " + self.stim_orientation[3] + ")"
             rotation_transform = "rotate(%d, %d, %d)"%(int(self.stim_orientation[1]), self.width/2, self.height/2)
+            
+        self.stim['transform'] = " ".join([mirror_transform, rotation_transform])
                         
-        if(clippath != None):
-            if(maskpath != None):
-                self.stim = self.dwg.add(self.dwg.g(clip_path = clippath, mask = maskpath, 
-                                                    transform = " ".join([mirror_transform, rotation_transform])))
-            else:
-                self.stim = self.dwg.add(self.dwg.g(clip_path = clippath, 
-                                                    transform = " ".join([mirror_transform, rotation_transform])))
-        else:
-            if(maskpath != None):
-                self.stim = self.dwg.add(self.dwg.g(mask = maskpath, 
-                                                    transform = " ".join([mirror_transform, rotation_transform])))
-            else:
-                self.stim = self.dwg.add(self.dwg.g(transform = " ".join([mirror_transform, rotation_transform])))
+        # ADD GROUP OF ELEMENTS TO DRAWING
+        self.dwg.add(self.stim)
           
         # ADD BACKGROUND COLOR
         if type(self.background_color) == str:

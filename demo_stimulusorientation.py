@@ -16,7 +16,11 @@ import random
 n_rows = 6
 n_cols = 6
 
-stimulus = Grid(n_rows, n_cols, background_color = "None", stim_orientation = 30, row_spacing = 40, col_spacing = 40, x_margin = 50, y_margin = 50)
+stimsize = (350,350)
+
+clipshape = Ellipse(position = (stimsize[0]/2,stimsize[1]/2), bounding_box = stimsize)
+
+stimulus = Grid(n_rows, n_cols, background_color = "lightgrey", stim_orientation = 30, row_spacing = 40, col_spacing = 40, size = stimsize, background_shape = clipshape)
 
 ## Determine shapes used in the stimulus
 ## Example shapes: Ellipse, Rectangle, Triangle, Polygon(n_sides = 8), ...
@@ -39,7 +43,7 @@ stimulus.SaveSVG("testori")
 n_rows = 6
 n_cols = 6
 
-stimulus = Grid(n_rows, n_cols, background_color = "None", stim_orientation = 30, row_spacing = 40, col_spacing = 40, size = (350,350))
+stimulus = Grid(n_rows, n_cols, background_color = "lightgrey", stim_orientation = 30, row_spacing = 40, col_spacing = 40, size = (350,350))
 
 ## Determine shapes used in the stimulus
 ## Example shapes: Ellipse, Rectangle, Triangle, Polygon(n_sides = 8), ...
