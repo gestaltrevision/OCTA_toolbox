@@ -575,14 +575,15 @@ class Stimulus:
 
         # ADD ROTATION
         rotation_transform = ""
+        self.rotation_animation = ""
         if (type(self.stim_orientation) == int) or (type(self.stim_orientation) == float):
-            self.rotation_animation = ""
             rotation_transform = "rotate(%d, %d, %d)"%(self.stim_orientation, self.width/2, self.height/2)
         elif type(self.stim_orientation) == list:
-            self.rotation_animation = "svgwrite.animate.AnimateTransform('rotate','transform', from_= '" + self.stim_orientation[1] + " " + str(self.width/2) + " " + str(self.height/2) + "', to = '" + self.stim_orientation[2] + " " + str(self.width/2) + " " + str(self.height/2) + "', " + self.stim_orientation[3] + ")"
+            self.rotation_animation = "svgwrite.animate.AnimateTransform('rotate','transform', from_= '" + str(self.stim_orientation[1]) + " " + str(self.width/2) + " " + str(self.height/2) + "', to = '" + str(self.stim_orientation[2]) + " " + str(self.width/2) + " " + str(self.height/2) + "', " + self.stim_orientation[3] + ")"
             rotation_transform = "rotate(%d, %d, %d)"%(int(self.stim_orientation[1]), self.width/2, self.height/2)
             
-        self.stim['transform'] = " ".join([mirror_transform, rotation_transform])
+        if (mirror_transform != "") | (rotation_transform != ""):
+            self.stim['transform'] = " ".join([mirror_transform, rotation_transform])
                         
         # ADD GROUP OF ELEMENTS TO DRAWING
         self.dwg.add(self.stim)

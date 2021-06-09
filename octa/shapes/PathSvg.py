@@ -3,6 +3,7 @@
 
 """
 import svgwrite
+from svg.path import parse_path
 import svgpathtools
 
 def PathSvg(src, name = None):
@@ -42,7 +43,7 @@ class PathSvg_:
             
         self.orientation = orientation
                
-        paths, self.attributes = svgpathtools.svg2paths(self.data)       
+        paths, self.attributes = svgpathtools.svg2paths(self.data)   
 #         paths, attributes = svgpathtools.svg2paths("img/arrow-circle-up-svgrepo-com.svg")
         n_paths = len(paths)
         allpaths = []
@@ -206,12 +207,14 @@ class PathSvg_:
         keep = [i for i, x in enumerate(['d' in  self.attributes[i] for i in range(len(self.attributes))]) if x]
         d = " ".join([item["d"] for item in [self.attributes[i] for i in keep]])
         
+        path = parse_path(d)
+        
         sizeposition_transform = "scale(%f, %f) translate(%f, %f)"%(scale_x_parameter, scale_y_parameter, (topleft[0]/scale_x_parameter), (topleft[1]/scale_y_parameter))
 
         mirror_transform = self.create_mirror_transform() 
                
         svg = dwg.path(
-                d            = d,              
+                d            = path.d(),              
                 fill         = self.create_fillcolor(dwg),
                 opacity      = self.opacity,
                 stroke       = self.create_bordercolor(dwg),

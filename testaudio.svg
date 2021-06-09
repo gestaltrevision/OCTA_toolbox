@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" baseProfile="full" height="124.69463130731182" version="1.1" width="111.0">
+  <defs/>
+  <g transform=" rotate(0, 55, 62)">
+    <rect fill="white" height="124.69463130731182" width="111.0" x="0" y="0"/>
+    <polygon fill="dodgerblue" opacity="1" points="30.5,20.0 23.428932188134524,22.928932188134524 20.5,29.999999999999996 23.428932188134524,37.071067811865476 30.499999999999996,40.0 37.571067811865476,37.071067811865476 40.5,30.000000000000004 37.57106781186548,22.92893218813453" stroke-width="0" transform=" rotate(0, 30, 30)"/>
+    <a onmouseout="audio.pause(); try { audio.currentTime=0; } catch(e) {} audio.loop=false;" onmouseover="audio = new Audio('audio/welldoneCCBY3.ogg'); audio.play(); audio.loop=true;" target="_blank" xlink:href="#">
+      <ellipse cx="80.5" cy="44.69463130731183" fill="dodgerblue" opacity="1" rx="10.0" ry="10.0" stroke-width="0" transform=" rotate(0, 80, 44)">
+        <set attributeName="fill" begin="click" dur="2s" to="purple;red;green"/>
+      </ellipse>
+    </a>
+    <polygon fill="dodgerblue" opacity="1" points="30.5,70.0 23.428932188134524,72.92893218813452 20.5,80.0 23.428932188134524,87.07106781186548 30.499999999999996,90.0 37.571067811865476,87.07106781186548 40.5,80.0 37.57106781186548,72.92893218813454" stroke-width="0" transform=" rotate(0, 30, 80)"/>
+    <a onmouseout="audio.pause(); try { audio.currentTime=0; } catch(e) {} audio.loop=false;" onmouseover="audio = new Audio('audio/welldoneCCBY3.ogg'); audio.play(); audio.loop=true;" target="_blank" xlink:href="#">
+      <ellipse cx="80.5" cy="94.69463130731182" fill="dodgerblue" opacity="1" rx="10.0" ry="10.0" stroke-width="0" transform=" rotate(0, 80, 94)">
+        <set attributeName="fill" begin="click" dur="2s" to="purple;red;green"/>
+      </ellipse>
+    </a>
+  </g>
+  <a onmouseout="audio.pause(); try { audio.currentTime=0; } catch(e) {} audio.loop=false;" onmouseover="audio = new Audio('audio/welldoneCCBY3.ogg'); audio.play(); audio.loop=true;" target="_blank" xlink:href="#">
+    <ellipse cx="80.5" cy="44.69463130731183" fill="dodgerblue" opacity="1" rx="10.0" ry="10.0" stroke-width="0" transform=" rotate(0, 80, 44)">
+      <set attributeName="fill" begin="click" dur="2s" to="purple;red;green"/>
+    </ellipse>
+  </a>
+  <a onmouseout="audio.pause(); try { audio.currentTime=0; } catch(e) {} audio.loop=false;" onmouseover="audio = new Audio('audio/welldoneCCBY3.ogg'); audio.play(); audio.loop=true;" target="_blank" xlink:href="#">
+    <ellipse cx="80.5" cy="94.69463130731182" fill="dodgerblue" opacity="1" rx="10.0" ry="10.0" stroke-width="0" transform=" rotate(0, 80, 94)">
+      <set attributeName="fill" begin="click" dur="2s" to="purple;red;green"/>
+    </ellipse>
+  </a>
+</svg>

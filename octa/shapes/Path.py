@@ -3,6 +3,7 @@
 
 """
 import svgwrite
+from svg.path import parse_path
 import svgpathtools
 
 def Path(path, xsize, ysize, name = None):
@@ -193,9 +194,11 @@ class Path_:
         sizeposition_transform = "scale(%f, %f) translate(%f, %f)"%(scale_x_parameter, scale_y_parameter, (topleft[0]/scale_x_parameter), (topleft[1]/scale_y_parameter))
 
         mirror_transform = self.create_mirror_transform()  
+        
+        path = parse_path(self.data[0])
                
         svg = dwg.path(
-                d            = self.data[0],              
+                d            = path.d(),              
                 fill         = self.create_fillcolor(dwg),
                 opacity      = self.opacity,
                 stroke       = self.create_bordercolor(dwg),
