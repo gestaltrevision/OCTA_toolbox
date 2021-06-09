@@ -16,6 +16,5 @@ from octa.shapes.Polygon import Polygon
 from octa.shapes.Path import Path
 from octa.shapes.PathSvg import PathSvg
 
-
 from octa.shapes.FitImage import FitImage
 from octa.shapes.ChangingEllipse import ChangingEllipse

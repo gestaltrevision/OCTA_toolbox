@@ -57,7 +57,7 @@ class PathSvg_:
         self.max_xsize = max([item[0] for item in allpaths])
         self.max_ysize = max([item[1] for item in allpaths])
 
-        if type(self.orientation) == int:
+        if (type(self.orientation) == int) or (type(self.orientation) == float):
             self.rotation_animation = ""
             self.rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, self.max_xsize/2, self.max_ysize/2)
         elif type(self.orientation) == list:
@@ -202,7 +202,9 @@ class PathSvg_:
         scale_x_parameter = self.bounding_box[0] / self.max_xsize
         scale_y_parameter = self.bounding_box[1] / self.max_ysize
         
-        d = " ".join([item["d"] for item in self.attributes])
+        # d = " ".join([item["d"] for item in self.attributes])
+        keep = [i for i, x in enumerate(['d' in  self.attributes[i] for i in range(len(self.attributes))]) if x]
+        d = " ".join([item["d"] for item in [self.attributes[i] for i in keep]])
         
         sizeposition_transform = "scale(%f, %f) translate(%f, %f)"%(scale_x_parameter, scale_y_parameter, (topleft[0]/scale_x_parameter), (topleft[1]/scale_y_parameter))
 

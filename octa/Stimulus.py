@@ -24,7 +24,8 @@ class Stimulus:
     
     """
     
-    def __init__(self, background_color = "white", x_margin = 20, y_margin = 20, size = None, background_shape = None, mask = None):
+    def __init__(self, background_color = "white", x_margin = 20, y_margin = 20, size = None, background_shape = None, mask = None, 
+                 stim_orientation = 0, stim_mirror_value = None, stim_class_label = None, stim_id_label = None):
         """
         Instantiates a stimulus object.
 
@@ -64,6 +65,10 @@ class Stimulus:
             self.size = (size[0], size[1])
             
         self.background_color = background_color
+        self.stim_orientation = stim_orientation
+        self.stim_mirror_value = stim_mirror_value
+        self.stim_class_label = stim_class_label
+        self.stim_id_label = stim_id_label
         
         if background_shape == None:
             self.background_shape = "auto"
@@ -530,7 +535,7 @@ class Stimulus:
 
         """           
         self.dwg = svgwrite.Drawing(size = (self.width, self.height)) #, profile="tiny"
-        
+
         # ADD CLIP PATH
         if(self.background_shape != "auto"):
             self.clip_path = self.dwg.defs.add(self.dwg.clipPath(id='custom_clip_path'))
@@ -546,23 +551,98 @@ class Stimulus:
             maskpath = "url(#custom_mask)"
         else:
             maskpath = None
+            
+        # ADD MIRROR VALUE  
+        mirror_transform = ""
+        if self.stim_mirror_value == "vertical":
+            mirror_transform = "scale(-1, 1) translate(%f, 0)"%(-2*(self.width/2))
+        elif self.stim_mirror_value == "horizontal":
+            mirror_transform = "scale(1, -1), translate(0, %f)"%(-2*(self.height/2))
+        elif self.stim_mirror_value == "horizontalvertical":
+            mirror_transform = "scale(-1, -1) translate(%f, %f)"%(-2*(self.width/2), -2*(self.height/2))
+
+        # ADD ROTATION
+        if (type(self.stim_orientation) == int) or (type(self.stim_orientation) == float):
+            self.rotation_animation = ""
+            rotation_transform = "rotate(%d, %d, %d)"%(self.stim_orientation, self.width/2, self.height/2)
+        elif type(self.stim_orientation) == list:
+            self.rotation_animation = "svgwrite.animate.AnimateTransform('rotate','transform', from_= '" + self.stim_orientation[1] + " " + str(self.width/2) + " " + str(self.height/2) + "', to = '" + self.stim_orientation[2] + " " + str(self.width/2) + " " + str(self.height/2) + "', " + self.stim_orientation[3] + ")"
+            rotation_transform = "rotate(%d, %d, %d)"%(int(self.stim_orientation[1]), self.width/2, self.height/2)
                         
         if(clippath != None):
             if(maskpath != None):
-                self.stim = self.dwg.add(self.dwg.g(clip_path = clippath, mask = maskpath))
+                self.stim = self.dwg.add(self.dwg.g(clip_path = clippath, mask = maskpath, 
+                                                    transform = " ".join([mirror_transform, rotation_transform])))
             else:
-                self.stim = self.dwg.add(self.dwg.g(clip_path = clippath))
+                self.stim = self.dwg.add(self.dwg.g(clip_path = clippath, 
+                                                    transform = " ".join([mirror_transform, rotation_transform])))
         else:
             if(maskpath != None):
-                self.stim = self.dwg.add(self.dwg.g(mask = maskpath))
+                self.stim = self.dwg.add(self.dwg.g(mask = maskpath, 
+                                                    transform = " ".join([mirror_transform, rotation_transform])))
             else:
-                self.stim = self.dwg.add(self.dwg.g())
-                
-        if(self.background_color != "None"):
+                self.stim = self.dwg.add(self.dwg.g(transform = " ".join([mirror_transform, rotation_transform])))
+          
+        # ADD BACKGROUND COLOR
+        if type(self.background_color) == str:
+            self.background_color_animation = ""
             self.background = self.dwg.rect(insert = (0, 0), size = (self.width, self.height), fill = self.background_color)
-            self.stim.add(self.background)  
+            
+        elif type(self.background_color) == list:
+            if self.background_color[0] == "set":                
+                self.background_color_animation = "svgwrite.animate.Set(attributeName = 'fill'," + self.background_color[2] + ")"
+                self.background_color = self.background_color[1]
+                self.background = self.dwg.rect(insert = (0, 0), size = (self.width, self.height), fill = self.background_color) 
         
+            elif self.background_color[0] == "animate":
+                self.background_color_animation = "svgwrite.animate.Animate(attributeName = 'fill'," + self.background_color[2] + ")"
+                self.background_color = self.background_color[1]
+                self.background = self.dwg.rect(insert = (0, 0), size = (self.width, self.height), fill = self.background_color) 
         
+            else:
+                self.background_color_animation = ""
+            
+                gradient = ""
+                if self.background_color[0] == "radial":
+                    gradient = self.dwg.radialGradient()               
+                elif self.background_color[0] == "horizontal":
+                    gradient = self.dwg.linearGradient((0, 0), (1, 0))
+                elif self.background_color[0] == "vertical":
+                    gradient = self.dwg.linearGradient((0, 0), (0, 1))
+                elif self.background_color[0] == "diagonal":
+                    gradient = self.dwg.linearGradient((0, 0), (1, 1))
+                    
+                else:
+                    self.background = self.dwg.rect(insert = (0, 0), size = (self.width, self.height), fill = self.background_color) 
+        
+                    
+                if gradient != "":
+                    self.dwg.defs.add(gradient)
+                    
+                    # define the gradient colors
+                    n_colors = len(self.background_color)-1
+                    stepsize = 1 / (n_colors - 1)
+                    for i in range(n_colors):
+                        gradient.add_stop_color(i*stepsize, self.background_color[i+1])
+            
+                    self.background = self.dwg.rect(insert = (0, 0), size = (self.width, self.height), fill = gradient.get_paint_server() )
+                
+                
+        if self.background_color_animation != "":
+            self.background.add(eval(self.background_color_animation))
+            
+        self.stim.add(self.background)  
+            
+        # ADD CLASS AND ID LABEL
+            
+        if self.stim_class_label != None:
+            self.stim['class']         = self.stim_class_label
+        if self.stim_id_label != None:
+            self.stim['id']        = self.stim_id_label
+        
+        if self.rotation_animation != "":
+            self.stim.add(eval(self.rotation_animation))  
+            
     @property
     def x_margin(self):
         return self._x_margin
@@ -641,6 +721,19 @@ class Stimulus:
         self.width = abs(max_x - min_x) + sum(self.x_margin)
         self.height = abs(max_y - min_y) + sum(self.y_margin)
         
+        # https://stackoverflow.com/questions/622140/calculate-bounding-box-coordinates-from-a-rotated-rectangle
+        # original_width = self.width
+        # original_height = self.height
+        
+        # orientation_radians = self.stim_orientation * (math.pi / 180)
+        
+        # rotated_width = abs(original_width * math.cos(orientation_radians)) + abs(original_height * math.sin(orientation_radians))
+        # rotated_height = abs(original_width * math.sin(orientation_radians)) + abs(original_height * math.cos(orientation_radians))
+        
+        # self.width = rotated_width
+        # self.height = rotated_height
+        
+        
         # print("min width: %f, max_width: %f"%(min_x, min_y))
         self._x_offset = -min_x + self.x_margin[0]
         self._y_offset = -min_y + self.y_margin[0]
@@ -678,9 +771,11 @@ class Grid(Stimulus):
     _element_attributes = ["_bounding_boxes", "_orientations", "_bordercolors", "_borderwidths", "_fillcolors", "_opacities", "_shapes",
                           "_class_labels", "_id_labels", "_mirror_values", "_data"]
     
-    def __init__(self, n_rows, n_cols, row_spacing = 50, col_spacing= 50, background_color = "white", size = None, background_shape = None, mask = None, x_margin = 20, y_margin = 20):
+    def __init__(self, n_rows, n_cols, row_spacing = 50, col_spacing= 50, background_color = "white", size = None, background_shape = None, mask = None, 
+                 stim_orientation = 0, stim_mirror_value = None, stim_class_label = None, stim_id_label = None, x_margin = 20, y_margin = 20):
         # print("Grid constructor")
-        super().__init__(background_color = background_color, x_margin = x_margin, y_margin = y_margin, size = size, background_shape = background_shape, mask = mask)
+        super().__init__(background_color = background_color, x_margin = x_margin, y_margin = y_margin, size = size, background_shape = background_shape, mask = mask, 
+                         stim_orientation = stim_orientation, stim_mirror_value = stim_mirror_value, stim_class_label = stim_class_label, stim_id_label = stim_id_label)
         
         # Initialize the positions of each element
         self._n_rows = n_rows

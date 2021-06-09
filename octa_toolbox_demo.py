@@ -11,6 +11,63 @@ import random
 
 #%%
 
+stimulus = Grid(2,2, x_margin = 20.5)
+
+stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(20, 20)])
+# stimulus.orientations   = GridPattern.RepeatAcrossElements([0], self._n_rows, self._n_cols)
+# stimulus.bordercolors   = GridPattern.RepeatAcrossElements([""], self._n_rows, self._n_cols)
+# stimulus.borderwidths   = GridPattern.RepeatAcrossElements([0], self.n_rows, self.n_cols)
+# stimulus.fillcolors     = GridPattern.RepeatAcrossElements(["dodgerblue"], self.n_rows, self.n_cols)
+# stimulus.opacities      = GridPattern.RepeatAcrossElements([1], self.n_rows, self.n_cols)
+stimulus.shapes         = GridPattern.RepeatAcrossElements([Polygon(8), ChangingEllipse])
+# stimulus.class_labels   = GridPattern.RepeatAcrossElements([""], self._n_rows, self._n_cols)
+# stimulus.id_labels      = GridPattern.RepeatAcrossElements([""], self._n_rows, self._n_cols)
+# stimulus.mirror_values  = GridPattern.RepeatAcrossElements([""], self._n_rows, self._n_cols)
+# stimulus.data           = GridPattern.RepeatAcrossElements(["8"], self._n_rows, self._n_cols)
+stimulus.positions = Positions.CreateSineGrid(2,2)
+stimulus.Show()
+
+stimulus.SaveSVG("testaudio")
+
+#%%
+
+## Choose number of rows and number of columns
+n_rows = 6
+n_cols = 6
+
+# stimulus = Grid(n_rows, n_cols, background_color = ["diagonal", "black", "white"], stim_orientation = 30, 
+                # stim_mirror_value="vertical", stim_class_label= "right", row_spacing = 40, col_spacing = 40, x_margin = 20, y_margin = (40,50))
+
+stimulus = Grid(n_rows, n_cols, background_color = ['set', "orange", 'to = "purple", begin = "click", dur = "2s"'], stim_orientation = 30, 
+                stim_mirror_value="vertical", stim_class_label= "right", row_spacing = 40, col_spacing = 40, x_margin = 20, y_margin = (40,50))
+
+stimulus = Grid(n_rows, n_cols, background_color = ['animate', "red", 'values = "red;orange;green;blue;indigo;violet;red", begin = "2s", dur = "10s",repeatCount="indefinite"'], stim_orientation = 30, 
+                stim_mirror_value="vertical", stim_class_label= "right", row_spacing = 40, col_spacing = 40, x_margin = 20, y_margin = (40,50))
+
+stimulus = Grid(n_rows, n_cols, background_color = ['animate', "red", 'values = "red;orange;green;blue;indigo;violet;red", begin = "0s", dur = "10s",repeatCount="indefinite"'], 
+                stim_orientation = ['animate', '0', '360', "begin = 'click', dur='4s', additive='sum'"], 
+                stim_class_label= "right", row_spacing = 40, col_spacing = 40, x_margin = 20, y_margin = (40,50))
+
+
+
+
+## Determine shapes used in the stimulus
+## Example shapes: Ellipse, Rectangle, Triangle, Polygon(n_sides = 8), ...
+stimulus.shapes = GridPattern.RepeatAcrossColumns([Rectangle, Triangle, Ellipse])
+
+## Determine colors used in the stimulus
+colors_to_use = ['#1b9fd8', '#6dd6ff', '#006ca1'] 
+stimulus.fillcolors = GridPattern.RepeatAcrossColumns(colors_to_use)
+
+## Determine size of elements in the stimulus
+stimulus.bounding_boxes = GridPattern.RepeatAcrossColumns([(30,30)])
+
+
+stimulus.Show()
+stimulus.SaveSVG("testori")
+
+#%%
+
 ## Choose number of rows and number of columns
 n_rows = 6
 n_cols = 6
@@ -29,7 +86,7 @@ stimulus.fillcolors = GridPattern.RepeatAcrossColumns(colors_to_use)
 stimulus.bounding_boxes = GridPattern.RepeatAcrossColumns([(30,30)])
 
 
-stimulus.positions.SetLocationJitter("xy")
+stimulus.positions.SetLocationJitter("xy", mu = 0, std = 2)
 
 stimulus.Show()
 #%%
@@ -221,11 +278,11 @@ stimulus.shapes = GridPattern.RepeatAcrossRows([
         Path('M 100 350 l 150 -300 M 250 50 l 150 300 M 175 200 l 150 0 M 100 350 q 150 -300 300 0', 450, 400), 
         PathSvg("img/test.svg"), 
         Image("img/test.svg"), 
-        Path("M12 22A10 10 0 1 0 2 12a10 10 0 0 0 10 10zM8.31 10.14l3-2.86a.49.49 0 0 1 .15-.1.54.54 0 0 1 .16-.1.94.94 0 0 1 .76 0 1 1 0 0 1 .33.21l3 3a1 1 0 0 1-1.42 1.42L13 10.41V16a1 1 0 0 1-2 0v-5.66l-1.31 1.25a1 1 0 0 1-1.38-1.45z", 24,24), 
-        PathSvg("img/arrow-circle-up-svgrepo-com.svg"), 
+        #Path("M12 22A10 10 0 1 0 2 12a10 10 0 0 0 10 10zM8.31 10.14l3-2.86a.49.49 0 0 1 .15-.1.54.54 0 0 1 .16-.1.94.94 0 0 1 .76 0 1 1 0 0 1 .33.21l3 3a1 1 0 0 1-1.42 1.42L13 10.41V16a1 1 0 0 1-2 0v-5.66l-1.31 1.25a1 1 0 0 1-1.38-1.45z", 24,24), 
+        #PathSvg("img/arrow-circle-up-svgrepo-com.svg"), 
         Image("img/arrow-circle-up-svgrepo-com.svg"), 
-        Path("M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z", 512, 512), 
-        PathSvg("img/checkmark.svg"), 
+        #Path("M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z", 512, 512), 
+        #PathSvg("img/checkmark.svg"), 
         Image("img/checkmark.svg")])
 stimulus.borderwidths = GridPattern.RepeatAcrossRows([2,2,2,0,0,0,2,2,2])
 stimulus.bordercolors = GridPattern.RepeatAcrossElements(['black'])
@@ -275,7 +332,8 @@ random.seed(3)
 stimulus = Grid(6,6, background_color = "none", x_margin = 20, y_margin = 20, row_spacing = 40, col_spacing = 40)
 stimulus._autosize_method = "maximum_bounding_box"
 stimulus.shapes = GridPattern.RepeatAcrossRows([
-        Path("M37.5,186c-12.1-10.5-11.8-32.3-7.2-46.7c4.8-15,13.1-17.8,30.1-36.7C91,68.8,83.5,56.7,103.4,45 c22.2-13.1,51.1-9.5,69.6-1.6c18.1,7.8,15.7,15.3,43.3,33.2c28.8,18.8,37.2,14.3,46.7,27.9c15.6,22.3,6.4,53.3,4.4,60.2 c-3.3,11.2-7.1,23.9-18.5,32c-16.3,11.5-29.5,0.7-48.6,11c-16.2,8.7-12.6,19.7-28.2,33.2c-22.7,19.7-63.8,25.7-79.9,9.7 c-15.2-15.1,0.3-41.7-16.6-54.9C63,186,49.7,196.7,37.5,186z", 288,288)])
+        Path('M 100 350 l 150 -300 M 250 50 l 150 300 M 175 200 l 150 0 M 100 350 q 150 -300 300 0', 450, 400)])
+        # Path("M37.5,186c-12.1-10.5-11.8-32.3-7.2-46.7c4.8-15,13.1-17.8,30.1-36.7C91,68.8,83.5,56.7,103.4,45 c22.2-13.1,51.1-9.5,69.6-1.6c18.1,7.8,15.7,15.3,43.3,33.2c28.8,18.8,37.2,14.3,46.7,27.9c15.6,22.3,6.4,53.3,4.4,60.2 c-3.3,11.2-7.1,23.9-18.5,32c-16.3,11.5-29.5,0.7-48.6,11c-16.2,8.7-12.6,19.7-28.2,33.2c-22.7,19.7-63.8,25.7-79.9,9.7 c-15.2-15.1,0.3-41.7-16.6-54.9C63,186,49.7,196.7,37.5,186z", 288,288)])
 # path example from https://webkul.com/blog/morphing-using-svg-animate-css/
 stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(40,40)])
 stimulus.fillcolors = GridPattern.MirrorAcrossColumns(Pattern.CreateColorRangeList( '#006ca1','#6dd6ff', n_elements = 5))
@@ -333,8 +391,9 @@ stimulus.bounding_boxes = tiled_grid_1
 #stimulus.shapes = tiled_grid_1
 
 center_grid = GridPattern.RepeatAcrossElements([Image("img/checkmark.svg")], 2, 2)
-outer_layers= Pattern([PathSvg("img/checkmark.svg"),
-                       Path("M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z", 41.15, 41.14)])
+outer_layers= Pattern([PathSvg("img/test.svg"),
+        Path('M 100 350 l 150 -300 M 250 50 l 150 300 M 175 200 l 150 0 M 100 350 q 150 -300 300 0', 450, 400)])
+                       # Path("M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z", 41.15, 41.14)])
 
 stimulus.shapes  = GridPattern.LayeredGrid(center_grid, outer_layers)
 
@@ -624,7 +683,8 @@ stimulus._autosize_method = "maximum_bounding_box"
 
       
 stimulus.shapes = GridPattern.RepeatAcrossElements([Ellipse, Rectangle, Triangle, Polygon(8), 
-                                                Path("M37.5,186c-12.1-10.5-11.8-32.3-7.2-46.7c4.8-15,13.1-17.8,30.1-36.7C91,68.8,83.5,56.7,103.4,45 c22.2-13.1,51.1-9.5,69.6-1.6c18.1,7.8,15.7,15.3,43.3,33.2c28.8,18.8,37.2,14.3,46.7,27.9c15.6,22.3,6.4,53.3,4.4,60.2 c-3.3,11.2-7.1,23.9-18.5,32c-16.3,11.5-29.5,0.7-48.6,11c-16.2,8.7-12.6,19.7-28.2,33.2c-22.7,19.7-63.8,25.7-79.9,9.7 c-15.2-15.1,0.3-41.7-16.6-54.9C63,186,49.7,196.7,37.5,186z", 288,288)])
+        Path('M 100 350 l 150 -300 M 250 50 l 150 300 M 175 200 l 150 0 M 100 350 q 150 -300 300 0', 450, 400)])
+                                                # Path("M37.5,186c-12.1-10.5-11.8-32.3-7.2-46.7c4.8-15,13.1-17.8,30.1-36.7C91,68.8,83.5,56.7,103.4,45 c22.2-13.1,51.1-9.5,69.6-1.6c18.1,7.8,15.7,15.3,43.3,33.2c28.8,18.8,37.2,14.3,46.7,27.9c15.6,22.3,6.4,53.3,4.4,60.2 c-3.3,11.2-7.1,23.9-18.5,32c-16.3,11.5-29.5,0.7-48.6,11c-16.2,8.7-12.6,19.7-28.2,33.2c-22.7,19.7-63.8,25.7-79.9,9.7 c-15.2-15.1,0.3-41.7-16.6-54.9C63,186,49.7,196.7,37.5,186z", 288,288)])
 stimulus.fillcolors = GridPattern.RepeatAcrossRows([["radial", "white", "red"], "green", ["horizontal", "red", "orange", "green", "blue", "indigo", "violet"], ["vertical", "green", "white", "green"], ["diagonal", "red", "white"]])
 stimulus.Show()
 stimulus.SaveSVG("testgradientellipse", folder = "output")
@@ -715,59 +775,59 @@ stimulus.Show()
 
 #%%
 
-# Test Path shape with path and size of path to use as input 
-stimulus = Grid(5,5, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
-stimulus._autosize_method = "maximum_bounding_box"
+# # Test Path shape with path and size of path to use as input 
+# stimulus = Grid(5,5, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+# stimulus._autosize_method = "maximum_bounding_box"
 
-stimulus.shapes = GridPattern.RepeatAcrossRows(
-        [Path(name = "Arrow", path = "M12 22A10 10 0 1 0 2 12a10 10 0 0 0 10 10zM8.31 10.14l3-2.86a.49.49 0 0 1 .15-.1.54.54 0 0 1 .16-.1.94.94 0 0 1 .76 0 1 1 0 0 1 .33.21l3 3a1 1 0 0 1-1.42 1.42L13 10.41V16a1 1 0 0 1-2 0v-5.66l-1.31 1.25a1 1 0 0 1-1.38-1.45z", xsize = 24, ysize = 24),
-         Path(name = "Checkmark", path = "M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z", xsize = 512, ysize = 512)])
-#stimulus.fillcolors = GridPattern.RepeatAcrossRows([["radial", "white", "red"], "green", ["horizontal", "red", "orange", "green", "blue", "indigo", "violet"], ["vertical", "green", "white", "green"], ["diagonal", "red", "white"]])
-stimulus.orientations = GridPattern.RepeatAcrossColumns([0,45,90,115,180])
+# stimulus.shapes = GridPattern.RepeatAcrossRows(
+#         [Path(name = "Arrow", path = "M12 22A10 10 0 1 0 2 12a10 10 0 0 0 10 10zM8.31 10.14l3-2.86a.49.49 0 0 1 .15-.1.54.54 0 0 1 .16-.1.94.94 0 0 1 .76 0 1 1 0 0 1 .33.21l3 3a1 1 0 0 1-1.42 1.42L13 10.41V16a1 1 0 0 1-2 0v-5.66l-1.31 1.25a1 1 0 0 1-1.38-1.45z", xsize = 24, ysize = 24),
+#          Path(name = "Checkmark", path = "M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z", xsize = 512, ysize = 512)])
+# #stimulus.fillcolors = GridPattern.RepeatAcrossRows([["radial", "white", "red"], "green", ["horizontal", "red", "orange", "green", "blue", "indigo", "violet"], ["vertical", "green", "white", "green"], ["diagonal", "red", "white"]])
+# stimulus.orientations = GridPattern.RepeatAcrossColumns([0,45,90,115,180])
 
-stimulus.swap_distinct_elements(n_swap_pairs = 1, distinction_features = ['shapes'])
-#stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])
+# stimulus.swap_distinct_elements(n_swap_pairs = 1, distinction_features = ['shapes'])
+# #stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])
 
-stimulus.Show()
-#stimulus.SaveSVG("test")
-
-#%%
-
-# Test PathSvg shape with path and size of path to use as input 
-stimulus = Grid(5,5, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
-stimulus._autosize_method = "maximum_bounding_box"
-
-stimulus.shapes = GridPattern.RepeatAcrossRows(
-        [PathSvg("img/checkmark.svg", name = "Checkmark"),
-         PathSvg("img/arrow-circle-up-svgrepo-com.svg", name = "Arrow")])
-#stimulus.fillcolors = GridPattern.RepeatAcrossRows([["radial", "white", "red"], "green", ["horizontal", "red", "orange", "green", "blue", "indigo", "violet"], ["vertical", "green", "white", "green"], ["diagonal", "red", "white"]])
-stimulus.orientations = GridPattern.RepeatAcrossColumns([0,45,90,115,180])
-
-stimulus.swap_distinct_elements(n_swap_pairs = 1, distinction_features = ['shapes'])
-#stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])
-
-stimulus.Show()
-#stimulus.SaveSVG("test")
-
+# stimulus.Show()
+# #stimulus.SaveSVG("test")
 
 #%%
 
-# Test PathSvg shape with path and size of path to use as input 
-stimulus = Grid(5,5, background_color = "none", row_spacing = 60, col_spacing = 60)
-stimulus._autosize_method = "maximum_bounding_box"
+# # Test PathSvg shape with path and size of path to use as input 
+# stimulus = Grid(5,5, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
+# stimulus._autosize_method = "maximum_bounding_box"
 
-stimulus.shapes = GridPattern.RepeatAcrossRows(
-        [PathSvg("img/checkmark.svg", name = "Checkmark")])
-stimulus.fillcolors = GridPattern.GradientAcrossElements(start_value = "red", end_value = "blue")
-stimulus.orientations = GridPattern.RepeatAcrossColumns([0,45,90,115,180])
+# stimulus.shapes = GridPattern.RepeatAcrossRows(
+#         [PathSvg("img/checkmark.svg", name = "Checkmark"),
+#          PathSvg("img/arrow-circle-up-svgrepo-com.svg", name = "Arrow")])
+# #stimulus.fillcolors = GridPattern.RepeatAcrossRows([["radial", "white", "red"], "green", ["horizontal", "red", "orange", "green", "blue", "indigo", "violet"], ["vertical", "green", "white", "green"], ["diagonal", "red", "white"]])
+# stimulus.orientations = GridPattern.RepeatAcrossColumns([0,45,90,115,180])
 
-stimulus.positions.SetLocationJitter("xy", "uniform", min_val = -10, max_val = 10)
+# stimulus.swap_distinct_elements(n_swap_pairs = 1, distinction_features = ['shapes'])
+# #stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])
 
-#stimulus.swap_distinct_elements(n_swap_pairs = 1, distinction_features = ['shapes'])
-#stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])
+# stimulus.Show()
+# #stimulus.SaveSVG("test")
 
-stimulus.Show()
-#stimulus.SaveSVG("test")
+
+#%%
+
+# # Test PathSvg shape with path and size of path to use as input 
+# stimulus = Grid(5,5, background_color = "none", row_spacing = 60, col_spacing = 60)
+# stimulus._autosize_method = "maximum_bounding_box"
+
+# stimulus.shapes = GridPattern.RepeatAcrossRows(
+#         [PathSvg("img/checkmark.svg", name = "Checkmark")])
+# stimulus.fillcolors = GridPattern.GradientAcrossElements(start_value = "red", end_value = "blue")
+# stimulus.orientations = GridPattern.RepeatAcrossColumns([0,45,90,115,180])
+
+# stimulus.positions.SetLocationJitter("xy", "uniform", min_val = -10, max_val = 10)
+
+# #stimulus.swap_distinct_elements(n_swap_pairs = 1, distinction_features = ['shapes'])
+# #stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])
+
+# stimulus.Show()
+# #stimulus.SaveSVG("test")
 
 
 #%%
@@ -866,7 +926,7 @@ stimulus.set_element_shape(10, ChangingEllipse)
 #stimulus.set_element_fillcolor(0, "red")
 #stimulus.set_element_orientation(0, 30)
 #stimulus.set_element_shape(9, Path("M37.5,186c-12.1-10.5-11.8-32.3-7.2-46.7c4.8-15,13.1-17.8,30.1-36.7C91,68.8,83.5,56.7,103.4,45 c22.2-13.1,51.1-9.5,69.6-1.6c18.1,7.8,15.7,15.3,43.3,33.2c28.8,18.8,37.2,14.3,46.7,27.9c15.6,22.3,6.4,53.3,4.4,60.2 c-3.3,11.2-7.1,23.9-18.5,32c-16.3,11.5-29.5,0.7-48.6,11c-16.2,8.7-12.6,19.7-28.2,33.2c-22.7,19.7-63.8,25.7-79.9,9.7 c-15.2-15.1,0.3-41.7-16.6-54.9C63,186,49.7,196.7,37.5,186z", 288,288))
-stimulus.set_element_bounding_box(10, (49,50))
+stimulus.set_element_bounding_box(10, (48,50))
 
 stimulus.Show()
 stimulus.SaveSVG("testsearchwithaudio")
@@ -882,8 +942,9 @@ stim.SaveSVG("testsearchwithaudio")
 from octa.shapes import Ellipse, Rectangle, Triangle, Image, FitImage, Text, Polygon, RegularPolygon, Path, PathSvg, ChangingEllipse
 stimulus = Grid(4,4, background_color = "none", row_spacing = 50, col_spacing = 50)
 
-stimulus.shapes = GridPattern.RepeatAcrossElements([ChangingEllipse, PathSvg("img/checkmark.svg"),
-                                                    Path("M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z", 41.15, 41.14),
+stimulus.shapes = GridPattern.RepeatAcrossElements([ChangingEllipse, #PathSvg("img/checkmark.svg"),
+                                                    Path('M35.67,19.72 C490,290, 550,290, 570,240', 500,500),
+                                                    # Path("M35.67,19.72a22.05,22.05,0,0,0,3-11.26c-.19-2.92-1.79-6-5.13-6-3.7,0-7.09,3.3-8.48,6.26-1.17,2.5-.41,6.67-4.46,6.8-4-.13-3.29-4.3-4.46-6.8-1.38-3-4.77-6.21-8.47-6.26-3.35,0-4.95,3-5.13,6a22.05,22.05,0,0,0,3,11.26c2.38,4-1.87,6.79-1.06,10.85.6,3,3.47,7.74,6.87,8.05s4.85-6.63,6.17-8.87a3.91,3.91,0,0,1,6.24,0C25,32,26.32,39,29.86,38.63s6.27-5.07,6.87-8.05C37.54,26.51,33.29,23.76,35.67,19.72Z", 41.15, 41.14),
                                                     Polygon(5), RegularPolygon(6), 
                                                     Rectangle, Triangle, 
                                                     Text('OCTA'),
@@ -891,11 +952,14 @@ stimulus.shapes = GridPattern.RepeatAcrossElements([ChangingEllipse, PathSvg("im
                                                     FitImage("img/checkmark.svg")])
 
 stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(40,50)])
-stimulus.orientations = GridPattern.RepeatAcrossElements([['animate', '0', '360', "id='anim1', dur = '4s', begin='0s;anim1.end+6s', additive = 'sum'"],
-                                                          ['animate', '0', '360', "id='anim2', dur = '4s', begin='2s;anim2.end+6s', additive = 'sum'"],
-                                                          ['animate', '0', '360', "id='anim3', dur = '4s', begin='4s;anim3.end+6s', additive = 'sum'"],
-                                                        ['animate', '0', '360', "id='anim4', dur = '4s', begin='6s; anim4.end+6s', additive = 'sum'"]])
-#stimulus.fillcolors = GridPattern.RepeatAcrossElements([['set', "orange", 'to = "purple", begin = "click", dur = "2s"']])
+# stimulus.orientations = GridPattern.RepeatAcrossElements([['animate', '0', '360', "id='anim1', dur = '4s', begin='0s;anim1.end+6s', additive = 'sum'"],
+#                                                           ['animate', '0', '360', "id='anim2', dur = '4s', begin='2s;anim2.end+6s', additive = 'sum'"],
+#                                                           ['animate', '0', '360', "id='anim3', dur = '4s', begin='4s;anim3.end+6s', additive = 'sum'"],
+#                                                         ['animate', '0', '360', "id='anim4', dur = '4s', begin='6s; anim4.end+6s', additive = 'sum'"]])
+stimulus.orientations = GridPattern.RepeatAcrossElements([['animate', '0', '360', "id='anim1', dur = '4s', begin='0s', additive = 'sum'"],
+                                                          ['animate', '0', '360', "id='anim2', dur = '4s', begin='2s', additive = 'sum'"],
+                                                          ['animate', '0', '360', "id='anim3', dur = '4s', begin='4s', additive = 'sum'"],
+                                                        ['animate', '0', '360', "id='anim4', dur = '4s', begin='6s', additive = 'sum'"]])#stimulus.fillcolors = GridPattern.RepeatAcrossElements([['set', "orange", 'to = "purple", begin = "click", dur = "2s"']])
 stimulus.fillcolors = GridPattern.RepeatAcrossElements([["radial", "white", "red"], ["horizontal", "red", "orange", "green", "blue", "indigo", "violet"], ["vertical", "green", "white", "green"], ["diagonal", "red", "white"],
                                                         ['animate', "red", 'values = "red;white;red", begin = "2s", dur = "10s",repeatCount="indefinite"'],
                                                         ['animate', "red", 'values = "red;orange;green;blue;indigo;violet;red", begin = "2s", dur = "10s",repeatCount="indefinite"'],
@@ -911,7 +975,7 @@ stimulus.fillcolors = GridPattern.RepeatAcrossElements([["radial", "white", "red
 #stimulus.set_element_shape(0, ChangingEllipse)
 #stimulus.set_element_fillcolor(0, "red")
 #stimulus.set_element_orientation(0, 30)
-stimulus.set_element_shape(9, Path("M37.5,186c-12.1-10.5-11.8-32.3-7.2-46.7c4.8-15,13.1-17.8,30.1-36.7C91,68.8,83.5,56.7,103.4,45 c22.2-13.1,51.1-9.5,69.6-1.6c18.1,7.8,15.7,15.3,43.3,33.2c28.8,18.8,37.2,14.3,46.7,27.9c15.6,22.3,6.4,53.3,4.4,60.2 c-3.3,11.2-7.1,23.9-18.5,32c-16.3,11.5-29.5,0.7-48.6,11c-16.2,8.7-12.6,19.7-28.2,33.2c-22.7,19.7-63.8,25.7-79.9,9.7 c-15.2-15.1,0.3-41.7-16.6-54.9C63,186,49.7,196.7,37.5,186z", 288,288))
+# stimulus.set_element_shape(9, Path("M37.5,186c-12.1-10.5-11.8-32.3-7.2-46.7c4.8-15,13.1-17.8,30.1-36.7C91,68.8,83.5,56.7,103.4,45 c22.2-13.1,51.1-9.5,69.6-1.6c18.1,7.8,15.7,15.3,43.3,33.2c28.8,18.8,37.2,14.3,46.7,27.9c15.6,22.3,6.4,53.3,4.4,60.2 c-3.3,11.2-7.1,23.9-18.5,32c-16.3,11.5-29.5,0.7-48.6,11c-16.2,8.7-12.6,19.7-28.2,33.2c-22.7,19.7-63.8,25.7-79.9,9.7 c-15.2-15.1,0.3-41.7-16.6-54.9C63,186,49.7,196.7,37.5,186z", 288,288))
 #stimulus.set_element_orientation(2, ['animate', '0', '360', "id='anim2', dur = '4s', begin='0s; anim2.end+4s', additive = 'sum'"])
 #stimulus.set_element_shape(1, Image("img/checkmark.svg"))
 stimulus.set_element_bounding_box(2, (40,50))

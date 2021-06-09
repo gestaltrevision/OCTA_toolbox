@@ -46,7 +46,7 @@ class Image_:
             
         self.orientation = orientation
         
-        if type(self.orientation) == int:
+        if (type(self.orientation) == int) or (type(self.orientation) == float):
             self.rotation_animation = ""
             self.rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, self.position[0], self.position[1])
         elif type(self.orientation) == list:

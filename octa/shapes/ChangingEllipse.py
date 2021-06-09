@@ -38,7 +38,7 @@ class ChangingEllipse:
             
         self.orientation = orientation
         
-        if type(self.orientation) == int:
+        if (type(self.orientation) == int) or (type(self.orientation) == float):
             self.rotation_animation = ""
             self.rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, self.position[0], self.position[1])
         elif type(self.orientation) == list:
@@ -209,7 +209,7 @@ class ChangingEllipse:
         
 #        svg.add(svgwrite.animate.Animate(attributeName="rx", values="0;5;0", dur="10s", repeatCount="indefinite"))
 
-        link = dwg.add(dwg.a(href = "#", onmouseover="audio = new Audio('welldoneCCBY3.ogg'); audio.play(); audio.loop=true;", onmouseout="audio.pause(); try { audio.currentTime=0; } catch(e) {} audio.loop=false;"))
+        link = dwg.add(dwg.a(href = "#", onmouseover="audio = new Audio('audio/welldoneCCBY3.ogg'); audio.play(); audio.loop=true;", onmouseout="audio.pause(); try { audio.currentTime=0; } catch(e) {} audio.loop=false;"))
 #        link = dwg.add(dwg.a(href = "#", target="_self", onclick="audio = new Audio('lyricchords.mp3');  try { audio.currentTime=0; } catch(e) {} audio.play()"))
         link.add(svg)
         

@@ -197,7 +197,7 @@ class Positions:
         return Positions(x, y)
         
     
-    def CreateSineGrid(n_rows, n_cols, row_spacing, col_spacing, A = 1, f = 1, axis = "x"):
+    def CreateSineGrid(n_rows, n_cols, row_spacing = 50, col_spacing = 50, A = 25, f = .1, axis = "x"):
         """
         Creates a 2D regularly spaced grid and adds a sine wave modulation to the y-axis.
 
@@ -275,7 +275,7 @@ class Positions:
         return Positions(x, y)
     
     
-    def CreateRandomPattern(n_elements, width = 256, height = 256, min_distance = 30, max_iterations = 10):
+    def CreateRandomPattern(n_elements, width = 300, height = 300, min_distance = 30, max_iterations = 10):
         """
         Generates random (x,y) positions
 

@@ -25,7 +25,7 @@ stimulus = Grid(10, 10, row_spacing = 25, col_spacing = 25, background_color = "
 stimulus._autosize_method = "maximum_bounding_box"
 
 #stimulus.shapes = GridPattern.RepeatAcrossRows([RegularPolygon(4), RegularPolygon(5), RegularPolygon(6, "Hexagon"), Polygon(6, "Hexagon")])
-stimulus.shapes = GridPattern.RepeatAcrossRows([Rectangle, Ellipse,PathSvg("img/arrow-circle-up-svgrepo-com.svg")])
+stimulus.shapes = GridPattern.RepeatAcrossLeftDiagonal([Rectangle, Ellipse,PathSvg("img/arrow-circle-up-svgrepo-com.svg")])
 #                                                Image("img/optotypes/butterfly.svg"),
 #                                                FitImage("img/optotypes/butterfly.svg"), 
 #                                                PathSvg("img/checkmark.svg"),
@@ -45,12 +45,14 @@ stimulus.shapes = GridPattern.RepeatAcrossRows([Rectangle, Ellipse,PathSvg("img/
 #stimulus.positions = Positions.CreateCustomPositions(xpositions_new, ypositions_new)
 stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(25,25)])
 
+stimulus.fillcolors = GridPattern.GradientAcrossElements("blue", "red")
+
 stimulus.set_element_shape(0, Polygon(5))
 
 stimulus.Show()
-#stimulus.SavePNG("test")
-stimulus.SaveJSON("test")
-stimulus.SaveSVG("test")
+stimulus.SavePNG("test13", folder = "test/")
+#stimulus.SaveJSON("test")
+#stimulus.SaveSVG("test")
 
 #%%
 stim = Stimulus.LoadFromJSON("test.json")
