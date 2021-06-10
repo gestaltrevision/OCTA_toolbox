@@ -284,6 +284,75 @@ class RepeatAcrossLeftDiagonal(GridPattern):
         self.patternorientation = "AcrossLeftDiagonal"
 
         return RepeatAcrossLeftDiagonal(result, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)    
+  
+class RepeatAcrossLayers(GridPattern):
+    """
+        Repeats the provided pattern across the layers within the stimulus running from inside to outside layers.
+
+        Returns
+        -------
+        GridRepeater
+            Current instance of the GridRepeater object.
+            
+        Example
+        -------
+        pattern: 
+            [1, 2, 3]
+        n_rows:
+            6
+        n_cols:
+            6
+            
+        result:
+            [3, 3, 3, 3, 3, 3, 
+             3, 2, 2, 2, 2, 3,
+             3, 2, 1, 1, 2, 3, 
+             3, 2, 1, 1, 2, 3, 
+             3, 2, 2, 2, 2, 3, 
+             3, 3, 3, 3, 3, 3]
+            
+
+    """ 
+    _fixed_grid = False
+    def generate(self):  
+        assert (self.n_rows > 2), "number of rows in the Grid should be more than 2 to apply this pattern"
+        assert (self.n_cols > 2), "number of columns in the Grid should be more than 2 to apply this pattern"
+        
+        p = Pattern(self.pattern)
+        
+        n_rows = self.n_rows
+        n_cols = self.n_cols
+        
+        minimal_n = min(n_rows, n_cols)
+        if minimal_n % 2 == 0: 
+            n_layers = int(minimal_n / 2)
+        else:
+            n_layers = int((minimal_n + 1 )/2)
+        
+        if len(p.pattern) < n_layers:
+            p = p.RepeatPattern( int(n_layers/len(self.pattern)) + 1, n_layers)
+        p.pattern = p.pattern[:n_layers][::-1]
+        
+        patternmatrix = [[0 for x in range(n_cols)] for y in range(n_rows)] 
+        
+        for layer in range(n_layers):
+            width = n_cols - (2*layer)
+            start_row = layer
+            start_col = layer
+            end_row = n_rows - layer - 1
+            end_col = n_cols - layer
+            patternmatrix[start_row][start_col:end_col] = [p.pattern[layer]] * (width)
+            patternmatrix[end_row][start_col:end_col] = [p.pattern[layer]] * (width)
+            for row in patternmatrix[start_row:end_row]:
+                row[start_col] = p.pattern[layer] 
+                row[end_col-1] = p.pattern[layer] 
+       
+        result = [item for sublist in patternmatrix for item in sublist]
+                            
+        self.patterntype = "Repeat"
+        self.patternorientation = "AcrossLayers"
+
+        return RepeatAcrossLayers(result, self.n_rows, self.n_cols, self.patterntype, self.patternorientation) 
     
     
 class MirrorAcrossElements(GridPattern):
@@ -552,7 +621,84 @@ class MirrorAcrossRightDiagonal(GridPattern):
                
         return MirrorAcrossRightDiagonal(result, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
   
- 
+class MirrorAcrossLayers(GridPattern):
+    """
+        Mirrors the provided pattern across the layers within the stimulus running from inside to outside layers.
+
+        Returns
+        -------
+        GridRepeater
+            Current instance of the GridRepeater object.
+            
+        Example
+        -------
+        pattern: 
+            [1, 2]
+        n_rows:
+            6
+        n_cols:
+            6
+            
+        result:
+            [1, 1, 1, 1, 1, 1, 
+             1, 2, 2, 2, 2, 1,
+             1, 2, 1, 1, 2, 1, 
+             1, 2, 1, 1, 2, 1, 
+             1, 2, 2, 2, 2, 1, 
+             1, 1, 1, 1, 1, 1]
+            
+
+    """ 
+    _fixed_grid = False
+    def generate(self):  
+        assert (self.n_rows > 2), "number of rows in the Grid should be more than 2 to apply this pattern"
+        assert (self.n_cols > 2), "number of columns in the Grid should be more than 2 to apply this pattern"
+        
+        p = Pattern(self.pattern)
+        
+        n_rows = self.n_rows
+        n_cols = self.n_cols
+        
+        minimal_n = min(n_rows, n_cols)
+        if minimal_n % 2 == 0: 
+            n_layers = int(minimal_n / 2)
+        else:
+            n_layers = int((minimal_n + 1 )/2)
+        
+        # max_elements = int(n_layers/2)
+        
+        if len(p.pattern) < int(n_layers/2) + 1:
+            p = p[::-1].RepeatPattern(int(n_layers/2) + 1)
+        
+        if n_layers%2 == 0:
+            m1 = p.pattern[:int(n_layers/2)]
+            m2 = m1[::-1]
+            p.pattern = m1 + m2
+        else:
+            m1 = p.pattern[:int((n_layers+1)/2)]
+            m2 = m1[::-1]
+            p.pattern = m1 + m2[1:]
+            
+        patternmatrix = [[0 for x in range(n_cols)] for y in range(n_rows)] 
+        
+        for layer in range(n_layers):
+            width = n_cols - (2*layer)
+            start_row = layer
+            start_col = layer
+            end_row = n_rows - layer - 1
+            end_col = n_cols - layer
+            patternmatrix[start_row][start_col:end_col] = [p.pattern[layer]] * (width)
+            patternmatrix[end_row][start_col:end_col] = [p.pattern[layer]] * (width)
+            for row in patternmatrix[start_row:end_row]:
+                row[start_col] = p.pattern[layer] 
+                row[end_col-1] = p.pattern[layer] 
+       
+        result = [item for sublist in patternmatrix for item in sublist]
+                            
+        self.patterntype = "Mirror"
+        self.patternorientation = "AcrossLayers"
+
+        return MirrorAcrossLayers(result, self.n_rows, self.n_cols, self.patterntype, self.patternorientation) 
         
 class GradientAcrossElements(GridPattern):
     """
@@ -703,7 +849,79 @@ class GradientAcrossRightDiagonal(GridPattern):
 
         return GridPattern(result, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
     
+class GradientAcrossLayers(GridPattern):
+    """
+        Creates a gradient across the layers within the stimulus running from inside to outside layers.
+
+        Returns
+        -------
+        GridRepeater
+            Current instance of the GridRepeater object.
+            
+        Example
+        -------
+        pattern: 
+            [1, 2]
+        n_rows:
+            6
+        n_cols:
+            6
+            
+        result:
+            [1, 1, 1, 1, 1, 1, 
+             1, 2, 2, 2, 2, 1,
+             1, 2, 1, 1, 2, 1, 
+             1, 2, 1, 1, 2, 1, 
+             1, 2, 2, 2, 2, 1, 
+             1, 1, 1, 1, 1, 1]
+            
+
+    """ 
+    _fixed_grid = False
     
+    def __init__(self, start_value, end_value, n_rows = 5, n_cols = 5):
+        self.start_value = start_value
+        self.end_value   = end_value
+        self.n_rows = n_rows
+        self.n_cols = n_cols
+           
+    def generate(self):  
+        assert (self.n_rows > 2), "number of rows in the Grid should be more than 2 to apply this pattern"
+        assert (self.n_cols > 2), "number of columns in the Grid should be more than 2 to apply this pattern"
+               
+        n_rows = self.n_rows
+        n_cols = self.n_cols
+        
+        minimal_n = min(n_rows, n_cols)
+        if minimal_n % 2 == 0: 
+            n_layers = int(minimal_n / 2)
+        else:
+            n_layers = int((minimal_n + 1 )/2)
+        
+        p = Pattern.CreateGradientPattern(self.start_value, self.end_value, n_layers)
+        p.pattern = p.pattern[::-1]
+          
+        patternmatrix = [[0 for x in range(n_cols)] for y in range(n_rows)] 
+        
+        for layer in range(n_layers):
+            width = n_cols - (2*layer)
+            start_row = layer
+            start_col = layer
+            end_row = n_rows - layer - 1
+            end_col = n_cols - layer
+            patternmatrix[start_row][start_col:end_col] = [p.pattern[layer]] * (width)
+            patternmatrix[end_row][start_col:end_col] = [p.pattern[layer]] * (width)
+            for row in patternmatrix[start_row:end_row]:
+                row[start_col] = p.pattern[layer] 
+                row[end_col-1] = p.pattern[layer] 
+       
+        result = [item for sublist in patternmatrix for item in sublist]
+                            
+        self.patterntype = "Gradient"
+        self.patternorientation = "AcrossLayers"
+
+        return GridPattern(result, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+
 class LayeredGrid(GridPattern):
     """
     Creates a grid that starts from a central structure, around which

@@ -16,11 +16,13 @@ import random
 n_rows = 6
 n_cols = 6
 
-stimsize = (350,350)
+factor = 3
+
+stimsize = (350*factor,350*factor)
 
 clipshape = Ellipse(position = (stimsize[0]/2,stimsize[1]/2), bounding_box = stimsize)
 
-stimulus = Grid(n_rows, n_cols, background_color = "lightgrey", stim_orientation = 30, row_spacing = 40, col_spacing = 40, size = stimsize, background_shape = clipshape)
+stimulus = Grid(n_rows, n_cols, background_color = "lightgrey", stim_orientation = 0*factor, row_spacing = 40*factor, col_spacing = 40*factor, size = stimsize, background_shape = clipshape)
 
 ## Determine shapes used in the stimulus
 ## Example shapes: Ellipse, Rectangle, Triangle, Polygon(n_sides = 8), ...
@@ -36,6 +38,10 @@ stimulus.bounding_boxes = GridPattern.RepeatAcrossColumns([(30,30)])
 
 stimulus.Show()
 stimulus.SaveSVG("testori")
+stimulus.SavePNG("testori")
+# stimulus.SaveJPG("testori")
+# stimulus.SaveTIFF("testori")
+# stimulus.SavePDF("testori")
 
 #%%
 

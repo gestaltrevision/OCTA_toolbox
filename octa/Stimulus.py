@@ -191,6 +191,80 @@ class Stimulus:
         os.remove(svg_filename)
         renderPDF.drawToFile(img, pdf_filename)
         
+        
+    def SaveTIFF(self, filename, folder = None): 
+        """
+        Saves the current stimulus as a TIFF file.
+
+        Parameters
+        ----------
+        filename : STRING
+            Name of the TIFF file.
+
+        Returns
+        -------
+        None.
+
+        """ 
+        # limitations using svglib:
+        # clipping is limited to single paths, no mask support
+        # color gradients not supported
+
+        svg_filename = "%s.svg"%filename
+        tiff_filename = "%s.tiff"%filename
+        if folder is not None:
+            svg_filename = os.path.join(folder, svg_filename)  
+#            png_fullfilename = os.path.join(folder, png_filename)
+            hti = Html2Image(output_path = folder)
+        else:
+            hti = Html2Image()
+
+        self.dwg.saveas(svg_filename, pretty = True)
+        
+        hti.screenshot(other_file = svg_filename, 
+                       size= (self.width, self.height), 
+                       save_as = tiff_filename)
+#        img = svg2rlg(svg_filename)
+#        os.remove(svg_filename)
+#        renderPM.drawToFile(img, png_filename, fmt="PNG")
+
+
+    def SaveJPG(self, filename, folder = None): 
+        """
+        Saves the current stimulus as a JPG file.
+
+        Parameters
+        ----------
+        filename : STRING
+            Name of the JPG file.
+
+        Returns
+        -------
+        None.
+
+        """ 
+        # limitations using svglib:
+        # clipping is limited to single paths, no mask support
+        # color gradients not supported
+
+        svg_filename = "%s.svg"%filename
+        jpg_filename = "%s.JPG"%filename
+        if folder is not None:
+            svg_filename = os.path.join(folder, svg_filename)  
+#            png_fullfilename = os.path.join(folder, png_filename)
+            hti = Html2Image(output_path = folder)
+        else:
+            hti = Html2Image()
+
+        self.dwg.saveas(svg_filename, pretty = True)
+        
+        hti.screenshot(other_file = svg_filename, 
+                       size= (self.width, self.height), 
+                       save_as = jpg_filename)
+#        img = svg2rlg(svg_filename)
+#        os.remove(svg_filename)
+#        renderPM.drawToFile(img, png_filename, fmt="PNG")
+        
     def SaveJSON(self, filename, folder = None):
         """
         Saves the current stimulus as a JSON file.
