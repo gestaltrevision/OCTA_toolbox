@@ -248,7 +248,7 @@ class Stimulus:
         # color gradients not supported
 
         svg_filename = "%s.svg"%filename
-        jpg_filename = "%s.JPG"%filename
+        jpg_filename = "%s.jpg"%filename
         if folder is not None:
             svg_filename = os.path.join(folder, svg_filename)  
 #            png_fullfilename = os.path.join(folder, png_filename)
@@ -289,7 +289,12 @@ class Stimulus:
                                    'height':           self.height,
                                    'background_color': self.background_color,
                                    'background_shape': self.background_shape,
-                                   'mask':             self.mask},
+                                   'mask':             self.mask,
+                                   'stim_orientation': self.stim_orientation,
+                                   'stim_mirror_value':self.stim_mirror_value,
+                                   'stim_class_label': self.stim_class_label,
+                                   'stim_id_label':    self.stim_id_label
+                                   },
                      'structure': {'class': str(type(self)),
                                    'n_rows': self._n_rows,
                                    'n_cols': self._n_cols,
@@ -340,7 +345,12 @@ class Stimulus:
                                    'height':           self.height,
                                    'background_color': self.background_color,
                                    'background_shape': self.background_shape,
-                                   'mask':             self.mask},
+                                   'mask':             self.mask,
+                                   'stim_orientation': self.stim_orientation,
+                                   'stim_mirror_value':self.stim_mirror_value,
+                                   'stim_class_label': self.stim_class_label,
+                                   'stim_id_label':    self.stim_id_label
+                                   },
                      'structure': {'class': str(type(self)),
                                    'n_rows': self._n_rows,
                                    'n_cols': self._n_cols,
@@ -402,6 +412,10 @@ class Stimulus:
                             stimulus_size,
                             data['stimulus']['background_shape'],
                             data['stimulus']['mask'],
+                            data['stimulus']['stim_orientation'],
+                            data['stimulus']['stim_mirror_value'],
+                            data['stimulus']['stim_class_label'],
+                            data['stimulus']['stim_id_label'],
                             data['structure']['x_margin'], 
                             data['structure']['y_margin'])
             

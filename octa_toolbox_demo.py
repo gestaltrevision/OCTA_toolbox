@@ -11,7 +11,7 @@ import random
 
 
 #%%
-stimulus = Grid(1,9, col_spacing=60)
+stimulus = Grid(1,9, col_spacing=60, stim_orientation = 50, background_color = "red", size = (500,500))
 stimulus.shapes = GridPattern.RepeatAcrossElements([Polygon(8)])
 stimulus.borderwidths = GridPattern.RepeatAcrossElements([10])
 stimulus.bordercolors = GridPattern.RepeatAcrossElements([
@@ -26,20 +26,25 @@ stimulus.bordercolors = GridPattern.RepeatAcrossElements([
 ['animate', "red", 'values = "red;orange;green;blue;indigo;violet;red", begin = "2s", calcMode = "discrete", dur = "10s", repeatCount = "indefinite"']
 ])
 stimulus.Show()
-stimulus.SaveSVG("output/stim")
+stimulus.SaveJSON("output/st")
+
+Complexity.CalculateElementsLOCE(stimulus)
+
+st = Stimulus.LoadFromJSON("output/st.json")
+st.Show()
 
 #%%
-stimulus = Grid(1,5)
-stimulus.shapes = GridPattern.RepeatAcrossElements([Polygon(8)])
-stimulus.opacities = GridPattern.RepeatAcrossElements([1,
-                                                       0.5,
-                                                       ['set', 0.05, 'to = 1, begin = "click", dur = "2s"'],
-['animate', 1, 'values = ".8;.6;.4;.2;0;.2;.4;.6;.8;1", begin = "2s", calcMode = "linear", dur = "10s", repeatCount = "indefinite"'],
-['animate', 1, 'values = ".8;.6;.4;.2;0;.2;.4;.6;.8;1", begin = "2s", calcMode = "discrete", dur = "10s", repeatCount = "indefinite"']
-])
-stimulus.bordercolors = GridPattern.RepeatAcrossElements(["black"])
+stimulus = Grid(5,5)
 stimulus.Show()
-stimulus.SaveSVG("output/stim")
+stimulus.GetSVG()
+stimulus.GetJSON()
+
+stimulus.SaveJSON('test_stimulus', folder = "output")
+stimulus.SaveSVG('test_stimulus', folder = "output")
+stimulus.SavePNG('test_stimulus', folder = "output")
+stimulus.SaveJPG('test_stimulus', folder = "output")
+stimulus.SaveTIFF('test_stimulus', folder = "output")
+stimulus.SavePDF('test_stimulus', folder = "output")
 
 #%%
 stimulus = Grid(1,5)
