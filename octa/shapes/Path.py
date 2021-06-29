@@ -58,13 +58,36 @@ class Path_:
             bordercolor = "green"
             
         self.bordercolor = bordercolor
-    
+        
+        if type(self.bordercolor) == str:
+            self.bordercolor_animation = ""
+        elif type(self.bordercolor) == list:
+            if self.bordercolor[0] == "set":                
+                self.bordercolor_animation = "svgwrite.animate.Set(attributeName = 'stroke'," + self.bordercolor[2] + ")"
+                self.bordercolor = self.bordercolor[1]
+            elif self.bordercolor[0] == "animate":
+                self.bordercolor_animation = "svgwrite.animate.Animate(attributeName = 'stroke'," + self.bordercolor[2] + ")"
+                self.bordercolor = self.bordercolor[1]
+            else:
+                self.bordercolor_animation = ""    
     
     def set_borderwidth(self, borderwidth):
         if borderwidth == None:
             borderwidth = 4
             
         self.borderwidth = borderwidth
+
+        if (type(self.borderwidth) == int) or (type(self.borderwidth) == float):
+            self.borderwidth_animation = ""
+        elif type(self.borderwidth) == list:
+            if self.borderwidth[0] == "set":                
+                self.borderwidth_animation = "svgwrite.animate.Set(attributeName = 'stroke-width'," + self.borderwidth[2] + ")"
+                self.borderwidth = self.borderwidth[1]
+            elif self.borderwidth[0] == "animate":
+                self.borderwidth_animation = "svgwrite.animate.Animate(attributeName = 'stroke-width'," + self.borderwidth[2] + ")"
+                self.borderwidth = self.borderwidth[1]
+            else:
+                self.borderwidth_animation = ""
         
         
     def set_fillcolor(self, fillcolor):
@@ -90,6 +113,18 @@ class Path_:
             opacity = 1
             
         self.opacity = opacity   
+        
+        if (type(self.opacity) == int) or (type(self.opacity) == float):
+            self.opacity_animation = ""
+        elif type(self.opacity) == list:
+            if self.opacity[0] == "set":                
+                self.opacity_animation = "svgwrite.animate.Set(attributeName = 'opacity'," + self.opacity[2] + ")"
+                self.opacity = self.opacity[1]
+            elif self.opacity[0] == "animate":
+                self.opacity_animation = "svgwrite.animate.Animate(attributeName = 'opacity'," + self.opacity[2] + ")"
+                self.opacity = self.opacity[1]
+            else:
+                self.opacity_animation = "" 
         
     def set_class_label(self, class_label):
         if class_label == None:
@@ -221,6 +256,15 @@ class Path_:
             
         if self.rotation_animation != "":
             svg.add(eval(self.rotation_animation))  
+            
+        if self.borderwidth_animation != "":
+            svg.add(eval(self.borderwidth_animation))    
+             
+        if self.bordercolor_animation != "":
+            svg.add(eval(self.bordercolor_animation))                
+             
+        if self.opacity_animation != "":
+            svg.add(eval(self.opacity_animation))    
             
 #        link = dwg.add(dwg.a(href = "#", onmouseover="audio = new Audio('alarm.ogg'); audio.play(); audio.loop=true;", onmouseout="audio.pause(); try { audio.currentTime=0; } catch(e) {} audio.loop=false;"))
 #        link = dwg.add(dwg.a(href = "#", target="_self", onclick="audio = new Audio('lyricchords.mp3');  try { audio.currentTime=0; } catch(e) {} audio.play()"))

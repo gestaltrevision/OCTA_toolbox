@@ -11,6 +11,126 @@ import random
 
 
 #%%
+stimulus = Grid(1,9, col_spacing=60)
+stimulus.shapes = GridPattern.RepeatAcrossElements([Polygon(8)])
+stimulus.borderwidths = GridPattern.RepeatAcrossElements([10])
+stimulus.bordercolors = GridPattern.RepeatAcrossElements([
+"blue", 
+"#d3d3d3",
+["radial", "white", "red"], 
+["horizontal", "red", "orange", "green", "blue", "indigo", "violet"], 
+["vertical", "green", "white", "green"], 
+["diagonal", "red", "white"],
+['set', "orange", 'to = "purple", begin = "click", dur = "2s"'],
+['animate', "red", 'values = "red;orange;green;blue;indigo;violet;red", begin = "2s", calcMode = "linear", dur = "10s", repeatCount = "indefinite"'],
+['animate', "red", 'values = "red;orange;green;blue;indigo;violet;red", begin = "2s", calcMode = "discrete", dur = "10s", repeatCount = "indefinite"']
+])
+stimulus.Show()
+stimulus.SaveSVG("output/stim")
+
+#%%
+stimulus = Grid(1,5)
+stimulus.shapes = GridPattern.RepeatAcrossElements([Polygon(8)])
+stimulus.opacities = GridPattern.RepeatAcrossElements([1,
+                                                       0.5,
+                                                       ['set', 0.05, 'to = 1, begin = "click", dur = "2s"'],
+['animate', 1, 'values = ".8;.6;.4;.2;0;.2;.4;.6;.8;1", begin = "2s", calcMode = "linear", dur = "10s", repeatCount = "indefinite"'],
+['animate', 1, 'values = ".8;.6;.4;.2;0;.2;.4;.6;.8;1", begin = "2s", calcMode = "discrete", dur = "10s", repeatCount = "indefinite"']
+])
+stimulus.bordercolors = GridPattern.RepeatAcrossElements(["black"])
+stimulus.Show()
+stimulus.SaveSVG("output/stim")
+
+#%%
+stimulus = Grid(1,5)
+stimulus.shapes = GridPattern.RepeatAcrossElements([Polygon(8)])
+stimulus.opacities = GridPattern.RepeatAcrossElements([1,
+                                                       0.5,
+                                                       ['set', 0.05, 'to = 1, begin = "click", dur = "2s"'],
+['animate', 1, 'values = ".8;.6;.4;.2;0;.2;.4;.6;.8;1", begin = "2s", calcMode = "linear", dur = "10s", repeatCount = "indefinite"'],
+['animate', 1, 'values = ".8;.6;.4;.2;0;.2;.4;.6;.8;1", begin = "2s", calcMode = "discrete", dur = "10s", repeatCount = "indefinite"']
+])
+stimulus.bordercolors = GridPattern.RepeatAcrossElements(["black"])
+stimulus.Show()
+stimulus.SaveSVG("output/stim")
+
+#%%
+stimulus = Grid(4,4)
+stimulus.shapes = GridPattern.RepeatAcrossElements([Polygon(8)])
+stimulus.borderwidths = GridPattern.RepeatAcrossElements([5,
+                                                          ['set', 0, 'to = 15, begin = "click", dur = "2s"'],
+['animate', 15, 'values = "10;8;6;4;2;0", begin = "2s", calcMode = "linear", dur = "10s", repeatCount = "indefinite"'],
+['animate', 15, 'values = "10;8;6;4;2;0", begin = "2s", calcMode = "discrete", dur = "10s", repeatCount = "indefinite"']
+])
+stimulus.bordercolors = GridPattern.RepeatAcrossElements(["black"])
+stimulus.Show()
+stimulus.SaveSVG("output/stim")
+
+#%%
+stimulus = Grid(1,30, col_spacing = 5, row_spacing = 5)
+stimulus.shapes = GridPattern.RepeatAcrossElements([Rectangle])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(2,150)])
+stimulus.fillcolors = GridPattern.RepeatAcrossElements(["lightgrey"])
+stimulus.positions.SetLocationJitter("x", min_val = -35, max_val = 35)
+stimulus.Show()
+stimulus.SaveSVG("output/stim1")
+
+#%%
+stimulus = Grid(1,30, col_spacing = 5, row_spacing = 5, stim_orientation = 90)
+stimulus.shapes = GridPattern.RepeatAcrossElements([Rectangle])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(2,150)])
+stimulus.fillcolors = GridPattern.RepeatAcrossElements(["lightgrey"])
+stimulus.positions.SetLocationJitter("x", min_val = -35, max_val = 35)
+stimulus.Show()
+
+stimulus.SaveSVG("output/stim2")
+
+
+#%%
+
+stimulus = Grid(1,30, col_spacing = 5, row_spacing = 5)
+stimulus.shapes = GridPattern.RepeatAcrossElements([Rectangle])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(2,150)])
+stimulus.fillcolors = GridPattern.RepeatAcrossElements(["lightgrey"])
+stimulus.positions.SetLocationJitter("x", min_val = -35, max_val = 35)
+# stimulus.Show()
+
+# stimulus.positions.GetPositions()
+
+stimulus2 = Grid(1,60, col_spacing = 5, row_spacing = 5)
+x = [stimulus.positions.x[i] + 0 for i in range(len(stimulus.positions.x))]
+y = [stimulus.positions.y[i] + 75 for i in range(len(stimulus.positions.y))]
+new_x = [item for sublist in [x, y] for item in sublist]
+new_y = [item for sublist in [y, x] for item in sublist]
+stimulus2.positions = Positions.CreateCustomPositions(x = new_x, y = new_y)
+stimulus2.shapes = GridPattern.RepeatAcrossElements([Rectangle])
+stimulus2.bounding_boxes = GridPattern.RepeatAcrossElements([(2,150),(2,150),(2,150),(2,150),(2,150),
+                                                             (2,150),(2,150),(2,150),(2,150),(2,150),
+                                                             (2,150),(2,150),(2,150),(2,150),(2,150),
+                                                             (2,150),(2,150),(2,150),(2,150),(2,150),
+                                                             (2,150),(2,150),(2,150),(2,150),(2,150),
+                                                             (2,150),(2,150),(2,150),(2,150),(2,150),
+                                                             (150,2),(150,2),(150,2),(150,2),(150,2),
+                                                             (150,2),(150,2),(150,2),(150,2),(150,2),
+                                                             (150,2),(150,2),(150,2),(150,2),(150,2),
+                                                             (150,2),(150,2),(150,2),(150,2),(150,2),
+                                                             (150,2),(150,2),(150,2),(150,2),(150,2),
+                                                             (150,2),(150,2),(150,2),(150,2),(150,2)])
+
+stimulus2.positions.SetLocationJitter("xy", min_val = -35, max_val = 35)
+stimulus2.Show()
+#.SaveSVG("output/stim2")
+
+
+#%%
+stimulus = Grid(4,4, row_spacing = 40, col_spacing = 40)
+# shapes_source_grid = GridPattern.MirrorAcrossRightDiagonal([Image("output/stim1.svg"), Image("output/stim2.svg")])
+stimulus.shapes = GridPattern.TiledGrid(GridPattern.MirrorAcrossRightDiagonal([Image("output/stim1.svg"), Image("output/stim2.svg")], 2 , 2), (2,2))
+stimulus.Show()
+
+stimulus.SaveSVG("output/combination")
+
+#%%
 stimulus = Grid(9,12)
 stimulus.fillcolors = GridPattern.RepeatAcrossLayers(["red", "green", "blue"])
 stimulus.bounding_boxes = GridPattern.MirrorAcrossLayers([(15,15), (30,30), (45,45)])
@@ -29,10 +149,12 @@ stimulus.Show()
 
 #%%
 stimulus = Grid(2,2)
+stimulus.fillcolors = GridPattern.RepeatAcrossElements(["red", "green", "blue"])
 stimulus.shapes         = GridPattern.RepeatAcrossElements([
+        Rectangle, 
         Path("M12 22A10 10 0 1 0 2 12a10 10 0 0 0 10 10zM8.31 10.14l3-2.86a.49.49 0 0 1 .15-.1.54.54 0 0 1 .16-.1.94.94 0 0 1 .76 0 1 1 0 0 1 .33.21l3 3a1 1 0 0 1-1.42 1.42L13 10.41V16a1 1 0 0 1-2 0v-5.66l-1.31 1.25a1 1 0 0 1-1.38-1.45z", 24,24), 
         PathSvg("img/arrow-circle-up-svgrepo-com.svg"), 
-        Image("img/arrow-circle-up-svgrepo-com.svg"), 
+        #Image("img/arrow-circle-up-svgrepo-com.svg"), 
         Path("M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z", 512, 512), 
         PathSvg("img/checkmark.svg")
         ])
