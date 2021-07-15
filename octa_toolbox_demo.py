@@ -10,7 +10,25 @@ from octa.measurements import Complexity
 import random
 
 #%%
+stimulus = Grid(n_rows = 5, n_cols = 5, x_margin = 60, y_margin = 60, size = None, background_shape = None, row_spacing = 39, col_spacing = 39, background_color = '#F8F8F8', stim_mask = None, stim_class_label = 'None', stim_id_label = 'None', stim_orientation =0, stim_mirror_value = 'none')
 
+stimulus.shapes = GridPattern.RepeatAcrossRows([ Rectangle , Ellipse , Triangle ])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([ (25,25) ])
+stimulus.fillcolors = GridPattern.MirrorAcrossColumns([ '#F39130' ])
+stimulus.orientations = GridPattern.MirrorAcrossRows([ 0 , 15 , 45 ])
+
+stimulus.Show()
+stimulus.SaveJSON("output/test")
+
+st = Stimulus.LoadFromJSON("output/OCTA_json_2021-07-15-214359.json")
+st.Show()
+
+#%%
+stimulus = Grid(5,5)
+stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(50,50),(10,50)])
+stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ["bounding_boxes"])
+# stimulus.remove_elements(1)
+stimulus.Show()
 
 #%%
 
@@ -27,22 +45,14 @@ stimulus2.SaveSVG("output/red_squares")
 stimulus2.GetSVG()
 
 #%%
-stimulus = Grid(4,4)
+stimulus = Grid(9,9)
 
-# stimulus.positions = Positions.CreateSineGrid(n_rows = 9, n_cols = 9, A = 25, f = .1, axis = "xy")
-#stimulus.fillcolors = GridPattern.GradientAcrossColumns(start_value = 'limegreen', end_value = 'steelblue')
-stimulus.fillcolors = GridPattern.ElementRepeatAcrossColumns(["blue", "red"])
-colors = GridPattern.GridPattern(stimulus.fillcolors).RandomizeAcrossRows()
-# stimulus.fillcolors = GridPattern.RepeatAcrossElements(colors.pattern)
-# stimulus.fillcolors = GridPattern.RandomAcrossElements(["red", "green"])
-# stimulus.fillcolors = GridPattern.RandomPattern(["red", "green", "blue"])
-
-# stimulus.orientations = GridPattern.RepeatAcrossElements([30])
-# #orientationjitter = Pattern(stimulus.orientations).AddUniformJitter(min_val = -20, max_val = 20)
-# orientationjitter = Pattern(stimulus.orientations).AddNormalJitter(mu = 0 , std = 30)
-# stimulus.orientations = GridPattern.RepeatAcrossElements(orientationjitter)
+stimulus.positions = Positions.CreateSineGrid(n_rows = 9, n_cols = 9, A = 25, f = .1, axis = "xy")
+stimulus.fillcolors = GridPattern.GradientAcrossLayers(start_value = 'limegreen', end_value = 'steelblue')
+stimulus.shapes = GridPattern.RandomPattern([Ellipse, Image("https://i.pinimg.com/originals/55/bf/0f/55bf0f408c689c308f9b4d2daa2ab2dc.jpg")])
 
 stimulus.Show()
+stimulus.SaveSVG("output/testexternal")
 
 #%%
 # OCTA STIMULUS AS IMAGE INPUT
@@ -592,6 +602,7 @@ stimulus.orientations = GridPattern.RepeatAcrossElements(orientationjitter)
 stimulus.remove_element([2,5])
 stimulus.remove_element([10,15])
 stimulus.remove_element([16,3])
+stimulus.remove_element(1)
 
 stimulus.Show()
 

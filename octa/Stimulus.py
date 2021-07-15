@@ -1539,7 +1539,18 @@ class Grid(Stimulus):
         
         self._attribute_overrides[element_id]['mirror_values'] = mirror_value
         
-        
+    def remove_elements(self, n_removals = 1):
+        """
+        """
+        n_elements = self._n_rows * self._n_cols
+        assert n_elements >= n_removals, "Maximum number of removals reached, try again with a lower number of removals"
+               
+        # 1. Sample n element ids to remove
+        removals = random.sample(range(n_elements), n_removals)
+            
+        # 2. Remove elements
+        for element in removals:
+            self.remove_element(element_id = element)
 
     def swap_elements(self, n_swap_pairs = 1):
         """
