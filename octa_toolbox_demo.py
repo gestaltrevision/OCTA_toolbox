@@ -9,6 +9,165 @@ from octa.shapes import Ellipse, Rectangle, Triangle, Image, FitImage, Text, Pol
 from octa.measurements import Complexity
 import random
 
+#%%
+# OCTA STIMULUS AS IMAGE INPUT
+stimulus = Grid(2,2, row_spacing = 50, col_spacing = 50, background_color = "none")
+
+stimulus.shapes = GridPattern.RepeatAcrossElements([Image("output/layerstim.svg")])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(50,50)])
+# stimulus.orientations = GridPattern.RepeatAcrossColumns([0,180])
+
+stimulus.Show()
+
+#%%
+# OCTA STIMULUS AS IMAGE INPUT
+stimulus = Grid(2,2, row_spacing = 50, col_spacing = 50)
+
+stimulus.shapes = GridPattern.RepeatAcrossElements([Image("output/layerstim.svg")])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(50,50)])
+# stimulus.orientations = GridPattern.RepeatAcrossColumns([0,180])
+
+stimulus.Show()
+
+#%%
+
+stimulus = Grid(12,12, x_margin = 0, y_margin = 0)
+
+stimulus.shapes = GridPattern.ElementRepeatAcrossElements([Rectangle, Ellipse, Ellipse])
+stimulus.fillcolors = GridPattern.ElementRepeatAcrossLayers(["red", "green"])
+stimulus.Show()
+stimulus.SaveSVG("output/layerstim")
+#%%
+
+stimulus = Grid(12,12)
+
+stimulus.shapes = GridPattern.ElementRepeatAcrossElements([Rectangle, Ellipse, Ellipse])
+stimulus.fillcolors = GridPattern.MirrorAcrossLayers(["red", "green", "blue"])
+stimulus.bounding_boxes = GridPattern.GradientAcrossElements(start_value = (50,50), end_value = (1,1))
+
+stimulus.Show()
+
+#%%
+
+stimulus = Grid(6,6)
+
+stimulus.shapes = GridPattern.ElementRepeatAcrossElements([Rectangle, Ellipse, Ellipse])
+stimulus.fillcolors = GridPattern.MirrorAcrossLayers(["red", "green", "blue"])
+stimulus.bounding_boxes = GridPattern.GradientAcrossElements(start_value = (25,25), end_value = (15,15))
+
+stimulus.Show()
+#%%
+#https://twitter.com/aemkei/status/1414689647872065544
+stimulus = Grid(11,11, row_spacing = 65, col_spacing = 65)
+
+stimulus.shapes = GridPattern.ElementRepeatAcrossElements([Rectangle])
+stimulus.orientations = GridPattern.RepeatAcrossElements([45])
+stimulus.fillcolors = GridPattern.RepeatAcrossElements(["blue", "orange"])
+stimulus.Show()
+
+#%%
+#https://twitter.com/aemkei/status/1414689647872065544
+stimulus = Grid(8,8, row_spacing = 65, col_spacing = 65)
+
+stimulus.shapes = GridPattern.ElementRepeatAcrossElements([Rectangle])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossRightDiagonal(Pattern.Create2DGradient(Sequence(15, 5), Sequence(15, 5), 8))
+stimulus.fillcolors = GridPattern.RepeatAcrossElements(["lightgrey", "black"])
+stimulus.Show()
+
+#%%
+#https://twitter.com/aemkei/status/1414689647872065544
+stimulus = Grid(8,8, row_spacing = 65, col_spacing = 65)
+
+stimulus.shapes = GridPattern.ElementRepeatAcrossElements([Triangle])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(45,30)])
+stimulus.orientations = GridPattern.RepeatAcrossRightDiagonal([0,180])
+stimulus.fillcolors = GridPattern.RepeatAcrossElements(["red"])
+stimulus.Show()
+
+#%%
+#https://twitter.com/aemkei/status/1414689647872065544
+stimulus = Grid(8,8, row_spacing = 65, col_spacing = 65)
+
+stimulus.shapes = GridPattern.ElementRepeatAcrossElements([Rectangle])
+stimulus.borderwidths = GridPattern.RepeatAcrossElements([10])
+stimulus.bordercolors = GridPattern.RepeatAcrossElements(["black", "lightgrey"])
+stimulus.fillcolors = GridPattern.RepeatAcrossElements(["lightgrey", "black"])
+stimulus.Show()
+
+
+#%%
+#https://twitter.com/aemkei/status/1414689647872065544
+stimulus = Grid(8,8, row_spacing = 65, col_spacing = 65)
+
+stimulus.shapes = GridPattern.ElementRepeatAcrossElements([Ellipse])
+stimulus.borderwidths = GridPattern.RepeatAcrossElements([15])
+stimulus.bordercolors = GridPattern.RepeatAcrossRightDiagonal(["lightblue", "darkblue"])
+stimulus.fillcolors = GridPattern.RepeatAcrossElements(["lightblue"])
+stimulus.Show()
+
+#%%
+stimulus = Stimulus(x_margin = 5, y_margin = 5)
+stimulus.positions = Positions.CreateCustomPositions(x = (10,35,75), 
+                                                     y = (10,85,45))
+stimulus.bounding_boxes = [(45,45), (45,45), (45,45)]
+stimulus.shapes = [Rectangle, Triangle, Ellipse]
+stimulus.fillcolors = ["red", "green", "blue"]
+
+stimulus.orientations   =  [0,0,0]
+stimulus.bordercolors   = ["black", "black", "black"]
+stimulus.borderwidths   = [0,0,0]
+stimulus.opacities      = [1,1,1]
+stimulus.data           = ["", "", ""]        
+stimulus.class_labels   = ["", "", ""]
+stimulus.id_labels      = ["", "", ""]
+stimulus.mirror_values  = ["", "", ""]
+stimulus._element_presentation_order  = [0,1,2]
+stimulus._attribute_overrides  = [{},{},{}]
+
+stimulus.Show()
+stimulus.SaveSVG("output/stimulustest")
+stimulus.SaveJSON("output/stimulustest")
+
+st = Stimulus.LoadFromJSON("output/stimulustest.json")
+st.background_color = "limegreen"
+st.Show()
+
+#%%
+stimulus = Grid(5,5)
+stimulus.shapes = GridPattern.RepeatAcrossColumns([Polygon(8), PathSvg("img/checkmark.svg")])
+stimulus.shapes
+stimulus.set_element_shape(0, Ellipse)
+stimulus.set_element_orientation(1, 90)
+
+stimulus.Show()
+#%%
+stimulus = Grid(15,5, background_color="lightgrey")
+stimulus.shapes = GridPattern.RepeatAcrossElements([Triangle])
+stimulus.orientations = GridPattern.RepeatAcrossElements([0,45,30,90])
+stimulus.fillcolors = GridPattern.RepeatAcrossElements(["navy", "lightblue", "blue"])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(35,35), (30,30), (25,25)])
+
+stimulus.positions = Positions.CreateCustomPositions(x = (0,0,0)*5 + (50,50,50)*5 + (100,100,100)*5 + (150,150,150)*5 + (200,200,200)*5, 
+                                                     y = (0,50,100,150,200)*15)
+
+stimulus.positions.SetLocationJitter("xy", mean = 0, std = 6)
+stimulus.Show()
+#%%
+stimulus = Grid(5,5)
+stimulus.fillcolors = GridPattern.GradientAcrossElements("red", "green")
+stimulus.Show()
+Complexity.CalculateElementsLOC(stimulus)
+
+#%%
+stimulus = Grid(5,5)
+stimulus.shapes = GridPattern.MirrorAcrossRows([Polygon(8), PathSvg("img/checkmark.svg")])
+stimulus.Show()
+stimulus.SaveJSON("output/st")
+Complexity.CalculateElementsLOCE(stimulus)
+
+st = Stimulus.LoadFromJSON("output/st.json")
+st.Show()
+st.SaveSVG("output/st")
 
 #%%
 stimulus = Grid(1,9, col_spacing=60, stim_orientation = 50, background_color = "red", size = (500,500))
@@ -32,6 +191,7 @@ Complexity.CalculateElementsLOCE(stimulus)
 
 st = Stimulus.LoadFromJSON("output/st.json")
 st.Show()
+st.SaveSVG("output/st")
 
 #%%
 stimulus = Grid(5,5)
@@ -145,9 +305,11 @@ stimulus.Show()
 # stimulus.SaveSVG("output/test")
 
 #%%
-stimulus = Grid(15,9)
+stimulus = Grid(9,9, row_spacing=65, col_spacing=65)
 
-stimulus.fillcolors = GridPattern.GradientAcrossLayers(start_value = 'red', end_value = 'green')
+stimulus.shapes = GridPattern.RepeatAcrossLayers([Rectangle, Triangle, Ellipse])
+stimulus.fillcolors = GridPattern.GradientAcrossRightDiagonal(start_value = 'limegreen', end_value = 'steelblue')
+stimulus.orientations = GridPattern.MirrorAcrossLeftDiagonal([-90,-45,0,45,90])
 stimulus.Show()
 # stimulus.SaveSVG("output/test")
 
@@ -177,7 +339,7 @@ stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(20, 20)])
 # stimulus.borderwidths   = GridPattern.RepeatAcrossElements([0], self.n_rows, self.n_cols)
 # stimulus.fillcolors     = GridPattern.RepeatAcrossElements(["dodgerblue"], self.n_rows, self.n_cols)
 # stimulus.opacities      = GridPattern.RepeatAcrossElements([1], self.n_rows, self.n_cols)
-stimulus.shapes         = GridPattern.RepeatAcrossElements([Polygon(8), ChangingEllipse])
+stimulus.shapes         = GridPattern.RepeatAcrossElements([Polygon(8), Ellipse])
 # stimulus.class_labels   = GridPattern.RepeatAcrossElements([""], self._n_rows, self._n_cols)
 # stimulus.id_labels      = GridPattern.RepeatAcrossElements([""], self._n_rows, self._n_cols)
 # stimulus.mirror_values  = GridPattern.RepeatAcrossElements([""], self._n_rows, self._n_cols)
@@ -803,18 +965,18 @@ stimulus.SaveSVG("testembeddedonlineimage", folder = "output")
 
 #%%
 
-# test out how to animate properties (in ChangingEllipse.py)
-from octa.shapes import ChangingEllipse
+# # test out how to animate properties (in ChangingEllipse.py)
+# from octa.shapes import ChangingEllipse
 
-stimulus = Grid(4,4, background_color = "white", row_spacing = 60, col_spacing = 60)
-stimulus._autosize_method = "maximum_bounding_box"
+# stimulus = Grid(4,4, background_color = "white", row_spacing = 60, col_spacing = 60)
+# stimulus._autosize_method = "maximum_bounding_box"
 
 
-stimulus.shapes = GridPattern.RepeatAcrossColumns([ChangingEllipse])
-#stimulus.fillcolors = GridPattern.RepeatAcrossColumns(["green", "blue", "orange"])
+# stimulus.shapes = GridPattern.RepeatAcrossColumns([ChangingEllipse])
+# #stimulus.fillcolors = GridPattern.RepeatAcrossColumns(["green", "blue", "orange"])
 
-stimulus.Show()
-stimulus.SaveSVG("testanimatesvg", folder = "output")
+# stimulus.Show()
+# stimulus.SaveSVG("testanimatesvg", folder = "output")
 
 #%%
 
@@ -1066,10 +1228,10 @@ stimulus = Grid(4,4, background_color = "none", row_spacing = 50, col_spacing = 
 stimulus.shapes = GridPattern.RepeatAcrossElements([Ellipse])
 
 stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(50,50)])
-#stimulus.orientations = GridPattern.RepeatAcrossElements([['animate', '0', '360', "id='anim1', dur = '4s', begin='0s;anim1.end+6s', additive = 'sum'"],
-#                                                          ['animate', '0', '360', "id='anim2', dur = '4s', begin='2s;anim2.end+6s', additive = 'sum'"],
-#                                                          ['animate', '0', '360', "id='anim3', dur = '4s', begin='4s;anim3.end+6s', additive = 'sum'"],
-#                                                        ['animate', '0', '360', "id='anim4', dur = '4s', begin='6s; anim4.end+6s', additive = 'sum'"]])
+# stimulus.orientations = GridPattern.RepeatAcrossElements([['animate', '0', '360', "id='anim1', dur = '4s', begin='0s', repeat='anim1.end+6s', additive = 'sum'"],
+#                                                           ['animate', '0', '360', "id='anim2', dur = '4s', begin='2s;anim2.end+6s', additive = 'sum'"],
+#                                                           ['animate', '0', '360', "id='anim3', dur = '4s', begin='4s;anim3.end+6s', additive = 'sum'"],
+#                                                         ['animate', '0', '360', "id='anim4', dur = '4s', begin='6s; anim4.end+6s', additive = 'sum'"]])
 ##stimulus.fillcolors = GridPattern.RepeatAcrossElements([['set', "orange", 'to = "purple", begin = "click", dur = "2s"']])
 #stimulus.fillcolors = GridPattern.RepeatAcrossElements([["radial", "white", "red"], ["horizontal", "red", "orange", "green", "blue", "indigo", "violet"], ["vertical", "green", "white", "green"], ["diagonal", "red", "white"],
 #                                                        ['animate', "red", 'values = "red;white;red", begin = "2s", dur = "10s",repeatCount="indefinite"'],

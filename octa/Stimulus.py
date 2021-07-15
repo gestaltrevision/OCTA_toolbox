@@ -285,7 +285,8 @@ class Stimulus:
             json_filename = os.path.join(folder, json_filename)
             csv_filename  = os.path.join(folder, csv_filename)
                     
-        json_data = {'stimulus' : {'width':            self.width,
+        json_data = {'stimulus' : {'type':             'Grid' if str(type(self)) == "<class 'octa.Stimulus.Grid'>" else 'Stimulus',
+                                   'width':            self.width,
                                    'height':           self.height,
                                    'background_color': self.background_color,
                                    'background_shape': self.background_shape,
@@ -296,10 +297,10 @@ class Stimulus:
                                    'stim_id_label':    self.stim_id_label
                                    },
                      'structure': {'class': str(type(self)),
-                                   'n_rows': self._n_rows,
-                                   'n_cols': self._n_cols,
-                                   'row_spacing': self.row_spacing,
-                                   'col_spacing': self.col_spacing,
+                                   'n_rows': self._n_rows if hasattr(self, '_n_rows') else None,
+                                   'n_cols': self._n_cols if hasattr(self, '_n_cols') else None,
+                                   'row_spacing': self.row_spacing if hasattr(self, 'row_spacing') else None,
+                                   'col_spacing': self.col_spacing if hasattr(self, 'col_spacing') else None,
                                    'x_margin'   : self.x_margin,
                                    'y_margin'   : self.y_margin,
                                    'size'       : self.size
@@ -307,25 +308,31 @@ class Stimulus:
                      'element_attributes': {
                                    'element_id'   :    jsonpickle.encode(list(range(len(self.dwg_elements)))),
                                    'positions'    :    jsonpickle.encode(self.positions),
-                                   'bounding_boxes' :  jsonpickle.encode(self._bounding_boxes),
-                                   'shapes'       :    jsonpickle.encode(self._shapes),
-                                   'fillcolors'     :  jsonpickle.encode(self._fillcolors),
-                                   'opacities'      :  jsonpickle.encode(self._opacities),
-                                   'bordercolors'   :  jsonpickle.encode(self._bordercolors),
-                                   'borderwidths'   :  jsonpickle.encode(self._borderwidths),
-                                   'orientations'  :   jsonpickle.encode(self._orientations),
-                                   'data'         :    jsonpickle.encode(self._data),
+                                   'bounding_boxes' :  jsonpickle.encode(self._bounding_boxes) if hasattr(self, '_bounding_boxes') else jsonpickle.encode(self.bounding_boxes),
+                                   'shapes'       :    jsonpickle.encode(self._shapes) if hasattr(self, '_shapes') else jsonpickle.encode(self.shapes),
+                                   'fillcolors'     :  jsonpickle.encode(self._fillcolors) if hasattr(self, '_fillcolors') else jsonpickle.encode(self.fillcolors),
+                                   'opacities'      :  jsonpickle.encode(self._opacities) if hasattr(self, '_opacities') else jsonpickle.encode(self.opacities),
+                                   'bordercolors'   :  jsonpickle.encode(self._bordercolors) if hasattr(self, '_bordercolors') else jsonpickle.encode(self.bordercolors),
+                                   'borderwidths'   :  jsonpickle.encode(self._borderwidths) if hasattr(self, '_borderwidths') else jsonpickle.encode(self.borderwidths),
+                                   'orientations'  :   jsonpickle.encode(self._orientations) if hasattr(self, '_orientations') else jsonpickle.encode(self.orientations),
+                                   'data'         :    jsonpickle.encode(self._data) if hasattr(self, '_data') else jsonpickle.encode(self.data),
                                    'overrides'    :    jsonpickle.encode(self._attribute_overrides),
                                    'element_order':    jsonpickle.encode(self._element_presentation_order),
-                                   'id'           :    jsonpickle.encode(self._id_labels),
-                                   'class'        :    jsonpickle.encode(self._class_labels),
-                                   'mirror'       :    jsonpickle.encode(self._mirror_values)}}
+                                   'id'           :    jsonpickle.encode(self._id_labels) if hasattr(self, '_id_labels') else jsonpickle.encode(self.id_labels),
+                                   'class'        :    jsonpickle.encode(self._class_labels) if hasattr(self, '_class_labels') else jsonpickle.encode(self.class_labels),
+                                   'mirror'       :    jsonpickle.encode(self._mirror_values) if hasattr(self, '_mirror_values') else jsonpickle.encode(self.mirror_values),}}
         
         with open(json_filename, 'w') as output_file:
             json.dump(json_data, output_file, indent = 4)
             
-        df = pd.DataFrame(self.dwg_elements, columns = ['element_id', 'position', 'shape', 'bounding_box', 'fillcolor', 'opacity', 'bordercolor', 'borderwidth', 'orientation', 'data'])
+        df = pd.DataFrame(self.dwg_elements, columns = ['element_id', 'position', 'shape', 'bounding_box', 'fillcolor', 'opacity', 'bordercolor', 'borderwidth', 'orientation', 'data', 'id', 'class', 'mirror'])
         df.to_csv(csv_filename, index = False)
+        
+    def GetElementsDF(self):
+        
+        df = pd.DataFrame(self.dwg_elements, columns = ['element_id', 'position', 'shape', 'bounding_box', 'fillcolor', 'opacity', 'bordercolor', 'borderwidth', 'orientation', 'data', 'id', 'class', 'mirror'])
+        
+        return df
    
     def GetJSON(self):
         """
@@ -341,7 +348,8 @@ class Stimulus:
 
         """
                    
-        json_data = {'stimulus' : {'width':            self.width,
+        json_data = {'stimulus' : {'type':             'Grid' if str(type(self)) == "<class 'octa.Stimulus.Grid'>" else 'Stimulus',
+                                   'width':            self.width,
                                    'height':           self.height,
                                    'background_color': self.background_color,
                                    'background_shape': self.background_shape,
@@ -352,30 +360,30 @@ class Stimulus:
                                    'stim_id_label':    self.stim_id_label
                                    },
                      'structure': {'class': str(type(self)),
-                                   'n_rows': self._n_rows,
-                                   'n_cols': self._n_cols,
-                                   'row_spacing': self.row_spacing,
-                                   'col_spacing': self.col_spacing,
+                                   'n_rows': self._n_rows if hasattr(self, '_n_rows') else None,
+                                   'n_cols': self._n_cols if hasattr(self, '_n_cols') else None,
+                                   'row_spacing': self.row_spacing if hasattr(self, 'row_spacing') else None,
+                                   'col_spacing': self.col_spacing if hasattr(self, 'col_spacing') else None,
                                    'x_margin'   : self.x_margin,
                                    'y_margin'   : self.y_margin,
                                    'size'       : self.size
                                    },
                      'element_attributes': {
-                                   'element_id'     : jsonpickle.encode(list(range(len(self.dwg_elements)))),
-                                   'positions'      : jsonpickle.encode(self.positions),
-                                   'bounding_boxes' : jsonpickle.encode(self._bounding_boxes),
-                                   'shapes'         : jsonpickle.encode(self._shapes),
-                                   'fillcolors'     : jsonpickle.encode(self._fillcolors),
-                                   'opacities'      :  jsonpickle.encode(self._opacities),
-                                   'bordercolors'   : jsonpickle.encode(self._bordercolors),
-                                   'borderwidths'   : jsonpickle.encode(self._borderwidths),
-                                   'orientations'   : jsonpickle.encode(self._orientations),
-                                   'data'           : jsonpickle.encode(self._data),
-                                   'overrides'      : jsonpickle.encode(self._attribute_overrides),
+                                   'element_id'   :    jsonpickle.encode(list(range(len(self.dwg_elements)))),
+                                   'positions'    :    jsonpickle.encode(self.positions),
+                                   'bounding_boxes' :  jsonpickle.encode(self._bounding_boxes) if hasattr(self, '_bounding_boxes') else jsonpickle.encode(self.bounding_boxes),
+                                   'shapes'       :    jsonpickle.encode(self._shapes) if hasattr(self, '_shapes') else jsonpickle.encode(self.shapes),
+                                   'fillcolors'     :  jsonpickle.encode(self._fillcolors) if hasattr(self, '_fillcolors') else jsonpickle.encode(self.fillcolors),
+                                   'opacities'      :  jsonpickle.encode(self._opacities) if hasattr(self, '_opacities') else jsonpickle.encode(self.opacities),
+                                   'bordercolors'   :  jsonpickle.encode(self._bordercolors) if hasattr(self, '_bordercolors') else jsonpickle.encode(self.bordercolors),
+                                   'borderwidths'   :  jsonpickle.encode(self._borderwidths) if hasattr(self, '_borderwidths') else jsonpickle.encode(self.borderwidths),
+                                   'orientations'  :   jsonpickle.encode(self._orientations) if hasattr(self, '_orientations') else jsonpickle.encode(self.orientations),
+                                   'data'         :    jsonpickle.encode(self._data) if hasattr(self, '_data') else jsonpickle.encode(self.data),
+                                   'overrides'    :    jsonpickle.encode(self._attribute_overrides),
                                    'element_order':    jsonpickle.encode(self._element_presentation_order),
-                                   'id'           :    jsonpickle.encode(self._id_labels),
-                                   'class'        :    jsonpickle.encode(self._class_labels),
-                                   'mirror'       :    jsonpickle.encode(self._mirror_values)}}
+                                   'id'           :    jsonpickle.encode(self._id_labels) if hasattr(self, '_id_labels') else jsonpickle.encode(self.id_labels),
+                                   'class'        :    jsonpickle.encode(self._class_labels) if hasattr(self, '_class_labels') else jsonpickle.encode(self.class_labels),
+                                   'mirror'       :    jsonpickle.encode(self._mirror_values) if hasattr(self, '_mirror_values') else jsonpickle.encode(self.mirror_values),}}
         
         return json_data            
         
@@ -404,73 +412,65 @@ class Stimulus:
             else:
                 stimulus_size = (data['stimulus']['width'], data['stimulus']['height'])
                 
-            stimulus = Grid(data['structure']['n_rows'], 
-                            data['structure']['n_cols'], 
-                            data['structure']['row_spacing'],
-                            data['structure']['col_spacing'], 
-                            data['stimulus']['background_color'],
-                            stimulus_size,
-                            data['stimulus']['background_shape'],
-                            data['stimulus']['mask'],
-                            data['stimulus']['stim_orientation'],
-                            data['stimulus']['stim_mirror_value'],
-                            data['stimulus']['stim_class_label'],
-                            data['stimulus']['stim_id_label'],
-                            data['structure']['x_margin'], 
-                            data['structure']['y_margin'])
+            if data['stimulus']['type'] == "Grid":
             
-            stimulus.positions                   = jsonpickle.decode(data['element_attributes']['positions'])
-            stimulus._bounding_boxes             = jsonpickle.decode(data['element_attributes']['bounding_boxes'])
-            stimulus._shapes                     = jsonpickle.decode(data['element_attributes']['shapes'])
-            stimulus._fillcolors                 = jsonpickle.decode(data['element_attributes']['fillcolors'])
-            stimulus._opacities                  = jsonpickle.decode(data['element_attributes']['opacities'])
-            stimulus._bordercolors               = jsonpickle.decode(data['element_attributes']['bordercolors'])
-            stimulus._borderwidths               = jsonpickle.decode(data['element_attributes']['borderwidths'])
-            stimulus._orientations               = jsonpickle.decode(data['element_attributes']['orientations'])
-            stimulus._data                       = jsonpickle.decode(data['element_attributes']['data'])
-            stimulus._attribute_overrides        = jsonpickle.decode(data['element_attributes']['overrides'])
-            stimulus._element_presentation_order = jsonpickle.decode(data['element_attributes']['element_order'])
-            stimulus._id_labels                  = jsonpickle.decode(data['element_attributes']['id'])
-            stimulus._class_labels               = jsonpickle.decode(data['element_attributes']['class'])
-            stimulus._mirror_values              = jsonpickle.decode(data['element_attributes']['mirror'])
+                stimulus = Grid(data['structure']['n_rows'], 
+                                data['structure']['n_cols'], 
+                                data['structure']['row_spacing'],
+                                data['structure']['col_spacing'], 
+                                data['stimulus']['background_color'],
+                                stimulus_size,
+                                data['stimulus']['background_shape'],
+                                data['stimulus']['mask'],
+                                data['stimulus']['stim_orientation'],
+                                data['stimulus']['stim_mirror_value'],
+                                data['stimulus']['stim_class_label'],
+                                data['stimulus']['stim_id_label'],
+                                data['structure']['x_margin'], 
+                                data['structure']['y_margin'])
+                
+                stimulus.positions                   = jsonpickle.decode(data['element_attributes']['positions'])
+                stimulus._bounding_boxes             = jsonpickle.decode(data['element_attributes']['bounding_boxes'])
+                stimulus._shapes                     = jsonpickle.decode(data['element_attributes']['shapes'])
+                stimulus._fillcolors                 = jsonpickle.decode(data['element_attributes']['fillcolors'])
+                stimulus._opacities                  = jsonpickle.decode(data['element_attributes']['opacities'])
+                stimulus._bordercolors               = jsonpickle.decode(data['element_attributes']['bordercolors'])
+                stimulus._borderwidths               = jsonpickle.decode(data['element_attributes']['borderwidths'])
+                stimulus._orientations               = jsonpickle.decode(data['element_attributes']['orientations'])
+                stimulus._data                       = jsonpickle.decode(data['element_attributes']['data'])
+                stimulus._attribute_overrides        = jsonpickle.decode(data['element_attributes']['overrides'])
+                stimulus._element_presentation_order = jsonpickle.decode(data['element_attributes']['element_order'])
+                stimulus._id_labels                  = jsonpickle.decode(data['element_attributes']['id'])
+                stimulus._class_labels               = jsonpickle.decode(data['element_attributes']['class'])
+                stimulus._mirror_values              = jsonpickle.decode(data['element_attributes']['mirror'])
             
-            
-#            for i in range(len(stimulus.data)):
-#                if stimulus.data[i] != "":
-#                    if "Polygon" in str(stimulus.shapes[i]):
-#                        stimulus.shapes[i] = eval(str(stimulus._shapes.patterntype) + str(stimulus._shapes.patternorientation) + "(Polygon(" + str(stimulus.data[i]) + "))")
-#                        print(stimulus.data)
-                        
-#            origshapelist = stimulus._shapes.pattern          
-#            shapelist = []
-#            for i in range(len(origshapelist)):
-#                if origshapelist[i] is not None:
-#                    if ".Polygon." in str(origshapelist[i]):
-#                        shapelist.append(str("Polygon(n_sides = " + str(stimulus._data.pattern[i][0]) + ", name = '" + str(stimulus._data.pattern[i][1]) + "')"))
-#                    elif str(stimulus._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.RegularPolygon.RegularPolygon_'>":
-#                        shapelist.append((stimulus._shapes.pattern[i].n_sides, stimulus._shapes.pattern[i].name))
-#                    elif str(stimulus._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.Image.Image_'>":
-#                        shapelist.append((stimulus._shapes.pattern[i].source, stimulus._shapes.pattern[i].name))
-#                    elif str(stimulus._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.FitImage.FitImage_'>":
-#                        shapelist.append((stimulus._shapes.pattern[i].source, stimulus._shapes.pattern[i].name))
-#                    elif str(stimulus._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.Text.Text_'>":
-#                        shapelist.append((stimulus._shapes.pattern[i].text, stimulus._shapes.pattern[i].name))
-#                    elif str(stimulus._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.Path.Path_'>":
-#                        shapelist.append((stimulus._shapes.pattern[i].path, stimulus._shapes.pattern[i].xsizepath, stimulus._shapes.pattern[i].ysizepath, stimulus._shapes.pattern[i].name))
-#                    elif str(stimulus._shapes.pattern[i].__bases__[0]) == "<class 'octa.shapes.PathSvg.PathSvg_'>":
-#                        shapelist.append((stimulus._shapes.pattern[i].source, stimulus._shapes.pattern[i].name))
-#                    else:
-#                        shapelist.append("")
-#                else:
-#                    shapelist.append("")
-                        
-#            stimulus.shapes = eval(str(stimulus._shapes.generate().patterntype) + str(stimulus._shapes.generate().patternorientation) + "(" + "[octa.shapes.Polygon.Polygon_8]" + ")")
- 
+            else:
+               stimulus = Stimulus(data['stimulus']['background_color'],
+                                data['structure']['x_margin'], 
+                                data['structure']['y_margin'],
+                                stimulus_size,
+                                data['stimulus']['background_shape'],
+                                data['stimulus']['mask'],
+                                data['stimulus']['stim_orientation'],
+                                data['stimulus']['stim_mirror_value'],
+                                data['stimulus']['stim_class_label'],
+                                data['stimulus']['stim_id_label'])
+                
+               stimulus.positions                   = jsonpickle.decode(data['element_attributes']['positions'])
+               stimulus.bounding_boxes             = jsonpickle.decode(data['element_attributes']['bounding_boxes'])
+               stimulus.shapes                     = jsonpickle.decode(data['element_attributes']['shapes'])
+               stimulus.fillcolors                 = jsonpickle.decode(data['element_attributes']['fillcolors'])
+               stimulus.opacities                  = jsonpickle.decode(data['element_attributes']['opacities'])
+               stimulus.bordercolors               = jsonpickle.decode(data['element_attributes']['bordercolors'])
+               stimulus.borderwidths               = jsonpickle.decode(data['element_attributes']['borderwidths'])
+               stimulus.orientations               = jsonpickle.decode(data['element_attributes']['orientations'])
+               stimulus.data                       = jsonpickle.decode(data['element_attributes']['data'])
+               stimulus._attribute_overrides        = jsonpickle.decode(data['element_attributes']['overrides'])
+               stimulus._element_presentation_order = jsonpickle.decode(data['element_attributes']['element_order'])
+               stimulus.id_labels                  = jsonpickle.decode(data['element_attributes']['id'])
+               stimulus.class_labels               = jsonpickle.decode(data['element_attributes']['class'])
+               stimulus.mirror_values              = jsonpickle.decode(data['element_attributes']['mirror'])
                           
-#            for d in json:
-#    name = d.pop('name')
-#    t = type(name, (object,), d)
-            
         return stimulus
     
                            

@@ -157,7 +157,10 @@ class Pattern:
             New Pattern object instance
 
         """
-        n_repeats = int(count/len(self.pattern)) + 1
+        if count % len(self.pattern) != 0:
+            n_repeats = int(count/len(self.pattern)) + 1
+        else:
+            n_repeats = int(count/len(self.pattern))
         
         new_pattern = self.RepeatElements(n_repeats, count)
         
@@ -181,7 +184,10 @@ class Pattern:
             New Pattern object instance
 
         """
-        n_repeats = int(count/len(self.pattern)) + 1
+        if count % len(self.pattern) != 0:
+            n_repeats = int(count/len(self.pattern)) + 1
+        else:
+            n_repeats = int(count/len(self.pattern))
         
         new_pattern = self.RepeatPattern(n_repeats, count)
         
@@ -277,6 +283,10 @@ class Pattern:
             gradient = Pattern.CreateColorRangeList(start_value, end_value, n_elements)
         elif type(start_value) == int or type(start_value) == float:
             gradient = Pattern.CreateNumberRangeList(start_value, end_value, n_elements)
+        elif type(start_value) == tuple:
+            gradient = Pattern.Create2DGradient(x = LinearGradient(start = start_value[0], end = end_value[0], n_elements = n_elements), 
+                                                y = LinearGradient(start = start_value[1], end = end_value[1], n_elements = n_elements), 
+                                                n_elements = n_elements)
         
         return Pattern(gradient)
     
@@ -362,7 +372,15 @@ def Sequence(start, step):
         yield i 
         i += step
         
-def LinearGradient(start, end, n_elements, invert = False):
+def LinearGradient(start, end, n_elements, invert = False): 
+    
+    if start > end:
+        orig_start = start
+        orig_end = end
+        start = orig_end
+        end = orig_start
+        invert = True
+        
     step_size = (end - start) / (n_elements - 1)
     
     if invert == True:
