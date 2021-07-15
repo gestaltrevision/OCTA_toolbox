@@ -6,6 +6,7 @@ Module with various algorithms for creating patterns in a 2D grid
 
 
 from .Pattern import Pattern
+import random
 
 class GridPattern(Pattern):
     """
@@ -65,7 +66,7 @@ class GridPattern(Pattern):
 
         """
         pass
-    
+       
 class ElementRepeatAcrossElements(GridPattern):
     """
         Repeats the values in the current pattern, until the total number of elements fits into the 2D grid structure.
@@ -1108,7 +1109,7 @@ class GradientAcrossLeftDiagonal(GridPattern):
             result.extend(shifter[:self.n_cols][::-1])
             shifter = shifter[1:] + [shifter[0]]
                 
-        self.pattern = result.pattern
+        self.pattern = Pattern(result).pattern
         self.patterntype = "Gradient"
         self.patternorientation = "AcrossLeftDiagonal"
 
@@ -1142,7 +1143,7 @@ class GradientAcrossRightDiagonal(GridPattern):
             result.extend(shifter[:self.n_cols])
             shifter = shifter[1:] + [shifter[0]]
                 
-        self.pattern = result.pattern
+        self.pattern = Pattern(result).pattern
         self.patterntype = "Gradient"
         self.patternorientation = "AcrossRightDiagonal"
 
@@ -1216,7 +1217,7 @@ class GradientAcrossLayers(GridPattern):
        
         result = [item for sublist in patternmatrix for item in sublist]
                             
-        self.pattern = result.pattern
+        self.pattern = Pattern(result).pattern
         self.patterntype = "Gradient"
         self.patternorientation = "AcrossLayers"
 
@@ -1431,7 +1432,7 @@ class TiledElementGrid(GridPattern):
         self.patternorientation = "Grid"
             
         return RepeatAcrossElements(result, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
-    
+       
 class RandomPattern(GridPattern):
     """
         The provided pattern is repeated until the length is equal to the
@@ -1450,9 +1451,11 @@ class RandomPattern(GridPattern):
     """
     _fixed_grid = False
     
-    def __init__(self, pattern, n_rows = 5, n_cols = 5, counts = None, patterntype = None, patternorientation = None):
+    def __init__(self, pattern, n_rows = 5, n_cols = 5, patterntype = None, patternorientation = None, counts = None):
         super().__init__(pattern, n_rows, n_cols)
         self.counts = counts
+        self.patterntype = patterntype
+        self.patternorientation = patternorientation
                 
     def check_counts(self):
         if self.counts is not None:
@@ -1480,7 +1483,7 @@ class RandomPattern(GridPattern):
             
         p = p.RandomizeOrder()
         
-        self.patterntype = "Random"
-        self.patternorientation = "AcrossElements"
+        self.patterntype = "RandomPattern"
+        self.patternorientation = ""
         
         return RandomPattern(p, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)

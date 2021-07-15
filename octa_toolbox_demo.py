@@ -10,6 +10,41 @@ from octa.measurements import Complexity
 import random
 
 #%%
+
+
+#%%
+
+stimulus1 = Grid(4,4, stim_class_label = "leftstim", stim_id_label = "blue_octagons")
+stimulus1.Show()
+stimulus1.SaveSVG("output/blue_octagons")
+stimulus1.GetSVG()
+
+stimulus2 = Grid(4,4, stim_class_label = "rightstim", stim_id_label = "red_squares")
+stimulus2.shapes = GridPattern.RepeatAcrossElements([Rectangle])
+stimulus2.fillcolors = GridPattern.RepeatAcrossElements(["red"])
+stimulus2.Show()
+stimulus2.SaveSVG("output/red_squares")
+stimulus2.GetSVG()
+
+#%%
+stimulus = Grid(4,4)
+
+# stimulus.positions = Positions.CreateSineGrid(n_rows = 9, n_cols = 9, A = 25, f = .1, axis = "xy")
+#stimulus.fillcolors = GridPattern.GradientAcrossColumns(start_value = 'limegreen', end_value = 'steelblue')
+stimulus.fillcolors = GridPattern.ElementRepeatAcrossColumns(["blue", "red"])
+colors = GridPattern.GridPattern(stimulus.fillcolors).RandomizeAcrossRows()
+# stimulus.fillcolors = GridPattern.RepeatAcrossElements(colors.pattern)
+# stimulus.fillcolors = GridPattern.RandomAcrossElements(["red", "green"])
+# stimulus.fillcolors = GridPattern.RandomPattern(["red", "green", "blue"])
+
+# stimulus.orientations = GridPattern.RepeatAcrossElements([30])
+# #orientationjitter = Pattern(stimulus.orientations).AddUniformJitter(min_val = -20, max_val = 20)
+# orientationjitter = Pattern(stimulus.orientations).AddNormalJitter(mu = 0 , std = 30)
+# stimulus.orientations = GridPattern.RepeatAcrossElements(orientationjitter)
+
+stimulus.Show()
+
+#%%
 # OCTA STIMULUS AS IMAGE INPUT
 stimulus = Grid(2,2, row_spacing = 50, col_spacing = 50, background_color = "none")
 

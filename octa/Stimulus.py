@@ -24,7 +24,7 @@ class Stimulus:
     
     """
     
-    def __init__(self, background_color = "white", x_margin = 20, y_margin = 20, size = None, background_shape = None, mask = None, 
+    def __init__(self, background_color = "white", x_margin = 20, y_margin = 20, size = None, background_shape = None, stim_mask = None, 
                  stim_orientation = 0, stim_mirror_value = None, stim_class_label = None, stim_id_label = None):
         """
         Instantiates a stimulus object.
@@ -75,10 +75,10 @@ class Stimulus:
         else:
             self.background_shape = background_shape
         
-        if mask == None:
-            self.mask = "none"
+        if stim_mask == None:
+            self.stim_mask = "none"
         else:
-            self.mask = mask
+            self.stim_mask = stim_mask
         
         # Set initial shape parameters to zero
         self.positions   = None
@@ -290,7 +290,7 @@ class Stimulus:
                                    'height':           self.height,
                                    'background_color': self.background_color,
                                    'background_shape': self.background_shape,
-                                   'mask':             self.mask,
+                                   'stim_mask':        self.stim_mask,
                                    'stim_orientation': self.stim_orientation,
                                    'stim_mirror_value':self.stim_mirror_value,
                                    'stim_class_label': self.stim_class_label,
@@ -353,7 +353,7 @@ class Stimulus:
                                    'height':           self.height,
                                    'background_color': self.background_color,
                                    'background_shape': self.background_shape,
-                                   'mask':             self.mask,
+                                   'stim_mask':        self.stim_mask,
                                    'stim_orientation': self.stim_orientation,
                                    'stim_mirror_value':self.stim_mirror_value,
                                    'stim_class_label': self.stim_class_label,
@@ -421,7 +421,7 @@ class Stimulus:
                                 data['stimulus']['background_color'],
                                 stimulus_size,
                                 data['stimulus']['background_shape'],
-                                data['stimulus']['mask'],
+                                data['stimulus']['stim_mask'],
                                 data['stimulus']['stim_orientation'],
                                 data['stimulus']['stim_mirror_value'],
                                 data['stimulus']['stim_class_label'],
@@ -450,7 +450,7 @@ class Stimulus:
                                 data['structure']['y_margin'],
                                 stimulus_size,
                                 data['stimulus']['background_shape'],
-                                data['stimulus']['mask'],
+                                data['stimulus']['stim_mask'],
                                 data['stimulus']['stim_orientation'],
                                 data['stimulus']['stim_mirror_value'],
                                 data['stimulus']['stim_class_label'],
@@ -632,11 +632,11 @@ class Stimulus:
         else:
             clippath = None
             
-        # ADD MASK
-        if(self.mask != "none"):
-            self.mask_object = self.dwg.defs.add(self.dwg.mask(id='custom_mask'))
-            self.mask_object.add(self.mask.generate(self.dwg))
-            maskpath = "url(#custom_mask)"
+        # ADD stim_mask
+        if(self.stim_mask != "none"):
+            self.stim_mask_object = self.dwg.defs.add(self.dwg.mask(id='custom_stim_mask'))
+            self.stim_mask_object.add(self.stim_mask.generate(self.dwg))
+            maskpath = "url(#custom_stim_mask)"
             
             if clippath != None:
                 self.stim = self.dwg.g(clip_path = clippath, mask = maskpath)
@@ -864,10 +864,10 @@ class Grid(Stimulus):
     _element_attributes = ["_bounding_boxes", "_orientations", "_bordercolors", "_borderwidths", "_fillcolors", "_opacities", "_shapes",
                           "_class_labels", "_id_labels", "_mirror_values", "_data"]
     
-    def __init__(self, n_rows, n_cols, row_spacing = 50, col_spacing= 50, background_color = "white", size = None, background_shape = None, mask = None, 
+    def __init__(self, n_rows, n_cols, row_spacing = 50, col_spacing= 50, background_color = "white", size = None, background_shape = None, stim_mask = None, 
                  stim_orientation = 0, stim_mirror_value = None, stim_class_label = None, stim_id_label = None, x_margin = 20, y_margin = 20):
         # print("Grid constructor")
-        super().__init__(background_color = background_color, x_margin = x_margin, y_margin = y_margin, size = size, background_shape = background_shape, mask = mask, 
+        super().__init__(background_color = background_color, x_margin = x_margin, y_margin = y_margin, size = size, background_shape = background_shape, stim_mask = stim_mask, 
                          stim_orientation = stim_orientation, stim_mirror_value = stim_mirror_value, stim_class_label = stim_class_label, stim_id_label = stim_id_label)
         
         # Initialize the positions of each element
@@ -1284,7 +1284,7 @@ class Grid(Stimulus):
         element_id = self._parse_element_id(element_id)
         
         self._attribute_overrides[element_id]['fillcolor'] = fillcolor_value
-        
+               
     @property
     def opacities(self):
         """

@@ -261,6 +261,24 @@ class Pattern:
         
         return Pattern(result)
     
+    def RandomizeAcrossElements(self):
+        """
+        Randomizes the order of the elements in the pattern.
+
+        Returns
+        -------
+        Pattern:
+            New Pattern object instance
+
+        """        
+        idx = list(range(len(self.pattern)))
+        random.shuffle(idx)
+        
+        result = []
+        for i in range(len(self.pattern)):
+            result.append(self.pattern[idx[i]])
+        
+        return Pattern(result)
     
     def CreateGradientPattern(start_value, end_value, n_elements):
         """
