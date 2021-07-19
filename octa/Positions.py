@@ -6,6 +6,9 @@ Created on Tue Apr  7 12:33:03 2020
 """
 import numpy as np
 import random
+# from IPython.display import SVG, display
+import svgpathtools
+# import svgwrite
 
 from .patterns.Pattern import Pattern
 
@@ -274,6 +277,59 @@ class Positions:
         
         return Positions(x, y)
     
+    def CreateShape(n_elements, src = None, path = None, width = 300, height = 300):
+        """
+        Generates element positions on the circumference of a custom shape (path) in an equally spaced way.
+
+        Parameters
+        ----------
+        n_elements : int
+            Number of elements on the circle.
+
+        Returns
+        -------
+        x : Pattern
+            All the x-coordinates.
+        y : Pattern
+            All the y-coordinates.
+
+        """
+        paths, attributes = svgpathtools.svg2paths(src)        
+        
+        n_paths = len(paths)
+        allpaths = []
+        
+        for i in range(0,n_paths):
+            mypath = paths[i]
+            xmin, xmax, ymin, ymax = mypath.bbox()
+            xsize = xmax - xmin
+            ysize = ymax - ymin
+            allpaths.append([xsize, ysize])
+            
+        max_xsize = max([item[0] for item in allpaths])
+        max_ysize = max([item[1] for item in allpaths])
+        scale_x_parameter = width / max_xsize
+        scale_y_parameter = height / max_ysize        
+
+        step_size = float(1 / n_elements)
+        
+        xpositions = []
+        ypositions = []
+        
+        for n in range(n_elements):
+            coords = paths[0].point(step_size * n)
+            x,y = str(coords).replace("(", "").replace(")", "").replace("j", "").split("+")
+            xpositions.append(float(x))
+            ypositions.append(float(y))
+                
+        x = Pattern(list( [xposition*scale_x_parameter for xposition in xpositions] ))
+        y = Pattern(list( [yposition*scale_y_parameter for yposition in ypositions] ))
+    
+        # idx = np.deg2rad(np.linspace(0, 360, n_elements+1))
+        # x   = Pattern(list( (radius * np.cos(idx)))[0:n_elements])
+        # y   = Pattern(list( (radius * np.sin(idx)))[0:n_elements])
+        
+        return Positions(x, y)
     
     def CreateRandomPattern(n_elements, width = 300, height = 300, min_distance = 30, max_iterations = 10):
         """

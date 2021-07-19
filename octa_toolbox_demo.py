@@ -9,6 +9,19 @@ from octa.shapes import Ellipse, Rectangle, Triangle, Image, FitImage, Text, Pol
 from octa.measurements import Complexity
 import random
 
+
+#%%
+stimulus = Grid(5,20)
+stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(10,10),(10,10)])
+
+stimulus.positions = Positions.CreateShape(src = "img/checkmark.svg", n_elements = 50)
+stimulus.positions = Positions.CreateShape(src = "img/arrow-circle-up-svgrepo-com.svg", n_elements = 100)
+
+# stimulus.positions = Positions.CreateShape(src = "butterfly.svg", n_elements = 50, width = 300, height = 300)
+stimulus.positions = Positions.CreateShape(path = "M12 22A10 10 0 1 0 2 12a10 10 0 0 0 10 10zM8.31 10.14l3-2.86a.49.49 0 0 1 .15-.1.54.54 0 0 1 .16-.1.94.94 0 0 1 .76 0 1 1 0 0 1 .33.21l3 3a1 1 0 0 1-1.42 1.42L13 10.41V16a1 1 0 0 1-2 0v-5.66l-1.31 1.25a1 1 0 0 1-1.38-1.45z", n_elements = 100)
+    
+stimulus.Show()
+
 #%%
 stimulus = Grid(n_rows = 5, n_cols = 5, x_margin = 60, y_margin = 60, size = None, background_shape = None, row_spacing = 39, col_spacing = 39, background_color = '#F8F8F8', stim_mask = None, stim_class_label = 'None', stim_id_label = 'None', stim_orientation =0, stim_mirror_value = 'none')
 
@@ -28,6 +41,12 @@ stimulus = Grid(5,5)
 stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(50,50),(10,50)])
 stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ["bounding_boxes"])
 # stimulus.remove_elements(1)
+stimulus.class_labels = GridPattern.RepeatAcrossElements([None])
+stimulus.id_labels = GridPattern.GradientAcrossElements(1, 36)
+
+test =    [("element" + str(count+1)) for count in range(5*5)]
+    
+    
 stimulus.Show()
 
 #%%

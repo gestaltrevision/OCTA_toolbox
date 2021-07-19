@@ -15,7 +15,7 @@ import svgpathtools
 import svgwrite
 
 topleft = (100 - width/2 , 100 - height/2)
-paths, attributes = svgpathtools.svg2paths("testshape.svg")
+paths, attributes = svgpathtools.svg2paths("img/checkmark.svg")
 
 orilength = paths[0].length()
 

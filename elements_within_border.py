@@ -15,7 +15,7 @@ import svgpathtools
 import svgwrite
 
 topleft = (100 - width/2 , 100 - height/2)
-paths, attributes = svgpathtools.svg2paths("testshape.svg")
+paths, attributes = svgpathtools.svg2paths("butterfly.svg")
 
 
 #path_alt = svgpathtools.parse_path("M 10 10 H 90 V 90 H 10 L 10 10")
@@ -87,7 +87,7 @@ stimulus = Grid(20, 20, row_spacing = 25, col_spacing = 25, background_color = "
 stimulus._autosize_method = "maximum_bounding_box"
 
 #stimulus.shapes = GridPattern.RepeatAcrossRows([RegularPolygon(4), RegularPolygon(5), RegularPolygon(6, "Hexagon"), Polygon(6, "Hexagon")])
-stimulus.shapes = GridPattern.RepeatAcrossRows([Rectangle, Ellipse, Triangle, PathSvg("img/checkmark.svg")])
+stimulus.shapes = GridPattern.RepeatAcrossRows([Rectangle, Ellipse, Triangle, PathSvg("butterfly.svg")])
 #                                                Image("img/optotypes/butterfly.svg"),
 #                                                , 
 #                                                PathSvg("img/optotypes/butterfly.svg"),

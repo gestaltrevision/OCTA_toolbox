@@ -18,6 +18,12 @@ from octa.shapes.FitImage import FitImage_
 from octa.shapes.Path import Path_
 from octa.shapes.PathSvg import PathSvg_
 
+#%%
+
+stimulus = Grid(4,4, stim_class_label = "leftstim", stim_id_label = "blue_octagons")
+stimulus1.SaveSVG("output/blue_oc")
+#%%
+
 # Test Polygon shapes with n_sides as input 
 stimsize = (600,600)
 clipshape = Ellipse(position = (stimsize[0]/2,stimsize[1]/2), bounding_box = (500,500))

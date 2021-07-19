@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon Jun 22 15:56:47 2020
-
-@author: rudy
 """
 
 from octa.Stimulus import Grid, Stimulus
