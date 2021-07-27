@@ -6,13 +6,14 @@ Created on Mon Apr  6 12:59:09 2020
 """
 import svgwrite
 import random
+import math
 import json
 import jsonpickle
 import pandas as pd
 import os
 from html2image import Html2Image
 from svglib.svglib import svg2rlg
-from reportlab.graphics import renderPDF
+from reportlab.graphics import renderPDF 
 from IPython.display import SVG, display
 
 from .Positions import Positions
@@ -147,7 +148,8 @@ class Stimulus:
         svg_filename = "%s.svg"%filename
         png_filename = "%s.png"%filename
         if folder is not None:
-            svg_filename = os.path.join(folder, svg_filename)  
+            svg_filename = os.path.join(folder, svg_filename) 
+            # png_filename = os.path.join(folder, png_filename)  
 #            png_fullfilename = os.path.join(folder, png_filename)
             hti = Html2Image(output_path = folder)
         else:
@@ -156,11 +158,11 @@ class Stimulus:
         self.dwg.saveas(svg_filename, pretty = True)
         
         hti.screenshot(other_file = svg_filename, 
-                       size= (self.width, self.height), 
+                       size= (math.ceil(self.width), math.ceil(self.height)), 
                        save_as = png_filename)
-#        img = svg2rlg(svg_filename)
-#        os.remove(svg_filename)
-#        renderPM.drawToFile(img, png_filename, fmt="PNG")
+        # img = svg2rlg(svg_filename)
+        # os.remove(svg_filename)
+        # renderPM.drawToFile(img, png_filename, fmt="PNG")
         
     def SavePDF(self, filename, folder = None): 
         """
@@ -222,7 +224,7 @@ class Stimulus:
         self.dwg.saveas(svg_filename, pretty = True)
         
         hti.screenshot(other_file = svg_filename, 
-                       size= (self.width, self.height), 
+                       size= (math.ceil(self.width), math.ceil(self.height)), 
                        save_as = tiff_filename)
 #        img = svg2rlg(svg_filename)
 #        os.remove(svg_filename)
@@ -259,7 +261,7 @@ class Stimulus:
         self.dwg.saveas(svg_filename, pretty = True)
         
         hti.screenshot(other_file = svg_filename, 
-                       size= (self.width, self.height), 
+                       size= (math.ceil(self.width), math.ceil(self.height)), 
                        save_as = jpg_filename)
 #        img = svg2rlg(svg_filename)
 #        os.remove(svg_filename)

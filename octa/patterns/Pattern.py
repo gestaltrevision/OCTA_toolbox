@@ -280,6 +280,21 @@ class Pattern:
         
         return Pattern(result)
     
+    def RandomizeAcrossRows(self):
+        if hasattr(self, 'n_rows') and hasattr(self, 'n_cols'):
+            print(True)
+            
+        for c in range(self.n_rows):
+            start_index = c * self.n_rows
+            end_index   = start_index + self.n_rows
+            
+            column_values = self.pattern[start_index : end_index]
+            
+            random.shuffle(column_values)
+            self.pattern[start_index : end_index] = column_values
+            
+        return self
+    
     def CreateGradientPattern(start_value, end_value, n_elements):
         """
         Private method for creating a list of gradient values, taking into account

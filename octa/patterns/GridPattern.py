@@ -1365,6 +1365,7 @@ class TiledGrid(GridPattern):
             
         result.extend(result * self.tile_multiplier[0])
         
+        self.pattern = source_pattern #Pattern(result).pattern 
         self.patterntype = "Tiled"
         self.patternorientation = "Grid"
         
@@ -1426,7 +1427,8 @@ class TiledElementGrid(GridPattern):
                 
             current_row = current_row * self.tile_multiplier[0]
             result.extend(current_row)
-            
+        
+        self.pattern = source_pattern #Pattern(result).pattern    
 #        self.pattern = result
         self.patterntype = "TiledElement"
         self.patternorientation = "Grid"

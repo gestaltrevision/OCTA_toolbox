@@ -9,6 +9,143 @@ from octa.shapes import Ellipse, Rectangle, Triangle, Image, FitImage, Text, Pol
 from octa.measurements import Complexity
 import random
 
+#%%
+
+stimulus = Grid(6,4)
+
+stimulus.fillcolors = GridPattern.RepeatAcrossColumns(["#6dd6ff", "#1b9fd8", "red", "green", "blue"]).RandomizeAcrossRows()
+# stimulus.Render()
+# stimulus.SaveSVG('locationtemplates1', folder = "img")
+# stimulus.SavePNG('locationtemplates1', folder = "img")
+
+# stimulus.positions = Positions.CreateSineGrid(n_rows = 6, n_cols = 6, row_spacing = 38, col_spacing = 38, A = 25, f = 0.1, axis = "xy")
+# stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(30,30)])
+stimulus.Show()
+# stimulus.SaveSVG('locationtemplates2', folder = "img")
+stimulus.SavePNG('locationtemplates2', folder = "img")
+
+#%%
+# Jacobsen & Hofel background
+
+stimulus = Grid(n_rows = 6, n_cols = 6, row_spacing=45, col_spacing=45,
+                size = (500,500),
+                stim_orientation = 45,
+                background_shape = Ellipse(position = (500/2,500/2), bounding_box = (500,500)),
+                background_color = 'black')
+
+stimulus.shapes = GridPattern.RepeatAcrossRows([ Rectangle ])
+stimulus.fillcolors = GridPattern.RepeatAcrossLayers(['white'])
+
+
+stimulus.Show()
+stimulus.SaveSVG("testbg")
+#%%
+# Jacobsen & Hofel stim
+
+stimulus = Grid(n_rows = 6, n_cols = 6, row_spacing=45, col_spacing=45,
+                x_margin = 60, y_margin = 60,
+                stim_orientation = 45,
+                background_color = 'white')
+
+stimulus.shapes = GridPattern.RepeatAcrossRows([ RegularPolygon(4) ])
+stimulus.fillcolors = GridPattern.RepeatAcrossLayers(['black'])
+
+
+stimulus.Show()
+stimulus.SaveSVG("teststim")
+
+#%%
+# Jacobsen & Hofel combo
+
+stimulus = Grid(n_rows = 1, n_cols = 2, 
+                x_margin = 0, y_margin = 0)
+
+stimulus.shapes = GridPattern.RepeatAcrossRows([ Image("testbg.svg"), Image("teststim.svg") ])
+
+
+
+stimulus.Show()
+stimulus.SaveSVG("testcombo")
+#%%
+# Chipman (1979)
+#https://stackoverflow.com/questions/13049336/avoid-line-between-tiled-svg-shapes
+# stimulus = Grid(n_rows = 6, n_cols = 6, row_spacing=45, col_spacing=45,
+#                 x_margin = 0, y_margin = 0,
+#                 background_color = 'none')
+
+# stimulus.shapes = GridPattern.RepeatAcrossRows([ Rectangle ])
+# stimulus.fillcolors = GridPattern.RepeatAcrossLayers([ 'white', 'black' ])
+# stimulus.borderwidths = GridPattern.RepeatAcrossElements([0.5])
+# stimulus.bordercolors = GridPattern.RepeatAcrossLayers([ 'white', 'black' ])
+
+# stimulus.Show()
+
+
+stimulus = Grid(n_rows = 6, n_cols = 6, row_spacing=45, col_spacing=45,
+                x_margin = 0, y_margin = 0,
+                background_color = 'none')
+
+stimulus.shapes = GridPattern.RepeatAcrossRows([ Rectangle ])
+stimulus.fillcolors = GridPattern.RepeatAcrossLayers(['white', 'white', 'black', 'black' ])
+stimulus.borderwidths = GridPattern.RepeatAcrossElements([0.5])
+stimulus.bordercolors = GridPattern.RepeatAcrossLayers([ 'white', 'white', 'black', 'black' ])
+stimulus.set_element_fillcolor(element_id = 2, fillcolor_value = "white")
+stimulus.set_element_bordercolor(element_id = 2, bordercolor_value = "white")
+stimulus.set_element_fillcolor(element_id = 3, fillcolor_value = "white")
+stimulus.set_element_bordercolor(element_id = 3, bordercolor_value = "white")
+
+stimulus.set_element_fillcolor(element_id = 12, fillcolor_value = "white")
+stimulus.set_element_bordercolor(element_id = 12, bordercolor_value = "white")
+stimulus.set_element_fillcolor(element_id = 18, fillcolor_value = "white")
+stimulus.set_element_bordercolor(element_id = 18, bordercolor_value = "white")
+
+stimulus.set_element_fillcolor(element_id = 17, fillcolor_value = "white")
+stimulus.set_element_bordercolor(element_id = 17, bordercolor_value = "white")
+stimulus.set_element_fillcolor(element_id = 23, fillcolor_value = "white")
+stimulus.set_element_bordercolor(element_id = 23, bordercolor_value = "white")
+
+stimulus.set_element_fillcolor(element_id = 32, fillcolor_value = "white")
+stimulus.set_element_bordercolor(element_id = 32, bordercolor_value = "white")
+stimulus.set_element_fillcolor(element_id = 33, fillcolor_value = "white")
+stimulus.set_element_bordercolor(element_id = 33, bordercolor_value = "white")
+
+stimulus.Show()
+
+#%%
+
+random.seed(1626762732)
+stimulus = Grid(n_rows = 6, n_cols = 6, x_margin = 60, y_margin = 60, size = None, row_spacing = 36, col_spacing = 36, background_color = '#F8F8F8', stim_orientation =0, stim_mirror_value = 'none')
+
+stimulus.positions = Positions.CreateRandomPattern(n_elements = 36, width = 250, height = 250, min_distance = 10, max_iterations = 10)
+
+stimulus.shapes = GridPattern.RepeatAcrossElements([ Ellipse ])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([ (25,25) ])
+stimulus.fillcolors = GridPattern.RepeatAcrossElements([ "none"])
+stimulus.orientations = GridPattern.RepeatAcrossElements([ 0 ])
+stimulus.borderwidths = GridPattern.RepeatAcrossElements([ 0 , 4 ])
+stimulus.bordercolors = GridPattern.MirrorAcrossElements([ '#FCE533' ])
+stimulus.opacities = GridPattern.MirrorAcrossElements([ 1 ])
+stimulus.mirror_values = GridPattern.RepeatAcrossElements([ 'none' ])
+
+stimulus.Show()
+
+#%%
+
+random.seed(1626723438)
+stimulus = Grid(n_rows = 5, n_cols = 5, x_margin = 60, y_margin = 60, size = None, row_spacing = 38, col_spacing = 38, background_color = '#F8F8F8', stim_orientation =0, stim_mirror_value = 'none')
+
+stimulus.positions = Positions.CreateShape(src = 'butterfly.svg', n_elements = 25, width = 250, height = 250)
+
+stimulus.shapes = GridPattern.RepeatAcrossColumns([ Rectangle , Ellipse , Triangle ])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossRightDiagonal([ (20,20) ])
+stimulus.fillcolors = GridPattern.RepeatAcrossRightDiagonal([ '#9C4B9C' , '#62BD80' ])
+stimulus.orientations = GridPattern.MirrorAcrossRows([ 45 ])
+stimulus.borderwidths = GridPattern.RepeatAcrossRightDiagonal([ 6 ])
+stimulus.bordercolors = GridPattern.MirrorAcrossRows([ '#54C4D0' , '#62BD80' ])
+stimulus.opacities = GridPattern.MirrorAcrossRightDiagonal([ 1 ])
+stimulus.mirror_values = GridPattern.RepeatAcrossColumns([ 'none' ])
+
+stimulus.Show()
 
 #%%
 stimulus = Grid(5,20)
