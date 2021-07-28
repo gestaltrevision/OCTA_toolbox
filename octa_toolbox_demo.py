@@ -2,7 +2,7 @@
 """
 OCTA toolbox: demo
 """
-from octa.Stimulus import Grid, Stimulus
+from octa.Stimulus import Grid, Outline, Stimulus
 from octa.Positions import Positions
 from octa.patterns import GridPattern, Pattern, Sequence, LinearGradient
 from octa.shapes import Ellipse, Rectangle, Triangle, Image, FitImage, Text, Polygon, RegularPolygon, Path, PathSvg, ChangingEllipse
@@ -11,15 +11,78 @@ import random
 
 #%%
 
+stimulus = Grid(2,2)
+# stimulus.borderwidths = GridPattern.RepeatAcrossElements([5])
+# stimulus.positions.SetPositionDeviations(0,5,5)
+# # stimulus.remove_elements(element_id = [1,3])
+# # stimulus.set_element_shapes(Ellipse, n_changes = 2)
+# stimulus.set_element_bounding_boxes([(5,5),(50,10), (10,50), (30,30)], element_id = [0,1,2,3])
+# # stimulus.set_element_shapes(shape_value = [Polygon(5)], n_changes = 2)
+# # stimulus.set_element_bordercolors(["red"], n_changes = 2)
+# stimulus.set_element_fillcolors([["radial", "white","red"]], element_id = [1])
+# stimulus.set_element_opacities([0.5], element_id = [1])
+# stimulus.set_element_borderwidths([15], element_id = [0])
+# stimulus.set_element_orientations([15], element_id = [2])
+# stimulus.set_element_mirror_values(["horizontalvertical"], element_id = [2])
+# stimulus.set_element_class_labels(["testlabel"], element_id = [1,2])
+# stimulus.set_element_id_labels(["idlabel1"], element_id = [0])
+
+# stimulus.swap_elements(swap_pairs = [(0,2), (1,3)])
+# stimulus.swap_elements(n_swap_pairs = 2)
+stimulus.fillcolors = GridPattern.RepeatAcrossElements(["red", "green", "blue"])
+stimulus.swap_features(feature_dimensions = ["fillcolors"], swap_pairs = [(0,1)])
+
+stimulus.Show()
+# stimulus.SaveJSON("test")
+
+# stim = Stimulus.LoadFromJSON("test.JSON")
+
+# stim.Show()
+
+#%%
+n_elements = 26
+stimulus = Outline(n_elements, shape_bounding_box = (300,300))
+stimulus.positions = Positions.CreateCircle(radius = 300, n_elements = n_elements, starting_point = "top")
+stimulus.set_element_fillcolor(0, "red")
+stimulus.set_element_fillcolor(int(n_elements/2), "green")
+stimulus.set_element_fillcolor(n_elements-1, "blue")
+
+stimulus.positions.SetPositionDeviations(element_id = [5,10], x_offset = [-25, 25], y_offset = 25)
+stimulus.Show()
+
+n_elements = 50
+stimulus = Outline(n_elements, shape = 'img/checkmark.svg', shape_bounding_box = (500,500))
+stimulus.shapes = GridPattern.RepeatAcrossElements([Polygon(5), PathSvg('img/checkmark.svg')])
+stimulus.fillcolors = GridPattern.RepeatAcrossElements(["red", "green"])
+stimulus.orientations = GridPattern.RepeatAcrossElements([0,90])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(25,25)])
+
+stimulus.set_element_fillcolor(n_elements-1, "blue")
+# stimulus.remove_elements(5)
+# stimulus.swap_elements(2)
+# stimulus.swap_distinct_elements(2)
+stimulus.swap_distinct_features(1)
+
+# stimulus.positions.SetPositionDeviations(element_id = [5,10], x_offset = [-25, 25], y_offset = 25)
+
+stimulus.Show()
+
+
+#%%
+
+
 stimulus = Grid(6,4)
 
-stimulus.fillcolors = GridPattern.RepeatAcrossColumns(["#6dd6ff", "#1b9fd8", "red", "green", "blue"]).RandomizeAcrossRows()
+stimulus.fillcolors = GridPattern.RepeatAcrossColumns(["#6dd6ff", "#1b9fd8", "red", "green", "blue"])
 # stimulus.Render()
 # stimulus.SaveSVG('locationtemplates1', folder = "img")
 # stimulus.SavePNG('locationtemplates1', folder = "img")
 
 # stimulus.positions = Positions.CreateSineGrid(n_rows = 6, n_cols = 6, row_spacing = 38, col_spacing = 38, A = 25, f = 0.1, axis = "xy")
 # stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(30,30)])
+
+stimulus.positions.SetPositionDeviations(element_id = [5,10], x_offset = [-25, 25], y_offset = 25)
+# stimulus.positions.SetPositionDeviations(element_id = 23, x_offset = 25, y_offset = 25)
 stimulus.Show()
 # stimulus.SaveSVG('locationtemplates2', folder = "img")
 stimulus.SavePNG('locationtemplates2', folder = "img")
@@ -351,7 +414,7 @@ stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(35,35), (30,30), (2
 stimulus.positions = Positions.CreateCustomPositions(x = (0,0,0)*5 + (50,50,50)*5 + (100,100,100)*5 + (150,150,150)*5 + (200,200,200)*5, 
                                                      y = (0,50,100,150,200)*15)
 
-stimulus.positions.SetLocationJitter("xy", mean = 0, std = 6)
+stimulus.positions.SetPositionJitter("xy", mean = 0, std = 6)
 stimulus.Show()
 #%%
 stimulus = Grid(5,5)
@@ -437,7 +500,7 @@ stimulus = Grid(1,30, col_spacing = 5, row_spacing = 5)
 stimulus.shapes = GridPattern.RepeatAcrossElements([Rectangle])
 stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(2,150)])
 stimulus.fillcolors = GridPattern.RepeatAcrossElements(["lightgrey"])
-stimulus.positions.SetLocationJitter("x", min_val = -35, max_val = 35)
+stimulus.positions.SetPositionJitter("x", min_val = -35, max_val = 35)
 stimulus.Show()
 stimulus.SaveSVG("output/stim1")
 
@@ -446,7 +509,7 @@ stimulus = Grid(1,30, col_spacing = 5, row_spacing = 5, stim_orientation = 90)
 stimulus.shapes = GridPattern.RepeatAcrossElements([Rectangle])
 stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(2,150)])
 stimulus.fillcolors = GridPattern.RepeatAcrossElements(["lightgrey"])
-stimulus.positions.SetLocationJitter("x", min_val = -35, max_val = 35)
+stimulus.positions.SetPositionJitter("x", min_val = -35, max_val = 35)
 stimulus.Show()
 
 stimulus.SaveSVG("output/stim2")
@@ -458,7 +521,7 @@ stimulus = Grid(1,30, col_spacing = 5, row_spacing = 5)
 stimulus.shapes = GridPattern.RepeatAcrossElements([Rectangle])
 stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(2,150)])
 stimulus.fillcolors = GridPattern.RepeatAcrossElements(["lightgrey"])
-stimulus.positions.SetLocationJitter("x", min_val = -35, max_val = 35)
+stimulus.positions.SetPositionJitter("x", min_val = -35, max_val = 35)
 # stimulus.Show()
 
 # stimulus.positions.GetPositions()
@@ -483,7 +546,7 @@ stimulus2.bounding_boxes = GridPattern.RepeatAcrossElements([(2,150),(2,150),(2,
                                                              (150,2),(150,2),(150,2),(150,2),(150,2),
                                                              (150,2),(150,2),(150,2),(150,2),(150,2)])
 
-stimulus2.positions.SetLocationJitter("xy", min_val = -35, max_val = 35)
+stimulus2.positions.SetPositionJitter("xy", min_val = -35, max_val = 35)
 stimulus2.Show()
 #.SaveSVG("output/stim2")
 
@@ -612,7 +675,7 @@ stimulus.fillcolors = GridPattern.RepeatAcrossColumns(colors_to_use)
 stimulus.bounding_boxes = GridPattern.RepeatAcrossColumns([(30,30)])
 
 
-stimulus.positions.SetLocationJitter("xy", mu = 0, std = 2)
+stimulus.positions.SetPositionJitter("xy", mu = 0, std = 2)
 
 stimulus.Show()
 #%%
@@ -655,7 +718,7 @@ stimulus.SavePNG(filename = "test", folder = "output")
 stimulus.SavePDF(filename = "test", folder = "output")
 stimulus.SaveSVG(filename = "test", folder = "output")
 
-stimulus.positions.SetLocationJitter(distribution = "uniform", min_val = 5, max_val = 40)
+stimulus.positions.SetPositionJitter(distribution = "uniform", min_val = 5, max_val = 40)
 
 random.seed(2)
 stimulus.Show()
@@ -1346,7 +1409,7 @@ stimulus.shapes = GridPattern.RepeatAcrossRows(
 stimulus.fillcolors = GridPattern.GradientAcrossElements(start_value = "red", end_value = "blue")
 stimulus.orientations = GridPattern.RepeatAcrossColumns([0,45,90,115,180])
 
-stimulus.positions.SetLocationJitter("xy", "uniform", min_val = -10, max_val = 10)
+stimulus.positions.SetPositionJitter("xy", "uniform", min_val = -10, max_val = 10)
 
 #stimulus.swap_distinct_elements(n_swap_pairs = 1, distinction_features = ['shapes'])
 #stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['shapes'])

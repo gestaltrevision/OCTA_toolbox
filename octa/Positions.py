@@ -32,6 +32,8 @@ class Positions:
     def __init__(self, x, y):
         self._x = x
         self._y = y
+        self._deviation = False
+        self._deviation_parameters = {}
         self._randomization = None
         self._randomization_parameters = {}
         
@@ -46,7 +48,18 @@ class Positions:
             List with values for the x coordinate.
 
         """
-        return self._x.pattern
+        # position_jitter = self._CalculatePositionJitter()
+        # position_deviations = self._CalculatePositionDeviations()
+        
+        x = list(self._x.pattern)
+        
+        # for i in range(len(position_deviations['x'])):
+        #     x[i] += position_deviations['x'][i]
+        
+        # for i in range(len(position_jitter['x'])):
+        #     x[i] += position_jitter['x'][i]
+            
+        return x
     
     @property
     def y(self):
@@ -59,13 +72,31 @@ class Positions:
             List with values for the y coordinate.
 
         """
-        return self._y.pattern
+        # position_jitter = self._CalculatePositionJitter()
+        # position_deviations = self._CalculatePositionDeviations()
+        
+        y = list(self._y.pattern)
+        
+        # for i in range(len(position_deviations['y'])):
+        #     y[i] += position_deviations['y'][i]
+        
+        # for i in range(len(position_jitter['y'])):
+        #     y[i] += position_jitter['y'][i]
+
+        return y
     
     def GetPositions(self):
-        position_jitter = self._CalculateLocationJitter()
+        position_jitter = self._CalculatePositionJitter()
+        position_deviations = self._CalculatePositionDeviations()
         
         x = list(self._x.pattern)
         y = list(self._y.pattern)
+        
+        for i in range(len(position_deviations['x'])):
+            x[i] += position_deviations['x'][i]
+        
+        for i in range(len(position_deviations['y'])):
+            y[i] += position_deviations['y'][i]
         
         for i in range(len(position_jitter['x'])):
             x[i] += position_jitter['x'][i]
@@ -75,7 +106,55 @@ class Positions:
         
         return (x, y)
     
-    def SetLocationJitter(self, axis = "xy", distribution = "normal", **kwargs):
+    def SetPositionDeviations(self, element_id = [0], x_offset = None, y_offset = None):
+        """
+        Add deviations to the positions.
+
+        Parameters
+        ----------
+
+        Returns
+        -------
+        Positions
+            The updated Positions object.
+
+        """  
+        assert type(element_id) == list or type(element_id) == int, "Element id must be int or list"
+        assert type(x_offset) == list or type(x_offset) == int, "X offset must be int or list"
+        assert type(y_offset) == list or type(y_offset) == int, "Y offset must be int or list"
+        
+        if type(element_id) == int:
+            element_id = [element_id]
+            
+        if type(x_offset) == int:
+            x_offset = [x_offset]*len(element_id)
+            
+        if type(y_offset) == int:
+            y_offset = [y_offset]*len(element_id)
+            
+        if type(element_id) == list:
+            assert len(element_id) == len(x_offset) or len(element_id) == len(y_offset), "Length of offset list and length of element_id list should be equal"
+            
+        self._deviation = True
+        self._deviation_parameters = {'element_id' : element_id, 'x_offset' : x_offset, 'y_offset' : y_offset}
+                                       
+        return self
+    
+    def _CalculatePositionDeviations(self):
+        x_deviations = [0 for _ in range(len(self._x.pattern))]
+        y_deviations = [0 for _ in range(len(self._y.pattern))]
+            
+        if self._deviation == True:
+            if self._deviation_parameters['x_offset'] is not None:
+                for i in range(len(self._deviation_parameters['element_id'])):
+                    x_deviations[self._deviation_parameters['element_id'][i]] = self._deviation_parameters['x_offset'][i]
+            if self._deviation_parameters['y_offset'] is not None:
+                for i in range(len(self._deviation_parameters['element_id'])):
+                    y_deviations[self._deviation_parameters['element_id'][i]]  = self._deviation_parameters['y_offset'][i]
+                    
+        return {'x' : x_deviations, 'y' : y_deviations}
+    
+    def SetPositionJitter(self, axis = "xy", distribution = "normal", **kwargs):
         """
         Add jitter to the positions.
 
@@ -126,7 +205,7 @@ class Positions:
         return self
     
     
-    def _CalculateLocationJitter(self):
+    def _CalculatePositionJitter(self):
         x_jitter = [0 for _ in range(len(self._x.pattern))]
         y_jitter = [0 for _ in range(len(self._y.pattern))]
             
@@ -251,7 +330,7 @@ class Positions:
             
             return Positions(x + x_mod, y + y_mod)
     
-    def CreateCircle(radius, n_elements):
+    def CreateCircle(radius, n_elements, starting_point = "left"):
         """
         Generates element positions on the circumference of a regularly spaced
         circle.
@@ -271,7 +350,14 @@ class Positions:
             All the y-coordinates.
 
         """
-        idx = np.deg2rad(np.linspace(0, 360, n_elements+1))
+        if starting_point == "left":
+            idx = np.deg2rad(np.linspace(-180, 180, n_elements+1))
+        elif starting_point == "top":
+            idx = np.deg2rad(np.linspace(-90, 270, n_elements+1))
+        elif starting_point == "right":
+            idx = np.deg2rad(np.linspace(0, 360, n_elements+1))
+        elif starting_point == "bottom": 
+            idx = np.deg2rad(np.linspace(-270, -90, n_elements+1))
         x   = Pattern(list( (radius * np.cos(idx)))[0:n_elements])
         y   = Pattern(list( (radius * np.sin(idx)))[0:n_elements])
         
@@ -294,7 +380,10 @@ class Positions:
             All the y-coordinates.
 
         """
-        paths, attributes = svgpathtools.svg2paths(src)        
+        if(src is not None):
+            paths, attributes = svgpathtools.svg2paths(src)    
+        else:
+            paths = svgpathtools.parse_path(path)
         
         n_paths = len(paths)
         allpaths = []
