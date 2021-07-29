@@ -356,8 +356,9 @@ class Positions:
             idx = np.deg2rad(np.linspace(-90, 270, n_elements+1))
         elif starting_point == "right":
             idx = np.deg2rad(np.linspace(0, 360, n_elements+1))
-        elif starting_point == "bottom": 
-            idx = np.deg2rad(np.linspace(-270, -90, n_elements+1))
+        else: # starting_point == "bottom": 
+            idx = np.deg2rad(np.linspace(-270, 90, n_elements+1))
+            
         x   = Pattern(list( (radius * np.cos(idx)))[0:n_elements])
         y   = Pattern(list( (radius * np.sin(idx)))[0:n_elements])
         

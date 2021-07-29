@@ -13,7 +13,7 @@ def Polygon(n_sides, name = None):
     return type(str(name), (Polygon_,), {'n_sides': n_sides, 'name': name})
 
 class Polygon_:
-    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'class_label', 'id_label', 'mirror_value', 'data']
+    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'class_label', 'id_label', 'mirror_value', 'link', 'data']
     
     def __init__(self, **kwargs):
         for p in Polygon_.parameters:
@@ -54,7 +54,7 @@ class Polygon_:
     
     def set_bordercolor(self, bordercolor):
         if bordercolor == None:
-            bordercolor = "green"
+            bordercolor = "none"
             
         self.bordercolor = bordercolor
         
@@ -72,7 +72,7 @@ class Polygon_:
     
     def set_borderwidth(self, borderwidth):
         if borderwidth == None:
-            borderwidth = 4
+            borderwidth = 0
             
         self.borderwidth = borderwidth
 
@@ -90,7 +90,7 @@ class Polygon_:
                
     def set_fillcolor(self, fillcolor):
         if fillcolor == None:
-            fillcolor = "gray"
+            fillcolor = "none"
             
         self.fillcolor = fillcolor
         
@@ -141,6 +141,14 @@ class Polygon_:
             mirror_value = ""
             
         self.mirror_value = mirror_value
+        
+    def set_link(self, link):
+        if link == "":
+            setlink = ""
+        else:             
+            setlink = 'dwg.add(dwg.a(href = "' + str(link) + '", target="_blank"' + '))'
+            
+        self.link = setlink
         
     def set_data(self, data):
         if data == None:
@@ -284,6 +292,9 @@ class Polygon_:
         if self.opacity_animation != "":
             svg.add(eval(self.opacity_animation))     
             
+        if self.link != "":            
+            svg = eval(self.link).add(svg)
+                        
         return svg
     
 if __name__ == '__main__':

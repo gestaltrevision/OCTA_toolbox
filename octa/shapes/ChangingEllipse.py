@@ -7,7 +7,7 @@ Created on Mon Apr  6 16:02:30 2020
 import svgwrite
 
 class ChangingEllipse:
-    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'class_label', 'id_label', 'mirror_value']
+    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'class_label', 'id_label', 'mirror_value', 'link']
     
     def __init__(self, **kwargs):
         for p in ChangingEllipse.parameters:
@@ -134,7 +134,13 @@ class ChangingEllipse:
         if mirror_value == None:
             mirror_value = ""
             
-        self.mirror_value = mirror_value
+        self.mirror_value = mirror_value   
+        
+    def set_link(self, link):
+        if link == None:
+            link = ""
+            
+        self.link = link
     
 
     def __str__(self):
@@ -251,11 +257,13 @@ class ChangingEllipse:
         
 #        svg.add(svgwrite.animate.Animate(attributeName="rx", values="0;5;0", dur="10s", repeatCount="indefinite"))
 
-        link = dwg.add(dwg.a(href = "#", onmouseover="audio = new Audio('audio/welldoneCCBY3.ogg'); audio.play(); audio.loop=true;", onmouseout="audio.pause(); try { audio.currentTime=0; } catch(e) {} audio.loop=false;"))
+        if self.link != "":
+            link = dwg.add(dwg.a(href = "#", target="_blank", onmouseover="audio = new Audio('audio/welldoneCCBY3.ogg'); audio.play(); audio.loop=true;", onmouseout="audio.pause(); try { audio.currentTime=0; } catch(e) {} audio.loop=false;"))
 #        link = dwg.add(dwg.a(href = "#", target="_self", onclick="audio = new Audio('lyricchords.mp3');  try { audio.currentTime=0; } catch(e) {} audio.play()"))
-        link.add(svg)
+            link.add(svg)
+            svg = link
         
-        return link
+        return svg
     
     
 if __name__ == '__main__':

@@ -8,7 +8,7 @@ Created on Mon Apr  6 16:02:30 2020
 import svgwrite
 
 class Ellipse:
-    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'class_label', 'id_label', 'mirror_value']
+    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'class_label', 'id_label', 'mirror_value', 'link']
     
     def __init__(self, **kwargs):
         for p in Ellipse.parameters:
@@ -17,8 +17,7 @@ class Ellipse:
                 set_method(kwargs[p])
             else:
                 set_method(None)
-
-
+                
     def set_position(self, position):
         if position == None:
             position = (0, 0)
@@ -48,7 +47,7 @@ class Ellipse:
     
     def set_bordercolor(self, bordercolor):
         if bordercolor == None:
-            bordercolor = "green"
+            bordercolor = "none"
             
         self.bordercolor = bordercolor
         
@@ -66,7 +65,7 @@ class Ellipse:
     
     def set_borderwidth(self, borderwidth):
         if borderwidth == None:
-            borderwidth = 4
+            borderwidth = 0
             
         self.borderwidth = borderwidth
 
@@ -85,7 +84,7 @@ class Ellipse:
         
     def set_fillcolor(self, fillcolor):
         if fillcolor == None:
-            fillcolor = "gray"
+            fillcolor = "none"
             
         self.fillcolor = fillcolor
         
@@ -136,8 +135,16 @@ class Ellipse:
             mirror_value = ""
             
         self.mirror_value = mirror_value
+        
+    def set_link(self, link):
+        if link == "":
+            setlink = ""
+        else:             
+            setlink = 'dwg.add(dwg.a(href = "' + str(link) + '", target="_blank"' + '))'
+            
+        self.link = setlink
     
-
+    
     def __str__(self):
         result = "Ellipse object with params:\n"
         for p in Ellipse.parameters:
@@ -235,6 +242,9 @@ class Ellipse:
               
         if self.opacity_animation != "":
             svg.add(eval(self.opacity_animation))    
+            
+        if self.link != "":            
+            svg = eval(self.link).add(svg)
             
         return svg
     

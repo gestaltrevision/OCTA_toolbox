@@ -12,7 +12,7 @@ def Path(path, xsize, ysize, name = None):
     return type(str(name), (Path_,), {'path': path, 'xsizepath': xsize, 'ysizepath': ysize, 'name': name})
 
 class Path_:
-    parameters = ['position', 'bounding_box', 'data', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'class_label', 'id_label', 'mirror_value']
+    parameters = ['position', 'bounding_box', 'data', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'class_label', 'id_label', 'mirror_value', 'link']
     
     def __init__(self, **kwargs):
         for p in Path_.parameters:
@@ -55,7 +55,7 @@ class Path_:
                 
     def set_bordercolor(self, bordercolor):
         if bordercolor == None:
-            bordercolor = "green"
+            bordercolor = "none"
             
         self.bordercolor = bordercolor
         
@@ -73,7 +73,7 @@ class Path_:
     
     def set_borderwidth(self, borderwidth):
         if borderwidth == None:
-            borderwidth = 4
+            borderwidth = 0
             
         self.borderwidth = borderwidth
 
@@ -92,7 +92,7 @@ class Path_:
         
     def set_fillcolor(self, fillcolor):
         if fillcolor == None:
-            fillcolor = "gray"
+            fillcolor = "none"
             
         self.fillcolor = fillcolor
         
@@ -143,6 +143,14 @@ class Path_:
             mirror_value = ""
             
         self.mirror_value = mirror_value
+        
+    def set_link(self, link):
+        if link == "":
+            setlink = ""
+        else:             
+            setlink = 'dwg.add(dwg.a(href = "' + str(link) + '", target="_blank"' + '))'
+            
+        self.link = setlink
         
     def set_data(self, data):
         if data == None:
@@ -266,10 +274,9 @@ class Path_:
         if self.opacity_animation != "":
             svg.add(eval(self.opacity_animation))    
             
-#        link = dwg.add(dwg.a(href = "#", onmouseover="audio = new Audio('alarm.ogg'); audio.play(); audio.loop=true;", onmouseout="audio.pause(); try { audio.currentTime=0; } catch(e) {} audio.loop=false;"))
-#        link = dwg.add(dwg.a(href = "#", target="_self", onclick="audio = new Audio('lyricchords.mp3');  try { audio.currentTime=0; } catch(e) {} audio.play()"))
-#        link.add(svg)
-
+        if self.link != "":            
+            svg = eval(self.link).add(svg)
+            
         return svg
     
     

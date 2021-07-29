@@ -15,7 +15,7 @@ def Image(src, name = None):
     return type(str(name), (Image_,), {'source': src, 'name': name})
 
 class Image_:
-    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'class_label', 'id_label', 'mirror_value', 'data']
+    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'class_label', 'id_label', 'mirror_value', 'link', 'data']
     
     def __init__(self, **kwargs):
         for p in Image_.parameters:
@@ -55,7 +55,7 @@ class Image_:
     
     def set_bordercolor(self, bordercolor):
         if bordercolor == None:
-            bordercolor = "green"
+            bordercolor = "none"
             
         self.bordercolor = bordercolor
         
@@ -73,7 +73,7 @@ class Image_:
     
     def set_borderwidth(self, borderwidth):
         if borderwidth == None:
-            borderwidth = 4
+            borderwidth = 0
             
         self.borderwidth = borderwidth
 
@@ -92,7 +92,7 @@ class Image_:
         
     def set_fillcolor(self, fillcolor):
         if fillcolor == None:
-            fillcolor = "gray"
+            fillcolor = "none"
             
         self.fillcolor = fillcolor
     
@@ -131,6 +131,14 @@ class Image_:
             mirror_value = ""
             
         self.mirror_value = mirror_value
+        
+    def set_link(self, link):
+        if link == "":
+            setlink = ""
+        else:             
+            setlink = 'dwg.add(dwg.a(href = "' + str(link) + '", target="_blank"' + '))'
+            
+        self.link = setlink
         
     def set_data(self, data):
         if data == None:
@@ -237,7 +245,10 @@ class Image_:
         #        svg.fit(scale="slice")
         svg.fit(scale="meet")
 #        svg.stretch()
-        
+            
+        if self.link != "":            
+            svg = eval(self.link).add(svg)
+                    
         return svg
     
     

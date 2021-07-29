@@ -8,7 +8,7 @@ import svgwrite
 import math
 
 class Triangle:
-    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'class_label', 'id_label', 'mirror_value']
+    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'class_label', 'id_label', 'mirror_value', 'link']
     
     def __init__(self, **kwargs):
         for p in Triangle.parameters:
@@ -48,7 +48,7 @@ class Triangle:
     
     def set_bordercolor(self, bordercolor):
         if bordercolor == None:
-            bordercolor = "green"
+            bordercolor = "none"
             
         self.bordercolor = bordercolor
         
@@ -66,7 +66,7 @@ class Triangle:
     
     def set_borderwidth(self, borderwidth):
         if borderwidth == None:
-            borderwidth = 4
+            borderwidth = 0
             
         self.borderwidth = borderwidth
 
@@ -85,7 +85,7 @@ class Triangle:
         
     def set_fillcolor(self, fillcolor):
         if fillcolor == None:
-            fillcolor = "gray"
+            fillcolor = "none"
             
         self.fillcolor = fillcolor
         
@@ -137,7 +137,14 @@ class Triangle:
             
         self.mirror_value = mirror_value
     
-
+    def set_link(self, link):
+        if link == "":
+            setlink = ""
+        else:             
+            setlink = 'dwg.add(dwg.a(href = "' + str(link) + '", target="_blank"' + '))'
+            
+        self.link = setlink
+        
     def __str__(self):
         result = "Triangle object with params:\n"
         for p in Triangle.parameters:
@@ -239,6 +246,9 @@ class Triangle:
         if self.opacity_animation != "":
             svg.add(eval(self.opacity_animation))  
             
+        if self.link != "":            
+            svg = eval(self.link).add(svg)
+                        
         return svg
     
     

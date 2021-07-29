@@ -2,19 +2,97 @@
 """
 OCTA toolbox: demo
 """
-from octa.Stimulus import Grid, Outline, Stimulus
+from octa.Stimulus import Grid, Outline, Concentric, Stimulus
 from octa.Positions import Positions
 from octa.patterns import GridPattern, Pattern, Sequence, LinearGradient
 from octa.shapes import Ellipse, Rectangle, Triangle, Image, FitImage, Text, Polygon, RegularPolygon, Path, PathSvg, ChangingEllipse
+from octa.shapes.Image import Image_
+from octa.shapes.FitImage import FitImage_
+from octa.shapes.Text import Text_
+from octa.shapes.Polygon import Polygon_
+from octa.shapes.RegularPolygon import RegularPolygon_
+from octa.shapes.Path import Path_
+from octa.shapes.PathSvg import PathSvg_
 from octa.measurements import Complexity
 import random
+
+#%%
+
+stimulus = Grid(n_rows = 6, n_cols = 6, row_spacing = 37, col_spacing =50, x_margin = 60, y_margin = 60, background_color = '#F8F8F8', stim_mask = Ellipse(position = (300/2,300/2), bounding_box = (300,300), fillcolor = ["radial", "white", "dodgerblue"]), stim_orientation = 7)
+
+
+stimulus.shapes = GridPattern.RepeatAcrossRightDiagonal([ Rectangle , Ellipse ])
+stimulus.bounding_boxes = GridPattern.ElementRepeatAcrossLeftDiagonal([ (15,15) ])
+stimulus.fillcolors = GridPattern.RepeatAcrossRightDiagonal([ '#9C4B9C' ])
+stimulus.orientations = GridPattern.RepeatAcrossRightDiagonal([ 15 ])
+stimulus.borderwidths = GridPattern.RepeatAcrossRows([ 0 ])
+stimulus.bordercolors = GridPattern.RepeatAcrossColumns([ '#62BD80' ])
+stimulus.opacities = GridPattern.RepeatAcrossRows([ 1 ])
+stimulus.mirror_values = GridPattern.RepeatAcrossRightDiagonal([ 'none' ])
+
+stimulus.Show()
+stimulus.SaveSVG("test")
+
+#%%
+stimulus = Grid(n_rows = 6, n_cols = 6, row_spacing = 37, col_spacing = 37, x_margin = 60, y_margin = 60, background_color = '#F8F8F8', background_shape = Ellipse(bounding_box = (200,200)), stim_orientation = 15)
+
+
+stimulus.shapes = GridPattern.ElementRepeatAcrossRows([ Ellipse ])
+stimulus.bounding_boxes = GridPattern.ElementRepeatAcrossRows([ (25,25) ])
+stimulus.fillcolors = GridPattern.GradientAcrossRightDiagonal(start_value = '#62BD80', end_value = '#ED4959')
+stimulus.orientations = GridPattern.ElementRepeatAcrossColumns([ 0 ])
+stimulus.borderwidths = GridPattern.RepeatAcrossRows([ 0 ])
+stimulus.bordercolors = GridPattern.RepeatAcrossColumns([ '#F39130' ])
+stimulus.opacities = GridPattern.RepeatAcrossColumns([ 1 ])
+stimulus.mirror_values = GridPattern.RepeatAcrossColumns([ 'none' ])
+
+stimulus.Show()
+stimulus.SaveSVG("test")
+#%%
+
+stimulus = Grid(2,2, stim_link = "http://evg.ulyssis.be/octa/")
+stimulus.shapes = GridPattern.RepeatAcrossElements([Ellipse])
+stimulus.links = GridPattern.RepeatAcrossElements([ "http://evg.ulyssis.be/evg/"])
+stimulus.Show()
+stimulus.SaveSVG("test")
+#%%
+
+# stimulus = Grid(2,2, background_color = "grey", background_shape= Path_(bounding_box = (120,120), data = ["M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z", 512, 512]))
+# stimulus = Grid(2,2, background_color = "grey", background_shape= 'Path_("M 256.00,0.00C 114.615,0.00,0.00,114.615,0.00,256.00s 114.615,256.00, 256.00,256.00s 256.00-114.615, 256.00-256.00S 397.385,0.00, 256.00,0.00z M 208.00,416.00L 102.00,278.00l 47.00-49.00l 59.00,75.00 l 185.00-151.00l 23.00,23.00L 208.00,416.00z", 512, 512)')
+stimulus = Grid(2,2, background_color = "grey", background_shape= "Triangle")
+stimulus.Show()
+stimulus.SaveSVG("test")
+#%%
+
+stimulus = Concentric(n_elements = 3, x_margin = 60, y_margin = 60, background_color = '#F8F8F8')
+
+stimulus.shapes = GridPattern.MirrorAcrossRightDiagonal([ Rectangle , Ellipse , Triangle ])
+# stimulus.bounding_boxes = GridPattern.MirrorAcrossRows([ (15,15) ])
+stimulus.fillcolors = GridPattern.ElementRepeatAcrossColumns([ '#9C4B9C' , '#62BD80' , '#FCE533' ])
+stimulus.orientations = GridPattern.MirrorAcrossRightDiagonal([ 0 ])
+stimulus.borderwidths = GridPattern.RepeatAcrossLeftDiagonal([ 0 ])
+stimulus.bordercolors = GridPattern.RepeatAcrossColumns([ '#FCE533' ])
+stimulus.opacities = GridPattern.RepeatAcrossLeftDiagonal([ 1 ])
+stimulus.mirror_values = GridPattern.RepeatAcrossRows([ 'none' ])
+
+stimulus.Show()
+#%%
+n = 6
+stimulus = Concentric(n_elements = n)
+# stimulus.bounding_boxes = GridPattern.RepeatAcrossElements(Pattern.Create2DGradient(x = LinearGradient(start = 20, end = 50, n_elements = n, invert = True),
+#                                                                                     y = LinearGradient(start = 20, end = 50, n_elements = n, invert = True),
+#                                                                                     n_elements = n))
+# stimulus.fillcolors = GridPattern.RepeatAcrossElements(["red", "green", "blue"])
+
+# stimulus.remove_elements(element_id = [1])
+stimulus.Show()
 
 #%%
 
 stimulus = Grid(2,2)
 # stimulus.borderwidths = GridPattern.RepeatAcrossElements([5])
 # stimulus.positions.SetPositionDeviations(0,5,5)
-# # stimulus.remove_elements(element_id = [1,3])
+stimulus.remove_elements(element_id = [1,3])
 # # stimulus.set_element_shapes(Ellipse, n_changes = 2)
 # stimulus.set_element_bounding_boxes([(5,5),(50,10), (10,50), (30,30)], element_id = [0,1,2,3])
 # # stimulus.set_element_shapes(shape_value = [Polygon(5)], n_changes = 2)
@@ -42,14 +120,31 @@ stimulus.Show()
 #%%
 n_elements = 26
 stimulus = Outline(n_elements, shape_bounding_box = (300,300))
-stimulus.positions = Positions.CreateCircle(radius = 300, n_elements = n_elements, starting_point = "top")
-stimulus.set_element_fillcolor(0, "red")
-stimulus.set_element_fillcolor(int(n_elements/2), "green")
-stimulus.set_element_fillcolor(n_elements-1, "blue")
+stimulus.positions = Positions.CreateCircle(radius = 300, n_elements = n_elements, starting_point = "bottom")
 
-stimulus.positions.SetPositionDeviations(element_id = [5,10], x_offset = [-25, 25], y_offset = 25)
+# stimulus.set_element_fillcolor(0, "red")
+# stimulus.set_element_fillcolor(int(n_elements/2), "green")
+# stimulus.set_element_fillcolor(n_elements-1, "blue")
+
+# stimulus.remove_elements(element_id = [1,3])
+# stimulus.set_element_shapes(Ellipse, n_changes = 2)
+# stimulus.set_element_bounding_boxes([(5,5),(50,10), (10,50), (30,30)], element_id = [0,1,2,3])
+# stimulus.set_element_shapes(shape_value = [Polygon(5)], n_changes = 2)
+# stimulus.set_element_bordercolors(["red"], element_id = [0])
+# stimulus.set_element_fillcolors([["radial", "white","red"]], element_id = [1])
+# stimulus.set_element_opacities([0.5], element_id = [1])
+# stimulus.set_element_borderwidths([15], element_id = [0])
+
+# stimulus.swap_elements(swap_pairs = [(0,2), (1,3)])
+# stimulus.swap_elements(n_swap_pairs = 2)
+# stimulus.fillcolors = GridPattern.RepeatAcrossElements(["red", "green", "blue"])
+# stimulus.swap_features(feature_dimensions = ["fillcolors"], swap_pairs = [(0,1)])
+
+
+# stimulus.positions.SetPositionDeviations(element_id = [5,10], x_offset = [-25, 25], y_offset = 25)
 stimulus.Show()
 
+#%%
 n_elements = 50
 stimulus = Outline(n_elements, shape = 'img/checkmark.svg', shape_bounding_box = (500,500))
 stimulus.shapes = GridPattern.RepeatAcrossElements([Polygon(5), PathSvg('img/checkmark.svg')])
