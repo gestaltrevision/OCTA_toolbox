@@ -4,7 +4,11 @@
         "height": 240,
         "background_color": "none",
         "background_shape": "auto",
-        "mask": "none"
+        "mask": "none",
+        "stim_orientation": 0,
+        "stim_mirror_value": null,
+        "stim_class_label": null,
+        "stim_id_label": null
     },
     "structure": {
         "class": "<class 'octa.Stimulus.Grid'>",

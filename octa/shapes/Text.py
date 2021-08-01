@@ -228,45 +228,18 @@ class Text_:
     def generate(self, dwg):
         mirror_transform = self.create_mirror_transform()
         
-        topleft = (self.position[0] - self.bounding_box[0]/2 , self.position[1] - self.bounding_box[1]/2)
-
-        textlength = max([(len(i) - i.count(" ")) for i in self.data.split("\n")])
-        
-        n_lines = len(self.data.split("\n"))
-       
         svg = dwg.text(
                 text        = self.data,
                 fill        = self.create_fillcolor(dwg),
                 opacity     = self.opacity,
                 stroke      = self.create_bordercolor(dwg),
                 stroke_width = self.borderwidth,
-                dominant_baseline = "middle",
                 text_anchor = "middle",
-#                x           = topleft[0]+((self.bounding_box[0] - (8*textlength)) / 2.0),
-#                y           = topleft[1]+((self.bounding_box[1] - (20*n_lines)) / 2.0),
-#                width       = self.bounding_box[0],
-#                height      = self.bounding_box[1],
-#                text_align = 'center',
-#                display_align = 'center',
-                insert      = (self.position[0], self.position[1]+(min(self.bounding_box)/(2*min(self.bounding_box)/textlength))),
-                font_size   = min(self.bounding_box)/textlength,
-                font_family = 'Roboto Mono',
-#                textLength  = self.bounding_box[0],
-#                size        = self.bounding_box,
+                insert      = (self.position[0], self.position[1]+((min(self.bounding_box))/2)-(min(self.bounding_box)*.015)),
+                style = "text-align: middle; font-size:" + str(min(self.bounding_box)*1.355) + "px; font-family: Arial",
+                textLength  = '100%',
                 transform   = " ".join([mirror_transform, self.rotation_transform]))
 
-#        svg = dwg.text(
-#                text        = self.data, 
-#                insert      = self.position,
-#                fill        = self.fillcolor,
-#                stroke      = self.bordercolor,
-#                stroke_width = self.borderwidth,
-##                style       = 'text-align = "middle";',
-#                textlength  = self.bounding_box[0],
-#                font_size   = min(self.bounding_box), 
-##                font_weight = str(700), 
-#                transform   = " ".join([mirror_transform, rotation_transform]))
-#        
         if self.class_label != "":
             svg['class']         = self.class_label
         if self.id_label != "":

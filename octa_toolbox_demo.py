@@ -13,8 +13,49 @@ from octa.shapes.Polygon import Polygon_
 from octa.shapes.RegularPolygon import RegularPolygon_
 from octa.shapes.Path import Path_
 from octa.shapes.PathSvg import PathSvg_
-from octa.measurements import Complexity
+from octa.measurements import Order, Complexity
 import random
+
+#%%
+stimulus = Grid(3,6, background_color = "grey")
+stimulus.shapes = GridPattern.RepeatAcrossElements([Text("o"),Rectangle, None, Rectangle, Text("C"),Text("T"),Text("A")])
+stimulus.fillcolors = GridPattern.RepeatAcrossRows(["red", "green", "blue"])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(5,10)])
+# stimulus.swap_elements(swap_pairs = (1,10))
+# stimulus.set_element_fillcolors(fillcolor_value = "white", element_id =  [0,5])
+# stimulus.remove_element(0)
+stimulus.positions.SetPositionDeviations([1],0,50)
+stimulus.Show()
+stimulus.SavePNG("test")
+
+# print(Complexity.CalculateElementsLOCE(stimulus, distinction_features =  ['fillcolors', 'links', 'data']))
+# print(Order.CalculatePatternDeviants(stimulus, distinction_features =  ['bounding_boxes', 'fillcolors', 'shapes']))
+print(Order.CalculatePositionDeviants(stimulus))
+
+#%%
+stimulus = Grid(2,2)
+stimulus._autosize_method = "tight_fit"
+stimulus.Show()
+stimulus.SaveJSON("test")
+
+
+stim = Stimulus.LoadFromJSON("test.json")
+stim.fillcolors  = GridPattern.ElementRepeatAcrossElements(["red"])
+stim.Show()
+
+#%%
+# random.seed(25)
+stimulus = Grid(9,9, row_spacing = 30, col_spacing = 30, x_margin = 20, y_margin = 20, size = (300,300))
+# stimulus.positions = Positions.CreateSineGrid(9, 9, row_spacing = 30, col_spacing = 30, axis = 'xy', A = 20)
+# stimulus.positions = Positions.CreateRandomPositions(n_elements = 89, width = 300, height = 300, min_distance = 20, max_iterations = 10)
+stimulus.positions.SetPositionJitter(distribution = 'normal', mu = 0, std = 5)
+
+stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(20,20)])
+stimulus.shapes = GridPattern.RepeatAcrossLayers([Rectangle, Triangle, Ellipse])
+stimulus.fillcolors = GridPattern.GradientAcrossRightDiagonal(start_value = 'limegreen', end_value = 'steelblue')
+stimulus.orientations = GridPattern.MirrorAcrossLeftDiagonal([-90,-45,0,45,90])
+stimulus.Show()
+stimulus.SavePNG("normaljitter")
 
 #%%
 
@@ -274,7 +315,7 @@ stimulus.Show()
 random.seed(1626762732)
 stimulus = Grid(n_rows = 6, n_cols = 6, x_margin = 60, y_margin = 60, size = None, row_spacing = 36, col_spacing = 36, background_color = '#F8F8F8', stim_orientation =0, stim_mirror_value = 'none')
 
-stimulus.positions = Positions.CreateRandomPattern(n_elements = 36, width = 250, height = 250, min_distance = 10, max_iterations = 10)
+stimulus.positions = Positions.CreateRandomPositions(n_elements = 36, width = 250, height = 250, min_distance = 10, max_iterations = 10)
 
 stimulus.shapes = GridPattern.RepeatAcrossElements([ Ellipse ])
 stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([ (25,25) ])

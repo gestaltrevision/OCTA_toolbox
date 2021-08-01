@@ -29,10 +29,12 @@ class Positions:
     y : Pattern
         Object that contains the values for the y-coordinates
     """
-    def __init__(self, x, y):
+    def __init__(self, x, y, positiontype = None, positionparameters = {}):
         self._x = x
         self._y = y
-        self._deviation = False
+        self._position_type = positiontype  
+        self._position_parameters = positionparameters
+        self._deviation = None
         self._deviation_parameters = {}
         self._randomization = None
         self._randomization_parameters = {}
@@ -84,7 +86,7 @@ class Positions:
         #     y[i] += position_jitter['y'][i]
 
         return y
-    
+        
     def GetPositions(self):
         position_jitter = self._CalculatePositionJitter()
         position_deviations = self._CalculatePositionDeviations()
@@ -252,7 +254,10 @@ class Positions:
         y = Pattern(list(range(0, n_rows * row_spacing, row_spacing)))
         y = y.RepeatElements(n_cols)    
         
-        return Positions(x, y)
+        positiontype = "2DGrid"
+        positionparameters = {'n_rows' : n_rows, 'n_cols' : n_cols, 'row_spacing' : row_spacing, 'col_spacing' : col_spacing}
+        
+        return Positions(x, y, positiontype, positionparameters)
     
     def CreateCustomPositions(x, y):
         """
@@ -276,7 +281,10 @@ class Positions:
         x = Pattern(list(x))
         y = Pattern(list(y))   
         
-        return Positions(x, y)
+        positiontype = "CustomPositions"
+        positionparameters = {'x': x, 'y': y}
+        
+        return Positions(x, y, positiontype, positionparameters)
         
     
     def CreateSineGrid(n_rows, n_cols, row_spacing = 50, col_spacing = 50, A = 25, f = .1, axis = "x"):
@@ -311,24 +319,28 @@ class Positions:
         
         y = Pattern(list(range(0, n_rows * row_spacing , row_spacing)))
         y = y.RepeatElements(n_cols)    
+        
+        positiontype = "SineGrid"
+        positionparameters = {'n_rows' : n_rows, 'n_cols' : n_cols, 'row_spacing' : row_spacing, 
+                              'col_spacing' : col_spacing, 'A' :  A, 'f' : f, 'axis' : axis}
                 
         if axis == "x":
             y_mod = Pattern( list(A*np.sin(2*np.pi*f*np.array(range(n_cols)))))
             y_mod = y_mod.RepeatPattern(n_rows)
             
-            return Positions(x, y + y_mod)
+            return Positions(x, y + y_mod, positiontype, positionparameters)
         elif axis == "y":
             x_mod = Pattern( list(A*np.sin(2*np.pi*f*np.array(range(n_rows)))))
             x_mod = x_mod.RepeatElements(n_cols)
             
-            return Positions(x + x_mod, y)
+            return Positions(x + x_mod, y, positiontype, positionparameters)
         else:
             y_mod = Pattern( list(A*np.sin(2*np.pi*f*np.array(range(n_cols)))))
             y_mod = y_mod.RepeatPattern(n_rows)
             x_mod = Pattern( list(A*np.sin(2*np.pi*f*np.array(range(n_rows)))))
             x_mod = x_mod.RepeatElements(n_cols)
             
-            return Positions(x + x_mod, y + y_mod)
+            return Positions(x + x_mod, y + y_mod, positiontype, positionparameters)
     
     def CreateCircle(radius, n_elements, starting_point = "left"):
         """
@@ -362,7 +374,10 @@ class Positions:
         x   = Pattern(list( (radius * np.cos(idx)))[0:n_elements])
         y   = Pattern(list( (radius * np.sin(idx)))[0:n_elements])
         
-        return Positions(x, y)
+        positiontype = "Circle"
+        positionparameters = {'radius' : radius, 'n_elements' :  n_elements, 'starting_point' : starting_point}
+        
+        return Positions(x, y, positiontype, positionparameters)
     
     def CreateShape(n_elements, src = None, path = None, width = 300, height = 300):
         """
@@ -418,10 +433,13 @@ class Positions:
         # idx = np.deg2rad(np.linspace(0, 360, n_elements+1))
         # x   = Pattern(list( (radius * np.cos(idx)))[0:n_elements])
         # y   = Pattern(list( (radius * np.sin(idx)))[0:n_elements])
+
+        positiontype = "Shape"
+        positionparameters = {'n_elements' : n_elements, 'src' : src, 'path' : path, 'width' : width, 'height' : height}
         
-        return Positions(x, y)
+        return Positions(x, y, positiontype, positionparameters)
     
-    def CreateRandomPattern(n_elements, width = 300, height = 300, min_distance = 30, max_iterations = 10):
+    def CreateRandomPositions(n_elements, width = 300, height = 300, min_distance = 30, max_iterations = 10):
         """
         Generates random (x,y) positions
 
@@ -479,12 +497,16 @@ class Positions:
                 
             outer_iteration_count += 1
             
-        assert all_elements_valid, "CreateRandomPattern failed to produce %d elements with a minimum distance %d\n. Try changin the max_iterations, or decrease the number of elements and/or minimum distance."%(n_elements, min_distance)
+        assert all_elements_valid, "CreateRandomPositions failed to produce %d elements with a minimum distance %d\n. Try changin the max_iterations, or decrease the number of elements and/or minimum distance."%(n_elements, min_distance)
         
         x = Pattern(list( p[0] for p in positions))
         y = Pattern(list( p[1] for p in positions))
         
-        return Positions(x, y)
+        positiontype = "RandomPositions"
+        positionparameters = {'n_elements' : n_elements, 'width' : width, 'height' : height,
+                              'min_distance' :  min_distance, 'max_iterations' : max_iterations}
+        
+        return Positions(x, y, positiontype, positionparameters)
                        
 
     

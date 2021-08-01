@@ -22,7 +22,7 @@ class GridPattern(Pattern):
             Number of columns in the 2D grid.
 
     """
-    def __init__(self, pattern, n_rows = 5, n_cols = 5, patterntype = None, patternorientation = None, patternclass = "GridPattern."):
+    def __init__(self, pattern, n_rows = 5, n_cols = 5, patterntype = None, patterndirection = None, patternclass = "GridPattern."):
 
         #print(type(pattern))
         assert type(pattern) == list or type(pattern) == Pattern, "Provided pattern must be a list"
@@ -35,7 +35,7 @@ class GridPattern(Pattern):
         self.n_cols = n_cols
         self.patternclass = patternclass
         self.patterntype = patterntype
-        self.patternorientation = patternorientation
+        self.patterndirection = patterndirection
                 
         
     def __str__(self):
@@ -98,9 +98,9 @@ class ElementRepeatAcrossElements(GridPattern):
         result = self.RepeatElementsToSize(required_count)        
         
         self.patterntype = "ElementRepeat"
-        self.patternorientation = "AcrossElements"
+        self.patterndirection = "AcrossElements"
         
-        return ElementRepeatAcrossElements(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+        return ElementRepeatAcrossElements(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
     
 class ElementRepeatAcrossColumns(GridPattern):
     """
@@ -143,9 +143,9 @@ class ElementRepeatAcrossColumns(GridPattern):
         p = p.RepeatPattern(self.n_rows)
         
         self.patterntype = "ElementRepeat"
-        self.patternorientation = "AcrossColumns"
+        self.patterndirection = "AcrossColumns"
 
-        return ElementRepeatAcrossColumns(p, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+        return ElementRepeatAcrossColumns(p, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
 
 class ElementRepeatAcrossRows(GridPattern):
     """
@@ -189,9 +189,9 @@ class ElementRepeatAcrossRows(GridPattern):
         p = p.RepeatElements(self.n_cols)
         
         self.patterntype = "ElementRepeat"
-        self.patternorientation = "AcrossRows"
+        self.patterndirection = "AcrossRows"
 
-        return ElementRepeatAcrossRows(p, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+        return ElementRepeatAcrossRows(p, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
         
 class ElementRepeatAcrossRightDiagonal(GridPattern):
     """
@@ -237,9 +237,9 @@ class ElementRepeatAcrossRightDiagonal(GridPattern):
             shifted_pattern = shifted_pattern[1:]  + [shifted_pattern[0]]
                 
         self.patterntype = "ElementRepeat"
-        self.patternorientation = "AcrossRightDiagonal"
+        self.patterndirection = "AcrossRightDiagonal"
 
-        return ElementRepeatAcrossRightDiagonal(result, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+        return ElementRepeatAcrossRightDiagonal(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
             
     
 class ElementRepeatAcrossLeftDiagonal(GridPattern):
@@ -286,9 +286,9 @@ class ElementRepeatAcrossLeftDiagonal(GridPattern):
             shifted_pattern = [shifted_pattern[-1]] + shifted_pattern[:-1]
                 
         self.patterntype = "ElementRepeat"
-        self.patternorientation = "AcrossLeftDiagonal"
+        self.patterndirection = "AcrossLeftDiagonal"
 
-        return ElementRepeatAcrossLeftDiagonal(result, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)    
+        return ElementRepeatAcrossLeftDiagonal(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)    
   
 class ElementRepeatAcrossLayers(GridPattern):
     """
@@ -356,9 +356,9 @@ class ElementRepeatAcrossLayers(GridPattern):
         result = [item for sublist in patternmatrix for item in sublist]
                             
         self.patterntype = "ElementRepeat"
-        self.patternorientation = "AcrossLayers"
+        self.patterndirection = "AcrossLayers"
 
-        return ElementRepeatAcrossLayers(result, self.n_rows, self.n_cols, self.patterntype, self.patternorientation) 
+        return ElementRepeatAcrossLayers(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection) 
     
    
 class RepeatAcrossElements(GridPattern):
@@ -393,9 +393,9 @@ class RepeatAcrossElements(GridPattern):
         result = self.RepeatPattern(1 + int(required_count/current_count), required_count)
         
         self.patterntype = "Repeat"
-        self.patternorientation = "AcrossElements"
+        self.patterndirection = "AcrossElements"
         
-        return RepeatAcrossElements(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+        return RepeatAcrossElements(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
     
     
 class RepeatAcrossColumns(GridPattern):
@@ -439,9 +439,9 @@ class RepeatAcrossColumns(GridPattern):
         p = p.RepeatPattern(self.n_rows)
         
         self.patterntype = "Repeat"
-        self.patternorientation = "AcrossColumns"
+        self.patterndirection = "AcrossColumns"
 
-        return RepeatAcrossColumns(p, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+        return RepeatAcrossColumns(p, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
         
     
 class RepeatAcrossRows(GridPattern):
@@ -486,9 +486,9 @@ class RepeatAcrossRows(GridPattern):
         p = p.RepeatElements(self.n_cols)
         
         self.patterntype = "Repeat"
-        self.patternorientation = "AcrossRows"
+        self.patterndirection = "AcrossRows"
 
-        return RepeatAcrossRows(p, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+        return RepeatAcrossRows(p, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
     
     
 class RepeatAcrossRightDiagonal(GridPattern):
@@ -530,9 +530,9 @@ class RepeatAcrossRightDiagonal(GridPattern):
             shifted_pattern = shifted_pattern[1:]  + [shifted_pattern[0]]
                 
         self.patterntype = "Repeat"
-        self.patternorientation = "AcrossRightDiagonal"
+        self.patterndirection = "AcrossRightDiagonal"
 
-        return RepeatAcrossRightDiagonal(result, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+        return RepeatAcrossRightDiagonal(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
             
     
 class RepeatAcrossLeftDiagonal(GridPattern):
@@ -575,9 +575,9 @@ class RepeatAcrossLeftDiagonal(GridPattern):
             shifted_pattern = [shifted_pattern[-1]] + shifted_pattern[:-1]
                 
         self.patterntype = "Repeat"
-        self.patternorientation = "AcrossLeftDiagonal"
+        self.patterndirection = "AcrossLeftDiagonal"
 
-        return RepeatAcrossLeftDiagonal(result, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)    
+        return RepeatAcrossLeftDiagonal(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)    
   
 class RepeatAcrossLayers(GridPattern):
     """
@@ -644,9 +644,9 @@ class RepeatAcrossLayers(GridPattern):
         result = [item for sublist in patternmatrix for item in sublist]
                             
         self.patterntype = "Repeat"
-        self.patternorientation = "AcrossLayers"
+        self.patterndirection = "AcrossLayers"
 
-        return RepeatAcrossLayers(result, self.n_rows, self.n_cols, self.patterntype, self.patternorientation) 
+        return RepeatAcrossLayers(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection) 
     
 
 class MirrorAcrossElements(GridPattern):
@@ -697,9 +697,9 @@ class MirrorAcrossElements(GridPattern):
             p.pattern = m1 + m2[1:]
         
         self.patterntype = "Mirror"
-        self.patternorientation = "AcrossElements"
+        self.patterndirection = "AcrossElements"
 
-        return MirrorAcrossElements(p, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+        return MirrorAcrossElements(p, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
     
     
 class MirrorAcrossRows(GridPattern):
@@ -752,9 +752,9 @@ class MirrorAcrossRows(GridPattern):
         p = p.RepeatElements(self.n_cols)
         
         self.patterntype = "Mirror"
-        self.patternorientation = "AcrossRows"
+        self.patterndirection = "AcrossRows"
 
-        return MirrorAcrossRows(p, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+        return MirrorAcrossRows(p, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
             
     
 class MirrorAcrossColumns(GridPattern):
@@ -805,9 +805,9 @@ class MirrorAcrossColumns(GridPattern):
         p = p.RepeatPattern(self.n_rows)
         
         self.patterntype = "Mirror"
-        self.patternorientation = "AcrossColumns"
+        self.patterndirection = "AcrossColumns"
 
-        return MirrorAcrossColumns(p, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+        return MirrorAcrossColumns(p, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
     
     
 class MirrorAcrossLeftDiagonal(GridPattern):
@@ -858,9 +858,9 @@ class MirrorAcrossLeftDiagonal(GridPattern):
             shifter = shifter[1:] + [shifter[0]]
 
         self.patterntype = "Mirror"
-        self.patternorientation = "AcrossLeftDiagonal"
+        self.patterndirection = "AcrossLeftDiagonal"
                 
-        return MirrorAcrossLeftDiagonal(result, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+        return MirrorAcrossLeftDiagonal(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
     
     
 class MirrorAcrossRightDiagonal(GridPattern):
@@ -911,9 +911,9 @@ class MirrorAcrossRightDiagonal(GridPattern):
             shifter = shifter[1:] + [shifter[0]]
         
         self.patterntype = "Mirror"
-        self.patternorientation = "AcrossRightDiagonal"
+        self.patterndirection = "AcrossRightDiagonal"
                
-        return MirrorAcrossRightDiagonal(result, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+        return MirrorAcrossRightDiagonal(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
   
 class MirrorAcrossLayers(GridPattern):
     """
@@ -991,9 +991,9 @@ class MirrorAcrossLayers(GridPattern):
         result = [item for sublist in patternmatrix for item in sublist]
                             
         self.patterntype = "Mirror"
-        self.patternorientation = "AcrossLayers"
+        self.patterndirection = "AcrossLayers"
 
-        return MirrorAcrossLayers(result, self.n_rows, self.n_cols, self.patterntype, self.patternorientation) 
+        return MirrorAcrossLayers(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection) 
         
 class GradientAcrossElements(GridPattern):
     """
@@ -1019,9 +1019,9 @@ class GradientAcrossElements(GridPattern):
 
         self.pattern = result.pattern
         self.patterntype = "Gradient"
-        self.patternorientation = "AcrossElements"
+        self.patterndirection = "AcrossElements"
         
-        return GridPattern(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+        return GridPattern(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
     
 
 class GradientAcrossRows(GridPattern):
@@ -1048,9 +1048,9 @@ class GradientAcrossRows(GridPattern):
         
         self.pattern = p.pattern
         self.patterntype = "Gradient"
-        self.patternorientation = "AcrossRows"
+        self.patterndirection = "AcrossRows"
 
-        return GridPattern(p.pattern, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+        return GridPattern(p.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
     
     
 class GradientAcrossColumns(GridPattern):
@@ -1077,9 +1077,9 @@ class GradientAcrossColumns(GridPattern):
         
         self.pattern = p.pattern
         self.patterntype = "Gradient"
-        self.patternorientation = "AcrossColumns"
+        self.patterndirection = "AcrossColumns"
 
-        return GridPattern(p.pattern, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+        return GridPattern(p.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
     
     
 class GradientAcrossLeftDiagonal(GridPattern):
@@ -1111,9 +1111,9 @@ class GradientAcrossLeftDiagonal(GridPattern):
                 
         self.pattern = Pattern(result).pattern
         self.patterntype = "Gradient"
-        self.patternorientation = "AcrossLeftDiagonal"
+        self.patterndirection = "AcrossLeftDiagonal"
 
-        return GridPattern(result, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+        return GridPattern(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
         
     
 class GradientAcrossRightDiagonal(GridPattern):
@@ -1145,9 +1145,9 @@ class GradientAcrossRightDiagonal(GridPattern):
                 
         self.pattern = Pattern(result).pattern
         self.patterntype = "Gradient"
-        self.patternorientation = "AcrossRightDiagonal"
+        self.patterndirection = "AcrossRightDiagonal"
 
-        return GridPattern(result, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+        return GridPattern(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
     
 class GradientAcrossLayers(GridPattern):
     """
@@ -1219,9 +1219,9 @@ class GradientAcrossLayers(GridPattern):
                             
         self.pattern = Pattern(result).pattern
         self.patterntype = "Gradient"
-        self.patternorientation = "AcrossLayers"
+        self.patterndirection = "AcrossLayers"
 
-        return GridPattern(result, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+        return GridPattern(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
 
 class LayeredGrid(GridPattern):
     """
@@ -1307,9 +1307,9 @@ class LayeredGrid(GridPattern):
             current_cols = new_cols
             
         self.patterntype = "Layered"
-        self.patternorientation = "Grid"
+        self.patterndirection = "Grid"
             
-        return GridPattern(current_center, current_rows, current_cols, self.patterntype, self.patternorientation)
+        return GridPattern(current_center, current_rows, current_cols, self.patterntype, self.patterndirection)
     
     
 class TiledGrid(GridPattern):
@@ -1367,9 +1367,9 @@ class TiledGrid(GridPattern):
         
         self.pattern = source_pattern #Pattern(result).pattern 
         self.patterntype = "Tiled"
-        self.patternorientation = "Grid"
+        self.patterndirection = "Grid"
         
-        return GridPattern(result, n_rows * self.tile_multiplier[0], n_cols * self.tile_multiplier[1], self.patterntype, self.patternorientation)
+        return GridPattern(result, n_rows * self.tile_multiplier[0], n_cols * self.tile_multiplier[1], self.patterntype, self.patterndirection)
     
 
 class TiledElementGrid(GridPattern):
@@ -1431,9 +1431,9 @@ class TiledElementGrid(GridPattern):
         self.pattern = source_pattern #Pattern(result).pattern    
 #        self.pattern = result
         self.patterntype = "TiledElement"
-        self.patternorientation = "Grid"
+        self.patterndirection = "Grid"
             
-        return RepeatAcrossElements(result, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+        return RepeatAcrossElements(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
        
 class RandomPattern(GridPattern):
     """
@@ -1453,11 +1453,11 @@ class RandomPattern(GridPattern):
     """
     _fixed_grid = False
     
-    def __init__(self, pattern, n_rows = 5, n_cols = 5, patterntype = None, patternorientation = None, counts = None):
+    def __init__(self, pattern, n_rows = 5, n_cols = 5, patterntype = None, patterndirection = None, counts = None):
         super().__init__(pattern, n_rows, n_cols)
         self.counts = counts
         self.patterntype = patterntype
-        self.patternorientation = patternorientation
+        self.patterndirection = patterndirection
                 
     def check_counts(self):
         if self.counts is not None:
@@ -1486,6 +1486,6 @@ class RandomPattern(GridPattern):
         p = p.RandomizeOrder()
         
         self.patterntype = "RandomPattern"
-        self.patternorientation = ""
+        self.patterndirection = ""
         
-        return RandomPattern(p, self.n_rows, self.n_cols, self.patterntype, self.patternorientation)
+        return RandomPattern(p, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
