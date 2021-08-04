@@ -204,4 +204,4 @@ def CalculateElementsLOCI(self, distinction_features = ['shapes', 'bounding_boxe
     if ('id_labels' in distinction_features) and (id_idlabel_values == True):
         LOCI += 1
         
-    return LOCI
+    return len(distinction_features) - LOCI

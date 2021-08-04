@@ -17,20 +17,62 @@ from octa.measurements import Order, Complexity
 import random
 
 #%%
+# random.seed(15)
+stim = Stimulus.LoadFromJSON("test.json")
+# stim.Render()
+stim.Show()
+
+#%%
+#Size jitter
+random.seed(15)
+stimulus = Grid(3,3)
+stimulus.shapes = GridPattern.RepeatAcrossLeftDiagonal([Rectangle])
+stimulus.fillcolors = GridPattern.GradientAcrossLayers("red", "blue") #.RandomizeAcrossRows()
+stimulus.bounding_boxes = GridPattern.ElementRepeatAcrossRows([(20,20)]).AddUniformJitter(-5,5, 'x=y')
+# stimulus.orientations = GridPattern.RepeatAcrossRows([0])
+stimulus.positions.SetPositionJitter(distribution = 'normal', mu = 0, std = 5, axis = 'x=y')
+# stimulus.fillcolors = GridPattern.GradientAcrossRows("red", "blue").RandomizeAcrossRows()
+# centergrid = GridPattern.MirrorAcrossLeftDiagonal([ 0, 45, 90],2, 2)
+# outerlayers = Pattern([ 0, 45]) 
+# stimulus.orientations = GridPattern.LayeredGrid(center_grid = centergrid, outer_layers = outerlayers)
+# stimulus.Render()
+stimulus.Show()
+
+stimulus.SaveJSON("test")
+# xsizejitter = Pattern([i[0] for i in stimulus.bounding_boxes]).AddNormalJitter(mu = 0 , std = 15).pattern
+# ysizejitter = Pattern([i[1] for i in stimulus.bounding_boxes]).AddNormalJitter(mu = 0 , std = 0).pattern
+# stimulus.bounding_boxes = GridPattern.RepeatAcrossElements(list(zip(xsizejitter, ysizejitter)))
+
+
+# stimulus.orientations = GridPattern.RepeatAcrossElements([0])
+# orientationjitter = Pattern(stimulus.orientations).AddNormalJitter(mu = 0 , std = 30).pattern
+# stimulus.orientations = GridPattern.RepeatAcrossElements(orientationjitter)
+# print(Order.CalculatePatternDeviants(stimulus))
+
+#%%
+
+s = Stimulus.LoadFromJSON("testjson.json")
+# s.fillcolors = GridPattern.RepeatAcrossColumns(["limegreen"])
+s.Show()
+#%%
 stimulus = Grid(3,6, background_color = "grey")
-stimulus.shapes = GridPattern.RepeatAcrossElements([Text("o"),Rectangle, None, Rectangle, Text("C"),Text("T"),Text("A")])
+# stimulus.shapes = GridPattern.RepeatAcrossElements([Text("T"),Text("e"),Text("s"),Text("t"), Text("O"),Text("C"),Text("T"),Text("A")])
 stimulus.fillcolors = GridPattern.RepeatAcrossRows(["red", "green", "blue"])
-stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(5,10)])
+# stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(45,45)])
 # stimulus.swap_elements(swap_pairs = (1,10))
 # stimulus.set_element_fillcolors(fillcolor_value = "white", element_id =  [0,5])
 # stimulus.remove_element(0)
-stimulus.positions.SetPositionDeviations([1],0,50)
+# stimulus.positions.SetPositionDeviations([1],0,50)
 stimulus.Show()
-stimulus.SavePNG("test")
+# stimulus.SavePNG("test")
 
 # print(Complexity.CalculateElementsLOCE(stimulus, distinction_features =  ['fillcolors', 'links', 'data']))
 # print(Order.CalculatePatternDeviants(stimulus, distinction_features =  ['bounding_boxes', 'fillcolors', 'shapes']))
-print(Order.CalculatePositionDeviants(stimulus))
+# print(Complexity.CalculateElementsLOCI(stimulus, distinction_features =  ['links']))
+p = Order.CalculatePatternCongruency(stimulus)
+
+stimulus.SaveJSON("test")
+j = stimulus.GetJSON()
 
 #%%
 stimulus = Grid(2,2)

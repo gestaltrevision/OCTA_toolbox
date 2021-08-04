@@ -21,7 +21,7 @@ class GridPattern(Pattern):
         n_cols : int
             Number of columns in the 2D grid.
 
-    """
+    """      
     def __init__(self, pattern, n_rows = 5, n_cols = 5, patterntype = None, patterndirection = None, patternclass = "GridPattern."):
 
         #print(type(pattern))
@@ -36,6 +36,9 @@ class GridPattern(Pattern):
         self.patternclass = patternclass
         self.patterntype = patterntype
         self.patterndirection = patterndirection
+        self._jitter = None
+        self._jitter_parameters = {}
+        self._randomization = None
                 
         
     def __str__(self):
@@ -66,6 +69,104 @@ class GridPattern(Pattern):
 
         """
         pass
+    
+    def AddNormalJitter(self, mu = 0, std = 1, axis = None):
+        """
+        Adds a sample from a random normal distribution to each element in the generated GridPattern.
+
+        Parameters
+        ----------
+        mu : float, optional
+            Mean of the normal distribution. The default is 0.
+        std : float, optional
+            Standard deviation of the normal distribution. The default is 1.
+
+        Returns
+        -------
+        Pattern:
+            New GridPattern object instance
+
+        """       
+        self._jitter = 'normal'
+        self._jitter_parameters = {'mu' : mu, 'std' : std, 'axis' : axis}
+                                       
+        return self
+    
+    def AddUniformJitter(self, min_val = -1, max_val = 1, axis = None):
+        """
+        Adds a sample from a uniform distribution to each element in the pattern.
+
+        Parameters
+        ----------
+        min_val : float, optional
+            Lower bound of the uniform distribution
+        max_val : float, optional
+            Upper bound of the uniform distribution
+
+        Returns
+        -------
+        Pattern:
+            New Pattern object instance
+
+        """      
+        self._jitter = 'uniform'
+        self._jitter_parameters = {'min_val' : min_val, 'max_val' : max_val, 'axis' : axis}
+                                       
+        return self
+    
+    def RandomizeAcrossElements(self):
+        """
+        Randomizes the order of the elements in the pattern.
+
+        """      
+        self._randomization = 'RandomizeAcrossElements'
+                                       
+        return self
+    
+    def RandomizeAcrossRows(self):
+        """
+        Randomizes the order of the elements across rows in the pattern.
+
+        """      
+        self._randomization = 'RandomizeAcrossRows'
+                                       
+        return self
+    
+    def RandomizeAcrossColumns(self):
+        """
+        Randomizes the order of the elements across columns in the pattern.
+
+        """      
+        self._randomization = 'RandomizeAcrossColumns'
+                                       
+        return self
+    
+    def RandomizeAcrossLeftDiagonal(self):
+        """
+        Randomizes the order of the elements across the left diagonal in the pattern.
+
+        """      
+        self._randomization = 'RandomizeAcrossLeftDiagonal'
+                                       
+        return self  
+    
+    def RandomizeAcrossRightDiagonal(self):
+        """
+        Randomizes the order of the elements across the right diagonal in the pattern.
+
+        """      
+        self._randomization = 'RandomizeAcrossRightDiagonal'
+                                       
+        return self   
+    
+    # def RandomizeAcrossLayers(self):
+    #     """
+    #     Randomizes the order of the elements across the layers in the pattern.
+
+    #     """      
+    #     self._randomization = 'RandomizeAcrossLayers'
+                                       
+    #     return self
        
 class ElementRepeatAcrossElements(GridPattern):
     """
@@ -95,7 +196,25 @@ class ElementRepeatAcrossElements(GridPattern):
     def generate(self):
         required_count = self.n_rows * self.n_cols
 
-        result = self.RepeatElementsToSize(required_count)        
+        result = self.RepeatElementsToSize(required_count)
+
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()    
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)     
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)    
+
         
         self.patterntype = "ElementRepeat"
         self.patterndirection = "AcrossElements"
@@ -140,12 +259,29 @@ class ElementRepeatAcrossColumns(GridPattern):
 
         p = p.RepeatElementsToSize(required_count) 
         
-        p = p.RepeatPattern(self.n_rows)
-        
+        result = p.RepeatPattern(self.n_rows)
+
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)       
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)     
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)      
+            
         self.patterntype = "ElementRepeat"
         self.patterndirection = "AcrossColumns"
 
-        return ElementRepeatAcrossColumns(p, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
+        return ElementRepeatAcrossColumns(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
 
 class ElementRepeatAcrossRows(GridPattern):
     """
@@ -186,12 +322,29 @@ class ElementRepeatAcrossRows(GridPattern):
 
         p = p.RepeatElementsToSize(required_count) 
         
-        p = p.RepeatElements(self.n_cols)
-        
+        result = p.RepeatElements(self.n_cols)
+
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)     
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)     
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)        
+         
         self.patterntype = "ElementRepeat"
         self.patterndirection = "AcrossRows"
 
-        return ElementRepeatAcrossRows(p, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
+        return ElementRepeatAcrossRows(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
         
 class ElementRepeatAcrossRightDiagonal(GridPattern):
     """
@@ -235,11 +388,30 @@ class ElementRepeatAcrossRightDiagonal(GridPattern):
         for i in range(self.n_rows):
             result.extend(shifted_pattern[:self.n_cols])
             shifted_pattern = shifted_pattern[1:]  + [shifted_pattern[0]]
-                
+            
+        result = Pattern(result)
+
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)      
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)     
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)       
+                 
         self.patterntype = "ElementRepeat"
         self.patterndirection = "AcrossRightDiagonal"
 
-        return ElementRepeatAcrossRightDiagonal(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
+        return ElementRepeatAcrossRightDiagonal(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
             
     
 class ElementRepeatAcrossLeftDiagonal(GridPattern):
@@ -284,11 +456,30 @@ class ElementRepeatAcrossLeftDiagonal(GridPattern):
         for i in range(self.n_rows):
             result.extend(shifted_pattern[-self.n_cols:])
             shifted_pattern = [shifted_pattern[-1]] + shifted_pattern[:-1]
-                
+            
+        result = Pattern(result)
+        
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)      
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)      
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)      
+                 
         self.patterntype = "ElementRepeat"
         self.patterndirection = "AcrossLeftDiagonal"
 
-        return ElementRepeatAcrossLeftDiagonal(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)    
+        return ElementRepeatAcrossLeftDiagonal(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)    
   
 class ElementRepeatAcrossLayers(GridPattern):
     """
@@ -353,12 +544,29 @@ class ElementRepeatAcrossLayers(GridPattern):
                 row[start_col] = p.pattern[layer] 
                 row[end_col-1] = p.pattern[layer] 
        
-        result = [item for sublist in patternmatrix for item in sublist]
-                            
+        result = Pattern([item for sublist in patternmatrix for item in sublist])
+
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)       
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)       
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)    
+                             
         self.patterntype = "ElementRepeat"
         self.patterndirection = "AcrossLayers"
 
-        return ElementRepeatAcrossLayers(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection) 
+        return ElementRepeatAcrossLayers(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection) 
     
    
 class RepeatAcrossElements(GridPattern):
@@ -391,7 +599,24 @@ class RepeatAcrossElements(GridPattern):
         current_count = len(self.pattern)
         
         result = self.RepeatPattern(1 + int(required_count/current_count), required_count)
-        
+
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)      
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)      
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)       
+         
         self.patterntype = "Repeat"
         self.patterndirection = "AcrossElements"
         
@@ -436,12 +661,29 @@ class RepeatAcrossColumns(GridPattern):
             p = p.RepeatPattern( int(self.n_cols/len(self.pattern)) + 1, self.n_cols)
         p.pattern = p.pattern[:self.n_cols]
         
-        p = p.RepeatPattern(self.n_rows)
-        
+        result = p.RepeatPattern(self.n_rows)
+
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)      
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)     
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)       
+         
         self.patterntype = "Repeat"
         self.patterndirection = "AcrossColumns"
 
-        return RepeatAcrossColumns(p, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
+        return RepeatAcrossColumns(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
         
     
 class RepeatAcrossRows(GridPattern):
@@ -483,13 +725,29 @@ class RepeatAcrossRows(GridPattern):
             p = p.RepeatPattern( int(self.n_rows / N) + 1, self.n_rows)
         p.pattern = p.pattern[:self.n_rows]
         
-        p = p.RepeatElements(self.n_cols)
-        
+        result = p.RepeatElements(self.n_cols)
+
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)      
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)      
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)       
+               
         self.patterntype = "Repeat"
         self.patterndirection = "AcrossRows"
 
-        return RepeatAcrossRows(p, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
-    
+        return RepeatAcrossRows(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
     
 class RepeatAcrossRightDiagonal(GridPattern):
     """
@@ -528,11 +786,30 @@ class RepeatAcrossRightDiagonal(GridPattern):
         for i in range(self.n_rows):
             result.extend(shifted_pattern[:self.n_cols])
             shifted_pattern = shifted_pattern[1:]  + [shifted_pattern[0]]
-                
+                    
+        result = Pattern(result)
+
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)      
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)      
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)      
+                 
         self.patterntype = "Repeat"
         self.patterndirection = "AcrossRightDiagonal"
 
-        return RepeatAcrossRightDiagonal(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
+        return RepeatAcrossRightDiagonal(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
             
     
 class RepeatAcrossLeftDiagonal(GridPattern):
@@ -573,11 +850,30 @@ class RepeatAcrossLeftDiagonal(GridPattern):
         for i in range(self.n_rows):
             result.extend(shifted_pattern[-self.n_cols:])
             shifted_pattern = [shifted_pattern[-1]] + shifted_pattern[:-1]
-                
+                    
+        result = Pattern(result)
+
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)       
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)       
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)    
+                 
         self.patterntype = "Repeat"
         self.patterndirection = "AcrossLeftDiagonal"
 
-        return RepeatAcrossLeftDiagonal(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)    
+        return RepeatAcrossLeftDiagonal(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)    
   
 class RepeatAcrossLayers(GridPattern):
     """
@@ -641,12 +937,29 @@ class RepeatAcrossLayers(GridPattern):
                 row[start_col] = p.pattern[layer] 
                 row[end_col-1] = p.pattern[layer] 
        
-        result = [item for sublist in patternmatrix for item in sublist]
+        result = Pattern([item for sublist in patternmatrix for item in sublist])
+ 
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)       
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)       
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)    
                             
         self.patterntype = "Repeat"
         self.patterndirection = "AcrossLayers"
 
-        return RepeatAcrossLayers(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection) 
+        return RepeatAcrossLayers(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection) 
     
 
 class MirrorAcrossElements(GridPattern):
@@ -695,11 +1008,30 @@ class MirrorAcrossElements(GridPattern):
             m1 = p.pattern[:int((required_count+1)/2)]
             m2 = m1[::-1]
             p.pattern = m1 + m2[1:]
-        
+            
+        result = p
+
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)      
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)       
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)     
+         
         self.patterntype = "Mirror"
         self.patterndirection = "AcrossElements"
 
-        return MirrorAcrossElements(p, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
+        return MirrorAcrossElements(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
     
     
 class MirrorAcrossRows(GridPattern):
@@ -749,12 +1081,29 @@ class MirrorAcrossRows(GridPattern):
             m2 = m1[::-1]
             p.pattern = m1 + m2[1:]
             
-        p = p.RepeatElements(self.n_cols)
-        
+        result = p.RepeatElements(self.n_cols)
+
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)      
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)     
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)        
+         
         self.patterntype = "Mirror"
         self.patterndirection = "AcrossRows"
 
-        return MirrorAcrossRows(p, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
+        return MirrorAcrossRows(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
             
     
 class MirrorAcrossColumns(GridPattern):
@@ -802,12 +1151,29 @@ class MirrorAcrossColumns(GridPattern):
             m2 = m1[::-1]
             p.pattern = m1 + m2[1:]
             
-        p = p.RepeatPattern(self.n_rows)
+        result = p.RepeatPattern(self.n_rows)
+ 
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)      
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)      
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)      
         
         self.patterntype = "Mirror"
         self.patterndirection = "AcrossColumns"
 
-        return MirrorAcrossColumns(p, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
+        return MirrorAcrossColumns(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
     
     
 class MirrorAcrossLeftDiagonal(GridPattern):
@@ -856,11 +1222,30 @@ class MirrorAcrossLeftDiagonal(GridPattern):
         for i in range(self.n_rows):
             result.extend(shifter[:self.n_cols][::-1])
             shifter = shifter[1:] + [shifter[0]]
+                    
+        result = Pattern(result)
 
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)       
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)     
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)      
+ 
         self.patterntype = "Mirror"
         self.patterndirection = "AcrossLeftDiagonal"
                 
-        return MirrorAcrossLeftDiagonal(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
+        return MirrorAcrossLeftDiagonal(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
     
     
 class MirrorAcrossRightDiagonal(GridPattern):
@@ -908,12 +1293,31 @@ class MirrorAcrossRightDiagonal(GridPattern):
         result = []
         for i in range(self.n_rows):
             result.extend(shifter[:self.n_cols])
-            shifter = shifter[1:] + [shifter[0]]
-        
+            shifter = shifter[1:] + [shifter[0]]            
+                    
+        result = Pattern(result)
+
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)       
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)     
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)      
+         
         self.patterntype = "Mirror"
         self.patterndirection = "AcrossRightDiagonal"
                
-        return MirrorAcrossRightDiagonal(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
+        return MirrorAcrossRightDiagonal(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
   
 class MirrorAcrossLayers(GridPattern):
     """
@@ -988,12 +1392,29 @@ class MirrorAcrossLayers(GridPattern):
                 row[start_col] = p.pattern[layer] 
                 row[end_col-1] = p.pattern[layer] 
        
-        result = [item for sublist in patternmatrix for item in sublist]
-                            
+        result = Pattern([item for sublist in patternmatrix for item in sublist])
+
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)       
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)     
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)      
+                             
         self.patterntype = "Mirror"
         self.patterndirection = "AcrossLayers"
 
-        return MirrorAcrossLayers(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection) 
+        return MirrorAcrossLayers(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection) 
         
 class GradientAcrossElements(GridPattern):
     """
@@ -1012,11 +1433,31 @@ class GradientAcrossElements(GridPattern):
         self.end_value   = end_value
         self.n_rows = n_rows
         self.n_cols = n_cols
+        self._jitter = None
+        self._jitter_parameters = {}
+        self._randomization = None
         
     def generate(self):
         n_elements = self.n_rows * self.n_cols
         result = Pattern.CreateGradientPattern(self.start_value, self.end_value, n_elements)
 
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)      
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)      
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)       
+ 
         self.pattern = result.pattern
         self.patterntype = "Gradient"
         self.patterndirection = "AcrossElements"
@@ -1041,16 +1482,36 @@ class GradientAcrossRows(GridPattern):
         self.end_value   = end_value
         self.n_rows = n_rows
         self.n_cols = n_cols
+        self._jitter = None
+        self._jitter_parameters = {}
+        self._randomization = None
         
     def generate(self):
         p = Pattern.CreateGradientPattern(self.start_value, self.end_value, self.n_rows)
-        p = p.RepeatElements(self.n_cols)
-        
-        self.pattern = p.pattern
+        result = p.RepeatElements(self.n_cols)
+
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)      
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)        
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)    
+         
+        self.pattern = result.pattern
         self.patterntype = "Gradient"
         self.patterndirection = "AcrossRows"
 
-        return GridPattern(p.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
+        return GridPattern(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
     
     
 class GradientAcrossColumns(GridPattern):
@@ -1070,16 +1531,36 @@ class GradientAcrossColumns(GridPattern):
         self.end_value   = end_value
         self.n_rows = n_rows
         self.n_cols = n_cols
+        self._jitter = None
+        self._jitter_parameters = {}
+        self._randomization = None
         
     def generate(self):      
         p = Pattern.CreateGradientPattern(self.start_value, self.end_value, self.n_cols)
-        p = p.RepeatPattern(self.n_rows)
+        result = p.RepeatPattern(self.n_rows)
+ 
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)       
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)      
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)     
         
-        self.pattern = p.pattern
+        self.pattern = result.pattern
         self.patterntype = "Gradient"
         self.patterndirection = "AcrossColumns"
 
-        return GridPattern(p.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
+        return GridPattern(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
     
     
 class GradientAcrossLeftDiagonal(GridPattern):
@@ -1099,6 +1580,9 @@ class GradientAcrossLeftDiagonal(GridPattern):
         self.end_value   = end_value
         self.n_rows = n_rows
         self.n_cols = n_cols
+        self._jitter = None
+        self._jitter_parameters = {}
+        self._randomization = None
         
     def generate(self):
         n_elements = self.n_rows + self.n_cols - 1
@@ -1108,12 +1592,31 @@ class GradientAcrossLeftDiagonal(GridPattern):
         for i in range(self.n_rows):
             result.extend(shifter[:self.n_cols][::-1])
             shifter = shifter[1:] + [shifter[0]]
+                    
+        result = Pattern(result)
+ 
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)      
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)      
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)       
                 
         self.pattern = Pattern(result).pattern
         self.patterntype = "Gradient"
         self.patterndirection = "AcrossLeftDiagonal"
 
-        return GridPattern(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
+        return GridPattern(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
         
     
 class GradientAcrossRightDiagonal(GridPattern):
@@ -1133,6 +1636,9 @@ class GradientAcrossRightDiagonal(GridPattern):
         self.end_value   = end_value
         self.n_rows = n_rows
         self.n_cols = n_cols
+        self._jitter = None
+        self._jitter_parameters = {}
+        self._randomization = None
         
     def generate(self):
         n_elements = self.n_rows + self.n_cols - 1
@@ -1142,12 +1648,31 @@ class GradientAcrossRightDiagonal(GridPattern):
         for i in range(self.n_rows):
             result.extend(shifter[:self.n_cols])
             shifter = shifter[1:] + [shifter[0]]
-                
+                    
+        result = Pattern(result)
+
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)       
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)     
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)      
+                 
         self.pattern = Pattern(result).pattern
         self.patterntype = "Gradient"
         self.patterndirection = "AcrossRightDiagonal"
 
-        return GridPattern(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
+        return GridPattern(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
     
 class GradientAcrossLayers(GridPattern):
     """
@@ -1184,6 +1709,9 @@ class GradientAcrossLayers(GridPattern):
         self.end_value   = end_value
         self.n_rows = n_rows
         self.n_cols = n_cols
+        self._jitter = None
+        self._jitter_parameters = {}
+        self._randomization = None
            
     def generate(self):  
         assert (self.n_rows > 2), "number of rows in the Grid should be more than 2 to apply this pattern"
@@ -1215,101 +1743,123 @@ class GradientAcrossLayers(GridPattern):
                 row[start_col] = p.pattern[layer] 
                 row[end_col-1] = p.pattern[layer] 
        
-        result = [item for sublist in patternmatrix for item in sublist]
-                            
+        result = Pattern([item for sublist in patternmatrix for item in sublist])
+
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)       
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)     
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)      
+                             
         self.pattern = Pattern(result).pattern
         self.patterntype = "Gradient"
         self.patterndirection = "AcrossLayers"
 
-        return GridPattern(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
+        return GridPattern(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
 
-class LayeredGrid(GridPattern):
-    """
-    Creates a grid that starts from a central structure, around which
-    additional layers are placed.
+# class LayeredGrid(GridPattern):
+#     """
+#     Creates a grid that starts from a central structure, around which
+#     additional layers are placed.
 
-    Parameters
-    ----------
-    center_grid : GridPattern
-        A grid pattern that forms the central structure
+#     Parameters
+#     ----------
+#     center_grid : GridPattern
+#         A grid pattern that forms the central structure
         
-    outer_layer : Pattern
-        The values for each of the outer layers. Each value in the pattern
-        becomes the next layer around the central grid structure
-    Example
-    -------
-    pattern: 
-        [1, 2, 3]
-    n_rows:
-        6
-    n_cols:
-        6
+#     outer_layer : Pattern
+#         The values for each of the outer layers. Each value in the pattern
+#         becomes the next layer around the central grid structure
+#     Example
+#     -------
+#     pattern: 
+#         [1, 2, 3]
+#     n_rows:
+#         6
+#     n_cols:
+#         6
         
-    result:
-        [1, 1, 1, 1, 1, 1, 
-         1, 2, 2, 2, 2, 1, 
-         1, 2, 3, 3, 2, 1, 
-         1, 2, 3, 3, 2, 1, 
-         1, 2, 2, 2, 2, 1, 
-         1, 1, 1, 1, 1, 1]
+#     result:
+#         [1, 1, 1, 1, 1, 1, 
+#          1, 2, 2, 2, 2, 1, 
+#          1, 2, 3, 3, 2, 1, 
+#          1, 2, 3, 3, 2, 1, 
+#          1, 2, 2, 2, 2, 1, 
+#          1, 1, 1, 1, 1, 1]
         
 
-    """
-    _fixed_grid = True
+#     """
+#     _fixed_grid = True
     
-    def __init__(self, center_grid, outer_layers):
-        assert issubclass(type(center_grid), GridPattern), "center_grid has to be a GridPattern type"
-        assert type(outer_layers) == Pattern, "outer_layers has to be a Pattern type"
+#     def __init__(self, center_grid, outer_layers):
+#         assert "GridPattern" in str(type(center_grid)), "center_grid has to be a GridPattern type"
+#         # assert issubclass(type(center_grid), GridPattern), "center_grid has to be a GridPattern type"
+#         assert type(outer_layers) == Pattern, "outer_layers has to be a Pattern type"
         
-        self.center_grid = center_grid
-        self.outer_layers = outer_layers        
+#         self.center_grid = center_grid
+#         self.outer_layers = outer_layers        
         
-        dim = self.get_dimensions()
-        self.n_rows = dim[0]
-        self.n_cols = dim[1]
+#         dim = self.get_dimensions()
+#         self.n_rows = dim[0]
+#         self.n_cols = dim[1]
+#         self._jitter = None
+#         self._jitter_parameters = {}
+#         self._randomization = None
         
-    def get_dimensions(self):
-        n_rows, n_cols = self.center_grid.n_rows, self.center_grid.n_cols
-        n_rows += 2 * len(self.outer_layers.pattern)
-        n_cols += 2 * len(self.outer_layers.pattern)
+#     def get_dimensions(self):
+#         n_rows, n_cols = self.center_grid.n_rows, self.center_grid.n_cols
+#         n_rows += 2 * len(self.outer_layers.pattern)
+#         n_cols += 2 * len(self.outer_layers.pattern)
         
-        return n_rows, n_cols
+#         return n_rows, n_cols
     
-    def generate(self):
-        # 1. Generate the center grid pattern
-        current_center = self.center_grid.generate().pattern
-        current_rows   = self.center_grid.n_rows
-        current_cols   = self.center_grid.n_cols
+#     def generate(self):
+        
+#         # 1. Generate the center grid pattern
+#         current_center = self.center_grid.generate().pattern
+#         current_rows   = self.center_grid.n_rows
+#         current_cols   = self.center_grid.n_cols
         
         
-        # 2. Recursively layer each layer around the center grid
-        for value in self.outer_layers.pattern:
-            # Calculate new dimensions
-            new_rows = current_rows + 2
-            new_cols = current_cols + 2
+#         # 2. Recursively layer each layer around the center grid
+#         for value in self.outer_layers.pattern:
+#             # Calculate new dimensions
+#             new_rows = current_rows + 2
+#             new_cols = current_cols + 2
             
-            # Fill the values in the new grid            
-            new_center = []
-            t = 0
-            for r in range(new_rows):
-                for c in range(new_cols):
-                    if r == 0 or r == new_rows - 1:
-                        new_center.append(value)
-                    elif c == 0 or c == new_cols - 1:
-                        new_center.append(value)
-                    else:
-                        new_center.append(current_center[t])
-                        t += 1
+#             # Fill the values in the new grid            
+#             new_center = []
+#             t = 0
+#             for r in range(new_rows):
+#                 for c in range(new_cols):
+#                     if r == 0 or r == new_rows - 1:
+#                         new_center.append(value)
+#                     elif c == 0 or c == new_cols - 1:
+#                         new_center.append(value)
+#                     else:
+#                         new_center.append(current_center[t])
+#                         t += 1
                         
-            # Update the current values
-            current_center = new_center
-            current_rows = new_rows
-            current_cols = new_cols
+#             # Update the current values
+#             current_center = new_center
+#             current_rows = new_rows
+#             current_cols = new_cols
+             
+#         self.patterntype = "Layered"
+#         self.patterndirection = "Grid"
             
-        self.patterntype = "Layered"
-        self.patterndirection = "Grid"
-            
-        return GridPattern(current_center, current_rows, current_cols, self.patterntype, self.patterndirection)
+#         return GridPattern(current_center, current_rows, current_cols, self.patterntype, self.patterndirection)
     
     
 class TiledGrid(GridPattern):
@@ -1344,6 +1894,9 @@ class TiledGrid(GridPattern):
         dims = self.get_dimensions()
         self.n_rows = dims[0]
         self.n_cols = dims[1]
+        self._jitter = None
+        self._jitter_parameters = {}
+        self._randomization = None
         
     
     def get_dimensions(self):
@@ -1364,12 +1917,31 @@ class TiledGrid(GridPattern):
             result.extend(current_row)
             
         result.extend(result * self.tile_multiplier[0])
-        
+                    
+        result = Pattern(result)
+
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)      
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)       
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)     
+         
         self.pattern = source_pattern #Pattern(result).pattern 
         self.patterntype = "Tiled"
         self.patterndirection = "Grid"
         
-        return GridPattern(result, n_rows * self.tile_multiplier[0], n_cols * self.tile_multiplier[1], self.patterntype, self.patterndirection)
+        return GridPattern(result.pattern, n_rows * self.tile_multiplier[0], n_cols * self.tile_multiplier[1], self.patterntype, self.patterndirection)
     
 
 class TiledElementGrid(GridPattern):
@@ -1406,6 +1978,9 @@ class TiledElementGrid(GridPattern):
 #        self.pattern = self.source_grid
         self.n_rows = dims[0]
         self.n_cols = dims[1]
+        self._jitter = None
+        self._jitter_parameters = {}
+        self._randomization = None
         
     def get_dimensions(self):
         n_rows = self.source_grid.n_rows * self.tile_multiplier[0]
@@ -1427,13 +2002,32 @@ class TiledElementGrid(GridPattern):
                 
             current_row = current_row * self.tile_multiplier[0]
             result.extend(current_row)
+                    
+        result = Pattern(result)
+ 
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)       
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)        
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)    
         
         self.pattern = source_pattern #Pattern(result).pattern    
 #        self.pattern = result
         self.patterntype = "TiledElement"
         self.patterndirection = "Grid"
             
-        return RepeatAcrossElements(result, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
+        return RepeatAcrossElements(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
        
 class RandomPattern(GridPattern):
     """
@@ -1458,6 +2052,9 @@ class RandomPattern(GridPattern):
         self.counts = counts
         self.patterntype = patterntype
         self.patterndirection = patterndirection
+        self._jitter = None
+        self._jitter_parameters = {}
+        self._randomization = None
                 
     def check_counts(self):
         if self.counts is not None:
@@ -1482,10 +2079,26 @@ class RandomPattern(GridPattern):
                 
             p.pattern = elements
             
-            
-        p = p.RandomizeOrder()
-        
+        result = p.RandomizeOrder()
+
+        if self._jitter is not None:
+            result = result._CalculateJitter(distribution = self._jitter, distribution_parameters = self._jitter_parameters)                 
+
+        if self._randomization is not None:
+            if self._randomization == "RandomizeAcrossElements":
+                result = result._SetRandomizeAcrossElements()   
+            elif self._randomization == "RandomizeAcrossRows":
+                result = result._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)       
+            elif self._randomization == "RandomizeAcrossColumns":
+                result = result._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)        
+            elif self._randomization == "RandomizeAcrossLeftDiagonal":
+                result = result._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossRightDiagonal":
+                result = result._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)    
+            elif self._randomization == "RandomizeAcrossLayers":
+                result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)   
+         
         self.patterntype = "RandomPattern"
         self.patterndirection = ""
         
-        return RandomPattern(p, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
+        return RandomPattern(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)

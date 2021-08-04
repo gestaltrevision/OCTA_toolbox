@@ -36,8 +36,8 @@ class Positions:
         self._position_parameters = positionparameters
         self._deviation = None
         self._deviation_parameters = {}
-        self._randomization = None
-        self._randomization_parameters = {}
+        self._jitter = None
+        self._jitter_parameters = {}
         
     @property
     def x(self):
@@ -189,8 +189,8 @@ class Positions:
             if 'std' in kwargs.keys():
                 std = kwargs['std']
                 
-            self._randomization = 'normal'
-            self._randomization_parameters = {'mu' : mu, 'std' : std, 'axis' : axis}
+            self._jitter = 'normal'
+            self._jitter_parameters = {'mu' : mu, 'std' : std, 'axis' : axis}
                 
         if distribution == 'uniform':
             min_val = -1
@@ -201,8 +201,8 @@ class Positions:
             if 'max_val' in kwargs.keys():
                 max_val = kwargs['max_val']
             
-            self._randomization = 'uniform'
-            self._randomization_parameters = {'min_val' : min_val, 'max_val' : max_val, 'axis' : axis}
+            self._jitter = 'uniform'
+            self._jitter_parameters = {'min_val' : min_val, 'max_val' : max_val, 'axis' : axis}
                                        
         return self
     
@@ -211,17 +211,29 @@ class Positions:
         x_jitter = [0 for _ in range(len(self._x.pattern))]
         y_jitter = [0 for _ in range(len(self._y.pattern))]
             
-        if self._randomization == "normal":
-            if 'x' in self._randomization_parameters['axis']:
-                x_jitter = [random.normalvariate(self._randomization_parameters['mu'], self._randomization_parameters['std']) for _ in range(len(self._x.pattern))]
-            if 'y' in self._randomization_parameters['axis']:
-                y_jitter = [random.normalvariate(self._randomization_parameters['mu'], self._randomization_parameters['std']) for _ in range(len(self._y.pattern))]
+        if self._jitter == "normal":
+            if self._jitter_parameters['axis'] == 'xy':
+                x_jitter = [random.normalvariate(self._jitter_parameters['mu'], self._jitter_parameters['std']) for _ in range(len(self._x.pattern))]
+                y_jitter = [random.normalvariate(self._jitter_parameters['mu'], self._jitter_parameters['std']) for _ in range(len(self._y.pattern))]
+            elif self._jitter_parameters['axis'] == 'x=y':   
+                x_jitter = [random.normalvariate(self._jitter_parameters['mu'], self._jitter_parameters['std']) for _ in range(len(self._x.pattern))]
+                y_jitter = x_jitter
+            elif self._jitter_parameters['axis'] == 'x':
+                x_jitter = [random.normalvariate(self._jitter_parameters['mu'], self._jitter_parameters['std']) for _ in range(len(self._x.pattern))]
+            elif self._jitter_parameters['axis'] == 'y':
+                y_jitter = [random.normalvariate(self._jitter_parameters['mu'], self._jitter_parameters['std']) for _ in range(len(self._y.pattern))]
                 
-        elif self._randomization == "uniform":
-            if 'x' in self._randomization_parameters['axis']:
-                x_jitter = [random.uniform(self._randomization_parameters['min_val'], self._randomization_parameters['max_val']) for _ in range(len(self._x.pattern))]
-            if 'y' in self._randomization_parameters['axis']:
-                y_jitter = [random.uniform(self._randomization_parameters['min_val'], self._randomization_parameters['max_val']) for _ in range(len(self._y.pattern))]
+        elif self._jitter == "uniform":
+            if self._jitter_parameters['axis'] == 'xy':
+                x_jitter = [random.uniform(self._jitter_parameters['min_val'], self._jitter_parameters['max_val']) for _ in range(len(self._x.pattern))]
+                y_jitter = [random.uniform(self._jitter_parameters['min_val'], self._jitter_parameters['max_val']) for _ in range(len(self._y.pattern))]
+            elif self._jitter_parameters['axis'] == 'x=y':
+                x_jitter = [random.uniform(self._jitter_parameters['min_val'], self._jitter_parameters['max_val']) for _ in range(len(self._x.pattern))]
+                y_jitter = x_jitter        
+            elif self._jitter_parameters['axis'] == 'x':
+                x_jitter = [random.uniform(self._jitter_parameters['min_val'], self._jitter_parameters['max_val']) for _ in range(len(self._x.pattern))]
+            elif self._jitter_parameters['axis'] == 'y':
+                y_jitter = [random.uniform(self._jitter_parameters['min_val'], self._jitter_parameters['max_val']) for _ in range(len(self._y.pattern))]
         
         return {'x' : x_jitter, 'y' : y_jitter}
             

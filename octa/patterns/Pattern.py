@@ -7,7 +7,7 @@ import random
 import types
 
 class Pattern:
-    def __init__(self, pattern, patterntype = "", patternorientation = "", patternclass = "Pattern"):
+    def __init__(self, pattern, patterntype = "", patterndirection = "", patternclass = "Pattern"):
         """
         Initializes a Pattern object. If the provided input is not a list,
         the pattern will be initialized with a list that contains the provided
@@ -19,6 +19,7 @@ class Pattern:
             List object with initial values for the pattern.
 
         """
+        
         if type(pattern) == list:
             self.pattern = pattern
         elif type(pattern) == Pattern:
@@ -28,7 +29,7 @@ class Pattern:
             
         self.patternclass = patternclass        
         self.patterntype = patterntype
-        self.patternorientation = patternorientation
+        self.patterndirection = patterndirection
         
         
     def __str__(self):
@@ -108,8 +109,10 @@ class Pattern:
         if max_elements != None:
             result = result[:max_elements]
             
+        patterntype = "RepeatElements"
+        patterndirection = ""
             
-        return Pattern(result)
+        return Pattern(result, patterntype, patterndirection)
             
             
     def RepeatPattern(self, n_repeats, max_elements = None):
@@ -137,8 +140,11 @@ class Pattern:
         
         if max_elements != None:
             result = result[:max_elements]
+            
+        patterntype = "RepeatPattern"
+        patterndirection = ""
         
-        return Pattern(result)
+        return Pattern(result, patterntype, patterndirection)
     
     def RepeatElementsToSize(self, count):
         """
@@ -192,9 +198,48 @@ class Pattern:
         new_pattern = self.RepeatPattern(n_repeats, count)
         
         return new_pattern
+    
+    def _CalculateJitter(self, distribution, distribution_parameters):
+        """
+        Adds a sample from a random normal distribution to each element in the pattern.
+
+        Parameters
+        ----------
+        mu : float, optional
+            Mean of the normal distribution. The default is 0.
+        std : float, optional
+            Standard deviation of the normal distribution. The default is 1.
+
+        Returns
+        -------
+        Pattern:
+            New Pattern object instance
+
+        """
+        p = self
+        
+        if distribution == "normal":
+     
+             values = p.pattern
+             mu = distribution_parameters['mu']
+             std = distribution_parameters['std'] 
+             axis = distribution_parameters['axis'] 
+         
+             p = Pattern(values).AddNormalJitter(mu = mu , std = std, axis = axis)  
+             
+        if distribution == "uniform":
+     
+             values = p.pattern
+             min_val = distribution_parameters['min_val']
+             max_val = distribution_parameters['max_val']  
+             axis = distribution_parameters['axis']        
+         
+             p = Pattern(values).AddUniformJitter(min_val = min_val, max_val = max_val, axis = axis) 
+             
+        return p
             
     
-    def AddNormalJitter(self, mu = 0, std = 1):
+    def AddNormalJitter(self, mu = 0, std = 1, axis = None):
         """
         Adds a sample from a random normal distribution to each element in the pattern.
 
@@ -212,14 +257,41 @@ class Pattern:
 
         """
         result = []
-        print("%f %f"%(mu, std))
-        for i in range(len(self.pattern)):
-            result.append(self.pattern[i] + random.normalvariate(mu, std))
+        if type(self.pattern[0]) == int or type(self.pattern[0]) == float:
+            for i in range(len(self.pattern)):
+                result.append(self.pattern[i] + random.normalvariate(mu, std))
+        elif type(self.pattern[0]) == tuple:
+            if axis is None:
+                for i in range(len(self.pattern)):
+                    xresult = self.pattern[i][0] + random.normalvariate(mu, std)
+                    yresult = self.pattern[i][1] + random.normalvariate(mu, std)
+                    result.append((xresult, yresult))
+            elif axis == 'x':
+                for i in range(len(self.pattern)):
+                    xresult = self.pattern[i][0] + random.normalvariate(mu, std)
+                    yresult = self.pattern[i][1]
+                    result.append((xresult, yresult))
+            elif axis == 'y':
+                for i in range(len(self.pattern)):
+                    xresult = self.pattern[i][0]
+                    yresult = self.pattern[i][1] + random.normalvariate(mu, std)
+                    result.append((xresult, yresult))
+            elif axis == 'xy':
+                for i in range(len(self.pattern)):
+                    xresult = self.pattern[i][0] + random.normalvariate(mu, std)
+                    yresult = self.pattern[i][1] + random.normalvariate(mu, std)
+                    result.append((xresult, yresult)) 
+            elif axis == 'x=y':
+                for i in range(len(self.pattern)):
+                    randomvalue = random.normalvariate(mu, std)
+                    xresult = self.pattern[i][0] + randomvalue
+                    yresult = self.pattern[i][1] + randomvalue
+                    result.append((xresult, yresult))            
         
         return Pattern(result)
     
     
-    def AddUniformJitter(self, min_val = -1, max_val = 1):
+    def AddUniformJitter(self, min_val = -1, max_val = 1, axis = None):
         """
         Adds a sample from a uniform distribution to each element in the pattern.
 
@@ -237,8 +309,36 @@ class Pattern:
 
         """
         result = []
-        for i in range(len(self.pattern)):
-            result.append(self.pattern[i] + random.uniform(min_val, max_val))
+        if type(self.pattern[0]) == int or type(self.pattern[0]) == float:
+            for i in range(len(self.pattern)):
+                result.append(self.pattern[i] + random.uniform(min_val, max_val))
+        elif type(self.pattern[0]) == tuple:
+            if axis is None:
+                for i in range(len(self.pattern)):
+                    xresult = self.pattern[i][0] + random.uniform(min_val, max_val)
+                    yresult = self.pattern[i][1] + random.uniform(min_val, max_val)
+                    result.append((xresult, yresult))
+            elif axis == 'x':
+                for i in range(len(self.pattern)):
+                    xresult = self.pattern[i][0] + random.uniform(min_val, max_val)
+                    yresult = self.pattern[i][1]
+                    result.append((xresult, yresult))
+            elif axis == 'y':
+                for i in range(len(self.pattern)):
+                    xresult = self.pattern[i][0]
+                    yresult = self.pattern[i][1] + random.uniform(min_val, max_val)
+                    result.append((xresult, yresult))
+            elif axis == 'xy':
+                for i in range(len(self.pattern)):
+                    xresult = self.pattern[i][0] + random.uniform(min_val, max_val)
+                    yresult = self.pattern[i][1] + random.uniform(min_val, max_val)
+                    result.append((xresult, yresult)) 
+            elif axis == 'x=y':
+                for i in range(len(self.pattern)):
+                    randomvalue = random.uniform(min_val, max_val)
+                    xresult = self.pattern[i][0] + randomvalue
+                    yresult = self.pattern[i][1] + randomvalue
+                    result.append((xresult, yresult)) 
         
         return Pattern(result)
     
@@ -261,7 +361,7 @@ class Pattern:
         
         return Pattern(result)
     
-    def RandomizeAcrossElements(self):
+    def _SetRandomizeAcrossElements(self):
         """
         Randomizes the order of the elements in the pattern.
 
@@ -280,20 +380,136 @@ class Pattern:
         
         return Pattern(result)
     
-    def RandomizeAcrossRows(self):
-        if hasattr(self, 'n_rows') and hasattr(self, 'n_cols'):
-            print(True)
+    def _SetRandomizeAcrossColumns(self, n_rows, n_cols):
+        """
+        Randomizes the order of the elements across the columns of the pattern.
+        """   
+   
+        p = self.pattern
+        result = []
+        for row in range(n_rows):
             
-        for c in range(self.n_rows):
-            start_index = c * self.n_rows
-            end_index   = start_index + self.n_rows
+            startindex = row * n_cols
+            endindex = (row * n_cols) + n_cols
+            rowvalues = p[startindex:endindex]
             
-            column_values = self.pattern[start_index : end_index]
+            idx = list(range(n_cols))
+            random.shuffle(idx)
             
-            random.shuffle(column_values)
-            self.pattern[start_index : end_index] = column_values
+            for i in range(len(rowvalues)):
+                result.append(rowvalues[idx[i]])
             
-        return self
+        return Pattern(result)
+    
+    def _SetRandomizeAcrossRows(self, n_rows, n_cols):
+        """
+        Randomizes the order of the elements across the rows of the pattern.
+        """   
+   
+        p = self.pattern
+        result = p.copy()
+        for column in range(n_cols):
+            
+            indices = []
+            for row in range(n_rows):
+                indices.append(column + row * n_cols)
+            
+            idx = list(range(n_rows))
+            random.shuffle(idx)
+            
+            for i in range(n_rows):
+                value = p[indices[i]]
+                result[indices[idx[i]]] = value
+            
+        return Pattern(result)
+    
+    def _SetRandomizeAcrossRightDiagonal(self, n_rows, n_cols):
+        """
+        Randomizes the order of the elements across the left diagonal of the pattern.
+        """   
+   
+        p = self.pattern
+        newp = p.copy()
+        required_count = (n_rows + n_cols) - 1
+        
+        s = Pattern(list(range(required_count)))        
+        shifted_pattern  = list(s.pattern[::-1])
+        result = []
+        for i in range(n_rows):
+            result.extend(shifted_pattern[-n_cols:])
+            shifted_pattern = [shifted_pattern[-1]] + shifted_pattern[:-1]          
+        result = Pattern(result)
+        
+        for serie in range(required_count):
+            
+            indices = []
+            for i in range(len(result.pattern)):
+                if result.pattern[i] == serie:
+                    indices.append(i)
+                
+            n_elements = len(indices)
+                
+            if n_elements > 1:
+                
+                idx = list(range(n_elements))
+                random.shuffle(idx)
+                
+                for i in range(n_elements):
+                    newp[indices[idx[i]]] = p[indices[i]]
+            
+        return Pattern(newp)        
+
+    def _SetRandomizeAcrossLeftDiagonal(self, n_rows, n_cols):
+        """
+        Randomizes the order of the elements across the right diagonal of the pattern.
+        """   
+   
+        p = self.pattern
+        newp = p.copy()
+        required_count = (n_rows + n_cols) - 1
+        
+        s = Pattern(list(range(required_count)))        
+        shifted_pattern  = list(s.pattern)        
+        result = []
+        for i in range(n_rows):
+            result.extend(shifted_pattern[:n_cols])
+            shifted_pattern = shifted_pattern[1:]  + [shifted_pattern[0]]                    
+        result = Pattern(result)
+        
+        for serie in range(required_count):
+            
+            indices = []
+            for i in range(len(result.pattern)):
+                if result.pattern[i] == serie:
+                    indices.append(i)
+                
+            n_elements = len(indices)
+                
+            if n_elements > 1:
+                
+                idx = list(range(n_elements))
+                random.shuffle(idx)
+                
+                for i in range(n_elements):
+                    newp[indices[idx[i]]] = p[indices[i]]
+            
+        return Pattern(newp)   
+    
+    # def _SetRandomizeAcrossLayers(self, n_rows, n_cols):
+    #     """
+    #     Randomizes the order of the elements across the layers of the pattern.
+    #     """   
+   
+    #     p = self.pattern
+    #     # newp = p.copy()
+    #     # minimal_n = min(n_rows, n_cols)
+    #     # if minimal_n % 2 == 0: 
+    #     #     n_layers = int(minimal_n / 2)
+    #     # else:
+    #     #     n_layers = int((minimal_n + 1 )/2)
+        
+
+    #     return Pattern(p) 
     
     def CreateGradientPattern(start_value, end_value, n_elements):
         """

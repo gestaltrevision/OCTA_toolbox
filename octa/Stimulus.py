@@ -321,8 +321,8 @@ class Stimulus:
                                    },
                      'positions': {'positiontype':          self.positions._position_type,
                                    'positionparameters':    jsonpickle.encode(self.positions._position_parameters),
-                                   'randomization':         self.positions._randomization,
-                                   'randomizationparameters': jsonpickle.encode(self.positions._randomization_parameters),                                   
+                                   'jitter':         self.positions._jitter,
+                                   'jitterparameters': jsonpickle.encode(self.positions._jitter_parameters),                                   
                                    'deviation':             self.positions._deviation,
                                    'deviationparameters':   jsonpickle.encode(self.positions._deviation_parameters)                                   
                                    },
@@ -401,8 +401,8 @@ class Stimulus:
                                    },
                      'positions': {'positiontype':          self.positions._position_type,
                                    'positionparameters':    jsonpickle.encode(self.positions._position_parameters),
-                                   'randomization':         self.positions._randomization,
-                                   'randomizationparameters': jsonpickle.encode(self.positions._randomization_parameters),                                   
+                                   'jitter':         self.positions._jitter,
+                                   'jitterparameters': jsonpickle.encode(self.positions._jitter_parameters),                                   
                                    'deviation':             self.positions._deviation,
                                    'deviationparameters':   jsonpickle.encode(self.positions._deviation_parameters)                                   
                                    },
@@ -521,8 +521,8 @@ class Stimulus:
             # Define position characteristics                                
             stimulus.positions._position_type       = data['positions']['positiontype']
             stimulus.positions._position_parameters = jsonpickle.decode(data['positions']['positionparameters'])
-            stimulus.positions._randomization       = data['positions']['randomization']
-            stimulus.positions._randomization_parameters = jsonpickle.decode(data['positions']['randomizationparameters'])
+            stimulus.positions._jitter       = data['positions']['jitter']
+            stimulus.positions._jitter_parameters = jsonpickle.decode(data['positions']['jitterparameters'])
             stimulus.positions._deviation           = data['positions']['deviation']
             stimulus.positions._deviation_parameters = jsonpickle.decode(data['positions']['deviationparameters'])
 
@@ -1265,55 +1265,56 @@ class Grid(Stimulus):
 
             self.data = eval(str(self._shapes.generate().patternclass + self._shapes.generate().patterntype) + str(self._shapes.generate().patterndirection) + "(" + str("GridPattern." + self._shapes.source_grid.patterntype) + str(self._shapes.source_grid.patterndirection) + "(" + str(datalist) + ", " + str(self._shapes.source_grid.n_rows) + ", " + str(self._shapes.source_grid.n_cols) + "), (" + str(int(self._shapes.generate().n_rows/self._shapes.source_grid.n_rows)) + ", " + str(int(self._shapes.generate().n_cols/self._shapes.source_grid.n_cols)) + "))")
         
-        elif (self._shapes.generate().patterndirection == "Grid") & (self._shapes.generate().patterntype in ["Layered"]):
+        # elif (self._shapes.generate().patterndirection == "Grid") & (self._shapes.generate().patterntype in ["Layered"]):
             
-            datalist = []
-            patternlist = self._shapes.center_grid.pattern
+        #     datalist = []
+        #     patternlist = self._shapes.center_grid.pattern
             
-            for i in range(len(patternlist)):
-                if patternlist[i] is not None:
-                    # add info about subclass generation to "data" argument
-                    if str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Polygon.Polygon_'>":
-                        datalist.append(patternlist[i].n_sides)
-                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.RegularPolygon.RegularPolygon_'>":
-                        datalist.append(patternlist[i].n_sides)
-                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Image.Image_'>":
-                        datalist.append(patternlist[i].source)
-                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.FitImage.FitImage_'>":
-                        datalist.append(patternlist[i].source)
-                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Text.Text_'>":
-                        datalist.append(patternlist[i].text)
-                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Path.Path_'>":
-                        datalist.append([patternlist[i].path, patternlist[i].xsizepath, patternlist[i].ysizepath])
-                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.PathSvg.PathSvg_'>":
-                        datalist.append(patternlist[i].source)
-                    else:
-                        datalist.append("")
+        #     for i in range(len(patternlist)):
+        #         if patternlist[i] is not None:
+        #             # add info about subclass generation to "data" argument
+        #             if str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Polygon.Polygon_'>":
+        #                 datalist.append(patternlist[i].n_sides)
+                        
+        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.RegularPolygon.RegularPolygon_'>":
+        #                 datalist.append(patternlist[i].n_sides)
+        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Image.Image_'>":
+        #                 datalist.append(patternlist[i].source)
+        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.FitImage.FitImage_'>":
+        #                 datalist.append(patternlist[i].source)
+        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Text.Text_'>":
+        #                 datalist.append(patternlist[i].text)
+        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Path.Path_'>":
+        #                 datalist.append([patternlist[i].path, patternlist[i].xsizepath, patternlist[i].ysizepath])
+        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.PathSvg.PathSvg_'>":
+        #                 datalist.append(patternlist[i].source)
+        #             else:
+        #                 datalist.append("")
 
-            outerlist = []
-            patternlist = self._shapes.outer_layers.pattern
+        #     outerlist = []
+        #     patternlist = self._shapes.outer_layers.pattern
             
-            for i in range(len(patternlist)):
-                if patternlist[i] is not None:
-                    # add info about subclass generation to "data" argument
-                    if str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Polygon.Polygon_'>":
-                        outerlist.append(patternlist[i].n_sides)
-                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.RegularPolygon.RegularPolygon_'>":
-                        outerlist.append(patternlist[i].n_sides)
-                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Image.Image_'>":
-                        outerlist.append(patternlist[i].source)
-                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.FitImage.FitImage_'>":
-                        outerlist.append(patternlist[i].source)
-                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Text.Text_'>":
-                        outerlist.append(patternlist[i].text)
-                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Path.Path_'>":
-                        outerlist.append([patternlist[i].path, patternlist[i].xsizepath, patternlist[i].ysizepath])
-                    elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.PathSvg.PathSvg_'>":
-                        outerlist.append(patternlist[i].source)
-                    else:
-                        outerlist.append("")
+        #     for i in range(len(patternlist)):
+        #         if patternlist[i] is not None:
+        #             # add info about subclass generation to "data" argument
+        #             if str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Polygon.Polygon_'>":
+        #                 outerlist.append(patternlist[i].n_sides)
+        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.RegularPolygon.RegularPolygon_'>":
+        #                 outerlist.append(patternlist[i].n_sides)
+        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Image.Image_'>":
+        #                 outerlist.append(patternlist[i].source)
+        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.FitImage.FitImage_'>":
+        #                 outerlist.append(patternlist[i].source)
+        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Text.Text_'>":
+        #                 outerlist.append(patternlist[i].text)
+        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Path.Path_'>":
+        #                 outerlist.append([patternlist[i].path, patternlist[i].xsizepath, patternlist[i].ysizepath])
+        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.PathSvg.PathSvg_'>":
+        #                 outerlist.append(patternlist[i].source)
+        #             else:
+        #                 outerlist.append("")
 
-            self.data = eval(str(self._shapes.generate().patternclass + self._shapes.generate().patterntype) + str(self._shapes.generate().patterndirection) + "(" + str(self._shapes.center_grid.patternclass + self._shapes.center_grid.patterntype) + str(self._shapes.center_grid.patterndirection) + "(" + str(datalist) + ", " + str(self._shapes.center_grid.n_rows) + ", " + str(self._shapes.center_grid.n_cols) + "), " + str(self._shapes.outer_layers.patternclass + self._shapes.outer_layers.patterntype + self._shapes.outer_layers.patterndirection) + "(" + str(outerlist) + "))")
+        #     self.data = eval(str(self._shapes.generate().patternclass + self._shapes.generate().patterntype) + str(self._shapes.generate().patterndirection) + "(" + str(self._shapes.center_grid.patternclass + self._shapes.center_grid.patterntype) + str(self._shapes.center_grid.patterndirection) + "(" + str(datalist) + ", " + str(self._shapes.center_grid.n_rows) + ", " + str(self._shapes.center_grid.n_cols) + "), " + str(self._shapes.outer_layers.patternclass + self._shapes.outer_layers.patterntype + self._shapes.outer_layers.patterndirection) + "(" + str(outerlist) + "))")
 
         else:
             
@@ -1745,8 +1746,7 @@ class Grid(Stimulus):
         The orientations for each element in the grid.
         
         """
-        return self._orientations.generate().pattern
-        
+        return self._orientations.generate().pattern            
     
     @orientations.setter
     def orientations(self, orientations):
