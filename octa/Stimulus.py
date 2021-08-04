@@ -2093,6 +2093,36 @@ class Grid(Stimulus):
         for i in range(len(changes)):
             self.set_element_link(element_id = changes[i], link_value = link_value[i])
             
+    def randomize_elements(self, direction = "AcrossElements"):
+        """
+
+        """
+        self.Render()
+        if direction == "AcrossElements":
+               
+            new_order = Pattern(self._element_presentation_order)._SetRandomizeAcrossElements()
+            self._element_presentation_order = new_order.pattern
+            
+        elif direction == "AcrossRows":
+               
+            new_order = Pattern(self._element_presentation_order)._SetRandomizeAcrossRows(n_rows = self.n_rows, n_cols = self.n_cols)
+            self._element_presentation_order = new_order.pattern
+                
+        elif direction == "AcrossColumns":
+               
+            new_order = Pattern(self._element_presentation_order)._SetRandomizeAcrossColumns(n_rows = self.n_rows, n_cols = self.n_cols)
+            self._element_presentation_order = new_order.pattern        
+        
+        elif direction == "AcrossLeftDiagonal":
+               
+            new_order = Pattern(self._element_presentation_order)._SetRandomizeAcrossLeftDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)
+            self._element_presentation_order = new_order.pattern
+
+        elif direction == "AcrossRightDiagonal":
+               
+            new_order = Pattern(self._element_presentation_order)._SetRandomizeAcrossRightDiagonal(n_rows = self.n_rows, n_cols = self.n_cols)
+            self._element_presentation_order = new_order.pattern
+            
     def swap_elements(self, n_swap_pairs = 1, swap_pairs = None):
         """
         Swaps the position of two elements in the pattern. Once a position has
