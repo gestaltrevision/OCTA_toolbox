@@ -5,6 +5,7 @@ Created on Mon Apr  6 12:59:09 2020
 @author: u0072088
 """
 import svgwrite
+import svgutils
 import random
 import csv
 import math
@@ -12,6 +13,7 @@ import json
 import jsonpickle
 import pandas as pd
 import os
+import base64
 from html2image import Html2Image
 from svglib.svglib import svg2rlg
 from reportlab.graphics import renderPDF 
@@ -99,7 +101,7 @@ class Stimulus:
         self.dwg = None
         
 
-    def SaveSVG(self, filename, folder = None):
+    def SaveSVG(self, filename, scale = None, folder = None):
         """
         Saves the current stimulus as an SVG file.
 
@@ -118,8 +120,17 @@ class Stimulus:
         if folder is not None:
             svg_filename = os.path.join(folder, svg_filename)  
             
+        if self.dwg_elements is None:
+            self.Render() 
+            
         self.dwg.saveas(svg_filename , pretty = True)
         
+        if scale is not None:
+            originalSVG = svgutils.compose.SVG(svg_filename)
+            originalSVG.scale(scale)
+            newSVG = svgutils.compose.Figure(float(self.width) * scale, float(self.height) * scale, originalSVG)
+            newSVG.save(svg_filename)
+            
     def GetSVG(self):
         """
         Gives the current stimulus as an SVG string.
@@ -133,10 +144,12 @@ class Stimulus:
         String.
 
         """
-        self.Render()
+        if self.dwg_elements is None:
+            self.Render() 
+            
         return self.dwg.tostring()
     
-    def SavePNG(self, filename, folder = None): 
+    def SavePNG(self, filename, scale = None, folder = None): 
         """
         Saves the current stimulus as a PNG file.
 
@@ -158,22 +171,28 @@ class Stimulus:
         png_filename = "%s.png"%filename
         if folder is not None:
             svg_filename = os.path.join(folder, svg_filename) 
-            # png_filename = os.path.join(folder, png_filename)  
-#            png_fullfilename = os.path.join(folder, png_filename)
             hti = Html2Image(output_path = folder)
         else:
             hti = Html2Image()
-
-        self.dwg.saveas(svg_filename, pretty = True)
+            
+        if self.dwg_elements is None:
+            self.Render() 
+            
+        self.dwg.saveas(svg_filename , pretty = True)
+        
+        if scale is not None:
+            originalSVG = svgutils.compose.SVG(svg_filename)
+            originalSVG.scale(scale)
+            newSVG = svgutils.compose.Figure(float(self.width) * scale, float(self.height) * scale, originalSVG)
+            newSVG.save(svg_filename)
         
         hti.screenshot(other_file = svg_filename, 
-                       size= (math.ceil(self.width), math.ceil(self.height)), 
+                       size= (math.ceil(self.width*scale), math.ceil(self.height*scale)), 
                        save_as = png_filename)
-        # img = svg2rlg(svg_filename)
-        # os.remove(svg_filename)
-        # renderPM.drawToFile(img, png_filename, fmt="PNG")
+
         
-    def SavePDF(self, filename, folder = None): 
+        
+    def SavePDF(self, filename, scale = None, folder = None): 
         """
         Saves the current stimulus as a PDF file.
 
@@ -197,13 +216,23 @@ class Stimulus:
             svg_filename = os.path.join(folder, svg_filename)  
             pdf_filename = os.path.join(folder, pdf_filename)       
 
+        if self.dwg_elements is None:
+            self.Render() 
+            
         self.dwg.saveas(svg_filename, pretty = True)
+        
+        if scale is not None:
+            originalSVG = svgutils.compose.SVG(svg_filename)
+            originalSVG.scale(scale)
+            newSVG = svgutils.compose.Figure(float(self.width) * scale, float(self.height) * scale, originalSVG)
+            newSVG.save(svg_filename)
+            
         img = svg2rlg(svg_filename)
         os.remove(svg_filename)
         renderPDF.drawToFile(img, pdf_filename)
         
         
-    def SaveTIFF(self, filename, folder = None): 
+    def SaveTIFF(self, filename, scale = None, folder = None): 
         """
         Saves the current stimulus as a TIFF file.
 
@@ -230,17 +259,26 @@ class Stimulus:
         else:
             hti = Html2Image()
 
+        if self.dwg_elements is None:
+            self.Render() 
+            
         self.dwg.saveas(svg_filename, pretty = True)
         
+        if scale is not None:
+            originalSVG = svgutils.compose.SVG(svg_filename)
+            originalSVG.scale(scale)
+            newSVG = svgutils.compose.Figure(float(self.width) * scale, float(self.height) * scale, originalSVG)
+            newSVG.save(svg_filename)
+                  
         hti.screenshot(other_file = svg_filename, 
-                       size= (math.ceil(self.width), math.ceil(self.height)), 
+                       size= (math.ceil(self.width*scale), math.ceil(self.height*scale)), 
                        save_as = tiff_filename)
 #        img = svg2rlg(svg_filename)
 #        os.remove(svg_filename)
 #        renderPM.drawToFile(img, png_filename, fmt="PNG")
 
 
-    def SaveJPG(self, filename, folder = None): 
+    def SaveJPG(self, filename, scale = None, folder = None): 
         """
         Saves the current stimulus as a JPG file.
 
@@ -267,10 +305,19 @@ class Stimulus:
         else:
             hti = Html2Image()
 
+        if self.dwg_elements is None:
+            self.Render() 
+            
         self.dwg.saveas(svg_filename, pretty = True)
         
+        if scale is not None:
+            originalSVG = svgutils.compose.SVG(svg_filename)
+            originalSVG.scale(scale)
+            newSVG = svgutils.compose.Figure(float(self.width) * scale, float(self.height) * scale, originalSVG)
+            newSVG.save(svg_filename)
+                  
         hti.screenshot(other_file = svg_filename, 
-                       size= (math.ceil(self.width), math.ceil(self.height)), 
+                       size= (math.ceil(self.width*scale), math.ceil(self.height*scale)), 
                        save_as = jpg_filename)
 #        img = svg2rlg(svg_filename)
 #        os.remove(svg_filename)
@@ -295,6 +342,9 @@ class Stimulus:
         if folder is not None:
             json_filename = os.path.join(folder, json_filename)
             csv_filename  = os.path.join(folder, csv_filename)
+
+        if self.dwg_elements is None:
+            self.Render() 
                     
         json_data = {'stimulus' : {'stimulustype':     str(type(self))[str(type(self)).find("'")+1:str(type(self)).find(">")-1].replace("octa.Stimulus.", ""),
                                    'n_elements'   :    self._n_elements if hasattr(self, '_n_elements') else None,
@@ -311,8 +361,8 @@ class Stimulus:
                                    'width':            self.width,
                                    'height':           self.height,
                                    'background_color': self.background_color,
-                                   'background_shape': self.background_shape,
-                                   'stim_mask':        self.stim_mask,
+                                   'background_shape': jsonpickle.encode(self.background_shape),
+                                   'stim_mask':        jsonpickle.encode(self.stim_mask),
                                    'stim_orientation': self.stim_orientation,
                                    'stim_mirror_value':self.stim_mirror_value,
                                    'stim_link'       : self.stim_link,
@@ -348,7 +398,10 @@ class Stimulus:
             json.dump(json_data, output_file, indent = 4)
         
     def GetElementsDF(self):
-        
+
+        if self.dwg_elements is None:
+            self.Render() 
+            
         df = pd.DataFrame(self.dwg_elements, columns = ['element_id', 'position', 'shape', 'bounding_box', 'fillcolor', 'orientation', 'borderwidth', 'bordercolor', 'opacity', 'mirror', 'link', 'id', 'class', 'data'])
         
         return df
@@ -358,7 +411,10 @@ class Stimulus:
         csv_filename = "%s.csv"%filename
         if folder is not None:
             csv_filename  = os.path.join(folder, csv_filename)
-            
+        
+        if self.dwg_elements is None:
+            self.Render()  
+                             
         df = pd.DataFrame(self.dwg_elements, columns = ['element_id', 'position', 'shape', 'bounding_box', 'fillcolor', 'orientation', 'borderwidth', 'bordercolor', 'opacity', 'mirror', 'link', 'id', 'class', 'data'])
         df.to_csv(csv_filename, index = False)
    
@@ -375,7 +431,10 @@ class Stimulus:
         JSON object.
 
         """
-                   
+        
+        if self.dwg_elements is None:
+            self.Render()  
+                 
         json_data = {'stimulus' : {'stimulustype':     str(type(self))[str(type(self)).find("'")+1:str(type(self)).find(">")-1].replace("octa.Stimulus.", ""),
                                    'n_elements'   :    self._n_elements if hasattr(self, '_n_elements') else None,
                                    'n_rows'   :        self._n_rows if hasattr(self, '_n_rows') else None,
@@ -391,8 +450,8 @@ class Stimulus:
                                    'width':            self.width,
                                    'height':           self.height,
                                    'background_color': self.background_color,
-                                   'background_shape': self.background_shape,
-                                   'stim_mask':        self.stim_mask,
+                                   'background_shape': jsonpickle.encode(self.background_shape),
+                                   'stim_mask':        jsonpickle.encode(self.stim_mask),
                                    'stim_orientation': self.stim_orientation,
                                    'stim_mirror_value':self.stim_mirror_value,
                                    'stim_link'       : self.stim_link,
@@ -462,8 +521,8 @@ class Stimulus:
                                 data['stimulus']['col_spacing'], 
                                 data['stimulus']['background_color'],
                                 stimulus_size,
-                                data['stimulus']['background_shape'],
-                                data['stimulus']['stim_mask'],
+                                jsonpickle.decode(data['stimulus']['background_shape']),
+                                jsonpickle.decode(data['stimulus']['stim_mask']),
                                 data['stimulus']['stim_orientation'],
                                 data['stimulus']['stim_mirror_value'],
                                 data['stimulus']['stim_link'],
@@ -478,8 +537,8 @@ class Stimulus:
                                 data['stimulus']['shape_bounding_box'],
                                 data['stimulus']['background_color'],
                                 stimulus_size,
-                                data['stimulus']['background_shape'],
-                                data['stimulus']['stim_mask'],
+                                jsonpickle.decode(data['stimulus']['background_shape']),
+                                jsonpickle.decode(data['stimulus']['stim_mask']),
                                 data['stimulus']['stim_orientation'],
                                 data['stimulus']['stim_mirror_value'],
                                 data['stimulus']['stim_link'],
@@ -492,8 +551,8 @@ class Stimulus:
                stimulus = Concentric(data['stimulus']['n_elements'], 
                                 data['stimulus']['background_color'],
                                 stimulus_size,
-                                data['stimulus']['background_shape'],
-                                data['stimulus']['stim_mask'],
+                                jsonpickle.decode(data['stimulus']['background_shape']),
+                                jsonpickle.decode(data['stimulus']['stim_mask']),
                                 data['stimulus']['stim_orientation'],
                                 data['stimulus']['stim_mirror_value'],
                                 data['stimulus']['stim_link'],
@@ -506,8 +565,8 @@ class Stimulus:
                stimulus = Stimulus(
                                 data['stimulus']['background_color'],
                                 stimulus_size,
-                                data['stimulus']['background_shape'],
-                                data['stimulus']['stim_mask'],
+                                jsonpickle.decode(data['stimulus']['background_shape']),
+                                jsonpickle.decode(data['stimulus']['stim_mask']),
                                 data['stimulus']['stim_orientation'],
                                 data['stimulus']['stim_mirror_value'],
                                 data['stimulus']['stim_link'],
@@ -607,7 +666,7 @@ class Stimulus:
 
         """
         
-        self.Render()
+        self.Render()             
         display(SVG(self.dwg.tostring()))
             
         
@@ -2097,7 +2156,9 @@ class Grid(Stimulus):
         """
 
         """
-        self.Render()
+        if self.dwg_elements is None:
+            self.Render() 
+            
         if direction == "AcrossElements":
                
             new_order = Pattern(self._element_presentation_order)._SetRandomizeAcrossElements()

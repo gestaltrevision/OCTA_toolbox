@@ -17,10 +17,39 @@ from octa.measurements import Order, Complexity
 import random
 
 #%%
-# random.seed(15)
+
+s = Grid(8,5)
+s.Show()
+s.SaveJPG("test2", scale = 10)
+#%%
+random.seed(15)
 stim = Stimulus.LoadFromJSON("test.json")
-# stim.Render()
+stim.x_margin = (10,20)
 stim.Show()
+# stim.SaveSVG("test2")
+
+#%%
+# random.seed(15)
+# stim = Stimulus.LoadFromJSON("test.json")
+# # stim.Render()
+# stim.Show()
+
+random.seed(15)
+stimulus = Grid(background_shape = "Ellipse", background_color = "lightgrey", n_rows = 6, n_cols = 6, row_spacing = 36, col_spacing = 36, x_margin = 60, y_margin = 60)
+
+stimulus.shapes = GridPattern.RepeatAcrossLeftDiagonal([ Rectangle , Triangle ])
+stimulus.bounding_boxes = GridPattern.RepeatAcrossLeftDiagonal([ (15,15) ])
+stimulus.fillcolors = GridPattern.GradientAcrossLeftDiagonal(start_value = '#FCE533' , end_value = '#ED4959' )
+stimulus.orientations = GridPattern.RepeatAcrossLeftDiagonal([ 45 ])
+stimulus.borderwidths = GridPattern.RepeatAcrossColumns([ 0 ])
+stimulus.bordercolors = GridPattern.RepeatAcrossColumns([ '#54C4D0' ])
+stimulus.opacities = GridPattern.RepeatAcrossLeftDiagonal([ 1 ])
+stimulus.mirror_values = GridPattern.RepeatAcrossRightDiagonal([ 'none' ])
+
+stimulus.randomize_elements(direction = 'AcrossElements')
+stimulus.Show()
+# stimulus.SaveSVG("test")
+# stimulus.SaveJSON("test")
 
 #%%
 #Size jitter
