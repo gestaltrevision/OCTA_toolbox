@@ -43,20 +43,21 @@ class PathSvg_:
             
         self.orientation = orientation
                
-        paths, self.attributes = svgpathtools.svg2paths(self.data)   
-#         paths, attributes = svgpathtools.svg2paths("img/arrow-circle-up-svgrepo-com.svg")
+        paths, self.attributes = svgpathtools.svg2paths(self.data)
         n_paths = len(paths)
         allpaths = []
 
         for i in range(0,n_paths):
             mypath = paths[i]
             xmin, xmax, ymin, ymax = mypath.bbox()
-            xsize = xmax - xmin
-            ysize = ymax - ymin
-            allpaths.append([xsize, ysize])
+            allpaths.append([xmin, xmax, ymin, ymax])
             
-        self.max_xsize = max([item[0] for item in allpaths])
-        self.max_ysize = max([item[1] for item in allpaths])
+        self.min_x = min([item[0] for item in allpaths])
+        self.max_x = max([item[1] for item in allpaths])        
+        self.min_y = min([item[2] for item in allpaths])
+        self.max_y = max([item[3] for item in allpaths])  
+        self.max_xsize = (self.max_x + self.min_x)
+        self.max_ysize = (self.max_y + self.min_y) 
 
         if (type(self.orientation) == int) or (type(self.orientation) == float):
             self.rotation_animation = ""

@@ -435,7 +435,10 @@ class Positions:
         
         for n in range(n_elements):
             coords = paths[0].point(step_size * n)
-            x,y = str(coords).replace("(", "").replace(")", "").replace("j", "").split("+")
+            if '+' in str(coords):
+                x,y = str(coords).replace("(", "").replace(")", "").replace("j", "").split("+")
+            else:
+                x,y = 0, str(coords).replace("(", "").replace(")", "").replace("j", "")
             xpositions.append(float(x))
             ypositions.append(float(y))
                 
