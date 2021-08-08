@@ -1,4 +1,4 @@
-def GetPatterns(self, features = ['shapes', 'bounding_boxes', 'fillcolors', 'orientations', 'data']):
+def GetPatterns(self, features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
      
 
@@ -21,7 +21,7 @@ def GetPatterns(self, features = ['shapes', 'bounding_boxes', 'fillcolors', 'ori
       
     return patterns
 
-def GetPatternTypes(self, features = ['shapes', 'bounding_boxes', 'fillcolors', 'orientations', 'data']):
+def GetPatternTypes(self, features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
      
 
@@ -40,7 +40,7 @@ def GetPatternTypes(self, features = ['shapes', 'bounding_boxes', 'fillcolors', 
       
     return patterns
 
-def GetPatternDirections(self, features = ['shapes', 'bounding_boxes', 'fillcolors', 'orientations', 'data']):
+def GetPatternDirections(self, features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
      
 
@@ -59,7 +59,7 @@ def GetPatternDirections(self, features = ['shapes', 'bounding_boxes', 'fillcolo
       
     return patterns
 
-def CheckPatternCongruency(self, features = ['shapes', 'bounding_boxes', 'fillcolors', 'orientations', 'data']):
+def CheckPatternCongruency(self, features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
     Check whether all specified element features have congruent patterns.
 
@@ -88,7 +88,7 @@ def CheckPatternCongruency(self, features = ['shapes', 'bounding_boxes', 'fillco
     
     return congruent
 
-def CalculatePatternCongruency(self, features = ['shapes', 'bounding_boxes', 'fillcolors', 'orientations', 'data']):
+def CalculatePatternCongruency(self, features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
     Calculate how many specified element features have congruent patterns.
 
@@ -121,7 +121,7 @@ def CalculatePatternCongruency(self, features = ['shapes', 'bounding_boxes', 'fi
     
     return patterncount
 
-def CheckPatternTypeCongruency(self, features = ['shapes', 'bounding_boxes', 'fillcolors', 'orientations', 'data']):
+def CheckPatternTypeCongruency(self, features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
     Calculate how many element features have congruent patterntypes.
 
@@ -142,7 +142,7 @@ def CheckPatternTypeCongruency(self, features = ['shapes', 'bounding_boxes', 'fi
     
     return congruent
 
-def CalculatePatternTypeCongruency(self, features = ['shapes', 'bounding_boxes', 'fillcolors', 'orientations', 'data']):
+def CalculatePatternTypeCongruency(self, features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
     Calculate how many specified element features have congruent patterntypes.
 
@@ -171,7 +171,7 @@ def CalculatePatternTypeCongruency(self, features = ['shapes', 'bounding_boxes',
     
     return patterncount
 
-def CheckPatternDirectionCongruency(self, features = ['shapes', 'bounding_boxes', 'fillcolors', 'orientations', 'data']):
+def CheckPatternDirectionCongruency(self, features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
     Calculate how many element features have congruent patterndirections.
 
@@ -192,7 +192,7 @@ def CheckPatternDirectionCongruency(self, features = ['shapes', 'bounding_boxes'
     
     return congruent
 
-def CalculatePatternDirectionCongruency(self, features = ['shapes', 'bounding_boxes', 'fillcolors', 'orientations', 'data']):
+def CalculatePatternDirectionCongruency(self, features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
     Calculate how many specified element features have congruent patterndirections.
 
@@ -220,7 +220,7 @@ def CalculatePatternDirectionCongruency(self, features = ['shapes', 'bounding_bo
     
     return patterncount
 
-def CalculatePatternDeviants(self, distinction_features = ['shapes', 'bounding_boxes', 'fillcolors', 'orientations', 'data']):
+def CalculatePatternDeviants(self, distinction_features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
     Calculate how many deviants are present given the specified distinction_features.
 
@@ -236,8 +236,8 @@ def CalculatePatternDeviants(self, distinction_features = ['shapes', 'bounding_b
     features = []
     if 'shapes' in distinction_features:
         features.append("shape")
-    if 'bounding_boxes' in distinction_features:
-        features.append("bounding_box")
+    if 'boundingboxes' in distinction_features:
+        features.append("boundingbox")
     if 'fillcolors' in distinction_features:
         features.append("fillcolor")
     if 'orientations' in distinction_features:
@@ -250,14 +250,14 @@ def CalculatePatternDeviants(self, distinction_features = ['shapes', 'bounding_b
         features.append("bordercolor")
     if 'opacities' in distinction_features:
         features.append("opacity")
-    if 'mirror_values' in distinction_features:
-        features.append("mirror_value")
+    if 'mirrorvalues' in distinction_features:
+        features.append("mirrorvalue")
     if 'links' in distinction_features:
         features.append("link")
-    if 'class_labels' in distinction_features:
-        features.append("class_label")
-    if 'id_labels' in distinction_features:
-        features.append("id_label")
+    if 'classlabels' in distinction_features:
+        features.append("classlabel")
+    if 'idlabels' in distinction_features:
+        features.append("idlabel")
         
     features = sorted(features)
     distinction_features = sorted(distinction_features)

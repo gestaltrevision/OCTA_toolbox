@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Apr  6 12:59:09 2020
+Stimulus code for the OCTA toolbox
+Eline Van Geert and Christophe Bossens
 
-@author: u0072088
 """
 import svgwrite
 import svgutils
@@ -13,7 +13,6 @@ import json
 import jsonpickle
 import pandas as pd
 import os
-import base64
 from html2image import Html2Image
 from svglib.svglib import svg2rlg
 from reportlab.graphics import renderPDF 
@@ -35,25 +34,39 @@ class Stimulus:
     
     """
     
-    def __init__(self, background_color = "white", x_margin = 20, y_margin = 20, size = None, background_shape = None, stim_mask = None, 
-                 stim_orientation = 0, stim_mirror_value = None, stim_link = None, stim_class_label = None, stim_id_label = None):
+    def __init__(self, x_margin = 20, y_margin = 20, size = None, 
+                 background_color = "white", background_shape = None, 
+                 stim_mask = None, stim_orientation = 0, stim_mirrorvalue = None, 
+                 stim_link = None, stim_classlabel = None, stim_idlabel = None):
         """
         Instantiates a stimulus object.
 
         Parameters
         ----------
-        background_color : STRING, optional
+        background_color: STRING, optional
             Background color of the stimulus. The default is "white".
-        x_margin: INT, optional
-            Amount of extra space added to the stimulus in the x-direction
-        y_margin: INT, optional
-            Amount of extra space added to the stimulus in the y-direction
+        x_margin: INT, FLOAT, or TUPLE, optional
+            Amount of extra space added to both sides of the stimulus in the x-direction. The default is 20.
+        y_margin: INT, FLOAT, or TUPLE, optional
+            Amount of extra space added to both sides of the stimulus in the y-direction. The default is 20.
         size: TUPLE, optional
             If specified, fixes the size of the stimulus to the dimension
             given in the tuple. The center of the stimulus will be calculated
-            to correspond to the average position of all the elements in the
+            to correspond to the center of all element positions in the
             stimulus.
-            
+        background_shape: STRING or octa.shapes object, optional
+            If specified, clips the stimulus to the specified shape (only the part of the stimulus that falls within the 
+            background shape will be visible). The center of the background shape 
+            will correspond to the center of all element positions in the stimulus.
+            If a shape name is provided as string, the boundingbox of the shape will be equal to the stimulus size.
+        stim_mask: STRING or octa.shapes object, optional
+            If specified, clips the stimulus to the specified shape. The center of the background shape 
+            will correspond to the center of all element positions in the stimulus.
+            If a shape name is provided as string, the boundingbox of the shape will be equal to the stimulus size.   
+        stim_orientation: INT or FLOAT, optional
+            If not equal to 0, the stimulus will be rotated around its center according to the specified degree value. The default is 0.
+        stim_mirror: STRING, optional
+            If specified, defines the way the stimulus will be mirrored (none, horizontal, vertical, or horizontalvertical).        
 
         Returns
         -------
@@ -77,10 +90,10 @@ class Stimulus:
             
         self.background_color = background_color
         self.stim_orientation = stim_orientation
-        self.stim_mirror_value = stim_mirror_value
+        self.stim_mirrorvalue = stim_mirrorvalue
         self.stim_link = stim_link
-        self.stim_class_label = stim_class_label
-        self.stim_id_label = stim_id_label
+        self.stim_classlabel = stim_classlabel
+        self.stim_idlabel = stim_idlabel
         
         if background_shape == None:
             self.background_shape = "auto"
@@ -95,7 +108,7 @@ class Stimulus:
         # Set initial shape parameters to zero
         self.positions   = None
 
-        self._autosize_method = "maximum_bounding_box" # can be 'tight_fit' or 'maximum_bounding_box'
+        self._autosize_method = "maximum_boundingbox" # can be 'tight_fit' or 'maximum_boundingbox'
         
         self.dwg_elements = None
         self.dwg = None
@@ -353,7 +366,7 @@ class Stimulus:
                                    'row_spacing'   :   self.row_spacing if hasattr(self, 'row_spacing') else None,
                                    'col_spacing'   :   self.col_spacing if hasattr(self, 'col_spacing') else None,
                                    'shape'   :         self._shape if hasattr(self, '_shape') else None,
-                                   'shape_bounding_box': self._shape_bounding_box if hasattr(self, '_shape_bounding_box') else None,
+                                   'shape_boundingbox': self._shape_boundingbox if hasattr(self, '_shape_boundingbox') else None,
                                    'autosize_method'   : self._autosize_method,
                                    'x_margin'   :      self.x_margin,
                                    'y_margin'   :      self.y_margin,
@@ -364,10 +377,10 @@ class Stimulus:
                                    'background_shape': jsonpickle.encode(self.background_shape),
                                    'stim_mask':        jsonpickle.encode(self.stim_mask),
                                    'stim_orientation': self.stim_orientation,
-                                   'stim_mirror_value':self.stim_mirror_value,
+                                   'stim_mirrorvalue':self.stim_mirrorvalue,
                                    'stim_link'       : self.stim_link,
-                                   'stim_class_label': self.stim_class_label,
-                                   'stim_id_label':    self.stim_id_label
+                                   'stim_classlabel': self.stim_classlabel,
+                                   'stim_idlabel':    self.stim_idlabel
                                    },
                      'positions': {'positiontype':          self.positions._position_type,
                                    'positionparameters':    jsonpickle.encode(self.positions._position_parameters),
@@ -379,16 +392,16 @@ class Stimulus:
                      'elements': { 'element_id'   :    jsonpickle.encode(list(range(len(self.dwg_elements)))),
                                    'positions'    :    jsonpickle.encode(self.positions),
                                    'shapes'       :    jsonpickle.encode(self._shapes) if hasattr(self, '_shapes') else jsonpickle.encode(self.shapes),
-                                   'bounding_boxes' :  jsonpickle.encode(self._bounding_boxes) if hasattr(self, '_bounding_boxes') else jsonpickle.encode(self.bounding_boxes),
+                                   'boundingboxes' :  jsonpickle.encode(self._boundingboxes) if hasattr(self, '_boundingboxes') else jsonpickle.encode(self.boundingboxes),
                                    'fillcolors'     :  jsonpickle.encode(self._fillcolors) if hasattr(self, '_fillcolors') else jsonpickle.encode(self.fillcolors),
                                    'orientations'  :   jsonpickle.encode(self._orientations) if hasattr(self, '_orientations') else jsonpickle.encode(self.orientations),
                                    'borderwidths'   :  jsonpickle.encode(self._borderwidths) if hasattr(self, '_borderwidths') else jsonpickle.encode(self.borderwidths),
                                    'bordercolors'   :  jsonpickle.encode(self._bordercolors) if hasattr(self, '_bordercolors') else jsonpickle.encode(self.bordercolors),
                                    'opacities'      :  jsonpickle.encode(self._opacities) if hasattr(self, '_opacities') else jsonpickle.encode(self.opacities),
-                                   'mirror'       :    jsonpickle.encode(self._mirror_values) if hasattr(self, '_mirror_values') else jsonpickle.encode(self.mirror_values),
-                                   'link'       :      jsonpickle.encode(self._links) if hasattr(self, '_links') else jsonpickle.encode(self.links),
-                                   'id'           :    jsonpickle.encode(self._id_labels) if hasattr(self, '_id_labels') else jsonpickle.encode(self.id_labels),
-                                   'class'        :    jsonpickle.encode(self._class_labels) if hasattr(self, '_class_labels') else jsonpickle.encode(self.class_labels),
+                                   'mirrorvalues'       :    jsonpickle.encode(self._mirrorvalues) if hasattr(self, '_mirrorvalues') else jsonpickle.encode(self.mirrorvalues),
+                                   'links'       :      jsonpickle.encode(self._links) if hasattr(self, '_links') else jsonpickle.encode(self.links),
+                                   'idlabels'           :    jsonpickle.encode(self._idlabels) if hasattr(self, '_idlabels') else jsonpickle.encode(self.idlabels),
+                                   'classlabels'        :    jsonpickle.encode(self._classlabels) if hasattr(self, '_classlabels') else jsonpickle.encode(self.classlabels),
                                    'data'         :    jsonpickle.encode(self._data) if hasattr(self, '_data') else jsonpickle.encode(self.data),
                                    'overrides'    :    jsonpickle.encode(self._attribute_overrides),
                                    'element_order':    jsonpickle.encode(self._element_presentation_order)
@@ -402,7 +415,7 @@ class Stimulus:
         if self.dwg_elements is None:
             self.Render() 
             
-        df = pd.DataFrame(self.dwg_elements, columns = ['element_id', 'position', 'shape', 'bounding_box', 'fillcolor', 'orientation', 'borderwidth', 'bordercolor', 'opacity', 'mirror', 'link', 'id', 'class', 'data'])
+        df = pd.DataFrame(self.dwg_elements, columns = ['element_id', 'position', 'shape', 'boundingbox', 'fillcolor', 'orientation', 'borderwidth', 'bordercolor', 'opacity', 'mirrorvalue', 'link', 'idlabel', 'classlabel', 'data'])
         
         return df
     
@@ -415,7 +428,7 @@ class Stimulus:
         if self.dwg_elements is None:
             self.Render()  
                              
-        df = pd.DataFrame(self.dwg_elements, columns = ['element_id', 'position', 'shape', 'bounding_box', 'fillcolor', 'orientation', 'borderwidth', 'bordercolor', 'opacity', 'mirror', 'link', 'id', 'class', 'data'])
+        df = pd.DataFrame(self.dwg_elements, columns = ['element_id', 'position', 'shape', 'boundingbox', 'fillcolor', 'orientation', 'borderwidth', 'bordercolor', 'opacity', 'mirrorvalue', 'link', 'idlabel', 'classlabel', 'data'])
         df.to_csv(csv_filename, index = False)
    
     def GetJSON(self):
@@ -442,7 +455,7 @@ class Stimulus:
                                    'row_spacing'   :   self.row_spacing if hasattr(self, 'row_spacing') else None,
                                    'col_spacing'   :   self.col_spacing if hasattr(self, 'col_spacing') else None,
                                    'shape'   :         self._shape if hasattr(self, '_shape') else None,
-                                   'shape_bounding_box': self._shape_bounding_box if hasattr(self, '_shape_bounding_box') else None,
+                                   'shape_boundingbox': self._shape_boundingbox if hasattr(self, '_shape_boundingbox') else None,
                                    'autosize_method'   : self._autosize_method,
                                    'x_margin'   :      self.x_margin,
                                    'y_margin'   :      self.y_margin,
@@ -453,10 +466,10 @@ class Stimulus:
                                    'background_shape': jsonpickle.encode(self.background_shape),
                                    'stim_mask':        jsonpickle.encode(self.stim_mask),
                                    'stim_orientation': self.stim_orientation,
-                                   'stim_mirror_value':self.stim_mirror_value,
+                                   'stim_mirrorvalue':self.stim_mirrorvalue,
                                    'stim_link'       : self.stim_link,
-                                   'stim_class_label': self.stim_class_label,
-                                   'stim_id_label':    self.stim_id_label
+                                   'stim_classlabel': self.stim_classlabel,
+                                   'stim_idlabel':    self.stim_idlabel
                                    },
                      'positions': {'positiontype':          self.positions._position_type,
                                    'positionparameters':    jsonpickle.encode(self.positions._position_parameters),
@@ -468,16 +481,16 @@ class Stimulus:
                      'elements': { 'element_id'   :    jsonpickle.encode(list(range(len(self.dwg_elements)))),
                                    'positions'    :    jsonpickle.encode(self.positions),
                                    'shapes'       :    jsonpickle.encode(self._shapes) if hasattr(self, '_shapes') else jsonpickle.encode(self.shapes),
-                                   'bounding_boxes' :  jsonpickle.encode(self._bounding_boxes) if hasattr(self, '_bounding_boxes') else jsonpickle.encode(self.bounding_boxes),
+                                   'boundingboxes' :  jsonpickle.encode(self._boundingboxes) if hasattr(self, '_boundingboxes') else jsonpickle.encode(self.boundingboxes),
                                    'fillcolors'     :  jsonpickle.encode(self._fillcolors) if hasattr(self, '_fillcolors') else jsonpickle.encode(self.fillcolors),
                                    'orientations'  :   jsonpickle.encode(self._orientations) if hasattr(self, '_orientations') else jsonpickle.encode(self.orientations),
                                    'borderwidths'   :  jsonpickle.encode(self._borderwidths) if hasattr(self, '_borderwidths') else jsonpickle.encode(self.borderwidths),
                                    'bordercolors'   :  jsonpickle.encode(self._bordercolors) if hasattr(self, '_bordercolors') else jsonpickle.encode(self.bordercolors),
                                    'opacities'      :  jsonpickle.encode(self._opacities) if hasattr(self, '_opacities') else jsonpickle.encode(self.opacities),
-                                   'mirror'       :    jsonpickle.encode(self._mirror_values) if hasattr(self, '_mirror_values') else jsonpickle.encode(self.mirror_values),
-                                   'link'       :      jsonpickle.encode(self._links) if hasattr(self, '_links') else jsonpickle.encode(self.links),
-                                   'id'           :    jsonpickle.encode(self._id_labels) if hasattr(self, '_id_labels') else jsonpickle.encode(self.id_labels),
-                                   'class'        :    jsonpickle.encode(self._class_labels) if hasattr(self, '_class_labels') else jsonpickle.encode(self.class_labels),
+                                   'mirrorvalues'       :    jsonpickle.encode(self._mirrorvalues) if hasattr(self, '_mirrorvalues') else jsonpickle.encode(self.mirrorvalues),
+                                   'links'       :      jsonpickle.encode(self._links) if hasattr(self, '_links') else jsonpickle.encode(self.links),
+                                   'idlabels'           :    jsonpickle.encode(self._idlabels) if hasattr(self, '_idlabels') else jsonpickle.encode(self.idlabels),
+                                   'classlabels'        :    jsonpickle.encode(self._classlabels) if hasattr(self, '_classlabels') else jsonpickle.encode(self.classlabels),
                                    'data'         :    jsonpickle.encode(self._data) if hasattr(self, '_data') else jsonpickle.encode(self.data),
                                    'overrides'    :    jsonpickle.encode(self._attribute_overrides),
                                    'element_order':    jsonpickle.encode(self._element_presentation_order)
@@ -519,61 +532,61 @@ class Stimulus:
                                 data['stimulus']['n_cols'], 
                                 data['stimulus']['row_spacing'],
                                 data['stimulus']['col_spacing'], 
-                                data['stimulus']['background_color'],
+                                data['stimulus']['x_margin'], 
+                                data['stimulus']['y_margin'],
                                 stimulus_size,
+                                data['stimulus']['background_color'],
                                 jsonpickle.decode(data['stimulus']['background_shape']),
                                 jsonpickle.decode(data['stimulus']['stim_mask']),
                                 data['stimulus']['stim_orientation'],
-                                data['stimulus']['stim_mirror_value'],
+                                data['stimulus']['stim_mirrorvalue'],
                                 data['stimulus']['stim_link'],
-                                data['stimulus']['stim_class_label'],
-                                data['stimulus']['stim_id_label'],
-                                data['stimulus']['x_margin'], 
-                                data['stimulus']['y_margin'])
+                                data['stimulus']['stim_classlabel'],
+                                data['stimulus']['stim_idlabel'])
             
             elif data['stimulus']['stimulustype'] == "Outline":
                stimulus = Outline(data['stimulus']['n_elements'], 
                                 data['stimulus']['shape'],
-                                data['stimulus']['shape_bounding_box'],
-                                data['stimulus']['background_color'],
+                                data['stimulus']['shape_boundingbox'],
+                                data['stimulus']['x_margin'], 
+                                data['stimulus']['y_margin'],
                                 stimulus_size,
+                                data['stimulus']['background_color'],
                                 jsonpickle.decode(data['stimulus']['background_shape']),
                                 jsonpickle.decode(data['stimulus']['stim_mask']),
                                 data['stimulus']['stim_orientation'],
-                                data['stimulus']['stim_mirror_value'],
+                                data['stimulus']['stim_mirrorvalue'],
                                 data['stimulus']['stim_link'],
-                                data['stimulus']['stim_class_label'],
-                                data['stimulus']['stim_id_label'],
-                                data['stimulus']['x_margin'], 
-                                data['stimulus']['y_margin'])
+                                data['stimulus']['stim_classlabel'],
+                                data['stimulus']['stim_idlabel'])
                 
             elif data['stimulus']['stimulustype'] == "Concentric":
                stimulus = Concentric(data['stimulus']['n_elements'], 
-                                data['stimulus']['background_color'],
+                                data['stimulus']['x_margin'], 
+                                data['stimulus']['y_margin'],
                                 stimulus_size,
+                                data['stimulus']['background_color'],
                                 jsonpickle.decode(data['stimulus']['background_shape']),
                                 jsonpickle.decode(data['stimulus']['stim_mask']),
                                 data['stimulus']['stim_orientation'],
-                                data['stimulus']['stim_mirror_value'],
+                                data['stimulus']['stim_mirrorvalue'],
                                 data['stimulus']['stim_link'],
-                                data['stimulus']['stim_class_label'],
-                                data['stimulus']['stim_id_label'],
-                                data['stimulus']['x_margin'], 
-                                data['stimulus']['y_margin'])
+                                data['stimulus']['stim_classlabel'],
+                                data['stimulus']['stim_idlabel'])
                
             else:
-               stimulus = Stimulus(
-                                data['stimulus']['background_color'],
+               stimulus = Stimulus(                                
+                                data['stimulus']['x_margin'], 
+                                data['stimulus']['y_margin'],
                                 stimulus_size,
+                                data['stimulus']['background_color'],
                                 jsonpickle.decode(data['stimulus']['background_shape']),
                                 jsonpickle.decode(data['stimulus']['stim_mask']),
                                 data['stimulus']['stim_orientation'],
-                                data['stimulus']['stim_mirror_value'],
+                                data['stimulus']['stim_mirrorvalue'],
                                 data['stimulus']['stim_link'],
-                                data['stimulus']['stim_class_label'],
-                                data['stimulus']['stim_id_label'],
-                                data['stimulus']['x_margin'], 
-                                data['stimulus']['y_margin'])
+                                data['stimulus']['stim_classlabel'],
+                                data['stimulus']['stim_idlabel'])
             
             stimulus._autosize_method = data['stimulus']['autosize_method']
             
@@ -585,8 +598,8 @@ class Stimulus:
             stimulus.positions._deviation           = data['positions']['deviation']
             stimulus.positions._deviation_parameters = jsonpickle.decode(data['positions']['deviationparameters'])
 
-            if stimulus.positions._position_type == "2DGrid":
-                stimulus.positions = Positions.Create2DGrid(n_rows = stimulus.positions._position_parameters['n_rows'], 
+            if stimulus.positions._position_type == "RectGrid":
+                stimulus.positions = Positions.CreateRectGrid(n_rows = stimulus.positions._position_parameters['n_rows'], 
                                                             n_cols = stimulus.positions._position_parameters['n_cols'], 
                                                             row_spacing = stimulus.positions._position_parameters['row_spacing'], 
                                                             col_spacing= stimulus.positions._position_parameters['col_spacing'])
@@ -621,7 +634,7 @@ class Stimulus:
            
             # Define element characteristics
             stimulus.positions                   = jsonpickle.decode(data['elements']['positions'])
-            stimulus._bounding_boxes             = jsonpickle.decode(data['elements']['bounding_boxes'])
+            stimulus._boundingboxes             = jsonpickle.decode(data['elements']['boundingboxes'])
             stimulus._shapes                     = jsonpickle.decode(data['elements']['shapes'])
             stimulus._fillcolors                 = jsonpickle.decode(data['elements']['fillcolors'])
             stimulus._opacities                  = jsonpickle.decode(data['elements']['opacities'])
@@ -631,10 +644,10 @@ class Stimulus:
             stimulus._data                       = jsonpickle.decode(data['elements']['data'])
             stimulus._attribute_overrides        = jsonpickle.decode(data['elements']['overrides'])
             stimulus._element_presentation_order = jsonpickle.decode(data['elements']['element_order'])
-            stimulus._id_labels                  = jsonpickle.decode(data['elements']['id'])
-            stimulus._class_labels               = jsonpickle.decode(data['elements']['class'])
-            stimulus._mirror_values              = jsonpickle.decode(data['elements']['mirror'])
-            stimulus._links                      = jsonpickle.decode(data['elements']['link'])
+            stimulus._idlabels                  = jsonpickle.decode(data['elements']['idlabels'])
+            stimulus._classlabels               = jsonpickle.decode(data['elements']['classlabels'])
+            stimulus._mirrorvalues              = jsonpickle.decode(data['elements']['mirrorvalues'])
+            stimulus._links                      = jsonpickle.decode(data['elements']['links'])
                           
         return stimulus
     
@@ -685,7 +698,7 @@ class Stimulus:
         """
         self.dwg_elements = []
         
-        bounding_boxes = self.bounding_boxes
+        boundingboxes = self.boundingboxes
         fillcolors     = self.fillcolors
         opacities      = self.opacities
         bordercolors   = self.bordercolors
@@ -693,9 +706,9 @@ class Stimulus:
         orientations   = self.orientations
         datas          = self.data
         shapes         = self.shapes
-        id_labels      = self.id_labels
-        class_labels   = self.class_labels
-        mirror_values  = self.mirror_values
+        idlabels      = self.idlabels
+        classlabels   = self.classlabels
+        mirrorvalues  = self.mirrorvalues
         links          = self.links
         x, y           = self._calculated_positions
         
@@ -705,10 +718,10 @@ class Stimulus:
             x_i           = x[i] + self._x_offset
             y_i           = y[i] + self._y_offset
             
-            if 'bounding_box' in self._attribute_overrides[idx]:
-                bounding_box = self._attribute_overrides[idx]['bounding_box']
+            if 'boundingbox' in self._attribute_overrides[idx]:
+                boundingbox = self._attribute_overrides[idx]['boundingbox']
             else:
-                bounding_box = bounding_boxes[idx]
+                boundingbox = boundingboxes[idx]
                 
             if 'fillcolor' in self._attribute_overrides[idx]:
                 fillcolor = self._attribute_overrides[idx]['fillcolor']
@@ -745,39 +758,39 @@ class Stimulus:
             else:
                 shape = shapes[idx]
                 
-            if 'mirror_values' in self._attribute_overrides[idx]:
-                mirror_value = self._attribute_overrides[idx]['mirror_values']
+            if 'mirrorvalues' in self._attribute_overrides[idx]:
+                mirrorvalue = self._attribute_overrides[idx]['mirrorvalues']
             else:
-                mirror_value = mirror_values[idx]
+                mirrorvalue = mirrorvalues[idx]
                 
             if 'links' in self._attribute_overrides[idx]:
                 link = self._attribute_overrides[idx]['links']
             else:
                 link = links[idx]
                 
-            if 'class_labels' in self._attribute_overrides[idx]:
-                class_label = self._attribute_overrides[idx]['class_labels']
+            if 'classlabels' in self._attribute_overrides[idx]:
+                classlabel = self._attribute_overrides[idx]['classlabels']
             else:
-                class_label = class_labels[idx]
+                classlabel = classlabels[idx]
                 
-            if 'id_labels' in self._attribute_overrides[idx]:
-                id_label = self._attribute_overrides[idx]['id_labels']
+            if 'idlabels' in self._attribute_overrides[idx]:
+                idlabel = self._attribute_overrides[idx]['idlabels']
             else:
-                id_label = id_labels[idx]
+                idlabel = idlabels[idx]
                 
             element_parameters = {'element_id'   : i,
                                   'position'     : (x_i, y_i), 
                                   'shape'        : shape, 
-                                  'bounding_box' : bounding_box, 
+                                  'boundingbox' : boundingbox, 
                                   'fillcolor'    : fillcolor,
                                   'orientation'  : orientation,
                                   'borderwidth'  : borderwidth,
                                   'bordercolor'  : bordercolor,
                                   'opacity'      : opacity, 
-                                  'mirror_value' : mirror_value,
+                                  'mirrorvalue' : mirrorvalue,
                                   'link'         : link,
-                                  'class_label'  : class_label,
-                                  'id_label'     : id_label,
+                                  'classlabel'  : classlabel,
+                                  'idlabel'     : idlabel,
                                   'data'         : data}
             
             self.dwg_elements.append(element_parameters)
@@ -801,33 +814,33 @@ class Stimulus:
             self.clip_path = self.dwg.defs.add(self.dwg.clipPath(id='custom_clip_path'))
             if type(self.background_shape) == str:
                 if self.background_shape == "Ellipse":
-                    self.background_shape = Ellipse(position = (self.width/2,self.height/2), bounding_box = (self.width,self.height))
+                    self.background_shape = Ellipse(position = (self.width/2,self.height/2), boundingbox = (self.width,self.height))
                 elif self.background_shape == "Rectangle":
-                    self.background_shape = Rectangle(position = (self.width/2,self.height/2), bounding_box = (self.width,self.height))
+                    self.background_shape = Rectangle(position = (self.width/2,self.height/2), boundingbox = (self.width,self.height))
                 elif self.background_shape == "Triangle":
-                    self.background_shape = Triangle(position = (self.width/2,self.height/2), bounding_box = (self.width,self.height))
+                    self.background_shape = Triangle(position = (self.width/2,self.height/2), boundingbox = (self.width,self.height))
                 elif "FitImage" in self.background_shape:
                     self.background_shape = self.background_shape.replace(" ", "")
                     src = self.background_shape[:self.background_shape.find(")")-1]
-                    self.background_shape = FitImage_(position = (self.width/2,self.height/2), bounding_box = (self.width,self.height), data = src)
+                    self.background_shape = FitImage_(position = (self.width/2,self.height/2), boundingbox = (self.width,self.height), data = src)
                 elif "Image" in self.background_shape:
                     self.background_shape = self.background_shape.replace(" ", "")
                     src = self.background_shape[self.background_shape.find("(")+2:self.background_shape.find(")")-1]
-                    self.background_shape = Image_(position = (self.width/2,self.height/2), bounding_box = (self.width,self.height), data = src)
+                    self.background_shape = Image_(position = (self.width/2,self.height/2), boundingbox = (self.width,self.height), data = src)
                 elif "Text" in self.background_shape:
                     self.background_shape = self.background_shape.replace(" ", "")
                     text = self.background_shape[self.background_shape.find("(")+2:self.background_shape.find(")")-1]
-                    self.background_shape = Text_(position = (self.width/2,self.height/2), bounding_box = (self.width,self.height), data = text)
+                    self.background_shape = Text_(position = (self.width/2,self.height/2), boundingbox = (self.width,self.height), data = text)
                 elif "RegularPolygon" in self.background_shape:
                     n_sides = self.background_shape[self.background_shape.find("(")+1:self.background_shape.find(")")]
-                    self.background_shape = RegularPolygon_(position = (self.width/2,self.height/2), bounding_box = (self.width,self.height), data = n_sides)
+                    self.background_shape = RegularPolygon_(position = (self.width/2,self.height/2), boundingbox = (self.width,self.height), data = n_sides)
                 elif "Polygon" in self.background_shape:
                     n_sides = self.background_shape[self.background_shape.find("(")+1:self.background_shape.find(")")]
-                    self.background_shape = Polygon_(position = (self.width/2,self.height/2), bounding_box = (self.width,self.height), data = n_sides)
+                    self.background_shape = Polygon_(position = (self.width/2,self.height/2), boundingbox = (self.width,self.height), data = n_sides)
                 elif "PathSvg" in self.background_shape:
                     self.background_shape = self.background_shape.replace(" ", "")
                     src = self.background_shape[self.background_shape.find("(")+2:self.background_shape.find(")")-1]
-                    self.background_shape = PathSvg_(position = (self.width/2,self.height/2), bounding_box = (self.width,self.height), data = src)
+                    self.background_shape = PathSvg_(position = (self.width/2,self.height/2), boundingbox = (self.width,self.height), data = src)
                 elif "Path" in self.background_shape:
                     self.background_shape = self.background_shape.replace(" ", "")
                     data = self.background_shape[self.background_shape.find("(")+1:self.background_shape.find(")")]
@@ -835,7 +848,7 @@ class Stimulus:
                     xsize = int([ '"{}"'.format(x) for x in list(csv.reader([data], delimiter=',', quotechar='"'))[0]][1].replace(" ", "").replace('"','').replace("'",''))
                     ysize = int([ '"{}"'.format(x) for x in list(csv.reader([data], delimiter=',', quotechar='"'))[0]][2].replace(" ", "").replace('"','').replace("'",''))
                     data = [path, xsize, ysize]
-                    self.background_shape = Path_(position = (self.width/2,self.height/2), bounding_box = (self.width,self.height), data = data)
+                    self.background_shape = Path_(position = (self.width/2,self.height/2), boundingbox = (self.width,self.height), data = data)
                 else:
                     self.background_shape.position = (self.width/2,self.height/2)
             else:
@@ -868,11 +881,11 @@ class Stimulus:
             
         # ADD MIRROR VALUE  
         mirror_transform = ""
-        if self.stim_mirror_value == "vertical":
+        if self.stim_mirrorvalue == "vertical":
             mirror_transform = "scale(-1, 1) translate(%f, 0)"%(-2*(self.width/2))
-        elif self.stim_mirror_value == "horizontal":
+        elif self.stim_mirrorvalue == "horizontal":
             mirror_transform = "scale(1, -1), translate(0, %f)"%(-2*(self.height/2))
-        elif self.stim_mirror_value == "horizontalvertical":
+        elif self.stim_mirrorvalue == "horizontalvertical":
             mirror_transform = "scale(-1, -1) translate(%f, %f)"%(-2*(self.width/2), -2*(self.height/2))
 
         # ADD ROTATION
@@ -942,10 +955,10 @@ class Stimulus:
             
         # ADD CLASS AND ID LABEL
             
-        if self.stim_class_label != None:
-            self.stim['class']         = self.stim_class_label
-        if self.stim_id_label != None:
-            self.stim['id']        = self.stim_id_label
+        if self.stim_classlabel != None:
+            self.stim['class']         = self.stim_classlabel
+        if self.stim_idlabel != None:
+            self.stim['id']        = self.stim_idlabel
         
         if self.rotation_animation != "":
             self.stim.add(eval(self.rotation_animation))  
@@ -1000,34 +1013,34 @@ class Stimulus:
         min_y = y[0]
         max_y = y[0]
         
-        bounding_boxes = self.bounding_boxes
+        boundingboxes = self.boundingboxes
         
-        if self._autosize_method == "maximum_bounding_box":
+        if self._autosize_method == "maximum_boundingbox":
             min_position_x = min(x)
             max_position_x = max(x)
             min_position_y = min(y)
             max_position_y = max(y)
             
-            max_bounding_box_x = max(list(list(zip(*bounding_boxes))[0]))
-            max_bounding_box_y = max(list(list(zip(*bounding_boxes))[1]))
+            max_boundingbox_x = max(list(list(zip(*boundingboxes))[0]))
+            max_boundingbox_y = max(list(list(zip(*boundingboxes))[1]))
             
-            min_x = min_position_x - max_bounding_box_x//2
-            max_x = max_position_x + max_bounding_box_x//2
+            min_x = min_position_x - max_boundingbox_x//2
+            max_x = max_position_x + max_boundingbox_x//2
             
-            min_y = min_position_y - max_bounding_box_y//2
-            max_y = max_position_y + max_bounding_box_y//2
+            min_y = min_position_y - max_boundingbox_y//2
+            max_y = max_position_y + max_boundingbox_y//2
             
         elif self._autosize_method == "tight_fit":
             for i in range(len(x)):
-                if (x[i] - bounding_boxes[i][0]//2) < min_x:
-                    min_x = x[i] -  bounding_boxes[i][0]//2
-                if (x[i] +  bounding_boxes[i][0]//2) > max_x:
-                    max_x = x[i] +  bounding_boxes[i][0]//2 
+                if (x[i] - boundingboxes[i][0]//2) < min_x:
+                    min_x = x[i] -  boundingboxes[i][0]//2
+                if (x[i] +  boundingboxes[i][0]//2) > max_x:
+                    max_x = x[i] +  boundingboxes[i][0]//2 
                     
-                if (y[i] -  bounding_boxes[i][1]//2) < min_y: 
-                    min_y = y[i] -  bounding_boxes[i][1]//2
-                if (y[i] +  bounding_boxes[i][1]//2) > max_y: 
-                    max_y = y[i] +  bounding_boxes[i][1]//2
+                if (y[i] -  boundingboxes[i][1]//2) < min_y: 
+                    min_y = y[i] -  boundingboxes[i][1]//2
+                if (y[i] +  boundingboxes[i][1]//2) > max_y: 
+                    max_y = y[i] +  boundingboxes[i][1]//2
                 
         self.width = abs(max_x - min_x) + sum(self.x_margin)
         self.height = abs(max_y - min_y) + sum(self.y_margin)
@@ -1079,14 +1092,19 @@ class Stimulus:
     
     
 class Grid(Stimulus):
-    _element_attributes = ["_bounding_boxes", "_orientations", "_bordercolors", "_borderwidths", "_fillcolors", "_opacities", "_shapes",
-                          "_class_labels", "_id_labels", "_mirror_values", "_links" ,"_data"]
+    _element_attributes = ["_boundingboxes", "_orientations", "_bordercolors", "_borderwidths", "_fillcolors", "_opacities", "_shapes",
+                          "_classlabels", "_idlabels", "_mirrorvalues", "_links" ,"_data"]
     
-    def __init__(self, n_rows, n_cols, row_spacing = 50, col_spacing= 50, background_color = "white", size = None, background_shape = None, stim_mask = None, 
-                 stim_orientation = 0, stim_mirror_value = None, stim_link = None, stim_class_label = None, stim_id_label = None, x_margin = 20, y_margin = 20):
-        # print("Grid constructor")
-        super().__init__(background_color = background_color, x_margin = x_margin, y_margin = y_margin, size = size, background_shape = background_shape, stim_mask = stim_mask, 
-                         stim_orientation = stim_orientation, stim_mirror_value = stim_mirror_value, stim_link = stim_link, stim_class_label = stim_class_label, stim_id_label = stim_id_label)
+    def __init__(self, n_rows, n_cols, row_spacing = 50, col_spacing= 50, 
+                 x_margin = 20, y_margin = 20, size = None, 
+                 background_color = "white", background_shape = None, 
+                 stim_mask = None, stim_orientation = 0, stim_mirrorvalue = None, 
+                 stim_link = None, stim_classlabel = None, stim_idlabel = None):
+
+        super().__init__(x_margin = x_margin, y_margin = y_margin, size = size, 
+                         background_color = background_color, background_shape = background_shape, 
+                         stim_mask = stim_mask, stim_orientation = stim_orientation, stim_mirrorvalue = stim_mirrorvalue, 
+                         stim_link = stim_link, stim_classlabel = stim_classlabel, stim_idlabel = stim_idlabel)
         
         # Initialize the positions of each element
         self._n_rows = n_rows
@@ -1095,19 +1113,19 @@ class Grid(Stimulus):
         self.row_spacing = row_spacing
         self.col_spacing = col_spacing
         
-        self.positions = Positions.Create2DGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing)
+        self.positions = Positions.CreateRectGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing)
         
         # Initialize the element attributes to their default values
-        self._bounding_boxes = GridPattern.RepeatAcrossElements([(45, 45)], self._n_rows, self._n_cols)
+        self._boundingboxes = GridPattern.RepeatAcrossElements([(45, 45)], self._n_rows, self._n_cols)
         self._orientations   = GridPattern.RepeatAcrossElements([0], self._n_rows, self._n_cols)
         self._bordercolors   = GridPattern.RepeatAcrossElements([""], self._n_rows, self._n_cols)
         self._borderwidths   = GridPattern.RepeatAcrossElements([0], self.n_rows, self.n_cols)
         self._fillcolors     = GridPattern.RepeatAcrossElements(["dodgerblue"], self.n_rows, self.n_cols)
         self._opacities      = GridPattern.RepeatAcrossElements([1], self.n_rows, self.n_cols)
         self._shapes         = GridPattern.RepeatAcrossElements([Polygon(8)], self._n_rows, self._n_cols)
-        self._class_labels   = GridPattern.RepeatAcrossElements([""], self._n_rows, self._n_cols)
-        self._id_labels      = GridPattern.RepeatAcrossElements([""], self._n_rows, self._n_cols)
-        self._mirror_values  = GridPattern.RepeatAcrossElements([""], self._n_rows, self._n_cols)
+        self._classlabels   = GridPattern.RepeatAcrossElements([""], self._n_rows, self._n_cols)
+        self._idlabels      = GridPattern.RepeatAcrossElements([""], self._n_rows, self._n_cols)
+        self._mirrorvalues  = GridPattern.RepeatAcrossElements([""], self._n_rows, self._n_cols)
         self._links          = GridPattern.RepeatAcrossElements([""], self._n_rows, self._n_cols)
         self._data           = GridPattern.RepeatAcrossElements(["8"], self._n_rows, self._n_cols)
         
@@ -1144,7 +1162,7 @@ class Grid(Stimulus):
             return
         
         self._n_rows = n_rows
-        self.positions = Positions.Create2DGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing)
+        self.positions = Positions.CreateRectGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing)
         
         self._attribute_overrides = [dict() for _ in range(self._n_cols * self._n_rows)]
         self._element_presentation_order = list(range(self._n_cols * self._n_rows))
@@ -1176,7 +1194,7 @@ class Grid(Stimulus):
         
         self._n_cols = n_cols
         
-        self.positions = Positions.Create2DGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing)
+        self.positions = Positions.CreateRectGrid(n_rows = self._n_rows, n_cols = self._n_cols, row_spacing = self.row_spacing, col_spacing = self.col_spacing)
         
         self._attribute_overrides = [dict() for _ in range(self._n_cols * self._n_rows)]
         self._element_presentation_order = list(range(self._n_cols * self._n_rows))
@@ -1186,7 +1204,7 @@ class Grid(Stimulus):
         
         
     @property
-    def bounding_boxes(self):
+    def boundingboxes(self):
         """
         The size for each element in the grid.
         
@@ -1194,11 +1212,11 @@ class Grid(Stimulus):
         contains the element.
         
         """
-        return self._bounding_boxes.generate().pattern
+        return self._boundingboxes.generate().pattern
     
     
-    @bounding_boxes.setter
-    def bounding_boxes(self, bounding_box):
+    @boundingboxes.setter
+    def boundingboxes(self, boundingbox):
         """
         Sets the bounding box size for each grid element.
         
@@ -1206,40 +1224,40 @@ class Grid(Stimulus):
         must match the number of rows and columns of the Grid Stimulus
         
         """
-        if not self._check_attribute_dimensions(bounding_box):
+        if not self._check_attribute_dimensions(boundingbox):
             return
             
-        self._bounding_boxes = bounding_box
-        self._bounding_boxes.n_rows = self._n_rows
-        self._bounding_boxes.n_cols = self._n_cols
+        self._boundingboxes = boundingbox
+        self._boundingboxes.n_rows = self._n_rows
+        self._boundingboxes.n_cols = self._n_cols
         
     
-    def set_element_bounding_box(self, element_id, bounding_box_value):
+    def set_element_boundingbox(self, element_id, boundingbox_value):
         """
         Sets the bounding box value for an individual element
         """
         element_id = self._parse_element_id(element_id)
-        bounding_box_value = Grid._check_bounding_box_value(bounding_box_value)                
-        self._attribute_overrides[element_id]['bounding_box'] = bounding_box_value
+        boundingbox_value = Grid._check_boundingbox_value(boundingbox_value)                
+        self._attribute_overrides[element_id]['boundingbox'] = boundingbox_value
         
-    def set_element_bounding_boxes(self, bounding_box_value = None, element_id = None, n_changes = None):
+    def set_element_boundingboxes(self, boundingbox_value = None, element_id = None, n_changes = None):
         """
         """  
         if element_id is not None:
             if type(element_id) == int:
                 element_id = [element_id]
             n_changes = len(element_id)
-            bounding_box_value = Pattern(bounding_box_value).RepeatPatternToSize(n_changes).pattern
+            boundingbox_value = Pattern(boundingbox_value).RepeatPatternToSize(n_changes).pattern
         elif n_changes is not None:
             n_changes = n_changes
-            bounding_box_value = Pattern(bounding_box_value).RepeatPatternToSize(n_changes).pattern
+            boundingbox_value = Pattern(boundingbox_value).RepeatPatternToSize(n_changes).pattern
         else:
-            if type(bounding_box_value) is not list:
-                bounding_box_value = [bounding_box_value]
-            n_changes = len(bounding_box_value)
+            if type(boundingbox_value) is not list:
+                boundingbox_value = [boundingbox_value]
+            n_changes = len(boundingbox_value)
         
         n_elements = self._n_rows * self._n_cols
-        assert n_elements >= n_changes, "Maximum number of bounding_box changes reached, try again with a lower number of elements"
+        assert n_elements >= n_changes, "Maximum number of boundingbox changes reached, try again with a lower number of elements"
                
         # 1. Sample n element ids to change
         if element_id is None:
@@ -1249,26 +1267,26 @@ class Grid(Stimulus):
             
         # 2. Change elements
         for i in range(len(changes)):
-            self.set_element_bounding_box(element_id = changes[i], bounding_box_value = bounding_box_value[i])
+            self.set_element_boundingbox(element_id = changes[i], boundingbox_value = boundingbox_value[i])
         
-    def _check_bounding_box_value(bounding_box_value):
+    def _check_boundingbox_value(boundingbox_value):
         """
-        Inspects the bounding_box_value and raises an error when the format
+        Inspects the boundingbox_value and raises an error when the format
         of this value is not correct
         
         Returns
         -------
-        bounding_box_value: tuple
-            A valid bounding_box_value
+        boundingbox_value: tuple
+            A valid boundingbox_value
         """
-        assert type(bounding_box_value) == list or type(bounding_box_value) == tuple or type(bounding_box_value) == int, "Bounding box value must be int, list or tuple"
+        assert type(boundingbox_value) == list or type(boundingbox_value) == tuple or type(boundingbox_value) == int, "Bounding box value must be int, list or tuple"
         
-        if type(bounding_box_value) == list or type(bounding_box_value) == tuple:
-            assert len(bounding_box_value) == 2, "Bounding box collection can only contain two values"
+        if type(boundingbox_value) == list or type(boundingbox_value) == tuple:
+            assert len(boundingbox_value) == 2, "Bounding box collection can only contain two values"
         else:
-            bounding_box_value = (bounding_box_value, bounding_box_value)
+            boundingbox_value = (boundingbox_value, boundingbox_value)
             
-        return bounding_box_value
+        return boundingbox_value
           
         
     @property
@@ -1324,57 +1342,6 @@ class Grid(Stimulus):
 
             self.data = eval(str(self._shapes.generate().patternclass + self._shapes.generate().patterntype) + str(self._shapes.generate().patterndirection) + "(" + str("GridPattern." + self._shapes.source_grid.patterntype) + str(self._shapes.source_grid.patterndirection) + "(" + str(datalist) + ", " + str(self._shapes.source_grid.n_rows) + ", " + str(self._shapes.source_grid.n_cols) + "), (" + str(int(self._shapes.generate().n_rows/self._shapes.source_grid.n_rows)) + ", " + str(int(self._shapes.generate().n_cols/self._shapes.source_grid.n_cols)) + "))")
         
-        # elif (self._shapes.generate().patterndirection == "Grid") & (self._shapes.generate().patterntype in ["Layered"]):
-            
-        #     datalist = []
-        #     patternlist = self._shapes.center_grid.pattern
-            
-        #     for i in range(len(patternlist)):
-        #         if patternlist[i] is not None:
-        #             # add info about subclass generation to "data" argument
-        #             if str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Polygon.Polygon_'>":
-        #                 datalist.append(patternlist[i].n_sides)
-                        
-        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.RegularPolygon.RegularPolygon_'>":
-        #                 datalist.append(patternlist[i].n_sides)
-        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Image.Image_'>":
-        #                 datalist.append(patternlist[i].source)
-        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.FitImage.FitImage_'>":
-        #                 datalist.append(patternlist[i].source)
-        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Text.Text_'>":
-        #                 datalist.append(patternlist[i].text)
-        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Path.Path_'>":
-        #                 datalist.append([patternlist[i].path, patternlist[i].xsizepath, patternlist[i].ysizepath])
-        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.PathSvg.PathSvg_'>":
-        #                 datalist.append(patternlist[i].source)
-        #             else:
-        #                 datalist.append("")
-
-        #     outerlist = []
-        #     patternlist = self._shapes.outer_layers.pattern
-            
-        #     for i in range(len(patternlist)):
-        #         if patternlist[i] is not None:
-        #             # add info about subclass generation to "data" argument
-        #             if str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Polygon.Polygon_'>":
-        #                 outerlist.append(patternlist[i].n_sides)
-        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.RegularPolygon.RegularPolygon_'>":
-        #                 outerlist.append(patternlist[i].n_sides)
-        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Image.Image_'>":
-        #                 outerlist.append(patternlist[i].source)
-        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.FitImage.FitImage_'>":
-        #                 outerlist.append(patternlist[i].source)
-        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Text.Text_'>":
-        #                 outerlist.append(patternlist[i].text)
-        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.Path.Path_'>":
-        #                 outerlist.append([patternlist[i].path, patternlist[i].xsizepath, patternlist[i].ysizepath])
-        #             elif str(patternlist[i].__bases__[0]) == "<class 'octa.shapes.PathSvg.PathSvg_'>":
-        #                 outerlist.append(patternlist[i].source)
-        #             else:
-        #                 outerlist.append("")
-
-        #     self.data = eval(str(self._shapes.generate().patternclass + self._shapes.generate().patterntype) + str(self._shapes.generate().patterndirection) + "(" + str(self._shapes.center_grid.patternclass + self._shapes.center_grid.patterntype) + str(self._shapes.center_grid.patterndirection) + "(" + str(datalist) + ", " + str(self._shapes.center_grid.n_rows) + ", " + str(self._shapes.center_grid.n_cols) + "), " + str(self._shapes.outer_layers.patternclass + self._shapes.outer_layers.patterntype + self._shapes.outer_layers.patterndirection) + "(" + str(outerlist) + "))")
-
         else:
             
             datalist = []
@@ -1949,45 +1916,45 @@ class Grid(Stimulus):
             self.set_element_data(element_id = changes[i], data_value = data_value[i])
             
     @property
-    def class_labels(self):
+    def classlabels(self):
         """
         The class labels for each grid element
 
         """
-        return self._class_labels.generate().pattern
+        return self._classlabels.generate().pattern
     
-    @class_labels.setter
-    def class_labels(self, class_labels):
-        if not self._check_attribute_dimensions(class_labels):
+    @classlabels.setter
+    def classlabels(self, classlabels):
+        if not self._check_attribute_dimensions(classlabels):
             return
         
-        self._class_labels = class_labels
-        self._class_labels.n_rows = self._n_rows
-        self._class_labels.n_cols = self._n_cols
+        self._classlabels = classlabels
+        self._classlabels.n_rows = self._n_rows
+        self._classlabels.n_cols = self._n_cols
         
-    def set_element_class_label(self, element_id, class_label_value):
+    def set_element_classlabel(self, element_id, classlabel_value):
         element_id = self._parse_element_id(element_id)
         
-        self._attribute_overrides[element_id]['class_labels'] = class_label_value
+        self._attribute_overrides[element_id]['classlabels'] = classlabel_value
         
-    def set_element_class_labels(self, class_label_value = None, element_id = None, n_changes = None):
+    def set_element_classlabels(self, classlabel_value = None, element_id = None, n_changes = None):
         """
         """  
         if element_id is not None:
             if type(element_id) == int:
                 element_id = [element_id]
             n_changes = len(element_id)
-            class_label_value = Pattern(class_label_value).RepeatPatternToSize(n_changes).pattern
+            classlabel_value = Pattern(classlabel_value).RepeatPatternToSize(n_changes).pattern
         elif n_changes is not None:
             n_changes = n_changes
-            class_label_value = Pattern(class_label_value).RepeatPatternToSize(n_changes).pattern
+            classlabel_value = Pattern(classlabel_value).RepeatPatternToSize(n_changes).pattern
         else:
-            if type(class_label_value) is not list:
-                class_label_value = [class_label_value]
-            n_changes = len(class_label_value)
+            if type(classlabel_value) is not list:
+                classlabel_value = [classlabel_value]
+            n_changes = len(classlabel_value)
         
         n_elements = self._n_rows * self._n_cols
-        assert n_elements >= n_changes, "Maximum number of class_label changes reached, try again with a lower number of elements"
+        assert n_elements >= n_changes, "Maximum number of classlabel changes reached, try again with a lower number of elements"
                
         # 1. Sample n element ids to change
         if element_id is None:
@@ -1997,48 +1964,48 @@ class Grid(Stimulus):
             
         # 2. Change elements
         for i in range(len(changes)):
-            self.set_element_class_label(element_id = changes[i], class_label_value = class_label_value[i])    
+            self.set_element_classlabel(element_id = changes[i], classlabel_value = classlabel_value[i])    
             
     @property
-    def id_labels(self):
+    def idlabels(self):
         """
         The ids for each grid element
 
         """
-        return self._id_labels.generate().pattern
+        return self._idlabels.generate().pattern
     
-    @id_labels.setter
-    def id_labels(self, id_labels):
-        if not self._check_attribute_dimensions(id_labels):
+    @idlabels.setter
+    def idlabels(self, idlabels):
+        if not self._check_attribute_dimensions(idlabels):
             return
         
-        self._id_labels = id_labels
-        self._id_labels.n_rows = self._n_rows
-        self._id_labels.n_cols = self._n_cols
+        self._idlabels = idlabels
+        self._idlabels.n_rows = self._n_rows
+        self._idlabels.n_cols = self._n_cols
         
-    def set_element_id_label(self, element_id, id_label_value):
+    def set_element_idlabel(self, element_id, idlabel_value):
         element_id = self._parse_element_id(element_id)
         
-        self._attribute_overrides[element_id]['id_labels'] = id_label_value
+        self._attribute_overrides[element_id]['idlabels'] = idlabel_value
         
-    def set_element_id_labels(self, id_label_value = None, element_id = None, n_changes = None):
+    def set_element_idlabels(self, idlabel_value = None, element_id = None, n_changes = None):
         """
         """  
         if element_id is not None:
             if type(element_id) == int:
                 element_id = [element_id]
             n_changes = len(element_id)
-            id_label_value = Pattern(id_label_value).RepeatPatternToSize(n_changes).pattern
+            idlabel_value = Pattern(idlabel_value).RepeatPatternToSize(n_changes).pattern
         elif n_changes is not None:
             n_changes = n_changes
-            id_label_value = Pattern(id_label_value).RepeatPatternToSize(n_changes).pattern
+            idlabel_value = Pattern(idlabel_value).RepeatPatternToSize(n_changes).pattern
         else:
-            if type(id_label_value) is not list:
-                id_label_value = [id_label_value]
-            n_changes = len(id_label_value)
+            if type(idlabel_value) is not list:
+                idlabel_value = [idlabel_value]
+            n_changes = len(idlabel_value)
         
         n_elements = self._n_rows * self._n_cols
-        assert n_elements >= n_changes, "Maximum number of id_label changes reached, try again with a lower number of elements"
+        assert n_elements >= n_changes, "Maximum number of idlabel changes reached, try again with a lower number of elements"
                
         # 1. Sample n element ids to change
         if element_id is None:
@@ -2048,31 +2015,31 @@ class Grid(Stimulus):
             
         # 2. Change elements
         for i in range(len(changes)):
-            self.set_element_id_label(element_id = changes[i], id_label_value = id_label_value[i])
+            self.set_element_idlabel(element_id = changes[i], idlabel_value = idlabel_value[i])
             
     @property
-    def mirror_values(self):
+    def mirrorvalues(self):
         """
         The mirror value for each grid element
 
         """
-        return self._mirror_values.generate().pattern
+        return self._mirrorvalues.generate().pattern
     
-    @mirror_values.setter
-    def mirror_values(self, mirror_values):
-        if not self._check_attribute_dimensions(mirror_values):
+    @mirrorvalues.setter
+    def mirrorvalues(self, mirrorvalues):
+        if not self._check_attribute_dimensions(mirrorvalues):
             return
         
-        self._mirror_values = mirror_values
-        self._mirror_values.n_rows = self._n_rows
-        self._mirror_values.n_cols = self._n_cols
+        self._mirrorvalues = mirrorvalues
+        self._mirrorvalues.n_rows = self._n_rows
+        self._mirrorvalues.n_cols = self._n_cols
         
-    def set_element_mirror_value(self, element_id, mirror_value):
+    def set_element_mirrorvalue(self, element_id, mirror_value):
         element_id = self._parse_element_id(element_id)
         
-        self._attribute_overrides[element_id]['mirror_values'] = mirror_value
+        self._attribute_overrides[element_id]['mirrorvalues'] = mirror_value
     
-    def set_element_mirror_values(self, mirror_value = None, element_id = None, n_changes = None):
+    def set_element_mirrorvalues(self, mirror_value = None, element_id = None, n_changes = None):
         """
         """  
         if element_id is not None:
@@ -2089,7 +2056,7 @@ class Grid(Stimulus):
             n_changes = len(mirror_value)
         
         n_elements = self._n_rows * self._n_cols
-        assert n_elements >= n_changes, "Maximum number of mirror_value changes reached, try again with a lower number of elements"
+        assert n_elements >= n_changes, "Maximum number of mirrorvalue changes reached, try again with a lower number of elements"
                
         # 1. Sample n element ids to change
         if element_id is None:
@@ -2099,7 +2066,7 @@ class Grid(Stimulus):
             
         # 2. Change elements
         for i in range(len(changes)):
-            self.set_element_mirror_value(element_id = changes[i], mirror_value = mirror_value[i])
+            self.set_element_mirrorvalue(element_id = changes[i], mirror_value = mirror_value[i])
             
     @property
     def links(self):
@@ -2238,7 +2205,7 @@ class Grid(Stimulus):
             self._element_presentation_order[swap_pair[0]], self._element_presentation_order[swap_pair[1]] = self._element_presentation_order[swap_pair[1]], self._element_presentation_order[swap_pair[0]]
             
             
-    def swap_distinct_elements(self, n_swap_pairs = 1, distinction_features = ['shapes', 'bounding_boxes', 'fillcolors', 'orientations', 'opacities', 'mirror_values', 'links', 'class_labels', 'id_labels']):
+    def swap_distinct_elements(self, n_swap_pairs = 1, distinction_features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'opacities', 'mirrorvalues', 'links', 'classlabels', 'idlabels']):
         """
         Swaps the position of two elements in the pattern. The elements that
         wil be swapped need to be distinct on at least one element feature
@@ -2346,8 +2313,8 @@ class Grid(Stimulus):
             
             if 'shapes' in feature_dimensions:
                 self._attribute_overrides[swap_element_0]['shape'] , self._attribute_overrides[swap_element_1]['shape'] = self.shapes[swap_pair[1]], self.shapes[swap_pair[0]]
-            if 'bounding_boxes' in feature_dimensions:
-                self._attribute_overrides[swap_element_0]['bounding_box'] , self._attribute_overrides[swap_element_1]['bounding_box'] = self.bounding_boxes[swap_pair[1]], self.bounding_boxes[swap_pair[0]]
+            if 'boundingboxes' in feature_dimensions:
+                self._attribute_overrides[swap_element_0]['boundingbox'] , self._attribute_overrides[swap_element_1]['boundingbox'] = self.boundingboxes[swap_pair[1]], self.boundingboxes[swap_pair[0]]
             if 'bordercolors' in feature_dimensions:
                 self._attribute_overrides[swap_element_0]['bordercolor'] , self._attribute_overrides[swap_element_1]['bordercolor'] = self.bordercolors[swap_pair[1]], self.bordercolors[swap_pair[0]]
             if 'borderwidths' in feature_dimensions:
@@ -2360,14 +2327,14 @@ class Grid(Stimulus):
                 self._attribute_overrides[swap_element_0]['orientation'] , self._attribute_overrides[swap_element_1]['orientation']  = self.orientations[swap_pair[1]], self.orientations[swap_pair[0]]
             if 'data' in feature_dimensions:
                 self._attribute_overrides[swap_element_0]['data'] , self._attribute_overrides[swap_element_1]['data']  = self.data[swap_pair[1]], self.data[swap_pair[0]]
-            if 'class_labels' in feature_dimensions:
-                self._attribute_overrides[swap_element_0]['class_labels'] , self._attribute_overrides[swap_element_1]['class_labels']  = self.class_labels[swap_pair[1]], self.class_labels[swap_pair[0]]
-            if 'id_labels' in feature_dimensions:
-                self._attribute_overrides[swap_element_0]['id_labels'] , self._attribute_overrides[swap_element_1]['id_labels']  = self.id_labels[swap_pair[1]], self.id_labels[swap_pair[0]]
-            if 'mirror_values' in feature_dimensions:
-                self._attribute_overrides[swap_element_0]['mirror_values'] , self._attribute_overrides[swap_element_1]['mirror_values']  = self.mirror_values[swap_pair[1]], self.mirror_values[swap_pair[0]]
+            if 'classlabels' in feature_dimensions:
+                self._attribute_overrides[swap_element_0]['classlabel'] , self._attribute_overrides[swap_element_1]['classlabel']  = self.classlabels[swap_pair[1]], self.classlabels[swap_pair[0]]
+            if 'idlabels' in feature_dimensions:
+                self._attribute_overrides[swap_element_0]['idlabel'] , self._attribute_overrides[swap_element_1]['idlabel']  = self.idlabels[swap_pair[1]], self.idlabels[swap_pair[0]]
+            if 'mirrorvalues' in feature_dimensions:
+                self._attribute_overrides[swap_element_0]['mirrorvalue'] , self._attribute_overrides[swap_element_1]['mirrorvalue']  = self.mirrorvalues[swap_pair[1]], self.mirrorvalues[swap_pair[0]]
             if 'links' in feature_dimensions:
-                self._attribute_overrides[swap_element_0]['links'] , self._attribute_overrides[swap_element_1]['links']  = self.links[swap_pair[1]], self.links[swap_pair[0]]
+                self._attribute_overrides[swap_element_0]['link'] , self._attribute_overrides[swap_element_1]['link']  = self.links[swap_pair[1]], self.links[swap_pair[0]]
  
   
     def swap_distinct_features(self, n_swap_pairs = 1, feature_dimensions = ['fillcolors']):
@@ -2428,8 +2395,8 @@ class Grid(Stimulus):
             
             if 'shapes' in feature_dimensions:
                 self._attribute_overrides[swap_element_0]['shape'] , self._attribute_overrides[swap_element_1]['shape'] = self.shapes[swap_pair[1]], self.shapes[swap_pair[0]]
-            if 'bounding_boxes' in feature_dimensions:
-                self._attribute_overrides[swap_element_0]['bounding_box'] , self._attribute_overrides[swap_element_1]['bounding_box'] = self.bounding_boxes[swap_pair[1]], self.bounding_boxes[swap_pair[0]]
+            if 'boundingboxes' in feature_dimensions:
+                self._attribute_overrides[swap_element_0]['boundingbox'] , self._attribute_overrides[swap_element_1]['boundingbox'] = self.boundingboxes[swap_pair[1]], self.boundingboxes[swap_pair[0]]
             if 'bordercolors' in feature_dimensions:
                 self._attribute_overrides[swap_element_0]['bordercolor'] , self._attribute_overrides[swap_element_1]['bordercolor'] = self.bordercolors[swap_pair[1]], self.bordercolors[swap_pair[0]]
             if 'borderwidths' in feature_dimensions:
@@ -2442,14 +2409,14 @@ class Grid(Stimulus):
                 self._attribute_overrides[swap_element_0]['orientation'] , self._attribute_overrides[swap_element_1]['orientation']  = self.orientations[swap_pair[1]], self.orientations[swap_pair[0]]
             if 'data' in feature_dimensions:
                 self._attribute_overrides[swap_element_0]['data'] , self._attribute_overrides[swap_element_1]['data']  = self.data[swap_pair[1]], self.data[swap_pair[0]]
-            if 'class_labels' in feature_dimensions:
-                self._attribute_overrides[swap_element_0]['class_labels'] , self._attribute_overrides[swap_element_1]['class_labels']  = self.class_labels[swap_pair[1]], self.class_labels[swap_pair[0]]
-            if 'id_labels' in feature_dimensions:
-                self._attribute_overrides[swap_element_0]['id_labels'] , self._attribute_overrides[swap_element_1]['id_labels']  = self.id_labels[swap_pair[1]], self.id_labels[swap_pair[0]]
-            if 'mirror_values' in feature_dimensions:
-                self._attribute_overrides[swap_element_0]['mirror_values'] , self._attribute_overrides[swap_element_1]['mirror_values']  = self.mirror_values[swap_pair[1]], self.mirror_values[swap_pair[0]]
+            if 'classlabels' in feature_dimensions:
+                self._attribute_overrides[swap_element_0]['classlabel'] , self._attribute_overrides[swap_element_1]['classlabel']  = self.classlabels[swap_pair[1]], self.classlabels[swap_pair[0]]
+            if 'idlabels' in feature_dimensions:
+                self._attribute_overrides[swap_element_0]['idlabel'] , self._attribute_overrides[swap_element_1]['idlabel']  = self.idlabels[swap_pair[1]], self.idlabels[swap_pair[0]]
+            if 'mirrorvalues' in feature_dimensions:
+                self._attribute_overrides[swap_element_0]['mirrorvalue'] , self._attribute_overrides[swap_element_1]['mirrorvalue']  = self.mirrorvalues[swap_pair[1]], self.mirrorvalues[swap_pair[0]]
             if 'links' in feature_dimensions:
-                self._attribute_overrides[swap_element_0]['links'] , self._attribute_overrides[swap_element_1]['links']  = self.links[swap_pair[1]], self.links[swap_pair[0]]
+                self._attribute_overrides[swap_element_0]['link'] , self._attribute_overrides[swap_element_1]['link']  = self.links[swap_pair[1]], self.links[swap_pair[0]]
  
            
     def _is_modifiable(self):
@@ -2526,14 +2493,18 @@ class Grid(Stimulus):
         return element_id
 
 class Concentric(Grid):
-    _element_attributes = ["_bounding_boxes", "_orientations", "_bordercolors", "_borderwidths", "_fillcolors", "_opacities", "_shapes",
-                          "_class_labels", "_id_labels", "_mirror_values", "_links", "_data"]
+    _element_attributes = ["_boundingboxes", "_orientations", "_bordercolors", "_borderwidths", "_fillcolors", "_opacities", "_shapes",
+                          "_classlabels", "_idlabels", "_mirrorvalues", "_links", "_data"]
     
-    def __init__(self, n_elements, background_color = "white", size = None, background_shape = None, stim_mask = None, 
-                 stim_orientation = 0, stim_mirror_value = None, stim_link = None, stim_class_label = None, stim_id_label = None, x_margin = 20, y_margin = 20):
+    def __init__(self, n_elements, x_margin = 20, y_margin = 20, size = None, 
+                 background_color = "white", background_shape = None, 
+                 stim_mask = None, stim_orientation = 0, stim_mirrorvalue = None, 
+                 stim_link = None, stim_classlabel = None, stim_idlabel = None):
         
-        super().__init__(n_rows = 1, n_cols = n_elements, background_color = background_color, x_margin = x_margin, y_margin = y_margin, size = size, background_shape = background_shape, stim_mask = stim_mask, 
-                         stim_orientation = stim_orientation, stim_mirror_value = stim_mirror_value, stim_link = stim_link, stim_class_label = stim_class_label, stim_id_label = stim_id_label)
+        super().__init__(n_rows = 1, n_cols = n_elements, x_margin = x_margin, y_margin = y_margin, size = size, 
+                         background_color = background_color, background_shape = background_shape, 
+                         stim_mask = stim_mask, stim_orientation = stim_orientation, stim_mirrorvalue = stim_mirrorvalue, 
+                         stim_link = stim_link, stim_classlabel = stim_classlabel, stim_idlabel = stim_idlabel)
         
         # Initialize the positions of each element
         self._n_elements = n_elements
@@ -2542,20 +2513,25 @@ class Concentric(Grid):
         
         self.positions = Positions.CreateCustomPositions(x = [0]*n_elements, y = [0]*n_elements)
         
-        self.bounding_boxes = GridPattern.RepeatAcrossElements(Pattern.Create2DGradient(x = LinearGradient(start = 20, end = 200, n_elements = n_elements, invert = True),
+        self.boundingboxes = GridPattern.RepeatAcrossElements(Pattern.Create2DGradient(x = LinearGradient(start = 20, end = 200, n_elements = n_elements, invert = True),
                                                                                         y = LinearGradient(start = 20, end = 200, n_elements = n_elements, invert = True),
                                                                                         n_elements = n_elements))
         self.fillcolors = GridPattern.RepeatAcrossElements(["dodgerblue", "lightgrey"])
 
 class Outline(Grid):
-    _element_attributes = ["_bounding_boxes", "_orientations", "_bordercolors", "_borderwidths", "_fillcolors", "_opacities", "_shapes",
-                          "_class_labels", "_id_labels", "_mirror_values", "_links", "_data"]
+    _element_attributes = ["_boundingboxes", "_orientations", "_bordercolors", "_borderwidths", "_fillcolors", "_opacities", "_shapes",
+                          "_classlabels", "_idlabels", "_mirrorvalues", "_links", "_data"]
     
-    def __init__(self, n_elements, shape = 'Ellipse', shape_bounding_box = (150,150), background_color = "white", size = None, background_shape = None, stim_mask = None, 
-                 stim_orientation = 0, stim_mirror_value = None, stim_link = None, stim_class_label = None, stim_id_label = None, x_margin = 20, y_margin = 20):
+    def __init__(self, n_elements, shape = 'Ellipse', shape_boundingbox = (150,150), 
+                 x_margin = 20, y_margin = 20, size = None, 
+                 background_color = "white", background_shape = None, 
+                 stim_mask = None, stim_orientation = 0, stim_mirrorvalue = None, 
+                 stim_link = None, stim_classlabel = None, stim_idlabel = None):
         
-        super().__init__(n_rows = 1, n_cols = n_elements, background_color = background_color, x_margin = x_margin, y_margin = y_margin, size = size, background_shape = background_shape, stim_mask = stim_mask, 
-                         stim_orientation = stim_orientation, stim_mirror_value = stim_mirror_value, stim_link = stim_link, stim_class_label = stim_class_label, stim_id_label = stim_id_label)
+        super().__init__(n_rows = 1, n_cols = n_elements, x_margin = x_margin, y_margin = y_margin, size = size,
+                         background_color = background_color, background_shape = background_shape, 
+                         stim_mask = stim_mask, stim_orientation = stim_orientation, stim_mirrorvalue = stim_mirrorvalue, 
+                         stim_link = stim_link, stim_classlabel = stim_classlabel, stim_idlabel = stim_idlabel)
         
         # Initialize the positions of each element
         self._n_elements = n_elements
@@ -2563,10 +2539,10 @@ class Outline(Grid):
         self._n_cols = n_elements
         
         self._shape = shape
-        self._shape_bounding_box = shape_bounding_box
+        self._shape_boundingbox = shape_boundingbox
         
         if shape == 'Ellipse':
-            self.positions = Positions.CreateCircle(n_elements = n_elements, radius = shape_bounding_box[0])
+            self.positions = Positions.CreateCircle(n_elements = n_elements, radius = shape_boundingbox[0])
         else:
-            self.positions = Positions.CreateShape(n_elements = n_elements, src = shape, width = shape_bounding_box[0], height = shape_bounding_box[1])
+            self.positions = Positions.CreateShape(n_elements = n_elements, src = shape, width = shape_boundingbox[0], height = shape_boundingbox[1])
         

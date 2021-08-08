@@ -238,9 +238,9 @@ class Positions:
         return {'x' : x_jitter, 'y' : y_jitter}
             
         
-    def Create2DGrid(n_rows, n_cols, row_spacing = 50, col_spacing= 50):
+    def CreateRectGrid(n_rows, n_cols, row_spacing = 50, col_spacing= 50):
         """
-        Static method for creates a 2D grid structure.
+        Static method for creates a rectangular grid structure.
 
         Parameters
         ----------
@@ -266,7 +266,7 @@ class Positions:
         y = Pattern(list(range(0, n_rows * row_spacing, row_spacing)))
         y = y.RepeatElements(n_cols)    
         
-        positiontype = "2DGrid"
+        positiontype = "RectGrid"
         positionparameters = {'n_rows' : n_rows, 'n_cols' : n_cols, 'row_spacing' : row_spacing, 'col_spacing' : col_spacing}
         
         return Positions(x, y, positiontype, positionparameters)
@@ -299,9 +299,9 @@ class Positions:
         return Positions(x, y, positiontype, positionparameters)
         
     
-    def CreateSineGrid(n_rows, n_cols, row_spacing = 50, col_spacing = 50, A = 25, f = .1, axis = "x"):
+    def CreateSineGrid(n_rows, n_cols, row_spacing = 50, col_spacing = 50, A = 25, f = .1, axis = "xy"):
         """
-        Creates a 2D regularly spaced grid and adds a sine wave modulation to the y-axis.
+        Creates a rectangular regularly spaced grid and adds a sine wave modulation to the y-axis.
 
         Parameters
         ----------
@@ -353,6 +353,55 @@ class Positions:
             x_mod = x_mod.RepeatElements(n_cols)
             
             return Positions(x + x_mod, y + y_mod, positiontype, positionparameters)
+        
+    # def CreateHexGrid(n_rows, n_cols, row_spacing = 50, col_spacing = 50, axis = "x"):
+    #     """
+    #     Creates a regularly spaced hexagonal grid.
+
+    #     Parameters
+    #     ----------
+    #     n_rows : int
+    #         Number of rows.
+    #     n_cols : int
+    #         Number of columns.
+    #     row_spacing : int
+    #         Distance between column centers.
+    #     col_spacing : int
+    #         Distance between row centers.
+
+    #     Returns
+    #     -------
+    #     x : Pattern
+    #         All the x-coordinates.
+    #     y : Pattern
+    #         All the y-coordinates.
+
+    #     """
+    #     x = Pattern(list(range(0, n_cols * col_spacing , col_spacing)))
+    #     x = x.RepeatPattern(n_rows)
+        
+    #     y = Pattern(list(range(0, n_rows * row_spacing , row_spacing)))
+    #     y = y.RepeatElements(n_cols)    
+        
+    #     positiontype = "HexGrid"
+    #     positionparameters = {'n_rows' : n_rows, 'n_cols' : n_cols, 'row_spacing' : row_spacing, 
+    #                           'col_spacing' : col_spacing, 'axis' : axis}
+        
+    #     if axis == "x":
+    #         x_mod = Pattern([0, float(col_spacing/2)]).RepeatPatternToSize(count = n_rows)
+    #         x_mod = x_mod.RepeatElements(n_cols)
+            
+    #         return Positions(x + x_mod, y, positiontype, positionparameters)
+    #     elif axis == "y":
+    #         # y_mod = Pattern([0, float(row_spacing)]).RepeatPatternToSize(count = n_cols)
+    #         y_mod = Pattern([0, float(row_spacing/2)]).RepeatPatternToSize(count = n_cols)
+    #         y_mod = y_mod.RepeatPattern(n_rows)
+            
+
+    #         # new_y = Pattern([i*2 for i in y.pattern])
+    #         # new_y = new_y + y_mod
+            
+    #         return Positions(x, y + y_mod, positiontype, positionparameters)
     
     def CreateCircle(radius, n_elements, starting_point = "left"):
         """
@@ -491,8 +540,8 @@ class Positions:
                 
                 # Check if the new position is sufficiently separated from previous ones
                 while valid_point == False and inner_iteration_count < max_iterations:                  
-                    x = np.random.randint(0, width)
-                    y = np.random.randint(0, height)
+                    x = random.randint(0, width)
+                    y = random.randint(0, height)
                     
                     valid_point = True
                     for p in positions:

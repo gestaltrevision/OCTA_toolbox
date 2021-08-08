@@ -20,7 +20,7 @@ factor = 3
 
 stimsize = (350*factor,350*factor)
 
-clipshape = Ellipse(position = (stimsize[0]/2,stimsize[1]/2), bounding_box = stimsize)
+clipshape = Ellipse(position = (stimsize[0]/2,stimsize[1]/2), boundingbox = stimsize)
 
 stimulus = Grid(n_rows, n_cols, background_color = "lightgrey", stim_orientation = 0*factor, row_spacing = 40*factor, col_spacing = 40*factor, size = stimsize, background_shape = clipshape)
 
@@ -33,12 +33,12 @@ colors_to_use = ['#1b9fd8', '#6dd6ff', '#006ca1']
 stimulus.fillcolors = GridPattern.RepeatAcrossColumns(colors_to_use)
 
 ## Determine size of elements in the stimulus
-stimulus.bounding_boxes = GridPattern.RepeatAcrossColumns([(30,30)])
+stimulus.boundingboxes = GridPattern.RepeatAcrossColumns([(30,30)])
 
 
 stimulus.Show()
 stimulus.SaveSVG("testori")
-stimulus.SavePNG("testori")
+# stimulus.SavePNG("testori")
 # stimulus.SaveJPG("testori")
 # stimulus.SaveTIFF("testori")
 # stimulus.SavePDF("testori")
@@ -60,7 +60,7 @@ colors_to_use = ['#1b9fd8', '#6dd6ff', '#006ca1']
 stimulus.fillcolors = GridPattern.RepeatAcrossColumns(colors_to_use)
 
 ## Determine size of elements in the stimulus
-stimulus.bounding_boxes = GridPattern.RepeatAcrossColumns([(30,30)])
+stimulus.boundingboxes = GridPattern.RepeatAcrossColumns([(30,30)])
 
 
 stimulus.Show()

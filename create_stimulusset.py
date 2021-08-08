@@ -62,31 +62,31 @@ for shape_n in complexity_levels:
                     
                     if(pattern == "RepeatAcrossRows"):
                         stimulus_1.shapes = GridPattern.RepeatAcrossColumns(Pattern(shapes_1).RepeatElements(int(stimulus_1.n_rows/len(shapes_1))))
-                        stimulus_1.bounding_boxes = GridPattern.RepeatAcrossColumns(Pattern(sizes_1).RepeatElements(int(stimulus_1.n_rows/len(sizes_1))))
+                        stimulus_1.boundingboxes = GridPattern.RepeatAcrossColumns(Pattern(sizes_1).RepeatElements(int(stimulus_1.n_rows/len(sizes_1))))
                         stimulus_1.fillcolors = GridPattern.RepeatAcrossColumns(Pattern(colors_1).RepeatElements(int(stimulus_1.n_rows/len(colors_1))))
                     elif(pattern == "RepeatAcrossColumns"):
                         stimulus_1.shapes = GridPattern.RepeatAcrossRows(Pattern(shapes_1).RepeatElements(int(stimulus_1.n_cols/len(shapes_1))))
-                        stimulus_1.bounding_boxes = GridPattern.RepeatAcrossRows(Pattern(sizes_1).RepeatElements(int(stimulus_1.n_cols/len(sizes_1))))
+                        stimulus_1.boundingboxes = GridPattern.RepeatAcrossRows(Pattern(sizes_1).RepeatElements(int(stimulus_1.n_cols/len(sizes_1))))
                         stimulus_1.fillcolors = GridPattern.RepeatAcrossRows(Pattern(colors_1).RepeatElements(int(stimulus_1.n_cols/len(colors_1))))
                     elif(pattern == "AlternateRows"):
                         stimulus_1.shapes = GridPattern.RepeatAcrossColumns(shapes_1)
-                        stimulus_1.bounding_boxes = GridPattern.RepeatAcrossColumns(sizes_1)
+                        stimulus_1.boundingboxes = GridPattern.RepeatAcrossColumns(sizes_1)
                         stimulus_1.fillcolors = GridPattern.RepeatAcrossColumns(colors_1)    
                     elif(pattern == "AlternateColumns"):
                         stimulus_1.shapes = GridPattern.RepeatAcrossRows(shapes_1)
-                        stimulus_1.bounding_boxes = GridPattern.RepeatAcrossRows(sizes_1)
+                        stimulus_1.boundingboxes = GridPattern.RepeatAcrossRows(sizes_1)
                         stimulus_1.fillcolors = GridPattern.RepeatAcrossRows(colors_1) 
                     elif(pattern == "MirrorAcrossRows"):
                         stimulus_1.shapes = GridPattern.MirrorAcrossRows(shapes_1)
-                        stimulus_1.bounding_boxes = GridPattern.MirrorAcrossRows(sizes_1)
+                        stimulus_1.boundingboxes = GridPattern.MirrorAcrossRows(sizes_1)
                         stimulus_1.fillcolors = GridPattern.MirrorAcrossRows(colors_1)
                     elif(pattern == "MirrorAcrossColumns"):
                         stimulus_1.shapes = GridPattern.MirrorAcrossColumns(shapes_1)
-                        stimulus_1.bounding_boxes = GridPattern.MirrorAcrossColumns(sizes_1)
+                        stimulus_1.boundingboxes = GridPattern.MirrorAcrossColumns(sizes_1)
                         stimulus_1.fillcolors = GridPattern.MirrorAcrossColumns(colors_1)
                     elif(pattern == "Subgroups"):
                         stimulus_1.shapes = GridPattern.TiledElementGrid(GridPattern.MirrorAcrossRightDiagonal(shapes_1, len(shapes_1), len(shapes_1)), int(stimulus_1.n_rows/len(shapes_1)))   
-                        stimulus_1.bounding_boxes = GridPattern.TiledElementGrid(GridPattern.MirrorAcrossRightDiagonal(sizes_1, len(sizes_1), len(sizes_1)), int(stimulus_1.n_rows/len(sizes_1)))
+                        stimulus_1.boundingboxes = GridPattern.TiledElementGrid(GridPattern.MirrorAcrossRightDiagonal(sizes_1, len(sizes_1), len(sizes_1)), int(stimulus_1.n_rows/len(sizes_1)))
                         stimulus_1.fillcolors = GridPattern.TiledElementGrid(GridPattern.MirrorAcrossRightDiagonal(colors_1, len(colors_1), len(colors_1)), int(stimulus_1.n_rows/len(colors_1)))
                     elif(pattern == "Checkerboard"):
                         if(len(shapes_1) < 3):
@@ -98,7 +98,7 @@ for shape_n in complexity_levels:
                             source_grid_sizes = GridPattern.RepeatAcrossElements(Pattern(sizes_1 + sizes_1[::-1]), 2, 2)
                         elif(len(sizes_1) >= 3):
                             source_grid_sizes = GridPattern.RepeatAcrossElements(Pattern(sizes_1).RepeatPatternToSize(count = 4), 2, 2)
-                        stimulus_1.bounding_boxes = GridPattern.TiledGrid(source_grid_sizes, (int(stimulus_1.n_rows/2),int(stimulus_1.n_cols/2)))
+                        stimulus_1.boundingboxes = GridPattern.TiledGrid(source_grid_sizes, (int(stimulus_1.n_rows/2),int(stimulus_1.n_cols/2)))
                         if(len(colors_1) < 3):
                             source_grid_colors = GridPattern.RepeatAcrossElements(Pattern(colors_1 + colors_1[::-1]), 2, 2)
                         elif(len(colors_1) >= 3):
@@ -112,7 +112,7 @@ for shape_n in complexity_levels:
                         sizes_1 = Pattern(sizes_1).RepeatPatternToSize(count = 3) # count = number of layers
                         center_grid_sizes = GridPattern.RepeatAcrossElements(Pattern(sizes_1.pattern[0]), 2, 2)
                         outer_layers_sizes = Pattern(sizes_1.pattern[1:])
-                        stimulus_1.bounding_boxes = GridPattern.LayeredGrid(center_grid_sizes, outer_layers_sizes)
+                        stimulus_1.boundingboxes = GridPattern.LayeredGrid(center_grid_sizes, outer_layers_sizes)
                         colors_1 = Pattern(colors_1).RepeatPatternToSize(count = 3) # count = number of layers
                         center_grid_colors = GridPattern.RepeatAcrossElements(Pattern(colors_1.pattern[0]), 2, 2)
                         outer_layers_colors = Pattern(colors_1.pattern[1:])
@@ -125,7 +125,7 @@ for shape_n in complexity_levels:
                         sizes_1 = Pattern(sizes_1).RepeatPatternToSize(count = 2) # count = number of layers
                         center_grid_sizes = GridPattern.RepeatAcrossElements(Pattern(sizes_1.pattern[0]), 2, 2)
                         outer_layers_sizes = Pattern(sizes_1.pattern)
-                        stimulus_1.bounding_boxes = GridPattern.LayeredGrid(center_grid_sizes, outer_layers_sizes)
+                        stimulus_1.boundingboxes = GridPattern.LayeredGrid(center_grid_sizes, outer_layers_sizes)
                         colors_1 = Pattern(colors_1).RepeatPatternToSize(count = 2) # count = number of layers
                         center_grid_colors = GridPattern.RepeatAcrossElements(Pattern(colors_1.pattern[0]), 2, 2)
                         outer_layers_colors = Pattern(colors_1.pattern)
@@ -142,7 +142,7 @@ for shape_n in complexity_levels:
                     else:
                         element_switches = 0
                     
-                    stimulus_1.swap_distinct_elements(element_switches, distinction_features = ['shapes', 'bounding_boxes', 'fillcolors'])
+                    stimulus_1.swap_distinct_elements(element_switches, distinction_features = ['shapes', 'boundingboxes', 'fillcolors'])
                     
                     stimulus_1.Show()
                     
@@ -153,4 +153,4 @@ for shape_n in complexity_levels:
                                         
                     print("\n\nLOCI:\t", LOCI_1)
                     print("LOC:\t", sum(complexity_1))
-                    print("LOCE:\t", Complexity.CalculateElementsLOCE(stimulus_1, distinction_features = ['shapes', 'bounding_boxes', 'fillcolors']))
+                    print("LOCE:\t", Complexity.CalculateElementsLOCE(stimulus_1, distinction_features = ['shapes', 'boundingboxes', 'fillcolors']))

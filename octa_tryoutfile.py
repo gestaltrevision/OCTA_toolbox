@@ -22,7 +22,7 @@ import random
 # Test Polygon shapes with n_sides as input 
 
 stimulus = Grid(10, 10, row_spacing = 25, col_spacing = 25, background_color = "none")
-stimulus._autosize_method = "maximum_bounding_box"
+stimulus._autosize_method = "maximum_boundingbox"
 
 #stimulus.shapes = GridPattern.RepeatAcrossRows([RegularPolygon(4), RegularPolygon(5), RegularPolygon(6, "Hexagon"), Polygon(6, "Hexagon")])
 stimulus.shapes = GridPattern.RepeatAcrossLeftDiagonal([Rectangle, Ellipse,PathSvg("img/arrow-circle-up-svgrepo-com.svg")])
@@ -38,12 +38,12 @@ stimulus.shapes = GridPattern.RepeatAcrossLeftDiagonal([Rectangle, Ellipse,PathS
 #stimulus.opacities = GridPattern.RepeatAcrossColumns([0.5,1])
 #stimulus.borderwidths = GridPattern.RepeatAcrossElements([5])
 #stimulus.bordercolors = GridPattern.RepeatAcrossElements(["black"])
-#stimulus.mirror_values = GridPattern.RepeatAcrossElements(["horizontal", "vertical"])
-#stimulus.swap_distinct_elements(n_swap_pairs = 1, distinction_features = ['mirror_values'])
-#stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['fillcolors', 'mirror_values'])
+#stimulus.mirrorvalues = GridPattern.RepeatAcrossElements(["horizontal", "vertical"])
+#stimulus.swap_distinct_elements(n_swap_pairs = 1, distinction_features = ['mirrorvalues'])
+#stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['fillcolors', 'mirrorvalues'])
 
 #stimulus.positions = Positions.CreateCustomPositions(xpositions_new, ypositions_new)
-stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(25,25)])
+stimulus.boundingboxes = GridPattern.RepeatAcrossElements([(25,25)])
 
 stimulus.fillcolors = GridPattern.GradientAcrossElements("blue", "red")
 

@@ -15,7 +15,7 @@ import svgpathtools
 import svgwrite
 
 topleft = (100 - width/2 , 100 - height/2)
-paths, attributes = svgpathtools.svg2paths("butterfly.svg")
+paths, attributes = svgpathtools.svg2paths("regularpolygon4.svg")
 
 
 #path_alt = svgpathtools.parse_path("M 10 10 H 90 V 90 H 10 L 10 10")
@@ -37,7 +37,7 @@ max_ysize = max([item[1] for item in allpaths])
 scale_x_parameter = width / max_xsize
 scale_y_parameter = height / max_ysize
 
-d = " ".join([item["d"] for item in attributes])
+# d = " ".join([item["d"] for item in attributes])
 
 
 #####
@@ -58,7 +58,10 @@ ypositions = []
 
 for n in range(n_elements):
     coords = paths[0].point(step_size * n)
-    x,y = str(coords).replace("(", "").replace(")", "").replace("j", "").split("+")
+    if '+' in str(coords):
+        x,y = str(coords).replace("(", "").replace(")", "").replace("j", "").split("+")
+    else:
+        x,y = 0, str(coords).replace("(", "").replace(")", "").replace("j", "")
     xpositions.append(float(x))
     ypositions.append(float(y))
     
@@ -66,7 +69,7 @@ for n in range(n_elements):
 xpositions_new = [xposition*scale_x_parameter for xposition in xpositions]
 ypositions_new = [yposition*scale_y_parameter for yposition in ypositions]
 
-
+#%%
 ####
 from octa.Stimulus import Grid, Stimulus
 from octa.Positions import Positions
@@ -77,14 +80,14 @@ import random
 from octa.shapes.Path import Path_
 
 #stimsize = (288,288)
-#clipshape = Path_(position = (stimsize[0]/2,stimsize[1]/2), bounding_box = (288,288), 
+#clipshape = Path_(position = (stimsize[0]/2,stimsize[1]/2), boundingbox = (288,288), 
 #                  data = ["M37.5,186c-12.1-10.5-11.8-32.3-7.2-46.7c4.8-15,13.1-17.8,30.1-36.7C91,68.8,83.5,56.7,103.4,45 c22.2-13.1,51.1-9.5,69.6-1.6c18.1,7.8,15.7,15.3,43.3,33.2c28.8,18.8,37.2,14.3,46.7,27.9c15.6,22.3,6.4,53.3,4.4,60.2 c-3.3,11.2-7.1,23.9-18.5,32c-16.3,11.5-29.5,0.7-48.6,11c-16.2,8.7-12.6,19.7-28.2,33.2c-22.7,19.7-63.8,25.7-79.9,9.7 c-15.2-15.1,0.3-41.7-16.6-54.9C63,186,49.7,196.7,37.5,186z", 288,288])
 
 
 # Test Polygon shapes with n_sides as input 
 
 stimulus = Grid(20, 20, row_spacing = 25, col_spacing = 25, background_color = "none")
-stimulus._autosize_method = "maximum_bounding_box"
+stimulus._autosize_method = "maximum_boundingbox"
 
 #stimulus.shapes = GridPattern.RepeatAcrossRows([RegularPolygon(4), RegularPolygon(5), RegularPolygon(6, "Hexagon"), Polygon(6, "Hexagon")])
 stimulus.shapes = GridPattern.RepeatAcrossRows([Rectangle, Ellipse, Triangle, PathSvg("butterfly.svg")])
@@ -100,12 +103,12 @@ stimulus.shapes = GridPattern.RepeatAcrossRows([Rectangle, Ellipse, Triangle, Pa
 #stimulus.opacities = GridPattern.RepeatAcrossColumns([0.5,1])
 #stimulus.borderwidths = GridPattern.RepeatAcrossElements([5])
 #stimulus.bordercolors = GridPattern.RepeatAcrossElements(["black"])
-#stimulus.mirror_values = GridPattern.RepeatAcrossElements(["horizontal", "vertical"])
-#stimulus.swap_distinct_elements(n_swap_pairs = 1, distinction_features = ['mirror_values'])
-#stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['fillcolors', 'mirror_values'])
+#stimulus.mirrorvalues = GridPattern.RepeatAcrossElements(["horizontal", "vertical"])
+#stimulus.swap_distinct_elements(n_swap_pairs = 1, distinction_features = ['mirrorvalues'])
+#stimulus.swap_distinct_features(n_swap_pairs = 1, feature_dimensions = ['fillcolors', 'mirrorvalues'])
 
 #stimulus.positions = Positions.CreateCustomPositions(xpositions_new, ypositions_new)
-stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(15,15)])
+stimulus.boundingboxes = GridPattern.RepeatAcrossElements([(15,15)])
 stimulus.fillcolors = GridPattern.RepeatAcrossElements(Pattern.CreateColorRangeList(start_color = "red", end_color = "blue", n_elements = 100))
 
 stimulus.set_element_fillcolor(105, "red")
@@ -114,8 +117,8 @@ stimulus.set_element_shape(105, PathSvg("img/checkmark.svg"))
 
 stimulus.Show()
 #stimulus.SavePNG("test")
-stimulus.SaveJSON("test")
-stimulus.SaveSVG("test")
+# stimulus.SaveJSON("test")
+# stimulus.SaveSVG("test")
 
 
 #stim = Stimulus.LoadFromJSON("test.json")
@@ -123,8 +126,8 @@ stimulus.SaveSVG("test")
 #stim.Show()
 
 ###############"
-
-
+#%%
+# paths, attributes = svgpathtools.svg2paths("regularpolygon4.svg")
 redpath = paths[0]
 redpath_attribs = attributes[0]
 intersections = []
@@ -138,7 +141,7 @@ redpath = svgpathtools.parse_path("M37.5,186c-12.1-10.5-11.8-32.3-7.2-46.7c4.8-1
 pathobjects = []
 
 objects = stimulus.positions.GetPositions()
-sizes = stimulus.bounding_boxes
+sizes = stimulus.boundingboxes
 
 for i in range(len(objects[0])):
     x_position = objects[0][i]
@@ -160,9 +163,9 @@ for i in range(len(paths[1:])):
             elements_to_keep.append(i)
             
 # only keep elements on border (within grid structure)
-for i in range(len(paths[1:])):
-    if i not in elements_to_keep:
-        elements_to_remove.append(i) 
+# for i in range(len(paths[1:])):
+#     if i not in elements_to_keep:
+#         elements_to_remove.append(i) 
         
 # keep elements on and within border (within grid structure)
 elements_to_keep_all = []
@@ -194,4 +197,4 @@ for row in range(stimulus.n_rows):
 for i in elements_to_remove:
     stimulus.remove_element(i)
 stimulus.Show()
-stimulus.SaveSVG("test_fullelementsclipshape")
+# stimulus.SaveSVG("test_fullelementsclipshape")

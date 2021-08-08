@@ -12,7 +12,7 @@ def Path(path, xsize, ysize, name = None):
     return type(str(name), (Path_,), {'path': path, 'xsizepath': xsize, 'ysizepath': ysize, 'name': name})
 
 class Path_:
-    parameters = ['position', 'bounding_box', 'data', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'class_label', 'id_label', 'mirror_value', 'link']
+    parameters = ['position', 'boundingbox', 'data', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'classlabel', 'idlabel', 'mirrorvalue', 'link']
     
     def __init__(self, **kwargs):
         for p in Path_.parameters:
@@ -30,11 +30,11 @@ class Path_:
         self.position = position
     
     
-    def set_bounding_box(self, bounding_box):
-        if bounding_box == None:
-            bounding_box = (10, 10)
+    def set_boundingbox(self, boundingbox):
+        if boundingbox == None:
+            boundingbox = (10, 10)
         
-        self.bounding_box = bounding_box
+        self.boundingbox = boundingbox
     
     
     def set_orientation(self, orientation):
@@ -126,23 +126,23 @@ class Path_:
             else:
                 self.opacity_animation = "" 
         
-    def set_class_label(self, class_label):
-        if class_label == None:
-            class_label = ""
+    def set_classlabel(self, classlabel):
+        if classlabel == None:
+            classlabel = ""
             
-        self.class_label = class_label
+        self.classlabel = classlabel
     
-    def set_id_label(self, id_label):
-        if id_label == None:
-            id_label = ""
+    def set_idlabel(self, idlabel):
+        if idlabel == None:
+            idlabel = ""
             
-        self.id_label = id_label
+        self.idlabel = idlabel
     
-    def set_mirror_value(self, mirror_value):
-        if mirror_value == None:
-            mirror_value = ""
+    def set_mirrorvalue(self, mirrorvalue):
+        if mirrorvalue == None:
+            mirrorvalue = ""
             
-        self.mirror_value = mirror_value
+        self.mirrorvalue = mirrorvalue
         
     def set_link(self, link):
         if link == "":
@@ -164,11 +164,11 @@ class Path_:
 
     def create_mirror_transform(self):
         mirror_transform = ""
-        if self.mirror_value == "vertical":
+        if self.mirrorvalue == "vertical":
             mirror_transform = "scale(-1, 1) translate(%f, 0)"%(-2*self.position[0])
-        elif self.mirror_value == "horizontal":
+        elif self.mirrorvalue == "horizontal":
             mirror_transform = "scale(1, -1), translate(0, %f)"%(-2*self.position[1])
-        elif self.mirror_value == "horizontalvertical":
+        elif self.mirrorvalue == "horizontalvertical":
             mirror_transform = "scale(-1, -1) translate(%f, %f)"%(-2*self.position[0], -2*self.position[1])
                 
         return mirror_transform
@@ -229,10 +229,10 @@ class Path_:
         return gradient.get_paint_server() 
 
     def generate(self, dwg):
-        topleft = (self.position[0] - self.bounding_box[0]/2 , self.position[1] - self.bounding_box[1]/2)
+        topleft = (self.position[0] - self.boundingbox[0]/2 , self.position[1] - self.boundingbox[1]/2)
                           
-        scale_x_parameter = self.bounding_box[0] / self.xsize
-        scale_y_parameter = self.bounding_box[1] / self.ysize
+        scale_x_parameter = self.boundingbox[0] / self.xsize
+        scale_y_parameter = self.boundingbox[1] / self.ysize
         
         sizeposition_transform = "scale(%f, %f) translate(%f, %f)"%(scale_x_parameter, scale_y_parameter, (topleft[0]/scale_x_parameter), (topleft[1]/scale_y_parameter))
 
@@ -248,16 +248,16 @@ class Path_:
                 stroke_width = self.borderwidth,
                 transform    = " ".join([mirror_transform, sizeposition_transform,  self.rotation_transform]))#,
 #                insert      = topleft,
-#                size        = self.bounding_box)
+#                size        = self.boundingbox)
                 
 #                extra = 
                 
 #                transform   = " ".join([mirror_transform, rotation_transform]))
         
-        if self.class_label != "":
-            svg['class']         = self.class_label
-        if self.id_label != "":
-            svg['id']        = self.id_label
+        if self.classlabel != "":
+            svg['class']         = self.classlabel
+        if self.idlabel != "":
+            svg['id']        = self.idlabel
             
         if self.fillcolor_animation != "":
             svg.add(eval(self.fillcolor_animation))

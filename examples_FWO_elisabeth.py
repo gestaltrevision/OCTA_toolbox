@@ -27,10 +27,10 @@ n_cols = 12
 ## column spacing is distance between midpoints of elements in vertical direction
 ## size argument makes the stimuli a fixed size, 
 ## but you could also choose for automatic determination of size by removing the size argument
-stimulus = Grid(n_rows, n_cols, background_color = "None", row_spacing = 35, col_spacing = 35, size = (600,600))
+stimulus = Grid(n_rows, n_cols, background_color = "none", row_spacing = 35, col_spacing = 35, size = (600,600))
 
 ## Determine size of elements in the stimulus
-stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(30,30)])
+stimulus.boundingboxes = GridPattern.RepeatAcrossElements([(30,30)])
 
 ## Determine shapes used in the stimulus
 ## Example shapes: Ellipse, Rectangle, Triangle, Polygon(n_sides = 8), ...
@@ -63,10 +63,10 @@ n_cols = 12
 ## column spacing is distance between midpoints of elements in vertical direction
 ## size argument makes the stimuli a fixed size, 
 ## but you could also choose for automatic determination of size by removing the size argument
-stimulus = Grid(n_rows, n_cols, background_color = "None", row_spacing = 35, col_spacing = 35, size = (600,600))
+stimulus = Grid(n_rows, n_cols, background_color = "none", row_spacing = 35, col_spacing = 35, size = (600,600))
 
 ## Determine size of elements in the stimulus
-stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(30,30)])
+stimulus.boundingboxes = GridPattern.RepeatAcrossElements([(30,30)])
 
 ## Determine shapes used in the stimulus
 ## Example shapes: Ellipse, Rectangle, Triangle, Polygon(n_sides = 8), ...
@@ -99,10 +99,10 @@ n_cols = 12
 ## column spacing is distance between midpoints of elements in vertical direction
 ## size argument makes the stimuli a fixed size, 
 ## but you could also choose for automatic determination of size by removing the size argument
-stimulus = Grid(n_rows, n_cols, background_color = "None", row_spacing = 35, col_spacing = 35, size = (600,600))
+stimulus = Grid(n_rows, n_cols, background_color = "none", row_spacing = 35, col_spacing = 35, size = (600,600))
 
 ## Determine size of elements in the stimulus
-stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(30,30)])
+stimulus.boundingboxes = GridPattern.RepeatAcrossElements([(30,30)])
 
 ## Determine shapes used in the stimulus
 ## Example shapes: Ellipse, Rectangle, Triangle, Polygon(n_sides = 8), ...
@@ -137,11 +137,11 @@ n_cols = 12
 ## column spacing is distance between midpoints of elements in vertical direction
 ## size argument makes the stimuli a fixed size, 
 ## but you could also choose for automatic determination of size by removing the size argument
-stimulus = Grid(n_rows, n_cols, background_color = "None", row_spacing = 35, col_spacing = 35, size = (600,600))
+stimulus = Grid(n_rows, n_cols, background_color = "none", row_spacing = 35, col_spacing = 35, size = (600,600))
 
 ## Determine size of elements in the stimulus
 sizes_to_use = [(30,30)] #, (20,20), (25,25)
-stimulus.bounding_boxes = GridPattern.RandomPattern(sizes_to_use)
+stimulus.boundingboxes = GridPattern.RandomPattern(sizes_to_use)
 
 ## Determine shapes used in the stimulus
 ## Example shapes: Ellipse, Rectangle, Triangle, Polygon(n_sides = 8), ...
@@ -182,11 +182,11 @@ n_cols = 12
 ## column spacing is distance between midpoints of elements in vertical direction
 ## size argument makes the stimuli a fixed size, 
 ## but you could also choose for automatic determination of size by removing the size argument
-stimulus = Grid(n_rows, n_cols, background_color = "None", row_spacing = 35, col_spacing = 35, size = (600,600))
+stimulus = Grid(n_rows, n_cols, background_color = "none", row_spacing = 35, col_spacing = 35, size = (600,600))
 
 ## Determine size of elements in the stimulus
 sizes_to_use = [(30,30),(20,20), (25,25)]
-stimulus.bounding_boxes = GridPattern.RepeatAcrossRows(sizes_to_use)
+stimulus.boundingboxes = GridPattern.RepeatAcrossRows(sizes_to_use)
 
 ## Determine shapes used in the stimulus
 ## Example shapes: Ellipse, Rectangle, Triangle, Polygon(n_sides = 8), ...
@@ -227,11 +227,11 @@ n_cols = 24
 ## column spacing is distance between midpoints of elements in vertical direction
 ## size argument makes the stimuli a fixed size, 
 ## but you could also choose for automatic determination of size by removing the size argument
-stimulus = Grid(n_rows, n_cols, background_color = "None", row_spacing = 60, col_spacing = 30, size = (600,600))
+stimulus = Grid(n_rows, n_cols, background_color = "none", row_spacing = 60, col_spacing = 30, size = (600,600))
 
 ## Determine size of elements in the stimulus
 sizes_to_use = [(28,28)]
-stimulus.bounding_boxes = GridPattern.RepeatAcrossElements(sizes_to_use)
+stimulus.boundingboxes = GridPattern.RepeatAcrossElements(sizes_to_use)
 
 ## Determine shapes used in the stimulus
 ## Example shapes: Ellipse, Rectangle, Triangle, Polygon(n_sides = 8), ...
@@ -262,11 +262,11 @@ n_cols = 24
 ## column spacing is distance between midpoints of elements in vertical direction
 ## size argument makes the stimuli a fixed size, 
 ## but you could also choose for automatic determination of size by removing the size argument
-stimulus = Grid(n_rows, n_cols, background_color = "None", row_spacing = 30, col_spacing = 30, size = (600,600))
+stimulus = Grid(n_rows, n_cols, background_color = "none", row_spacing = 30, col_spacing = 30, size = (600,600))
 
 ## Determine size of elements in the stimulus
 sizes_to_use = [(28,28)]
-stimulus.bounding_boxes = GridPattern.RepeatAcrossElements(sizes_to_use)
+stimulus.boundingboxes = GridPattern.RepeatAcrossElements(sizes_to_use)
 
 ## Determine shapes used in the stimulus
 ## Example shapes: Ellipse, Rectangle, Triangle, Polygon(n_sides = 8), ...

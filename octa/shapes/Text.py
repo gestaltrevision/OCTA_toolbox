@@ -12,7 +12,7 @@ def Text(text, name = None):
     return type(str(name), (Text_,), {'text': str(text), 'name': name})
 
 class Text_:
-    parameters = ['position', 'bounding_box', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'class_label', 'id_label', 'mirror_value', 'link', 'data']
+    parameters = ['position', 'boundingbox', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'classlabel', 'idlabel', 'mirrorvalue', 'link', 'data']
     
     def __init__(self, **kwargs):
         for p in Text_.parameters:
@@ -30,11 +30,11 @@ class Text_:
         self.position = position
     
     
-    def set_bounding_box(self, bounding_box):
-        if bounding_box == None:
-            bounding_box = (10, 10)
+    def set_boundingbox(self, boundingbox):
+        if boundingbox == None:
+            boundingbox = (10, 10)
         
-        self.bounding_box = bounding_box
+        self.boundingbox = boundingbox
     
     
     def set_orientation(self, orientation):
@@ -123,23 +123,23 @@ class Text_:
             else:
                 self.opacity_animation = ""
         
-    def set_class_label(self, class_label):
-        if class_label == None:
-            class_label = ""
+    def set_classlabel(self, classlabel):
+        if classlabel == None:
+            classlabel = ""
             
-        self.class_label = class_label
+        self.classlabel = classlabel
     
-    def set_id_label(self, id_label):
-        if id_label == None:
-            id_label = ""
+    def set_idlabel(self, idlabel):
+        if idlabel == None:
+            idlabel = ""
             
-        self.id_label = id_label
+        self.idlabel = idlabel
     
-    def set_mirror_value(self, mirror_value):
-        if mirror_value == None:
-            mirror_value = ""
+    def set_mirrorvalue(self, mirrorvalue):
+        if mirrorvalue == None:
+            mirrorvalue = ""
             
-        self.mirror_value = mirror_value
+        self.mirrorvalue = mirrorvalue
         
     def set_link(self, link):
         if link == "":
@@ -168,11 +168,11 @@ class Text_:
     
     def create_mirror_transform(self):
         mirror_transform = ""
-        if self.mirror_value == "vertical":
+        if self.mirrorvalue == "vertical":
             mirror_transform = "scale(-1, 1) translate(%f, 0)"%(-2*self.position[0])
-        elif self.mirror_value == "horizontal":
+        elif self.mirrorvalue == "horizontal":
             mirror_transform = "scale(1, -1), translate(0, %f)"%(-2*self.position[1])
-        elif self.mirror_value == "horizontalvertical":
+        elif self.mirrorvalue == "horizontalvertical":
             mirror_transform = "scale(-1, -1) translate(%f, %f)"%(-2*self.position[0], -2*self.position[1])
                 
         return mirror_transform
@@ -235,15 +235,15 @@ class Text_:
                 stroke      = self.create_bordercolor(dwg),
                 stroke_width = self.borderwidth,
                 text_anchor = "middle",
-                insert      = (self.position[0], self.position[1]+((min(self.bounding_box))/2)-(min(self.bounding_box)*.015)),
-                style = "text-align: middle; font-size:" + str(min(self.bounding_box)*1.355) + "px; font-family: Arial",
+                insert      = (self.position[0], self.position[1]+((min(self.boundingbox))/2)-(min(self.boundingbox)*.015)),
+                style = "text-align: middle; font-size:" + str(min(self.boundingbox)*1.355) + "px; font-family: Arial",
                 textLength  = '100%',
                 transform   = " ".join([mirror_transform, self.rotation_transform]))
 
-        if self.class_label != "":
-            svg['class']         = self.class_label
-        if self.id_label != "":
-            svg['id']        = self.id_label
+        if self.classlabel != "":
+            svg['class']         = self.classlabel
+        if self.idlabel != "":
+            svg['id']        = self.idlabel
 
         if self.fillcolor_animation != "":
             svg.add(eval(self.fillcolor_animation))

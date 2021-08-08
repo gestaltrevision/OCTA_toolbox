@@ -32,24 +32,24 @@ stimulus = Grid(n_rows = nrows,
 #  if(parameters$pattern %in% c("MirrorAcrossRows", "MirrorAcrossColumns")):
 #      stimulus.shapes = GridPattern.", parameters$pattern, "([", paste(parameters$shape, collapse = ", "])
 #    py_run_string(paste0("stimulus.fillcolors = GridPattern.", parameters$pattern, "([", paste(parameters$color, collapse = ", "), "])"))
-#    py_run_string(paste0("stimulus.bounding_boxes = GridPattern.", parameters$pattern, "([", paste(parameters$size, collapse = ", "), "])"))
+#    py_run_string(paste0("stimulus.boundingboxes = GridPattern.", parameters$pattern, "([", paste(parameters$size, collapse = ", "), "])"))
 #  } else if(parameters$pattern == "AlternateRows"){
 #    
 #    py_run_string(paste0("stimulus.shapes = GridPattern.", "RepeatAcrossRows", "([", paste(parameters$shape, collapse = ", "), "])"))
 #    py_run_string(paste0("stimulus.fillcolors = GridPattern.", "RepeatAcrossRows", "([", paste(parameters$color, collapse = ", "), "])"))
-#    py_run_string(paste0("stimulus.bounding_boxes = GridPattern.", "RepeatAcrossRows", "([", paste(parameters$size, collapse = ", "), "])"))
+#    py_run_string(paste0("stimulus.boundingboxes = GridPattern.", "RepeatAcrossRows", "([", paste(parameters$size, collapse = ", "), "])"))
 #  } else if(parameters$pattern == "AlternateColumns"){
 #    
 #    py_run_string(paste0("stimulus.shapes = GridPattern.", "RepeatAcrossColumns", "([", paste(parameters$shape, collapse = ", "), "])"))
 #    py_run_string(paste0("stimulus.fillcolors = GridPattern.", "RepeatAcrossColumns", "([", paste(parameters$color, collapse = ", "), "])"))
-#    py_run_string(paste0("stimulus.bounding_boxes = GridPattern.", "RepeatAcrossColumns", "([", paste(parameters$size, collapse = ", "), "])"))
+#    py_run_string(paste0("stimulus.boundingboxes = GridPattern.", "RepeatAcrossColumns", "([", paste(parameters$size, collapse = ", "), "])"))
 #  } else if(parameters$pattern == "RepeatAcrossRows"){
 #    
 #    py_run_string(paste0("stimulus.shapes = GridPattern.", "RepeatAcrossRows", "(Pattern([", paste(parameters$shape, collapse = ", "), "])",
 #                         ".RepeatElements(int(", parameters$nrows, "/", length(parameters$shape), ")))"))
 #    py_run_string(paste0("stimulus.fillcolors = GridPattern.", "RepeatAcrossRows", "(Pattern([", paste(parameters$color, collapse = ", "),
 #                         "])", ".RepeatElements(int(", parameters$nrows, "/", length(parameters$color), ")))"))
-#    py_run_string(paste0("stimulus.bounding_boxes = GridPattern.", "RepeatAcrossRows", "(Pattern([", paste(parameters$size, collapse = ", "),
+#    py_run_string(paste0("stimulus.boundingboxes = GridPattern.", "RepeatAcrossRows", "(Pattern([", paste(parameters$size, collapse = ", "),
 #                         "])", ".RepeatElements(int(", parameters$nrows, "/", length(parameters$size), ")))"))
 #  } else if(parameters$pattern == "RepeatAcrossColumns"){
 #    
@@ -57,14 +57,14 @@ stimulus = Grid(n_rows = nrows,
 #                         ".RepeatElements(int(", parameters$nrows, "/", length(parameters$shape), ")))"))
 #    py_run_string(paste0("stimulus.fillcolors = GridPattern.", "RepeatAcrossColumns", "(Pattern([", paste(parameters$color, collapse = ", "),
 #                         "])", ".RepeatElements(int(", parameters$nrows, "/", length(parameters$color), ")))"))
-#    py_run_string(paste0("stimulus.bounding_boxes = GridPattern.", "RepeatAcrossColumns", "(Pattern([", paste(parameters$size, collapse = ", "),
+#    py_run_string(paste0("stimulus.boundingboxes = GridPattern.", "RepeatAcrossColumns", "(Pattern([", paste(parameters$size, collapse = ", "),
 #                         "])", ".RepeatElements(int(", parameters$nrows, "/", length(parameters$size), ")))"))
 #  } else if(parameters$pattern == "Subgroups"){
     
 
 tiled_grid_1 = GridPattern.TiledElementGrid(GridPattern.MirrorAcrossRightDiagonal([(20,20), (36,36)], 2 , 2),3)
 
-stimulus.bounding_boxes = tiled_grid_1
+stimulus.boundingboxes = tiled_grid_1
 stimulus.Show()
 
 stimulus.swap_distinct_elements(n_swap_pairs = 6)

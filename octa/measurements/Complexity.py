@@ -21,7 +21,7 @@ def CalculateElementsN(self):
     
     return N
 
-def CalculateElementsLOCE(self, distinction_features = ['shapes', 'bounding_boxes', 'fillcolors', 'orientations', 'data']):
+def CalculateElementsLOCE(self, distinction_features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
     Calculate how many different types of elements are present in the display based on the feature dimensions specified in distinction_features.
 
@@ -37,8 +37,8 @@ def CalculateElementsLOCE(self, distinction_features = ['shapes', 'bounding_boxe
     features = []
     if 'shapes' in distinction_features:
         features.append("shape")
-    if 'bounding_boxes' in distinction_features:
-        features.append("bounding_box")
+    if 'boundingboxes' in distinction_features:
+        features.append("boundingbox")
     if 'fillcolors' in distinction_features:
         features.append("fillcolor")
     if 'orientations' in distinction_features:
@@ -51,14 +51,14 @@ def CalculateElementsLOCE(self, distinction_features = ['shapes', 'bounding_boxe
         features.append("bordercolor")
     if 'opacities' in distinction_features:
         features.append("opacity")
-    if 'mirror_values' in distinction_features:
-        features.append("mirror_value")
+    if 'mirrorvalues' in distinction_features:
+        features.append("mirrorvalue")
     if 'links' in distinction_features:
         features.append("link")
-    if 'class_labels' in distinction_features:
-        features.append("class_label")
-    if 'id_labels' in distinction_features:
-        features.append("id_label")
+    if 'classlabels' in distinction_features:
+        features.append("classlabel")
+    if 'idlabels' in distinction_features:
+        features.append("idlabel")
         
     element_list = [{k: dic[k] for k in features} for dic in self.dwg_elements]
     feature_list = {k: [dic[k] for dic in element_list] for k in element_list[0]}
@@ -74,7 +74,7 @@ def CalculateElementsLOCE(self, distinction_features = ['shapes', 'bounding_boxe
     
     return LOCE
 
-def CalculateElementsLOC(self, distinction_features = ['shapes', 'bounding_boxes', 'fillcolors', 'orientations', 'data']):
+def CalculateElementsLOC(self, distinction_features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
     Calculate how many different features are present across all dimensions.
 
@@ -89,7 +89,7 @@ def CalculateElementsLOC(self, distinction_features = ['shapes', 'bounding_boxes
         
     n_shape_values = len(set([d['shape'] for d in self.dwg_elements])) 
 
-    n_size_values = len(set([d['bounding_box'] for d in self.dwg_elements])) 
+    n_size_values = len(set([d['boundingbox'] for d in self.dwg_elements])) 
         
     n_fillcolor_values = len(set([d['fillcolor'] for d in self.dwg_elements])) 
         
@@ -103,19 +103,19 @@ def CalculateElementsLOC(self, distinction_features = ['shapes', 'bounding_boxes
     
     n_opacity_values = len(set([d['opacity'] for d in self.dwg_elements]))   
     
-    n_mirror_values = len(set([d['mirror_value'] for d in self.dwg_elements])) 
+    n_mirror_values = len(set([d['mirrorvalue'] for d in self.dwg_elements])) 
     
     n_link_values = len(set([d['link'] for d in self.dwg_elements])) 
     
-    n_classlabel_values = len(set([d['class_label'] for d in self.dwg_elements])) 
+    n_classlabel_values = len(set([d['classlabel'] for d in self.dwg_elements])) 
     
-    n_idlabel_values = len(set([d['id_label'] for d in self.dwg_elements])) 
+    n_idlabel_values = len(set([d['idlabel'] for d in self.dwg_elements])) 
         
     LOC = 0
     
     if 'shapes' in distinction_features:
         LOC += n_shape_values
-    if 'bounding_boxes' in distinction_features:
+    if 'boundingboxes' in distinction_features:
         LOC += n_size_values
     if 'fillcolors' in distinction_features:
         LOC += n_fillcolor_values
@@ -129,18 +129,18 @@ def CalculateElementsLOC(self, distinction_features = ['shapes', 'bounding_boxes
         LOC += n_bordercolor_values
     if 'opacities' in distinction_features:
         LOC += n_opacity_values
-    if 'mirror_values' in distinction_features:
+    if 'mirrorvalues' in distinction_features:
         LOC += n_mirror_values
     if 'links' in distinction_features:
         LOC += n_link_values
-    if 'class_labels' in distinction_features:
+    if 'classlabels' in distinction_features:
         LOC += n_classlabel_values
-    if 'id_labels' in distinction_features:
+    if 'idlabels' in distinction_features:
         LOC += n_idlabel_values
         
     return LOC
 
-def CalculateElementsLOCI(self, distinction_features = ['shapes', 'bounding_boxes', 'fillcolors', 'orientations', 'data']):
+def CalculateElementsLOCI(self, distinction_features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
     Calculate how many different feature dimensions have more than one feature value (i.e., have non-identical values).
 
@@ -155,7 +155,7 @@ def CalculateElementsLOCI(self, distinction_features = ['shapes', 'bounding_boxe
         
     id_shape_values = len(set([d['shape'] for d in self.dwg_elements])) == 1
 
-    id_size_values = len(set([d['bounding_box'] for d in self.dwg_elements])) == 1
+    id_size_values = len(set([d['boundingbox'] for d in self.dwg_elements])) == 1
         
     id_fillcolor_values = len(set([d['fillcolor'] for d in self.dwg_elements])) == 1
         
@@ -169,19 +169,19 @@ def CalculateElementsLOCI(self, distinction_features = ['shapes', 'bounding_boxe
         
     id_opacity_values = len(set([d['opacity'] for d in self.dwg_elements])) == 1
         
-    id_mirror_values = len(set([d['mirror_value'] for d in self.dwg_elements])) == 1
+    id_mirrorvalues = len(set([d['mirrorvalue'] for d in self.dwg_elements])) == 1
         
     id_link_values = len(set([d['link'] for d in self.dwg_elements])) == 1
         
-    id_classlabel_values = len(set([d['class_label'] for d in self.dwg_elements])) == 1
+    id_classlabel_values = len(set([d['classlabel'] for d in self.dwg_elements])) == 1
         
-    id_idlabel_values = len(set([d['id_label'] for d in self.dwg_elements])) == 1
+    id_idlabel_values = len(set([d['idlabel'] for d in self.dwg_elements])) == 1
         
     LOCI = 0
     
     if ('shapes' in distinction_features) and (id_shape_values == True):
         LOCI += 1
-    if ('bounding_boxes' in distinction_features) and (id_size_values == True):
+    if ('boundingboxes' in distinction_features) and (id_size_values == True):
         LOCI += 1
     if ('fillcolors' in distinction_features) and (id_fillcolor_values == True):
         LOCI += 1
@@ -195,13 +195,13 @@ def CalculateElementsLOCI(self, distinction_features = ['shapes', 'bounding_boxe
         LOCI += 1
     if ('opacities' in distinction_features) and (id_opacity_values == True):
         LOCI += 1
-    if ('mirror_values' in distinction_features) and (id_mirror_values == True):
+    if ('mirrorvalues' in distinction_features) and (id_mirrorvalues == True):
         LOCI += 1
     if ('links' in distinction_features) and (id_link_values == True):
         LOCI += 1
-    if ('class_labels' in distinction_features) and (id_classlabel_values == True):
+    if ('classlabels' in distinction_features) and (id_classlabel_values == True):
         LOCI += 1
-    if ('id_labels' in distinction_features) and (id_idlabel_values == True):
+    if ('idlabels' in distinction_features) and (id_idlabel_values == True):
         LOCI += 1
         
     return len(distinction_features) - LOCI

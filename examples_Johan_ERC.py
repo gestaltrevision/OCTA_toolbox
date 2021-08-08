@@ -18,10 +18,9 @@ def rgb2hex(r,g,b):
 
 #%% Default grid + change in values after initialization
 stimulus = Grid(6,6, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0)
-stimulus._autosize_method = "maximum_bounding_box"
-stimulus.shapes = GridPattern.RepeatAcrossRightDiagonal([RegularPolygon])
-stimulus.data = GridPattern.RepeatAcrossRightDiagonal([4,5,6])
-stimulus.bounding_boxes = GridPattern.RepeatAcrossRightDiagonal([(40,40)])
+stimulus._autosize_method = "maximum_boundingbox"
+stimulus.shapes = GridPattern.RepeatAcrossRightDiagonal([RegularPolygon(4), RegularPolygon(5), RegularPolygon(6)])
+stimulus.boundingboxes = GridPattern.RepeatAcrossRightDiagonal([(40,40)])
 stimulus.fillcolors = GridPattern.RepeatAcrossRightDiagonal(['#6dd6ff', '#1b9fd8', '#006ca1'])  
 #stimulus.bordercolors = GridPattern.RandomPattern(['#6dd6ff', '#1b9fd8', '#006ca1'])  
 #stimulus.borderwidths = GridPattern.RandomPattern([5])
@@ -37,7 +36,7 @@ filename = "1"
 #%%
 
 random.seed(2)
-stimulus.positions.SetLocationJitter(distribution = "uniform", min_val = 0, max_val = 30)
+stimulus.positions.SetPositionJitter(distribution = "uniform", min_val = 0, max_val = 30)
 
 stimulus.Show()
 filename = "2"
@@ -60,9 +59,9 @@ filename = "3"
 #%%
 
 stimulus = Grid(6,6, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0)
-stimulus._autosize_method = "maximum_bounding_box"
+stimulus._autosize_method = "maximum_boundingbox"
 stimulus.shapes = GridPattern.RepeatAcrossRows([Ellipse])
-stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(40,40)])
+stimulus.boundingboxes = GridPattern.RepeatAcrossRows([(40,40)])
 stimulus.fillcolors = GridPattern.RepeatAcrossRows(['#6dd6ff', '#1b9fd8', '#006ca1'])  
                                                              
 random.seed(2)
@@ -77,9 +76,9 @@ filename = "4"
 #%%
 
 stimulus = Grid(6,6, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0)
-stimulus._autosize_method = "maximum_bounding_box"
+stimulus._autosize_method = "maximum_boundingbox"
 stimulus.shapes = GridPattern.RepeatAcrossRows([Ellipse])
-stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(40,40)])
+stimulus.boundingboxes = GridPattern.RepeatAcrossRows([(40,40)])
 stimulus.fillcolors = GridPattern.RepeatAcrossRows(['#6dd6ff', '#1b9fd8', '#006ca1'])  
                                                              
 random.seed(2)
@@ -94,9 +93,9 @@ filename = "5"
 
 #%% Default grid + change in values after initialization
 stimulus = Grid(6,6, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0)
-stimulus._autosize_method = "maximum_bounding_box"
+stimulus._autosize_method = "maximum_boundingbox"
 stimulus.shapes = GridPattern.RepeatAcrossRightDiagonal([Ellipse])
-stimulus.bounding_boxes = GridPattern.RepeatAcrossRightDiagonal([(40,40)])
+stimulus.boundingboxes = GridPattern.RepeatAcrossRightDiagonal([(40,40)])
 stimulus.fillcolors = GridPattern.RepeatAcrossRightDiagonal(['#6dd6ff', '#1b9fd8', '#006ca1'])  
 #stimulus.bordercolors = GridPattern.RandomPattern(['#6dd6ff', '#1b9fd8', '#006ca1'])  
 #stimulus.borderwidths = GridPattern.RandomPattern([5])
@@ -112,7 +111,7 @@ filename = "6"
 #%%
 
 random.seed(2)
-stimulus.positions.SetLocationJitter(distribution = "uniform", min_val = 0, max_val = 30)
+stimulus.positions.SetPositionJitter(distribution = "uniform", min_val = 0, max_val = 30)
 
 stimulus.Show()
 filename = "7"
@@ -133,9 +132,9 @@ filename = "8"
 
 #%% Default grid + change in values after initialization
 stimulus = Grid(6,6, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0)
-stimulus._autosize_method = "maximum_bounding_box"
+stimulus._autosize_method = "maximum_boundingbox"
 stimulus.shapes = GridPattern.RepeatAcrossRightDiagonal([Ellipse])
-stimulus.bounding_boxes = GridPattern.RepeatAcrossRightDiagonal([(40,40), (30,30),(20,20)])
+stimulus.boundingboxes = GridPattern.RepeatAcrossRightDiagonal([(40,40), (30,30),(20,20)])
 stimulus.fillcolors = GridPattern.RepeatAcrossRightDiagonal(['#6dd6ff', '#1b9fd8', '#006ca1'])  
 #stimulus.bordercolors = GridPattern.RandomPattern(['#6dd6ff', '#1b9fd8', '#006ca1'])  
 #stimulus.borderwidths = GridPattern.RandomPattern([5])
@@ -151,7 +150,7 @@ filename = "9"
 #%%
 
 random.seed(2)
-stimulus.positions.SetLocationJitter(distribution = "uniform", min_val = 0, max_val = 30)
+stimulus.positions.SetPositionJitter(distribution = "uniform", min_val = 0, max_val = 30)
 
 stimulus.Show()
 filename = "10"
@@ -172,9 +171,9 @@ filename = "11"
 
 #%%
 stimulus = Grid(6,6, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0)
-stimulus._autosize_method = "maximum_bounding_box"
+stimulus._autosize_method = "maximum_boundingbox"
 stimulus.shapes = GridPattern.RepeatAcrossColumns([Triangle])
-stimulus.bounding_boxes = GridPattern.RepeatAcrossColumns([(40,40), (30,30),(20,20)])
+stimulus.boundingboxes = GridPattern.RepeatAcrossColumns([(40,40), (30,30),(20,20)])
 stimulus.orientations = GridPattern.RandomPattern([0,30,60])
 stimulus.fillcolors = GridPattern.RepeatAcrossColumns(['#6dd6ff', '#1b9fd8', '#006ca1'])  
                                                              
@@ -190,9 +189,9 @@ filename = "12"
                                                              
 #%%
 #stimulus = Grid(6,6, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0)
-#stimulus._autosize_method = "maximum_bounding_box"
+#stimulus._autosize_method = "maximum_boundingbox"
 #stimulus.shapes = GridPattern.RepeatAcrossRows([Triangle])
-#stimulus.bounding_boxes = GridPattern.RandomPattern([(40,40), (30,30),(20,20)])
+#stimulus.boundingboxes = GridPattern.RandomPattern([(40,40), (30,30),(20,20)])
 #stimulus.orientations = GridPattern.RandomPattern([0,30,60,90,45,135])
 #stimulus.fillcolors = GridPattern.RandomPattern(['#6dd6ff', '#1b9fd8', '#006ca1'])  
 #                                                             
@@ -208,9 +207,9 @@ filename = "12"
 #%%
 
 stimulus = Grid(6,3, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0)
-stimulus._autosize_method = "maximum_bounding_box"
+stimulus._autosize_method = "maximum_boundingbox"
 stimulus.shapes = GridPattern.RepeatAcrossRows([Ellipse])
-stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(30,20)])
+stimulus.boundingboxes = GridPattern.RepeatAcrossRows([(30,20)])
 stimulus.orientations = GridPattern.RepeatAcrossColumns([45,0,90])
 stimulus.fillcolors = GridPattern.RepeatAcrossRows(['#6dd6ff', '#1b9fd8', '#006ca1'])  
                                                              
@@ -227,9 +226,9 @@ filename = "13"
 #%%
 
 stimulus = Grid(6,3, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0)
-stimulus._autosize_method = "maximum_bounding_box"
+stimulus._autosize_method = "maximum_boundingbox"
 stimulus.shapes = GridPattern.RepeatAcrossRows([Ellipse])
-stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(30,20)])
+stimulus.boundingboxes = GridPattern.RepeatAcrossRows([(30,20)])
 stimulus.orientations = GridPattern.RepeatAcrossColumns([90])
 stimulus.fillcolors = GridPattern.RepeatAcrossRows(['#6dd6ff', '#1b9fd8', '#006ca1'])  
                                                              
@@ -248,9 +247,9 @@ filename = "14"
 #%%
 
 stimulus = Grid(6,6, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0)
-stimulus._autosize_method = "maximum_bounding_box"
+stimulus._autosize_method = "maximum_boundingbox"
 stimulus.shapes = GridPattern.RepeatAcrossRows([Rectangle])
-stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(30,20)])
+stimulus.boundingboxes = GridPattern.RepeatAcrossElements([(30,20)])
 stimulus.orientations = GridPattern.GradientAcrossElements(0, 360)
 colorlist = Pattern.CreateColorRangeList('#6dd6ff', '#1b9fd8', n_elements = 36)
 stimulus.fillcolors = GridPattern.RepeatAcrossElements(Pattern.CreateColorRangeList('yellowgreen', "purple", n_elements = 36))
@@ -267,9 +266,9 @@ filename = "15"
 #%%
 
 stimulus = Grid(6,6, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0)
-stimulus._autosize_method = "maximum_bounding_box"
+stimulus._autosize_method = "maximum_boundingbox"
 stimulus.shapes = GridPattern.RepeatAcrossRows([Rectangle])
-stimulus.bounding_boxes = GridPattern.RepeatAcrossElements([(20,30)])
+stimulus.boundingboxes = GridPattern.RepeatAcrossElements([(20,30)])
 stimulus.orientations = GridPattern.GradientAcrossColumns(-30, 30)
 colorlist = Pattern.CreateColorRangeList('#6dd6ff', '#1b9fd8', n_elements = 36)
 stimulus.fillcolors = GridPattern.RepeatAcrossRows(Pattern.CreateColorRangeList('#6dd6ff', '#006ca1', n_elements = 6))
@@ -285,9 +284,9 @@ filename = "16"
 #%%
 
 stimulus = Grid(6,10, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0)
-stimulus._autosize_method = "maximum_bounding_box"
+stimulus._autosize_method = "maximum_boundingbox"
 stimulus.shapes = GridPattern.RepeatAcrossRows([Ellipse])
-stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(20,30)])
+stimulus.boundingboxes = GridPattern.RepeatAcrossRows([(20,30)])
 stimulus.orientations = GridPattern.GradientAcrossColumns(-30, 30)
 stimulus.fillcolors = GridPattern.MirrorAcrossColumns(Pattern.CreateColorRangeList( '#006ca1','#6dd6ff', n_elements = 5))
                                                              
@@ -303,9 +302,9 @@ filename = "17"
 #%%
 
 stimulus = Grid(6,6, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0)
-stimulus._autosize_method = "maximum_bounding_box"
+stimulus._autosize_method = "maximum_boundingbox"
 stimulus.shapes = GridPattern.RepeatAcrossRows([Ellipse])
-stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(40,40)])
+stimulus.boundingboxes = GridPattern.RepeatAcrossRows([(40,40)])
 stimulus.orientations = GridPattern.GradientAcrossColumns(-30, 30)
 stimulus.fillcolors = GridPattern.MirrorAcrossColumns(Pattern.CreateColorRangeList( '#006ca1','#6dd6ff', n_elements = 5))
                                                              
@@ -322,9 +321,9 @@ filename = "18"
 #%%
 
 stimulus = Grid(6,6, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0)
-stimulus._autosize_method = "maximum_bounding_box"
+stimulus._autosize_method = "maximum_boundingbox"
 stimulus.shapes = GridPattern.RepeatAcrossRows([Ellipse])
-stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(40,40)])
+stimulus.boundingboxes = GridPattern.RepeatAcrossRows([(40,40)])
 stimulus.orientations = GridPattern.GradientAcrossColumns(-30, 30)
 stimulus.fillcolors = GridPattern.MirrorAcrossColumns(Pattern.CreateColorRangeList( '#006ca1','#6dd6ff', n_elements = 5))
                                                              
@@ -341,9 +340,9 @@ filename = "19"
 #%%
 
 stimulus = Grid(10,10, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0)
-stimulus._autosize_method = "maximum_bounding_box"
+stimulus._autosize_method = "maximum_boundingbox"
 stimulus.shapes = GridPattern.RepeatAcrossRows([Ellipse])
-stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(30,30)])
+stimulus.boundingboxes = GridPattern.RepeatAcrossRows([(30,30)])
 stimulus.orientations = GridPattern.GradientAcrossColumns(-30, 30)
 stimulus.fillcolors = GridPattern.MirrorAcrossColumns(Pattern.CreateColorRangeList( '#006ca1','#6dd6ff', n_elements = 5))
                                                              
@@ -360,9 +359,9 @@ filename = "20"
 #%%
 random.seed(3)
 stimulus = Grid(10,10, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0, row_spacing = 30, col_spacing = 30)
-stimulus._autosize_method = "maximum_bounding_box"
+stimulus._autosize_method = "maximum_boundingbox"
 stimulus.shapes = GridPattern.RepeatAcrossRows([Ellipse])
-stimulus.bounding_boxes = GridPattern.RandomPattern([(30,30), (25,25), (35,35)])
+stimulus.boundingboxes = GridPattern.RandomPattern([(30,30), (25,25), (35,35)])
 stimulus.orientations = GridPattern.GradientAcrossColumns(-30, 30)
 stimulus.fillcolors = GridPattern.MirrorAcrossColumns(Pattern.CreateColorRangeList( '#006ca1','#6dd6ff', n_elements = 5))
                                                              
@@ -376,15 +375,15 @@ filename = "21"
 #%%
 
 stimulus = Grid(10,10, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0, row_spacing = 30, col_spacing = 30)
-stimulus._autosize_method = "maximum_bounding_box"
+stimulus._autosize_method = "maximum_boundingbox"
 stimulus.shapes = GridPattern.RepeatAcrossRows([Ellipse])
-stimulus.bounding_boxes = GridPattern.RandomPattern([(30,30), (25,25), (35,35)])
+stimulus.boundingboxes = GridPattern.RandomPattern([(30,30), (25,25), (35,35)])
 stimulus.orientations = GridPattern.GradientAcrossColumns(-30, 30)
 stimulus.fillcolors = GridPattern.MirrorAcrossColumns(Pattern.CreateColorRangeList( '#006ca1','#6dd6ff', n_elements = 5))
                                                              
 random.seed(3)
 #stimulus.positions = Positions.CreateSineGrid(n_rows = 10, n_cols = 10, row_spacing = 30, col_spacing = 30, A = 25, f = .1, axis = "x")
-stimulus.positions.SetLocationJitter(distribution = "normal", mu = 0, std = 5)
+stimulus.positions.SetPositionJitter(distribution = "normal", mu = 0, std = 5)
 
 
 stimulus.Show()

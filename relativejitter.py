@@ -22,10 +22,10 @@ x_jitterratio = 0.3
 y_jitterratio = 0.3
 
 stimulus = Grid(6,6, size = (500,500), row_spacing = 60, col_spacing = 60)
-stimulus._autosize_method = "maximum_bounding_box"
+stimulus._autosize_method = "maximum_boundingbox"
 
 tiled_grid_1 = GridPattern.TiledElementGrid(GridPattern.MirrorAcrossRightDiagonal([(30,30), (30*1.8,30*1.8)], 2 , 2),3)
-stimulus.bounding_boxes = tiled_grid_1
+stimulus.boundingboxes = tiled_grid_1
 
 tiled_grid_1 = GridPattern.TiledElementGrid(GridPattern.MirrorAcrossRightDiagonal([Rectangle, Ellipse], 2 , 2),3)
 stimulus.shapes = tiled_grid_1
@@ -38,17 +38,17 @@ stimulus.Show()
 random.seed(3)
 
 stimulus = Grid(6,6, size = (500,500), row_spacing = 60, col_spacing = 60)
-stimulus._autosize_method = "maximum_bounding_box"
+stimulus._autosize_method = "maximum_boundingbox"
 
 tiled_grid_1 = GridPattern.TiledElementGrid(GridPattern.MirrorAcrossRightDiagonal([(30,30), (30*1.8,30*1.8)], 2 , 2),3)
-stimulus.bounding_boxes = tiled_grid_1
+stimulus.boundingboxes = tiled_grid_1
 
 tiled_grid_1 = GridPattern.TiledElementGrid(GridPattern.MirrorAcrossRightDiagonal([Rectangle, Ellipse], 2 , 2),3)
 stimulus.shapes = tiled_grid_1
 
-x_boundingboxes =  [i[0] for i in stimulus.bounding_boxes]
+x_boundingboxes =  [i[0] for i in stimulus.boundingboxes]
 x_maxjitter = [i*x_jitterratio for i in x_boundingboxes]
-y_boundingboxes =  [i[1] for i in stimulus.bounding_boxes]
+y_boundingboxes =  [i[1] for i in stimulus.boundingboxes]
 y_maxjitter = [i*y_jitterratio for i in y_boundingboxes]
 random.seed(3)
 x_jitter = [random.uniform(-x_maxjitter[_], x_maxjitter[_]) for _ in range(len(stimulus.positions.x))]
@@ -67,24 +67,24 @@ stimulus.Show()
 random.seed(3)
 
 stimulus = Grid(6,6, size = (500,500), row_spacing = 60, col_spacing = 60)
-stimulus._autosize_method = "maximum_bounding_box"
+stimulus._autosize_method = "maximum_boundingbox"
 
 tiled_grid_1 = GridPattern.TiledElementGrid(GridPattern.MirrorAcrossRightDiagonal([(30,30), (30*1.8,30*1.8)], 2 , 2),3)
-stimulus.bounding_boxes = tiled_grid_1
+stimulus.boundingboxes = tiled_grid_1
 
 tiled_grid_1 = GridPattern.TiledElementGrid(GridPattern.MirrorAcrossRightDiagonal([Rectangle, Ellipse], 2 , 2),3)
 stimulus.shapes = tiled_grid_1
 
-x_boundingboxes =  [i[0] for i in stimulus.bounding_boxes]
+x_boundingboxes =  [i[0] for i in stimulus.boundingboxes]
 x_maxjitter = x_jitterratio*np.mean(x_boundingboxes)
-y_boundingboxes =  [i[1] for i in stimulus.bounding_boxes]
+y_boundingboxes =  [i[1] for i in stimulus.boundingboxes]
 y_maxjitter = y_jitterratio*np.mean(y_boundingboxes)
 
 random.seed(3)
-stimulus.positions.SetLocationJitter(distribution = "uniform", axis = "x", min_val = -x_maxjitter, max_val = x_maxjitter)
+stimulus.positions.SetPositionJitter(distribution = "uniform", axis = "x", min_val = -x_maxjitter, max_val = x_maxjitter)
 
 random.seed(3)
-stimulus.positions.SetLocationJitter(distribution = "uniform", axis = "y", min_val = -y_maxjitter, max_val = y_maxjitter)
+stimulus.positions.SetPositionJitter(distribution = "uniform", axis = "y", min_val = -y_maxjitter, max_val = y_maxjitter)
                                 
 stimulus.Show()
 
@@ -95,10 +95,10 @@ stimulus.Show()
 random.seed(3)
 
 stimulus = Grid(6,6, size = (500,500), row_spacing = 60, col_spacing = 60)
-stimulus._autosize_method = "maximum_bounding_box"
+stimulus._autosize_method = "maximum_boundingbox"
 
 tiled_grid_1 = GridPattern.TiledElementGrid(GridPattern.MirrorAcrossRightDiagonal([(30,30), (30*1.8,30*1.8)], 2 , 2),3)
-stimulus.bounding_boxes = tiled_grid_1
+stimulus.boundingboxes = tiled_grid_1
 
 tiled_grid_1 = GridPattern.TiledElementGrid(GridPattern.MirrorAcrossRightDiagonal([Rectangle, Ellipse], 2 , 2),3)
 stimulus.shapes = tiled_grid_1
@@ -107,9 +107,9 @@ x_maxjitter = x_jitterratio*stimulus.row_spacing
 y_maxjitter = y_jitterratio*stimulus.col_spacing
 
 random.seed(3)
-stimulus.positions.SetLocationJitter(distribution = "uniform", axis = "x", min_val = -x_maxjitter, max_val = x_maxjitter)
+stimulus.positions.SetPositionJitter(distribution = "uniform", axis = "x", min_val = -x_maxjitter, max_val = x_maxjitter)
 
 random.seed(3)
-stimulus.positions.SetLocationJitter(distribution = "uniform", axis = "y", min_val = -y_maxjitter, max_val = y_maxjitter)
+stimulus.positions.SetPositionJitter(distribution = "uniform", axis = "y", min_val = -y_maxjitter, max_val = y_maxjitter)
                                 
 stimulus.Show()

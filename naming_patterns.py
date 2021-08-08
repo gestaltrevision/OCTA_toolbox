@@ -18,7 +18,7 @@ import random
 # Test Polygon shapes with n_sides as input 
 
 stimulus = Grid(6,6, background_color = "lightgrey", row_spacing = 60, col_spacing = 60)
-stimulus._autosize_method = "maximum_bounding_box"
+stimulus._autosize_method = "maximum_boundingbox"
 
 stimulus.shapes = GridPattern.RepeatAcrossRows([RegularPolygon(4), RegularPolygon(5), RegularPolygon(6, "Hexagon"), Polygon(6, "Hexagon")])
 stimulus.orientations = GridPattern.RepeatAcrossColumns([0,45,90,115,180])

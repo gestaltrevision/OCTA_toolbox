@@ -115,7 +115,7 @@ for i in range(len(nrows)):
  
             if sizepattern == "Subgroups":
                 
-                stimulus.bounding_boxes = GridPattern.TiledElementGrid(GridPattern.MirrorAcrossRightDiagonal(eval(sizes[i]), len(eval(sizes[i])), len(eval(sizes[i]))), int(stimulus.n_rows/len(eval(sizes[i]))))
+                stimulus.boundingboxes = GridPattern.TiledElementGrid(GridPattern.MirrorAcrossRightDiagonal(eval(sizes[i]), len(eval(sizes[i])), len(eval(sizes[i]))), int(stimulus.n_rows/len(eval(sizes[i]))))
     
             elif sizepattern == "Checkerboard":
                 
@@ -125,7 +125,7 @@ for i in range(len(nrows)):
                 elif(len(eval(sizes[i])) >= 3):
                     source_grid = GridPattern.RepeatAcrossElements(Pattern(eval(sizes[i])).RepeatPatternToSize(count = 4), 2, 2)
                 
-                stimulus.bounding_boxes = GridPattern.TiledGrid(source_grid, (int(stimulus.n_rows/2),int(stimulus.n_cols/2)))
+                stimulus.boundingboxes = GridPattern.TiledGrid(source_grid, (int(stimulus.n_rows/2),int(stimulus.n_cols/2)))
             
             elif sizepattern == "Outin":
                 
@@ -133,10 +133,10 @@ for i in range(len(nrows)):
                 # count = number of layers
                 center_grid = GridPattern.RepeatAcrossElements(Pattern(sizes_to_use.pattern[0]), 2, 2)
                 outer_layers = Pattern(sizes_to_use.pattern[1:])
-                stimulus.bounding_boxes = GridPattern.LayeredGrid(center_grid, outer_layers)
+                stimulus.boundingboxes = GridPattern.LayeredGrid(center_grid, outer_layers)
 
             else:
-                stimulus.bounding_boxes = eval("GridPattern." + sizepattern + "(" + sizes[i] + ")")
+                stimulus.boundingboxes = eval("GridPattern." + sizepattern + "(" + sizes[i] + ")")
             
             ### PATTERNS FOR COLORS ###  
 #            
@@ -217,31 +217,31 @@ for i in range(len(nrows)):
 #            ### PATTERNS FOR SIZES ###         
 #              
 #            if(size_pattern == "MirrorAcrossLeftDiagonal"):
-#                stimulus_1.bounding_boxes = GridPattern.MirrorAcrossLeftDiagonal(sizes_1)
+#                stimulus_1.boundingboxes = GridPattern.MirrorAcrossLeftDiagonal(sizes_1)
 #                
 #            elif(size_pattern == "MirrorAcrossRightDiagonal"):
-#                stimulus_1.bounding_boxes = GridPattern.MirrorAcrossRightDiagonal(sizes_1)
+#                stimulus_1.boundingboxes = GridPattern.MirrorAcrossRightDiagonal(sizes_1)
 #              
 #            elif(size_pattern == "RepeatAcrossRows"):
-#                stimulus_1.bounding_boxes = GridPattern.RepeatAcrossColumns(Pattern(sizes_1).RepeatElements(int(stimulus_1.n_rows/len(sizes_1))))
+#                stimulus_1.boundingboxes = GridPattern.RepeatAcrossColumns(Pattern(sizes_1).RepeatElements(int(stimulus_1.n_rows/len(sizes_1))))
 #                 
 #            elif(size_pattern == "RepeatAcrossColumns"):
-#                stimulus_1.bounding_boxes = GridPattern.RepeatAcrossRows(Pattern(sizes_1).RepeatElements(int(stimulus_1.n_cols/len(sizes_1))))
+#                stimulus_1.boundingboxes = GridPattern.RepeatAcrossRows(Pattern(sizes_1).RepeatElements(int(stimulus_1.n_cols/len(sizes_1))))
 #                
 #            elif(size_pattern == "AlternateRows"):
-#                stimulus_1.bounding_boxes = GridPattern.RepeatAcrossColumns(sizes_1)
+#                stimulus_1.boundingboxes = GridPattern.RepeatAcrossColumns(sizes_1)
 #                
 #            elif(size_pattern == "AlternateColumns"):
-#                stimulus_1.bounding_boxes = GridPattern.RepeatAcrossRows(sizes_1)
+#                stimulus_1.boundingboxes = GridPattern.RepeatAcrossRows(sizes_1)
 #                
 #            elif(size_pattern == "MirrorAcrossRows"):
-#                stimulus_1.bounding_boxes = GridPattern.MirrorAcrossRows(sizes_1)
+#                stimulus_1.boundingboxes = GridPattern.MirrorAcrossRows(sizes_1)
 #                
 #            elif(size_pattern == "MirrorAcrossColumns"):
-#                stimulus_1.bounding_boxes = GridPattern.MirrorAcrossColumns(sizes_1)
+#                stimulus_1.boundingboxes = GridPattern.MirrorAcrossColumns(sizes_1)
 #                
 #            elif(size_pattern == "Subgroups"):
-#                stimulus_1.bounding_boxes = GridPattern.TiledElementGrid(GridPattern.MirrorAcrossRightDiagonal(sizes_1, len(sizes_1), len(sizes_1)), int(stimulus_1.n_rows/len(sizes_1)))
+#                stimulus_1.boundingboxes = GridPattern.TiledElementGrid(GridPattern.MirrorAcrossRightDiagonal(sizes_1, len(sizes_1), len(sizes_1)), int(stimulus_1.n_rows/len(sizes_1)))
 #                
 #            elif(size_pattern == "Checkerboard"):
 #                if(len(sizes_1) < 3):
@@ -249,15 +249,15 @@ for i in range(len(nrows)):
 #               
 #                elif(len(sizes_1) >= 3):
 #                    source_grid_sizes = GridPattern.RepeatAcrossElements(Pattern(sizes_1).RepeatPatternToSize(count = 4), 2, 2)
-#                stimulus_1.bounding_boxes = GridPattern.TiledGrid(source_grid_sizes, (int(stimulus_1.n_rows/2),int(stimulus_1.n_cols/2)))
+#                stimulus_1.boundingboxes = GridPattern.TiledGrid(source_grid_sizes, (int(stimulus_1.n_rows/2),int(stimulus_1.n_cols/2)))
 #                                 
 
             
             ## JITTER ##               
             if jittertype == "jitterrelativetoboundingbox":
-                x_boundingboxes =  [i[0] for i in stimulus.bounding_boxes]
+                x_boundingboxes =  [i[0] for i in stimulus.boundingboxes]
                 x_maxjitter = [i*x_jitterratio for i in x_boundingboxes]
-                y_boundingboxes =  [i[1] for i in stimulus.bounding_boxes]
+                y_boundingboxes =  [i[1] for i in stimulus.boundingboxes]
                 y_maxjitter = [i*y_jitterratio for i in y_boundingboxes]
 
                 x_jitter = [random.uniform(-x_maxjitter[_], x_maxjitter[_]) for _ in range(len(stimulus.positions.x))]
@@ -267,9 +267,9 @@ for i in range(len(nrows)):
                 stimulus.positions = Positions.CreateCustomPositions(x = new_x, y = new_y)
                 
             elif jittertype == "jitterrelativetomeanboundingbox":
-                x_boundingboxes =  [i[0] for i in stimulus.bounding_boxes]
+                x_boundingboxes =  [i[0] for i in stimulus.boundingboxes]
                 x_maxjitter = x_jitterratio*np.mean(x_boundingboxes)
-                y_boundingboxes =  [i[1] for i in stimulus.bounding_boxes]
+                y_boundingboxes =  [i[1] for i in stimulus.boundingboxes]
                 y_maxjitter = y_jitterratio*np.mean(y_boundingboxes)
                 
                 x_jitter = [random.uniform(-x_maxjitter, x_maxjitter) for _ in range(len(stimulus.positions.x))]
@@ -289,7 +289,7 @@ for i in range(len(nrows)):
                 stimulus.positions = Positions.CreateCustomPositions(x = new_x, y = new_y)
             
             ## SWITCHES ##      
-            stimulus.swap_distinct_elements(n_swap_pairs = nswitches, distinction_features = ["fillcolors", "shapes", "bounding_boxes"])
+            stimulus.swap_distinct_elements(n_swap_pairs = nswitches, distinction_features = ["fillcolors", "shapes", "boundingboxes"])
 #                newpresentationorder = stimulus._element_presentation_order
 
             ## SHOW STIMULUS / SAVE STIMULUS ##

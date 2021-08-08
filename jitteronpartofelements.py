@@ -6,9 +6,9 @@ Created on Thu Jan  7 10:28:21 2021
 """
 
 stimulus = Grid(10,10, background_color = "white", size = (350,350), x_margin = 0, y_margin = 0)
-stimulus._autosize_method = "maximum_bounding_box"
+stimulus._autosize_method = "maximum_boundingbox"
 stimulus.shapes = GridPattern.RepeatAcrossRows([Ellipse])
-stimulus.bounding_boxes = GridPattern.RepeatAcrossRows([(30,30)])
+stimulus.boundingboxes = GridPattern.RepeatAcrossRows([(30,30)])
 stimulus.orientations = GridPattern.GradientAcrossColumns(-30, 30)
 stimulus.fillcolors = GridPattern.MirrorAcrossColumns(Pattern.CreateColorRangeList( '#006ca1','#6dd6ff', n_elements = 5))
                                                              
