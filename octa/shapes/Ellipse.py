@@ -21,8 +21,6 @@ Contact: eline.vangeert@kuleuven.be
 
 """
 
-# import svgwrite
-
 class Ellipse:
     parameters = ['position', 'boundingbox', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'classlabel', 'idlabel', 'mirrorvalue', 'link']
     

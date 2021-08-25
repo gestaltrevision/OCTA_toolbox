@@ -20,12 +20,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Contact: eline.vangeert@kuleuven.be
 
 """
-import svgwrite
-from math import sin, cos, pi, radians
+from math import sin, cos, pi
 
 def Polygon(n_sides, name = None):
     if name == None:
-        name = "Polygon_" # + str(n_sides)
+        name = "Polygon_"
     return type(str(name), (Polygon_,), {'n_sides': n_sides, 'name': name})
 
 class Polygon_:
@@ -51,7 +50,6 @@ class Polygon_:
         if boundingbox == None:
             boundingbox = (10, 10)
         
-#        assert boundingbox[0] == boundingbox[1], 'Polygon bounding box needs to be square'
         self.boundingbox = boundingbox
     
     

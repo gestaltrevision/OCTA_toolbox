@@ -24,7 +24,6 @@ Contact: eline.vangeert@kuleuven.be
 """
 
 from .Pattern import Pattern
-# import random
 
 class GridPattern(Pattern):
     """
@@ -46,7 +45,6 @@ class GridPattern(Pattern):
     """      
     def __init__(self, pattern, n_rows = 5, n_cols = 5, patterntype = None, patterndirection = None, patternclass = "GridPattern."):
 
-        #print(type(pattern))
         assert type(pattern) == list or type(pattern) == Pattern, "Provided pattern must be a list"
         assert type(n_rows)  == int, "n_rows must be an integer type"
         assert type(n_cols)  == int, "n_cols must be an integer type"
@@ -182,15 +180,6 @@ class GridPattern(Pattern):
         self._randomization = 'RandomizeAcrossRightDiagonal'
                                        
         return self   
-    
-    # def RandomizeAcrossLayers(self):
-    #     """
-    #     Randomizes the order of the elements across the layers in the pattern.
-
-    #     """      
-    #     self._randomization = 'RandomizeAcrossLayers'
-                                       
-    #     return self
        
 class ElementRepeatAcrossElements(GridPattern):
     """
@@ -1792,100 +1781,7 @@ class GradientAcrossLayers(GridPattern):
 
         return GridPattern(result.pattern, self.n_rows, self.n_cols, self.patterntype, self.patterndirection)
 
-# class LayeredGrid(GridPattern):
-#     """
-#     Creates a grid that starts from a central structure, around which
-#     additional layers are placed.
 
-#     Parameters
-#     ----------
-#     center_grid : GridPattern
-#         A grid pattern that forms the central structure
-        
-#     outer_layer : Pattern
-#         The values for each of the outer layers. Each value in the pattern
-#         becomes the next layer around the central grid structure
-#     Example
-#     -------
-#     pattern: 
-#         [1, 2, 3]
-#     n_rows:
-#         6
-#     n_cols:
-#         6
-        
-#     result:
-#         [1, 1, 1, 1, 1, 1, 
-#          1, 2, 2, 2, 2, 1, 
-#          1, 2, 3, 3, 2, 1, 
-#          1, 2, 3, 3, 2, 1, 
-#          1, 2, 2, 2, 2, 1, 
-#          1, 1, 1, 1, 1, 1]
-        
-
-#     """
-#     _fixed_grid = True
-    
-#     def __init__(self, center_grid, outer_layers):
-#         assert "GridPattern" in str(type(center_grid)), "center_grid has to be a GridPattern type"
-#         # assert issubclass(type(center_grid), GridPattern), "center_grid has to be a GridPattern type"
-#         assert type(outer_layers) == Pattern, "outer_layers has to be a Pattern type"
-        
-#         self.center_grid = center_grid
-#         self.outer_layers = outer_layers        
-        
-#         dim = self.get_dimensions()
-#         self.n_rows = dim[0]
-#         self.n_cols = dim[1]
-#         self._jitter = None
-#         self._jitter_parameters = {}
-#         self._randomization = None
-        
-#     def get_dimensions(self):
-#         n_rows, n_cols = self.center_grid.n_rows, self.center_grid.n_cols
-#         n_rows += 2 * len(self.outer_layers.pattern)
-#         n_cols += 2 * len(self.outer_layers.pattern)
-        
-#         return n_rows, n_cols
-    
-#     def generate(self):
-        
-#         # 1. Generate the center grid pattern
-#         current_center = self.center_grid.generate().pattern
-#         current_rows   = self.center_grid.n_rows
-#         current_cols   = self.center_grid.n_cols
-        
-        
-#         # 2. Recursively layer each layer around the center grid
-#         for value in self.outer_layers.pattern:
-#             # Calculate new dimensions
-#             new_rows = current_rows + 2
-#             new_cols = current_cols + 2
-            
-#             # Fill the values in the new grid            
-#             new_center = []
-#             t = 0
-#             for r in range(new_rows):
-#                 for c in range(new_cols):
-#                     if r == 0 or r == new_rows - 1:
-#                         new_center.append(value)
-#                     elif c == 0 or c == new_cols - 1:
-#                         new_center.append(value)
-#                     else:
-#                         new_center.append(current_center[t])
-#                         t += 1
-                        
-#             # Update the current values
-#             current_center = new_center
-#             current_rows = new_rows
-#             current_cols = new_cols
-             
-#         self.patterntype = "Layered"
-#         self.patterndirection = "Grid"
-            
-#         return GridPattern(current_center, current_rows, current_cols, self.patterntype, self.patterndirection)
-    
-    
 class TiledGrid(GridPattern):
     """
     The current grid is tiled across the rows and columns using the
@@ -1999,7 +1895,6 @@ class TiledElementGrid(GridPattern):
         
         dims = self.get_dimensions()
         
-#        self.pattern = self.source_grid
         self.n_rows = dims[0]
         self.n_cols = dims[1]
         self._jitter = None
@@ -2046,8 +1941,7 @@ class TiledElementGrid(GridPattern):
             elif self._randomization == "RandomizeAcrossLayers":
                 result = result._SetRandomizeAcrossLayers(n_rows = self.n_rows, n_cols = self.n_cols)    
         
-        self.pattern = source_pattern #Pattern(result).pattern    
-#        self.pattern = result
+        self.pattern = source_pattern 
         self.patterntype = "TiledElement"
         self.patterndirection = "Grid"
             

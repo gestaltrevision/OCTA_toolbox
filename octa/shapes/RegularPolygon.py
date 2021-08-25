@@ -20,8 +20,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Contact: eline.vangeert@kuleuven.be
 
 """
-import svgwrite
-from math import sin, cos, pi, radians
+from math import sin, cos, pi
 
 def RegularPolygon(n_sides, name = None):
     if name == None:
@@ -52,7 +51,6 @@ class RegularPolygon_:
         if boundingbox == None:
             boundingbox = (10, 10)
         
-#        assert boundingbox[0] == boundingbox[1], 'Polygon bounding box needs to be square'
         self.boundingbox = boundingbox
     
     
@@ -245,15 +243,6 @@ class RegularPolygon_:
 
     def generate(self, dwg):
         mirror_transform = self.create_mirror_transform()
-        
-#        bb = dwg.rect(
-#                insert       = (self.position[0] - self.boundingbox[0]/2, self.position[1] - self.boundingbox[1]/2),
-#                size         = self.boundingbox,
-#                fill         = "none",
-#                stroke       = "red",
-#                stroke_width = 1)
-#        dwg.add(bb)
-            
         
         n_sides = int(self.data)
         

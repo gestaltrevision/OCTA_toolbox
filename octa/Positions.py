@@ -24,9 +24,7 @@ Contact: eline.vangeert@kuleuven.be
 """
 import numpy as np
 import random
-# from IPython.display import SVG, display
 import svgpathtools
-# import svgwrite
 
 from .patterns.Pattern import Pattern
 
@@ -392,55 +390,7 @@ class Positions:
             
             return Positions(x + x_mod, y + y_mod, positiontype, positionparameters)
         
-    # def CreateHexGrid(n_rows, n_cols, row_spacing = 50, col_spacing = 50, axis = "x"):
-    #     """
-    #     Creates a regularly spaced hexagonal grid.
 
-    #     Parameters
-    #     ----------
-    #     n_rows : int
-    #         Number of rows.
-    #     n_cols : int
-    #         Number of columns.
-    #     row_spacing : int
-    #         Distance between column centers.
-    #     col_spacing : int
-    #         Distance between row centers.
-
-    #     Returns
-    #     -------
-    #     x : Pattern
-    #         All the x-coordinates.
-    #     y : Pattern
-    #         All the y-coordinates.
-
-    #     """
-    #     x = Pattern(list(range(0, n_cols * col_spacing , col_spacing)))
-    #     x = x.RepeatPattern(n_rows)
-        
-    #     y = Pattern(list(range(0, n_rows * row_spacing , row_spacing)))
-    #     y = y.RepeatElements(n_cols)    
-        
-    #     positiontype = "HexGrid"
-    #     positionparameters = {'n_rows' : n_rows, 'n_cols' : n_cols, 'row_spacing' : row_spacing, 
-    #                           'col_spacing' : col_spacing, 'axis' : axis}
-        
-    #     if axis == "x":
-    #         x_mod = Pattern([0, float(col_spacing/2)]).RepeatPatternToSize(count = n_rows)
-    #         x_mod = x_mod.RepeatElements(n_cols)
-            
-    #         return Positions(x + x_mod, y, positiontype, positionparameters)
-    #     elif axis == "y":
-    #         # y_mod = Pattern([0, float(row_spacing)]).RepeatPatternToSize(count = n_cols)
-    #         y_mod = Pattern([0, float(row_spacing/2)]).RepeatPatternToSize(count = n_cols)
-    #         y_mod = y_mod.RepeatPattern(n_rows)
-            
-
-    #         # new_y = Pattern([i*2 for i in y.pattern])
-    #         # new_y = new_y + y_mod
-            
-    #         return Positions(x, y + y_mod, positiontype, positionparameters)
-    
     def CreateCircle(radius, n_elements, starting_point = "left"):
         """
         Generates element positions on the circumference of a regularly spaced
@@ -541,10 +491,6 @@ class Positions:
                 
         x = Pattern(list( [xposition*scale_x_parameter for xposition in xpositions] ))
         y = Pattern(list( [yposition*scale_y_parameter for yposition in ypositions] ))
-    
-        # idx = np.deg2rad(np.linspace(0, 360, n_elements+1))
-        # x   = Pattern(list( (radius * np.cos(idx)))[0:n_elements])
-        # y   = Pattern(list( (radius * np.sin(idx)))[0:n_elements])
 
         positiontype = "Shape"
         positionparameters = {'n_elements' : n_elements, 'src' : src, 'path' : path, 'width' : width, 'height' : height}

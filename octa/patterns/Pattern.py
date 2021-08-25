@@ -527,22 +527,6 @@ class Pattern:
             
         return Pattern(newp)   
     
-    # def _SetRandomizeAcrossLayers(self, n_rows, n_cols):
-    #     """
-    #     Randomizes the order of the elements across the layers of the pattern.
-    #     """   
-   
-    #     p = self.pattern
-    #     # newp = p.copy()
-    #     # minimal_n = min(n_rows, n_cols)
-    #     # if minimal_n % 2 == 0: 
-    #     #     n_layers = int(minimal_n / 2)
-    #     # else:
-    #     #     n_layers = int((minimal_n + 1 )/2)
-        
-
-    #     return Pattern(p) 
-    
     def CreateGradientPattern(start_value, end_value, n_elements):
         """
         Private method for creating a list of gradient values, taking into account

@@ -20,13 +20,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Contact: eline.vangeert@kuleuven.be
 
 """
-import svgwrite
 from svg.path import parse_path
-import svgpathtools
 
 def Path(path, xsize, ysize, name = None):
     if name == None:
-        name = "Path_" #+ str(path) + "_" + str(xsize) + "_" + str(ysize)
+        name = "Path_" 
     return type(str(name), (Path_,), {'path': path, 'xsizepath': xsize, 'ysizepath': ysize, 'name': name})
 
 class Path_:
@@ -264,13 +262,8 @@ class Path_:
                 opacity      = self.opacity,
                 stroke       = self.create_bordercolor(dwg),
                 stroke_width = self.borderwidth,
-                transform    = " ".join([mirror_transform, sizeposition_transform,  self.rotation_transform]))#,
-#                insert      = topleft,
-#                size        = self.boundingbox)
-                
-#                extra = 
-                
-#                transform   = " ".join([mirror_transform, rotation_transform]))
+                transform    = " ".join([mirror_transform, sizeposition_transform,  self.rotation_transform])
+            )
         
         if self.classlabel != "":
             svg['class']         = self.classlabel

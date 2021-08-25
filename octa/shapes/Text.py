@@ -20,11 +20,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Contact: eline.vangeert@kuleuven.be
 
 """
-import svgwrite
 
 def Text(text, name = None):
     if name == None:
-        name = "Text_" #+ str(text)
+        name = "Text_"
     return type(str(name), (Text_,), {'text': str(text), 'name': name})
 
 class Text_:

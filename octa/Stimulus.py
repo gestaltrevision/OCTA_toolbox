@@ -37,8 +37,8 @@ from reportlab.graphics import renderPDF
 from IPython.display import SVG, display
 
 from .Positions import Positions
-from .patterns import GridPattern, Pattern #, LinearGradient
-from .shapes import Ellipse, Rectangle, Triangle, Polygon #, RegularPolygon, Path, PathSvg, FitImage, Image, Text
+from .patterns import GridPattern, Pattern
+from .shapes import Ellipse, Rectangle, Triangle, Polygon
 from .shapes.Image import Image_
 from .shapes.FitImage import FitImage_
 from .shapes.Text import Text_
@@ -246,11 +246,7 @@ class Stimulus:
         if folder is not None:
             svg_filename = os.path.join(folder, svg_filename)  
             pdf_filename = os.path.join(folder, pdf_filename) 
-        #     hti = Html2Image(output_path = folder)
-        # else:
-        #     hti = Html2Image()
             
-        # if self.dwg_elements is None:
         self.Render() 
             
         self.dwg.saveas(svg_filename, pretty = True)
@@ -290,12 +286,10 @@ class Stimulus:
         tiff_filename = "%s.tiff"%filename
         if folder is not None:
             svg_filename = os.path.join(folder, svg_filename)  
-#            png_fullfilename = os.path.join(folder, png_filename)
             hti = Html2Image(output_path = folder)
         else:
             hti = Html2Image()
 
-        # if self.dwg_elements is None:
         self.Render() 
             
         self.dwg.saveas(svg_filename, pretty = True)
@@ -305,14 +299,12 @@ class Stimulus:
             originalSVG.scale(scale)
             newSVG = svgutils.compose.Figure(float(self.width) * scale, float(self.height) * scale, originalSVG)
             newSVG.save(svg_filename)
+        else:
+            scale = 1
                   
         hti.screenshot(other_file = svg_filename, 
                        size= (math.ceil(self.width*scale), math.ceil(self.height*scale)), 
                        save_as = tiff_filename)
-#        img = svg2rlg(svg_filename)
-#        os.remove(svg_filename)
-#        renderPM.drawToFile(img, png_filename, fmt="PNG")
-
 
     def SaveJPG(self, filename, scale = None, folder = None): 
         """
@@ -336,12 +328,10 @@ class Stimulus:
         jpg_filename = "%s.jpg"%filename
         if folder is not None:
             svg_filename = os.path.join(folder, svg_filename)  
-#            png_fullfilename = os.path.join(folder, png_filename)
             hti = Html2Image(output_path = folder)
         else:
             hti = Html2Image()
 
-        # if self.dwg_elements is None:
         self.Render() 
             
         self.dwg.saveas(svg_filename, pretty = True)
@@ -351,13 +341,12 @@ class Stimulus:
             originalSVG.scale(scale)
             newSVG = svgutils.compose.Figure(float(self.width) * scale, float(self.height) * scale, originalSVG)
             newSVG.save(svg_filename)
+        else:
+            scale = 1
                   
         hti.screenshot(other_file = svg_filename, 
                        size= (math.ceil(self.width*scale), math.ceil(self.height*scale)), 
                        save_as = jpg_filename)
-#        img = svg2rlg(svg_filename)
-#        os.remove(svg_filename)
-#        renderPM.drawToFile(img, png_filename, fmt="PNG")
         
     def SaveJSON(self, filename, folder = None):
         """
@@ -377,7 +366,6 @@ class Stimulus:
             json_filename = os.path.join(folder, json_filename)
             csv_filename  = os.path.join(folder, csv_filename)
 
-        # if self.dwg_elements is None:
         self.Render() 
                     
         json_data = {'stimulus' : {'stimulustype':     str(type(self))[str(type(self)).find("'")+1:str(type(self)).find(">")-1].replace("octa.Stimulus.", ""),
@@ -550,7 +538,9 @@ class Stimulus:
         stimulus = None
         
         if folder is not None:
-            json_filename  = os.path.join(folder, filename)
+            json_filename  = os.path.join(folder, filename + '.json')
+        else:
+            json_filename = os.path.join(filename + '.json')
         
         with open(json_filename, 'r') as input_file:
             data = json.load(input_file)
@@ -1101,20 +1091,6 @@ class Stimulus:
         self.width = abs(max_x - min_x) + sum(self.x_margin)
         self.height = abs(max_y - min_y) + sum(self.y_margin)
         
-        # https://stackoverflow.com/questions/622140/calculate-bounding-box-coordinates-from-a-rotated-rectangle
-        # original_width = self.width
-        # original_height = self.height
-        
-        # orientation_radians = self.stim_orientation * (math.pi / 180)
-        
-        # rotated_width = abs(original_width * math.cos(orientation_radians)) + abs(original_height * math.sin(orientation_radians))
-        # rotated_height = abs(original_width * math.sin(orientation_radians)) + abs(original_height * math.cos(orientation_radians))
-        
-        # self.width = rotated_width
-        # self.height = rotated_height
-        
-        
-        # print("min width: %f, max_width: %f"%(min_x, min_y))
         self._x_offset = -min_x + self.x_margin[0]
         self._y_offset = -min_y + self.y_margin[0]
         

@@ -20,13 +20,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Contact: eline.vangeert@kuleuven.be
 
 """
-import svgwrite
 import base64
 from urllib.request import urlopen
 
 def FitImage(src, name = None):
     if name == None:
-        name = "FitImage_" #+ str(src)
+        name = "FitImage_"
     return type(str(name), (FitImage_,), {'source': src, 'name': name})
 
 class FitImage_:
@@ -282,8 +281,7 @@ class FitImage_:
              
         if self.opacity_animation != "":
             svg.add(eval(self.opacity_animation))    
-#        svg.fit(scale="slice")
-#        svg.fit(scale="meet")
+
         svg.stretch()        
                     
         if self.link != "":            
