@@ -1,6 +1,27 @@
 """
+Pattern code for the OCTA toolbox
 This module contains a base class with several essential functions for patterns.
 More complex patterns (e.g., grid based patterns) can be derived from this class.
+
+The Order & Complexity Toolbox for Aesthetics (OCTA) Python library is a tool for researchers 
+to create stimuli varying in order and complexity on different dimensions. 
+Copyright (C) 2021  Eline Van Geert, Christophe Bossens, and Johan Wagemans
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Contact: eline.vangeert@kuleuven.be
+
 """
 import colour
 import random
@@ -17,7 +38,12 @@ class Pattern:
         ----------
         pattern : any type
             List object with initial values for the pattern.
-
+        patterntype : string
+            Indicates the pattern type used.
+        patterndirection : string
+            Indicates the pattern direction used.
+        patternclass : string
+            Indicates the pattern class used.
         """
         
         if type(pattern) == list:
@@ -38,7 +64,7 @@ class Pattern:
 
         Returns
         -------
-        str
+        string
             String representation of the pattern.
 
         """
@@ -121,7 +147,7 @@ class Pattern:
 
         Parameters
         ----------
-        n_duplications : int
+        n_repeats : int
             How many times the pattern needs to be repeated.
         max_elements : int, optional
             Maximum number of elements in the resulting pattern. The default is None.
@@ -205,10 +231,10 @@ class Pattern:
 
         Parameters
         ----------
-        mu : float, optional
-            Mean of the normal distribution. The default is 0.
-        std : float, optional
-            Standard deviation of the normal distribution. The default is 1.
+        distribution :  string
+            Options are 'normal' or 'uniform'
+        distribution_parameters : dictionary
+            Provides parameters for the specified distribution.
 
         Returns
         -------
@@ -249,6 +275,9 @@ class Pattern:
             Mean of the normal distribution. The default is 0.
         std : float, optional
             Standard deviation of the normal distribution. The default is 1.
+        axis : string, optional
+            String that contains the axis to which jitter should be applied.
+            Possible values are "x", "y", "xy" or "x=y". 
 
         Returns
         -------
@@ -301,6 +330,9 @@ class Pattern:
             Lower bound of the uniform distribution
         max_val : float, optional
             Upper bound of the uniform distribution
+        axis : string, optional
+            String that contains the axis to which jitter should be applied.
+            Possible values are "x", "y", "xy" or "x=y". 
 
         Returns
         -------
@@ -518,6 +550,10 @@ class Pattern:
 
         Parameters
         ----------
+        start_value : string, int, float, or tuple
+            Value for the first element in the list.
+        end_value : string, int, float, or tuple
+            Value for the last element in the list.
         n_elements : int
             Total number of elements in the list of gradient values.
 
@@ -549,7 +585,7 @@ class Pattern:
             Name of the first color in the list.
         end_color : string
             Name of the final color in the list.
-        n_elements : TYPE
+        n_elements : int
             Total number of colors in the list. Value must be >= 2.
 
         Returns
@@ -578,7 +614,7 @@ class Pattern:
         end_number : int or float
             Final number in the list.
         n_elements : int
-            Total number of numbers in the list. Value must be >= 2.
+            Total number of elements in the list. Value must be >= 2.
 
         Returns
         -------
@@ -596,6 +632,16 @@ class Pattern:
     
     def Create2DGradient(x, y, n_elements):
         """
+        Creates a 2D gradient
+        
+        Parameters
+        ----------
+        x : list
+            List of x coordinates (can also be a Sequence or LinearGradient)
+        y : list
+            List of y coordinates (can also be a Sequence or LinearGradient)
+        n_elements : int
+            Total number of elements in the list. 
         """
         result = []
         for i in range(n_elements):
@@ -615,13 +661,36 @@ class Pattern:
         
         
 def Sequence(start, step):
+    """
+    Creates a sequence based on a start value and a step size.
+    
+    Parameters
+    ----------
+    start : int or float
+        Numeric start value.
+    step : int or float
+        Numeric step size.
+    """
     i = start
     
     while True:
         yield i 
         i += step
         
-def LinearGradient(start, end, n_elements, invert = False): 
+def LinearGradient(start, end, n_elements, invert = False):
+    """
+    Creates a linear gradient based on a start value, an end value, and a number of elements.
+    Parameters
+    ----------
+    start : int or float
+        Numeric value for the first element in the list.
+    end : list
+        Numeric value for the last element in the list.
+    n_elements : int
+        Total number of elements in the list. 
+    invert : Boolean
+        Indicates whether the gradient needs to be inverted. Default is false.
+    """
     
     if start > end:
         orig_start = start

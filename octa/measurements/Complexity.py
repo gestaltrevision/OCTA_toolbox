@@ -1,3 +1,26 @@
+"""
+Complexity measurements code for the OCTA toolbox
+
+The Order & Complexity Toolbox for Aesthetics (OCTA) Python library is a tool for researchers 
+to create stimuli varying in order and complexity on different dimensions. 
+Copyright (C) 2021  Eline Van Geert, Christophe Bossens, and Johan Wagemans
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Contact: eline.vangeert@kuleuven.be
+
+"""
 def CalculateElementsN(self):
     """
     Calculate how many elements are present in the display.
@@ -24,6 +47,12 @@ def CalculateElementsN(self):
 def CalculateElementsLOCE(self, distinction_features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
     Calculate how many different types of elements are present in the display based on the feature dimensions specified in distinction_features.
+        
+    Parameters
+    ----------
+    distinction_features: list
+        Feature dimensions that will be inspected to decide if two elements
+        are the same. Default is ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']
 
     Returns
     -------
@@ -77,6 +106,12 @@ def CalculateElementsLOCE(self, distinction_features = ['shapes', 'boundingboxes
 def CalculateElementsLOC(self, distinction_features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
     Calculate how many different features are present across all dimensions.
+        
+    Parameters
+    ----------
+    distinction_features: list
+        Feature dimensions that will be taken into account.
+        Default is ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']
 
     Returns
     -------
@@ -143,6 +178,12 @@ def CalculateElementsLOC(self, distinction_features = ['shapes', 'boundingboxes'
 def CalculateElementsLOCI(self, distinction_features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
     Calculate how many different feature dimensions have more than one feature value (i.e., have non-identical values).
+        
+    Parameters
+    ----------
+    distinction_features: list
+        Feature dimensions that will be taken into account.
+        Default is ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']
 
     Returns
     -------

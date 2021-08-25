@@ -1,0 +1,33 @@
+# YAML 1.2
+---
+authors: 
+  -
+    affiliation: "Laboratory of Experimental Psychology, KU Leuven"
+    family-names: "Van Geert"
+    given-names: Eline
+    orcid: "https://orcid.org/0000-0002-7848-5998"
+  -
+    affiliation: "Laboratory of Experimental Psychology, KU Leuven"
+    family-names: Bossens
+    given-names: Christophe
+    orcid: "https://orcid.org/0000-0003-0239-902X"
+  -
+    affiliation: "Laboratory of Experimental Psychology, KU Leuven"
+    family-names: Wagemans
+    given-names: Johan
+    orcid: "https://orcid.org/0000-0002-7970-1541"
+cff-version: "1.1.0"
+date-released: 2021-08-25
+doi: "10.000/TOBEADDED"
+keywords: 
+  - order
+  - complexity
+  - "aesthetic appreciation"
+  - "stimulus construction"
+  - "perceptual organization"
+license: "LGPL-3.0+"
+message: "If you use this software, please cite it using these metadata."
+repository-code: "https://github.com/gestaltrevision/OCTA_toolbox"
+title: "OCTA toolbox"
+version: "1.0"
+...

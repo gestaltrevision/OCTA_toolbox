@@ -1,7 +1,25 @@
 # -*- coding: utf-8 -*-
 """
 Stimulus code for the OCTA toolbox
-Eline Van Geert and Christophe Bossens
+
+The Order & Complexity Toolbox for Aesthetics (OCTA) Python library is a tool for researchers 
+to create stimuli varying in order and complexity on different dimensions. 
+Copyright (C) 2021  Eline Van Geert, Christophe Bossens, and Johan Wagemans
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Contact: eline.vangeert@kuleuven.be
 
 """
 import svgwrite
@@ -19,8 +37,8 @@ from reportlab.graphics import renderPDF
 from IPython.display import SVG, display
 
 from .Positions import Positions
-from .patterns import GridPattern, Pattern, LinearGradient
-from .shapes import Ellipse, Rectangle, Triangle, Polygon, RegularPolygon, Path, PathSvg, FitImage, Image, Text
+from .patterns import GridPattern, Pattern #, LinearGradient
+from .shapes import Ellipse, Rectangle, Triangle, Polygon #, RegularPolygon, Path, PathSvg, FitImage, Image, Text
 from .shapes.Image import Image_
 from .shapes.FitImage import FitImage_
 from .shapes.Text import Text_
@@ -43,34 +61,36 @@ class Stimulus:
 
         Parameters
         ----------
-        background_color: STRING, optional
-            Background color of the stimulus. The default is "white".
-        x_margin: INT, FLOAT, or TUPLE, optional
+        x_margin: int, float, or tuple, optional
             Amount of extra space added to both sides of the stimulus in the x-direction. The default is 20.
-        y_margin: INT, FLOAT, or TUPLE, optional
+        y_margin: int, float, or tuple, optional
             Amount of extra space added to both sides of the stimulus in the y-direction. The default is 20.
-        size: TUPLE, optional
+        size: tuple, optional
             If specified, fixes the size of the stimulus to the dimension
             given in the tuple. The center of the stimulus will be calculated
             to correspond to the center of all element positions in the
             stimulus.
-        background_shape: STRING or octa.shapes object, optional
+        background_color: string or list, optional
+            Background color of the stimulus. The default is "white".
+        background_shape: string or octa.shapes object, optional
             If specified, clips the stimulus to the specified shape (only the part of the stimulus that falls within the 
             background shape will be visible). The center of the background shape 
             will correspond to the center of all element positions in the stimulus.
             If a shape name is provided as string, the boundingbox of the shape will be equal to the stimulus size.
-        stim_mask: STRING or octa.shapes object, optional
+        stim_mask: string or octa.shapes object, optional
             If specified, clips the stimulus to the specified shape. The center of the background shape 
             will correspond to the center of all element positions in the stimulus.
             If a shape name is provided as string, the boundingbox of the shape will be equal to the stimulus size.   
-        stim_orientation: INT or FLOAT, optional
+        stim_orientation: int, float, or list, optional
             If not equal to 0, the stimulus will be rotated around its center according to the specified degree value. The default is 0.
-        stim_mirror: STRING, optional
-            If specified, defines the way the stimulus will be mirrored (none, horizontal, vertical, or horizontalvertical).        
-
-        Returns
-        -------
-        None.
+        stim_mirrorvalue: string, optional
+            If specified, defines the way the stimulus will be mirrored (none, horizontal, vertical, or horizontalvertical).   
+        stim_link: string, optional
+            If specified, defines the hyperlink that will be activated when the stimulus is clicked.   
+        stim_classlabel: string, optional
+            If specified, defines the class label that can be used to add javascript or css changes to the stimulus. 
+        stim_idlabel: string, optional
+            If specified, defines the id label that can be used to add javascript or css changes to the stimulus.        
 
         """
         if size == None:
@@ -120,12 +140,12 @@ class Stimulus:
 
         Parameters
         ----------
-        filename : STRING
+        filename : string
             Name of the svg file.
-
-        Returns
-        -------
-        None.
+        scale : int or float, optional
+            Number that indicates the scaling factor to use on the original SVG size.
+        folder : string, optional
+            Name of the folder in which the svg file needs to be saved.
 
         """
         
@@ -148,17 +168,13 @@ class Stimulus:
         """
         Gives the current stimulus as an SVG string.
 
-        Parameters
-        ----------
-        None.
-
         Returns
         -------
         String.
 
         """
-        if self.dwg_elements is None:
-            self.Render() 
+        # if self.dwg_elements is None:
+        self.Render() 
             
         return self.dwg.tostring()
     
@@ -168,19 +184,19 @@ class Stimulus:
 
         Parameters
         ----------
-        filename : STRING
+        filename : string
             Name of the png file.
-
-        Returns
-        -------
-        None.
+        scale : int or float, optional
+            Number that indicates the scaling factor to use on the original SVG size.
+        folder : string, optional
+            Name of the folder in which the png file needs to be saved.
 
         """ 
         # limitations using svglib:
         # clipping is limited to single paths, no mask support
         # color gradients not supported
 
-        svg_filename = "%s.svg"%filename
+        svg_filename = "%s_scaled.svg"%filename
         png_filename = "%s.png"%filename
         if folder is not None:
             svg_filename = os.path.join(folder, svg_filename) 
@@ -188,8 +204,8 @@ class Stimulus:
         else:
             hti = Html2Image()
             
-        if self.dwg_elements is None:
-            self.Render() 
+        # if self.dwg_elements is None:
+        self.Render() 
             
         self.dwg.saveas(svg_filename , pretty = True)
         
@@ -198,12 +214,14 @@ class Stimulus:
             originalSVG.scale(scale)
             newSVG = svgutils.compose.Figure(float(self.width) * scale, float(self.height) * scale, originalSVG)
             newSVG.save(svg_filename)
-        
+        else:
+            scale = 1
+            
         hti.screenshot(other_file = svg_filename, 
                        size= (math.ceil(self.width*scale), math.ceil(self.height*scale)), 
                        save_as = png_filename)
 
-        
+        os.remove(svg_filename)
         
     def SavePDF(self, filename, scale = None, folder = None): 
         """
@@ -211,12 +229,12 @@ class Stimulus:
 
         Parameters
         ----------
-        filename : STRING
+        filename : string
             Name of the pdf file.
-
-        Returns
-        -------
-        None.
+        scale : int or float, optional
+            Number that indicates the scaling factor to use on the original SVG size.
+        folder : string, optional
+            Name of the folder in which the pdf file needs to be saved.
 
         """ 
         # limitations using svglib:
@@ -227,10 +245,13 @@ class Stimulus:
         pdf_filename = "%s.pdf"%filename
         if folder is not None:
             svg_filename = os.path.join(folder, svg_filename)  
-            pdf_filename = os.path.join(folder, pdf_filename)       
-
-        if self.dwg_elements is None:
-            self.Render() 
+            pdf_filename = os.path.join(folder, pdf_filename) 
+        #     hti = Html2Image(output_path = folder)
+        # else:
+        #     hti = Html2Image()
+            
+        # if self.dwg_elements is None:
+        self.Render() 
             
         self.dwg.saveas(svg_filename, pretty = True)
         
@@ -239,6 +260,8 @@ class Stimulus:
             originalSVG.scale(scale)
             newSVG = svgutils.compose.Figure(float(self.width) * scale, float(self.height) * scale, originalSVG)
             newSVG.save(svg_filename)
+        else:
+            scale = 1
             
         img = svg2rlg(svg_filename)
         os.remove(svg_filename)
@@ -251,12 +274,12 @@ class Stimulus:
 
         Parameters
         ----------
-        filename : STRING
-            Name of the TIFF file.
-
-        Returns
-        -------
-        None.
+        filename : string
+            Name of the tiff file.
+        scale : int or float, optional
+            Number that indicates the scaling factor to use on the original SVG size.
+        folder : string, optional
+            Name of the folder in which the tiff file needs to be saved.
 
         """ 
         # limitations using svglib:
@@ -272,8 +295,8 @@ class Stimulus:
         else:
             hti = Html2Image()
 
-        if self.dwg_elements is None:
-            self.Render() 
+        # if self.dwg_elements is None:
+        self.Render() 
             
         self.dwg.saveas(svg_filename, pretty = True)
         
@@ -297,12 +320,12 @@ class Stimulus:
 
         Parameters
         ----------
-        filename : STRING
-            Name of the JPG file.
-
-        Returns
-        -------
-        None.
+        filename : string
+            Name of the jpg file.
+        scale : int or float, optional
+            Number that indicates the scaling factor to use on the original SVG size.
+        folder : string, optional
+            Name of the folder in which the jpg file needs to be saved.
 
         """ 
         # limitations using svglib:
@@ -318,8 +341,8 @@ class Stimulus:
         else:
             hti = Html2Image()
 
-        if self.dwg_elements is None:
-            self.Render() 
+        # if self.dwg_elements is None:
+        self.Render() 
             
         self.dwg.saveas(svg_filename, pretty = True)
         
@@ -342,12 +365,10 @@ class Stimulus:
 
         Parameters
         ----------
-        filename : STRING
+        filename : string
             Name of the json file.
-
-        Returns
-        -------
-        None.
+        folder : string, optional
+            Name of the folder in which the json file needs to be saved.
 
         """
         json_filename = "%s.json"%filename
@@ -356,8 +377,8 @@ class Stimulus:
             json_filename = os.path.join(folder, json_filename)
             csv_filename  = os.path.join(folder, csv_filename)
 
-        if self.dwg_elements is None:
-            self.Render() 
+        # if self.dwg_elements is None:
+        self.Render() 
                     
         json_data = {'stimulus' : {'stimulustype':     str(type(self))[str(type(self)).find("'")+1:str(type(self)).find(">")-1].replace("octa.Stimulus.", ""),
                                    'n_elements'   :    self._n_elements if hasattr(self, '_n_elements') else None,
@@ -411,22 +432,38 @@ class Stimulus:
             json.dump(json_data, output_file, indent = 4)
         
     def GetElementsDF(self):
+        """
+        Gets a dataframe with all element information.
 
-        if self.dwg_elements is None:
-            self.Render() 
+        Returns
+        -------
+        Data frame.
+
+        """
+        self.Render() 
             
         df = pd.DataFrame(self.dwg_elements, columns = ['element_id', 'position', 'shape', 'boundingbox', 'fillcolor', 'orientation', 'borderwidth', 'bordercolor', 'opacity', 'mirrorvalue', 'link', 'idlabel', 'classlabel', 'data'])
         
         return df
     
     def SaveElementsDF(self, filename, folder = None):
-        
+        """
+        Saves a dataframe with all element information as CSV file.
+
+        Parameters
+        ----------
+        filename : string
+            Name of the csv file.
+        folder : string, optional
+            Name of the folder in which the csv file needs to be saved.
+
+        """        
         csv_filename = "%s.csv"%filename
         if folder is not None:
             csv_filename  = os.path.join(folder, csv_filename)
         
-        if self.dwg_elements is None:
-            self.Render()  
+        # if self.dwg_elements is None:
+        self.Render()  
                              
         df = pd.DataFrame(self.dwg_elements, columns = ['element_id', 'position', 'shape', 'boundingbox', 'fillcolor', 'orientation', 'borderwidth', 'bordercolor', 'opacity', 'mirrorvalue', 'link', 'idlabel', 'classlabel', 'data'])
         df.to_csv(csv_filename, index = False)
@@ -435,18 +472,14 @@ class Stimulus:
         """
         Gives the JSON info concerning the current stimulus.
 
-        Parameters
-        ----------
-        None.
-
         Returns
         -------
         JSON object.
 
         """
         
-        if self.dwg_elements is None:
-            self.Render()  
+        # if self.dwg_elements is None:
+        self.Render()  
                  
         json_data = {'stimulus' : {'stimulustype':     str(type(self))[str(type(self)).find("'")+1:str(type(self)).find(">")-1].replace("octa.Stimulus.", ""),
                                    'n_elements'   :    self._n_elements if hasattr(self, '_n_elements') else None,
@@ -497,14 +530,16 @@ class Stimulus:
                                    }}        
         return json_data            
         
-    def LoadFromJSON(filename):
+    def LoadFromJSON(filename, folder = None):
         """
         Creates a stimulus object from a JSON file.
 
         Parameters
         ----------
-        filename : STRING
+        filename : string
             JSON file that needs to be loaded.
+        folder : string, optional
+            Name of the folder in which the csv file needs to be saved.
 
         Returns
         -------
@@ -514,7 +549,10 @@ class Stimulus:
         """
         stimulus = None
         
-        with open(filename, 'r') as input_file:
+        if folder is not None:
+            json_filename  = os.path.join(folder, filename)
+        
+        with open(json_filename, 'r') as input_file:
             data = json.load(input_file)
             
             
@@ -654,12 +692,8 @@ class Stimulus:
                            
     def Render(self):
         """
-        Prepares the svg stimulus. The stimulus parameters are first parsed, then
+        Prepares the SVG stimulus. The stimulus parameters are first parsed, then
         a new drawing is instantiated to which all the individual elements are added.
-
-        Returns
-        -------
-        None.
 
         """
         self.__CalculateStimulusValues()
@@ -673,10 +707,6 @@ class Stimulus:
         """
         Displays the current SVG stimulus in the IPython console window.
 
-        Returns
-        -------
-        None.
-
         """
         
         self.Render()             
@@ -684,16 +714,16 @@ class Stimulus:
             
         
     def __CalculateStimulusValues(self):
+        """
+        Gets the actual element positions and adds them to the stimulus properties.
+
+        """
         self._calculated_positions = self.positions.GetPositions()
         
     def __ParseDrawingParameters(self):
         """
         Uses the stimulus parameter properties to create a dictionary with
         parameters for each individual shape.
-
-        Returns
-        -------
-        None.
 
         """
         self.dwg_elements = []
@@ -800,11 +830,7 @@ class Stimulus:
         """
         Instantiates a new drawing canvas to which elements can be added. Executing
         this function will result in a blank canvas with the provided size and
-        background color.
-
-        Returns
-        -------
-        None.
+        stimulus characteristics.
 
         """           
         self.dwg = svgwrite.Drawing(size = (self.width, self.height)) 
@@ -969,10 +995,23 @@ class Stimulus:
             
     @property
     def x_margin(self):
+        """
+        The horizontal margin in the stimulus
+        
+        """
         return self._x_margin
     
     @x_margin.setter
     def x_margin(self, x_margin):
+        """
+        Sets the horizontal margin in the stimulus
+        
+        Parameters
+        ----------
+        x_margin: int, float, or tuple
+            Amount of extra space added to both sides of the stimulus in the x-direction.
+
+        """
         if type(x_margin) == int or type(x_margin) == float:
             self._x_margin = (x_margin, x_margin)
         elif type(x_margin) == list or type(x_margin) == tuple:
@@ -983,10 +1022,23 @@ class Stimulus:
                 
     @property
     def y_margin(self):
+        """
+        The vertical margin in the stimulus
+        
+        """
         return self._y_margin
     
     @y_margin.setter
     def y_margin(self, y_margin):
+        """
+        Sets the vertical margin in the stimulus
+        
+        Parameters
+        ----------
+        y_margin: int, float, or tuple
+            Amount of extra space added to both sides of the stimulus in the y-direction. 
+        
+        """
         if type(y_margin) == int or type(y_margin) == float:
             self._y_margin = (y_margin, y_margin)
         elif type(y_margin) == list or type(y_margin) == tuple:
@@ -996,6 +1048,10 @@ class Stimulus:
             self._y_margin = y_margin
         
     def __AutoCalculateSize(self):
+        """
+        Calculates the automatic size of the svg drawing.
+
+        """  
         if not self._autosize:
             x_center, y_center = self.CalculateCenter()
             self._x_offset = self.width/2 - x_center
@@ -1067,10 +1123,6 @@ class Stimulus:
         """
         Adds the provided stimulus elements to the svg drawing.
 
-        Returns
-        -------
-        None.
-
         """                
         for i in range(len(self.dwg_elements)):
             if not self.dwg_elements[i]['shape'] == None:
@@ -1092,6 +1144,9 @@ class Stimulus:
     
     
 class Grid(Stimulus):
+    """ Class for creating a Grid stimulus.
+    
+    """
     _element_attributes = ["_boundingboxes", "_orientations", "_bordercolors", "_borderwidths", "_fillcolors", "_opacities", "_shapes",
                           "_classlabels", "_idlabels", "_mirrorvalues", "_links" ,"_data"]
     
@@ -1100,6 +1155,51 @@ class Grid(Stimulus):
                  background_color = "white", background_shape = None, 
                  stim_mask = None, stim_orientation = 0, stim_mirrorvalue = None, 
                  stim_link = None, stim_classlabel = None, stim_idlabel = None):
+        """
+        Instantiates a Grid stimulus object.
+
+        Parameters
+        ----------
+        n_rows: int
+            Number of rows in the stimulus. 
+        n_cols: int
+            Number of columns in the stimulus. 
+        row_spacing: int or float, optional
+            Amount of space between two rows (element positions in the y-direction). The default is 50.
+        col_spacing: int or float, optional
+            Amount of space between two columns (element positions in the x-direction). The default is 50.
+        x_margin: int, float, or tuple, optional
+            Amount of extra space added to both sides of the stimulus in the x-direction. The default is 20.
+        y_margin: int, float, or tuple, optional
+            Amount of extra space added to both sides of the stimulus in the y-direction. The default is 20.
+        size: tuple, optional
+            If specified, fixes the size of the stimulus to the dimension
+            given in the tuple. The center of the stimulus will be calculated
+            to correspond to the center of all element positions in the
+            stimulus.
+        background_color: string or list, optional
+            Background color of the stimulus. The default is "white".
+        background_shape: string or octa.shapes object, optional
+            If specified, clips the stimulus to the specified shape (only the part of the stimulus that falls within the 
+            background shape will be visible). The center of the background shape 
+            will correspond to the center of all element positions in the stimulus.
+            If a shape name is provided as string, the boundingbox of the shape will be equal to the stimulus size.
+        stim_mask: string or octa.shapes object, optional
+            If specified, clips the stimulus to the specified shape. The center of the background shape 
+            will correspond to the center of all element positions in the stimulus.
+            If a shape name is provided as string, the boundingbox of the shape will be equal to the stimulus size.   
+        stim_orientation: int, float, or list, optional
+            If not equal to 0, the stimulus will be rotated around its center according to the specified degree value. The default is 0.
+        stim_mirrorvalue: string, optional
+            If specified, defines the way the stimulus will be mirrored (none, horizontal, vertical, or horizontalvertical).   
+        stim_link: string, optional
+            If specified, defines the hyperlink that will be activated when the stimulus is clicked.   
+        stim_classlabel: string, optional
+            If specified, defines the class label that can be used to add javascript or css changes to the stimulus. 
+        stim_idlabel: string, optional
+            If specified, defines the id label that can be used to add javascript or css changes to the stimulus.        
+
+        """
 
         super().__init__(x_margin = x_margin, y_margin = y_margin, size = size, 
                          background_color = background_color, background_shape = background_shape, 
@@ -1154,8 +1254,13 @@ class Grid(Stimulus):
         """
         Sets the number of rows in the grid.
         
-        This only works if none of the element attributes have a fixed grid
+        This only works if none of the element attributes has a fixed grid
         structure.
+        
+        Parameters
+        ----------
+        n_rows: int
+            Number of rows in the stimulus.
         """
         if not self._is_modifiable():
             print("WARNING: At least one element attribute has a fixed structure. n_rows remains unchanged.")
@@ -1183,10 +1288,16 @@ class Grid(Stimulus):
     @n_cols.setter
     def n_cols(self, n_cols):
         """
-        Sets the number of columns in the grid.
+        Sets the number of columns in the Grid.
         
-        This only works if none of the element attributes have a fixed grid
+        This only works if none of the element attributes has a fixed grid
         structure.
+        
+        Parameters
+        ----------
+        n_cols: int
+            Number of columns in the stimulus. 
+            
         """
         if not self._is_modifiable():
             print("WARNING: At least one element attribute has a fixed structure. n_rows remains unchanged.")
@@ -1208,7 +1319,7 @@ class Grid(Stimulus):
         """
         The size for each element in the grid.
         
-        The size is defined in terms of a rectangular bounding box that
+        The size is defined in terms of a rectangular boundingbox that
         contains the element.
         
         """
@@ -1216,32 +1327,59 @@ class Grid(Stimulus):
     
     
     @boundingboxes.setter
-    def boundingboxes(self, boundingbox):
+    def boundingboxes(self, boundingboxes):
         """
-        Sets the bounding box size for each grid element.
+        Sets the boundingbox size for each grid element.
         
         If the provided pattern has a fixed grid structure, that structure
-        must match the number of rows and columns of the Grid Stimulus
-        
+        must match the number of rows and columns of the Grid stimulus   
+                
+        Parameters
+        ----------
+        boundingboxes: list
+            A list of boundingbox values equal in length to the number of elements in the position pattern of the stimulus.
+                   
         """
-        if not self._check_attribute_dimensions(boundingbox):
+        if not self._check_attribute_dimensions(boundingboxes):
             return
             
-        self._boundingboxes = boundingbox
+        self._boundingboxes = boundingboxes
         self._boundingboxes.n_rows = self._n_rows
         self._boundingboxes.n_cols = self._n_cols
         
     
     def set_element_boundingbox(self, element_id, boundingbox_value):
         """
-        Sets the bounding box value for an individual element
+        Sets the boundingbox value for an individual element
+        
+        Parameters
+        ----------
+        element_id : int, tuple, or list
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element. 
+        boundingbox_value: int, float, or tuple
+            The new boundingbox value to apply to the element.
+            
         """
         element_id = self._parse_element_id(element_id)
         boundingbox_value = Grid._check_boundingbox_value(boundingbox_value)                
         self._attribute_overrides[element_id]['boundingbox'] = boundingbox_value
         
-    def set_element_boundingboxes(self, boundingbox_value = None, element_id = None, n_changes = None):
+    def set_element_boundingboxes(self, boundingbox_value, element_id = None, n_changes = None):
         """
+        Sets the boundingbox value for a series of individual elements
+        
+        Parameters
+        ----------
+        boundingbox_value: int, float, tuple, or list
+            The new boundingbox value(s) to apply to the specified elements.        
+        element_id : int, tuple, or list, optional
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element,
+            or a list of several element ids 
+        n_changes: int, optional  
+            The number of randomly chosen elements to change in the stimulus.
+            
         """  
         if element_id is not None:
             if type(element_id) == int:
@@ -1304,8 +1442,13 @@ class Grid(Stimulus):
         Sets the shape for each grid element.
         
         If the provided pattern has a fixed grid structure, that structure
-        must match the number of rows and columns of the Grid Stimulus
-        
+        must match the number of rows and columns of the Grid stimulus
+                 
+        Parameters
+        ----------
+        shapes: list
+            A list of shape values equal in length to the number of elements in the position pattern of the stimulus.
+                   
         """
         if not self._check_attribute_dimensions(shapes):
             return
@@ -1374,15 +1517,12 @@ class Grid(Stimulus):
 
         Parameters
         ----------
-        element_id : tuple, list or int
-            A tuple with the row and column index of the element. A single integer
-            can also be used to refer to an element in order.
+        element_id : int, tuple, or list
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element. 
         shape_value : Shape or None
             An element shape, or None if no shape needs to be displayed.
 
-        Returns
-        -------
-        None.
         """
         element_id = self._parse_element_id(element_id)
         
@@ -1409,8 +1549,21 @@ class Grid(Stimulus):
         
         self._attribute_overrides[element_id]['data'] = data_value
             
-    def set_element_shapes(self, shape_value = None, element_id = None, n_changes = None):
+    def set_element_shapes(self, shape_value, element_id = None, n_changes = None):
         """
+        Sets the shapes of a series of individual elements
+        
+        Parameters
+        ----------
+        shape_value: Shape, None, or list
+            The new shape value(s) to apply to the specified elements.        
+        element_id : int, tuple, or list, optional
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element,
+            or a list of several element ids 
+        n_changes: int, optional  
+            The number of randomly chosen elements to change in the stimulus.
+            
         """  
         if element_id is not None:
             if type(element_id) == int:
@@ -1442,11 +1595,28 @@ class Grid(Stimulus):
         """
         Removes the shape at position element_id from the display
         
+        Parameters
+        ----------       
+        element_id : int, tuple, or list, optional
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element. 
+        
         """
         self.set_element_shape(element_id, None)
         
     def remove_elements(self, n_removals = 0, element_id = None):
         """
+        Removes the shape of a series of individual elements
+        
+        Parameters
+        ----------
+        n_removals: int, optional  
+            The number of randomly chosen elements to remove in the stimulus. Default value is 0.      
+        element_id : int, tuple, or list, optional
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element,
+            or a list of several element ids
+            
         """
         if element_id is not None:
             if type(element_id) == int:
@@ -1481,8 +1651,13 @@ class Grid(Stimulus):
         Sets the bordercolor for each grid element.
         
         If the provided pattern has a fixed grid structure, that structure
-        must match the number of rows and columns of the Grid Stimulus
+        must match the number of rows and columns of the Grid stimulus
         
+        Parameters
+        ----------
+        bordercolors: list
+            A list of bordercolor values equal in length to the number of elements in the position pattern of the stimulus.
+
         """
         if not self._check_attribute_dimensions(bordercolors):
             return
@@ -1498,23 +1673,33 @@ class Grid(Stimulus):
         Parameters
         ----------
         element_id : tuple, list or int
-            A tuple with the row and column index of the element. A single integer
-            can also be used to refer to an element in order.
-        bordercolor_value : string
-            color string.
-
-        Returns
-        -------
-        None.
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element. 
+        bordercolor_value : string or list
+            Color string, or a list for animated colors.
 
         """
         element_id = self._parse_element_id(element_id)
         
         self._attribute_overrides[element_id]['bordercolor'] = bordercolor_value
         
-    def set_element_bordercolors(self, bordercolor_value = None, element_id = None, n_changes = None):
+    def set_element_bordercolors(self, bordercolor_value, element_id = None, n_changes = None):
         """
+        Sets the bordercolors of a series of individual elements
+        
+        Parameters
+        ----------
+        bordercolor_value: string or list
+            The new bordercolor value(s) to apply to the specified elements.        
+        element_id : int, tuple, or list, optional
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element,
+            or a list of several element ids 
+        n_changes: int, optional  
+            The number of randomly chosen elements to change in the stimulus.
+            
         """  
+ 
         if element_id is not None:
             if type(element_id) == int:
                 element_id = [element_id]
@@ -1556,7 +1741,7 @@ class Grid(Stimulus):
         Sets the fillcolor for each grid element.
         
         If the provided pattern has a fixed grid structure, that structure
-        must match the number of rows and columns of the Grid Stimulus
+        must match the number of rows and columns of the Grid stimulus
         
         """
         if not self._check_attribute_dimensions(fillcolors):
@@ -1572,24 +1757,34 @@ class Grid(Stimulus):
 
         Parameters
         ----------
-        element_id : tuple, list or int
-            A tuple with the row and column index of the element. A single integer
-            can also be used to refer to an element in order.
-        fillcolor_value : string
-            color string.
-
-        Returns
-        -------
-        None.
+        element_id : int, tuple, or list
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element. 
+        fillcolor_value : string or list
+            Color string, or a list for animated colors.
 
         """
         element_id = self._parse_element_id(element_id)
         
         self._attribute_overrides[element_id]['fillcolor'] = fillcolor_value
         
-    def set_element_fillcolors(self, fillcolor_value = None, element_id = None, n_changes = None):
+    def set_element_fillcolors(self, fillcolor_value, element_id = None, n_changes = None):
         """
+        Sets the fillcolors of a series of individual elements
+        
+        Parameters
+        ----------
+        fillcolor_value: string or list
+            The new fillcolor value(s) to apply to the specified elements.        
+        element_id : int, tuple, or list, optional
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element,
+            or a list of several element ids 
+        n_changes: int, optional  
+            The number of randomly chosen elements to change in the stimulus.
+
         """  
+ 
         if element_id is not None:
             if type(element_id) == int:
                 element_id = [element_id]
@@ -1631,8 +1826,13 @@ class Grid(Stimulus):
         Sets the opacity for each grid element.
         
         If the provided pattern has a fixed grid structure, that structure
-        must match the number of rows and columns of the Grid Stimulus
+        must match the number of rows and columns of the Grid stimulus
         
+        Parameters
+        ----------
+        opacities: list
+            A list of opacity values equal in length to the number of elements in the position pattern of the stimulus.
+
         """
         if not self._check_attribute_dimensions(opacities):
             return
@@ -1647,24 +1847,33 @@ class Grid(Stimulus):
 
         Parameters
         ----------
-        element_id : tuple, list or int
-            A tuple with the row and column index of the element. A single integer
-            can also be used to refer to an element in order.
-        opacity_value : 
-            numeric value between 0 and 1.
-
-        Returns
-        -------
-        None.
+        element_id : int, tuple, or list
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element. 
+        opacity_value : int, float, or list
+            A numeric value between 0 and 1, or a list for animated opacities.
 
         """
         element_id = self._parse_element_id(element_id)
         
         self._attribute_overrides[element_id]['opacity'] = opacity_value
                     
-    def set_element_opacities(self, opacity_value = None, element_id = None, n_changes = None):
+    def set_element_opacities(self, opacity_value, element_id = None, n_changes = None):
         """
+        Sets the opacities of a series of individual elements
+        
+        Parameters
+        ----------
+        opacity_value: int, float, or list
+            The new opacity value(s) to apply to the specified elements.        
+        element_id : int, tuple, or list, optional
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element,
+            or a list of several element ids 
+        n_changes: int, optional  
+            The number of randomly chosen elements to change in the stimulus.
         """  
+ 
         if element_id is not None:
             if type(element_id) == int:
                 element_id = [element_id]
@@ -1706,8 +1915,13 @@ class Grid(Stimulus):
         Sets the borderwidths for each grid element.
         
         If the provided pattern has a fixed grid structure, that structure
-        must match the number of rows and columns of the Grid Stimulus
+        must match the number of rows and columns of the Grid stimulus
         
+        Parameters
+        ----------
+        borderwidths: list
+            A list of borderwidth values equal in length to the number of elements in the position pattern of the stimulus.
+
         """
         if not self._check_attribute_dimensions(borderwidths):
             return
@@ -1722,24 +1936,33 @@ class Grid(Stimulus):
 
         Parameters
         ----------
-        element_id : tuple, list or int
-            A tuple with the row and column index of the element. A single integer
-            can also be used to refer to an element in order.
-        borderwidth_value : int
+        element_id : int, tuple, or list
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element. 
+        borderwidth_value : int, float, or list
             Size of the border.
-
-        Returns
-        -------
-        None.
 
         """
         element_id = self._parse_element_id(element_id)
         
         self._attribute_overrides[element_id]['borderwidth'] = borderwidth_value
                        
-    def set_element_borderwidths(self, borderwidth_value = None, element_id = None, n_changes = None):
+    def set_element_borderwidths(self, borderwidth_value, element_id = None, n_changes = None):
         """
+        Sets the borderwidths of a series of individual elements
+        
+        Parameters
+        ----------
+        borderwidth_value: int, float, or list
+            The new borderwidth value(s) to apply to the specified elements.        
+        element_id : int, tuple, or list, optional
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element,
+            or a list of several element ids 
+        n_changes: int, optional  
+            The number of randomly chosen elements to change in the stimulus.
         """  
+
         if element_id is not None:
             if type(element_id) == int:
                 element_id = [element_id]
@@ -1780,8 +2003,13 @@ class Grid(Stimulus):
         Sets the orientations for each grid element.
         
         If the provided pattern has a fixed grid structure, that structure
-        must match the number of rows and columns of the Grid Stimulus
+        must match the number of rows and columns of the Grid stimulus
         
+        Parameters
+        ----------
+        orientations: list
+            A list of orientation values equal in length to the number of elements in the position pattern of the stimulus.
+
         """
         if not self._check_attribute_dimensions(orientations):
             return
@@ -1797,24 +2025,32 @@ class Grid(Stimulus):
 
         Parameters
         ----------
-        element_id : tuple, list or int
-            A tuple with the row and column index of the element. A single integer
-            can also be used to refer to an element in order.
-        orientation_value : int
+        element_id : int, tuple, or list
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element. 
+        orientation_value : int or list
             Orientation of the element.
-
-        Returns
-        -------
-        None.
-
         """
         element_id = self._parse_element_id(element_id)
         
         self._attribute_overrides[element_id]['orientation'] = orientation_value
             
-    def set_element_orientations(self, orientation_value = None, element_id = None, n_changes = None):
+    def set_element_orientations(self, orientation_value, element_id = None, n_changes = None):
         """
+        Sets the orientations of a series of individual elements
+        
+        Parameters
+        ----------
+        orientation_value: int or list
+            The new orientation value(s) to apply to the specified elements.        
+        element_id : int, tuple, or list, optional
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element,
+            or a list of several element ids 
+        n_changes: int, optional  
+            The number of randomly chosen elements to change in the stimulus.
         """  
+ 
         if element_id is not None:
             if type(element_id) == int:
                 element_id = [element_id]
@@ -1855,8 +2091,13 @@ class Grid(Stimulus):
         Sets the data for each grid element.
         
         If the provided pattern has a fixed grid structure, that structure
-        must match the number of rows and columns of the Grid Stimulus
+        must match the number of rows and columns of the Grid stimulus
         
+        Parameters
+        ----------
+        data: list
+            A list of data values equal in length to the number of elements in the position pattern of the stimulus.
+
         """
         if not self._check_attribute_dimensions(data):
             return
@@ -1871,24 +2112,32 @@ class Grid(Stimulus):
 
         Parameters
         ----------
-        element_id : tuple, list or int
-            A tuple with the row and column index of the element. A single integer
-            can also be used to refer to an element in order.
+        element_id : int, tuple, or list
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element. 
         data_value : string
             Data string for the element.
-
-        Returns
-        -------
-        None.
-
         """
         element_id = self._parse_element_id(element_id)
         
         self._attribute_overrides[element_id]['data'] = data_value
 
-    def set_element_datas(self, data_value = None, element_id = None, n_changes = None):
+    def set_element_datas(self, data_value, element_id = None, n_changes = None):
         """
+        Sets the data of a series of individual elements
+        
+        Parameters
+        ----------
+        data_value: string or list
+            The new data value(s) to apply to the specified elements.        
+        element_id : int, tuple, or list, optional
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element,
+            or a list of several element ids 
+        n_changes: int, optional  
+            The number of randomly chosen elements to change in the stimulus.
         """  
+ 
         if element_id is not None:
             if type(element_id) == int:
                 element_id = [element_id]
@@ -1925,6 +2174,18 @@ class Grid(Stimulus):
     
     @classlabels.setter
     def classlabels(self, classlabels):
+        """
+        Sets the classlabel for each grid element.
+        
+        If the provided pattern has a fixed grid structure, that structure
+        must match the number of rows and columns of the Grid stimulus
+                 
+        Parameters
+        ----------
+        classlabels: list
+            A list of classlabel values equal in length to the number of elements in the position pattern of the stimulus.
+        """
+
         if not self._check_attribute_dimensions(classlabels):
             return
         
@@ -1933,12 +2194,36 @@ class Grid(Stimulus):
         self._classlabels.n_cols = self._n_cols
         
     def set_element_classlabel(self, element_id, classlabel_value):
+        """
+        Sets the classlabel of an individual element
+
+        Parameters
+        ----------
+        element_id : int, tuple, or list
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element. 
+        classlabel_value : string
+            A classlabel string.
+        """
+
         element_id = self._parse_element_id(element_id)
         
         self._attribute_overrides[element_id]['classlabels'] = classlabel_value
         
-    def set_element_classlabels(self, classlabel_value = None, element_id = None, n_changes = None):
+    def set_element_classlabels(self, classlabel_value, element_id = None, n_changes = None):
         """
+        Sets the classlabels of a series of individual elements
+        
+        Parameters
+        ----------
+        classlabel_value: string or list
+            The new classlabel value(s) to apply to the specified elements.        
+        element_id : int, tuple, or list, optional
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element,
+            or a list of several element ids 
+        n_changes: int, optional  
+            The number of randomly chosen elements to change in the stimulus.
         """  
         if element_id is not None:
             if type(element_id) == int:
@@ -1976,6 +2261,17 @@ class Grid(Stimulus):
     
     @idlabels.setter
     def idlabels(self, idlabels):
+        """
+        Sets the idlabel for each grid element.
+        
+        If the provided pattern has a fixed grid structure, that structure
+        must match the number of rows and columns of the Grid stimulus
+                 
+        Parameters
+        ----------
+        idlabels: list
+            A list of idlabel values equal in length to the number of elements in the position pattern of the stimulus.
+        """
         if not self._check_attribute_dimensions(idlabels):
             return
         
@@ -1984,12 +2280,35 @@ class Grid(Stimulus):
         self._idlabels.n_cols = self._n_cols
         
     def set_element_idlabel(self, element_id, idlabel_value):
+        """
+        Sets the idlabel of an individual element
+
+        Parameters
+        ----------
+        element_id : int, tuple, or list
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element. 
+        idlabel_value : string
+            An idlabel string.
+        """
         element_id = self._parse_element_id(element_id)
         
         self._attribute_overrides[element_id]['idlabels'] = idlabel_value
         
-    def set_element_idlabels(self, idlabel_value = None, element_id = None, n_changes = None):
+    def set_element_idlabels(self, idlabel_value, element_id = None, n_changes = None):
         """
+        Sets the idlabels of a series of individual elements
+        
+        Parameters
+        ----------
+        idlabel_value: string or list
+            The new idlabel value(s) to apply to the specified elements.        
+        element_id : int, tuple, or list, optional
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element,
+            or a list of several element ids 
+        n_changes: int, optional  
+            The number of randomly chosen elements to change in the stimulus.
         """  
         if element_id is not None:
             if type(element_id) == int:
@@ -2027,6 +2346,18 @@ class Grid(Stimulus):
     
     @mirrorvalues.setter
     def mirrorvalues(self, mirrorvalues):
+        """
+        Sets the mirrorvalue for each grid element.
+        
+        If the provided pattern has a fixed grid structure, that structure
+        must match the number of rows and columns of the Grid stimulus
+                 
+        Parameters
+        ----------
+        mirrorvalues: list
+            A list of mirrorvalue values equal in length to the number of elements in the position pattern of the stimulus.
+        """
+
         if not self._check_attribute_dimensions(mirrorvalues):
             return
         
@@ -2035,13 +2366,38 @@ class Grid(Stimulus):
         self._mirrorvalues.n_cols = self._n_cols
         
     def set_element_mirrorvalue(self, element_id, mirror_value):
+        """
+        Sets the mirrorvalue of an individual element
+
+        Parameters
+        ----------
+        element_id : int, tuple, or list
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element. 
+        mirrorvalue_value : string
+            A mirrorvalue string ('none', 'horizontal', 'vertical', or 'horizontalvertical')
+        """
+
         element_id = self._parse_element_id(element_id)
         
         self._attribute_overrides[element_id]['mirrorvalues'] = mirror_value
     
-    def set_element_mirrorvalues(self, mirror_value = None, element_id = None, n_changes = None):
+    def set_element_mirrorvalues(self, mirror_value, element_id = None, n_changes = None):
         """
+        Sets the mirrorvalues of a series of individual elements
+        
+        Parameters
+        ----------
+        mirror_value: string or list
+            The new mirrorvalue value(s) to apply to the specified elements.        
+        element_id : int, tuple, or list, optional
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element,
+            or a list of several element ids 
+        n_changes: int, optional  
+            The number of randomly chosen elements to change in the stimulus.
         """  
+  
         if element_id is not None:
             if type(element_id) == int:
                 element_id = [element_id]
@@ -2078,6 +2434,18 @@ class Grid(Stimulus):
     
     @links.setter
     def links(self, links):
+        """
+        Sets the link for each grid element.
+        
+        If the provided pattern has a fixed grid structure, that structure
+        must match the number of rows and columns of the Grid stimulus
+                 
+        Parameters
+        ----------
+        links: list
+            A list of link values equal in length to the number of elements in the position pattern of the stimulus.
+        """
+
         if not self._check_attribute_dimensions(links):
             return
         
@@ -2086,13 +2454,38 @@ class Grid(Stimulus):
         self._links.n_cols = self._n_cols
         
     def set_element_link(self, element_id, link):
+        """
+        Sets the link of an individual element
+
+        Parameters
+        ----------
+        element_id : int, tuple, or list
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element. 
+        link_value : string
+            A hyperlink string.
+        """
+
         element_id = self._parse_element_id(element_id)
         
         self._attribute_overrides[element_id]['links'] = link
     
-    def set_element_links(self, link_value = None, element_id = None, n_changes = None):
+    def set_element_links(self, link_value, element_id = None, n_changes = None):
         """
+        Sets the links of a series of individual elements
+        
+        Parameters
+        ----------
+        link_value: string or list
+            The new link value(s) to apply to the specified elements.        
+        element_id : int, tuple, or list, optional
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element,
+            or a list of several element ids 
+        n_changes: int, optional  
+            The number of randomly chosen elements to change in the stimulus.
         """  
+
         if element_id is not None:
             if type(element_id) == int:
                 element_id = [element_id]
@@ -2121,10 +2514,17 @@ class Grid(Stimulus):
             
     def randomize_elements(self, direction = "AcrossElements"):
         """
-
+        Randomizes the order of the elements in the Grid stimulus across a specified direction.
+        
+        Parameters
+        ----------
+        direction: string
+            A pattern direction ("AcrossElements", "AcrossRows", "AcrossColumns",
+            "AcrossLeftDiagonal","AcrossRightDiagonal"). 
+            Default is "AcrossElements".
         """
-        if self.dwg_elements is None:
-            self.Render() 
+        # if self.dwg_elements is None:
+        self.Render() 
             
         if direction == "AcrossElements":
                
@@ -2164,9 +2564,11 @@ class Grid(Stimulus):
         
         Parameters
         ----------
-        n_swap_pairs: int 
+        n_swap_pairs: int, optional 
             Number of element pairs that will be swapped. Maximum value
-            is half the total number of elements
+            is half the total number of elements. Default is 1.
+        swap_pairs: tuple or list, optional
+            Element indices of specific pairs of elements to be swapped.
 
         """
         if swap_pairs is not None:
@@ -2215,11 +2617,11 @@ class Grid(Stimulus):
         
         Parameters
         ----------
-        n_swap_pairs: int 
-            Number of element pairs that will be swapped. 
+        n_swap_pairs: int, optional
+            Number of element pairs that will be swapped. Default is 1.
         distinction_features: list
             Feature dimensions that will be inspected to decide if two elements
-            are the same.
+            are the same. Default is ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'opacities', 'mirrorvalues', 'links', 'classlabels', 'idlabels']
 
         """
         
@@ -2268,11 +2670,13 @@ class Grid(Stimulus):
         
         Parameters
         ----------
-        n_swap_pairs: int 
-            Number of element pairs that will be swapped. 
-        feature_dimensions: list
+        n_swap_pairs: int , optional
+            Number of element pairs that will be swapped. Default is 1.
+        feature_dimensions: list, optional
             Feature dimensions that will be swapped between the elements.
-
+            Default is ['fillcolors'].
+        swap_pairs: tuple or list, optional
+            Element indices of specific pairs of elements to be swapped.
         """
         if swap_pairs is not None:
             assert type(swap_pairs) == tuple or type(swap_pairs) == list, 'Swap_pairs needs to be tuple or list'
@@ -2347,10 +2751,11 @@ class Grid(Stimulus):
         
         Parameters
         ----------
-        n_swap_pairs: int 
-            Number of element pairs that will be swapped. 
+        n_swap_pairs: int, optional 
+            Number of element pairs that will be swapped. Default is 1.
         feature_dimensions: list
             Feature dimensions that will be swapped between the elements.
+            Default is ['fillcolors'].
 
         """
         
@@ -2500,6 +2905,49 @@ class Concentric(Grid):
                  background_color = "white", background_shape = None, 
                  stim_mask = None, stim_orientation = 0, stim_mirrorvalue = None, 
                  stim_link = None, stim_classlabel = None, stim_idlabel = None):
+        """
+        Instantiates a Concentric (Grid) stimulus.
+
+        Parameters
+        ----------
+        n_elements: int
+            Number of elements in the stimulus.
+        x_margin: int, float, or tuple, optional
+            Amount of extra space added to both sides of the stimulus in the x-direction. The default is 20.
+        y_margin: int, float, or tuple, optional
+            Amount of extra space added to both sides of the stimulus in the y-direction. The default is 20.
+        size: tuple, optional
+            If specified, fixes the size of the stimulus to the dimension
+            given in the tuple. The center of the stimulus will be calculated
+            to correspond to the center of all element positions in the
+            stimulus.
+        background_color: string or list, optional
+            Background color of the stimulus. The default is "white".
+        background_shape: string or octa.shapes object, optional
+            If specified, clips the stimulus to the specified shape (only the part of the stimulus that falls within the 
+            background shape will be visible). The center of the background shape 
+            will correspond to the center of all element positions in the stimulus.
+            If a shape name is provided as string, the boundingbox of the shape will be equal to the stimulus size.
+        stim_mask: string or octa.shapes object, optional
+            If specified, clips the stimulus to the specified shape. The center of the background shape 
+            will correspond to the center of all element positions in the stimulus.
+            If a shape name is provided as string, the boundingbox of the shape will be equal to the stimulus size.   
+        stim_orientation: int, float, or list, optional
+            If not equal to 0, the stimulus will be rotated around its center according to the specified degree value. The default is 0.
+        stim_mirrorvalue: string, optional
+            If specified, defines the way the stimulus will be mirrored (none, horizontal, vertical, or horizontalvertical).   
+        stim_link: string, optional
+            If specified, defines the hyperlink that will be activated when the stimulus is clicked.   
+        stim_classlabel: string, optional
+            If specified, defines the class label that can be used to add javascript or css changes to the stimulus. 
+        stim_idlabel: string, optional
+            If specified, defines the id label that can be used to add javascript or css changes to the stimulus.        
+
+        Returns
+        -------
+        None.
+
+        """
         
         super().__init__(n_rows = 1, n_cols = n_elements, x_margin = x_margin, y_margin = y_margin, size = size, 
                          background_color = background_color, background_shape = background_shape, 
@@ -2513,9 +2961,7 @@ class Concentric(Grid):
         
         self.positions = Positions.CreateCustomPositions(x = [0]*n_elements, y = [0]*n_elements)
         
-        self.boundingboxes = GridPattern.RepeatAcrossElements(Pattern.Create2DGradient(x = LinearGradient(start = 20, end = 200, n_elements = n_elements, invert = True),
-                                                                                        y = LinearGradient(start = 20, end = 200, n_elements = n_elements, invert = True),
-                                                                                        n_elements = n_elements))
+        self.boundingboxes = GridPattern.GradientAcrossElements((200,200), (20,20))
         self.fillcolors = GridPattern.RepeatAcrossElements(["dodgerblue", "lightgrey"])
 
 class Outline(Grid):
@@ -2527,6 +2973,49 @@ class Outline(Grid):
                  background_color = "white", background_shape = None, 
                  stim_mask = None, stim_orientation = 0, stim_mirrorvalue = None, 
                  stim_link = None, stim_classlabel = None, stim_idlabel = None):
+        """
+        Instantiates an Outline (Grid) stimulus.
+
+        Parameters
+        ----------
+        n_elements: int
+            Number of elements in the stimulus
+        shape: string
+            'Ellipse' or source string to svg file. Default is 'Ellipse'.
+        shape_boundingbox: int or tuple
+            Boundingbox value for shape outline. Default is (150,150).
+        x_margin: int, float, or tuple, optional
+            Amount of extra space added to both sides of the stimulus in the x-direction. The default is 20.
+        y_margin: int, float, or tuple, optional
+            Amount of extra space added to both sides of the stimulus in the y-direction. The default is 20.
+        size: tuple, optional
+            If specified, fixes the size of the stimulus to the dimension
+            given in the tuple. The center of the stimulus will be calculated
+            to correspond to the center of all element positions in the
+            stimulus.
+        background_color: string or list, optional
+            Background color of the stimulus. The default is "white".
+        background_shape: string or octa.shapes object, optional
+            If specified, clips the stimulus to the specified shape (only the part of the stimulus that falls within the 
+            background shape will be visible). The center of the background shape 
+            will correspond to the center of all element positions in the stimulus.
+            If a shape name is provided as string, the boundingbox of the shape will be equal to the stimulus size.
+        stim_mask: string or octa.shapes object, optional
+            If specified, clips the stimulus to the specified shape. The center of the background shape 
+            will correspond to the center of all element positions in the stimulus.
+            If a shape name is provided as string, the boundingbox of the shape will be equal to the stimulus size.   
+        stim_orientation: int, float, or list, optional
+            If not equal to 0, the stimulus will be rotated around its center according to the specified degree value. The default is 0.
+        stim_mirrorvalue: string, optional
+            If specified, defines the way the stimulus will be mirrored (none, horizontal, vertical, or horizontalvertical).   
+        stim_link: string, optional
+            If specified, defines the hyperlink that will be activated when the stimulus is clicked.   
+        stim_classlabel: string, optional
+            If specified, defines the class label that can be used to add javascript or css changes to the stimulus. 
+        stim_idlabel: string, optional
+            If specified, defines the id label that can be used to add javascript or css changes to the stimulus.        
+
+        """
         
         super().__init__(n_rows = 1, n_cols = n_elements, x_margin = x_margin, y_margin = y_margin, size = size,
                          background_color = background_color, background_shape = background_shape, 

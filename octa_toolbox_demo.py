@@ -1,11 +1,32 @@
 # -*- coding: utf-8 -*-
 """
-OCTA toolbox: demo
+OCTA toolbox demo
+
+The Order & Complexity Toolbox for Aesthetics (OCTA) Python library is a tool for researchers 
+to create stimuli varying in order and complexity on different dimensions. 
+Copyright (C) 2021  Eline Van Geert, Christophe Bossens, and Johan Wagemans
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Contact: eline.vangeert@kuleuven.be
+
 """
+
 from octa.Stimulus import Grid, Outline, Concentric, Stimulus
 from octa.Positions import Positions
 from octa.patterns import GridPattern, Pattern, Sequence, LinearGradient
-from octa.shapes import Ellipse, Rectangle, Triangle, Image, FitImage, Text, Polygon, RegularPolygon, Path, PathSvg, ChangingEllipse
+from octa.shapes import Ellipse, Rectangle, Triangle, Image, FitImage, Text, Polygon, RegularPolygon, Path, PathSvg
 from octa.shapes.Image import Image_
 from octa.shapes.FitImage import FitImage_
 from octa.shapes.Text import Text_ 
@@ -16,9 +37,106 @@ from octa.shapes.PathSvg import PathSvg_
 from octa.measurements import Order, Complexity
 import random
 
+#%%
+s = Grid(6,6, stim_orientation = 0)
+s.orientations = GridPattern.RepeatAcrossElements([['animate', '0', '360', "dur='12s', repeatCount='indefinite'"]])
+#['animate', '0', '360', "dur='12s', repeatCount='indefinite'"]
+s.SaveSVG("test", scale = 2)
 
 #%%
 
+s = Grid(4,4)
+s.SavePDF("test", folder = "output")
+#%%
+random.seed(1628234141)
+stimulus = Outline(n_elements = 24, x_margin = 10, y_margin = 10, background_color = 'none',
+                background_shape = "Ellipse", stim_orientation = ['animate', '0', '360', "dur='12s', repeatCount='indefinite'"])
+# stimulus.positions = Positions.CreateSineGrid(9, 9, row_spacing = 32, col_spacing = 32, axis = 'xy', A = 20)
+# stimulus.positions = Positions.CreateShape(n_elements = 30, src = "img/butterfly.svg")
+# stimulus.positions = Positions.CreateRandomPositions(n_elements = 81, width = 300, height = 300, min_distance = 20, max_iterations = 10)
+# stimulus.positions = Positions.CreateCustomPositions(x = Pattern(Pattern.CreateGradientPattern(250,0,15).pattern + Pattern.CreateGradientPattern(0,250,15).pattern).RepeatElementsToSize(30).pattern,
+                                                     # y = Pattern.CreateGradientPattern(0,250,15).RepeatPatternToSize(30).pattern)
+# stimulus.positions.SetPositionJitter(distribution = 'normal', mu = 0, std = 5)
+
+stimulus.shapes = GridPattern.RepeatAcrossRightDiagonal([Rectangle, Ellipse])
+# stimulus.shapes = GridPattern.TiledElementGrid(GridPattern.RepeatAcrossElements([Rectangle, Ellipse],3,3), 2)
+stimulus.fillcolors = GridPattern.RepeatAcrossElements(["limegreen", "steelblue"])
+# stimulus.fillcolors = GridPattern.TiledElementGrid(GridPattern.GradientAcrossElements("limegreen", "steelblue",3,3), 2)
+stimulus.boundingboxes = GridPattern.RepeatAcrossElements([ (25,25) ])
+stimulus.orientations = GridPattern.RepeatAcrossElements([['animate', '360', '0', "dur='12s', repeatCount='indefinite'"]])
+
+stimulus.Show()
+stimulus.SaveSVG("ring1")
+
+stimulus = Outline(n_elements = 12, shape_boundingbox = (75,75), x_margin = 10, y_margin = 10, background_color = 'none',
+                background_shape = "Ellipse", stim_orientation = ['animate', '360', '0', "dur='12s', repeatCount='indefinite'"])
+stimulus.shapes = GridPattern.RepeatAcrossRightDiagonal([Rectangle, Ellipse])
+# stimulus.shapes = GridPattern.TiledElementGrid(GridPattern.RepeatAcrossElements([Rectangle, Ellipse],3,3), 2)
+stimulus.fillcolors = GridPattern.RepeatAcrossElements([ "steelblue","limegreen"])
+# stimulus.fillcolors = GridPattern.TiledElementGrid(GridPattern.GradientAcrossElements("limegreen", "steelblue",3,3), 2)
+stimulus.boundingboxes = GridPattern.RepeatAcrossElements([ (25,25) ])
+stimulus.orientations = GridPattern.RepeatAcrossElements([['animate', '0', '360', "dur='12s', repeatCount='indefinite'"]])
+
+stimulus.Show()
+
+stimulus.SaveSVG("ring2")
+
+#%%
+s = Concentric(3, x_margin = 0, y_margin = 0, background_color = "none")
+s.shapes = GridPattern.RepeatAcrossElements([Image("ring1.svg"), Image("ring2.svg"), Rectangle])
+s.boundingboxes = GridPattern.RepeatAcrossElements([(150,150),(95,95), (20,20)])
+s.set_element_fillcolor(element_id = 2, fillcolor_value = "limegreen")
+s.set_element_orientation(element_id = 2, orientation_value = ['animate', '0', '360', "dur='12s', repeatCount='indefinite'"])
+s.SaveSVG("concentricrings")
+s.SavePNG("concentricrings_scale05", scale = 0.5)
+s.SavePNG("concentricrings_scale1", scale = 1)
+s.SavePNG("concentricrings_scale2", scale  = 2)
+s.SavePNG("concentricrings_scale10", scale = 10)
+
+#%%
+# random.seed(4589974)
+stimulus = Grid(6,6, x_margin = 10, y_margin = 10, background_color = 'none')
+
+stimulus.shapes = GridPattern.RepeatAcrossElements([Ellipse])
+# stimulus.fillcolors = GridPattern.ElementRepeatAcrossColumns([ 'limegreen', 'steelblue'])
+# stimulus.fillcolors = GridPattern.RepeatAcrossColumns([ 'limegreen', 'steelblue'])
+# stimulus.fillcolors = GridPattern.GradientAcrossColumns('limegreen', 'steelblue')
+# stimulus.fillcolors = GridPattern.MirrorAcrossColumns([ 'limegreen', 'steelblue'])
+# stimulus.fillcolors = GridPattern.RandomPattern([ 'limegreen', 'steelblue'])
+# stimulus.fillcolors = GridPattern.TiledGrid(GridPattern.GradientAcrossRightDiagonal( 'limegreen', 'steelblue',3,3),2)
+# stimulus.fillcolors = GridPattern.TiledElementGrid(GridPattern.GradientAcrossRightDiagonal( 'limegreen', 'steelblue',2,2),3)
+# stimulus.fillcolors = GridPattern.RepeatAcrossColumns([ 'limegreen', 'steelblue'])
+
+stimulus.Show()
+# stimulus.SaveSVG("randompattern")
+#%%
+
+stimulus = Outline(n_elements = 12, x_margin = 10, y_margin = 10, background_color = 'none', 
+                   stim_orientation = ['animate', '0', '360', "dur='4s', repeatCount='indefinite'"])
+stimulus.positions = Positions.CreateCircle(radius = 80, n_elements = 12, starting_point = 'left')
+
+stimulus.shapes = GridPattern.RepeatAcrossElements([ Ellipse])
+stimulus.fillcolors = GridPattern.RepeatAcrossElements([ '#5EA1D8', '#B2D135', '#54C4D0'])
+stimulus.boundingboxes = GridPattern.RepeatAcrossElements([(30,30), (20,20)])
+
+stimulus.Show()
+stimulus.SaveSVG("loadstim")
+#%%
+random.seed(25)
+# stimulus = Grid(9,9, row_spacing = 32, col_spacing = 32, x_margin = 20, y_margin = 20, size = (300,300))
+stimulus = Grid(6,6, row_spacing = 32, col_spacing = 32, x_margin = 10, y_margin = 10)
+# stimulus.positions = Positions.CreateSineGrid(9, 9, row_spacing = 30, col_spacing = 30, axis = 'xy', A = 20)
+# stimulus.positions = Positions.CreateRandomPositions(n_elements = 36, width = 250, height = 250, min_distance = 25, max_iterations = 10)
+# stimulus.positions.SetPositionJitter(distribution = 'normal', mu = 0, std = 5)
+# stimulus.positions.SetPositionDeviations([0, 35], [-5,5], [-10,10])
+
+stimulus.boundingboxes = GridPattern.RepeatAcrossElements([(25,25)]).AddUniformJitter(-10, 10, 'xy')
+stimulus.shapes = GridPattern.RepeatAcrossElements([Rectangle])
+stimulus.fillcolors = GridPattern.GradientAcrossElements('limegreen', 'steelblue')
+
+stimulus.set_element_orientations(orientation_value = 45, n_changes = 3)
+# stimulus.set_element_fillcolors(fillcolor_value = "red", n_changes = 3)
+stimulus.Show()
 #%%
 random.seed(25)
 # stimulus = Grid(9,9, row_spacing = 32, col_spacing = 32, x_margin = 20, y_margin = 20, size = (300,300))
@@ -41,31 +159,33 @@ stimulus.fillcolors = GridPattern.GradientAcrossElements('limegreen', 'steelblue
 # stimulus.remove_elements(2)
 # stimulus.orientations = GridPattern.MirrorAcrossLeftDiagonal([-90,-45,0,45,90])
 stimulus.Show()
-stimulus.SaveSVG("jitterfeatures")
+# stimulus.SaveSVG("jitterfeatures")
 # stimulus.SavePNG("examplegrid", scale = 10)
 
 #%%
 
 
-# random.seed(1628234141)
-# stimulus = Grid(n_rows = 5, n_cols = 5, row_spacing = 32, col_spacing = 32, x_margin = 10, y_margin = 10, background_color = 'none')
-# # stimulus.positions = Positions.CreateSineGrid(9, 9, row_spacing = 32, col_spacing = 32, axis = 'xy', A = 20)
-# # stimulus.positions = Positions.CreateShape(n_elements = 30, src = "img/butterfly.svg")
-# # stimulus.positions = Positions.CreateRandomPositions(n_elements = 81, width = 300, height = 300, min_distance = 20, max_iterations = 10)
-# # stimulus.positions = Positions.CreateCustomPositions(x = Pattern(Pattern.CreateGradientPattern(250,0,15).pattern + Pattern.CreateGradientPattern(0,250,15).pattern).RepeatElementsToSize(30).pattern,
-#                                                      # y = Pattern.CreateGradientPattern(0,250,15).RepeatPatternToSize(30).pattern)
-# # stimulus.positions.SetPositionJitter(distribution = 'normal', mu = 0, std = 5)
+random.seed(1628234141)
+stimulus = Grid(n_rows = 5, n_cols = 5, row_spacing = 32, col_spacing = 32, x_margin = 10, y_margin = 10, background_color = 'none')
+# stimulus.positions = Positions.CreateSineGrid(9, 9, row_spacing = 32, col_spacing = 32, axis = 'xy', A = 20)
+# stimulus.positions = Positions.CreateShape(n_elements = 30, src = "img/butterfly.svg")
+# stimulus.positions = Positions.CreateRandomPositions(n_elements = 81, width = 300, height = 300, min_distance = 20, max_iterations = 10)
+# stimulus.positions = Positions.CreateCustomPositions(x = Pattern(Pattern.CreateGradientPattern(250,0,15).pattern + Pattern.CreateGradientPattern(0,250,15).pattern).RepeatElementsToSize(30).pattern,
+#                                                         y = Pattern.CreateGradientPattern(0,250,15).RepeatPatternToSize(30).pattern)
+# stimulus.positions.SetPositionJitter(distribution = 'normal', mu = 0, std = 5)
 
-# stimulus.shapes = GridPattern.RepeatAcrossElements([PathSvg("img/heart.svg")])
+stimulus.shapes = GridPattern.RepeatAcrossElements([PathSvg("img/blob.svg")])
 
-# stimulus.boundingboxes = GridPattern.RepeatAcrossElements([ (25,25) ])
-# # stimulus.shapes = GridPattern.TiledElementGrid(GridPattern.RepeatAcrossElements([Rectangle, Ellipse],3,3), 2)
+stimulus.boundingboxes = GridPattern.RepeatAcrossElements([ (25,25) ])
+# stimulus.shapes = GridPattern.TiledElementGrid(GridPattern.RepeatAcrossElements([Rectangle, Ellipse],3,3), 2)
 # stimulus.fillcolors = GridPattern.GradientAcrossElements(start_value = "limegreen", end_value = "steelblue")
-# stimulus.orientations = GridPattern.RepeatAcrossElements([15])
-# stimulus.mirrorvalues = GridPattern.RepeatAcrossRows(["none", "horizontal", "vertical", "horizontalvertical"])
+stimulus.fillcolors = GridPattern.RepeatAcrossElements(["steelblue"])
+stimulus.orientations = GridPattern.RepeatAcrossElements([15])
+stimulus.mirrorvalues = GridPattern.RepeatAcrossRows(["none", "horizontal", "vertical", "horizontalvertical"])
 
-# stimulus.Show()
-# stimulus.SaveSVG("mirrorvalues")
+stimulus.Show()
+stimulus.SaveSVG("mirrorvalues")
+stimulus.SavePNG("mirrorvalues", scale = 10)
 
 
 #%%
@@ -100,6 +220,7 @@ stimulus.opacities = GridPattern.RepeatAcrossElements([
 
 stimulus.Show()
 stimulus.SaveSVG("opacities")
+stimulus.SavePNG("opacities", scale = 10)
 
 #%%
 
@@ -149,6 +270,7 @@ stimulus.borderwidths = GridPattern.RepeatAcrossElements([5])
 
 stimulus.Show()
 stimulus.SaveSVG("bordercolors")
+stimulus.SavePNG("bordercolors", scale = 10)
 
 #%%
 
@@ -177,6 +299,7 @@ stimulus.borderwidths = GridPattern.RepeatAcrossElements([
 
 stimulus.Show()
 stimulus.SaveSVG("borderwidths")
+stimulus.SavePNG("borderwidths", scale = 10)
 
 #%%
 
@@ -191,12 +314,14 @@ stimulus = Grid(n_rows = 5, n_cols = 5, row_spacing = 32, col_spacing = 32, x_ma
 
 stimulus.shapes = GridPattern.RepeatAcrossElements([Rectangle])
 # stimulus.shapes = GridPattern.TiledElementGrid(GridPattern.RepeatAcrossElements([Rectangle, Ellipse],3,3), 2)
-stimulus.fillcolors = GridPattern.GradientAcrossElements(start_value = "limegreen", end_value = "steelblue")
+# stimulus.fillcolors = GridPattern.GradientAcrossElements(start_value = "limegreen", end_value = "steelblue")
+stimulus.fillcolors = GridPattern.RepeatAcrossElements(["steelblue"])
 
 stimulus.boundingboxes = GridPattern.RepeatAcrossLeftDiagonal(Pattern.Create2DGradient(x = Sequence(start = 7, step = 3), y = Sequence(start = 32, step = -3), n_elements = 9))
 
 stimulus.Show()
 stimulus.SaveSVG("boundingboxes")
+stimulus.SavePNG("boundingboxes", scale = 10)
 #%%
 
 random.seed(1628234141)
@@ -210,13 +335,15 @@ stimulus = Grid(n_rows = 5, n_cols = 5, row_spacing = 32, col_spacing = 32, x_ma
 
 stimulus.shapes = GridPattern.RepeatAcrossElements([Rectangle])
 # stimulus.shapes = GridPattern.TiledElementGrid(GridPattern.RepeatAcrossElements([Rectangle, Ellipse],3,3), 2)
-stimulus.fillcolors = GridPattern.GradientAcrossElements(start_value = "limegreen", end_value = "steelblue")
+# stimulus.fillcolors = GridPattern.GradientAcrossElements(start_value = "limegreen", end_value = "steelblue")
+stimulus.fillcolors = GridPattern.RepeatAcrossElements(["limegreen"])
 stimulus.boundingboxes = GridPattern.RepeatAcrossElements([ (5,25) ])
 stimulus.orientations = GridPattern.GradientAcrossElements(0,360)
 stimulus.set_element_orientation(12,     ['animate', '0', '360', "dur='4s', repeatCount='indefinite'"])
 
 stimulus.Show()
 stimulus.SaveSVG("orientations")
+stimulus.SavePNG("orientations", scale = 10)
 
 #%%
 
@@ -254,32 +381,29 @@ stimulus.fillcolors = GridPattern.RepeatAcrossElements([
 stimulus.Show()
 
 stimulus.SaveSVG("fillcolors")
+stimulus.SavePNG("fillcolors", scale = 10)
 
 #%%
 
 # random.seed(1628234141)
-# stimulus = Grid(n_rows = 5, n_cols = 5, row_spacing = 32, col_spacing = 32, x_margin = 10, y_margin = 10, background_color = 'none')
-# # stimulus.positions = Positions.CreateSineGrid(9, 9, row_spacing = 32, col_spacing = 32, axis = 'xy', A = 20)
-# # stimulus.positions = Positions.CreateShape(n_elements = 30, src = "img/butterfly.svg")
-# # stimulus.positions = Positions.CreateRandomPositions(n_elements = 81, width = 300, height = 300, min_distance = 20, max_iterations = 10)
-# # stimulus.positions = Positions.CreateCustomPositions(x = Pattern(Pattern.CreateGradientPattern(250,0,15).pattern + Pattern.CreateGradientPattern(0,250,15).pattern).RepeatElementsToSize(30).pattern,
-#                                                      # y = Pattern.CreateGradientPattern(0,250,15).RepeatPatternToSize(30).pattern)
-# # stimulus.positions.SetPositionJitter(distribution = 'normal', mu = 0, std = 5)
+stimulus = Grid(n_rows = 5, n_cols = 5, row_spacing = 32, col_spacing = 32, x_margin = 10, y_margin = 10, background_color = 'white')
 
-# stimulus.shapes = GridPattern.RepeatAcrossElements([Ellipse, Triangle, RegularPolygon(3), Rectangle, Polygon(4),
-#                                                     Polygon(5), RegularPolygon(5), Polygon(6), RegularPolygon(6), Polygon(8), 
-#                                                     Image("img/gabor.png"), Image("https://upload.wikimedia.org/wikipedia/commons/b/ba/Elephant_legs_illusion%2C_variant_of_Roger_Shepard%27s_L%27egsistential_paradox.png"), Image("https://upload.wikimedia.org/wikipedia/commons/d/da/Knight%27s_tour_anim_2.gif"), Image("img/heart.svg"), FitImage("img/pattern.jpg"),
-#                                                     Path("M404.5,275.5Q383,301,403,354Q423,407,386,427.5Q349,448,303,386.5Q257,325,229.5,372Q202,419,200,369Q198,319,172,316.5Q146,314,108,299Q70,284,107,257Q144,230,93.5,176Q43,122,98,121.5Q153,121,190,146Q227,171,248,106.5Q269,42,310.5,44Q352,46,393,64Q434,82,450.5,124Q467,166,446.5,208Q426,250,404.5,275.5Z", 527.1851223261176,476.5648496240602),
+stimulus.shapes = GridPattern.RepeatAcrossElements([Ellipse, Triangle, RegularPolygon(3), Rectangle, Polygon(4),
+                                                    Polygon(5), RegularPolygon(5), Polygon(6), RegularPolygon(6), Polygon(8), 
+                                                    FitImage("img/gabor.png"), Image("https://upload.wikimedia.org/wikipedia/commons/b/ba/Elephant_legs_illusion%2C_variant_of_Roger_Shepard%27s_L%27egsistential_paradox.png"), Image("https://upload.wikimedia.org/wikipedia/commons/d/da/Knight%27s_tour_anim_2.gif"), Image("img/heart.svg"), FitImage("img/pattern.jpg"),
+                                                    Path("M404.5,275.5Q383,301,403,354Q423,407,386,427.5Q349,448,303,386.5Q257,325,229.5,372Q202,419,200,369Q198,319,172,316.5Q146,314,108,299Q70,284,107,257Q144,230,93.5,176Q43,122,98,121.5Q153,121,190,146Q227,171,248,106.5Q269,42,310.5,44Q352,46,393,64Q434,82,450.5,124Q467,166,446.5,208Q426,250,404.5,275.5Z", 527.1851223261176,476.5648496240602),
                                                     
-#                                                     PathSvg("img/cat.svg"),  Text("+"),PathSvg("img/heart.svg"),Text("T")])
-# # stimulus.shapes = GridPattern.TiledElementGrid(GridPattern.RepeatAcrossElements([Rectangle, Ellipse],3,3), 2)
+                                                    PathSvg("img/cat.svg"),  Text("+"),PathSvg("img/heart.svg"),Text("T")])
 # stimulus.fillcolors = GridPattern.GradientAcrossElements(start_value = "limegreen", end_value = "steelblue")
-# # stimulus.fillcolors = GridPattern.TiledElementGrid(GridPattern.GradientAcrossElements("limegreen", "steelblue",3,3), 2)
-# stimulus.boundingboxes = GridPattern.RepeatAcrossElements([ (25,25) ])
+stimulus.fillcolors = GridPattern.RepeatAcrossElements(["steelblue"])
+stimulus.boundingboxes = GridPattern.RepeatAcrossElements([ (25,25) ])
+stimulus.borderwidths = GridPattern.RepeatAcrossElements([3])
+stimulus.bordercolors = GridPattern.RepeatAcrossElements(["black"])
 
-# stimulus.set_element_mirrorvalue(16, 'horizontal')
-# stimulus.Show()
-# stimulus.SaveSVG("shapes")
+stimulus.set_element_mirrorvalue(16, 'horizontal')
+stimulus.Show()
+stimulus.SaveSVG("shapes")
+# stimulus.SavePNG("shapes", scale = 10)
 
 #%%
 
@@ -287,19 +411,19 @@ random.seed(1628234141)
 stimulus = Grid(n_rows = 9, n_cols = 9, row_spacing = 32, col_spacing = 32, x_margin = 10, y_margin = 10, background_color = 'none')
 # stimulus.positions = Positions.CreateSineGrid(9, 9, row_spacing = 32, col_spacing = 32, axis = 'xy', A = 20)
 # stimulus.positions = Positions.CreateShape(n_elements = 30, src = "img/butterfly.svg")
-# stimulus.positions = Positions.CreateRandomPositions(n_elements = 81, width = 300, height = 300, min_distance = 20, max_iterations = 10)
+stimulus.positions = Positions.CreateRandomPositions(n_elements = 81, width = 300, height = 300, min_distance = 20, max_iterations = 10)
 # stimulus.positions = Positions.CreateCustomPositions(x = Pattern(Pattern.CreateGradientPattern(250,0,15).pattern + Pattern.CreateGradientPattern(0,250,15).pattern).RepeatElementsToSize(30).pattern,
                                                      # y = Pattern.CreateGradientPattern(0,250,15).RepeatPatternToSize(30).pattern)
 # stimulus.positions.SetPositionJitter(distribution = 'normal', mu = 0, std = 5)
 
-stimulus.shapes = GridPattern.RepeatAcrossRightDiagonal([Polygon(5)])
+stimulus.shapes = GridPattern.RepeatAcrossRightDiagonal([Rectangle, Ellipse])
 # stimulus.shapes = GridPattern.TiledElementGrid(GridPattern.RepeatAcrossElements([Rectangle, Ellipse],3,3), 2)
 stimulus.fillcolors = GridPattern.GradientAcrossColumns(start_value = "limegreen", end_value = "steelblue")
 # stimulus.fillcolors = GridPattern.TiledElementGrid(GridPattern.GradientAcrossElements("limegreen", "steelblue",3,3), 2)
 stimulus.boundingboxes = GridPattern.RepeatAcrossElements([ (25,25) ])
 
 stimulus.Show()
-stimulus.SaveSVG("custom")
+stimulus.SaveSVG("randompositions")
 
 #%%
 

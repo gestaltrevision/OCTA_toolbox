@@ -1,10 +1,40 @@
+"""
+Order measurements code for the OCTA toolbox
+
+The Order & Complexity Toolbox for Aesthetics (OCTA) Python library is a tool for researchers 
+to create stimuli varying in order and complexity on different dimensions. 
+Copyright (C) 2021  Eline Van Geert, Christophe Bossens, and Johan Wagemans
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Contact: eline.vangeert@kuleuven.be
+
+"""
 def GetPatterns(self, features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
+    Provides a list of the applied pattern for each of the specified features
+        
+    Parameters
+    ----------
+    features: list
+        Feature dimensions that will be taken into account. 
+        Default is ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']
      
 
     Returns
     -------
-     
+    Dictionary with pattern per feature
 
     """     
     patterntypes = []
@@ -23,13 +53,20 @@ def GetPatterns(self, features = ['shapes', 'boundingboxes', 'fillcolors', 'orie
 
 def GetPatternTypes(self, features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
+    Provides a list of the applied pattern types for each of the specified features
+        
+    Parameters
+    ----------
+    features: list
+        Feature dimensions that will be taken into account. 
+        Default is ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']
      
 
     Returns
     -------
-     
+    Dictionary with patterntype per feature
 
-    """     
+    """      
     patterntypes = []
     for f in features:
         patterntypes.append(eval("self._" + str(f) + ".patterntype"))
@@ -42,13 +79,20 @@ def GetPatternTypes(self, features = ['shapes', 'boundingboxes', 'fillcolors', '
 
 def GetPatternDirections(self, features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
+    Provides a list of the applied pattern directions for each of the specified features
+        
+    Parameters
+    ----------
+    features: list
+        Feature dimensions that will be taken into account. 
+        Default is ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']
      
 
     Returns
     -------
-     
+    Dictionary with patterndirection per feature
 
-    """             
+    """               
     patterndirections = []
     for f in features:
         patterndirections.append(eval("self._" + str(f) + ".patterndirection"))
@@ -62,10 +106,16 @@ def GetPatternDirections(self, features = ['shapes', 'boundingboxes', 'fillcolor
 def CheckPatternCongruency(self, features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
     Check whether all specified element features have congruent patterns.
-
+    
+    Parameters
+    ----------
+    features: list
+        Feature dimensions that will be taken into account. 
+        Default is ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']
+     
     Returns
     -------
-    value.
+    Boolean
 
     """     
     
@@ -92,9 +142,15 @@ def CalculatePatternCongruency(self, features = ['shapes', 'boundingboxes', 'fil
     """
     Calculate how many specified element features have congruent patterns.
 
+    Parameters
+    ----------
+    features: list
+        Feature dimensions that will be taken into account. 
+        Default is ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']
+     
     Returns
     -------
-    value.
+    Value indicating the maximal number of congruent patterns.
 
     """     
     
@@ -123,13 +179,19 @@ def CalculatePatternCongruency(self, features = ['shapes', 'boundingboxes', 'fil
 
 def CheckPatternTypeCongruency(self, features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
-    Calculate how many element features have congruent patterntypes.
+    Check whether all specified element features have congruent pattern types.
 
+    Parameters
+    ----------
+    features: list
+        Feature dimensions that will be taken into account. 
+        Default is ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']
+     
     Returns
     -------
-    value.
+    Boolean
 
-    """     
+    """    
     
     patterntypes = []
     for f in features:
@@ -144,13 +206,19 @@ def CheckPatternTypeCongruency(self, features = ['shapes', 'boundingboxes', 'fil
 
 def CalculatePatternTypeCongruency(self, features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
-    Calculate how many specified element features have congruent patterntypes.
+    Calculate how many specified element features have congruent pattern types.
 
+    Parameters
+    ----------
+    features: list
+        Feature dimensions that will be taken into account. 
+        Default is ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']
+     
     Returns
     -------
-    value.
+    Value indicating the maximal number of congruent pattern types.
 
-    """     
+    """    
     
     patterntypes = []
     for f in features:
@@ -173,13 +241,19 @@ def CalculatePatternTypeCongruency(self, features = ['shapes', 'boundingboxes', 
 
 def CheckPatternDirectionCongruency(self, features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
-    Calculate how many element features have congruent patterndirections.
+    Check whether all specified element features have congruent pattern directions.
 
+    Parameters
+    ----------
+    features: list
+        Feature dimensions that will be taken into account. 
+        Default is ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']
+     
     Returns
     -------
-    value.
+    Boolean
 
-    """     
+    """        
     
     patterndirections = []
     for f in features:
@@ -194,13 +268,19 @@ def CheckPatternDirectionCongruency(self, features = ['shapes', 'boundingboxes',
 
 def CalculatePatternDirectionCongruency(self, features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
-    Calculate how many specified element features have congruent patterndirections.
+    Calculate how many specified element features have congruent pattern directions.
 
+    Parameters
+    ----------
+    features: list
+        Feature dimensions that will be taken into account. 
+        Default is ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']
+     
     Returns
     -------
-    value.
+    Value indicating the maximal number of congruent patterndirections.
 
-    """             
+    """            
     patterndirections = []
     for f in features:
         patterndirections.append(eval("self._" + str(f) + ".patterndirection"))
@@ -222,11 +302,17 @@ def CalculatePatternDirectionCongruency(self, features = ['shapes', 'boundingbox
 
 def CalculatePatternDeviants(self, distinction_features = ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']):
     """
-    Calculate how many deviants are present given the specified distinction_features.
+    Calculate how many deviant elements are present given the specified distinction_features.
 
+    Parameters
+    ----------
+    distinction_features: list
+        Feature dimensions that will be taken into account. 
+        Default is ['shapes', 'boundingboxes', 'fillcolors', 'orientations', 'data']
+     
     Returns
     -------
-    value.
+    Number of deviants
 
     """             
     
@@ -283,11 +369,11 @@ def CalculatePatternDeviants(self, distinction_features = ['shapes', 'boundingbo
 
 def CalculatePositionDeviants(self):
     """
-    Calculate how many deviants are present for position.
+    Calculate how many deviant positions are present.
 
     Returns
     -------
-    value.
+    Number of deviant positions
 
     """   
     if self.dwg_elements is None:

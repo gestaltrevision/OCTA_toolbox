@@ -1,8 +1,26 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Apr  7 12:33:03 2020
+Positions code for the OCTA toolbox
 
-@author: Christophe
+The Order & Complexity Toolbox for Aesthetics (OCTA) Python library is a tool for researchers 
+to create stimuli varying in order and complexity on different dimensions. 
+Copyright (C) 2021  Eline Van Geert, Christophe Bossens, and Johan Wagemans
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Contact: eline.vangeert@kuleuven.be
+
 """
 import numpy as np
 import random
@@ -28,6 +46,10 @@ class Positions:
         Object that contains the values for the x-coordinates
     y : Pattern
         Object that contains the values for the y-coordinates
+    positiontype : string
+        Indicates the type of position definition used
+    positionparameters: dictionary
+        Provides the parameters for the positiontype used
     """
     def __init__(self, x, y, positiontype = None, positionparameters = {}):
         self._x = x
@@ -114,6 +136,15 @@ class Positions:
 
         Parameters
         ----------
+        element_id : int, tuple, or list, optional
+            A single integer referring to the element's index value (element number),
+            or a tuple or list with the row and column index of the element,
+            or a list of several element ids.
+            Default is [0].
+        x_offset : int, float, or list, optional
+            (List of) numeric value(s) to add to the x coordinate of the specified element position(s).
+        y_offset : int, float, or list, optional
+            (List of) numeric value(s) to add to the y coordinate of the specified element position(s).
 
         Returns
         -------
@@ -122,16 +153,20 @@ class Positions:
 
         """  
         assert type(element_id) == list or type(element_id) == int, "Element id must be int or list"
-        assert type(x_offset) == list or type(x_offset) == int, "X offset must be int or list"
-        assert type(y_offset) == list or type(y_offset) == int, "Y offset must be int or list"
+        assert x_offset is not None or y_offset is not None, "Please provide either x_offset or y_offset"
+        if x_offset is not None:
+            assert type(x_offset) == list or type(x_offset) == int or type(x_offset) == float, "X offset must be int, float, or list"
+        if y_offset is not None:
+            assert type(y_offset) == list or type(y_offset) == int or type(y_offset) == float, "Y offset must be int, float, or list"
+        
         
         if type(element_id) == int:
             element_id = [element_id]
             
-        if type(x_offset) == int:
+        if type(x_offset) == int or type(x_offset) == float:
             x_offset = [x_offset]*len(element_id)
             
-        if type(y_offset) == int:
+        if type(y_offset) == int or type(y_offset) == float:
             y_offset = [y_offset]*len(element_id)
             
         if type(element_id) == list:
@@ -162,11 +197,11 @@ class Positions:
 
         Parameters
         ----------
-        axis : str, optional
+        axis : string, optional
             String that contains the axis to which jitter should be applied.
-            Possible values are "x", "y", or "xy". The default is "xy".
+            Possible values are "x", "y", "xy" or "x=y". The default is "xy".
             
-        distribution : str, optional
+        distribution : string, optional
             The type of jitter that should be used. The default is "normal".
             
         **kwargs : Additional arguments that depend on the requested jitter type:
@@ -240,14 +275,14 @@ class Positions:
         
     def CreateRectGrid(n_rows, n_cols, row_spacing = 50, col_spacing= 50):
         """
-        Static method for creates a rectangular grid structure.
+        Static method to create a rectangular grid structure.
 
         Parameters
         ----------
         n_rows : int
             Number of rows.
         n_cols : int
-            Numbr of columns.
+            Number of columns.
         row_spacing : int
             Distance between column centers. The default is 50.
         col_spacing : int
@@ -273,7 +308,7 @@ class Positions:
     
     def CreateCustomPositions(x, y):
         """
-        Static method for creates a 2D grid structure.
+        Static method to create custom positions.
 
         Parameters
         ----------
@@ -301,7 +336,7 @@ class Positions:
     
     def CreateSineGrid(n_rows, n_cols, row_spacing = 50, col_spacing = 50, A = 25, f = .1, axis = "xy"):
         """
-        Creates a rectangular regularly spaced grid and adds a sine wave modulation to the y-axis.
+        Creates a rectangular regularly spaced grid and adds a sine wave modulation to the specified axis.
 
         Parameters
         ----------
@@ -313,10 +348,13 @@ class Positions:
             Distance between column centers.
         col_spacing : int
             Distance between row centers.
-        A : TYPE, float
+        A : int or float
             Amplitude of the modulation.
-        f : TYPE, float
+        f : int or float
             Frequency of the modulation.
+        axis : string, optional
+            String that contains the axis to which jitter should be applied.
+            Possible values are "x", "y", "xy" or "x=y". The default is "xy".
 
         Returns
         -------
@@ -414,7 +452,9 @@ class Positions:
             Radius of the circle.
         n_elements : int
             Number of elements on the circle.
-
+        starting_point : string
+            Options are 'left', 'right', 'top', or 'bottom'.
+            Default value is 'left'.
         Returns
         -------
         x : Pattern
@@ -448,6 +488,14 @@ class Positions:
         ----------
         n_elements : int
             Number of elements on the circle.
+        src: string, optional
+            String indicating the source location for the svg file
+        path: string, optional
+            Custom path defining the shape outline
+        width: int or float, optional
+            Width of the shape outline. Default value is 300.
+        height: int or float, optional
+            Height of the shape outline. Default value is 300.
 
         Returns
         -------
@@ -512,9 +560,9 @@ class Positions:
         n_elements : int
             The number of random positions.
         width : int, optional
-            The width of the stimulus. The default is 256.
+            The width of the stimulus. The default is 300.
         height : int, optional
-            The height of the stimulus. The default is 256.
+            The height of the stimulus. The default is 300.
         min_distance : int, optional
             Minimum distance between all generated positions. The default is 30.
         max_iterations : int, optional

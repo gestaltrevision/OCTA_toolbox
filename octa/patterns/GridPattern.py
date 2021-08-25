@@ -1,12 +1,30 @@
 """
-Module with various algorithms for creating patterns in a 2D grid
+GridPattern code for the OCTA toolbox
+Module with various algorithms for creating patterns in a rectangular 2D grid
 
-@author: Christophe
+The Order & Complexity Toolbox for Aesthetics (OCTA) Python library is a tool for researchers 
+to create stimuli varying in order and complexity on different dimensions. 
+Copyright (C) 2021  Eline Van Geert, Christophe Bossens, and Johan Wagemans
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Contact: eline.vangeert@kuleuven.be
+
 """
 
-
 from .Pattern import Pattern
-import random
+# import random
 
 class GridPattern(Pattern):
     """
@@ -20,6 +38,10 @@ class GridPattern(Pattern):
             Number of rows in the 2D grid.
         n_cols : int
             Number of columns in the 2D grid.
+        patterntype : string
+            Indicates the pattern type used.
+        patterndirection : string
+            Indicates the pattern direction used.
 
     """      
     def __init__(self, pattern, n_rows = 5, n_cols = 5, patterntype = None, patterndirection = None, patternclass = "GridPattern."):
@@ -63,10 +85,6 @@ class GridPattern(Pattern):
         Abstract method. Needs to be implemented by specific grid pattern
         generation algorithms.
 
-        Returns
-        -------
-        None.
-
         """
         pass
     
@@ -80,6 +98,9 @@ class GridPattern(Pattern):
             Mean of the normal distribution. The default is 0.
         std : float, optional
             Standard deviation of the normal distribution. The default is 1.
+        axis : string, optional
+            String that contains the axis to which jitter should be applied.
+            Possible values are "x", "y", "xy" or "x=y". The default is "xy".
 
         Returns
         -------
@@ -99,9 +120,12 @@ class GridPattern(Pattern):
         Parameters
         ----------
         min_val : float, optional
-            Lower bound of the uniform distribution
+            Lower bound of the uniform distribution. The default is -1.
         max_val : float, optional
-            Upper bound of the uniform distribution
+            Upper bound of the uniform distribution. The default is 1.
+        axis : string, optional
+            String that contains the axis to which jitter should be applied.
+            Possible values are "x", "y", "xy" or "x=y". The default is "xy".
 
         Returns
         -------
@@ -174,8 +198,8 @@ class ElementRepeatAcrossElements(GridPattern):
 
         Returns
         -------
-        GridRepeater
-            Current instance of the GridRepeater object.
+        GridPattern
+            Current instance of the GridPattern object.
             
         Example
         -------
@@ -229,8 +253,8 @@ class ElementRepeatAcrossColumns(GridPattern):
 
         Returns
         -------
-        GridRepeater
-            Current instance of the GridRepeater object.
+        GridPattern
+            Current instance of the GridPattern object.
             
         Example
         -------
@@ -291,8 +315,8 @@ class ElementRepeatAcrossRows(GridPattern):
 
         Returns
         -------
-        GridRepeater
-            Current instance of the GridRepeater object.
+        GridPattern
+            Current instance of the GridPattern object.
             
         Example
         -------
@@ -353,8 +377,8 @@ class ElementRepeatAcrossRightDiagonal(GridPattern):
 
         Returns
         -------
-        GridRepeater
-            Current instance of the GridRepeater object.
+        GridPattern
+            Current instance of the GridPattern object.
             
         Example
         -------
@@ -421,8 +445,8 @@ class ElementRepeatAcrossLeftDiagonal(GridPattern):
 
         Returns
         -------
-        GridRepeater
-            Current instance of the GridRepeater object.
+        GridPattern
+            Current instance of the GridPattern object.
             
         Example
         -------
@@ -487,8 +511,8 @@ class ElementRepeatAcrossLayers(GridPattern):
 
         Returns
         -------
-        GridRepeater
-            Current instance of the GridRepeater object.
+        GridPattern
+            Current instance of the GridPattern object.
             
         Example
         -------
@@ -575,8 +599,8 @@ class RepeatAcrossElements(GridPattern):
 
         Returns
         -------
-        GridRepeater
-            Current instance of the GridRepeater object.
+        GridPattern
+            Current instance of the GridPattern object.
             
         Example
         -------
@@ -631,8 +655,8 @@ class RepeatAcrossColumns(GridPattern):
 
         Returns
         -------
-        GridRepeater
-            Current instance of the GridRepeater object.
+        GridPattern
+            Current instance of the GridPattern object.
             
         Example
         -------
@@ -694,8 +718,8 @@ class RepeatAcrossRows(GridPattern):
 
         Returns
         -------
-        GridRepeater
-            Current instance of the GridRepeater object.
+        GridPattern
+            Current instance of the GridPattern object.
             
         Example
         -------
@@ -756,8 +780,8 @@ class RepeatAcrossRightDiagonal(GridPattern):
 
         Returns
         -------
-        GridRepeater
-            Current instance of the GridRepeater object.
+        GridPattern
+            Current instance of the GridPattern object.
             
         Example
         -------
@@ -819,8 +843,8 @@ class RepeatAcrossLeftDiagonal(GridPattern):
 
         Returns
         -------
-        GridRepeater
-            Current instance of the GridRepeater object.
+        GridPattern
+            Current instance of the GridPattern object.
             
         Example
         -------
@@ -881,8 +905,8 @@ class RepeatAcrossLayers(GridPattern):
 
         Returns
         -------
-        GridRepeater
-            Current instance of the GridRepeater object.
+        GridPattern
+            Current instance of the GridPattern object.
             
         Example
         -------
@@ -1325,8 +1349,8 @@ class MirrorAcrossLayers(GridPattern):
 
         Returns
         -------
-        GridRepeater
-            Current instance of the GridRepeater object.
+        GridPattern
+            Current instance of the GridPattern object.
             
         Example
         -------
@@ -1680,8 +1704,8 @@ class GradientAcrossLayers(GridPattern):
 
         Returns
         -------
-        GridRepeater
-            Current instance of the GridRepeater object.
+        GridPattern
+            Current instance of the GridPattern object.
             
         Example
         -------

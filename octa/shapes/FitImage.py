@@ -1,8 +1,24 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Apr  6 16:02:30 2020
+The Order & Complexity Toolbox for Aesthetics (OCTA) Python library is a tool for researchers 
+to create stimuli varying in order and complexity on different dimensions. 
+Copyright (C) 2021  Eline Van Geert, Christophe Bossens, and Johan Wagemans
 
-@author: Christophe
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Contact: eline.vangeert@kuleuven.be
+
 """
 import svgwrite
 import base64
@@ -94,6 +110,7 @@ class FitImage_:
             fillcolor = "none"
             
         self.fillcolor = fillcolor
+        
     
     def set_opacity(self, opacity):
         if opacity == None:
@@ -159,6 +176,30 @@ class FitImage_:
                 
         return mirror_transform
     
+    def create_bordercolor(self, dwg):
+        gradient = ""
+        if len(self.bordercolor) < 2:
+            return self.bordercolor
+        elif self.bordercolor[0] == "radial":
+            gradient = dwg.radialGradient()
+        elif self.bordercolor[0] == "horizontal":
+            gradient = dwg.linearGradient((0, 0), (1, 0))
+        elif self.bordercolor[0] == "vertical":
+            gradient = dwg.linearGradient((0, 0), (0, 1))
+        elif self.bordercolor[0] == "diagonal":
+            gradient = dwg.linearGradient((0, 0), (1, 1))
+        else:
+            return self.bordercolor
+            
+        dwg.defs.add(gradient)
+        # define the gradient colors
+        n_colors = len(self.bordercolor)-1
+        stepsize = 1 / (n_colors - 1)
+        for i in range(n_colors):
+            gradient.add_stop_color(i*stepsize, self.bordercolor[i+1])
+            
+        return gradient.get_paint_server() 
+    
     def get_imgdata(self):
         imgdata = ""
         source = self.data
@@ -221,6 +262,8 @@ class FitImage_:
                 insert      = topleft,
                 size        = self.boundingbox,
                 opacity     = self.opacity,
+                stroke       = self.create_bordercolor(dwg),
+                stroke_width = self.borderwidth,
                 transform   = " ".join([mirror_transform, self.rotation_transform]))
         
         if self.classlabel != "":
