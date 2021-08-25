@@ -4,6 +4,14 @@ The OCTA Python toolbox was created by Van Geert, Bossens, and Wagemans (2021) a
 It was created in Python 3.8 and is dependent on the following Python libraries: svgwrite, svg.path, svgpathtools, svgutils, jsonpickle, html2image, svglib, reportlab, colour, and IPython. 
 We thank the developers of each of these libraries and of the Python programming language.
 
+## Install OCTA
+
+```
+pip install octa
+```
+
+## Use OCTA
+
 A simple example:
 
 ```
@@ -31,7 +39,7 @@ stim.Show()
 ## OCTA Shiny app
 A graphical user interface for OCTA is available in the form of a [Shiny app](https://elinevg.shinyapps.io/OCTA_toolbox/).
 
-## Citing OCTA
+## Cite OCTA
 If you use the OCTA Python toolbox in your (academic) work, please cite:
 Van Geert, E., Bossens, C., & Wagemans, J. (2021). The Order & Complexity Toolbox for Aesthetics Python library [Computer software]. [https://github.com/gestaltrevision/OCTA_toolbox](https://github.com/gestaltrevision/OCTA_toolbox)
 
