@@ -40,6 +40,7 @@ Van Geert, E., Bossens, C., & Wagemans, J. (2021). The Order & Complexity Toolbo
 
 ## Documentation
 Human-readable documentation: http://evg.ulyssis.be/octa/
+
 Computer-readable documentation: https://octa-toolbox.readthedocs.io/en/latest/index.html
 
 ## License
