@@ -108,6 +108,10 @@ class Positions:
         return y
         
     def GetPositions(self):
+        """
+        Returns the actual position values in the stimulus (including position jitter and position deviations)
+
+        """
         position_jitter = self._CalculatePositionJitter()
         position_deviations = self._CalculatePositionDeviations()
         
@@ -147,7 +151,7 @@ class Positions:
         Returns
         -------
         Positions
-            The updated Positions object.
+            The updated Positions object
 
         """  
         assert type(element_id) == list or type(element_id) == int, "Element id must be int or list"
@@ -210,7 +214,7 @@ class Positions:
         Returns
         -------
         Positions
-            The updated Positions object.
+            The updated Positions object
 
         """
         if distribution == 'normal':
@@ -288,10 +292,8 @@ class Positions:
 
         Returns
         -------
-        x : Pattern
-            All the x-coordinates.
-        y : Pattern
-            All the y-coordinates.
+        Positions
+            Positions object with the generated (x,y) positions.
 
         """
         x = Pattern(list(range(0, n_cols * col_spacing, col_spacing)))
@@ -317,10 +319,8 @@ class Positions:
 
         Returns
         -------
-        x : Pattern
-            All the x-coordinates.
-        y : Pattern
-            All the y-coordinates.
+        Positions
+            Positions object with the generated (x,y) positions.
 
         """
         x = Pattern(list(x))
@@ -356,10 +356,8 @@ class Positions:
 
         Returns
         -------
-        x : Pattern
-            All the x-coordinates.
-        y : Pattern
-            All the y-coordinates.
+        Positions
+            Positions object with the generated (x,y) positions.
 
         """
         x = Pattern(list(range(0, n_cols * col_spacing , col_spacing)))
@@ -407,10 +405,8 @@ class Positions:
             Default value is 'left'.
         Returns
         -------
-        x : Pattern
-            All the x-coordinates.
-        y : Pattern
-            All the y-coordinates.
+        Positions
+            Positions object with the generated (x,y) positions.
 
         """
         if starting_point == "left":
@@ -449,10 +445,8 @@ class Positions:
 
         Returns
         -------
-        x : Pattern
-            All the x-coordinates.
-        y : Pattern
-            All the y-coordinates.
+        Positions
+            Positions object with the generated (x,y) positions.
 
         """
         if(src is not None):
@@ -518,7 +512,7 @@ class Positions:
         Returns
         -------
         Positions
-            Positions object with the generated (x,y) positions.
+            Positions object with the generated (x,y) positions
 
         """
         outer_iteration_count = 0

@@ -34,7 +34,8 @@ def GetPatterns(self, features = ['shapes', 'boundingboxes', 'fillcolors', 'orie
 
     Returns
     -------
-    Dictionary with pattern per feature
+    dictionary
+        Dictionary with pattern per feature
 
     """     
     patterntypes = []
@@ -64,7 +65,8 @@ def GetPatternTypes(self, features = ['shapes', 'boundingboxes', 'fillcolors', '
 
     Returns
     -------
-    Dictionary with patterntype per feature
+    dictionary
+        Dictionary with patterntype per feature
 
     """      
     patterntypes = []
@@ -90,7 +92,8 @@ def GetPatternDirections(self, features = ['shapes', 'boundingboxes', 'fillcolor
 
     Returns
     -------
-    Dictionary with patterndirection per feature
+    dictionary
+        Dictionary with patterndirection per feature
 
     """               
     patterndirections = []
@@ -116,6 +119,7 @@ def CheckPatternCongruency(self, features = ['shapes', 'boundingboxes', 'fillcol
     Returns
     -------
     Boolean
+        TRUE if all specified element features have congruent patterns
 
     """     
     
@@ -150,7 +154,8 @@ def CalculatePatternCongruency(self, features = ['shapes', 'boundingboxes', 'fil
      
     Returns
     -------
-    Value indicating the maximal number of congruent patterns.
+    int
+        Value indicating the maximal number of congruent patterns present.
 
     """     
     
@@ -190,6 +195,7 @@ def CheckPatternTypeCongruency(self, features = ['shapes', 'boundingboxes', 'fil
     Returns
     -------
     Boolean
+        TRUE if all specified element features have congruent pattern types
 
     """    
     
@@ -216,7 +222,8 @@ def CalculatePatternTypeCongruency(self, features = ['shapes', 'boundingboxes', 
      
     Returns
     -------
-    Value indicating the maximal number of congruent pattern types.
+    int
+        Value indicating the maximal number of congruent pattern types present.
 
     """    
     
@@ -252,6 +259,7 @@ def CheckPatternDirectionCongruency(self, features = ['shapes', 'boundingboxes',
     Returns
     -------
     Boolean
+        TRUE if all specified element features have congruent pattern directions
 
     """        
     
@@ -278,7 +286,8 @@ def CalculatePatternDirectionCongruency(self, features = ['shapes', 'boundingbox
      
     Returns
     -------
-    Value indicating the maximal number of congruent patterndirections.
+    int
+        Value indicating the maximal number of congruent pattern directions present.
 
     """            
     patterndirections = []
@@ -312,7 +321,8 @@ def CalculatePatternDeviants(self, distinction_features = ['shapes', 'boundingbo
      
     Returns
     -------
-    Number of deviants
+    int
+        Number of deviant elements
 
     """             
     
@@ -373,7 +383,8 @@ def CalculatePositionDeviants(self):
 
     Returns
     -------
-    Number of deviant positions
+    int
+        Number of deviant positions
 
     """   
     if self.dwg_elements is None:

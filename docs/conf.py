@@ -17,11 +17,12 @@ sys.path.insert(0, os.path.abspath('..'))
 # -- Project information -----------------------------------------------------
 
 project = 'octa'
-copyright = '2021, Christophe Bossens & Eline Van Geert'
-author = 'Christophe Bossens & Eline Van Geert'
+copyright = '2021, Eline Van Geert, Christophe Bossens, and Johan Wagemans'
+author = 'Eline Van Geert, Christophe Bossens, and Johan Wagemans'
 
+version = '1.0.0'
 # The full version, including alpha/beta/rc tags
-release = '0.0.1'
+release = '1.0.0'
 
 
 # -- General configuration ---------------------------------------------------

@@ -20,9 +20,3 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Contact: eline.vangeert@kuleuven.be
 
 """
-
-import octa.Stimulus
-import octa.Positions 
-import octa.patterns 
-import octa.shapes 
-import octa.measurements 

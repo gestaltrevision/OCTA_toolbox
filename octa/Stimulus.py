@@ -48,8 +48,42 @@ from .shapes.Path import Path_
 from .shapes.PathSvg import PathSvg_
 
 class Stimulus:
-    """ Container class for creating a stimulus.
-    
+    """ 
+    Container class for creating a stimulus.
+        
+    Parameters
+    ----------
+    x_margin: int, float, or tuple, optional
+        Amount of extra space added to both sides of the stimulus in the x-direction. The default is 20.
+    y_margin: int, float, or tuple, optional
+        Amount of extra space added to both sides of the stimulus in the y-direction. The default is 20.
+    size: tuple, optional
+        If specified, fixes the size of the stimulus to the dimension
+        given in the tuple. The center of the stimulus will be calculated
+        to correspond to the center of all element positions in the
+        stimulus.
+    background_color: string or list, optional
+        Background color of the stimulus. The default is "white".
+    background_shape: string or octa.shapes object, optional
+        If specified, clips the stimulus to the specified shape (only the part of the stimulus that falls within the 
+        background shape will be visible). The center of the background shape 
+        will correspond to the center of all element positions in the stimulus.
+        If a shape name is provided as string, the boundingbox of the shape will be equal to the stimulus size.
+    stim_mask: string or octa.shapes object, optional
+        If specified, clips the stimulus to the specified shape. The center of the background shape 
+        will correspond to the center of all element positions in the stimulus.
+        If a shape name is provided as string, the boundingbox of the shape will be equal to the stimulus size.   
+    stim_orientation: int, float, or list, optional
+        If not equal to 0, the stimulus will be rotated around its center according to the specified degree value. The default is 0.
+    stim_mirrorvalue: string, optional
+        If specified, defines the way the stimulus will be mirrored (none, horizontal, vertical, or horizontalvertical).   
+    stim_link: string, optional
+        If specified, defines the hyperlink that will be activated when the stimulus is clicked.   
+    stim_classlabel: string, optional
+        If specified, defines the class label that can be used to add javascript or css changes to the stimulus. 
+    stim_idlabel: string, optional
+        If specified, defines the id label that can be used to add javascript or css changes to the stimulus.        
+
     """
     
     def __init__(self, x_margin = 20, y_margin = 20, size = None, 
@@ -58,39 +92,6 @@ class Stimulus:
                  stim_link = None, stim_classlabel = None, stim_idlabel = None):
         """
         Instantiates a stimulus object.
-
-        Parameters
-        ----------
-        x_margin: int, float, or tuple, optional
-            Amount of extra space added to both sides of the stimulus in the x-direction. The default is 20.
-        y_margin: int, float, or tuple, optional
-            Amount of extra space added to both sides of the stimulus in the y-direction. The default is 20.
-        size: tuple, optional
-            If specified, fixes the size of the stimulus to the dimension
-            given in the tuple. The center of the stimulus will be calculated
-            to correspond to the center of all element positions in the
-            stimulus.
-        background_color: string or list, optional
-            Background color of the stimulus. The default is "white".
-        background_shape: string or octa.shapes object, optional
-            If specified, clips the stimulus to the specified shape (only the part of the stimulus that falls within the 
-            background shape will be visible). The center of the background shape 
-            will correspond to the center of all element positions in the stimulus.
-            If a shape name is provided as string, the boundingbox of the shape will be equal to the stimulus size.
-        stim_mask: string or octa.shapes object, optional
-            If specified, clips the stimulus to the specified shape. The center of the background shape 
-            will correspond to the center of all element positions in the stimulus.
-            If a shape name is provided as string, the boundingbox of the shape will be equal to the stimulus size.   
-        stim_orientation: int, float, or list, optional
-            If not equal to 0, the stimulus will be rotated around its center according to the specified degree value. The default is 0.
-        stim_mirrorvalue: string, optional
-            If specified, defines the way the stimulus will be mirrored (none, horizontal, vertical, or horizontalvertical).   
-        stim_link: string, optional
-            If specified, defines the hyperlink that will be activated when the stimulus is clicked.   
-        stim_classlabel: string, optional
-            If specified, defines the class label that can be used to add javascript or css changes to the stimulus. 
-        stim_idlabel: string, optional
-            If specified, defines the id label that can be used to add javascript or css changes to the stimulus.        
 
         """
         if size == None:
@@ -167,10 +168,6 @@ class Stimulus:
     def GetSVG(self):
         """
         Gives the current stimulus as an SVG string.
-
-        Returns
-        -------
-        String.
 
         """
         # if self.dwg_elements is None:
@@ -423,10 +420,6 @@ class Stimulus:
         """
         Gets a dataframe with all element information.
 
-        Returns
-        -------
-        Data frame.
-
         """
         self.Render() 
             
@@ -460,13 +453,8 @@ class Stimulus:
         """
         Gives the JSON info concerning the current stimulus.
 
-        Returns
-        -------
-        JSON object.
-
         """
         
-        # if self.dwg_elements is None:
         self.Render()  
                  
         json_data = {'stimulus' : {'stimulustype':     str(type(self))[str(type(self)).find("'")+1:str(type(self)).find(">")-1].replace("octa.Stimulus.", ""),
@@ -531,7 +519,7 @@ class Stimulus:
 
         Returns
         -------
-        stimulus : STIMULUS
+        Stimulus
             A stimulus object with parameters extracted from the JSON file.
 
         """
@@ -640,8 +628,8 @@ class Stimulus:
                                                               f = stimulus.positions._position_parameters['f'], 
                                                               axis = stimulus.positions._position_parameters['axis'])
             elif stimulus.positions._position_type == "CustomPositions":
-                stimulus.positions = Positions.CreateCustomPositions(x = stimulus.positions._position_parameters['x'], 
-                                                                     y = stimulus.positions._position_parameters['y'])
+                stimulus.positions = Positions.CreateCustomPositions(x = stimulus.positions._position_parameters['x'].pattern, 
+                                                                     y = stimulus.positions._position_parameters['y'].pattern)
             elif stimulus.positions._position_type == "Circle":
                 stimulus.positions = Positions.CreateCircle(radius = stimulus.positions._position_parameters['radius'], 
                                                             n_elements = stimulus.positions._position_parameters['n_elements'], 
@@ -2918,10 +2906,6 @@ class Concentric(Grid):
             If specified, defines the class label that can be used to add javascript or css changes to the stimulus. 
         stim_idlabel: string, optional
             If specified, defines the id label that can be used to add javascript or css changes to the stimulus.        
-
-        Returns
-        -------
-        None.
 
         """
         

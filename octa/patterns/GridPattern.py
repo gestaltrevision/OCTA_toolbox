@@ -102,8 +102,8 @@ class GridPattern(Pattern):
 
         Returns
         -------
-        Pattern:
-            New GridPattern object instance
+        GridPattern
+            Updated GridPattern object instance
 
         """       
         self._jitter = 'normal'
@@ -127,8 +127,8 @@ class GridPattern(Pattern):
 
         Returns
         -------
-        Pattern:
-            New Pattern object instance
+        GridPattern
+            Updated GridPattern object instance
 
         """      
         self._jitter = 'uniform'
@@ -139,7 +139,11 @@ class GridPattern(Pattern):
     def RandomizeAcrossElements(self):
         """
         Randomizes the order of the elements in the pattern.
-
+        
+        Returns
+        -------
+        GridPattern
+            Updated GridPattern object instance
         """      
         self._randomization = 'RandomizeAcrossElements'
                                        
@@ -148,7 +152,11 @@ class GridPattern(Pattern):
     def RandomizeAcrossRows(self):
         """
         Randomizes the order of the elements across rows in the pattern.
-
+        
+        Returns
+        -------
+        GridPattern
+            Updated GridPattern object instance
         """      
         self._randomization = 'RandomizeAcrossRows'
                                        
@@ -157,7 +165,11 @@ class GridPattern(Pattern):
     def RandomizeAcrossColumns(self):
         """
         Randomizes the order of the elements across columns in the pattern.
-
+        
+        Returns
+        -------
+        GridPattern
+            Updated GridPattern object instance
         """      
         self._randomization = 'RandomizeAcrossColumns'
                                        
@@ -166,7 +178,11 @@ class GridPattern(Pattern):
     def RandomizeAcrossLeftDiagonal(self):
         """
         Randomizes the order of the elements across the left diagonal in the pattern.
-
+        
+        Returns
+        -------
+        GridPattern
+            Updated GridPattern object instance
         """      
         self._randomization = 'RandomizeAcrossLeftDiagonal'
                                        
@@ -175,7 +191,11 @@ class GridPattern(Pattern):
     def RandomizeAcrossRightDiagonal(self):
         """
         Randomizes the order of the elements across the right diagonal in the pattern.
-
+        
+        Returns
+        -------
+        GridPattern
+            Updated GridPattern object instance
         """      
         self._randomization = 'RandomizeAcrossRightDiagonal'
                                        
@@ -189,19 +209,6 @@ class ElementRepeatAcrossElements(GridPattern):
         -------
         GridPattern
             Current instance of the GridPattern object.
-            
-        Example
-        -------
-        pattern:
-            [1, 2, 3]
-        n_rows:
-            4
-        n_cols:
-            3
-        result:    
-            [1, 2, 3, 1, 
-             2, 3, 1, 2, 
-             3, 1, 2, 3]
 
     """
     _fixed_grid = False
@@ -245,23 +252,6 @@ class ElementRepeatAcrossColumns(GridPattern):
         GridPattern
             Current instance of the GridPattern object.
             
-        Example
-        -------
-        pattern:
-            [1, 2, 3]
-        n_rows:
-            3
-        n_cols:
-            4
-        
-        result:
-            (First fit into number of columns)
-            [1, 2, 3, 1]
-            (Then replicate across rows)
-            [1, 2, 3, 1,
-             1, 2, 3, 1,
-             1, 2, 3, 1]
-
     """ 
     _fixed_grid = False
     
@@ -307,23 +297,6 @@ class ElementRepeatAcrossRows(GridPattern):
         GridPattern
             Current instance of the GridPattern object.
             
-        Example
-        -------
-        pattern: 
-            [1, 2, 3]
-        n_rows: 
-            4
-        n_cols:
-            3
-            
-        result:
-            (First fit into number of rows)
-            [1, 2, 3, 1]
-            (Then replicate across columns)
-            [1, 1, 1, 1,
-             2, 2, 2, 2,
-             3, 3, 3, 3,
-             1, 1, 1, 1]
     """   
     _fixed_grid = False
     
@@ -369,20 +342,6 @@ class ElementRepeatAcrossRightDiagonal(GridPattern):
         GridPattern
             Current instance of the GridPattern object.
             
-        Example
-        -------
-        pattern:
-            [1, 2, 3]
-        n_rows:
-            4
-        n_cols:
-            4
-            
-        result:
-            [1, 2, 3, 1,
-             2, 3, 1, 2,
-             3, 1, 2, 3,
-             1, 2, 3, 1]
 
     """   
     _fixed_grid = False
@@ -437,20 +396,6 @@ class ElementRepeatAcrossLeftDiagonal(GridPattern):
         GridPattern
             Current instance of the GridPattern object.
             
-        Example
-        -------
-        pattern: 
-            [1, 2, 3]
-        n_rows:
-            4
-        n_cols:
-            4
-            
-        result:
-            [1, 3, 2, 1,
-             2, 1, 3, 2,
-             3, 2, 1, 3,
-             1, 3, 2, 1]
             
 
     """ 
@@ -502,23 +447,6 @@ class ElementRepeatAcrossLayers(GridPattern):
         -------
         GridPattern
             Current instance of the GridPattern object.
-            
-        Example
-        -------
-        pattern: 
-            [1, 2, 3]
-        n_rows:
-            6
-        n_cols:
-            6
-            
-        result:
-            [3, 3, 3, 3, 3, 3, 
-             3, 2, 2, 2, 2, 3,
-             3, 2, 1, 1, 2, 3, 
-             3, 2, 1, 1, 2, 3, 
-             3, 2, 2, 2, 2, 3, 
-             3, 3, 3, 3, 3, 3]
             
 
     """ 
@@ -591,19 +519,6 @@ class RepeatAcrossElements(GridPattern):
         GridPattern
             Current instance of the GridPattern object.
             
-        Example
-        -------
-        pattern:
-            [1, 2, 3]
-        n_rows:
-            4
-        n_cols:
-            3
-        result:    
-            [1, 2, 3, 1, 
-             2, 3, 1, 2, 
-             3, 1, 2, 3]
-
     """
     _fixed_grid = False
     
@@ -647,22 +562,6 @@ class RepeatAcrossColumns(GridPattern):
         GridPattern
             Current instance of the GridPattern object.
             
-        Example
-        -------
-        pattern:
-            [1, 2, 3]
-        n_rows:
-            3
-        n_cols:
-            4
-        
-        result:
-            (First fit into number of columns)
-            [1, 2, 3, 1]
-            (Then replicate across rows)
-            [1, 2, 3, 1,
-             1, 2, 3, 1,
-             1, 2, 3, 1]
 
     """ 
     _fixed_grid = False
@@ -710,23 +609,6 @@ class RepeatAcrossRows(GridPattern):
         GridPattern
             Current instance of the GridPattern object.
             
-        Example
-        -------
-        pattern: 
-            [1, 2, 3]
-        n_rows: 
-            4
-        n_cols:
-            3
-            
-        result:
-            (First fit into number of rows)
-            [1, 2, 3, 1]
-            (Then replicate across columns)
-            [1, 1, 1, 1,
-             2, 2, 2, 2,
-             3, 3, 3, 3,
-             1, 1, 1, 1]
     """   
     _fixed_grid = False
     
@@ -772,20 +654,6 @@ class RepeatAcrossRightDiagonal(GridPattern):
         GridPattern
             Current instance of the GridPattern object.
             
-        Example
-        -------
-        pattern:
-            [1, 2, 3]
-        n_rows:
-            4
-        n_cols:
-            4
-            
-        result:
-            [1, 2, 3, 1,
-             2, 3, 1, 2,
-             3, 1, 2, 3,
-             1, 2, 3, 1]
 
     """   
     _fixed_grid = False
@@ -834,22 +702,7 @@ class RepeatAcrossLeftDiagonal(GridPattern):
         -------
         GridPattern
             Current instance of the GridPattern object.
-            
-        Example
-        -------
-        pattern: 
-            [1, 2, 3]
-        n_rows:
-            4
-        n_cols:
-            4
-            
-        result:
-            [1, 3, 2, 1,
-             2, 1, 3, 2,
-             3, 2, 1, 3,
-             1, 3, 2, 1]
-            
+
 
     """ 
     _fixed_grid = False
@@ -897,22 +750,6 @@ class RepeatAcrossLayers(GridPattern):
         GridPattern
             Current instance of the GridPattern object.
             
-        Example
-        -------
-        pattern: 
-            [1, 2, 3]
-        n_rows:
-            6
-        n_cols:
-            6
-            
-        result:
-            [3, 3, 3, 3, 3, 3, 
-             3, 2, 2, 2, 2, 3,
-             3, 2, 1, 1, 2, 3, 
-             3, 2, 1, 1, 2, 3, 
-             3, 2, 2, 2, 2, 3, 
-             3, 3, 3, 3, 3, 3]
             
 
     """ 
@@ -977,33 +814,16 @@ class RepeatAcrossLayers(GridPattern):
 
 class MirrorAcrossElements(GridPattern):
     """
-        Repeats the input pattern until there are as many elements as half the 
-        number of elements in the grid. This pattern
+    Repeats the input pattern until there are as many elements as half the 
+    number of elements in the grid. 
 
-        Returns
-        -------
-        SymmetryPattern.
-            Current instance of the SymmetryPattern.
-            
-        Example
-        -------
-        pattern:
-            [1, 2, 3]
-        n_rows:
-            4
-        n_cols:
-            4
-            
-        result:
-            (after repetition)
-            [1, 2, 3, 1, 2, 3, 1, 2]
-            (after repeating to fit in the grid)
-            [1, 2, 3, 1,
-             2, 3, 1, 2,
-             2, 1, 3, 2,
-             1, 3, 2, 1]
+    Returns
+    -------
+    GridPattern
+        Current instance of the GridPattern.
+        
 
-        """
+    """
     _fixed_grid = False
         
     def generate(self):
@@ -1049,32 +869,19 @@ class MirrorAcrossElements(GridPattern):
     
 class MirrorAcrossRows(GridPattern):
     """
-        Mirrors the pattern across the horizontal midline of the grid. If the input
-        pattern is not equal to half the number of rows (+1 if the number of rows is uneven),
-        two manipulations can take place:
-            1. If the provided pattern is shorter in length, the pattern as a whole is duplicated
-               until it matches half the number of rows (+1 if uneven)
-            2. If the provided pattern is longer, it is truncated to half the number of rows (+1)
+    Mirrors the pattern across the horizontal midline of the grid. If the input
+    pattern is not equal to half the number of rows (+1 if the number of rows is uneven),
+    two manipulations can take place:
         
-        Returns
-        -------
-        SymmetryPattern.
-            Current instance of the SymmetryPattern.
+        1. If the provided pattern is shorter in length, the pattern as a whole is duplicated
+           until it matches half the number of rows (+1 if uneven)
+        2. If the provided pattern is longer, it is truncated to half the number of rows (+1)
+    
+    Returns
+    -------
+    GridPattern
+        Current instance of the GridPattern.
             
-        Example
-        -------
-        pattern:
-            [1, 2]
-        n_rows:
-            4
-        n_cols:
-            4
-            
-        result:
-            [1, 1, 1, 1,
-             2, 2, 2, 2,
-             2, 2, 2, 2,
-             1, 1, 1, 1]
 
     """
     _fixed_grid = False
@@ -1121,32 +928,19 @@ class MirrorAcrossRows(GridPattern):
     
 class MirrorAcrossColumns(GridPattern):
     """
-        Mirrors the pattern across the horizontal midline of the grid. If the input
-        pattern is not equal to half the number of columns (+1 if the number of columns is uneven),
-        two manipulations can take place:
-            1. If the provided pattern is shorter in length, the pattern as a whole is duplicated
-               until it matches half the number of columns (+1 if uneven)
-            2. If the provided pattern is longer, it is truncated to half the number of columns (+1)
+    Mirrors the pattern across the horizontal midline of the grid. If the input
+    pattern is not equal to half the number of columns (+1 if the number of columns is uneven),
+    two manipulations can take place:
         
-        Returns
-        -------
-        SymmetryPattern.
-            Current instance of the SymmetryPattern.
+        1. If the provided pattern is shorter in length, the pattern as a whole is duplicated
+           until it matches half the number of columns (+1 if uneven)
+        2. If the provided pattern is longer, it is truncated to half the number of columns (+1)
+    
+    Returns
+    -------
+    GridPattern
+        Current instance of the GridPattern.
             
-        Example
-        -------
-        pattern:
-            [1, 2]
-        n_rows:
-            4
-        n_cols:
-            4
-            
-        result:
-            [1, 2, 2, 1,
-             1, 2, 2, 1,
-             1, 2, 2, 1,
-             1, 2, 2, 1]
     """
     _fixed_grid = False
     
@@ -1198,23 +992,9 @@ class MirrorAcrossLeftDiagonal(GridPattern):
 
         Returns
         -------
-        SymmetryPattern.
-            Current instance of the SymmetryPattern.
+        GridPattern
+            Current instance of the GridPattern.
             
-        Example
-        -------
-        pattern: 
-            [1, 2, 3]
-        n_rows:
-            4
-        n_cols: 
-            5
-            
-        result:
-            [1, 1, 3, 2, 1,
-             3, 1, 1, 3, 2,
-             2, 3, 1, 1, 3,
-             1, 2, 3, 1, 1]
         """
     _fixed_grid = False    
     
@@ -1270,23 +1050,9 @@ class MirrorAcrossRightDiagonal(GridPattern):
 
         Returns
         -------
-        SymmetryPattern.
-            Current instance of the SymmetryPattern.
+        GridPattern
+            Current instance of the GridPattern.
             
-        Example
-        -------
-        pattern: 
-            [1, 2, 3]
-        n_rows:
-            4
-        n_cols: 
-            5
-            
-        result:
-            [1, 2, 3, 1, 1,
-             2, 3, 1, 1, 3,
-             3, 1, 1, 3, 2,
-             1, 1, 3, 2, 1]
     """
     _fixed_grid = False
     
@@ -1340,23 +1106,6 @@ class MirrorAcrossLayers(GridPattern):
         -------
         GridPattern
             Current instance of the GridPattern object.
-            
-        Example
-        -------
-        pattern: 
-            [1, 2]
-        n_rows:
-            6
-        n_cols:
-            6
-            
-        result:
-            [1, 1, 1, 1, 1, 1, 
-             1, 2, 2, 2, 2, 1,
-             1, 2, 1, 1, 2, 1, 
-             1, 2, 1, 1, 2, 1, 
-             1, 2, 2, 2, 2, 1, 
-             1, 1, 1, 1, 1, 1]
             
 
     """ 
@@ -1435,7 +1184,7 @@ class GradientAcrossElements(GridPattern):
 
     Returns
     -------
-    GridGradient
+    GridPattern
         Current instance of the object.
 
     """
@@ -1484,7 +1233,7 @@ class GradientAcrossRows(GridPattern):
 
     Returns
     -------
-    GridGradient
+    GridPattern
         Current instance of the object.
 
     """
@@ -1533,7 +1282,7 @@ class GradientAcrossColumns(GridPattern):
 
     Returns
     -------
-    GridGradient
+    GridPattern
         Current instance of the object.
 
     """
@@ -1582,7 +1331,7 @@ class GradientAcrossLeftDiagonal(GridPattern):
 
     Returns
     -------
-    GridGradient
+    GridPattern
         Current instance of the object.
 
     """
@@ -1638,7 +1387,7 @@ class GradientAcrossRightDiagonal(GridPattern):
 
     Returns
     -------
-    GridGradient
+    GridPattern
         Current instance of the object.
 
     """
@@ -1695,23 +1444,6 @@ class GradientAcrossLayers(GridPattern):
         -------
         GridPattern
             Current instance of the GridPattern object.
-            
-        Example
-        -------
-        pattern: 
-            [1, 2]
-        n_rows:
-            6
-        n_cols:
-            6
-            
-        result:
-            [1, 1, 1, 1, 1, 1, 
-             1, 2, 2, 2, 2, 1,
-             1, 2, 1, 1, 2, 1, 
-             1, 2, 1, 1, 2, 1, 
-             1, 2, 2, 2, 2, 1, 
-             1, 1, 1, 1, 1, 1]
             
 
     """ 
@@ -1796,7 +1528,7 @@ class TiledGrid(GridPattern):
 
     Returns
     -------
-    GridPattern.
+    GridPattern
 
     """
     _fixed_grid = True
@@ -1878,7 +1610,7 @@ class TiledElementGrid(GridPattern):
 
         Returns
         -------
-        GridPattern.
+        GridPattern
 
     """
     
@@ -1961,7 +1693,7 @@ class RandomPattern(GridPattern):
 
         Returns
         -------
-        GridPattern.
+        GridPattern
     """
     _fixed_grid = False
     

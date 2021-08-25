@@ -27,7 +27,7 @@ def CalculateElementsN(self):
 
     Returns
     -------
-    N value.
+    N : int
 
     """     
     
@@ -56,7 +56,7 @@ def CalculateElementsLOCE(self, distinction_features = ['shapes', 'boundingboxes
 
     Returns
     -------
-    LOCE value.
+    LOCE : int
 
     """     
     
@@ -115,7 +115,7 @@ def CalculateElementsLOC(self, distinction_features = ['shapes', 'boundingboxes'
 
     Returns
     -------
-    LOC value.
+    LOC: int
 
     """     
     
@@ -187,7 +187,7 @@ def CalculateElementsLOCI(self, distinction_features = ['shapes', 'boundingboxes
 
     Returns
     -------
-    LOCI value.
+    LOCI: int
 
     """     
     

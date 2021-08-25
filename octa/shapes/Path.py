@@ -20,6 +20,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Contact: eline.vangeert@kuleuven.be
 
 """
+import svgwrite
 from svg.path import parse_path
 
 def Path(path, xsize, ysize, name = None):

@@ -20,6 +20,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Contact: eline.vangeert@kuleuven.be
 
 """
+import svgwrite
 from math import sin, cos, pi
 
 def Polygon(n_sides, name = None):

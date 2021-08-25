@@ -117,16 +117,8 @@ class Pattern:
         Returns
         -------
         Pattern
-            Current instance of Pattern.
+            Updated Pattern instance.
             
-        Examples
-        --------
-        initial pattern:
-            [1, 2, 3]
-        n_duplications:
-            3
-        resulting pattern:
-            [1, 1, 1, 2, 2, 2, 3, 3, 3]
         """
         result = []
         for el in self.pattern:
@@ -155,7 +147,7 @@ class Pattern:
         Returns
         -------
         Pattern
-            Current instance of Pattern.
+            Updated Pattern instance.
 
         """
         result = []
@@ -186,7 +178,7 @@ class Pattern:
         Returns
         -------
         Pattern
-            New Pattern object instance
+            Updated Pattern instance.
 
         """
         if count % len(self.pattern) != 0:
@@ -213,7 +205,7 @@ class Pattern:
         Returns
         -------
         Pattern
-            New Pattern object instance
+            Updated Pattern instance.
 
         """
         if count % len(self.pattern) != 0:
@@ -238,8 +230,8 @@ class Pattern:
 
         Returns
         -------
-        Pattern:
-            New Pattern object instance
+        Pattern
+            Updated Pattern instance.
 
         """
         p = self
@@ -281,8 +273,8 @@ class Pattern:
 
         Returns
         -------
-        Pattern:
-            New Pattern object instance
+        Pattern
+            Updated Pattern instance.
 
         """
         result = []
@@ -336,8 +328,8 @@ class Pattern:
 
         Returns
         -------
-        Pattern:
-            New Pattern object instance
+        Pattern
+            Updated Pattern instance.
 
         """
         result = []
@@ -380,8 +372,8 @@ class Pattern:
 
         Returns
         -------
-        Pattern:
-            New Pattern object instance
+        Pattern
+            Updated Pattern instance.
 
         """
         idx = list(range(len(self.pattern)))
@@ -399,8 +391,8 @@ class Pattern:
 
         Returns
         -------
-        Pattern:
-            New Pattern object instance
+        Pattern
+            Updated Pattern instance.
 
         """        
         idx = list(range(len(self.pattern)))
@@ -543,8 +535,8 @@ class Pattern:
 
         Returns
         -------
-        Pattern : Pattern
-            A list of size n_elements.
+        Pattern
+            Updated Pattern instance.
 
         """
         gradient = None
@@ -626,6 +618,11 @@ class Pattern:
             List of y coordinates (can also be a Sequence or LinearGradient)
         n_elements : int
             Total number of elements in the list. 
+            
+        Returns
+        -------
+        result : list
+            A list of tuples.
         """
         result = []
         for i in range(n_elements):
