@@ -307,7 +307,10 @@ class Pattern:
                     randomvalue = random.normalvariate(mu, std)
                     xresult = self.pattern[i][0] + randomvalue
                     yresult = self.pattern[i][1] + randomvalue
-                    result.append((xresult, yresult))            
+                    result.append((xresult, yresult))  
+        else:
+            raise ValueError("WARNING: AddNormalJitter has not been applied as the pattern contains list elements")
+            result = self.pattern
         
         return Pattern(result)
     
@@ -363,6 +366,9 @@ class Pattern:
                     xresult = self.pattern[i][0] + randomvalue
                     yresult = self.pattern[i][1] + randomvalue
                     result.append((xresult, yresult)) 
+        else:
+            raise ValueError("WARNING: AddUniformJitter has not been applied as the pattern contains list elements")
+            result = self.pattern
         
         return Pattern(result)
     
@@ -541,13 +547,21 @@ class Pattern:
         """
         gradient = None
         if type(start_value) == str:
-            gradient = Pattern.CreateColorRangeList(start_value, end_value, n_elements)
+            if type(end_value) == list:
+                raise ValueError("WARNING: GradientPattern cannot be applied as the start value is a list element")
+            else: 
+                gradient = Pattern.CreateColorRangeList(start_value, end_value, n_elements)
         elif type(start_value) == int or type(start_value) == float:
-            gradient = Pattern.CreateNumberRangeList(start_value, end_value, n_elements)
+            if type(end_value) == list:
+                raise ValueError("WARNING: GradientPattern cannot be applied as the start value is a list element")
+            else: 
+                gradient = Pattern.CreateNumberRangeList(start_value, end_value, n_elements)
         elif type(start_value) == tuple:
             gradient = Pattern.Create2DGradient(x = LinearGradient(start = start_value[0], end = end_value[0], n_elements = n_elements), 
                                                 y = LinearGradient(start = start_value[1], end = end_value[1], n_elements = n_elements), 
                                                 n_elements = n_elements)
+        elif type(start_value) == list:
+            raise ValueError("WARNING: GradientPattern cannot be applied as the start value is a list element")
         
         return Pattern(gradient)
     

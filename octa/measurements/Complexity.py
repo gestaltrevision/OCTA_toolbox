@@ -126,17 +126,47 @@ def CalculateElementsLOC(self, distinction_features = ['shapes', 'boundingboxes'
 
     n_size_values = len(set([d['boundingbox'] for d in self.dwg_elements])) 
         
-    n_fillcolor_values = len(set([d['fillcolor'] for d in self.dwg_elements])) 
+    l = list()
+    for d in self.dwg_elements:
+        if type(d['fillcolor']) == list:
+            l.append(tuple(d['fillcolor']))           
+        else:
+            l.append(d['fillcolor'])
+    n_fillcolor_values = len(set(l)) 
         
-    n_orientation_values = len(set([d['orientation'] for d in self.dwg_elements])) 
+    l = list()
+    for d in self.dwg_elements:
+        if type(d['orientation']) == list:
+            l.append(tuple(d['orientation']))          
+        else:
+            l.append(d['orientation'])
+    n_orientation_values = len(set(l)) 
         
     n_data_values = len(set([d['data'] for d in self.dwg_elements])) 
-        
-    n_borderwidth_values = len(set([d['borderwidth'] for d in self.dwg_elements])) 
     
-    n_bordercolor_values = len(set([d['bordercolor'] for d in self.dwg_elements])) 
+    l = list()
+    for d in self.dwg_elements:
+        if type(d['borderwidth']) == list:
+            l.append(tuple(d['borderwidth']))          
+        else:
+            l.append(d['borderwidth'])
+    n_borderwidth_values = len(set(l)) 
     
-    n_opacity_values = len(set([d['opacity'] for d in self.dwg_elements]))   
+    l = list()
+    for d in self.dwg_elements:
+        if type(d['bordercolor']) == list:
+            l.append(tuple(d['bordercolor']))           
+        else:
+            l.append(d['bordercolor'])
+    n_bordercolor_values = len(set(l))  
+    
+    l = list()
+    for d in self.dwg_elements:
+        if type(d['opacity']) == list:
+            l.append(tuple(d['opacity']))           
+        else:
+            l.append(d['opacity'])
+    n_opacity_values = len(set(l)) 
     
     n_mirror_values = len(set([d['mirrorvalue'] for d in self.dwg_elements])) 
     
@@ -197,18 +227,48 @@ def CalculateElementsLOCI(self, distinction_features = ['shapes', 'boundingboxes
     id_shape_values = len(set([d['shape'] for d in self.dwg_elements])) == 1
 
     id_size_values = len(set([d['boundingbox'] for d in self.dwg_elements])) == 1
+    
+    l = list()
+    for d in self.dwg_elements:
+        if type(d['fillcolor']) == list:
+            l.append(tuple(d['fillcolor']))           
+        else:
+            l.append(d['fillcolor'])
+    id_fillcolor_values = len(set(l))  == 1
         
-    id_fillcolor_values = len(set([d['fillcolor'] for d in self.dwg_elements])) == 1
-        
-    id_orientation_values = len(set([d['orientation'] for d in self.dwg_elements])) == 1
+    l = list()
+    for d in self.dwg_elements:
+        if type(d['orientation']) == list:
+            l.append(tuple(d['orientation']))          
+        else:
+            l.append(d['orientation'])
+    id_orientation_values = len(set(l))  == 1
         
     id_data_values = len(set([d['data'] for d in self.dwg_elements])) == 1
-        
-    id_borderwidth_values = len(set([d['borderwidth'] for d in self.dwg_elements])) == 1
-
-    id_bordercolor_values = len(set([d['bordercolor'] for d in self.dwg_elements])) == 1
-        
-    id_opacity_values = len(set([d['opacity'] for d in self.dwg_elements])) == 1
+    
+    l = list()
+    for d in self.dwg_elements:
+        if type(d['borderwidth']) == list:
+            l.append(tuple(d['borderwidth']))          
+        else:
+            l.append(d['borderwidth'])
+    id_borderwidth_values = len(set(l))  == 1
+    
+    l = list()
+    for d in self.dwg_elements:
+        if type(d['bordercolor']) == list:
+            l.append(tuple(d['bordercolor']))           
+        else:
+            l.append(d['bordercolor'])
+    id_bordercolor_values = len(set(l))  == 1
+    
+    l = list()
+    for d in self.dwg_elements:
+        if type(d['opacity']) == list:
+            l.append(tuple(d['opacity']))           
+        else:
+            l.append(d['opacity'])
+    id_opacity_values = len(set(l))  == 1
         
     id_mirrorvalues = len(set([d['mirrorvalue'] for d in self.dwg_elements])) == 1
         
