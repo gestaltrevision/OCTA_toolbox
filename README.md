@@ -47,9 +47,9 @@ If you use the OCTA Shiny app in your (academic) work, please cite:
 Van Geert, E., Bossens, C., & Wagemans, J. (2021). The Order & Complexity Toolbox for Aesthetics Shiny application [Online application]. [https://elinevg.shinyapps.io/OCTA_toolbox/](https://elinevg.shinyapps.io/OCTA_toolbox/)
 
 ## Documentation
-Human-readable documentation: http://evg.ulyssis.be/octa/
+Human-readable documentation: https://elinevg.github.io/OCTA_manual/
 
-Computer-readable documentation: http://evg.ulyssis.be/octa/docs/
+Computer-readable documentation: https://elinevg.github.io/OCTA_docs/
 
 ## License
 The OCTA Python toolbox is licensed under the terms of the [GNU Lesser General Public License 3.0](https://choosealicense.com/licenses/lgpl-3.0/).
