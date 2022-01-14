@@ -40,11 +40,13 @@ stim.Show()
 A graphical user interface for OCTA is available in the form of a [Shiny app](https://elinevg.shinyapps.io/OCTA_toolbox/).
 
 ## Cite OCTA
-If you use the OCTA Python toolbox in your (academic) work, please cite:
-Van Geert, E., Bossens, C., & Wagemans, J. (2021). The Order & Complexity Toolbox for Aesthetics Python library [Computer software]. [https://github.com/gestaltrevision/OCTA_toolbox](https://github.com/gestaltrevision/OCTA_toolbox)
+If you use the **OCTA Python toolbox** in your (academic) work, please cite:
+* Van Geert, E., Bossens, C., & Wagemans, J. (2022). The Order & Complexity Toolbox for Aesthetics (OCTA): A systematic approach to study the relations between order, complexity, and aesthetic appreciation. [https://doi.org/10.31234/osf.io/2bu8a](https://doi.org/10.31234/osf.io/2bu8a)
+* Van Geert, E., Bossens, C., & Wagemans, J. (2021). The Order & Complexity Toolbox for Aesthetics Python library [Computer software]. [https://github.com/gestaltrevision/OCTA_toolbox](https://github.com/gestaltrevision/OCTA_toolbox)
 
-If you use the OCTA Shiny app in your (academic) work, please cite:
-Van Geert, E., Bossens, C., & Wagemans, J. (2021). The Order & Complexity Toolbox for Aesthetics Shiny application [Online application]. [https://elinevg.shinyapps.io/OCTA_toolbox/](https://elinevg.shinyapps.io/OCTA_toolbox/)
+If you use the **OCTA Shiny app** in your (academic) work, please cite:
+* Van Geert, E., Bossens, C., & Wagemans, J. (2022). The Order & Complexity Toolbox for Aesthetics (OCTA): A systematic approach to study the relations between order, complexity, and aesthetic appreciation. [https://doi.org/10.31234/osf.io/2bu8a](https://doi.org/10.31234/osf.io/2bu8a)
+* Van Geert, E., Bossens, C., & Wagemans, J. (2021). The Order & Complexity Toolbox for Aesthetics Shiny application [Online application]. [https://elinevg.shinyapps.io/OCTA_toolbox/](https://elinevg.shinyapps.io/OCTA_toolbox/)
 
 ## Documentation
 Human-readable documentation: https://elinevg.github.io/OCTA_manual/
