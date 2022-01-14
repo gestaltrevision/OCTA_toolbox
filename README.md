@@ -49,6 +49,8 @@ If you use the **OCTA Shiny app** in your (academic) work, please cite:
 * Van Geert, E., Bossens, C., & Wagemans, J. (2021). The Order & Complexity Toolbox for Aesthetics Shiny application [Online application]. [https://elinevg.shinyapps.io/OCTA_toolbox/](https://elinevg.shinyapps.io/OCTA_toolbox/)
 
 ## Documentation
+Overview of OCTA resources: https://elinevg.github.io/OCTA/
+
 Human-readable documentation: https://elinevg.github.io/OCTA_manual/
 
 Computer-readable documentation: https://elinevg.github.io/OCTA_docs/
