@@ -41,11 +41,11 @@ A graphical user interface for OCTA is available in the form of a [Shiny app](ht
 
 ## Cite OCTA
 If you use the **OCTA Python toolbox** in your (academic) work, please cite:
-* Van Geert, E., Bossens, C., & Wagemans, J. (2022). The Order & Complexity Toolbox for Aesthetics (OCTA): A systematic approach to study the relations between order, complexity, and aesthetic appreciation. [https://doi.org/10.31234/osf.io/2bu8a](https://doi.org/10.31234/osf.io/2bu8a)
+* Van Geert, E., Bossens, C., & Wagemans, J. (2023). The Order & Complexity Toolbox for Aesthetics (OCTA): A systematic approach to study the relations between order, complexity, and aesthetic appreciation. Behavior Research Methods, 55, 2423–2446. [https://doi.org/10.3758/s13428-022-01900-w](https://doi.org/10.3758/s13428-022-01900-w)
 * Van Geert, E., Bossens, C., & Wagemans, J. (2021). The Order & Complexity Toolbox for Aesthetics Python library [Computer software]. [https://github.com/gestaltrevision/OCTA_toolbox](https://github.com/gestaltrevision/OCTA_toolbox)
 
 If you use the **OCTA Shiny app** in your (academic) work, please cite:
-* Van Geert, E., Bossens, C., & Wagemans, J. (2022). The Order & Complexity Toolbox for Aesthetics (OCTA): A systematic approach to study the relations between order, complexity, and aesthetic appreciation. [https://doi.org/10.31234/osf.io/2bu8a](https://doi.org/10.31234/osf.io/2bu8a)
+* Van Geert, E., Bossens, C., & Wagemans, J. (2023). The Order & Complexity Toolbox for Aesthetics (OCTA): A systematic approach to study the relations between order, complexity, and aesthetic appreciation. Behavior Research Methods, 55, 2423–2446. [https://doi.org/10.3758/s13428-022-01900-w](https://doi.org/10.3758/s13428-022-01900-w)
 * Van Geert, E., Bossens, C., & Wagemans, J. (2021). The Order & Complexity Toolbox for Aesthetics Shiny application [Online application]. [https://elinevg.shinyapps.io/OCTA_toolbox/](https://elinevg.shinyapps.io/OCTA_toolbox/)
 
 ## Documentation
