@@ -21,8 +21,8 @@ Contact: eline.vangeert@kuleuven.be
 
 """
 import svgwrite
-from svg.path import parse_path
 import svgpathtools
+from svgpathtools import parse_path
 
 def PathSvg(src, name = None):
     if name == None:
@@ -60,30 +60,15 @@ class PathSvg_:
             orientation = 0
             
         self.orientation = orientation
-               
-        paths, self.attributes = svgpathtools.svg2paths(self.data)
-        n_paths = len(paths)
-        allpaths = []
-
-        for i in range(0,n_paths):
-            mypath = paths[i]
-            xmin, xmax, ymin, ymax = mypath.bbox()
-            allpaths.append([xmin, xmax, ymin, ymax])
-            
-        self.min_x = min([item[0] for item in allpaths])
-        self.max_x = max([item[1] for item in allpaths])        
-        self.min_y = min([item[2] for item in allpaths])
-        self.max_y = max([item[3] for item in allpaths])  
-        self.max_xsize = (self.max_x + self.min_x)
-        self.max_ysize = (self.max_y + self.min_y) 
 
         if (type(self.orientation) == int) or (type(self.orientation) == float):
             self.rotation_animation = ""
-            self.rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, self.max_xsize/2, self.max_ysize/2)
+            self.rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, self.position[0], self.position[1])
         elif type(self.orientation) == list:
-            self.rotation_animation = "svgwrite.animate.AnimateTransform('rotate','transform', from_= '" + self.orientation[1] + " " + str(self.max_xsize/2) + " " + str(self.max_ysize/2) + "', to = '" + self.orientation[2] + " " + str(self.max_xsize/2) + " " + str(self.max_ysize/2) + "', " + self.orientation[3] + ")"
-            self.rotation_transform = "rotate(%d, %d, %d)"%(int(self.orientation[1]), self.max_xsize/2, self.max_ysize/2)    
-            
+            self.rotation_animation = "svgwrite.animate.AnimateTransform('rotate','transform', from_= '" + self.orientation[1] + " " + str(self.position[0]) + " " + str(self.position[1]) + "', to = '" + self.orientation[2] + " " + str(self.position[0]) + " " + str(self.position[1]) + "', " + self.orientation[3] + ")"
+            self.rotation_transform = "rotate(%d, %d, %d)"%(int(self.orientation[1]), self.position[0], self.position[1])    
+                  
+      
     def set_bordercolor(self, bordercolor):
         if bordercolor == None:
             bordercolor = "none"
@@ -260,28 +245,46 @@ class PathSvg_:
         return gradient.get_paint_server() 
 
     def generate(self, dwg):
-        topleft = (self.position[0] - self.boundingbox[0]/2 , self.position[1] - self.boundingbox[1]/2)
-              
-        scale_x_parameter = self.boundingbox[0] / self.max_xsize
-        scale_y_parameter = self.boundingbox[1] / self.max_ysize
         
-        keep = [i for i, x in enumerate(['d' in  self.attributes[i] for i in range(len(self.attributes))]) if x]
+        mirror_transform = self.create_mirror_transform()  
+        
+        paths, self.attributes = svgpathtools.svg2paths(self.data)
+        n_paths = len(paths)
+        allpaths = []
+
+        for i in range(0,n_paths):
+            mypath = paths[i]
+            xmin, xmax, ymin, ymax = mypath.bbox()
+            allpaths.append([xmin, xmax, ymin, ymax])
+            
+        self.min_x = min([item[0] for item in allpaths])
+        self.max_x = max([item[1] for item in allpaths])        
+        self.min_y = min([item[2] for item in allpaths])
+        self.max_y = max([item[3] for item in allpaths])  
+        self.max_xsize = (self.max_x + self.min_x)
+        self.max_ysize = (self.max_y + self.min_y) 
+        
+        keep = [i for i, x in enumerate(['d' in self.attributes[i] for i in range(len(self.attributes))]) if x]
         d = " ".join([item["d"] for item in [self.attributes[i] for i in keep]])
         
         path = parse_path(d)
+                
+        originalsize = (self.max_xsize, self.max_ysize)
+        newsize = (self.boundingbox[0]/originalsize[0], self.boundingbox[1]/originalsize[1])
+        topleft = (self.position[0] - newsize[0] - (self.boundingbox[0] / 2),
+                   self.position[1] - newsize[1] - (self.boundingbox[1] / 2))
+  
+        sizeposition_transform = "translate(%f, %f) scale(%f, %f)"%(topleft[0], topleft[1], newsize[0], newsize[1])
         
-        sizeposition_transform = "scale(%f, %f) translate(%f, %f)"%(scale_x_parameter, scale_y_parameter, (topleft[0]/scale_x_parameter), (topleft[1]/scale_y_parameter))
-
-        mirror_transform = self.create_mirror_transform() 
-               
         svg = dwg.path(
                 d            = path.d(),              
                 fill         = self.create_fillcolor(dwg),
                 opacity      = self.opacity,
                 stroke       = self.create_bordercolor(dwg),
                 stroke_width = self.borderwidth,
-                transform    = " ".join([mirror_transform,sizeposition_transform, self.rotation_transform])
+                transform    = " ".join([mirror_transform, self.rotation_transform, sizeposition_transform])
             )
+        
 
         if self.classlabel != "":
             svg['class']         = self.classlabel

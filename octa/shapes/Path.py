@@ -21,13 +21,14 @@ Contact: eline.vangeert@kuleuven.be
 
 """
 import svgwrite
-from svg.path import parse_path
+from svgpathtools import parse_path
 
 def Path(path, xsize, ysize, name = None):
     if name == None:
         name = "Path_" 
     return type(str(name), (Path_,), {'path': path, 'xsizepath': xsize, 'ysizepath': ysize, 'name': name})
 
+    
 class Path_:
     parameters = ['position', 'boundingbox', 'data', 'orientation' ,'bordercolor', 'borderwidth', 'fillcolor', 'opacity', 'classlabel', 'idlabel', 'mirrorvalue', 'link']
     
@@ -53,23 +54,21 @@ class Path_:
         
         self.boundingbox = boundingbox
     
-    
+        
     def set_orientation(self, orientation):
         if orientation == None:
             orientation = 0
             
         self.orientation = orientation
         
-        self.xsize = self.data[1]
-        self.ysize = self.data[2]
-        
         if (type(self.orientation) == int) or (type(self.orientation) == float):
             self.rotation_animation = ""
-            self.rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, self.xsize/2, self.ysize/2)
+            self.rotation_transform = "rotate(%d, %d, %d)"%(self.orientation, self.position[0], self.position[1])
         elif type(self.orientation) == list:
-            self.rotation_animation = "svgwrite.animate.AnimateTransform('rotate','transform', from_= '" + self.orientation[1] + " " + str(self.xsize/2) + " " + str(self.ysize/2) + "', to = '" + self.orientation[2] + " " + str(self.xsize/2) + " " + str(self.ysize/2) + "', " + self.orientation[3] + ")"
-            self.rotation_transform = "rotate(%d, %d, %d)"%(int(self.orientation[1]), self.xsize/2, self.ysize/2)    
+            self.rotation_animation = "svgwrite.animate.AnimateTransform('rotate','transform', from_= '" + self.orientation[1] + " " + str(self.position[0]) + " " + str(self.position[1]) + "', to = '" + self.orientation[2] + " " + str(self.position[0]) + " " + str(self.position[1]) + "', " + self.orientation[3] + ")"
+            self.rotation_transform = "rotate(%d, %d, %d)"%(int(self.orientation[1]), self.position[0], self.position[1])    
                 
+                  
     def set_bordercolor(self, bordercolor):
         if bordercolor == None:
             bordercolor = "none"
@@ -178,7 +177,6 @@ class Path_:
             
         self.data = data
     
-
     def create_mirror_transform(self):
         mirror_transform = ""
         if self.mirrorvalue == "vertical":
@@ -246,24 +244,25 @@ class Path_:
         return gradient.get_paint_server() 
 
     def generate(self, dwg):
-        topleft = (self.position[0] - self.boundingbox[0]/2 , self.position[1] - self.boundingbox[1]/2)
-                          
-        scale_x_parameter = self.boundingbox[0] / self.xsize
-        scale_y_parameter = self.boundingbox[1] / self.ysize
         
-        sizeposition_transform = "scale(%f, %f) translate(%f, %f)"%(scale_x_parameter, scale_y_parameter, (topleft[0]/scale_x_parameter), (topleft[1]/scale_y_parameter))
-
         mirror_transform = self.create_mirror_transform()  
         
         path = parse_path(self.data[0])
-               
+        
+        originalsize = (self.data[1],self.data[2])
+        newsize = (self.boundingbox[0]/originalsize[0], self.boundingbox[1]/originalsize[1])
+        topleft = (self.position[0] - newsize[0] - (self.boundingbox[0] / 2),
+                   self.position[1] - newsize[1] - (self.boundingbox[1] / 2))
+  
+        sizeposition_transform = "translate(%f, %f) scale(%f, %f)"%(topleft[0], topleft[1], newsize[0], newsize[1])
+                       
         svg = dwg.path(
                 d            = path.d(),              
                 fill         = self.create_fillcolor(dwg),
                 opacity      = self.opacity,
                 stroke       = self.create_bordercolor(dwg),
                 stroke_width = self.borderwidth,
-                transform    = " ".join([mirror_transform, sizeposition_transform,  self.rotation_transform])
+                transform    = " ".join([mirror_transform, self.rotation_transform, sizeposition_transform])
             )
         
         if self.classlabel != "":
