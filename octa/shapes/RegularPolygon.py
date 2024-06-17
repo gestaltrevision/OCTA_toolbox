@@ -25,7 +25,7 @@ from math import sin, cos, pi
 
 def RegularPolygon(n_sides, name = None):
     if name == None:
-        name = "RegularPolygon_" #+ str(n_sides)
+        name = "RegularPolygon_" 
     return type(str(name), (RegularPolygon_,), {'n_sides': n_sides, 'name': name})
 
 
