@@ -2554,7 +2554,7 @@ class Grid(Stimulus):
             # 2. Select the required number of swap positions
             selected_swap_pairs = []
             for i in range(n_swap_pairs):
-                selected_pair = random.sample(candidate_swap_positions, 1)[0]
+                selected_pair = random.sample(sorted(candidate_swap_positions), 1)[0]
                 selected_swap_pairs.append(selected_pair)
                 
                 removable_positions = set()
@@ -2612,7 +2612,7 @@ class Grid(Stimulus):
         selected_swap_pairs = []
         for i in range(n_swap_pairs):
             assert len(candidate_swap_positions) > 0, "Distinct swaps exhausted, try again with a lower number of pairs"
-            selected_pair = random.sample(candidate_swap_positions, 1)[0]
+            selected_pair = random.sample(sorted(candidate_swap_positions), 1)[0]
             selected_swap_pairs.append(selected_pair)
             
             removable_positions = set()
@@ -2661,7 +2661,7 @@ class Grid(Stimulus):
             selected_swap_pairs = []
             for i in range(n_swap_pairs):
                 assert len(candidate_swap_positions) > 0, "Distinct swaps exhausted, try again with a lower number of pairs"
-                selected_pair = random.sample(candidate_swap_positions, 1)[0]
+                selected_pair = random.sample(sorted(candidate_swap_positions), 1)[0]
                 selected_swap_pairs.append(selected_pair)
                 
                 removable_positions = set()
@@ -2746,7 +2746,7 @@ class Grid(Stimulus):
         selected_swap_pairs = []
         for i in range(n_swap_pairs):
             assert len(candidate_swap_positions) > 0, "Distinct swaps exhausted, try again with a lower number of pairs"
-            selected_pair = random.sample(candidate_swap_positions, 1)[0]
+            selected_pair = random.sample(sorted(candidate_swap_positions), 1)[0]
             selected_swap_pairs.append(selected_pair)
             
             removable_positions = set()
