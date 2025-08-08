@@ -38,6 +38,7 @@ stim.Show()
 
 ## OCTA Shiny app
 A graphical user interface for OCTA is available in the form of a [Shiny app](https://elinevg.shinyapps.io/OCTA_toolbox/).
+In case of issues, please try this second link to the [Shiny app](https://octa.shinyapps.io/OCTA_app1/).
 
 ## Cite OCTA
 If you use the **OCTA Python toolbox** in your (academic) work, please cite:
