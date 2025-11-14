@@ -35,6 +35,7 @@ from html2image import Html2Image
 from svglib.svglib import svg2rlg
 from reportlab.graphics import renderPDF 
 from IPython.display import SVG, display
+from PIL import Image
 
 from .Positions import Positions
 from .patterns import GridPattern, Pattern
@@ -197,9 +198,7 @@ class Stimulus:
         png_filename = "%s.png"%filename
         if folder is not None:
             svg_filename = os.path.join(folder, svg_filename) 
-            hti = Html2Image(output_path = folder)
-        else:
-            hti = Html2Image()
+            png_filename = os.path.join(folder, png_filename) 
             
         # if self.dwg_elements is None:
         self.Render() 
@@ -214,9 +213,18 @@ class Stimulus:
         else:
             scale = 1
             
-        hti.screenshot(other_file = svg_filename, 
-                       size= (math.ceil(self.width*scale), math.ceil(self.height*scale)), 
-                       save_as = png_filename)
+        if folder is not None: 
+            hti = Html2Image(output_path = folder,
+                             size = (1920*scale,1080*scale))
+        else:
+            hti = Html2Image(size = (1920*scale,1080*scale))
+            
+        hti.screenshot(other_file = svg_filename,  
+                       save_as = os.path.basename(png_filename))
+        
+        originalPNG = Image.open(png_filename)
+        newPNG = originalPNG.crop((0, 0, math.ceil(self.width*scale), math.ceil(self.height*scale)))
+        newPNG.save(png_filename)
 
         os.remove(svg_filename)
         
@@ -238,7 +246,7 @@ class Stimulus:
         # clipping is limited to single paths, no mask support
         # color gradients not supported
             
-        svg_filename = "%s.svg"%filename
+        svg_filename = "%s_scaled.svg"%filename
         pdf_filename = "%s.pdf"%filename
         if folder is not None:
             svg_filename = os.path.join(folder, svg_filename)  
@@ -261,47 +269,54 @@ class Stimulus:
         renderPDF.drawToFile(img, pdf_filename)
         
         
-    def SaveTIFF(self, filename, scale = None, folder = None): 
-        """
-        Saves the current stimulus as a TIFF file.
+    # def SaveTIFF(self, filename, scale = None, folder = None): 
+    #     """
+    #     Saves the current stimulus as a TIFF file.
 
-        Parameters
-        ----------
-        filename : string
-            Name of the tiff file.
-        scale : int or float, optional
-            Number that indicates the scaling factor to use on the original SVG size.
-        folder : string, optional
-            Name of the folder in which the tiff file needs to be saved.
+    #     Parameters
+    #     ----------
+    #     filename : string
+    #         Name of the tiff file.
+    #     scale : int or float, optional
+    #         Number that indicates the scaling factor to use on the original SVG size.
+    #     folder : string, optional
+    #         Name of the folder in which the tiff file needs to be saved.
 
-        """ 
-        # limitations using svglib:
-        # clipping is limited to single paths, no mask support
-        # color gradients not supported
+    #     """ 
+    #     # limitations using svglib:
+    #     # clipping is limited to single paths, no mask support
+    #     # color gradients not supported
 
-        svg_filename = "%s.svg"%filename
-        tiff_filename = "%s.tiff"%filename
-        if folder is not None:
-            svg_filename = os.path.join(folder, svg_filename)  
-            hti = Html2Image(output_path = folder)
-        else:
-            hti = Html2Image()
+    #     svg_filename = "%s_scaled.svg"%filename
+    #     tiff_filename = "%s.tiff"%filename
+    #     if folder is not None:
+    #         svg_filename = os.path.join(folder, svg_filename)
+    #         tiff_filename = os.path.join(folder, tiff_filename)  
+    #         hti = Html2Image(output_path = folder,
+    #                          size = (1920*scale,1080*scale))
+    #     else:
+    #         hti = Html2Image(size = (1920*scale,1080*scale))
 
-        self.Render() 
+    #     self.Render() 
             
-        self.dwg.saveas(svg_filename, pretty = True)
+    #     self.dwg.saveas(svg_filename, pretty = True)
         
-        if scale is not None:
-            originalSVG = svgutils.compose.SVG(svg_filename)
-            originalSVG.scale(scale)
-            newSVG = svgutils.compose.Figure(float(self.width) * scale, float(self.height) * scale, originalSVG)
-            newSVG.save(svg_filename)
-        else:
-            scale = 1
+    #     if scale is not None:
+    #         originalSVG = svgutils.compose.SVG(svg_filename)
+    #         originalSVG.scale(scale)
+    #         newSVG = svgutils.compose.Figure(float(self.width) * scale, float(self.height) * scale, originalSVG)
+    #         newSVG.save(svg_filename)
+    #     else:
+    #         scale = 1
                   
-        hti.screenshot(other_file = svg_filename, 
-                       size= (math.ceil(self.width*scale), math.ceil(self.height*scale)), 
-                       save_as = tiff_filename)
+    #     hti.screenshot(other_file = svg_filename, 
+    #                    save_as = os.path.basename(tiff_filename))
+               
+    #     originalTIFF = Image.open(tiff_filename)
+    #     newTIFF = originalTIFF.crop((0, 0, math.ceil(self.width*scale), math.ceil(self.height*scale)))
+    #     newTIFF.save(tiff_filename)
+
+    #     os.remove(svg_filename) 
 
     def SaveJPG(self, filename, scale = None, folder = None): 
         """
@@ -321,13 +336,11 @@ class Stimulus:
         # clipping is limited to single paths, no mask support
         # color gradients not supported
 
-        svg_filename = "%s.svg"%filename
+        svg_filename = "%s_scaled.svg"%filename
         jpg_filename = "%s.jpg"%filename
         if folder is not None:
-            svg_filename = os.path.join(folder, svg_filename)  
-            hti = Html2Image(output_path = folder)
-        else:
-            hti = Html2Image()
+            svg_filename = os.path.join(folder, svg_filename) 
+            jpg_filename = os.path.join(folder, jpg_filename)  
 
         self.Render() 
             
@@ -340,10 +353,21 @@ class Stimulus:
             newSVG.save(svg_filename)
         else:
             scale = 1
+
+        if folder is not None: 
+            hti = Html2Image(output_path = folder,
+                             size = (1920*scale,1080*scale))
+        else:
+            hti = Html2Image(size = (1920*scale,1080*scale))
                   
         hti.screenshot(other_file = svg_filename, 
-                       size= (math.ceil(self.width*scale), math.ceil(self.height*scale)), 
-                       save_as = jpg_filename)
+                       save_as = os.path.basename(jpg_filename))
+        
+        originalJPG = Image.open(jpg_filename)
+        newJPG = originalJPG.crop((0, 0, math.ceil(self.width*scale), math.ceil(self.height*scale)))
+        newJPG.save(jpg_filename)
+
+        os.remove(svg_filename)        
         
     def SaveJSON(self, filename, folder = None):
         """
