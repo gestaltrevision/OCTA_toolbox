@@ -199,7 +199,7 @@ class Stimulus:
             svg_filename = os.path.join(folder, svg_filename) 
             hti = Html2Image(output_path = folder)
         else:
-            hti = Html2Image()
+            hti = Html2Image(output_path = "")
             
         # if self.dwg_elements is None:
         self.Render() 
